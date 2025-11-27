@@ -1,55 +1,46 @@
 using MessageReaction;
-using MessageReaction.Bot;
-using MessageReaction.Log;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Connector.Authentication;
+using MessageReaction.Controllers;
+using Azure.Core;
+using Azure.Identity;
+using Microsoft.Teams.Api.Auth;
+using Microsoft.Teams.Apps;
+using Microsoft.Teams.Apps.Extensions;
+using Microsoft.Teams.Common.Http;
+using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddControllers();
-builder.Services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
-builder.Services.AddHttpContextAccessor();
-
-// Create the Bot Framework Authentication to be used with the Bot Adapter.
 var config = builder.Configuration.Get<ConfigOptions>();
-builder.Configuration["MicrosoftAppType"] = config.BOT_TYPE;
-builder.Configuration["MicrosoftAppId"] = config.BOT_ID;
-builder.Configuration["MicrosoftAppPassword"] = config.BOT_PASSWORD;
-builder.Configuration["MicrosoftAppTenantId"] = config.BOT_TENANT_ID;
-builder.Services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
-// Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
-builder.Services.AddSingleton<IStorage, MemoryStorage>();
+Func<string[], string?, Task<ITokenResponse>> createTokenFactory = async (string[] scopes, string? tenantId) =>
+{
+    var clientId = config.Teams.ClientId;
 
-// Create the ActivityLog.
-// Used to store sent activities in order to correlate Message Reactions with
-// the previously sent activity.
-builder.Services.AddSingleton<ActivityLog>();
+    var managedIdentityCredential = new ManagedIdentityCredential(clientId);
+    var tokenRequestContext = new TokenRequestContext(scopes, tenantId: tenantId);
+    var accessToken = await managedIdentityCredential.GetTokenAsync(tokenRequestContext);
 
-// Create the Bot Framework Adapter with error handling enabled.
-builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+    return new TokenResponse
+    {
+        TokenType = "Bearer",
+        AccessToken = accessToken.Token,
+    };
+};
+var appBuilder = App.Builder();
 
-// Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-builder.Services.AddTransient<IBot, MessageReactionBot>();
+if (config.Teams.BotType == "UserAssignedMsi")
+{
+    appBuilder.AddCredentials(new TokenCredentials(
+        config.Teams.ClientId ?? string.Empty,
+        async (tenantId, scopes) =>
+        {
+            return await createTokenFactory(scopes, tenantId);
+        }
+    ));
+}
+
+builder.Services.AddSingleton<Controller>();
+builder.AddTeams(appBuilder);
 
 var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
-
+app.UseTeams();
 app.Run();

@@ -5,7 +5,7 @@ env/.env.*.user
 env/.env.local
 appsettings.Development.json
 .deployment
-appsettings.TestTool.json
+appsettings.Playground.json
 
 # User-specific files
 *.user
@@ -24,7 +24,7 @@ bld/
 
 # Notification local store
 .notification.localstore.json
-.notification.testtoolstore.json
+.notification.playgroundstore.json
 
 # devTools
 devTools/
