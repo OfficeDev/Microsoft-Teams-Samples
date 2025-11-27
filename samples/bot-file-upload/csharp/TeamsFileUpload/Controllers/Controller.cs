@@ -11,6 +11,9 @@ using System.Net.Http.Headers;
 using FileConsentActivity = Microsoft.Teams.Api.Activities.Invokes.FileConsentActivity;
 using FileConsentCardResponse = Microsoft.Teams.Api.FileConsentCardResponse;
 using FileUploadInfo = Microsoft.Teams.Api.FileUploadInfo;
+using FileConsentCard = TeamsFileUpload.Models.FileConsentCard;
+using FileDownloadInfo = TeamsFileUpload.Models.FileDownloadInfo;
+using FileInfoCard = TeamsFileUpload.Models.FileInfoCard;
 
 namespace TeamsFileUpload.Controllers
 {
@@ -20,6 +23,10 @@ namespace TeamsFileUpload.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _filesPath = Path.Combine(Environment.CurrentDirectory, "Files");
 
+        /// <summary>
+        /// Initializes a new instance of the Controller class.
+        /// </summary>
+        /// <param name="httpClientFactory">The HTTP client factory for making HTTP requests.</param>
         public Controller(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -31,6 +38,13 @@ namespace TeamsFileUpload.Controllers
             }
         }
 
+        /// <summary>
+        /// Handles incoming messages from Teams users.
+        /// Processes file attachments (downloads and inline images) or sends a file consent card if no attachment is present.
+        /// </summary>
+        /// <param name="activity">The message activity received from Teams.</param>
+        /// <param name="client">The Teams client for sending responses.</param>
+        /// <param name="log">Logger for tracking message processing.</param>
         [Message]
         public async Task OnMessage([Context] MessageActivity activity, [Context] IContext.Client client, [Context] Microsoft.Teams.Common.Logging.ILogger log)
         {
@@ -71,6 +85,13 @@ namespace TeamsFileUpload.Controllers
             }
         }
 
+        /// <summary>
+        /// Handles file consent card responses from users.
+        /// Routes to appropriate handler based on whether user accepted or declined the file upload.
+        /// </summary>
+        /// <param name="activity">The file consent activity containing user's response.</param>
+        /// <param name="client">The Teams client for sending responses.</param>
+        /// <param name="log">Logger for tracking consent processing.</param>
         [FileConsent]
         public async Task OnFileConsent([Context] FileConsentActivity activity, [Context] IContext.Client client, [Context] Microsoft.Teams.Common.Logging.ILogger log)
         {
@@ -88,6 +109,14 @@ namespace TeamsFileUpload.Controllers
             }
         }
 
+        /// <summary>
+        /// Processes inline image attachments received in Teams messages.
+        /// Downloads the image, saves it locally, and sends it back as a base64-encoded inline attachment.
+        /// </summary>
+        /// <param name="activity">The message activity containing the image.</param>
+        /// <param name="client">The Teams client for sending responses.</param>
+        /// <param name="attachment">The image attachment to process.</param>
+        /// <param name="log">Logger for tracking image processing.</param>
         private async Task ProcessInlineImage(MessageActivity activity, IContext.Client client, Attachment attachment, Microsoft.Teams.Common.Logging.ILogger log)
         {
             try
@@ -129,6 +158,13 @@ namespace TeamsFileUpload.Controllers
             }
         }
 
+        /// <summary>
+        /// Processes file download attachments received in Teams messages.
+        /// Downloads the file from Teams and saves it to the local Files directory.
+        /// </summary>
+        /// <param name="client">The Teams client for sending responses.</param>
+        /// <param name="attachment">The file attachment containing download information.</param>
+        /// <param name="log">Logger for tracking file download processing.</param>
         private async Task ProcessFileDownload(IContext.Client client, Attachment attachment, Microsoft.Teams.Common.Logging.ILogger log)
         {
             try
@@ -161,6 +197,13 @@ namespace TeamsFileUpload.Controllers
             }
         }
 
+        /// <summary>
+        /// Sends a file consent card to the user requesting permission to upload a file.
+        /// Creates a sample file if it doesn't exist in the Files directory.
+        /// </summary>
+        /// <param name="client">The Teams client for sending the consent card.</param>
+        /// <param name="fileName">The name of the file to be uploaded.</param>
+        /// <param name="log">Logger for tracking consent card operations.</param>
         private async Task SendFileConsentCard(IContext.Client client, string fileName, Microsoft.Teams.Common.Logging.ILogger log)
         {
             try
@@ -204,6 +247,14 @@ namespace TeamsFileUpload.Controllers
             }
         }
 
+        /// <summary>
+        /// Handles the user accepting the file upload consent.
+        /// Uploads the file to Teams/OneDrive and sends appropriate response based on file type.
+        /// For images: sends inline base64-encoded attachment. For other files: sends OneDrive link.
+        /// </summary>
+        /// <param name="response">The file consent response containing upload information.</param>
+        /// <param name="client">The Teams client for sending responses.</param>
+        /// <param name="log">Logger for tracking file upload operations.</param>
         private async Task OnFileConsentAccept(FileConsentCardResponse response, IContext.Client client, Microsoft.Teams.Common.Logging.ILogger log)
         {
             try
@@ -276,6 +327,13 @@ namespace TeamsFileUpload.Controllers
             }
         }
 
+        /// <summary>
+        /// Handles the user declining the file upload consent.
+        /// Sends a confirmation message indicating the file will not be uploaded.
+        /// </summary>
+        /// <param name="response">The file consent response containing decline information.</param>
+        /// <param name="client">The Teams client for sending responses.</param>
+        /// <param name="log">Logger for tracking decline operations.</param>
         private async Task OnFileConsentDecline(FileConsentCardResponse response, IContext.Client client, Microsoft.Teams.Common.Logging.ILogger log)
         {
             try
@@ -297,30 +355,5 @@ namespace TeamsFileUpload.Controllers
                 await client.Send("You declined the file upload.");
             }
         }
-    }
-
-    // Supporting classes for file operations
-    public class FileDownloadInfo
-    {
-        public string DownloadUrl { get; set; }
-        public string UniqueId { get; set; }
-        public string FileType { get; set; }
-    }
-
-    public class FileConsentCard
-    {
-        public const string ContentType = "application/vnd.microsoft.teams.card.file.consent";
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public long SizeInBytes { get; set; }
-        public object AcceptContext { get; set; }
-        public object DeclineContext { get; set; }
-    }
-
-    public class FileInfoCard
-    {
-        public const string ContentType = "application/vnd.microsoft.teams.card.file.info";
-        public string UniqueId { get; set; }
-        public string FileType { get; set; }
     }
 }
