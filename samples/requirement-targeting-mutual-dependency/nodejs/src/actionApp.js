@@ -1,6 +1,21 @@
-const { TeamsActivityHandler, CardFactory, TurnContext } = require("botbuilder");
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+const { CardFactory } = require('@microsoft/agents-hosting');
+const { TeamsActivityHandler } = require('@microsoft/agents-hosting-extensions-teams');
 const ACData = require("adaptivecards-templating");
 const helloWorldCard = require("./adaptiveCards/helloWorldCard.json");
+
+// Helper function to remove bot mentions from a message
+function removeRecipientMention(activity) {
+    const text = activity.text || "";
+    const recipientId = activity.recipient?.id;
+
+    if (!recipientId) return text;
+    
+    // Remove <at>mention</at> tags for the bot
+    return text.replace(/<at>.*?<\/at>/g, "").trim();
+}
 
 class ActionApp extends TeamsActivityHandler {
   constructor() {
@@ -8,11 +23,12 @@ class ActionApp extends TeamsActivityHandler {
 
     // Echo bot code
     this.onMessage(async (context, next) => {
-      TurnContext.removeRecipientMention(context.activity);
-      if (context.activity.text != undefined) {
-        const text = context.activity.text.trim().toLocaleLowerCase();
-        await context.sendActivity('You said ' + text);
+      const text = removeRecipientMention(context.activity);
+      if (text != undefined && text !== '') {
+        const cleanText = text.trim();
+        await context.sendActivity('You said : ' + cleanText);
       }
+      await next();
     });
   }
 
@@ -37,4 +53,5 @@ class ActionApp extends TeamsActivityHandler {
     };
   }
 }
+
 module.exports.ActionApp = ActionApp;
