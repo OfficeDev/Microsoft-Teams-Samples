@@ -26,6 +26,7 @@ server.set("views", __dirname + "/views");
 server.engine('html', require('ejs').renderFile);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.get('/tab', (req, res) => { res.render('chatLifecycle.html') });
+server.get('/chatLifecycle', (req, res) => { res.render('chatLifecycle.html') });
 
 server.post('/api/getAdaptiveCard', Helper.getAdaptiveCard);
 server.post('/api/createGroupChat', Helper.createGroupChat);
@@ -58,7 +59,14 @@ server.get('/auth/auth-end', function (req, res) {
 server.post('/auth/token', function (req, res) {
   const tid = req.body.tid;
   const token = req.body.token;
-  var scopes = ["https://graph.microsoft.com/User.Read"];
+  var scopes = [
+    "https://graph.microsoft.com/User.Read",
+    "https://graph.microsoft.com/User.ReadBasic.All",
+    "https://graph.microsoft.com/Chat.Create",
+    "https://graph.microsoft.com/Chat.ReadWrite",
+    "https://graph.microsoft.com/TeamsAppInstallation.ReadWriteForChat",
+    "https://graph.microsoft.com/TeamsTab.ReadWriteForChat"
+  ];
 
   var oboPromise = new Promise((resolve, reject) => {
     const url = "https://login.microsoftonline.com/" + tid + "/oauth2/v2.0/token";
@@ -71,6 +79,10 @@ server.post('/auth/token', function (req, res) {
       scope: scopes.join(" ")
     };
 
+    console.log('OBO Token Request for tenant:', tid);
+    console.log('Client ID:', config["tab"]["appId"]);
+    console.log('Scopes:', scopes.join(" "));
+
     fetch(url, {
       method: "POST",
       body: querystring.stringify(params),
@@ -81,22 +93,43 @@ server.post('/auth/token', function (req, res) {
     }).then(result => {
       if (result.status !== 200) {
         result.json().then(json => {
-          // TODO: Check explicitly for invalid_grant or interaction_required
-          reject({ "error": json.error });
+          console.error('OBO Token Error Response:', JSON.stringify(json, null, 2));
+          console.error('Status Code:', result.status);
+          // Check explicitly for invalid_grant or interaction_required
+          if (json.error === 'invalid_grant' || json.error === 'interaction_required') {
+            reject({ "error": json.error, "error_description": json.error_description, "error_codes": json.error_codes });
+          } else {
+            reject({ "error": json.error, "error_description": json.error_description });
+          }
+        }).catch(parseError => {
+          console.error('Error parsing error response:', parseError);
+          reject({ "error": "parse_error", "error_description": "Failed to parse error response" });
         });
       } else {
         result.json().then(json => {
+          console.log('OBO Token Success');
           resolve(json.access_token);
+        }).catch(parseError => {
+          console.error('Error parsing success response:', parseError);
+          reject({ "error": "parse_error", "error_description": "Failed to parse success response" });
         });
       }
+    }).catch(fetchError => {
+      console.error('Fetch Error:', fetchError);
+      reject({ "error": "network_error", "error_description": fetchError.message });
     });
   });
 
   oboPromise.then(function (result) {
     res.json(result);
   }, function (err) {
-    console.log(err); // Error: "It broke"
-    res.json(err);
+    console.error('Final Error:', err);
+    // Return 401 for consent_required or interaction_required errors
+    if (err.error === 'invalid_grant' || err.error === 'interaction_required') {
+      res.status(401).json(err);
+    } else {
+      res.status(500).json(err);
+    }
   });
 });
 

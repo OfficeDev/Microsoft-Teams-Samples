@@ -18,7 +18,7 @@
             const msalConfig = {
                 auth: {
                     clientId: <%-clientId%>,
-                    authority: `https://login.microsoftonline.com/${context.tid}`,
+                    authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
                     navigateToLoginRequestUrl: false
                 },
                 cache: {
@@ -26,7 +26,7 @@
                 },
             }
 			
-            const msalInstance = new window.msal.PublicClientApplication(msalConfig);2
+            const msalInstance = new window.msal.PublicClientApplication(msalConfig);
 			
             msalInstance.handleRedirectPromise()
                 .then((tokenResponse) => {

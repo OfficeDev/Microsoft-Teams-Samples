@@ -1,6 +1,6 @@
 const fs = require('fs');
 const ACData = require("adaptivecards-templating");
-const { CardFactory } = require('botbuilder');
+const { CardFactory } = require('@microsoft/agents-hosting');
 require('isomorphic-fetch');
 const { Client } = require("@microsoft/microsoft-graph-client");
 const config = require('../config/default.json');
