@@ -1,26 +1,12 @@
 ---
 page_type: sample
+description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams using Python and Microsoft Graph APIs, including creating chats, adding members, and deleting members.
 products:
 - office-teams
 - office
 - office-365
 languages:
 - python
-
-## Run the app (Manually Uploading to Teams)
-
-> Note these instructions are for running the sample on your local machine, the tunneling solution is required because
-the Teams service needs to call into the app.
-
-1) Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-2) Run ngrok - point to port 3978ation (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the config.py.hon
-title: Microsoft Teams Python Chat Lifecycle Sample
-description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams using Python and Microsoft Graph APIs, including creating chats, adding members, and deleting members.
 extensions:
  contentType: samples
  createdDate: "07/07/2021 01:38:26 PM"
@@ -35,10 +21,11 @@ This sample application showcases the management of chat lifecycles in Microsoft
 * Tabs
 * Adaptive Cards
 * Graph API
+* Agent SDK
 
 ## Interaction with app
 
-![](Images/GraphChatLifecycleGif.gif)
+![Graph-Chat-LifeCycle](Images/GraphChatLifecycleGif.gif)
 
 ## Prerequisites
 
@@ -154,24 +141,58 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Running the sample
 
-1. In Teams, Install App
+**1. Install App in Teams**
 
- ![](Images/OpenApp.png)
+![Install App](Images/1.Install.png)
 
- ![](Images/Save.png)
- 
-2. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
+**2. Add App to Teams**
 
- ![](Images/TabView.png)
+![Add to Teams](Images/2.Add_To_Teams.png)
 
-3. Once create group chat is clicked, user will be able to add Title of the groupchat and select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
+**3. Configure Tab**
 
-   ![](Images/CreateGroup.png)
+![Configurable Tab](Images/3.Configurable_Tab.png)
 
-4. Also, Polly app will be installed to the created group chat and will be pinned to the chat.
+**4. Tab Configured Successfully**
 
-   ![](Images/GroupChat.png)
-   
+![Tab Configured](Images/4.Tab_Configured_Successfully.png)
+
+**5. Create Group Chat with Selected Members**
+
+![Create Group Chat](Images/5.Create_GC_Of_Selected_Members.png)
+
+**6. Group Chat Created Successfully**
+
+![Group Chat Created](Images/6.GC_Created_Successfully.png)
+
+**7. Group Created from Python Sample**
+
+![Created Group](Images/7.Created_Group_From_Python.png)
+
+**8. Select App in Outlook**
+
+![Outlook Select App](Images/8.Outlook_Select_App.png)
+
+**9. Click Continue in Outlook**
+
+![Outlook Continue](Images/9.Outlook_Click_Continue.png)
+
+**10. Outlook Tab Loaded Successfully**
+
+![Outlook Tab Loaded](Images/10.Outlook_Tab_Loaded_Successfully.png)
+
+**11. Select App in M365 Copilot**
+
+![M365 Copilot Select App](Images/11.M365_Copilot_Select_App.png)
+
+**12. Click Continue in M365 Copilot**
+
+![M365 Copilot Continue](Images/12.M365_Copilot_Click_Continue.png)
+
+**13. M365 Copilot Tab Loaded Successfully**
+
+![M365 Copilot Tab Loaded](Images/13.M365_Copilot_Tab_Loaded_Successfully.png)
+
 
 ## Further reading
 

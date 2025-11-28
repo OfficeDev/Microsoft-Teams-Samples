@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+
 import os
 import json
 import requests
@@ -33,6 +36,9 @@ def get_adaptive_card(req):
 
         return jsonify({"type": "AdaptiveCard", "content": card})
     except Exception as e:
+        print(f"Error in get_adaptive_card: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
 def create_group_chat(req):
@@ -42,6 +48,7 @@ def create_group_chat(req):
     title = req.json.get("title")
 
     try:
+        print(f"Creating group chat with title: {title}, users: {user_ids}, main user: {user_id_main}")
         client_headers = HEADERS(token)
 
         chat_payload = {
@@ -100,6 +107,9 @@ def create_group_chat(req):
 
         return jsonify(True)
     except Exception as e:
+        print(f"Error in create_group_chat: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
 
