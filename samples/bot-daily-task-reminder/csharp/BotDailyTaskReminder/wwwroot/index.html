@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Task</title>
+    <!-- Microsoft Teams SDK script -->
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        input[type="text"],
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="text"].error,
+        input[type="datetime-local"].error {
+            border: 1px solid red;
+        }
+        .checkbox-group {
+            margin-bottom: 0.5rem;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        .btn-submit {
+            background-color: #6264A7;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        .btn-submit:hover {
+            background-color: #464775;
+        }
+    </style>
+
+    <script>
+        // Initializes Microsoft Teams SDK
+        microsoftTeams.app.initialize();
+
+        /**
+         * Handles the form submission for scheduling a task.
+         * Validates the form and sends task details to the Microsoft Teams task module.
+         */
+        function submitTask() {
+            let isValid = true;
+            let checkboxArray = [];
+
+            // Validate required fields
+            const taskTitle = document.getElementById('taskTitle');
+            const taskDateTime = document.getElementById('taskdatetime');
+            const taskDescription = document.getElementById('taskdescription');
+
+            // Reset error states
+            [taskTitle, taskDateTime, taskDescription].forEach(field => {
+                if (field.value.trim() === '') {
+                    isValid = false;
+                    field.classList.add('error');
+                } else {
+                    field.classList.remove('error');
+                }
+            });
+
+            // Prevent form submission if validation fails
+            if (!isValid) {
+                return false;
+            }
+
+            // Gather selected days for the task recurrence
+            const checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+            checkboxes.forEach(checkbox => {
+                checkboxArray.push(checkbox.value);
+            });
+
+            // Convert datetime to UTC format
+            const datetimeLocal = taskDateTime.value;
+            const datetimeUTC = new Date(datetimeLocal).toISOString();
+
+            // Prepare task data - field names must match the C# backend expectations
+            let taskInfo = {
+                taskName: taskTitle.value,
+                taskDescription: taskDescription.value,
+                frequency: checkboxArray.length > 0 ? 'custom' : 'daily',
+                reminderTime: datetimeUTC,
+                selectedDays: checkboxArray
+            };
+
+            console.log('Submitting task info:', taskInfo);
+
+            // Submit the task information to Microsoft Teams task module
+            microsoftTeams.dialog.url.submit(taskInfo);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Schedule Task</h2>
+        
+        <div class="form-group">
+            <label for="taskTitle">Task title</label>
+            <input type="text" id="taskTitle" name="taskTitle" placeholder="Enter task title">
+        </div>
+
+        <div class="form-group">
+            <label for="taskdescription">Task description</label>
+            <input type="text" id="taskdescription" name="taskdescription" placeholder="Enter task description">
+        </div>
+
+        <div class="form-group">
+            <label for="taskdatetime">Date and time</label>
+            <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+        </div>
+
+        <div class="form-group">
+            <label>Please select days to be repeated</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="monday" name="monday" value="1">
+                <label for="monday" style="display: inline;">Monday</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="tuesday" name="tuesday" value="2">
+                <label for="tuesday" style="display: inline;">Tuesday</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="wednesday" name="wednesday" value="3">
+                <label for="wednesday" style="display: inline;">Wednesday</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="thursday" name="thursday" value="4">
+                <label for="thursday" style="display: inline;">Thursday</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="friday" name="friday" value="5">
+                <label for="friday" style="display: inline;">Friday</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="saturday" name="saturday" value="6">
+                <label for="saturday" style="display: inline;">Saturday</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sunday" name="sunday" value="0">
+                <label for="sunday" style="display: inline;">Sunday</label>
+            </div>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="submitTask()">Submit</button>
+    </div>
+</body>
+</html>

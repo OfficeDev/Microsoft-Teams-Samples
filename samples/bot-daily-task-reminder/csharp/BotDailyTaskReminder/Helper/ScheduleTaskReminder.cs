@@ -1,13 +1,6 @@
-﻿// <copyright file="ScheduleTaskReminder.cs" company="Microsoft">
-// Copyright (c) Microsoft. All rights reserved.
-// </copyright>
-
 using Quartz;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 
-namespace BotDailyTaskReminder
+namespace BotDailyTaskReminder.Helper
 {
     /// <summary>
     /// Class to handle scheduled task reminders.
