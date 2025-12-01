@@ -1,21 +1,20 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-from botbuilder.core import TurnContext, CardFactory
-from botbuilder.core.teams import TeamsActivityHandler
-from botbuilder.schema.teams import TeamInfo, TeamsChannelAccount
+from microsoft_agents.hosting.core import TurnContext, CardFactory
+from microsoft_agents.hosting.teams import TeamsActivityHandler
+from microsoft_agents.activity.teams import TeamInfo, TeamsChannelAccount
 from faker import Faker
-from botbuilder.schema.teams import (
+from microsoft_agents.activity.teams import (
     MessagingExtensionResponse,
     MessagingExtensionAttachment,
     MessagingExtensionResult,
 )
-from botbuilder.schema import (
+from microsoft_agents.activity import (
     ThumbnailCard,
     CardImage,
     CardAction,
 )
-
 
 class HelloWorldBot(TeamsActivityHandler):
     """
@@ -105,6 +104,7 @@ class HelloWorldBot(TeamsActivityHandler):
                 preview_card = self.create_thumbnail_card(title, text, images)
                 tap_action = CardAction(
                     type="invoke",
+                    title=title,
                     value={"title": title, "text": text, "images": images},
                 )
                 preview_attachment = CardFactory.thumbnail_card(preview_card)
@@ -114,6 +114,7 @@ class HelloWorldBot(TeamsActivityHandler):
                 attachment = MessagingExtensionAttachment(
                     content=thumbnail_card,
                     content_type=CardFactory.content_types.thumbnail_card,
+                    content_url="",
                     preview=preview_attachment,
                 )
                 attachments.append(attachment)
@@ -149,6 +150,7 @@ class HelloWorldBot(TeamsActivityHandler):
         attachment = MessagingExtensionAttachment(
             content_type=CardFactory.content_types.thumbnail_card,
             content=thumbnail_card,
+            content_url="",
         )
 
         return MessagingExtensionResponse(
