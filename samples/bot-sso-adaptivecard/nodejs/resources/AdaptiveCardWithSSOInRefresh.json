@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "version": "1.5",
   "type": "AdaptiveCard",
@@ -12,15 +12,15 @@
   },
   "authentication": {
     "text": "Signin Text",
-    "connectionName": "BotSSOAdaptivecardConnection",
+    "connectionName": "oauthbotsetting",
     "tokenExchangeResource": {
-      "id": "<<YOUR-MICROSOFT-APP-ID>>"
+      "id": "115af9ce-5373-4f85-9861-18e289e4dfc4"
     },
     "buttons": [
       {
         "type": "signin",
         "title": "Please sign in",
-        "value": "https://token.botframework.com/api/oauth/signin?signin=<<YOUR-MICROSOFT-APP-ID>>"
+        "value": "https://token.botframework.com/api/oauth/signin?signin=115af9ce-5373-4f85-9861-18e289e4dfc4"
       }
     ]
   },
@@ -32,5 +32,5 @@
       "weight": "Bolder"
     }
   ],
-  "appId": "<<YOUR-MICROSOFT-APP-ID>>"
+  "appId": "115af9ce-5373-4f85-9861-18e289e4dfc4"
 }

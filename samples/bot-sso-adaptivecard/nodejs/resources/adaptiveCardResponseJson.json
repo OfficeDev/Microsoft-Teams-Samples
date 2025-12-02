@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "version": "1.5",
   "type": "AdaptiveCard",
@@ -12,10 +12,18 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "You are successfully logged-in !!",
+      "text": "Welcome Universal Card",
       "size": "Medium",
       "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${authresult}",
+      "size": "Small",
+      "wrap": true
     }
   ],
-  "appid": "<<YOUR-MICROSOFT-APP-ID>>"
+  "authentication": {
+    "connectionName": "oauthbotsetting"
+  }
 }

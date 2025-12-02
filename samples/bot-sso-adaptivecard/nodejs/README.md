@@ -86,7 +86,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 - In a terminal, navigate to `samples/bot-sso-adaptivecard/nodejs`
 
-- Update the `.env` configuration for the bot to use the MicrosoftAppId <<YOUR-MICROSOFT-APP-ID>>, MicrosoftAppPassword <<YOUR-MICROSOFT-PASSWORD>> and <<YOUR-CONNECTION-NAME>> replace with (OAuth Connection Name).
+- Update the CLIENT_ID, CLIENT_SECRET, BOT_ID, BOT_PASSWORD, BOT_TYPE, TENANT_ID, CONNECTION_NAME in     `.localConfigs` configuration for the bot.
 
 - Install modules
 
@@ -171,14 +171,14 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
       * Select Microsoft Graph -\> Delegated permissions.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-
+  
  ### 5. Setup Manifest for Teams
 
 **This step is specific to Teams.**
-   - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+   - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
    - **Edit** the `manifest.json` for `validDomains` replace `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-   - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-   - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app to your org's app catalog'". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+   - **Zip** up the contents of the `appManifest` folder to create a `appPackage.zip` folder into a `appPackage.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+   - **Upload** the `appPackage.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app to your org's app catalog'". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
 > Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.   
 
