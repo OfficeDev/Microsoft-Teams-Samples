@@ -1,10 +1,10 @@
 # TeamsFx files
 env/.env.*.user
 env/.env.local
-.localConfigs.testTool
+.localConfigs.playground
 .localConfigs
 .notification.localstore.json
-.notification.testtoolstore.json
+.notification.playgroundstore.json
 appPackage/build
 
 # dependencies
