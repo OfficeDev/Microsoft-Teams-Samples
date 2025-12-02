@@ -1,7 +1,10 @@
 .webappignore
 .fx
 .deployment
+.localConfigs.playground
 .localConfigs
+.notification.localstore.json
+.notification.playgroundstore.json
 .vscode
 *.js.map
 *.ts.map
@@ -22,3 +25,4 @@ m365agents.*.yml
 /node_modules/typescript
 /appPackage/
 /infra/
+/devTools/

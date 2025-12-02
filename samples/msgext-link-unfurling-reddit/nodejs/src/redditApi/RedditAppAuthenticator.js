@@ -1,62 +1,81 @@
-const axios = require("axios").default;
-const redditOptions = require("./RedditOptions");
+const https = require("https");
 
+/**
+ * Reddit App Authenticator
+ * Handles authentication with Reddit API
+ */
 class RedditAppAuthenticator {
-  static CacheKey = 'RedditAppToken';
-  redditAppId;
-  redditAppPassword;
-  cache;
-
-  constructor() {
-    this.redditAppId = redditOptions.redditAppId;
-    this.redditAppPassword = redditOptions.redditAppPassword;
-    this.cache = new TokenCache();
+  /**
+   * Creates an instance of RedditAppAuthenticator
+   * @param {RedditOptions} options - Reddit API options
+   */
+  constructor(options) {
+    this.options = options;
+    this.accessToken = null;
+    this.tokenExpiry = null;
   }
 
+  /**
+   * Gets a valid access token, refreshing if necessary
+   * @returns {Promise<string>} Access token
+   */
   async getAccessToken() {
-    let accessToken = await this.cache.get(RedditAppAuthenticator.CacheKey);
-    if (!accessToken) {
-      const request = {
-        method: 'POST',
-        url: 'https://www.reddit.com/api/v1/access_token',
-        data: new URLSearchParams({
-          grant_type: 'client_credentials',
-          scope: 'read',
-        }),
-        auth: {
-          username: this.redditAppId,
-          password: this.redditAppPassword,
+    // Check if we have a valid token
+    if (this.accessToken && this.tokenExpiry && Date.now() < this.tokenExpiry) {
+      return this.accessToken;
+    }
+
+    // Request a new token
+    return new Promise((resolve, reject) => {
+      const auth = this.options.getBasicAuth();
+      const postData = "grant_type=client_credentials";
+
+      const options = {
+        hostname: "www.reddit.com",
+        port: 443,
+        path: "/api/v1/access_token",
+        method: "POST",
+        headers: {
+          "Authorization": `Basic ${auth}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Length": Buffer.byteLength(postData),
+          "User-Agent": this.options.userAgent,
         },
       };
-      const response = await axios(request);
-      accessToken = response.data.access_token;
-      this.cache.setWithTimeout(RedditAppAuthenticator.CacheKey, accessToken, 43200000); // Duration is 24hr, store in cache for half-life.
-    }
 
-    return accessToken;
+      const req = https.request(options, (res) => {
+        let data = "";
+
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+
+        res.on("end", () => {
+          if (res.statusCode === 200) {
+            try {
+              const response = JSON.parse(data);
+              this.accessToken = response.access_token;
+              // Set expiry to 5 minutes before actual expiry for safety margin
+              this.tokenExpiry = Date.now() + (response.expires_in - 300) * 1000;
+
+              resolve(this.accessToken);
+            } catch (error) {
+              reject(new Error("Failed to parse Reddit API response"));
+            }
+          } else {
+            reject(new Error("Failed to authenticate with Reddit API"));
+          }
+        });
+      });
+
+      req.on("error", (error) => {
+        reject(new Error("Failed to authenticate with Reddit API"));
+      });
+
+      req.write(postData);
+      req.end();
+    });
   }
 }
-class TokenCache {
-  cache = new Map();
 
-  async setWithTimeout(key, value, timeout) {
-    if (this.cache.has(key)) {
-      clearTimeout(this.cache.get(key).timeout);
-    }
-    const timeoutId = setTimeout(() => {
-      this.cache.delete(key);
-    }, timeout);
-    this.cache.set(key, { value, timeout: timeoutId });
-  }
-
-  async get(key) {
-    const cachedValue = this.cache.get(key);
-    if (cachedValue) {
-      return cachedValue.value;
-    }
-    return undefined;
-  }
-}
-
-module.exports.RedditAppAuthenticator = RedditAppAuthenticator;
-
+module.exports = RedditAppAuthenticator;

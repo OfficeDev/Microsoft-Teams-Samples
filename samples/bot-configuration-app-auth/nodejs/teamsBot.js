@@ -1,73 +1,22 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-const { TeamsActivityHandler, CardFactory } = require("botbuilder");
+const { stripMentionsText } = require("@microsoft/teams.api");
+const { LocalStorage } = require("@microsoft/teams.common");
 const fs = require('fs');
+const path = require('path');
 
-/**
- * TeamsBot class extends TeamsActivityHandler to handle bot activities.
- */
-class TeamsBot extends TeamsActivityHandler {
+// Create storage for conversation history
+const storage = new LocalStorage();
+
+class TeamsBot {
   constructor() {
-    super();
-    this.onMembersAdded(this.handleMembersAdded.bind(this));
-    this.onMessage(this.handleMessage.bind(this));
+    this.storage = storage;
   }
 
   /**
-   * Handles the event when new members are added to the conversation.
-   * @param {TurnContext} context - The context object for the turn.
-   * @param {Function} next - The next middleware handler to call.
+   * Handle config/fetch invoke activity
+   * This is called when the bot is added to a team or group chat or when user clicks settings
    */
-  async handleMembersAdded(context, next) {
-    const imagePath = 'Images/configbutton.png';
-    const imageBase64 = fs.readFileSync(imagePath, 'base64');
-    const card = CardFactory.adaptiveCard({
-      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-      "type": "AdaptiveCard",
-      "version": "1.0",
-      "body": [
-        {
-          "type": "TextBlock",
-          "text": "Hello and welcome! With this sample, you can experience the functionality of bot configuration. To access Bot configuration, click on the settings button in the bot description card.",
-          "wrap": true,
-          "size": "large",
-          "weight": "bolder"
-        },
-        {
-          "type": "Image",
-          "url": `data:image/jpeg;base64,${imageBase64}`,
-          "size": "auto"
-        }
-      ],
-      "fallbackText": "This card requires Adaptive Card support."
-    });
-
-    await context.sendActivity({
-      text: '',
-      attachments: [card]
-    });
-
-    await next();
-  }
-
-  /**
-   * Handles incoming messages.
-   * @param {TurnContext} context - The context object for the turn.
-   * @param {Function} next - The next middleware handler to call.
-   */
-  async handleMessage(context, next) {
-    // By calling next() you ensure that the next BotHandler is run.
-    await next();
-  }
-
-  /**
-   * Handles the bot configuration fetch request.
-   * @param {TurnContext} _context - The context object for the turn.
-   * @param {Object} _configData - The configuration data.
-   * @returns {Object} The response object containing the configuration.
-   */
-  async handleTeamsConfigFetch(_context, _configData) {
+  async handleConfigFetch(context) {
+    // Return auth type with suggested actions (matching original sample)
     return {
       config: {
         type: "auth",
@@ -75,7 +24,7 @@ class TeamsBot extends TeamsActivityHandler {
           actions: [
             {
               type: "openUrl",
-              value: "https://example.com/auth",
+              value: "https://example.com/auth/signin",
               title: "Sign in to this app"
             }
           ]
@@ -85,19 +34,111 @@ class TeamsBot extends TeamsActivityHandler {
   }
 
   /**
-   * Handles the bot configuration submit request.
-   * @param {TurnContext} context - The context object for the turn.
-   * @param {Object} _configData - The configuration data.
-   * @returns {Object} The response object containing the configuration.
+   * Handle config/submit invoke activity
+   * This is called when the user submits the configuration card
    */
-  async handleTeamsConfigSubmit(context, _configData) {
+  async handleConfigSubmit(context) {
+    // Return just the body
     return {
       config: {
-        type: 'message',
-        value: 'You have chosen to finish setting up bot',
+        type: "message",
+        value: "Configuration submitted. Please complete the sign-in process."
       }
     };
   }
+
+  /**
+   * Handle application/search invoke activity for type-ahead search
+   * Not used in the original simplified sample, but kept for extensibility
+   */
+  async handleSearchInvoke(context) {
+    // Original sample doesn't implement search
+    // Return empty results
+    const response = {
+      status: 200,
+      body: {
+        type: "application/vnd.microsoft.search.searchResponse",
+        value: {
+          results: []
+        }
+      }
+    };
+
+    return response;
+  }
+
+  /**
+   * Handle regular messages
+   * In the original sample, the bot doesn't respond to regular messages
+   * The main functionality is through the configuration flow
+   */
+  async handleMessage(context) {
+    // The original implementation doesn't handle regular messages
+    // All interaction is through the config/fetch and config/submit flow
+    // You can add custom message handling here if needed
+  }
+
+  /**
+   * Handle conversation update events
+   */
+  async handleConversationUpdate(context) {
+    const activity = context.activity;
+    
+    if (activity.membersAdded && activity.membersAdded.length > 0) {
+      for (const member of activity.membersAdded) {
+        if (member.id !== activity.recipient.id) {
+          // Try to read image, use placeholder if not found
+          let imageBase64 = '';
+          const imagePath = path.join(__dirname, 'Images', 'configbutton.png');
+          
+          try {
+            if (fs.existsSync(imagePath)) {
+              const imageBuffer = fs.readFileSync(imagePath);
+              imageBase64 = imageBuffer.toString('base64');
+            }
+          } catch (error) {
+            // Image not found, using text only card
+          }
+
+          const welcomeCard = {
+            type: "AdaptiveCard",
+            body: [
+              {
+                type: "TextBlock",
+                text: "Hello and welcome! With this sample, you can experience the functionality of bot configuration. To access Bot configuration, click on the settings button in the bot description card.",
+                wrap: true,
+                size: "Large",
+                weight: "Bolder"
+              }
+            ],
+            $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+            version: "1.5",
+            fallbackText: "This card requires Adaptive Card support."
+          };
+
+          // Add image if available
+          if (imageBase64) {
+            welcomeCard.body.push({
+              type: "Image",
+              url: `data:image/png;base64,${imageBase64}`,
+              size: "Auto"
+            });
+          }
+
+          await context.send({
+            type: "message",
+            text: '',
+            attachments: [
+              {
+                contentType: "application/vnd.microsoft.card.adaptive",
+                content: welcomeCard
+              }
+            ]
+          });
+        }
+      }
+    }
+  }
 }
 
-module.exports.TeamsBot = TeamsBot;
+module.exports = TeamsBot;

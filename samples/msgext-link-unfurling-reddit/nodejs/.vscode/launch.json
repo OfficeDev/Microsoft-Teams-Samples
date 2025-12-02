@@ -2,29 +2,29 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Remote in Teams (Edge)",
+            "name": "Launch Remote (Edge)",
             "type": "msedge",
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
             "presentation": {
-                "group": "group 1: Teams",
-                "order": 3
+                "group": "3-remote",
+                "order": 1
             },
             "internalConsoleOptions": "neverOpen"
         },
         {
-            "name": "Launch Remote in Teams (Chrome)",
+            "name": "Launch Remote (Chrome)",
             "type": "chrome",
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
             "presentation": {
-                "group": "group 1: Teams",
-                "order": 3
+                "group": "3-remote",
+                "order": 2
             },
             "internalConsoleOptions": "neverOpen"
         },
         {
-            "name": "Launch App in Teams (Edge)",
+            "name": "Launch App (Edge)",
             "type": "msedge",
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
@@ -35,10 +35,11 @@
                 "group": "all",
                 "hidden": true
             },
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "perScriptSourcemaps": "yes"
         },
         {
-            "name": "Launch App in Teams (Chrome)",
+            "name": "Launch App (Chrome)",
             "type": "chrome",
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
@@ -49,7 +50,8 @@
                 "group": "all",
                 "hidden": true
             },
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "perScriptSourcemaps": "yes"
         },
         {
             "name": "Attach to Local Service",
@@ -62,18 +64,29 @@
                 "hidden": true
             },
             "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Launch Remote (Desktop)",
+            "type": "node",
+            "request": "launch",
+            "preLaunchTask": "Start App in Desktop Client (Remote)",
+            "presentation": {
+                "group": "3-remote",
+                "order": 3
+            },
+            "internalConsoleOptions": "neverOpen",
         }
     ],
     "compounds": [
         {
             "name": "Debug in Teams (Edge)",
             "configurations": [
-                "Launch App in Teams (Edge)",
+                "Launch App (Edge)",
                 "Attach to Local Service"
             ],
-            "preLaunchTask": "Start Teams App Locally",
+            "preLaunchTask": "Start App Locally",
             "presentation": {
-                "group": "group 1: Teams",
+                "group": "2-local",
                 "order": 1
             },
             "stopAll": true
@@ -81,13 +94,37 @@
         {
             "name": "Debug in Teams (Chrome)",
             "configurations": [
-                "Launch App in Teams (Chrome)",
+                "Launch App (Chrome)",
                 "Attach to Local Service"
             ],
-            "preLaunchTask": "Start Teams App Locally",
+            "preLaunchTask": "Start App Locally",
             "presentation": {
-                "group": "group 1: Teams",
+                "group": "2-local",
                 "order": 2
+            },
+            "stopAll": true
+        },
+        {
+            "name": "Debug in Teams (Desktop)",
+            "configurations": [
+                "Attach to Local Service"
+            ],
+            "preLaunchTask": "Start App in Desktop Client",
+            "presentation": {
+                "group": "2-local",
+                "order": 3
+            },
+            "stopAll": true
+        },
+        {
+            "name": "Debug in Microsoft 365 Agents Playground",
+            "configurations": [
+                "Attach to Local Service"
+            ],
+            "preLaunchTask": "Start App in Microsoft 365 Agents Playground",
+            "presentation": {
+                "group": "1-local",
+                "order": 1
             },
             "stopAll": true
         }

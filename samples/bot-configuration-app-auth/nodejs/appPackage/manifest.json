@@ -1,0 +1,56 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.teams.com/privacy",
+        "termsOfUseUrl": "https://www.teams.com/termsofuser"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Bot Configuration auth App",
+        "full": "Bot Configuration auth Sample App"
+    },
+    "description": {
+        "short": "Configurable Teams bot with dynamic type-ahead search and Adaptive Cards.",
+        "full": "This Teams bot enables configuration and reconfiguration with dynamic search capabilities on Adaptive Cards."
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "configuration": {
+                "groupChat": {
+                    "fetchTask": true
+                },
+                "team": {
+                    "fetchTask": true
+                }
+            },
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "supportsCalling": false,
+            "supportsVideo": false
+            
+        }
+    ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}

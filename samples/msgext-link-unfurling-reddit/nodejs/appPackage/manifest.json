@@ -1,13 +1,13 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.19",
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
     "version": "1.0.0",
     "id": "${{TEAMS_APP_ID}}",
     "developer": {
-        "name": "Teams App, Inc.",
+        "name": "My App, Inc.",
         "websiteUrl": "https://www.example.com",
-        "privacyUrl": "https://www.example.com/termofuse",
-        "termsOfUseUrl": "https://www.example.com/privacy"
+        "privacyUrl": "https://www.example.com/privacy",
+        "termsOfUseUrl": "https://www.example.com/termofuse"
     },
     "icons": {
         "color": "color.png",
@@ -22,39 +22,31 @@
         "full": "This sample demonstrates a Node.js Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams."
     },
     "accentColor": "#FFFFFF",
-    "bots": [],
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false
+        }
+    ],
     "composeExtensions": [
         {
             "botId": "${{BOT_ID}}",
-            "commands": [
-                {
-                    "id": "searchQuery",
-                    "context": [
-                        "compose",
-                        "commandBox"
-                    ],
-                    "description": "Test command to run query",
-                    "title": "Search",
-                    "type": "query",
-                    "parameters": [
-                        {
-                            "name": "searchQuery",
-                            "title": "Search Query",
-                            "description": "Your search query",
-                            "inputType": "text"
-                        }
-                    ]
-                }
-            ],
+            "commands": [],
             "messageHandlers": [
                 {
                     "type": "link",
                     "value": {
                         "domains": [
-                            "www.reddit.com",
-                            "reddit.com"
-                        ],
-                        "supportsAnonymizedPayloads": true
+                            "*.reddit.com",
+                            "reddit.com",
+                            "redd.it"
+                        ]
                     }
                 }
             ]
@@ -66,5 +58,9 @@
         "identity",
         "messageTeamMembers"
     ],
-    "validDomains": []
+    "validDomains": [
+        "*.reddit.com",
+        "reddit.com",
+        "redd.it"
+    ]
 }
