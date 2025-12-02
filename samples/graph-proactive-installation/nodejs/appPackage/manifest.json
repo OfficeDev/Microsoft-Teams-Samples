@@ -18,13 +18,13 @@
     "full": "This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs."
   },
   "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
@@ -56,7 +56,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [
-    "${{BOT_DOMAIN}}"
-  ]
+  "validDomains": []
 }
