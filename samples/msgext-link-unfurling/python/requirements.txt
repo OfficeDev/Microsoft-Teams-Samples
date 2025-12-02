@@ -1,3 +1,6 @@
-requests>=2.25.0
-botbuilder-integration-aiohttp>=4.14.0
-urllib3==1.26.18
+microsoft-agents-activity>=0.6.0
+microsoft-agents-hosting-core>=0.6.0
+microsoft-agents-hosting-aiohttp>=0.6.0
+microsoft-agents-hosting-teams>=0.6.0
+microsoft-agents-authentication-msal>=0.6.0
+faker

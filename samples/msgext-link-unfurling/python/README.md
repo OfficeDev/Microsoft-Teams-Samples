@@ -17,14 +17,14 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-link-unfurling-python
 
 This sample application illustrates a Python bot that enhances Microsoft Teams by performing [link unfurling](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) in messaging extensions. By integrating with Azure, the bot facilitates seamless interactions when users share links, improving overall communication.
 
-
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that performs link unfurling in Teams.
+This bot has been created using [Microsoft Agents SDK](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agents-sdk-overview), it shows how to create a simple bot that performs link unfurling in Teams.
 
 ## Included Features
 * Bots
 * Message Extensions
 * Search Commands
 * Link Unfurling
+* Agent SDK
 
 ## Interaction with Messaging Extension Link Unfurling
 ![MsgExtLink](Images/LinkUnfurling.gif)
@@ -94,10 +94,10 @@ the Teams service needs to call into the bot.
     * `User.Read` (enabled by default)
     * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-3) Create [Bot Framework registration resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
+3) Create [Azure Bot Service registration resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
     - Use the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages` used by this sample
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+    - __*If you don't have an Azure account*__ you can use this [Azure Bot registration guide](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
 1) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-link-unfurling\python` folder
 
@@ -105,7 +105,7 @@ the Teams service needs to call into the bot.
 
 1) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-1) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+1) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Azure Bot registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
@@ -126,18 +126,51 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Running the sample
 
-![msgext-search ](Images/1.Install.png)
+**Install the app in Teams:**
 
-![msgext-search ](Images/2.Installed.png)
+![Msgext-LinkUnfurling](Images/1.Install.png)
 
-![msgext-search ](Images/3.Link_Unfurling_In_Compose_Box.png)
+**Link unfurling in collapsed view when you paste a URL:**
 
-![msgext-search ](Images/4.Link_Unfurling_Chat.png)
+![Msgext-LinkUnfurling](Images/2.LinkUnfurling_For_Paste_URL_Collapse_View.png)
+
+**Link unfurling in expanded view showing the rich preview card:**
+
+![Msgext-LinkUnfurling](Images/3.LinkUnfurling_For_Paste_URL_Expand_View.png)
+
+**Both collapsed and expanded views of the unfurled link:**
+
+![Msgext-LinkUnfurling](Images/4.LinkUnfurling_Both_The_Views.png)
+
+**Messaging extension search command in action:**
+
+![Msgext-LinkUnfurling](Images/5.Link_Unfurling_Search.png)
+
+**Search results displaying adaptive cards:**
+
+![Msgext-LinkUnfurling](Images/6.Link_Unfurling_Search_Card.png)
+
+**Enable Outlook channel in Azure Bot Service for Outlook support (Note: Link unfurling is not currently supported in Outlook with Agent SDK):**
+
+![Msgext-LinkUnfurling](Images/7.To_Work_In_Outlook_Enable_Outlook_Channel.png)
+
+**Link unfurling is not available in M365 Copilot:**
+
+![Msgext-LinkUnfurling](Images/8.Not_Available_In_M365Copilot.png)
+
+**Messaging extension search working in Outlook:**
+
+![Msgext-LinkUnfurling](Images/9.Outlook_MsgExt_Search.png)
+
+**Selected card inserted into Outlook email:**
+
+![Msgext-LinkUnfurling](Images/10.Outlook_Selcetd_Card.png)
 
 ## Further reading
 
 - [Link unfurling](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet%2Cadvantages)
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Microsoft Agents SDK](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agents-sdk-overview)
+- [Microsoft Agents SDK for Python](https://pypi.org/project/microsoft-agents/)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
