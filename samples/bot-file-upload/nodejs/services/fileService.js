@@ -17,7 +17,7 @@ const generateFileName = async (fileDir) => {
 // Downloads content from a URL and saves it to the specified file path
 const writeFile = async (contentUrl, config, filePath) => {
     try {
-        const response = await axios({ method: 'GET', url: contentUrl, responseType: 'stream' });
+        const response = await axios({ method: 'GET', url: contentUrl, ...config });
         return new Promise((resolve, reject) => {
             response.data
                 .pipe(fs.createWriteStream(filePath))
