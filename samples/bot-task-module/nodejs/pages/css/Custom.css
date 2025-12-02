@@ -1,8 +1,12 @@
-html, body, div.surface, div.panel {
-    height: 100%;
+/* Custom styles for task modules */
+body {
     margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-div.panel {
-    padding: 15px;
+.form-field-input label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
 }
