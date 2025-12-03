@@ -31,9 +31,9 @@
         },
         {
             "name": "Python: Run App Locally",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/app.py",
+            "program": "${workspaceFolder}/index.py",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
         }

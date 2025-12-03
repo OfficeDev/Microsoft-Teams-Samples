@@ -1,89 +1,137 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-import sys
-import traceback
-import uuid
-from datetime import datetime
-from http import HTTPStatus
-from aiohttp import web
-from aiohttp.web import Request, Response, json_response
-from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
+from pathlib import Path
+from dotenv import load_dotenv
+from microsoft.teams.apps import App, ActivityContext
+from microsoft.teams.api import MessageActivity, MessageActivityInput, Attachment
+from cards import cards
+
+# Load environment variables from .env file
+env_path = Path(__file__).parent / ".env"
+if env_path.exists():
+    load_dotenv(env_path)
+
+# Also try to load .localConfigs (Teams Toolkit)
+local_configs_path = Path(__file__).parent / ".localConfigs"
+if local_configs_path.exists():
+    load_dotenv(local_configs_path)
+
+# Create simple in-memory storage (matches Node.js LocalStorage pattern)
+storage = {}
+
+# Create the Teams AI application with storage
+app = App(
+    storage=storage
 )
-from botbuilder.core.integration import aiohttp_error_middleware
-from botbuilder.schema import Activity, ActivityTypes
-from bots import BotAllCards
-from config import DefaultConfig
 
-CONFIG = DefaultConfig()
-
-# Create adapter.
-# See https://aka.ms/about-bot-adapter to learn more about how bots work.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
-
-# Catch-all for errors.
-async def on_error(context: TurnContext, error: Exception):
-    # This check writes out errors to console log .vs. app insights.
-    # NOTE: In production environment, you should consider logging this to Azure
-    #       application insights.
-    print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
-    traceback.print_exc()
-
-    # Send a message to the user
-    await context.send_activity("The bot encountered an error or bug.")
-    await context.send_activity(
-        "To continue to run this bot, please fix the bot source code."
-    )
-    # Send a trace activity if we're talking to the Bot Framework Emulator
-    if context.activity.channel_id == "emulator":
-        # Create a trace activity that contains the error object
-        trace_activity = Activity(
-            label="TurnError",
-            name="on_turn_error Trace",
-            timestamp=datetime.utcnow(),
-            type=ActivityTypes.trace,
-            value=f"{error}",
-            value_type="https://www.botframework.com/schemas/error",
+# Message handler - processes all incoming messages from Teams
+@app.on_message
+async def on_message(context: ActivityContext[MessageActivity]):
+    """Handle incoming message activities"""
+    # Get the message text from the activity
+    activity = context.activity
+    text = (activity.text or "").strip()
+    
+    # Remove bot mentions (e.g., @BotName) from the message text
+    if hasattr(activity, 'entities'):
+        for entity in activity.entities or []:
+            if entity.type == "mention":
+                text = text.replace(f"<at>{entity.text}</at>", "").strip()
+    
+    # Send welcome message if user sends empty message or first interaction
+    if not text:
+        await context.send(
+            "Welcome to Cards Bot. This bot will introduce you to different types of cards. "
+            "Please select the cards from given options."
         )
-        # Send a trace activity, which will be displayed in Bot Framework Emulator
-        await context.send_activity(trace_activity)
+        await send_suggested_cards(context)
+        return
+    
+    # Define all supported card types
+    suggested_cards = [
+        'AdaptiveCard', 'HeroCard', 'ListCard', 'Office365',
+        'CollectionCard', 'SignIn', 'OAuth', 'ThumbnailCard'
+    ]
+    
+    # Process the selected card type and send the corresponding card
+    if text in suggested_cards:
+        # Send Adaptive Card (rich interactive card with JSON schema)
+        if text == 'AdaptiveCard':
+            message = MessageActivityInput(text="").add_card(cards.adaptive_Card())
+            await context.send(message)
+        
+        # Send Hero Card (card with large image, title, and buttons)
+        elif text == 'HeroCard':
+            card = cards.hero_Card()
+            attachment = Attachment(content_type=card['contentType'], content=card['content'])
+            message = MessageActivityInput(text="").add_attachments(attachment)
+            await context.send(message)
+        
+        # Send Office 365 Connector Card (card with sections, facts, and actions)
+        elif text == 'Office365':
+            card = cards.O365_connector_Card()
+            attachment = Attachment(content_type=card['contentType'], content=card['content'])
+            message = MessageActivityInput(text="").add_attachments(attachment)
+            await context.send(message)
+        
+        # Send Thumbnail Card (compact card with small image and buttons)
+        elif text == 'ThumbnailCard':
+            card = cards.thumbnail_card()
+            attachment = Attachment(content_type=card['contentType'], content=card['content'])
+            message = MessageActivityInput(text="").add_attachments(attachment)
+            await context.send(message)
+        
+        # Send SignIn Card (authentication card with sign-in button)
+        elif text == 'SignIn':
+            card = cards.signin_Card()
+            attachment = Attachment(content_type=card['contentType'], content=card['content'])
+            message = MessageActivityInput(text="").add_attachments(attachment)
+            await context.send(message)
+        
+        # Send OAuth Card (authentication card with OAuth connection)
+        elif text == 'OAuth':
+            card = cards.oauth_Card('connection-name')
+            attachment = Attachment(content_type=card['contentType'], content=card['content'])
+            message = MessageActivityInput(text="").add_attachments(attachment)
+            await context.send(message)
+        
+        # Send List Card (card with multiple list items and sections)
+        elif text == 'ListCard':
+            card = cards.list_Card()
+            attachment = Attachment(content_type=card['contentType'], content=card['content'])
+            message = MessageActivityInput(text="").add_attachments(attachment)
+            await context.send(message)
+        
+        # Send Collection Card (adaptive card for employee events)
+        elif text == 'CollectionCard':
+            message = MessageActivityInput(text="").add_card(cards.collection_Card())
+            await context.send(message)
+        
+        # Confirm the card selection to the user
+        await context.send(f"You have selected <b>{text}</b>")
+    
+    # Always send the card selection menu after processing the message
+    await send_suggested_cards(context)
 
-ADAPTER.on_turn_error = on_error
 
-# If the channel is the Emulator, and authentication is not in use, the AppId will be null.
-# We generate a random AppId for this case only. This is not required for production, since
-# the AppId will have a value.
-APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
-
-# Create the Bot
-BOT = BotAllCards()
-
-# Listen for incoming requests on /api/messages.
-async def messages(req: Request) -> Response:
-    # Main bot message handler.
-    if "application/json" in req.headers["Content-Type"]:
-        body = await req.json()
-    else:
-        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-
-    activity = Activity().deserialize(body)
-    auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
-
-    response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
-    if response:
-        return json_response(data=response.body, status=response.status)
-    return Response(status=HTTPStatus.OK)
-
-# Listen for incoming requests on /api/messages.
-APP = web.Application(middlewares=[aiohttp_error_middleware])
-APP.router.add_post("/api/messages", messages)
-
-if __name__ == "__main__":
-    try:
-        web.run_app(APP, host="localhost", port=CONFIG.PORT)
-    except Exception as error:
-        raise error
+async def send_suggested_cards(context):
+    """Send a hero card with buttons to select different card types"""
+    # Create hero card content with all available card options as buttons
+    hero_card_content = {
+        'title': 'Please select a card from given options.',
+        'buttons': [
+            {'type': 'imBack', 'title': 'AdaptiveCard', 'value': 'AdaptiveCard'},
+            {'type': 'imBack', 'title': 'HeroCard', 'value': 'HeroCard'},
+            {'type': 'imBack', 'title': 'ListCard', 'value': 'ListCard'},
+            {'type': 'imBack', 'title': 'Office365', 'value': 'Office365'},
+            {'type': 'imBack', 'title': 'CollectionCard', 'value': 'CollectionCard'},
+            {'type': 'imBack', 'title': 'SignIn', 'value': 'SignIn'},
+            {'type': 'imBack', 'title': 'ThumbnailCard', 'value': 'ThumbnailCard'},
+            {'type': 'imBack', 'title': 'OAuth', 'value': 'OAuth'}
+        ]
+    }
+    # Create attachment and send the hero card with selection buttons
+    attachment = Attachment(content_type='application/vnd.microsoft.card.hero', content=hero_card_content)
+    message = MessageActivityInput(text="").add_attachments(attachment)
+    await context.send(message)

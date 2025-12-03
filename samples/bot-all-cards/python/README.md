@@ -111,43 +111,47 @@ the Teams service needs to call into the bot.
 
 **Install App:**
 
-![InstallApp](Images/1.Install.png)
+![InstallApp](Images/1.Install_App.png)
 
 **Welcome Message:**
 
-![Initial message](Images/2.Welcome.png)
+![Initial message](Images/2.Open_App.png)
+
+**Card Selection Menu:**
+
+![Card Selection](Images/3.Select_Cards_From_Given_Card.png)
 
 **Adaptive Card:**
 
-![Adaptive Card](Images/3.AdaptiveCard.png)
+![Adaptive Card](Images/4.Adaptive_Card.png)
 
 **Hero Card:**
 
-![Hero Card](Images/4.HeroCard.png)
+![Hero Card](Images/5.Hero_Card.png)
 
 **List Card:**
 
-![List Card](Images/5.ListCard.png)
+![List Card](Images/6.List_Card.png)
 
-**Office365 Card:**
+**Office 365 Connector Card:**
 
-![Office365 Connector Card](Images/6.Office365Card.png)
-
-**SignIn Card:**
-
-![SignIn Card](Images/8.SignInCard.png)
-
-**Thumbnail Card:**
-
-![Thumbnail Card](Images/9.ThumbnailCard.png)
+![Office365 Connector Card](Images/7.Office_365_Connector_Card.png)
 
 **Collection Card:**
 
-![Collection Card](Images/7.CollectionCard.png)
+![Collection Card](Images/8.Collection_Card.png)
 
-**Oauth Card:**
+**SignIn Card:**
 
-![Oauth Card](Images/8.SignInCard.png)
+![SignIn Card](Images/9.SignIn_Card.png)
+
+**Thumbnail Card:**
+
+![Thumbnail Card](Images/10.Thumbnail_Card.png)
+
+**OAuth Card:**
+
+![OAuth Card](Images/11.Oauth_Card.png)
 
 ## Deploy the bot to Azure
 
@@ -155,6 +159,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 - [Types Of Cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#thumbnail-card)
+- [Teams AI Library](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/teams-conversation-ai-overview)
 - [Send a hero card](https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-howto-add-media-attachments?view=azure-bot-service-4.0&tabs=javascript#send-a-hero-card&preserve-view=true)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-all-cards-python" />

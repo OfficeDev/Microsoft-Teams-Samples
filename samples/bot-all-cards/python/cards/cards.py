@@ -1,21 +1,13 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-from botbuilder.core import CardFactory
-from botbuilder.schema import (
-    Attachment,
-    HeroCard,
-    CardImage,
-    CardAction,
-    ActionTypes,
-    SigninCard,
-    OAuthCard
-)
-import os
+from microsoft.teams.cards import AdaptiveCard
+from typing import Dict, Any
 
 
-def adaptive_Card() -> Attachment:
-    return CardFactory.adaptive_card(
+# Creates an Adaptive Card with rich content including images, text blocks, and fact sets
+def adaptive_Card() -> AdaptiveCard:
+    return AdaptiveCard.model_validate(
         {
             "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
             "type": "AdaptiveCard",
@@ -91,8 +83,9 @@ def adaptive_Card() -> Attachment:
     )
 
 
-def collection_Card() -> Attachment:
-    return CardFactory.adaptive_card(
+# Creates a Collection Card (Adaptive Card) for employee events and notifications
+def collection_Card() -> AdaptiveCard:
+    return AdaptiveCard.model_validate(
         {
             "type": "AdaptiveCard",
             "version": "1.0",
@@ -141,10 +134,11 @@ def collection_Card() -> Attachment:
     )
 
 
-def list_Card() -> Attachment:
-    return Attachment(
-        content_type="application/vnd.microsoft.teams.card.list",
-        content={
+# Creates a List Card with multiple items including files, links, and people
+def list_Card() -> Dict[str, Any]:
+    return {
+        "contentType": "application/vnd.microsoft.teams.card.list",
+        "content": {
             "title": "Card title",
             "items": [
                 {
@@ -175,13 +169,14 @@ def list_Card() -> Attachment:
             ],
             "buttons": [{"type": "imBack", "title": "Select", "value": "whois"}],
         },
-    )
+    }
 
 
-def o365_Connector_Card() -> Attachment:
-    return Attachment(
-        content_type="application/vnd.microsoft.teams.card.o365connector",
-        content={
+# Creates an Office 365 Connector Card with sections, facts, images, and actions
+def O365_connector_Card() -> Dict[str, Any]:
+    return {
+        "contentType": "application/vnd.microsoft.teams.card.o365connector",
+        "content": {
             "@type": "MessageCard",
             "@context": "http://schema.org/extensions",
             "summary": "Office 365 Connector Card",
@@ -208,13 +203,13 @@ def o365_Connector_Card() -> Attachment:
                     "title": "Images",
                     "images": [
                         {
-                            "image": "http://connectorsdemo.azurewebsites.net/images/MicrosoftSurface_024_Cafe_OH-06315_VS_R1c.jpg"
+                            "image": "https://picsum.photos/400/300?random=1"
                         },
                         {
-                            "image": "http://connectorsdemo.azurewebsites.net/images/WIN12_Scene_01.jpg"
+                            "image": "https://picsum.photos/400/300?random=2"
                         },
                         {
-                            "image": "http://connectorsdemo.azurewebsites.net/images/WIN12_Anthony_02.jpg"
+                            "image": "https://picsum.photos/400/300?random=3"
                         },
                     ],
                 },
@@ -227,13 +222,14 @@ def o365_Connector_Card() -> Attachment:
                 }
             ],
         },
-    )
+    }
 
 
-def thumbnail_Card() -> Attachment:
-    return Attachment(
-        content_type="application/vnd.microsoft.card.thumbnail",
-        content={
+# Creates a Thumbnail Card with a compact layout, small image, and action buttons
+def thumbnail_card() -> Dict[str, Any]:
+    return {
+        "contentType": "application/vnd.microsoft.card.thumbnail",
+        "content": {
             "title": "Thumbnail Card",
             "subtitle": "Tale of a robot who dared to love",
             "text": (
@@ -255,44 +251,61 @@ def thumbnail_Card() -> Attachment:
                 }
             ],
         },
-    )
+    }
 
 
-def hero_Card():
-    return CardFactory.hero_card(
-        HeroCard(
-            title="BotFramework Hero Card",
-            images=[
-                CardImage(
-                    url="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Seattle_monorail01_2008-02-25.jpg/1024px-Seattle_monorail01_2008-02-25.jpg"
-                )
+# Creates a Hero Card with a large image, title, and action buttons
+def hero_Card() -> Dict[str, Any]:
+    return {
+        "contentType": "application/vnd.microsoft.card.hero",
+        "content": {
+            "title": "Teams SDK Hero Card",
+            "images": [
+                {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Seattle_monorail01_2008-02-25.jpg/1024px-Seattle_monorail01_2008-02-25.jpg"
+                }
             ],
-            buttons=[
-                CardAction(
-                    type=ActionTypes.open_url,
-                    title="Get started",
-                    value="https://docs.microsoft.com/en-us/azure/bot-service/",
-                )
+            "buttons": [
+                {
+                    "type": "openUrl",
+                    "title": "Get started",
+                    "value": "https://docs.microsoft.com/en-us/azure/bot-service/",
+                }
             ],
-        )
-    )
+        },
+    }
 
 
-def signin_Card():
-    return CardFactory.signin_card(
-        SigninCard(
-            text="BotFramework SignIn Card",
-            buttons=[
-                CardAction(
-                    type=ActionTypes.signin,
-                    title="Sign In",
-                    value="https://login.microsoftonline.com",
-                )
+# Creates a SignIn Card for user authentication with a sign-in button
+def signin_Card() -> Dict[str, Any]:
+    return {
+        "contentType": "application/vnd.microsoft.card.signin",
+        "content": {
+            "text": "Teams SDK SignIn Card",
+            "buttons": [
+                {
+                    "type": "signin",
+                    "title": "Sign In",
+                    "value": "https://login.microsoftonline.com",
+                }
             ],
-        )
-    )
+        },
+    }
 
-def oauth_Card(connection_name: str):
-    return CardFactory.oauth_card(
-        connection_name, "Sign In", "Please sign in to continue."
-    )
+
+# Creates an OAuth Card for authentication with a specified connection name
+def oauth_Card(connection_name: str) -> Dict[str, Any]:
+    return {
+        "contentType": "application/vnd.microsoft.card.oauth",
+        "content": {
+            "text": "Teams SDK OAuth Card",
+            "connectionName": connection_name,
+            "buttons": [
+                {
+                    "type": "signin",
+                    "title": "Sign In",
+                    "value": "https://login.microsoftonline.com",
+                }
+            ],
+        },
+    }

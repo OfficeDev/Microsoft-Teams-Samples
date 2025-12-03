@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
@@ -6,12 +5,16 @@ import os
 
 """ Bot Configuration """
 
-
 class DefaultConfig:
-    """ Bot Configuration """
+    """ Bot Configuration matching Node.js Teams AI SDK pattern """
 
     PORT = 3978
-    APP_ID = os.environ.get("MicrosoftAppId", "")
-    APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
-    MicrosoftAppTenantId = os.environ.get("MicrosoftAppTenantId", "")
+    
+    # Bot credentials (matching Node.js config.js pattern)
+    MicrosoftAppId = os.environ.get("CLIENT_ID", "")
+    MicrosoftAppType = os.environ.get("BOT_TYPE", "SingleTenant")
+    MicrosoftAppTenantId = os.environ.get("TENANT_ID", "")
+    MicrosoftAppPassword = os.environ.get("CLIENT_SECRET", os.environ.get("CLIENT_PASSWORD", ""))
+    
+    # Connection name for OAuth (matches Node.js pattern)
     CONNECTION_NAME = os.environ.get("ConnectionName", "")

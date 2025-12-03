@@ -9,7 +9,7 @@
       "This Microsoft Teams bot sample demonstrates sending various card types, such as Adaptive, Hero, List, and Thumbnail cards. It includes detailed steps for setup, app deployment, and using Microsoft 365 Agents Toolkit for Visual Studio to run the app. Experience this versatile bot directly within your Teams client, complete with a manifest for easy uploading."
     ],
     "creationDateTime": "2025-08-19",
-    "updateDateTime": "2025-08-19",
+    "updateDateTime": "2025-12-03",
     "products": [
       "Teams"
     ],
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-all-cards/python/Images/TypesOfCards.gif",
-        "alt": "Solution UX showing different types of cards using bot."
+        "alt": "Solution UX showing different types of cards using Teams SDK."
       }
     ],
     "authors": [
