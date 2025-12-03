@@ -1,4 +1,0 @@
-# A gitignored place holder file for local runtime configurations when debug in test tool
-MicrosoftAppId=
-MicrosoftAppPassword=
-TEAMSFX_NOTIFICATION_STORE_FILENAME=.notification.testtoolstore.json
