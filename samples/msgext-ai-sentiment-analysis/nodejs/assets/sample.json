@@ -9,7 +9,7 @@
       "This sample allows users to assess the sentiment of messages in Teams chats by utilizing a messaging extension integrated with Open AI. The analysis categorizes messages as positive, negative, or neutral, enhancing understanding of team interactions."
     ],
     "creationDateTime": "2023-08-07",
-    "updateDateTime": "2024-10-11",
+    "updateDateTime": "2025-06-24",
     "products": [
       "Teams"
     ],

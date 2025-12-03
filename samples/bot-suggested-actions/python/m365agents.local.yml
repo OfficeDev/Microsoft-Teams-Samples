@@ -41,6 +41,14 @@ provision:
           deploymentName: Create-resources-for-bot
       bicepCliVersion: v0.9.1 # Microsoft 365 Agents Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
 
+  # manifest file to determine which AAD app to update.
+  - uses: aadApp/update
+    with:
+      # Relative path to this file. Environment variables in manifest will
+      # be replaced before apply to AAD app
+      manifestPath: ./aad.manifest.json
+      outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
+
   # Validate using manifest schema
   - uses: teamsApp/validateManifest
     with:
@@ -74,5 +82,7 @@ deploy:
     with:
       target: ./.env
       envs:
+        MicrosoftAppType: "SingleTenant"
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

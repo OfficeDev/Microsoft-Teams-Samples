@@ -77,7 +77,8 @@ class TeamsBot extends TeamsActivityHandler {
         const scheduleDate = new Date(year, month -1, day, hour, min);
 
         const job = schedule.scheduleJob(scheduleDate, async function () {
-            await adapter.continueConversation(conversationReferences[currentUser], async turnContext => {
+            const botAppId = process.env.MicrosoftAppId || process.env.AAD_APP_CLIENT_ID || '';
+            await adapter.continueConversationAsync(botAppId, conversationReferences[currentUser], async turnContext => {
                 const userCard = CardFactory.adaptiveCard({
                     $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
                     body: [

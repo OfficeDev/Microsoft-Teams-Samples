@@ -1,3 +1,3 @@
-from .adaptive_card_actions_bot import SuggestedActionsBot
+from .Suggested_Actions_Bot import SuggestedActionsBot
 
 __all__ = ["SuggestedActionsBot"]

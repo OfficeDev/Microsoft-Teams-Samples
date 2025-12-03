@@ -1,0 +1,8 @@
+Flask==2.3.3
+Flask-CORS==4.0.0
+python-dotenv==1.0.0
+botbuilder-core==4.15.0
+botbuilder-schema==4.15.0
+botbuilder-azure==4.15.0
+botframework-connector==4.15.0
+aiohttp==3.9.3

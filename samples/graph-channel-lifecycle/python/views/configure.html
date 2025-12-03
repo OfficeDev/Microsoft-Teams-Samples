@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Channel Life Cycle demo - Python</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-inner-container">
+            <div style="display: flex; align-items: center; font-size: 24px;">
+                Welcome to Channel Life Cycle Python demo
+            </div>
+        </div>
+        <div class="header-inner-container">
+            <div style="display: flex; align-items: center; font-size: 18px;">
+                Press save to continue
+            </div>
+        </div>
+    </header>
+
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
+
+    <script>
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.appInitialization.notifySuccess();
+        microsoftTeams.settings.setValidityState(true);
+
+        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+            const origin = window.location.origin;
+            const contentUrl = `${origin}/lifeCycleDemo?tid={tid}`;
+
+            microsoftTeams.settings.setSettings({
+                entityID: "Channel lifecycle demo",
+                contentUrl: contentUrl,
+                suggestedTabName: "Channel lifecycle demo",
+                websiteUrl: contentUrl,
+            });
+
+            saveEvent.notifySuccess();
+        });
+
+    }).catch(error => {
+        console.error("Error initializing Microsoft Teams SDK:", error);
+    });
+</script>
+
+</body>
+
+</html>

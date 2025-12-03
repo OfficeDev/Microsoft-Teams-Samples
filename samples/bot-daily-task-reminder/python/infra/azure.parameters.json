@@ -19,6 +19,9 @@
     },
     "microsoftAppTenantId": {
       "value": "${{MICROSOFT_APP_TENANT_ID}}"
+    },
+    "botAadAppTenantId": {
+      "value": "${{AAD_APP_TENANT_ID}}"
     }
   }
 }

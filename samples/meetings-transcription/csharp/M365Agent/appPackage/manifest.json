@@ -24,7 +24,7 @@
   "accentColor": "#235EA5",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [ "groupChat" ],
       "isNotificationOnly": true
     }
@@ -34,7 +34,7 @@
   ],
   "permissions": [ "messageTeamMembers" ],
   "webApplicationInfo": {
-    "id": "${{AAD_APP_CLIENT_ID}}",
+    "id": "${{BOT_ID}}",
     "resource": "https://RscPermission"
   },
   "authorization": {
