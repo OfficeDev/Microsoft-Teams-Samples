@@ -8,7 +8,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { LiveShareHost } from "@microsoft/teams-js";
 import { SharedMap } from "fluid-framework";
 import { LiveShareClient } from "@microsoft/live-share";
-import { setMeetingContext, addAgendaTask, postAgenda } from "./services/agendaAPIHelper"
+import { setMeetingContext, setAgendaList, postAgenda } from "./services/agendaAPIHelper"
 
 let containerValue;
 
@@ -16,6 +16,7 @@ const SidePanel = (props) => {
 
     const agendaValueKey = "editor-value-key";
     const [appTheme, setAppTheme] = useState("");
+    const [containerReady, setContainerReady] = useState(false);
 
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
@@ -41,8 +42,6 @@ const SidePanel = (props) => {
                     userId: context.user.id,
                     tenantId: context.user.tenant.id
                 }
-
-                agendaListPopulate();
 
                 setMeetingContext(userData).then((result) => {
                     if (result.data == true) {
@@ -102,6 +101,9 @@ const SidePanel = (props) => {
             const { container } = await client.joinContainer(containerSchema, onContainerFirstCreated);
             containerValue = container;
             containerValue.initialObjects.editorMap.on("valueChanged", updateEditorState);
+            
+            setContainerReady(true);
+            agendaListPopulate();
         })();
 
     }, []);
@@ -131,6 +133,8 @@ const SidePanel = (props) => {
     }
 
     function addAgenda() {
+        if (!containerValue) return;
+        
         document.getElementById("agendaInputDiv").style.display = "none";
         document.getElementById("agendaButtonDiv").style.display = "block";
         var newAgendaItem = document.getElementById('agendaInput').value;
@@ -139,7 +143,7 @@ const SidePanel = (props) => {
         };
 
         // API call to save agenda.
-        addAgendaTask(taskInfo);
+        setAgendaList(taskInfo);
 
         var editorMap = containerValue.initialObjects.editorMap;
         var agendas = editorMap.get(agendaValueKey);
@@ -149,6 +153,8 @@ const SidePanel = (props) => {
 
     // This method is called to publish the agenda in meeting chat.
     function publishAgenda() {
+        if (!containerValue) return;
+        
         const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
         postAgenda(agendaValue);
     }
@@ -166,7 +172,7 @@ const SidePanel = (props) => {
                     Agenda
                 </div>
                 <div id="agendaButtonDiv">
-                    <button id="agendaButton" onClick={showAgendaInput}>Add New Agenda Item</button>
+                    <button id="agendaButton" onClick={showAgendaInput} disabled={!containerReady}>Add New Agenda Item</button>
                 </div>
                 <div id="agendaInputDiv" style={{ display: 'none' }}>
                     <input type="text" id="agendaInput" /><br />
@@ -176,7 +182,7 @@ const SidePanel = (props) => {
                     <ol type="1" id="agendaList">
                     </ol>
                 </div>
-                <button id="publishAgendaButton" onClick={publishAgenda}>Publish Agenda</button>
+                <button id="publishAgendaButton" onClick={publishAgenda} disabled={!containerReady}>Publish Agenda</button>
             </div>
         </>
     );
