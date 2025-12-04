@@ -6,16 +6,23 @@ import './tab.css'
 
 const Tab = () => {
 
-    React.useEffect(() => {
-        app.initialize();
-        meeting.getMeetingDetails( (error, meetingDetails: any) =>
-        {
-            console.log(JSON.stringify(meetingDetails));
-            setTabContext(meetingDetails);
-        }); 
-    }, [])
-
     const [tabContext, setTabContext] = React.useState({});
+
+    React.useEffect(() => {
+        (async () => {
+            try {
+                await app.initialize();
+                
+                const context = await app.getContext();
+                
+                // Display the entire context object
+                setTabContext(context);
+            } catch (error) {
+                console.error('Error initializing app:', error);
+                setTabContext({ error: String(error) });
+            }
+        })();
+    }, [])
 
     return (
         <div className="tab-container">

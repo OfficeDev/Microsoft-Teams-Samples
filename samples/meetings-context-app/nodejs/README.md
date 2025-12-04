@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to retrieve and display meeting context and participant details in Microsoft Teams using the bot's Meeting API.
+description: This sample demonstrates how to retrieve and display meeting context and participant details in Microsoft Teams using Teams SDK.
 products:
 - office-teams
 - office
@@ -16,13 +16,14 @@ urlFragment: officedev-microsoft-teams-samples-meetings-context-app-nodejs
 
 # Teams Meeting Context Sample Node.js
 
-This sample application illustrates how to display the meeting context object in a Microsoft Teams meeting tab, utilizing the bot's Meeting API to fetch participant and meeting details. Users can interact with the bot to obtain comprehensive information about participants and meeting specifics, such as start times, end times, and joining URLs, thereby enriching the collaborative experience within Teams.
+This sample application illustrates how to display the meeting context object in a Microsoft Teams meeting tab, utilizing Teams SDK to fetch participant and meeting details. Users can interact with the bot to obtain comprehensive information about participants and meeting specifics, such as start times, end times, and joining URLs, thereby enriching the collaborative experience within Teams.
 
 ## Included Features
 * Bots
 * Meeting Chat 
 * Meeting Details
 * RSC Permissions
+* Teams SDK
 
 ## Interaction with bot
 ![meeting-context](Images/meeting-context.gif)
@@ -85,12 +86,7 @@ Here is the exact content that must be added if it’s missing or incomplete:
     * Choose the **supported account types** (any account type will work)
     * Leave **Redirect URI** empty.
     * Choose **Register**.
-3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-4. Navigate to **API Permissions**, and make sure to add the follow permissions:
-    * Select Add a permission
-    * Select Microsoft Graph -> Delegated permissions.
-    * `User.Read` (enabled by default)
-    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the .localConfigs.
 
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
@@ -126,9 +122,20 @@ Here is the exact content that must be added if it’s missing or incomplete:
     ```
 
 
-4) Update the `.env` configuration file.
+4) Update the `.localConfigs` configuration file.
 
-   Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
+   Add the following configuration:
+
+   ```
+   CLIENT_ID=<Your-Application-Client-ID>
+   CLIENT_SECRET=<Your-Client-Secret>
+   BaseURL=<Your-Dev-Tunnel-URL>
+   ```
+
+   Replace the values:
+   - `CLIENT_ID`: Your Application (client) ID from Azure AD App Registration
+   - `CLIENT_SECRET`: Your client secret value from Azure AD App Registration
+   - `BaseURL`: Your dev tunnel URL (e.g., `https://abc123.devtunnels.ms`)
 
 6) Run your app for server and client
 
@@ -136,13 +143,13 @@ Here is the exact content that must be added if it’s missing or incomplete:
     npm start
     ```
 
-    - Your server will start running on 3000 PORT
+    - Your server will start running on 4001 PORT
     - Your client will start running on 3978 PORT.
 
-7) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+7) __*This step is specific to Teams.*__ 
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (CLIENT_ID from `.localConfigs`) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>`
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
      
@@ -163,7 +170,6 @@ Here is the exact content that must be added if it’s missing or incomplete:
 2. **Meeting Details :** In this user can track the detials of meeting start time, end time, joining url and other details respectively.
 ![meeting context](Images/Meeting-Details.png) 
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-context-app/nodejs/server/index.js#L44) line and put your debugger for local debug.
 
 ## Further reading
 

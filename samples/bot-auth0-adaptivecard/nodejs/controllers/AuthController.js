@@ -1,5 +1,4 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const TokenStore = require('../services/TokenStore');
 const fetch = require('node-fetch');
 
