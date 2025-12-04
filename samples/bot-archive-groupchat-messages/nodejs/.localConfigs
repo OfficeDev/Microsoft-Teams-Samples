@@ -1,0 +1,5 @@
+CLIENT_ID=
+CLIENT_SECRET=
+CONNECTION_NAME=oauthbotsetting
+BOT_TYPE=SingleTenant
+TENANT_ID=

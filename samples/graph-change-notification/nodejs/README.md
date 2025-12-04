@@ -68,8 +68,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       * Choose **Register**.
   3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env.
   4. Under **Manage**, select **Expose an API**. 
-  5. Select the **Set** link to generate the Application ID URI in the form of `api://botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://botid-{AppID}`
-      * ex: `api://botid-00000000-0000-0000-0000-000000000000`.
+  5. Select the **Set** link to generate the Application ID URI in the form of `api://{BOT_DOMAIN}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://{BOT_DOMAIN}/botid-{AppID}`
+      * ex: `api://1234.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`.
+      * If using dev tunnels: `api://12345.devtunnels.ms/botid-00000000-0000-0000-0000-000000000000`.
   6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
   7. Set **Who can consent?** to `Admins and users`
   8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -80,7 +81,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   9. Ensure that **State** is set to **Enabled**
   10. Select **Add scope**
       * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-          * `api://botid-00000000-0000-0000-0000-000000000000/access_as_user.
+          * `api://{BOT_DOMAIN}/botid-00000000-0000-0000-0000-000000000000/access_as_user`.
   11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
       * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
       * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
@@ -102,9 +103,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
  2. Setup for Bot
     - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
-	**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+    **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
     
 ### Instruction on setting connection string for bot authentication on the behalf of user
    ![image](Images/BotConnection.png)
@@ -151,7 +152,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`,`connectionName` and `notificationUrl` (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.) and connectionName we can get from step "Select your bot channel registration link." and for the `notificationUrl` eg.1234.ngrok-free.app/api/notifications
+  - Update the `.localConfigs` configuration for the bot with the following values:
+    - `CLIENT_ID` - The Application (client) ID from the Microsoft Entra ID app registration (created in step 1)
+    - `CLIENT_SECRET` - The client secret from the Microsoft Entra ID app registration (created in step 1.14)
+    - `CONNECTION_NAME` - The OAuth connection name you configured (e.g., "oauthbotsetting")
+    - `BOT_TYPE` - Set to "SingleTenant"
+    - `TENANT_ID` - Your Microsoft Entra tenant ID (Directory tenant ID from step 1.3)
+    - `notificationUrl` - Set to `${{BOT_ENDPOINT}}/api/notifications` 
   
  - Open from Visual Studio code
     - Launch Visual Studio code
@@ -165,14 +172,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/nodejs/index.js#L42) line and put your debugger for local debug.
