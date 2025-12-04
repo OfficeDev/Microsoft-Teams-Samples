@@ -15,7 +15,7 @@
   },
   "name": {
     "short": "Messaging Extension Search",
-    "full": ""
+    "full": "Messaging Extension Search"
   },
   "description": {
     "short": "Messaging Extension quick start for handling search requests.",
@@ -56,5 +56,15 @@
   ],
   "validDomains": [
     "${{BOT_DOMAIN}}"
-  ]
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MailboxItem.ReadWrite.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
 }

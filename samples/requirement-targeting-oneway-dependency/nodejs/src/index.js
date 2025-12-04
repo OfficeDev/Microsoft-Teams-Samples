@@ -1,32 +1,24 @@
-// Import required packages
-const restify = require("restify");
-const send = require("send");
-const fs = require("fs");
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const {
-  CloudAdapter,
-  ConfigurationServiceClientCredentialFactory,
-  ConfigurationBotFrameworkAuthentication,
-} = require("botbuilder");
+// Import required packages
+const express = require("express");
+const path = require("path");
+
+// Import required agent services.
+// See Agent SDK documentation to learn more about agents.
+const { CloudAdapter, loadPrevAuthConfigFromEnv } = require('@microsoft/agents-hosting');
 const { ActionApp } = require("./actionApp");
 const config = require("./config");
 
+// Set environment variables for authentication
+process.env.MicrosoftAppId = config.botId;
+process.env.MicrosoftAppPassword = config.botPassword;
+
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
-  MicrosoftAppId: config.botId,
-  MicrosoftAppPassword: config.botPassword,
-  MicrosoftAppType: "MultiTenant",
-});
-
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
-  {},
-  credentialsFactory
-);
-
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+const authConfig = loadPrevAuthConfigFromEnv();
+const adapter = new CloudAdapter(authConfig);
 
 adapter.onTurnError = async (context, error) => {
   // This check writes out errors to console log .vs. app insights.
@@ -44,37 +36,32 @@ adapter.onTurnError = async (context, error) => {
 const actionApp = new ActionApp();
 
 // Create HTTP server.
-const server = restify.createServer({
-  key: process.env.SSL_KEY_FILE ? fs.readFileSync(process.env.SSL_KEY_FILE) : undefined,
-  certificate: process.env.SSL_CRT_FILE ? fs.readFileSync(process.env.SSL_CRT_FILE) : undefined,
-  formatters: {
-    "text/html": function (req, res, body) {
-      return body;
-    },
-  },
-});
-server.use(restify.plugins.bodyParser());
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-  console.log(`\nBot started, ${server.name} listening to ${server.url}`);
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const port = process.env.port || process.env.PORT || 3978;
+app.listen(port, () => {
+  console.log(`\nBot started, listening on port ${port}`);
 });
 
 // Listen for incoming requests.
-server.post("/api/messages", async (req, res) => {
+app.post("/api/messages", async (req, res) => {
   await adapter.process(req, res, async (context) => {
     await actionApp.run(context);
   });
 });
 
 // Setup the static tab
-server.get("/", (req, res, next) => {
-  send(req, __dirname + "/views/hello.html").pipe(res);
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/hello.html"));
 });
 
-server.get("/tab", (req, res, next) => {
-  send(req, __dirname + "/views/hello.html").pipe(res);
+app.get("/tab", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/hello.html"));
 });
 
 // Task module tab
-server.get("/taskModulePage", (req, res, next) => {
-  send(req, __dirname + "/views/taskModule.html").pipe(res);
+app.get("/taskModulePage", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/taskModule.html"));
 });

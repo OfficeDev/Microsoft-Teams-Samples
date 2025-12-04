@@ -24,10 +24,11 @@ This comprehensive JavaScript quick start sample illustrates the creation of a M
 * Bots
 * Message Extensions
 * Search Commands
+* Agent SDK
 
 ## Interaction with app
 
-![Sample Module](Images/msgextsearchquickstart.gif)
+![Sample Module](Images/MsgExtSearchQuickStart.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -36,7 +37,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Prerequisites
 
-**Dependencies**
 -  [NodeJS](https://nodejs.org/en/)
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
@@ -65,7 +65,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - For the Messaging endpoint URL, use the current `https` URL you were given by running the tunnelling application and append it with the path `/api/messages`. It should like something work `https://{subdomain}.ngrok-free.app/api/messages`.
 
-- Click on the `Bots` menu item from the toolkit and select the bot you are using for this project.  Update the messaging endpoint and press enter to save the value in the Bot Framework.
+- Click on the `Bots` menu item from the toolkit and select the bot you are using for this project.  Update the messaging endpoint and press enter to save the value in Azure Bot Service.
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
@@ -130,37 +130,63 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Running the sample
 
-![Search](Images/search.png)
+**Install the app in Teams:**
 
-![Result](Images/result.png)
+![Install App](Images/1.Install_App.png)
+
+**Open the installed app:**
+
+![Open App](Images/2.Open_App.png)
+
+**Select messaging extension search:**
+
+![Select MsgExt Search](Images/3.Select_MsgExt_Search.png)
+
+**Search results displayed:**
+
+![Results On Search](Images/4.Results_On_Search.png)
+
+**Searched NPM package results:**
+
+![Searched NPM Results](Images/5.Searched_NPM_Results.png)
+
+**Using the app in Outlook - Click on New Mail:**
+
+![Outlook Click New Mail](Images/6.Outlook_Click_New_Main.png)
+
+**Select the app from Outlook:**
+
+![Outlook Select App](Images/7.Outlook_Select_App.png)
+
+**Enable Outlook channel in Azure Bot Service:**
+
+![Enable Channel In Azure Bot](Images/8.Enable_Channel_In_Azure_Bot.png)
+
+**Search results in Outlook:**
+
+![Outlook Search Results](Images/9.Outlook_Search_Results.png)
+
+**Selected NPM package in Outlook:**
+
+![Outlook Selected NPM Package](Images/10.Outlook_Selected_NPM_Package.png)
+
+**Multiple NPM packages displayed:**
+
+![Multiple NPM Packages](Images/11.Multiple_NPM_Packages.png)
 
 ## Outlook on the web
 
-- To view your app in Outlook on the web.
+- To view your app in Outlook on the web, go to [Outlook on the web](https://outlook.office.com/mail/) and sign in using your dev tenant account.
 
-- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
-
-**After opening Outlook web, click the "New mail" button.**
-
-![Open New Mail](Images/OpenNewMail.png)
-
-**on the tool bar on top,select Apps icon. Your uploaded app title appears among your installed apps**
-
-![OpenAppIcon](Images/OpenAppIcon.png)
-
-**Select your app icon to launch your app in Office on the web**
-
-![Search in Extension](Images/SearchInExtension.png)
-
-![Output in Outlook](Images/OutputInOutlook.png)
+**Note:** Please refer to the images in the "Running the sample" section above for detailed screenshots of the Outlook integration.
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Microsoft Agents SDK](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agents-sdk-overview)
+- [Microsoft Agents SDK for JavaScript](https://www.npmjs.com/package/@microsoft/agents-hosting)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Search based messaging extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command)

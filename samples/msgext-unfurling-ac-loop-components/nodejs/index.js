@@ -1,32 +1,23 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 // index.js is used to setup and configure your bot
 
 // Import required packages
-const restify = require("restify");
+const express = require("express");
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const {
-  CloudAdapter,
-  ConfigurationServiceClientCredentialFactory,
-  ConfigurationBotFrameworkAuthentication,
-} = require("botbuilder");
+const { CloudAdapter } = require("@microsoft/agents-hosting");
 const { TeamsBot } = require("./bots/teamsBot");
 const config = require("./config");
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
-  MicrosoftAppId: config.botId,
-  MicrosoftAppPassword: config.botPassword,
-  MicrosoftAppType: "MultiTenant",
+const adapter = new CloudAdapter({
+  appId: config.botId,
+  appPassword: config.botPassword,
 });
-
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
-  {},
-  credentialsFactory
-);
-
-const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
   // This check writes out errors to console log .vs. app insights.
@@ -46,14 +37,16 @@ adapter.onTurnError = async (context, error) => {
 const bot = new TeamsBot();
 
 // Create HTTP server.
-const server = restify.createServer();
-server.use(restify.plugins.bodyParser());
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-  console.log(`\nBot started, ${server.name} listening to ${server.url}`);
+const app = express();
+app.use(express.json());
+
+const port = process.env.port || process.env.PORT || 3978;
+const server = app.listen(port, function () {
+  console.log(`\nBot started, listening on port ${port}`);
 });
 
 // Listen for incoming requests.
-server.post("/api/messages", async (req, res) => {
+app.post("/api/messages", async (req, res) => {
   await adapter.process(req, res, async (context) => {
     await bot.run(context);
   });

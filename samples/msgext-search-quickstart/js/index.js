@@ -1,30 +1,32 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-// index.js is used to setup and configure your bot
+// index.js is used to setup and configure your agent
 
 // Import required packages
 const path = require('path');
 const express = require('express');
 
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
+// Import required agent services.
+// See https://aka.ms/agents-hosting to learn more about the Agent SDK.
 const {
     CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder')
+    loadAuthConfigFromEnv
+} = require('@microsoft/agents-hosting');
 
-// Import bot definitions
+// Import agent application
 const { BotActivityHandler } = require('./botActivityHandler');
 
-// Read botFilePath and botFileSecret from .env file.
+// Read environment variables from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
+// Load authentication configuration from environment variables
+const authConfig = loadAuthConfigFromEnv();
+
 // Create adapter.
-// See https://aka.ms/about-bot-adapter to learn more about adapters.
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+// See https://aka.ms/agents-hosting to learn more about adapters.
+const adapter = new CloudAdapter(authConfig);
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
@@ -40,9 +42,10 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-     // Uncomment below commented line for local debugging.
-     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
+    // Only send error messages for regular conversations, not for invokes (messaging extensions)
+    if (context.activity.type !== 'invoke') {
+        await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+    }
 };
 
 // Create bot handlers

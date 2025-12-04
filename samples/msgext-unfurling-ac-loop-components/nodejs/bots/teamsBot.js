@@ -1,4 +1,9 @@
-const { TeamsActivityHandler, CardFactory } = require("botbuilder");
+
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+const { TeamsActivityHandler } = require("@microsoft/agents-hosting-extensions-teams");
+const { CardFactory } = require("@microsoft/agents-hosting");
 
 const card = CardFactory.adaptiveCard({
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
