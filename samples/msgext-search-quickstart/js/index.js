@@ -11,7 +11,6 @@ const express = require('express');
 // See https://aka.ms/agents-hosting to learn more about the Agent SDK.
 const {
     CloudAdapter,
-    AuthConfiguration,
     loadAuthConfigFromEnv
 } = require('@microsoft/agents-hosting');
 
@@ -43,9 +42,10 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-     // Uncomment below commented line for local debugging.
-     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
+    // Only send error messages for regular conversations, not for invokes (messaging extensions)
+    if (context.activity.type !== 'invoke') {
+        await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+    }
 };
 
 // Create bot handlers

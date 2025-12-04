@@ -54,6 +54,16 @@
     "identity",
     "messageTeamMembers"
   ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MailboxItem.ReadWrite.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  },
   "validDomains": [
     "${{BOT_DOMAIN}}"
   ]
