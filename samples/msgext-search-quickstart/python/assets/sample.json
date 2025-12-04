@@ -9,7 +9,7 @@
       "This python quick start sample showcases how to create a Messaging Extension in Microsoft Teams that handles user search queries. It allows users to interact with your web service through the Teams client, providing seamless search functionality."
     ],
     "creationDateTime": "2024-12-26",
-    "updateDateTime": "2024-12-26",
+    "updateDateTime": "2025-12-04",
     "products": [
       "Teams"
     ],
