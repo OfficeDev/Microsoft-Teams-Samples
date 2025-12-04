@@ -5,25 +5,27 @@ const path = require('path');
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
-const restify = require('restify');
 const express = require('express');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter, ConversationState, MemoryStorage, UserState, CardFactory } = require('botbuilder');
+const { ConversationState, MemoryStorage, UserState, CardFactory } = require('botbuilder');
 
 const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
 const { DialogBot } = require('./bots/dialogBot');
 
+
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder')
 
-adapter.onTurnError = async (context, error) => {
+
+
+CloudAdapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
     // NOTE: In production environment, you should consider logging this to Azure
     //       application insights. See https://aka.ms/bottelemetry for telemetry 
@@ -65,7 +67,6 @@ const bot = new TeamsBot(conversationState, userState, dialog, conversationRefer
 
 // Create HTTP server.
 const server = express();
-server.use(restify.plugins.queryParser());
 server.use(express.json());
 
 server.use(express.urlencoded({

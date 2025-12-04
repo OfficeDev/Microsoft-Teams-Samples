@@ -1,0 +1,52 @@
+.welcome-container {
+    margin: 1.6rem 1.25rem;
+  }
+  
+  .welcome-description {
+    margin-bottom: 3vh;
+    opacity: 0.65;
+    max-width: 50rem;
+  }
+  
+  .resources-title {
+    margin-top: 2rem;
+  }
+  
+  .resources-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .resource-card {
+    max-width: 23vw;
+    margin: 0 5px;
+  }
+  
+  .resource-image {
+    border-radius: 4px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 1px 5px rgba(0, 0, 0, 0.06);
+    max-width: 100%;
+  }
+  
+  .resource-title {
+    margin: 2rem 0 0.5rem;
+  }
+  
+  .resource-description {
+    margin: 0.5rem 0 2rem;
+    opacity: 0.65;
+  }
+  
+  .resource-links a {
+    display: block;
+    color: #0078d4;
+    text-decoration: none;
+    margin-top: 0.5rem;
+  }
+  
+  .resource-links a:hover {
+    text-decoration: underline;
+  }  

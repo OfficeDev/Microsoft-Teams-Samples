@@ -1,0 +1,130 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share to Meeting</title>
+    <script src="https://unpkg.com/@microsoft/teams-js@2.4.0/dist/MicrosoftTeams.min.js"></script> <!-- Teams SDK -->
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .surface {
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #tabheader {
+            font-size: 24px;
+            color: #5558AF;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #5558AF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #464775;
+        }
+
+        /* Timer Count Styles for Different Themes */
+        /* Dark Theme Timer */
+        .timerCount-dark {
+            padding: 10rem;
+            text-align: center;
+            background-color: #242424;
+            color: white;
+        }
+
+        /* Light Theme Timer */
+        .timerCount-light {
+            padding: 10rem;
+            text-align: center;
+            background-color: white;
+            color: #242424;
+        }
+
+        /* High Contrast Theme Timer */
+        .timerCount-contrast {
+            padding: 10rem;
+            text-align: center;
+            background-color: black;
+            color: yellow;
+        }
+
+        /* Dark Theme */
+        .theme-dark {
+            margin: 0.5rem;
+            margin-right: 0px;
+            border-radius: 2px;
+            padding: 0.3rem;
+            background-color: #242424;
+            color: white;
+        }
+
+        /* Light Theme */
+        .theme-light {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: white;
+            color: #242424;
+            display: contents;
+        }
+
+        /* High Contrast Theme */
+        .theme-contrast {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: black;
+            color: yellow;
+            display: contents;
+        }
+    </style>
+</head>
+<body>
+    <div class="surface">
+        <h3 id="tabheader">Welcome Meeting Tab</h3>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Dynamically load the Teams share script
+            const script = document.createElement("script");
+            script.src = "https://teams.microsoft.com/share/launcher.js";
+            script.onload = function() {
+                console.log("Teams share script loaded successfully.");
+            };
+            script.onerror = function() {
+                console.error("Error loading Teams share script.");
+            };
+            document.body.appendChild(script);
+        });
+    </script>
+</body>
+</html>

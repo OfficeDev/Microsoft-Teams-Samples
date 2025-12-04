@@ -25,6 +25,7 @@ builder.Services.AddOptions<AzureSettings>()
     botOptions.MicrosoftAppId = configuration.GetValue<string>("MicrosoftAppId");
     botOptions.MicrosoftAppPassword = configuration.GetValue<string>("MicrosoftAppPassword");
     botOptions.MicrosoftAppTenantId = configuration.GetValue<string>("MicrosoftAppTenantId");
+    botOptions.MicrosoftTeamsAppId = configuration.GetValue<string>("MicrosoftTeamsAppId");
 });
 
 // Creates Singleton Card Factory.

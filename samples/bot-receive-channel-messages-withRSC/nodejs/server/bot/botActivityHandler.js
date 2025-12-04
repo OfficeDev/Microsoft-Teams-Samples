@@ -15,11 +15,11 @@ class BotActivityHandler extends TeamsActivityHandler  {
         // Activity called when there's a message in channel
         this.onMessage(async (context, next) => {
             var replyText = context.activity.text;
-            if(replyText == 1)
+            if(replyText == "1")
             {
               await context.sendActivity(MessageFactory.text(permissionRequired));
             }
-            else if(replyText == 2){
+            else if(replyText == "2"){
               await context.sendActivity(MessageFactory.text(docLink));
             }
             else{

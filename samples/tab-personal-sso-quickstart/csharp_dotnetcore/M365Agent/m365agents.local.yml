@@ -1,7 +1,7 @@
-# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.8/yaml.schema.json
 # Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
 # Visit https://aka.ms/teamsfx-actions for details on actions
-version: v1.2
+version: v1.8
 
 additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:tab-personal-sso-quickstart-csharp
@@ -34,11 +34,10 @@ provision:
       authorityHost: AAD_APP_OAUTH_AUTHORITY_HOST
 
   # Set TAB_DOMAIN and TAB_ENDPOINT for local launch
-  - uses: script 
+  - uses: script
     with:
-      run:
-        echo "::set-teamsfx-env TAB_DOMAIN=localhost:44302";
-        echo "::set-teamsfx-env TAB_ENDPOINT=https://localhost:44302";
+      run: echo "::set-teamsfx-env TAB_DOMAIN=localhost:44302"; echo
+        "::set-teamsfx-env TAB_ENDPOINT=https://localhost:44302";
 
   # Creates a Teams app
   - uses: teamsApp/create
@@ -47,7 +46,7 @@ provision:
       name: tab-personal-sso-quickstart${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
-    writeToEnvironmentFile: 
+    writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
 
   # Generate runtime appsettings to JSON file
@@ -80,7 +79,7 @@ provision:
       # Path to manifest template
       manifestPath: ./appPackage/manifest.json
       outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
+      outputFolder: ./appPackage/build
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:

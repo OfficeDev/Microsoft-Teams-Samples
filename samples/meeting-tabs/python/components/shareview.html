@@ -1,0 +1,133 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShareView</title>
+    <script src="https://unpkg.com/@microsoft/teams-js@2.4.0/dist/MicrosoftTeams.min.js"></script> <!-- Teams SDK -->
+    <style>
+        /* Timer Count Styles for Different Themes */
+        /* Light Theme Timer */
+        .timerCount-light {
+            padding: 10rem;
+            text-align: center;
+            background-color: white;
+            color: #242424;
+        }
+
+        /* Dark Theme Timer */
+        .timerCount-dark {
+            padding: 10rem;
+            text-align: center;
+            background-color: #242424;
+            color: white;
+        }
+
+        /* High Contrast Theme Timer */
+        .timerCount-contrast {
+            padding: 10rem;
+            text-align: center;
+            background-color: black;
+            color: yellow;
+        }
+
+        /* Dark Theme */
+        .theme-dark {
+            margin: 0.5rem;
+            margin-right: 0px;
+            border-radius: 2px;
+            padding: 0.3rem;
+            background-color: #242424;
+            color: white;
+        }
+
+        /* Light Theme */
+        .theme-light {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: white;
+            color: #242424;
+            display: contents;
+        }
+
+        /* High Contrast Theme */
+        .theme-contrast {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: black;
+            color: yellow;
+            display: contents;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="shareview-container" class="timerCount-light">
+        <h1 id="timer-display">0</h1>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let app = microsoftTeams.app;
+
+            // Initialize Microsoft Teams app and get context
+            app.initialize().then(app.getContext).then((context) => {
+                // Apply the correct theme based on the Teams context
+                let appTheme = "";
+
+                switch (context.app.theme) {
+                    case 'dark':
+                        appTheme = "timerCount-dark";
+                        break;
+                    case 'contrast':
+                        appTheme = "timerCount-contrast";
+                        break;
+                    case 'default':
+                        appTheme = "timerCount-light";
+                        break;
+                    default:
+                        appTheme = "timerCount-dark";
+                        break;
+                }
+
+                // Set the theme class to the container
+                document.getElementById("shareview-container").className = appTheme;
+            }).catch(function (error) {
+                console.error("Error initializing Microsoft Teams app:", error);
+            });
+
+            // Timer functionality
+            let seconds = 0;
+            let timerInterval;
+
+            const startTimer = () => {
+                seconds++;
+                document.getElementById("timer-display").innerText = seconds;
+            }
+
+            // Start the timer
+            timerInterval = setInterval(startTimer, 1000);
+        });
+    </script>
+</body>
+</html>

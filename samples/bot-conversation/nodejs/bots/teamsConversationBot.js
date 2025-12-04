@@ -1,6 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+// @copilot-mode: agent
+// @model: gpt-4o
+// @tech-stack: nodejs, teams, bot-framework
+// @analysis-type: code-quality, test-coverage
+
 const {
     ActionTypes,
     CardFactory,

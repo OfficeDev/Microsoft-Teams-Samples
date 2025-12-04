@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +19,7 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
     // Startup class to configure services and HTTP request pipeline for the HelloWorld Bot app.
     // This class configures the bot services, localization, and routing for the app.
+    // Uses SingleTenant authentication and CloudAdapter for improved authentication handling.
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -28,7 +30,7 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
         public IConfiguration Configuration { get; }
 
         // ConfigureServices method is used to add services to the DI container.
-        // It configures MVC, localization, and Bot Framework services.
+        // It configures MVC, localization, and Bot Framework services for SingleTenant setup.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -37,8 +39,11 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
                 opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
-            // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            // Add Bot Framework Authentication for SingleTenant setup
+            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+
+            // Create the CloudAdapter with error handling enabled for SingleTenant authentication
+            services.AddSingleton<CloudAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, CommandsMenuBot>();

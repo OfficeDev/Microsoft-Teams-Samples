@@ -26,6 +26,11 @@ This sample application showcases the management of chat lifecycles in Microsoft
 
 ![](Images/GraphChatLifecycleGif.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Chat LifeCycle Application:** [Manifest](/samples/graph-chat-lifecycle/csharp/demo-manifest/graph-chat-lifecycle.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -193,7 +198,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -209,7 +214,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 

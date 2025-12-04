@@ -69,13 +69,14 @@ namespace ChangeNotification.Dialogs
 
         protected async Task ExecuteAsync(string token, ITurnContext turnContext, CancellationToken stoppingToken)
         {
+            TokenStore.Token = token;
             SubscriptionManager subscriptionManager = new SubscriptionManager(Config, sLogger, token, turnContext);
             await subscriptionManager.InitializeAllSubscription();
 
             while (!stoppingToken.IsCancellationRequested)
             {
                 await Task.Delay(TimeSpan.FromMinutes(15), stoppingToken).ConfigureAwait(false);
-                await subscriptionManager.CheckSubscriptions().ConfigureAwait(false); ;
+                await subscriptionManager.CheckSubscriptions().ConfigureAwait(false);
             }
         }
     }

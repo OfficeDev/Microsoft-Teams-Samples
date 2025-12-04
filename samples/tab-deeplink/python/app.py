@@ -1,10 +1,20 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+
 import os
 import logging
 import asyncio
 from flask import Flask, request, jsonify, send_from_directory, Response
-from botbuilder.core import BotFrameworkAdapter, BotFrameworkAdapterSettings, TurnContext
+from botbuilder.core import  TurnContext
 from botbuilder.schema import Activity
 from bots import DeepLinkTabsBot
+from botbuilder.integration.aiohttp import (
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+)
+from config import DefaultConfig
+
+CONFIG = DefaultConfig()
 
 app = Flask(__name__)
 
@@ -17,8 +27,7 @@ MICROSOFT_APP_PASSWORD = os.getenv("MicrosoftAppPassword", "")
 logging.basicConfig(level=logging.INFO)
 
 # Configure Bot Adapter
-settings = BotFrameworkAdapterSettings(app_id=MICROSOFT_APP_ID, app_password=MICROSOFT_APP_PASSWORD)
-adapter = BotFrameworkAdapter(settings)
+adapter = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
 # Bot instance
 bot = DeepLinkTabsBot()

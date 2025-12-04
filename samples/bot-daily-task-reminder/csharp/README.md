@@ -22,13 +22,14 @@ The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurr
 * Adaptive Cards
 * Task Modules
 * Quartz Scheduler (for scheduling)
+* Custom Engine Agent - Copilot
 
 ## Interaction with app
 
 ![Daily Task Reminder ](BotDailyTaskReminder/Images/DailyTaskReminder.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Bot daily task reminder:** [Manifest](/samples/bot-daily-task-reminder/csharp/demo-manifest/Bot-Daily-Task-Reminder.zip)
 
@@ -58,11 +59,23 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
 </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
 1. In the opened web browser, select Add button to install the app in Teams
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 2. Setup for Bot
   - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
@@ -127,6 +140,27 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   ![Reminder Card](BotDailyTaskReminder/Images/4.reminder-card.png)
 
 
+## Custom Engine Agent - Copilot
+
+**Installation of Copilot App**  
+![Installation of Copilot App](BotDailyTaskReminder/Images/Copilot_Install_App.png)  
+
+**Opening the Daily Task Reminder in Copilot**  
+![Opening the Daily Task Reminder in Copilot](BotDailyTaskReminder/Images/Copilot_DailyTaskReminder_App.png)  
+
+**Creating a new reminder in Copilot**  
+![Creating a new reminder in Copilot](BotDailyTaskReminder/Images/Copilot_CreateReminder.png)  
+
+**Scheduling a task reminder**  
+![Scheduling a task reminder](BotDailyTaskReminder/Images/Copilot_Schedule_Reminder.png)  
+
+**Reminder set successfully confirmation**  
+![Reminder set successfully confirmation](BotDailyTaskReminder/Images/Copilot_ReminderSet_Successfully.png)  
+
+**Final reminder notification in Copilot**  
+![Final reminder notification in Copilot](BotDailyTaskReminder/Images/Copilot_Task_Reminder.png)  
+
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -138,7 +172,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Activity processing](https://docs.microsoft.com/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-
+- [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-daily-task-reminder-csharp" />

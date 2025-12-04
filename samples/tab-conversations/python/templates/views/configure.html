@@ -1,0 +1,83 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Microsoft Teams Conversation Tab Sample app
+    </title>
+    <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css">
+    </link>
+    <link rel="stylesheet" type="text/css" href="/styles/custom.css">
+    </link>
+    <script src="https://res.cdn.office.net/teams-js/2.24.0/js/MicrosoftTeams.min.js"
+            crossorigin="anonymous"></script>
+    <script>
+        microsoftTeams.app.initialize().then(() => {
+            // Save configuration changes
+            microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                // Let the Microsoft Teams platform know what you want to load based on
+                // what the user configured on this page
+                microsoftTeams.pages.config.setConfig({
+                    contentUrl: createTabUrl(),
+                    entityId: createTabUrl(),
+                });
+
+                // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
+                // for the app to call this API before it dismisses the dialog. If the wait times out, you will
+                // see an error indicating that the configuration settings could not be saved.
+                saveEvent.notifySuccess();
+            });
+        });
+
+        // Method to select a particular tab.
+        function choiceOnChange(element) {
+            var tabChoice = document.getElementById('tabChoice');
+            if (tabChoice) {
+                var selectedTab = element.options[element.selectedIndex].value;
+
+                // This API tells Microsoft Teams to enable the 'Save' button. Since Microsoft Teams always assumes
+                // an initial invalid state, without this call the 'Save' button will never be enabled.
+                microsoftTeams.pages.config.setValidityState(
+                    selectedTab === 'conversationTab' || selectedTab === 'conversationTab'
+                );
+            }
+        }
+
+        // Create the URL that Microsoft Teams will load in the tab. You can compose any URL even with query strings.
+        function createTabUrl() {
+            var tabChoice = document.getElementById('tabChoice');
+            var selectedTab = tabChoice[tabChoice.selectedIndex].value;
+
+            return (
+                window.location.protocol +
+                '//' +
+                window.location.host +
+                '/' +
+                selectedTab
+            );
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="font-semibold font-title">Configure your app here
+                <p>
+                <div>
+                    <label for="tabChoice"></label>Select the tab you would like to see:
+                    <select id="tabChoice" name="tabChoice" onchange="choiceOnChange(this)">
+                        <option value="" selected="selected">(Select a tab)</option>
+                        <option value="conversationTab">Conversation Tab</option>
+                    </select>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

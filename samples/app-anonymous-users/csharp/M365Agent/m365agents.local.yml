@@ -34,7 +34,7 @@ provision:
     with:
       run:
         # echo "::set-teamsfx-env MICROSOFT_APP_TYPE=SingleTenant";
-        echo "::set-teamsfx-env MICROSOFT_APP_TYPE=MultiTenant";
+        echo "::set-teamsfx-env MICROSOFT_APP_TYPE=SingleTenant";
         echo "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=${{AAD_APP_TENANT_ID}}";
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
@@ -55,6 +55,7 @@ provision:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
+        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
         ApplicationBaseUrl: ${{BOT_ENDPOINT}}
         AzureAd: {
           TenantId: "${{MICROSOFT_APP_TENANT_ID}}",

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Boards</title>
+    <style>
+        .board {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .lane {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            width: 18%;
+        }
+        .lane-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #fff;
+        }
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .item-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        .item-body {
+            margin-top: 0.5rem;
+        }
+        .badges {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task Boards</h1>
+    <div class="board">
+        {% for lane_id, lane in lanes.items() %}
+        <div class="lane">
+            <div class="lane-title">{{ lane.title }}</div>
+            {% for item_id, item in items.items() %}
+            {% if item.lane == lane_id %}
+            <div class="item">
+                <div class="item-title">{{ item.title }}</div>
+                {% if item.subtitle %}
+                <div class="item-subtitle">{{ item.subtitle }}</div>
+                {% endif %}
+                {% if item.body %}
+                <div class="item-body">{{ item.body }}</div>
+                {% endif %}
+                {% if item.preview %}
+                <img src="{{ item.preview }}" alt="Preview" style="max-width: 100%; margin-top: 0.5rem; border-radius: 4px;">
+                {% endif %}
+                {% if item.badges.attachments %}
+                <div class="badges">Attachments: {{ item.badges.attachments }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

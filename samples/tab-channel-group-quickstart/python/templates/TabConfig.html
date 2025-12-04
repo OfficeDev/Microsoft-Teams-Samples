@@ -1,0 +1,60 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Configuration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='App.css') }}">
+    <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"></script>
+    <style>
+        /* Dark theme content area only */
+        .dark-theme-container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            padding: 30px;
+            width: 95%;
+            max-width: 1200px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: left;
+        }
+
+        .dark-theme-container h1,
+        .dark-theme-container h3,
+        .dark-theme-container div {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="dark-theme-container">
+        <h1>Tab Configuration</h1>
+        <div>
+            This is where you will add your tab configuration options the user
+            can choose when the tab is added to your team/group chat.            
+        </div>
+    </div>
+
+    <script>
+        function render() {
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+                    const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
+                    microsoftTeams.pages.config.setConfig({
+                        suggestedDisplayName: "My Tab",
+                        entityId: "Test",
+                        contentUrl: baseUrl + "/tab",
+                        websiteUrl: baseUrl + "/tab"
+                    });
+                    saveEvent.notifySuccess();
+                });
+
+                microsoftTeams.pages.config.setValidityState(true);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', render);
+    </script>
+</body>
+</html>

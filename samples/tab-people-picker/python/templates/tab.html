@@ -1,0 +1,181 @@
+<!--Copyright (c) Microsoft Corporation. All rights reserved.--> 
+<!--# Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teams People Picker Demo</title>
+    <script src="https://res.cdn.office.net/teams-js/2.4.0/js/MicrosoftTeams.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        let aadId;        
+        $(document).ready(function () {
+            microsoftTeams.app.initialize().then(() => {
+                $("#defaultSelected").hide();
+                $("#allMemberOfOrganisationSelected").hide();
+                $("#singleSelected").hide();
+                $("#defaultMemberSelected").hide();
+            });
+            microsoftTeams.app.getContext().then(function (context) {
+                aadId = context.user.id; 
+            });
+        }); 
+
+        function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+            var id = $(e.currentTarget).attr('data-id'); 
+            if (setSelected == "default") {
+                setSelected = [aadId];
+            }
+
+            microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+                if (people) {
+                    let peopleData = JSON.stringify(people);
+
+                    if (id == "default") {
+                        $("#defaultSelected").empty().append("Selected member: " + peopleData).show();
+                    }
+
+                    if (id == "singleSelect") {
+                        $("#singleSelected").empty().append("Selected member: " + peopleData).show();
+                    }
+
+                    if (id == "allMemberOfOrganisation") {
+                        $("#allMemberOfOrganisationSelected").empty().append("Selected member: " + peopleData).show();
+                    }
+
+                    if (id == "defaultSelect") {
+                        $("#defaultMemberSelected").empty().append("Selected member: " + peopleData).show();
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+        #mainDiv {
+            padding-left: 6%;
+            padding-top: 2%;
+        }
+
+        #taskDetails {
+            margin-top: 1rem;
+        }
+
+        .label-text {
+            padding-top: 1.5rem;
+            margin-left: 1rem;
+        }
+
+        #error {
+            color: #dd1438;
+            margin-top: 1rem;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 52rem;
+            min-height: 27rem;
+            overflow: hidden;
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .card-container-div {
+            padding-bottom: 2rem;
+            display: flex;
+        }
+
+        .signin-header,
+        .configure-header {
+            margin-left: 1rem;
+            margin-right: 1rem;
+            margin-top: 1rem;
+            padding-top: 0.5rem;
+        }
+
+        button {
+            margin: 1rem 8.5rem 0rem 19.5rem;
+        }
+
+        #defaultSelected,
+        #allMemberOfOrganisationSelected,
+        #singleSelected,
+        #defaultMemberSelected,
+        .configure-header {
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body id="mainDiv">
+    <div class="container">
+        <div class="card-container-div">
+            <div>
+                <div class="card">
+                    <div class="signin-header"><b>People picker with members according to scope</b></div>
+                    <div class="configure-header">
+                        To use this option, configure the function using following parameters
+                        <pre>microsoftTeams.people.selectPeople(
+callbackfunc, 
+setSelected: null,
+openOrgWideSearchInChatOrChannel: false, 
+singleSelect: false)</pre>
+                    </div>
+                    <button data-id="default" onclick="selectPeople(event,null,false,false)">Select</button>
+                    <div id="defaultSelected" class="label-text"></div>
+                </div>
+            </div>
+            <div>
+                <div class="card">
+                    <div class="signin-header"><b>People picker with all members of the tenant</b></div>
+                    <div class="configure-header">
+                        To use this option, configure the function using following parameters
+                        <pre>microsoftTeams.people.selectPeople(
+callbackfunc, 
+setSelected: null,
+openOrgWideSearchInChatOrChannel: true, 
+singleSelect: false)</pre>
+                    </div>
+                    <button data-id="allMemberOfOrganisation" onclick="selectPeople(event,null,true,false)">Select</button>
+                    <div id="allMemberOfOrganisationSelected" class="label-text"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-container-div">
+            <div>
+                <div class="card">
+                    <div class="signin-header"><b>People picker with single member select</b></div>
+                    <div class="configure-header">
+                        To use this option, configure the function using following parameters
+                        <pre>microsoftTeams.people.selectPeople(
+callbackfunc, 
+setSelected: null,
+openOrgWideSearchInChatOrChannel: false, 
+singleSelect: true)</pre>
+                    </div>
+                    <button data-id="singleSelect" onclick="selectPeople(event,null,false,true)">Select</button>
+                    <div id="singleSelected" class="label-text"></div>
+                </div>
+            </div>
+            <div>
+                <div class="card">
+                    <div class="signin-header"><b>People picker with default selected member</b></div>
+                    <div class="configure-header">
+                        To use this option, configure the function using following parameters
+                        <pre>microsoftTeams.people.selectPeople(
+callbackfunc, 
+setSelected: aad id,
+openOrgWideSearchInChatOrChannel: false, 
+singleSelect: true)</pre>
+                    </div>
+                    <button data-id="defaultSelect" onclick="selectPeople(event,'default',false,false)">Select</button>
+                    <div id="defaultMemberSelected" class="label-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

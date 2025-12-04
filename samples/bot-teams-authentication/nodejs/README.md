@@ -25,10 +25,15 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
 - **Interaction with the bot**
-![bot-teams-auth ](Images/bot-teams-auth.gif)
+
+- **Bot Teams Authentication Teams Client/Web**
+![bot-teams-auth](Images/Bot_Teams_Auth_Web.gif)
+
+- **Bot Teams Authentication Teams Desktop**
+![bot-teams-auth](Images/Bot_Teams_Auth_Desktop.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Teams Auth Bot:** [Manifest](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
 
@@ -54,12 +59,29 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
+
+### Register your app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 
 ### Setup for Bot Auth
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
@@ -115,23 +137,29 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 **Install app:**
 
-![add-App ](Images/1.Install.png)
+![add-App ](Images/9.Desktop_OpenApp.png)
 
 **Welcome to teamsbot:**
 
-![added-App ](Images/2.Welcome.png)
+![added-App ](Images/10.Desktop_WelcomeMsg.png)
 
-**Login UI: Authentication success:**
+**Login UI: OAuth Prompt**
+- The OAuth Prompt behavior differs between Teams Desktop and Teams Web (Browser) clients.
+- Below are sample UI captures demonstrating how the login experience appears on each:
 
-![auth-login ](Images/3.AuthLogin.png)
+- **Teams Desktop:** OAuth Prompt displayed as a native popup.
+![auth-prompt ](Images/11.Desktop_OAuth_Prompt.png)
 
-**Authentication token:**
+- **Teams Web (Browser):** OAuth Prompt shown within an Adaptive Card.
+![auth-card ](Images/3.Web_Teams_SignIn_Card.png)
 
-![auth-Token ](Images/3.AuthToken.png)
+**Authentication Success And Token:**
+
+![auth-Token ](Images/13.Desktop_Login_Success_And_Token.png)
 
 **Logout UI:**
 
-![logout ](Images/4.Signout.png)
+![logout ](Images/14.Desktop_Logout.png)
 
 ## Deploy the bot to Azure
 

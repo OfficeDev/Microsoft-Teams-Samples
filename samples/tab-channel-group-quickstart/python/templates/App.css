@@ -1,0 +1,23 @@
+/* Copyright (c) Microsoft Corporation. All rights reserved. */
+/* Licensed under the MIT License. */
+.App {
+  text-align: center;
+}
+h1 {
+  color: gray;
+  line-height: 2rem;
+}
+h2 {
+  font-size: .8em;
+}
+.PropName {
+  font-weight: bold;
+  color: #6264A7;
+}
+.Logo {
+  font-size: 45pt;
+  color: #6264A7;
+}
+.Error {
+  color: red;
+}

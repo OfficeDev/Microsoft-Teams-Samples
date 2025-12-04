@@ -9,10 +9,8 @@ from botbuilder.core import (
 )
 from botbuilder.dialogs import Dialog
 from botbuilder.schema import ChannelAccount
-
 from helpers.dialog_helper import DialogHelper
 from .dialog_bot import DialogBot
-
 
 class AuthBot(DialogBot):
     def __init__(
@@ -26,6 +24,7 @@ class AuthBot(DialogBot):
     async def on_members_added_activity(
         self, members_added: List[ChannelAccount], turn_context: TurnContext
     ):
+        # Handles new members added to the conversation and sends a welcome message.
         for member in members_added:
             # Greet anyone that was not the target (recipient) of this message.
             # To learn more about Adaptive Cards, see https://aka.ms/msbot-adaptivecards for more details.
@@ -36,7 +35,7 @@ class AuthBot(DialogBot):
                 )
 
     async def on_token_response_event(self, turn_context: TurnContext):
-        # Run the Dialog with the new Token Response Event Activity.
+        # Handles the token response event by continuing the dialog.
         await DialogHelper.run_dialog(
             self.dialog,
             turn_context,

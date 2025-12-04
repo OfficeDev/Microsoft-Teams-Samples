@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-tab-adhoccalls-transcript-recording-nodejs",
+    "source": "officeDev",
+    "title": "AdhocCalls for group call recording, transcription, and displaying results in UI.",
+    "shortDescription": "Use adhocCalls to record and transcribe group calls, receive notifications, and view results in Teams.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-adhoccalls-transcript-recording/nodejs",
+    "longDescription": [
+      "This sample demonstrates how to use the Microsoft Graph `adhocCalls` API to manage call recordings and transcriptions within Microsoft Teams. After joining a group call in a group chat, the app initiates a recording or transcription session. When the call ends or the user leaves, it triggers notifications, retrieves the associated recording and transcription details from Microsoft Graph, and displays them in the Teams tab UI.The backend uses Express.js to interact with Microsoft Graph API, while the frontend (built with React and Socket.IO) renders real-time updates, formatted transcripts with speaker labels, and embedded recording playback."
+    ],
+    "creationDateTime": "2025-08-14",
+    "updateDateTime": "2025-08-14",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-adhoccalls-transcript-recording/nodejs/Images/adhoccalls-transcript-recording.gif",
+        "alt": "Solution UX showing gif AdhocCalls record and transcript."
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

@@ -47,7 +47,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
 </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
 1. In the opened web browser, select Add button to install the app in Teams
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -67,7 +67,24 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-### 3. Setup SharePoint Site.
+### 3. Register your app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
+### 4. Setup SharePoint Site.
 1) SharePoint site configuration
    - Login to [sharepoint](https://www.office.com/launch/sharepoint?auth=2)
    - Click on `Create site` and select `Team site`
@@ -84,7 +101,7 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
    - Click on next. (optional step)Add aditional owner and member.
    - Click on Finish.
 
-### 4. Setup for code
+### 5. Setup for code
 1 Clone the repository
 
     ```bash
@@ -106,7 +123,7 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
 
 5 Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-### 5. Setup Manifest for Teams
+### 6. Setup Manifest for Teams
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.

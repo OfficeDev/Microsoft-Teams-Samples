@@ -78,7 +78,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 ## Included Features
 * Bots
 * Universal Adaptive Cards
-
+* Custom Engine Agents
 ## Interaction with bot
 
 #### Me Action
@@ -88,7 +88,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 ![bot-conversations ](docs/UserSpecificView_all.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Microsoft Teams bot adaptivecards user specific views sample app:** [Manifest](/samples/bot-adaptivecards-user-specific-views/csharp/demo-manifest/bot-adaptivecards-user-specific-views.zip)
 
@@ -111,7 +111,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
 </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
 1. In the opened web browser, select Add button to install the app in Teams
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -129,6 +129,22 @@ the Teams service needs to call into the bot.
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
+
+1) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 
 1) Setup for Bot
 
@@ -297,6 +313,35 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   **Welcome intraction card**
   
   ![Meeting-scope-app](docs/24.welcome-card.png)
+
+  **Copilot Custom Engine Agents**
+
+  Install App in copilot
+  ![Copilot](docs/CopilotInstall.png) 
+
+  **Welcome Card**
+  ![Copilot](docs/Copilot1.png) 
+
+  **User Specific Card**
+  ![Copilot](docs/Copilot2.png) 
+
+  **On Click Manual Refresh**
+  ![Copilot](docs/Copilot3.png) 
+
+  **On Click Update Message**
+  ![Copilot](docs/Copilot4.png) 
+
+  ![Copilot](docs/Copilot5.png) 
+
+  **On Click All Users**
+  ![Copilot](docs/Copilot6.png) 
+
+  **On Click Manual Refresh**
+  ![Copilot](docs/Copilot7.png) 
+
+  **On Click Update Message**
+  ![Copilot](docs/Copilot8.png) 
+
   
 ## FAQ
 

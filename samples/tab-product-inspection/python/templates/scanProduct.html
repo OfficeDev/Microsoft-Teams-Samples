@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scan Product</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-QXdQxWIYy1PLsb9pdWIm5k6mjLxVKAF4ISp0BVCZZCiZNyaKXinYNAQVT8+8hEIf"
+        crossorigin="anonymous"></script>
+
+  <style>
+    .surface {
+      padding: 20px;
+    }
+    #wait, #status, #noProductFound, #productStatus, #captureImage {
+      display: none;
+    }
+  </style>
+</head>
+<body class="theme-light">
+  <div class="surface">
+    <div class="panel">
+      <label id="noProductFound">This product is not available. Please scan the product from 'All product list'</label>
+
+      <div id="captureImage">
+        <input type="button" value="Capture Image" onclick="selectMedia()" />
+        <br />
+      </div>
+
+      <div id="productStatus">
+        <label id="productName"></label><br />
+        <img id="productImg" src="" height="100" width="100" /><br /><br />
+        <button type="button" onclick="saveProduct(true)">Approve</button>
+        <button type="button" onclick="saveProduct(false)">Reject</button>
+      </div>
+
+      <div id="wait">Please wait...</div>
+      <div id="status">Product status updated successfully.</div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/static/js/scanProduct.js"></script>
+</body>
+</html>

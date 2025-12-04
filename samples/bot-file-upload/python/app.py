@@ -5,19 +5,18 @@ import traceback
 from datetime import datetime
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
-from botbuilder.core import BotFrameworkAdapterSettings, BotFrameworkAdapter
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
 from bots import TeamsFileUploadBot
 from config import DefaultConfig
-
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
 # Load configuration once
 CONFIG = DefaultConfig()
 
 # Create adapter with settings
 # See https://aka.ms/about-bot-adapter to learn more about how bots work.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
+ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
+
 
 # Catch-all for errors
 async def on_error(context, error):
@@ -49,21 +48,7 @@ BOT = TeamsFileUploadBot()
 
 # Main message handler
 async def messages(req: Request) -> Response:
-    if req.content_type != "application/json":
-        return Response(status=415)  # HTTP 415 Unsupported Media Type
-
-    # Parse the incoming request body
-    body = await req.json()
-    activity = Activity().deserialize(body)
-    auth_header = req.headers.get("Authorization", "")
-
-    # Process the activity
-    invoke_response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
-    
-    if invoke_response and invoke_response.body:
-        return json_response(data=invoke_response.body, status=invoke_response.status)
-    
-    return Response(status=invoke_response.status if invoke_response else 200)  # Return status OK if no response body
+    return await ADAPTER.process(req, BOT)
 
 # Initialize web application with error middleware
 APP = web.Application(middlewares=[aiohttp_error_middleware])

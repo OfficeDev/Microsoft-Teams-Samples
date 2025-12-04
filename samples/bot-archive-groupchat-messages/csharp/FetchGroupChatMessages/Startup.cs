@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,30 +23,30 @@ namespace FetchGroupChatMessagesWithRSC
 
         public IConfiguration Configuration { get; set; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // Configure services
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
-
             services.AddHttpClient();
 
-            // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
-            services.AddSingleton<IStorage, MemoryStorage>();
+            // Register BotFrameworkAuthentication
+            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
-            // Create the Conversation state. (Used by the Dialog system itself.)
+            // Register storage and state
+            services.AddSingleton<IStorage, MemoryStorage>();
             services.AddSingleton<ConversationState>();
 
-            // The Dialog that will be run by the bot.
+            // Register dialog
             services.AddSingleton<MainDialog>();
 
-            // Create the Bot Framework Adapter with error handling enabled.
+            // Register adapter with error handler
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
+            // Register the bot
             services.AddTransient<IBot, AuthBot<MainDialog>>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // Configure HTTP request pipeline
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

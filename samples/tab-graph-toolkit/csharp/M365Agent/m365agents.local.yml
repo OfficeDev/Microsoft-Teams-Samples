@@ -89,3 +89,11 @@ provision:
     with:
       workingDirectory: ../TabGraphToolkit/ClientApp
       args: install --no-audit
+
+    # Generate runtime environment variables for tab
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ../TabGraphToolkit/ClientApp/.env
+      envs:
+        REACT_APP_CLIENT_ID: ${{AAD_APP_CLIENT_ID}}
+        REACT_APP_START_LOGIN_PAGE_URL: ${{BOT_ENDPOINT}}/auth-start.html

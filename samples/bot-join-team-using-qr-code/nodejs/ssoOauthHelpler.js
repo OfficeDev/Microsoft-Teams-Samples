@@ -1,4 +1,5 @@
-const { StatusCodes, ActivityTypes, tokenExchangeOperationName } = require('botbuilder');
+const { ActivityTypes, tokenExchangeOperationName } = require('botbuilder');
+const { StatusCodes } = require('http-status-codes');
 
 class SsoOAuthHelpler {
     constructor(oAuthConnectName, storage) {
@@ -53,54 +54,52 @@ class SsoOAuthHelpler {
         return true;
     }
 
-    async exchangedToken(turnContext) {
-        let tokenExchangeResponse = null;
-        const tokenExchangeRequest = turnContext.activity.value;
+async exchangedToken(turnContext) {
+    let tokenExchangeResponse = null;
+    const tokenExchangeRequest = turnContext.activity.value;
 
-        try {
-            // turnContext.adapter IExtendedUserTokenProvider
-            tokenExchangeResponse = await turnContext.adapter.exchangeToken(
-                turnContext,
-                tokenExchangeRequest.connectionName,
-                turnContext.activity.from.id,
-                { token: tokenExchangeRequest.token });
+    try {
+        // ✅ Get UserTokenClient from the CloudAdapter turn state
+        const userTokenClient = turnContext.turnState.get(turnContext.adapter.UserTokenClientKey);
 
-            console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
-        } catch (err) {
-            console.log(err);
-            // Ignore Exceptions
-            // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
+        if (!userTokenClient) {
+            throw new Error('UserTokenClient not found in turn state.');
         }
 
-        if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
-            // The token could not be exchanged (which could be due to a consent requirement)
-            // Notify the sender that PreconditionFailed so they can respond accordingly.
-            await turnContext.sendActivity(
-                {
-                    type: ActivityTypes.InvokeResponse,
-                    value:
-                    {
-                        status: StatusCodes.PRECONDITION_FAILED,
-                        // Token exchange invoke response
-                        body:
-                        {
-                            id: tokenExchangeRequest.id,
-                            connectionName: tokenExchangeRequest.connectionName,
-                            failureDetail: 'The bot is unable to exchange token. Proceed with regular login.'
-                        }
-                    }
-                });
+        tokenExchangeResponse = await userTokenClient.exchangeToken(
+            turnContext.activity.from.id,
+            tokenExchangeRequest.connectionName,
+            turnContext.activity.channelId,
+            { token: tokenExchangeRequest.token }
+        );
 
-            return false;
-        } else {
-            // Store response in TurnState, so the SsoOAuthPrompt can use it, and not have to do the exchange again.
-            turnContext.turnState.tokenExchangeInvokeRequest = tokenExchangeRequest;
-            turnContext.turnState.tokenResponse = tokenExchangeResponse;
-        }
-
-        return true;
+        console.log('tokenExchangeResponse:', JSON.stringify(tokenExchangeResponse));
+    } catch (err) {
+        console.error('Token exchange error:', err);
+        // Continue gracefully
     }
 
+    if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.InvokeResponse,
+            value: {
+                status: StatusCodes.PRECONDITION_FAILED,
+                body: {
+                    id: tokenExchangeRequest.id,
+                    connectionName: tokenExchangeRequest.connectionName,
+                    failureDetail: 'The bot is unable to exchange token. Proceed with regular login.'
+                }
+            }
+        });
+        return false;
+    } else {
+        // ✅ Store in turn state for use in OAuthPrompt
+        turnContext.turnState.tokenExchangeInvokeRequest = tokenExchangeRequest;
+        turnContext.turnState.tokenResponse = tokenExchangeResponse;
+        return true;
+    }
+}
+   
     getStorageKey(turnContext) {
 
         if (!turnContext || !turnContext.activity || !turnContext.activity.conversation) {

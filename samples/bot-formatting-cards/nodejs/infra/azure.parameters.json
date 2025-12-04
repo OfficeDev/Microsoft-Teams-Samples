@@ -14,6 +14,9 @@
     "botDisplayName": {
       "value": "bot-formatting-cards"
     },
+    "botAadAppTenantId": {
+      "value": "${{AAD_APP_TENANT_ID}}"
+    },
     "microsoftAppType": {
       "value": "${{MICROSOFT_APP_TYPE}}"
     },

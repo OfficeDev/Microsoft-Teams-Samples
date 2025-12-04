@@ -11,6 +11,9 @@ dotenv.config({ path: ENV_FILE });
 
 const server = express();
 
+// Add this line so req.body is populated
+server.use(express.json());
+
 // Use the API routes
 server.use('/api', require('./api'));
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph App Installation - Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .nav-link {
+            display: inline-block;
+            margin: 10px 20px 10px 0;
+            padding: 10px 20px;
+            background-color: #5558AF;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .nav-link:hover {
+            background-color: #4a4da3;
+        }
+        .debug-link {
+            background-color: #f57c00;
+        }
+        .debug-link:hover {
+            background-color: #e65100;
+        }
+        .status {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f5e8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>Graph App Installation Python Sample</h4>
+        <p>This sample demonstrates how to manage Microsoft Teams app installations using Microsoft Graph API.</p>
+        
+        <div>
+            <a href="/configure" class="nav-link">Configure App</a>
+            <a href="/installedAppsList" class="nav-link">View Installed Apps</a>
+            <a href="/config-status-page" class="nav-link debug-link">Config Status</a>
+            <a href="/configure-direct" class="nav-link debug-link">Test Configure</a>
+            <a href="/debug" class="nav-link debug-link">Debug Config</a>
+        </div>
+        
+        <div class="status">
+            <h5>🔧 Troubleshooting Tips:</h5>
+            <ul>
+                <li>Make sure the Flask app is running on port 3978</li>
+                <li>Verify your dev tunnel is active and accessible</li>
+                <li>Check that environment variables are loaded correctly</li>
+                <li>Ensure the Teams app manifest has the correct URLs</li>
+                <li>Verify Microsoft Graph API permissions are granted</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

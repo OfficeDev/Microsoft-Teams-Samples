@@ -26,7 +26,7 @@
             "args": {
                 "prerequisites": [
                     "nodejs", // Validate if Node.js is installed.
-                    "m365Account", // Sign-in prompt for Microsoft 365 account, then validate if the account enables the sideloading permission.
+                    "m365Account", // Sign-in prompt for Microsoft 365 account, then validate if the account enables the uploading permission.
                     "portOccupancy" // Validate available ports to ensure those debug ones are not occupied.
                 ],
                 "portOccupancy": [

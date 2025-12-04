@@ -1,0 +1,91 @@
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.11/yaml.schema.json
+# Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
+# Visit https://aka.ms/teamsfx-actions for details on actions
+version: v1.11
+
+additionalMetadata:
+  sampleTag: Microsoft-Teams-Samples:bot-proactive-messaging-teamsfx
+
+provision:
+  - uses: teamsApp/create # Creates a Teams app
+    with:
+      name: proactive-messages-demo${{APP_NAME_SUFFIX}} # Teams app name
+    writeToEnvironmentFile:
+      # Write the information of created resources into environment file for the specified environment variable(s).
+      teamsAppId: TEAMS_APP_ID
+
+  # Create or reuse an existing Microsoft Entra application for bot.
+  - uses: aadApp/create
+    with:
+      # The Microsoft Entra application's display name
+      name: ${{CONFIG_APPNAME_SHORT}}-bot
+      generateClientSecret: true
+      generateServicePrincipal: true
+      signInAudience: AzureADMultipleOrgs
+    writeToEnvironmentFile:
+      # The Microsoft Entra application's client id created for bot.
+      clientId: BOT_ID
+      # The Microsoft Entra application's client secret created for bot.
+      clientSecret: SECRET_BOT_PASSWORD
+      # The Microsoft Entra application's object id created for bot.
+      objectId: BOT_OBJECT_ID
+
+  # Create or update the bot registration on dev.botframework.com
+  - uses: botFramework/create
+    with:
+      botId: ${{BOT_ID}}
+      name: ${{CONFIG_APPNAME_SHORT}}-bot
+      messagingEndpoint: ${{PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}}/api/messages
+      description: ""
+      channels:
+        - name: msteams
+
+  - uses: teamsApp/validateManifest # Validate using manifest schema
+    with:
+      manifestPath: ./appPackage/manifest.json # Path to manifest template
+
+  # Build Teams app package with latest env value
+  - uses: teamsApp/zipAppPackage
+    with:
+      # Path to manifest template
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputFolder: ./appPackage/build
+
+  - uses: teamsApp/update # Apply the Teams app manifest to an existing Teams app in Developer Portal. Will use the app id in manifest file to determine which Teams app to update.
+    with:
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
+
+deploy:
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./bot/.env.teamsfx.local
+      envs:
+        BOT_ID: ${{BOT_ID}}
+        BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        TENANT_ID: ${{TEAMS_APP_TENANT_ID}}
+
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./bot/.env.teamsfx.local
+      envs:
+        INITIATE_LOGIN_ENDPOINT: ${{PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}}/auth-start.html
+        M365_APPLICATION_ID_URI: api://botid-${{BOT_ID}}
+
+  # Run npm command
+  - uses: cli/runNpmCommand
+    with:
+      args: install --no-audit
+      workingDirectory: bot
+
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.env
+      envs:
+        BOT_ID: ${{BOT_ID}}
+        BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        MicrosoftAppType: SingleTenant
+        MicrosoftAppTenantId: ${{TEAMS_APP_TENANT_ID}}
+

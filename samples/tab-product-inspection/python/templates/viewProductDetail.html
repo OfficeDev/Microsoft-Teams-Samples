@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Product Detail</title>
+    <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-QXdQxWIYy1PLsb9pdWIm5k6mjLxVKAF4ISp0BVCZZCiZNyaKXinYNAQVT8+8hEIf"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        #statusText {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="statusText">Initializing scan...</div>
+
+    <script>
+        let productId = null;
+
+        $(document).ready(function () {
+            microsoftTeams.app.initialize().then(() => {
+                scanBarCode();
+            }).catch(err => {
+                $("#statusText").text("Failed to initialize Teams SDK.");
+            });
+        });
+
+        function scanBarCode() {
+            const config = {
+                timeOutIntervalInSec: 30
+            };
+
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                if (error) {
+                    console.error("Barcode scan error", error);
+                    $("#statusText").text("Scan failed: " + (error.message || error.errorCode));
+                } else if (decodedText) {
+                    productId = decodedText;
+                    window.location.href = `${window.location.origin}/productDetails?productId=${productId}`;
+                } else {
+                    $("#statusText").text("No barcode detected.");
+                }
+            }, config);
+        }
+    </script>
+</body>
+
+</html>
