@@ -19,14 +19,6 @@ getAgenda = (req, res, next) => {
         const agendaPoints = String(req.body);
         const array = agendaPoints.split(",");
         const adaptive = await AgendaAdaptiveList(array);
-        
-        if (!sidePanelBot.serviceUrl || !sidePanelBot.ConversationID) {
-            if (res) {
-                res.send(200, { success: true, message: 'Agenda published', agenda: array });
-            }
-            return;
-        }
-        
         const client = new ConnectorClient(credentials, { baseUri: sidePanelBot.serviceUrl });
         
         try {
@@ -37,14 +29,9 @@ getAgenda = (req, res, next) => {
                     from: { id: appID },
                     attachments: [CardFactory.adaptiveCard(adaptive)]
                 });
-            if (res) {
-                res.send(200, { success: true, message: 'Agenda published to Teams chat' });
-            }
         }
         catch (e) {
-            if (res) {
-                res.send(500, { success: false, message: 'Failed to publish agenda', error: e.message });
-            }
+            console.log(e.message);
         }
     }
 
@@ -68,33 +55,24 @@ setContext = (req, res, next) => {
     getRole();
 
     async function getRole() {
-        try {
-            if (!sidePanelBot.serviceUrl) {
-                res.send(true);
-                return;
-            }
+        const token = await credentials.getToken();
+        
+        const getRoleRequest = await fetch(`${sidePanelBot.serviceUrl}/v1/meetings/${meetingId}/participants/${userId}?tenantId=${tenantId}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            });
 
-            const token = await credentials.getToken();
-            
-            const getRoleRequest = await fetch(`${sidePanelBot.serviceUrl}/v1/meetings/${meetingId}/participants/${userId}?tenantId=${tenantId}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + token
-                    }
-                });
+        const response = await getRoleRequest.json();
+        const role = response.meeting.role;
 
-            const response = await getRoleRequest.json();
-            const role = response.meeting.role;
-
-            if (role == 'Organizer') {
-                res.send(true);
-            }
-            else {
-                res.send(false);
-            }
-        } catch (error) {
+        if (role == 'Organizer') {
             res.send(true);
+        }
+        else {
+            res.send(false);
         }
     }
 }

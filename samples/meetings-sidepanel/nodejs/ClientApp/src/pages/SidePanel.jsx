@@ -37,15 +37,16 @@ const SidePanel = (props) => {
                 }
 
                 var userData = {
-                    meetingId: context.meeting?.id,
-                    userId: context.user?.id,
-                    tenantId: context.user?.tenant?.id
+                    meetingId: context.meeting.id,
+                    userId: context.user.id,
+                    tenantId: context.user.tenant.id
                 }
 
                 agendaListPopulate();
 
                 setMeetingContext(userData).then((result) => {
                     if (result.data == true) {
+
                         document.getElementById("agendaButtonDiv").style.display = "block";
                         document.getElementById("publishAgendaButton").style.display = "block";
                     }
@@ -53,10 +54,6 @@ const SidePanel = (props) => {
                         document.getElementById("agendaButtonDiv").style.display = "none";
                         document.getElementById("publishAgendaButton").style.display = "none";
                     }
-                }).catch((error) => {
-                    console.error('Error setting meeting context:', error);
-                    document.getElementById("agendaButtonDiv").style.display = "block";
-                    document.getElementById("publishAgendaButton").style.display = "block";
                 })
             });
 
@@ -137,11 +134,6 @@ const SidePanel = (props) => {
         document.getElementById("agendaInputDiv").style.display = "none";
         document.getElementById("agendaButtonDiv").style.display = "block";
         var newAgendaItem = document.getElementById('agendaInput').value;
-        
-        if (!newAgendaItem || newAgendaItem.trim() === '') {
-            return;
-        }
-        
         let taskInfo = {
             title: newAgendaItem
         };
@@ -149,39 +141,16 @@ const SidePanel = (props) => {
         // API call to save agenda.
         addAgendaTask(taskInfo);
 
-        if (containerValue && containerValue.initialObjects && containerValue.initialObjects.editorMap) {
-            var editorMap = containerValue.initialObjects.editorMap;
-            var agendas = editorMap.get(agendaValueKey) || [];
-            agendas.push(newAgendaItem);
-            editorMap.set(agendaValueKey, agendas);
-        } else {
-            agendaListPopulate();
-        }
-        
-        document.getElementById('agendaInput').value = '';
+        var editorMap = containerValue.initialObjects.editorMap;
+        var agendas = editorMap.get(agendaValueKey);
+        agendas.push(newAgendaItem);
+        editorMap.set(agendaValueKey, agendas);
     }
 
     // This method is called to publish the agenda in meeting chat.
     function publishAgenda() {
-        let agendaValue;
-        
-        if (containerValue && containerValue.initialObjects && containerValue.initialObjects.editorMap) {
-            agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
-        } else {
-            agendaValue = ["Approve 5% dividend payment to shareholders.", "Increase research budget by 10%.", "Continue with WFH for next 3 months."];
-        }
-        
-        if (!agendaValue || agendaValue.length === 0) {
-            return;
-        }
-        
-        postAgenda(agendaValue)
-            .then((response) => {
-                console.log('Agenda published successfully:', response.data);
-            })
-            .catch((error) => {
-                console.error('Error publishing agenda:', error);
-            });
+        const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
+        postAgenda(agendaValue);
     }
 
     // This method is called whenever the shared state is updated.
