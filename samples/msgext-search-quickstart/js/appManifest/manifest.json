@@ -15,7 +15,7 @@
   },
   "name": {
     "short": "Messaging Extension Search",
-    "full": ""
+    "full": "Messaging Extension Search"
   },
   "description": {
     "short": "Messaging Extension quick start for handling search requests.",
@@ -54,6 +54,9 @@
     "identity",
     "messageTeamMembers"
   ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ],
   "authorization": {
     "permissions": {
       "resourceSpecific": [
@@ -63,8 +66,5 @@
         }
       ]
     }
-  },
-  "validDomains": [
-    "${{BOT_DOMAIN}}"
-  ]
+  }
 }
