@@ -7,7 +7,6 @@ from flask_cors import CORS
 from config import DefaultConfig
 from controller.pin_message_controller import chat_api
 
-
 app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)
 config = DefaultConfig()
@@ -15,7 +14,6 @@ app.register_blueprint(chat_api, url_prefix='/api/chat')
 MICROSOFT_APP_ID = config.APP_ID
 
 # ---------- ROUTES ---------- #
-
 @app.route('/')
 @app.route('/dashboard')
 def dashboard():
