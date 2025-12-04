@@ -1246,6 +1246,10 @@ jobs:
               name: 'agent-knowledge-hub'
               version: '3.13.x'
 
+            - project_path: 'samples/bot-all-cards/python'
+              name: 'bot-all-cards'
+              version: '3.13.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
     defaults:

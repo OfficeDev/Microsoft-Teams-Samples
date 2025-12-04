@@ -110,7 +110,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 24 | Bot configuration app with auth | This sample demonstrates the features of bot configuration auth and reconfiguration for both teams and group chats. | Advanced | [View][BotConfigurationAppAuth#csharp] | [View][BotConfigurationAppAuth#nodejs]![toolkit-icon](assets/toolkit-icon.png) | | |[View](/samples/bot-configuration-app-auth/csharp/demo-manifest/bot-configuration-auth-app.zip)|
 | 25 | Tag mention bot | This sample app demonstrates the use of tag mention functionality in teams scope using Bot Framework. | Advanced | [View][Tagmention#csharp] | [View][Tagmention#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 26 | Commands menu and prompt starters bot | This sample adds a command menu with a dropdown list of commands for your bot. Users can select a command from the list, which will insert the command title into the compose box. Then, they can select Send to execute the command. | Advanced | [View][CommandsMenu#csharp] | [View][CommandsMenu#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | | [View](/samples/bot-commands-menu/csharp/demo-manifest/bot-commands-menu.zip)|
-| 27 | Bot All Cards | Sample which demonstrates sending different types cards supported in teams using bot. | Advanced | [View][TypesCards#csharp] | [View][TypesCards#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | | [View](/samples/bot-all-cards/csharp/demo-manifest/bot-all-cards.zip) |
+| 27 | Bot All Cards | Sample which demonstrates sending different types cards supported in teams using bot. | Advanced | [View][TypesCards#csharp] | [View][TypesCards#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View][TypesCards#python] ![toolkit-icon](assets/toolkit-icon.png) | | [View](/samples/bot-all-cards/csharp/demo-manifest/bot-all-cards.zip) |
 | 28 | Apps in Federated | This sample app allows users to easily view a list of group members. When a new member is added, their details are promptly displayed. | Advanced | [View][bot-feed-members#js] ![toolkit-icon](assets/toolkit-icon.png) | | | | [View](/samples/bot-feed-members/nodejs/demo-manifest/bot-feed-members.zip) |
 | 29 | Requirement Targeting OneWay Dependency | Microsoft M365 RT sample app in Node.js which specifies one-way-dependency relationships between app capabilities (using elementRelationshipSet) and functionality using hostMustSupportFunctionalities. | Advanced | | [View][RequirementTargetingOneWayDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 30 | Requirement Targeting Mutual Dependency | Microsoft M365 RT sample app in Node.js which specifies mutual-dependency relationships between app capabilities using elementRelationshipSet. | Advanced | | [View][RequirementTargetingMutualDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
@@ -426,6 +426,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [BotSSOAdaptiveCard#nodejs]:samples/bot-sso-adaptivecard/nodejs
 [TypesCards#csharp]:samples/bot-all-cards/csharp
 [TypesCards#nodejs]:samples/bot-all-cards/nodejs
+[TypesCards#python]:samples/bot-all-cards/python
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
 [meetings-details-tab#cs]:samples/meetings-details-tab/csharp
