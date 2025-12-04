@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+                crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="/static/scripts/auth-delegated.js"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    </head>
+    <style>
+        #mainDiv {
+            padding-left: 2%;
+            padding-top: 2%;
+            padding-right: 2%;
+        }
+
+        .container {
+        margin-top: 1rem;
+        margin-left:1.5rem;
+        }
+
+    </style>
+</head>
+
+<body id=mainDiv>
+    <div class="container">
+        <div id="productDetails">
+            <h4>Request Details</h4>
+            <br>
+            <label for="title" class="title">Request Title</label>
+            <br>
+            <div id="requestName"></div>
+            <br>
+            <label for="description" class="title">Request Description</label>
+            <br>
+            <div id="requestDescription"></div>
+            <br>
+            <label for="description" class="title">Created By</label>
+            <br>
+            <div id="requestCreatedBy"></div>
+            <br>
+        <br/>
+        <button type="button" class="btn btn-outline-info" id="btnApprove" onclick="ApproveRequest()">Approve</button>
+        <button type="button" class="btn btn-outline-info" id="btnReject" onclick="RejectRequest()">Reject</button>
+    </div>
+    <div id="noRequestFound">
+        <span>Request not found</span>
+    </div>
+    <div id="requestApproved">
+        <span>Request is already approved/rejected</span>
+    </div>
+    </div>
+    <script>
+        var data = {{ data|safe }};
+        microsoftTeams.app.initialize().then(()=>{
+            $("#noRequestFound").hide();
+            $("#requestApproved").hide();
+            getRequestDetails(); 
+        });
+
+        function getRequestDetails() {
+            if(data == null){
+                $("#productDetails").hide();
+                $("#noRequestFound").show();
+                $("#requestApproved").hide();
+            }
+
+            else if(data != null && data.status != "Pending") {
+                $("#productDetails").hide();
+                $("#noRequestFound").hide();
+                $("#requestApproved").show();
+            }
+
+            else if(data != null && data.status == "Pending"){
+                $("#requestName").text(data.title);
+                $("#requestDescription").text(data.description);
+                $("#requestCreatedBy").text(data.createdBy);
+            }
+        }
+
+        function ApproveRequest() {
+            var taskId = data.id;
+            let taskInfo = {
+                taskId: taskId,
+                status: "Approved"
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/ApproveRejectRequestActivity',
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (data, textStatus, jQxhr) {
+                    microsoftTeams.dialog.submit();
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+
+        };  
+
+        function RejectRequest() {
+            var taskId = data.id;
+            let taskInfo = {
+                taskId: taskId,
+                status: "Rejected"
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/ApproveRejectRequestActivity',
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (data, textStatus, jQxhr) {
+                    microsoftTeams.dialog.submit();
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+        };
+    </script>
+</body>
+
+</html>

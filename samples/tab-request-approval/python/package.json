@@ -1,0 +1,11 @@
+{
+  "name": "tab-request-approval-python",
+  "version": "1.0.0",
+  "description": "Tab request approval Python sample",
+  "scripts": {
+    "dev:teamsfx": "python app.py",
+    "start": "python app.py"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1250,6 +1250,10 @@ jobs:
               name: 'bot-all-cards'
               version: '3.13.x'
 
+            - project_path: 'samples/tab-request-approval/python'
+              name: 'tab-request-approval'
+              version: '3.10.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
     defaults:
