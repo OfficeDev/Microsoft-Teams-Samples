@@ -24,7 +24,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "needsChannelSelector": false,
       "scopes": [
         "personal",
@@ -47,6 +47,5 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "${{BOT_DOMAIN}}"
   ]
 }

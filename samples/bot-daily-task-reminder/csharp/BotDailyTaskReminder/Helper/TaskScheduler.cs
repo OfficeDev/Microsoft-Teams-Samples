@@ -1,12 +1,6 @@
-﻿// <copyright file="TaskScheduler.cs" company="Microsoft">
-// Copyright (c) Microsoft. All rights reserved.
-// </copyright>
-
 using Quartz;
-using Quartz.Impl;
-using System;
 
-namespace BotDailyTaskReminder
+namespace BotDailyTaskReminder.Helper
 {
     /// <summary>
     /// Class to handle task scheduling.
@@ -25,7 +19,7 @@ namespace BotDailyTaskReminder
             try
             {
                 // Synchronously get the scheduler and start it
-                var scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
+                var scheduler = Quartz.Impl.StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
                 scheduler.Start();
 
                 var job = JobBuilder.Create<ScheduleTaskReminder>()
