@@ -21,6 +21,7 @@ This sample application showcases the management of chat lifecycles in Microsoft
 * Tabs
 * Adaptive Cards
 * Graph API
+* Agent SDK
 
 ## Interaction with app
 
@@ -166,63 +167,41 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Running the sample
 
-1. In Teams, Install App
+- **Install App:**
+  ![Install the Chat Lifecycle app in Teams](Images/1.Install.png)
 
- ![](Images/Install.png)
- 
- ![](Images/SelectTeams.png)
+- **Add To Group Chat:**
+  ![Add the app to an existing group chat](Images/2.Add_To_GroupChat.png)
 
- ![](Images/InstallSaveTab.png)
+- **Open Configurable Tab:**
+  ![Open the configurable tab to set up the app](Images/3.Configurable_Tab.png)
 
-2. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
+- **Tab Added Successfully:**
+  ![Confirmation that the tab was added successfully](Images/4.Tab_Added_Successfully.png)
 
- ![](Images/WelcomeCreateGroup.png)
+- **Create Group Chat (Adaptive Card):**
+  ![Adaptive card used to create a group chat](Images/5.Create_Group_Chat.png)
 
-3. Once create group chat is clicked, user will be able to add Title of the groupchat and select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
+- **Group Chat Created Successfully:**
+  ![Success message after creating group chat and installing app](Images/6.Created_GC_Successfully.png)
 
-   ![](Images/CreateGroupChat.png)
+- **App In Outlook:**
+  ![The app shown in Outlook on the web](Images/7.In_Outlook.png)
 
-   ![](Images/MembersList.png)
-  
-   ![](Images/CreateGroupChatDetails.png)
+- **Outlook Tab View:**
+  ![The app loaded as a tab inside Outlook](Images/8.Outlook_Tab.png)
 
-   ![](Images/GroupChatCreatedSuccessfully.png)
+- **M365 Copilot Integration:**
+  ![App appearing within the M365 Copilot experience](Images/9.M365_Copilot_Office.png)
 
-4. Also, Polly app will be installed to the created group chat and will be pinned to the chat.
+- **Continue in M365 Copilot:**
+  ![Continue flow inside M365 Copilot after opening the app](Images/10.Continue_M365_Copilot.png)
 
-   ![](Images/PinnedTabSuccessfully.png)
+- **Tab Loaded in M365 Copilot:**
+  ![Final view of the tab loaded in the M365 Copilot surface](Images/11.Tab_Loaded_In_M365_Copilot.png)
 
-## Outlook on the web
 
-- To view your app in Outlook on the web.
-
-- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
-
-**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
-
-![InstallOutlook](Images/InstallOutlook.png)
-
-**Select your app icon to launch and preview your app running in Outlook on the web**
-
-![AppOutlook](Images/AppOutlook.png)
-
-**Note:** Similarly, you can test your application in the Outlook desktop app as well.
-
-## Office on the web
-
-- To preview your app running in Office on the web.
-
-- Log into office.com with test tenant credentials
-
-**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
-
-![InstallOffice](Images/InstallOffice.png)
-
-**Select your app icon to launch your app in Office on the web**
-
-![AppOffice](Images/AppOffice.png) 
-
-**Note:** Similarly, you can test your application in the Office 365 desktop app as well.   
+**Note:** Similarly, you can test your application in the Office M365 Copilot desktop app as well.   
 
 ## Further Reading
 [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)

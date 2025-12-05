@@ -1,3 +1,6 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License. -->
+
 <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
   integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
   crossorigin="anonymous"></script>
@@ -77,9 +80,9 @@
                         if (response.ok) {
                             return response.json();
                         } else {
-                            // Get the response text to understand the error
-                            return response.text().then(text => {
-                                reject(`HTTP ${response.status}: ${text}`);
+                            // Parse error response as JSON
+                            return response.json().then(errorJson => {
+                                reject(errorJson.error || `HTTP ${response.status}`);
                             });
                         }
                     })

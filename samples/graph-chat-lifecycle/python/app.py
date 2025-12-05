@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+
 import os
 from flask import Flask, render_template, request, jsonify, send_file
 import requests
@@ -41,7 +44,7 @@ def auth_end():
 def obo_token():
     tid = request.json.get("tid")
     token = request.json.get("token")
-    scopes = ["https://graph.microsoft.com/User.Read"]
+    scopes = ["https://graph.microsoft.com/User.Read.All", "https://graph.microsoft.com/Chat.ReadWrite"]
     app_id = config.APP_ID
     app_secret = config.APP_PASSWORD
 
@@ -65,7 +68,20 @@ def obo_token():
         response.raise_for_status()
         return jsonify(response.json().get("access_token"))
     except requests.RequestException as err:
-        return jsonify({"error": str(err)}), 400
+        error_msg = str(err)
+        # Check if response contains JSON error details
+        if hasattr(err, 'response') and err.response is not None:
+            try:
+                error_json = err.response.json()
+                error_code = error_json.get("error", "")
+                error_desc = error_json.get("error_description", "")
+                print(f"Token exchange error - Code: {error_code}, Description: {error_desc}")
+                # Return just the error code for client-side handling
+                return jsonify({"error": error_code}), 400
+            except:
+                error_msg = f"{err.response.status_code}: {err.response.text}"
+                print(f"Token exchange error: {error_msg}")
+        return jsonify({"error": error_msg}), 400
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=PORT)

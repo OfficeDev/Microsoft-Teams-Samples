@@ -10,8 +10,10 @@ getClientSideToken()
         return useServerSideToken(serverSideToken);
     })
     .catch((error) => {
-        if (error === "invalid_grant") {
-            display(`Error: ${error} - user or admin consent required`);
+        console.error("Authentication error:", error);
+        // Check for consent_required or invalid_grant errors
+        if (error === "invalid_grant" || (typeof error === 'object' && error.error === "invalid_grant")) {
+            display(`Error: Consent required - please click the button below to grant permissions`);
             // Display in-line button so user can consent
             button = display("Consent", "button");
             button.onclick = (() => {
@@ -73,16 +75,23 @@ function getServerSideToken(clientSideToken) {
                 cache: 'default'
             })
                 .then((response) => {
-                    console.log(response);
+                    console.log('Token response:', response);
                     if (response.ok) {
                         return response.json();
                     } else {
-                        reject(response.error);
+                        // Parse error response
+                        return response.json().then(errorData => {
+                            throw errorData;
+                        });
                     }
                 })
                 .then((responseJson) => {
+                    console.log('Response JSON:', responseJson);
                     if (responseJson.error) {
-                        reject(responseJson.error);
+                        reject(responseJson);
+                    } else if (responseJson.error_description) {
+                        // Handle detailed error responses
+                        reject(responseJson);
                     } else {
                         serverSideToken = responseJson;
                         localStorage.setItem("accessToken", serverSideToken);
@@ -91,6 +100,10 @@ function getServerSideToken(clientSideToken) {
                         button.disabled = true;
                         resolve(serverSideToken);
                     }
+                })
+                .catch((error) => {
+                    console.error('Fetch error:', error);
+                    reject(error);
                 });
         });
     });

@@ -25,6 +25,7 @@ With this sample, users can:
 * Tabs
 * Bots
 * Messaging Extensions
+* Agents SDK
 
 ## Interaction with app
 
@@ -171,29 +172,49 @@ To set the **Tab as the default landing capability**, configure the 'staticTabs'
 
 ![Personal Scope Bot](Images/1.PersonalScope_Bot.png)
 
+*Installing the Hello World app in personal scope. Once added, the bot sends a welcome message and you can interact with it through chat.*
+
 **Hello World Tab:**
 
 ![HelloWorld](Images/2.PersonalScope_StaticTab.png)
 
-**ME:**
+*The Hello Tab displays a static page in personal scope, demonstrating how to embed custom web content within Teams.*
+
+**Messaging Extension (ME):**
 
 ![Hello World App](Images/3.PersonalScope_MsgExtSearchQuery.png)
 
+*Messaging extension search interface showing the "getRandomText" command, which allows users to search and insert content into conversations.*
+
 ![Hello World App](Images/4.PersonalScope_MsgExtQuery2.png)
+
+*Search results from the messaging extension displaying randomly generated text and images that can be shared in the conversation.*
 
 **Teams Scope**
 
 ![Hello World App](Images/TeamsScope_Bot.png)
 
+*Bot interaction in a Teams channel. The bot responds to messages from team members and can be @mentioned for specific interactions.*
+
 ![Hello World App](Images/TeamsScope_ComposeExt_1.png)
+
+*Opening the messaging extension compose area in a Teams conversation to search for content.*
 
 ![Hello World App](Images/TeamsScope_ComposeExt_2.png)
 
+*Messaging extension results displayed in Teams scope, showing the preview of content before inserting into the conversation.*
+
 ![Hello World App](Images/TeamsScope_ConfigTab.png)
+
+*Configuration page for a configurable tab in Teams, allowing users to customize tab settings before adding it to a channel.*
 
 ![Hello World App](Images/TeamsScope_FirstTab.png)
 
+*The First Tab displaying custom content in a Teams channel, demonstrating how tabs can provide dedicated workspace within Teams.*
+
 ![Hello World App](Images/TeamsScope_SecondTab.png)
+
+*The Second Tab showing additional content options, illustrating how multiple tabs can be used to organize different features.*
 
 ## Outlook on the web
 
@@ -205,9 +226,31 @@ To set the **Tab as the default landing capability**, configure the 'staticTabs'
 
 ![InstallOutlook](Images/Outlook_SelectApp.png)
 
+*Accessing the Hello World app from Outlook on the web. The app appears in the More Apps section of the sidebar.*
+
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
-![AppOutlook](Images/Outlook_StaticTab.png)
+![AppOutlook](Images/Outlook_Click_Continue.png)
+
+*Launching the Hello World app in Outlook. Click Continue to load the app content.*
+
+![AppOutlook](Images/Outlook_Tab_Loaded.png)
+
+*The Hello World tab successfully loaded in Outlook on the web, displaying the same content as in Teams.*
+
+**M365 Copilot Office**
+
+![Copilot](Images/M365_Copilot_Office.png)
+
+*Accessing the Hello World app from Microsoft 365 Copilot in Office on the web.*
+
+![Copilot](Images/M365_Copilot_Click_Continue_To_Load_Tab.png)
+
+*Loading the Hello World app in M365 Copilot. Click Continue to proceed.*
+
+![Copilot](Images/M365_Copilot_Tab_Loaded_Successfully.png)
+
+*The Hello World tab successfully loaded in M365 Copilot, showcasing cross-platform compatibility.*
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
@@ -221,19 +264,24 @@ To set the **Tab as the default landing capability**, configure the 'staticTabs'
 
 ![InstallOffice](Images/Office_M365.png)
 
+*Finding the Hello World app in the Office on the web Apps section.*
+
 **Select your app icon to launch your app in Office on the web**
 
 ![AppOffice](Images/Office_M365_App.png)
 
+*The Hello World app running in Office on the web, demonstrating Microsoft 365 integration.*
+
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
-
-## Deploy the bot to Azure
-
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Microsoft 365 Agents SDK Documentation](https://aka.ms/agents)
+- [Microsoft 365 Agents SDK for Python - GitHub](https://github.com/microsoft/Agents)
+- [Microsoft 365 Agents SDK Python Samples](https://github.com/microsoft/Agents/tree/main/samples/python)
+- [Building Conversational Agents with Microsoft 365 Agents SDK](https://learn.microsoft.com/microsoft-365-copilot/extensibility/overview-agents-sdk)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

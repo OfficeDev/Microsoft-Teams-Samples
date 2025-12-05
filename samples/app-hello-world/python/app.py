@@ -3,27 +3,34 @@
 
 import sys
 import traceback
-import uuid
 from datetime import datetime
-from http import HTTPStatus
 from aiohttp import web
-from aiohttp.web import Request, Response, json_response
-from botbuilder.core import (
-    TurnContext
-)
-from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
-from botbuilder.core.integration import aiohttp_error_middleware
-from botbuilder.schema import Activity, ActivityTypes
+from aiohttp.web import Request, Response
+from microsoft_agents.hosting.core import TurnContext
+from microsoft_agents.hosting.aiohttp import CloudAdapter
+from microsoft_agents.authentication.msal import MsalConnectionManager
+from microsoft_agents.hosting.aiohttp import jwt_authorization_middleware
+from microsoft_agents.activity import Activity, ActivityTypes, load_configuration_from_env
+from os import environ
 from bots import HelloWorldBot 
 from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
-# Create adapter.
-# See https://aka.ms/about-bot-adapter to learn more about how bots work.
-ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
+# Set up environment variables for Agent SDK
+# The Agent SDK expects specific environment variable format for service connection
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTID", CONFIG.APP_ID)
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTSECRET", CONFIG.APP_PASSWORD)
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__TENANTID", CONFIG.APP_TENANTID)
 
+# Load configuration from environment using Agent SDK helper
+agents_sdk_config = load_configuration_from_env(environ)
 
+# Create connection manager for authentication
+CONNECTION_MANAGER = MsalConnectionManager(**agents_sdk_config)
+
+# Create adapter with connection manager
+ADAPTER = CloudAdapter(connection_manager=CONNECTION_MANAGER)
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
@@ -97,8 +104,20 @@ bot = HelloWorldBot(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 async def messages(req: Request) -> Response:
     return await ADAPTER.process(req, bot)
 
+# Custom middleware wrapper to apply JWT only to /api/messages
+@web.middleware
+async def conditional_jwt_middleware(request, handler):
+    # Only apply JWT authentication to /api/messages endpoint
+    if request.path.startswith('/api/messages'):
+        return await jwt_authorization_middleware(request, handler)
+    else:
+        # For other routes (tabs, static pages), skip JWT validation
+        return await handler(request)
 
-APP = web.Application(middlewares=[aiohttp_error_middleware])
+APP = web.Application(middlewares=[conditional_jwt_middleware])
+
+# Set the agent configuration in app state for jwt_authorization_middleware
+APP["agent_configuration"] = CONNECTION_MANAGER.get_default_connection_configuration()
 
 # Register routes
 APP.router.add_get("/", home)
