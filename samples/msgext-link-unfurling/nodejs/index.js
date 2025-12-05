@@ -1,67 +1,61 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-// index.js is used to setup and configure your bot
+// File: index.js
+// Purpose: Minimal Express host for the Teams messaging extension (link unfurl + search).
+// Key Steps: load env, create CloudAdapter, instantiate bot, expose /api/messages.
 
-// Import required pckages
+// Import required packages
 const path = require('path');
 
-// Read botFilePath and botFileSecret from .env file.
+// Load environment variables from .env (auth settings, etc.)
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
-const restify = require('restify');
+const express = require('express');
 
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
+// Import CloudAdapter + auth loader (Agents SDK)
 const {
     CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder');
+    loadAuthConfigFromEnv
+} = require('@microsoft/agents-hosting');
 
 const { TeamsLinkUnfurlingBot } = require('./bots/teamsLinkUnfurlingBot');
 
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+// Load authentication configuration (uses standard env vars defined by Agents SDK)
+const authConfig = loadAuthConfigFromEnv();
 
-// Create adapter.
-// See https://aka.ms/about-bot-adapter to learn more about how bots work.
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+// Create CloudAdapter instance
+const adapter = new CloudAdapter(authConfig);
 
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights. See https://aka.ms/bottelemetry for telemetry
-    //       configuration instructions.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
-
-    // Send a trace activity, which will be displayed in Bot Framework Emulator
-    await context.sendTraceActivity(
-        'OnTurnError Trace',
-        `${ error }`,
-        'https://www.botframework.com/schemas/error',
-        'TurnError'
-    );
-
-    // Uncomment below commented line for local debugging.
-    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
-    // Note: Since this Messaging Extension does not have the messageTeamMembers permission
-    // in the manifest, the bot will not be allowed to message users.
+    // Minimal error handler: log + trace (for local debugging / emulator).
+    console.error('[onTurnError]', error);
+    await context.sendTraceActivity('OnTurnError Trace', String(error), 'https://www.botframework.com/schemas/error', 'TurnError');
+    // Optionally send a user-friendly activity (commented out to avoid noisy UX):
+    // await context.sendActivity('Sorry, something went wrong.');
 };
 
-// Create the bot that will handle incoming messages.
+// Instantiate bot
 const bot = new TeamsLinkUnfurlingBot();
 
-// Create HTTP server.
-const server = restify.createServer();
-server.use(restify.plugins.bodyParser());
+// Express server setup
+const app = express();
+app.use(express.json());
 
-server.listen(process.env.port || process.env.PORT || 3978, function() {
-    console.log(`Server listening on http://localhost:${ server.url }`);
+// Bot endpoint (Teams invokes hit this route)
+app.post('/api/messages', async (req, res) => {
+    try {
+        await adapter.process(req, res, (context) => bot.run(context));
+    } catch (e) {
+        console.error('[Express] Error processing /api/messages:', e);
+        if (!res.headersSent) {
+            res.status(500).send({ error: 'Processing error' });
+        }
+    }
 });
 
-// Listen for incoming requests.
-server.post('/api/messages', async (req, res) => {
-    // Route received a request to adapter for processing
-    await adapter.process(req, res, (context) => bot.run(context));
+const port = process.env.port || process.env.PORT || 3978;
+app.listen(port, () => {
+    console.log(`Express server listening on http://localhost:${port}`);
 });

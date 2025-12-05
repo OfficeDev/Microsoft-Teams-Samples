@@ -7,6 +7,7 @@
   },
   "version": "1.0.0",
   "description": "Microsoft Teams Hello World Bot sample optimized for GitHub Copilot Agent development",
+  "type": "module",
   "homepage": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs",
   "keywords": [
     "microsoft-teams",
@@ -24,6 +25,8 @@
     "dev": "nodemon --exec babel-node --inspect=9239 --signal SIGINT src/app.js",
     "start": "nodemon --exec babel-node src/app.js",
     "start:prod": "babel-node src/app.js",
+  "debug:native": "set NODE_OPTIONS=--enable-source-maps&& node --inspect=9239 src/app.js",
+  "dev:native": "set NODE_OPTIONS=--enable-source-maps&& nodemon --inspect=9239 --signal SIGINT src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.js"
   },
@@ -49,14 +52,14 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "botbuilder": "^4.23.3",
+    "@microsoft/agents-hosting": "^1.0.15",
+    "@microsoft/agents-hosting-extensions-teams": "^1.0.15",
     "config": "^1.28.1",
     "core-js": "^2.6.11",
     "dotenv": "^8.2.0",
     "express": "^4.16.2",
     "faker": "^4.1.0",
     "path": "^0.12.7",
-    "restify": "^10.0.0",
     "send": "^0.18.0"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@ import send from 'send';
 /**
  * Sets up routes for handling the tabs and their content in the application.
  * 
- * @param {Object} server - The Restify server instance.
+ * @param {Object} server - The Express app instance.
  */
 export default function tabs(server) {
     // Helper function to streamline serving static HTML files.
