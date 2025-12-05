@@ -15,12 +15,13 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-python
 
 # DeepLink
 
-Explore this Microsoft Teams sample app designed to demonstrate the use of deeplinks for seamless interactions, including calls, chats, and navigation across tabs and applications. Featuring bot integration and comprehensive setup guidance, this app empowers developers to create engaging and efficient communication experiences within Teams.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
+Explore this Microsoft Teams sample app designed to demonstrate the use of deeplinks for seamless interactions, including calls, chats, and navigation across tabs and applications. Built with Microsoft Agents SDK and featuring comprehensive setup guidance, this app empowers developers to create engaging and efficient communication experiences within Teams.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
 
  ## Included Features
 * Tabs
 * Bots
 * Deep Links
+* Agent SDK
 
 ## Interaction with app.
 
@@ -87,7 +88,7 @@ the Teams service needs to call into the bot.
     * `User.Read` (enabled by default)
     * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-4) Create [Azure Bot resource resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
+4) Create [Azure Bot Service registration resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
     - Use the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages` used by this sample
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
@@ -98,7 +99,7 @@ the Teams service needs to call into the bot.
 
 7) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-8) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+8) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Azure Bot Service registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 9)  - navigate to `Deeplink.html` page at line number `58` Update the `data-app-id` attribute with your application id.
     - Navigate to `env.js` file and update your AppId at placeholder `<<App-ID>>` (You can get it manually from [teams admin portal](https://admin.teams.microsoft.com/).
@@ -112,9 +113,8 @@ the Teams service needs to call into the bot.
 
 11) Run your bot with `python app.py`
 
-## Interacting with the bot
+## Running the sample
 
-Enter text in the emulator.  The text will be echoed back by the bot.
 1. Interact with DeepLink bot by pinging it in personal or channel scope. 
 
 ![Deep link card](Images/BotCard.png)
@@ -202,6 +202,30 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 ![AppOutlook](Images/AppOutlook.png)
 
+**Click Continue to interact with the bot in Outlook:**
+
+![Outlook Click Continue](Images/Outlook_Click_Continue.png)
+
+**Bot information displayed in Outlook:**
+
+![Outlook Bot Info](Images/Outlook_Bot_Info.png)
+
+**Adaptive card displayed in Outlook:**
+
+![Outlook Adaptive Card Info](Images/Outlook_Adaptive_Card_Info.png)
+
+**Tab loaded successfully in Outlook:**
+
+![Outlook Tab Loaded Successfully](Images/Outlook_Tab_Loaded_Successfully.png)
+
+**Additional tab view in Outlook:**
+
+![Outlook Tab 2](Images/Outlook_Tab_2.png)
+
+**Messaging extension in Outlook:**
+
+![Outlook ME Info](Images/Outlook_ME_Info.png)
+
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
 ## Office on the web
@@ -220,10 +244,38 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
+## M365 Copilot
+
+- To preview your app running in M365 Copilot.
+
+**Select the app from M365 Copilot:**
+
+![M365 Copilot Select App](Images/M365Copilot_Select_App.png)
+
+**Click Continue to interact with the bot:**
+
+![M365 Copilot Click Continue](Images/M365Copilot_Click_Continue.png)
+
+**Bot information displayed in M365 Copilot:**
+
+![M365 Copilot Bot Info](Images/M365Copilot_Bot_Info.png)
+
+**Adaptive card displayed in M365 Copilot:**
+
+![M365 Copilot Adaptive Card Info](Images/M365Copilot_AdaptiveCard_info.png)
+
+**Tab loaded successfully in M365 Copilot:**
+
+![M365 Copilot Tab Loaded Successfully](Images/M365_Copilot_Tab_Loaded_Successfully.png)
+
  ## Further reading
 
+- [Microsoft Agents SDK Documentation](https://learn.microsoft.com/microsoft-365-copilot/extensibility/agents-are-apps)
+- [Microsoft Agents SDK for Python](https://pypi.org/project/microsoft-agents/)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
-
 - [Share to teams web apps](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-web-apps?branch=pr-en-us-10824&tabs=method1)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-deeplink-python" />

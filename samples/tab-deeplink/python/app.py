@@ -1,66 +1,68 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
+import sys
+import traceback
 import os
-import logging
-import asyncio
-from flask import Flask, request, jsonify, send_from_directory, Response
-from botbuilder.core import  TurnContext
-from botbuilder.schema import Activity
+from aiohttp import web
+from aiohttp.web import Request, Response
+from microsoft_agents.hosting.core import TurnContext
+from microsoft_agents.hosting.aiohttp import CloudAdapter
+from microsoft_agents.authentication.msal import MsalConnectionManager
+from microsoft_agents.activity import load_configuration_from_env
+from os import environ
 from bots import DeepLinkTabsBot
-from botbuilder.integration.aiohttp import (
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-)
 from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
-app = Flask(__name__)
+# Configure Agent SDK authentication using environment variables
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTID", CONFIG.APP_ID)
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTSECRET", CONFIG.APP_PASSWORD)
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__TENANTID", CONFIG.APP_TENANTID)
 
-# Load environment variables
-PORT = int(os.getenv("PORT", 3978))
-MICROSOFT_APP_ID = os.getenv("MicrosoftAppId", "")
-MICROSOFT_APP_PASSWORD = os.getenv("MicrosoftAppPassword", "")
+# Load Agent SDK configuration from environment
+agents_sdk_config = load_configuration_from_env(environ)
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
+# Create MSAL connection manager for bot authentication
+CONNECTION_MANAGER = MsalConnectionManager(**agents_sdk_config)
 
-# Configure Bot Adapter
-adapter = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
+# Create CloudAdapter with Agent SDK (replaces Bot Framework CloudAdapter)
+ADAPTER = CloudAdapter(connection_manager=CONNECTION_MANAGER)
 
-# Bot instance
-bot = DeepLinkTabsBot()
+# Initialize bot instance
+BOT = DeepLinkTabsBot()
 
-# Error handling
-async def on_turn_error(context: TurnContext, error: Exception):
-    logging.error(f"\n [on_turn_error] unhandled error: {error}")
-    await context.send_activity("Sorry, it looks like something went wrong.")
+# Error handler for bot turn errors
+async def on_error(context: TurnContext, error: Exception):
+    print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
+    traceback.print_exc()
+    await context.send_activity("The bot encountered an error or bug.")
+    await context.send_activity("To continue to run this bot, please fix the bot source code.")
 
-adapter.on_turn_error = on_turn_error
+ADAPTER.on_turn_error = on_error
 
-@app.route("/api/messages", methods=["POST"])
-def messages():
-    body = request.json
-    activity = Activity().deserialize(body)
-    auth_header = request.headers.get("Authorization", "")
+# Bot message endpoint - processes incoming Teams messages
+async def messages(req: Request) -> Response:
+    """Main bot message handler."""
+    return await ADAPTER.process(req, BOT)
 
-    async def aux_func(turn_context: TurnContext):
-        await bot.on_turn(turn_context)  # Correct method name
+# API endpoint to retrieve Microsoft App ID
+async def get_app_id(req: Request) -> Response:
+    """Return the Microsoft App ID."""
+    return web.json_response({"microsoftAppId": CONFIG.APP_ID})
 
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(adapter.process_activity(activity, auth_header, aux_func))
+# Create aiohttp web application (Agent SDK uses aiohttp, not Flask)
+APP = web.Application()
+APP.router.add_post("/api/messages", messages)
+APP.router.add_get("/api/getAppId", get_app_id)
 
-    return Response(status=200)  # Explicitly return an empty response with status 200
-
-@app.route("/api/getAppId", methods=["GET"])
-def get_app_id():
-    return jsonify({"microsoftAppId": MICROSOFT_APP_ID})
-
-@app.route("/<filename>")
-def redirect_static(filename):
-    return send_from_directory("static", filename)
+# Serve static files (HTML, CSS, JS) for Teams tabs
+STATIC_DIR = os.path.join(os.path.dirname(__file__), 'static')
+APP.router.add_static('/', STATIC_DIR, name='static')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=PORT)
+    try:
+        web.run_app(APP, host="0.0.0.0", port=CONFIG.PORT)
+    except Exception as error:
+        raise error

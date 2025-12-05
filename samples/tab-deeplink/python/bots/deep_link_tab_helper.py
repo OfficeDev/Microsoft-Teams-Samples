@@ -1,9 +1,14 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+
 import os
 import urllib.parse
 
+# Helper class to generate Teams deeplinks for various scenarios
 class DeepLinkTabHelper:
     @staticmethod
     def get_deep_link_tab_channel(sub_entity_id, ID, desc, channel_id, app_id, entity_id):
+        # Generate deeplink for channel tab with context
         task_context = urllib.parse.quote(f'{{"subEntityId": "{sub_entity_id}","channelId":"{channel_id}"}}')
         encoded_web_url = urllib.parse.quote(f'{os.getenv("Base_URL")}/ChannelDeepLink.html&label=DeepLink')
 
@@ -15,6 +20,7 @@ class DeepLinkTabHelper:
 
     @staticmethod
     def get_deep_link_tab_static(sub_entity_id, ID, desc, app_id):
+        # Generate deeplink for static/personal tab
         task_context = urllib.parse.quote(f'{{"subEntityId": "{sub_entity_id}"}}')
 
         return {
@@ -25,6 +31,7 @@ class DeepLinkTabHelper:
 
     @staticmethod
     def get_deep_link_to_meeting_side_panel(ID, desc, app_id, base_url, chat_id, context_type):
+        # Generate deeplink to open meeting side panel
         json_context = f'{{"chatId": "{chat_id}", "contextType": "{context_type}"}}'
         task_context = urllib.parse.quote(json_context)
         encoded_url = urllib.parse.quote(f"{base_url}/ChannelDeepLink.html")
