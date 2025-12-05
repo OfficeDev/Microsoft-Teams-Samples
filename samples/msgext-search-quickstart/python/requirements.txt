@@ -1,2 +1,6 @@
 requests==2.32.3
-botbuilder-integration-aiohttp>=4.16.2
+microsoft-agents-activity>=0.6.0
+microsoft-agents-hosting-core>=0.6.0
+microsoft-agents-hosting-aiohttp>=0.6.0
+microsoft-agents-hosting-teams>=0.6.0
+microsoft-agents-authentication-msal>=0.6.0

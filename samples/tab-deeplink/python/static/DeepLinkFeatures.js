@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 // Initialize the library.
 microsoftTeams.app.initialize().then(() => {
 });

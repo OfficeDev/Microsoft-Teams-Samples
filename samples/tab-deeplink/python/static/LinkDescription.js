@@ -1,5 +1,10 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+// Initialize Teams SDK and handle different page contexts
 microsoftTeams.app.initialize().then(() => {
     microsoftTeams.app.getContext().then((context) => { 
+        // Display content when opened in meeting side panel
         if (context.page.frameContext === "sidePanel") {
             document.getElementById("side-panel-content").style.display = "block";
             document.getElementById('list-content').style.display = "none";
@@ -7,9 +12,11 @@ microsoftTeams.app.initialize().then(() => {
             document.getElementById("extended-deeplink").style.display = "none";
             document.getElementById("side-panel-deeplink").style.display = "none";
         }
+        // Display deeplink when opened in meeting stage
         else if (context.page.frameContext === "meetingStage") {
 
             fetch(`${window.location.origin}/api/getAppId`).then(response => response.json()).then(data => {
+                // Generate deeplink to open meeting side panel
                 deepLinkString = `https://teams.microsoft.com/l/entity/${data.microsoftAppId}/DeepLinkApp?context={"chatId": "${context.chat.id}","contextType":"chat"}`;
                 
                 document.getElementById("side-panel-deeplink").style.display = "block";
@@ -18,20 +25,22 @@ microsoftTeams.app.initialize().then(() => {
                 document.getElementById("extended-deeplink").style.display = "none";
             });
         }                       
+        // Display Bots information when topic1 is selected
         else if (context.page.subPageId === "topic1") {                                  
             document.getElementById("taskDiv").innerHTML = "Bots";
             document.getElementById("taskContent").innerHTML = "A bot also referred to as a chatbot or conversational bot is an app that runs simple and repetitive automated tasks performed by the users, such as customer service or support staff. Examples of bots in everyday use include, bots that provide information about the weather, make dinner reservations, or provide travel information. A bot interaction can be a quick question and answer, or it can be a complex conversation that provides access to services.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots' target='_blank'>Click here</a>";
         }
-
+        // Display Messaging Extension information when topic2 is selected
         else if (context.page.subPageId === "topic2") {
             document.getElementById("taskDiv").innerHTML = "Messaging Extension";
             document.getElementById("taskContent").innerHTML = "Messaging extensions allow the users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search or initiate actions in an external system from the compose message area, the command box, or directly from a message. You can send back the results of that interaction to the Microsoft Teams client in the form of a richly formatted card. This document gives an overview of the messaging extension, tasks performed under different scenarios, working of messaging extension, action and search commands, and link unfurling.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions' target='_blank'>Click here</a>";
         }
-
+        // Display Adaptive Card information when topic3 is selected
         else if (context.page.subPageId === "topic3") {
             document.getElementById("taskDiv").innerHTML = "Adaptive Card";
             document.getElementById("taskContent").innerHTML ="Adaptive cards are a new cross product specification for cards in Microsoft products including Bots, Cortana, Outlook, and Windows. They are the recommended card type for new Teams development. For general information from the Adaptive cards team see Adaptive Cards Overview. You can use adaptive cards anywhere you can use existing Hero cards, Office365 cards, and Thumbnail cards.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-cards' target='_blank'>Click here</a>";
         }   
+        // Default: Display list of all deeplink options
         else{    
             var s=DeepLinkModel;
             var html ='';

@@ -52,10 +52,11 @@
                     "value": {
                       "domains": [
                         "${{BOT_DOMAIN}}",
+                        "*.devtunnels.ms",
+                        "*.inc1.devtunnels.ms",
                         "*.botframework.com"
-
                       ],
-                        "supportsAnonymizedPayloads": true
+                        "supportsAnonymizedPayloads": false
                     }
                 }
             ]
@@ -69,5 +70,15 @@
     ],
     "validDomains": [
       "${{BOT_DOMAIN}}"
-    ]
+    ],
+    "authorization": {
+        "permissions": {
+            "resourceSpecific": [
+                {
+                    "name": "MailboxItem.ReadWrite.User",
+                    "type": "Delegated"
+                }
+            ]
+        }
+    }
 }

@@ -2,104 +2,130 @@
 # Licensed under the MIT License.
 
 import requests
-from botbuilder.core import TurnContext, CardFactory
-from botbuilder.schema import ThumbnailCard, CardAction, CardImage, InvokeResponse
-from botbuilder.core.teams import TeamsActivityHandler
-from botbuilder.schema.teams import (
+from microsoft_agents.hosting.core import TurnContext
+from microsoft_agents.hosting.teams import TeamsActivityHandler
+from microsoft_agents.activity.teams import (
     MessagingExtensionResponse,
-    MessagingExtensionAttachment,
     MessagingExtensionResult,
+    MessagingExtensionAttachment,
 )
 
-# A bot activity handler that processes Teams messaging extensions and app link queries
 class BotActivityHandler(TeamsActivityHandler):
+    """Bot activity handler for Teams messaging extensions and app link queries."""
+
     def __init__(self):
         super().__init__()
 
-    # Handle search-based messaging extension queries
     async def on_teams_messaging_extension_query(self, context, query):
-        # Get the search query parameter
-        search_query = query.parameters[0].value
+        """Handle search-based messaging extension queries."""
+        # Extract search query from parameters (supports both dict and object formats)
+        search_query = ""
+        if isinstance(query, dict):
+            parameters = query.get("parameters", [])
+            search_query = parameters[0].get("value", "") if parameters else ""
+        else:
+            search_query = query.parameters[0].value if hasattr(query, "parameters") and query.parameters else ""
 
-        # Call the npm registry search API
-        response = requests.get(
-            "http://registry.npmjs.com/-/v1/search",
-            params={"text": search_query, "size": 8},
-        )
-        response.raise_for_status()
-        data = response.json()
+        # Use default search term if not provided or too short (npm API requires min 2 chars)
+        if not search_query or len(search_query) < 2:
+            search_query = "react"
+
+        try:
+            # Call the npm registry search API
+            response = requests.get(
+                "http://registry.npmjs.com/-/v1/search",
+                params={"text": search_query, "size": 8},
+                timeout=10,
+            )
+            response.raise_for_status()
+            data = response.json()
+        except Exception as e:
+            # Return error card on API failure
+            error_card = {
+                "contentType": "application/vnd.microsoft.card.hero",
+                "content": {
+                    "title": "Search Error",
+                    "text": "Unable to search npm packages. Please try again with a different query (minimum 2 characters).",
+                },
+            }
+            return MessagingExtensionResponse(
+                compose_extension=MessagingExtensionResult(
+                    type="result",
+                    attachment_layout="list",
+                    attachments=[
+                        MessagingExtensionAttachment(
+                            content=error_card["content"],
+                            content_type="application/vnd.microsoft.card.hero",
+                            content_url="",
+                            preview=error_card,
+                        )
+                    ],
+                )
+            )
 
         attachments = []
 
-        # Build a list of cards for the search results
+        # Build result cards for search results
         for obj in data["objects"][:8]:
             package = obj.get("package", {})
             package_name = package.get("name", "Unknown Package")
             description = package.get("description", "No description available")
             homepage = package.get("links", {}).get("homepage", "https://www.npmjs.com")
 
-            # Main card (full view when selected/inserted into conversation)
-            thumbnail_card = ThumbnailCard(
-                title=package_name,
-                text=description,
-                buttons=[
-                    CardAction(
-                        type="openUrl",
-                        title="View on NPM",
-                        value=f"https://www.npmjs.com/package/{package_name}",
-                    ),
-                    CardAction(
-                        type="openUrl",
-                        title="Homepage",
-                        value=homepage,
-                    ),
-                ],
-            )
-            card_attachment = CardFactory.thumbnail_card(thumbnail_card)
+            # Create hero card (better Outlook compatibility)
+            hero_card = {
+                "contentType": "application/vnd.microsoft.card.hero",
+                "content": {
+                    "title": package_name,
+                    "text": description,
+                    "buttons": [
+                        {
+                            "type": "openUrl",
+                            "title": "View on NPM",
+                            "value": f"https://www.npmjs.com/package/{package_name}",
+                        },
+                        {
+                            "type": "openUrl",
+                            "title": "Homepage",
+                            "value": homepage,
+                        },
+                    ],
+                },
+            }
 
-            # Preview card (shown in search result list)
-            preview_card = ThumbnailCard(title=package_name, text=description)
-            preview_attachment = CardFactory.thumbnail_card(preview_card)
-            preview_attachment.content.tap = CardAction(
-                type="invoke",
-                value={"title": package_name, "description": description},
-            )
-
-            # Messaging Extension attachment
+            # Create messaging extension attachment
             attachment = MessagingExtensionAttachment(
-                content=card_attachment.content,
-                content_type=card_attachment.content_type,
-                preview=preview_attachment,
+                content=hero_card["content"],
+                content_type="application/vnd.microsoft.card.hero",
+                content_url="",  # Required field in Agent SDK
+                preview=hero_card,
             )
             attachments.append(attachment)
 
-        # Wrap the results in a MessagingExtensionResult
-        result = MessagingExtensionResult(
-            type="result",
-            attachment_layout="list",
-            attachments=attachments,
+        # Return messaging extension response
+        return MessagingExtensionResponse(
+            compose_extension=MessagingExtensionResult(
+                type="result",
+                attachment_layout="list",
+                attachments=attachments,
+            )
         )
 
-        # Return InvokeResponse with the MessagingExtensionResponse
-        return InvokeResponse(
-            status=200,
-            body=MessagingExtensionResponse(compose_extension=result),
-        )
-
-    # Handle the user's selection of an item from the search results
-    async def on_teams_messaging_extension_select_item(
-        self, turn_context: TurnContext, query
-    ) -> InvokeResponse:
-        # Build a card with the selected package details
-        selected_card = ThumbnailCard(
-            title=query.get("title"),
-            text=query.get("description"),
-        )
-        selected_attachment = CardFactory.thumbnail_card(selected_card)
+    async def on_teams_messaging_extension_select_item(self, turn_context: TurnContext, query) -> MessagingExtensionResponse:
+        """Handle user's selection of an item from search results."""
+        # Create card with selected package details
+        selected_card = {
+            "contentType": "application/vnd.microsoft.card.thumbnail",
+            "content": {
+                "title": query.get("title"),
+                "text": query.get("description"),
+            },
+        }
 
         me_attachment = MessagingExtensionAttachment(
-            content=selected_attachment.content,
-            content_type=selected_attachment.content_type,
+            content=selected_card["content"],
+            content_type="application/vnd.microsoft.card.thumbnail",
+            content_url="",  # Required field in Agent SDK
         )
 
         result = MessagingExtensionResult(
@@ -108,30 +134,31 @@ class BotActivityHandler(TeamsActivityHandler):
             attachments=[me_attachment],
         )
 
-        return InvokeResponse(
-            status=200,
-            body=MessagingExtensionResponse(compose_extension=result),
-        )
+        return MessagingExtensionResponse(compose_extension=result)
 
-    # Handle app-based link unfurling (e.g., when a user pastes a link)
-    async def on_teams_app_based_link_query(
-        self, turn_context: TurnContext, query
-    ) -> InvokeResponse:
-        # Create a card with the unfurled link details
-        link_card = ThumbnailCard(
-            title="Thumbnail Card",
-            text=query.url,
-            images=[
-                CardImage(
-                    url="https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png"
-                )
-            ],
-        )
-        link_attachment = CardFactory.thumbnail_card(link_card)
+    async def on_teams_app_based_link_query(self, turn_context: TurnContext, query) -> MessagingExtensionResponse:
+        """Handle app-based link unfurling when user pastes a link."""
+        # Extract URL from query (supports both dict and object formats)
+        url = query.get("url", "No URL provided") if isinstance(query, dict) else getattr(query, "url", "No URL provided")
+
+        # Create card with unfurled link details
+        link_card = {
+            "contentType": "application/vnd.microsoft.card.thumbnail",
+            "content": {
+                "title": "Thumbnail Card",
+                "text": url,
+                "images": [
+                    {
+                        "url": "https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png"
+                    }
+                ],
+            },
+        }
 
         me_attachment = MessagingExtensionAttachment(
-            content=link_attachment.content,
-            content_type=link_attachment.content_type,
+            content=link_card["content"],
+            content_type="application/vnd.microsoft.card.thumbnail",
+            content_url="",  # Required field in Agent SDK
         )
 
         result = MessagingExtensionResult(
@@ -140,7 +167,4 @@ class BotActivityHandler(TeamsActivityHandler):
             attachments=[me_attachment],
         )
 
-        return InvokeResponse(
-            status=200,
-            body=MessagingExtensionResponse(compose_extension=result),
-        )
+        return MessagingExtensionResponse(compose_extension=result)

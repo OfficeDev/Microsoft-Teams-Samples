@@ -1,10 +1,14 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+
 import os
 import json
-from botbuilder.core import ActivityHandler, TurnContext, MessageFactory, CardFactory
-from botbuilder.schema import Attachment
+from microsoft_agents.hosting.core import TurnContext, MessageFactory, CardFactory
+from microsoft_agents.hosting.teams import TeamsActivityHandler
 from .deep_link_tab_helper import DeepLinkTabHelper  
 
-class DeepLinkTabsBot(ActivityHandler):
+# Bot class using Agent SDK TeamsActivityHandler
+class DeepLinkTabsBot(TeamsActivityHandler):
     def __init__(self):
         super().__init__()
 
@@ -13,6 +17,7 @@ class DeepLinkTabsBot(ActivityHandler):
         extended_deep_link = ""
         side_panel_link = ""
 
+        # Generate deeplinks based on conversation type (channel vs personal/group chat)
         if conversation_type == "channel":
             bots_deep_link = DeepLinkTabHelper.get_deep_link_tab_channel(
                 "topic1", 1, "Bots", turn_context.activity.channel_data["teamsChannelId"],
@@ -40,6 +45,7 @@ class DeepLinkTabsBot(ActivityHandler):
                 turn_context.activity.conversation.id, "chat"
             )
 
+        # Create and send adaptive card with all deeplinks
         adaptive_card = self.create_adaptive_card(
             conversation_type, bots_deep_link, messaging_deep_link, adaptive_card_deep_link, extended_deep_link, side_panel_link
         )
@@ -47,12 +53,14 @@ class DeepLinkTabsBot(ActivityHandler):
         await turn_context.send_activity(MessageFactory.attachment(adaptive_card))
 
     async def on_members_added_activity(self, members_added, turn_context: TurnContext):
+        # Send welcome message when new members join
         welcome_text = "Hello and welcome!"
         for member in members_added:
             if member.id != turn_context.activity.recipient.id:
                 await turn_context.send_activity(MessageFactory.text(welcome_text))
 
-    def create_adaptive_card(self, conversation_type, bots_deep_link, messaging_deep_link, adaptive_card_deep_link, extended_deep_link, side_panel_link) -> Attachment:
+    def create_adaptive_card(self, conversation_type, bots_deep_link, messaging_deep_link, adaptive_card_deep_link, extended_deep_link, side_panel_link):
+        # Load adaptive card template from JSON file
         with open("resources/AdaptiveCard.json", "r", encoding="utf-8") as json_file:
             template_payload = json.load(json_file)
 
@@ -70,7 +78,7 @@ class DeepLinkTabsBot(ActivityHandler):
             "sidePanelLinkTitle": side_panel_link["TaskText"] if side_panel_link else ""
         }
 
-        # Convert template to string for manual replacement
+        # Replace template placeholders with actual deeplink values
         adaptive_card_json = json.dumps(template_payload)
 
         # Replace placeholders manually
@@ -80,4 +88,5 @@ class DeepLinkTabsBot(ActivityHandler):
         # Convert back to dictionary
         adaptive_card = json.loads(adaptive_card_json)
 
+        # Return adaptive card using Agent SDK CardFactory
         return CardFactory.adaptive_card(adaptive_card)

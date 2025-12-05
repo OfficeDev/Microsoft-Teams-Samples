@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 var Task1Link ={   ID:1, Desc: "Bots"}
 var Task2Link ={   ID:2, Desc:"Messaging Extension"}
 var Task3Link ={   ID:3, Desc: "Adaptive Card"}
