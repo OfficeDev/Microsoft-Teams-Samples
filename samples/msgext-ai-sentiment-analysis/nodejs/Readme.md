@@ -15,9 +15,10 @@ urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-node
 
 # Sentiment Analysis for Teams chat messages using Azure Open AI and messaging extension.
 
-Explore this sample application that integrates Azure Open AI with a Teams messaging extension, enabling real-time sentiment analysis of chat messages. It categorizes sentiments as positive, negative, or neutral, providing valuable insights into team interactions and enhancing overall communication effectiveness.
+Explore this sample application that integrates Azure Open AI with a Teams messaging extension, enabling real-time sentiment analysis of chat messages using Teams SDK. It categorizes sentiments as positive, negative, or neutral, providing valuable insights into team interactions and enhancing overall communication effectiveness.
 
 ## Included Features
+
 * Bot
 * ME
 * Azure Open AI For Sentiment Analysis
@@ -55,9 +56,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-## Setup
+## Setup for running the sample manually
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+> Note these instructions are for running the sample manually on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
 
 1) Run ngrok - point to port 3978
@@ -94,7 +95,7 @@ the Teams service needs to call into the bot.
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
     - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
-    - Choose "Accounts in any organizational directory (Any Azure AD directory - Multitenant)" in Authentication section in your App Registration to run this sample smoothly.
+    - Choose "SingleTenant" in Authentication section in your App Registration to run this sample smoothly.
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     - In the new Azure Bot resource in the Portal, Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
@@ -112,7 +113,7 @@ the Teams service needs to call into the bot.
     ```bash
     npm install
     ```
-1) Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`,`AzureOpenAPIKey` and `BaseUrl`  with application base url. For e.g., your ngrok or dev tunnels url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+1) Update the `.localConfigs` configuration for the bot to use the `ClientId`, `ClientSecret`,`OPENAI_API_KEY`, `CHAT_COMPLETION_MODEL_NAME`(defalut is 'gpt-3.5-turbo'), `BOT_Type` and `BASE_URL`  with application base url. For e.g., your ngrok or dev tunnels url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 1) Run your app
 
@@ -121,14 +122,12 @@ the Teams service needs to call into the bot.
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<BOT_ID>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - Also, update the <TEAMS_APP_ID> with unique Guid in `manifest.json` stored in (`AppManifest`).
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your `ClientId` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Also, update the `${{TEAMS_APP_ID}}` with unique Guid in `manifest.json` stored in (`appPackage`).
 
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `AppManifest` folder (AppManifest.admin and AppManifest.user folders separately) to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-ai-sentiment-analysis/nodejs/index.js#L44) line and put your debugger for local debug.
 
 ## Running the sample
 

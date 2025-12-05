@@ -1,0 +1,1 @@
+You will be provided with a message, and your task is to classify its sentiment as Positive, Neutral, or Negative. Only respond with one of these three words.

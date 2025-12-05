@@ -23,7 +23,7 @@ Explore adaptive card formatting in Microsoft Teams with this bot sample. It inc
 
 ## Interaction with app
 
-![Types Of Cards](BotFormattingCards/Images/bot_formatting_cards.gif)
+![Types Of Cards](bot-formatting-cards/Images/bot_formatting_cards.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -103,7 +103,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
     Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/bot-formatting-cards/csharp/BotFormattingCards`
+  A) From a terminal, navigate to `samples/bot-formatting-cards/csharp/bot-formatting-cards`
 
      ```bash
      # run the bot
@@ -114,8 +114,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `samples/bot-formatting-cards/csharp/BotFormattingCards` folder
-    - Select `BotFormattingCards.csproj` file
+    - Navigate to `samples/bot-formatting-cards/csharp/bot-formatting-cards` folder
+    - Select `bot-formatting-cards.csproj` file
     - Press `F5` to run the project   
   
 - Update the `appsettings.json` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
@@ -123,7 +123,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 **Update mentionSupport json**
 - Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
 
-   - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\mentionSupport.json
+   - Navigate to samples\bot-formatting-cards\csharp\bot-formatting-cards\Resources\mentionSupport.json
       1) On line 14, replace {{new-Ids}}  
       2) On line 23, replace {{Email-Id}}
       3) On line 31, replace {{Microsoft-App-Id}}
@@ -155,7 +155,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    
    **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
   - Update the user Microsoft Entra object ID in your adaptive card JSON from your tenant's Microsoft Entra ID users available in the Azure portal.
-    - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
+    - Navigate to samples\bot-formatting-cards\csharp\bot-formatting-cards\Resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{User-Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}
       3) On line 18, replace {{User-Principal-Name}}
@@ -168,7 +168,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
         "userPrincipalName": "JoeSmith@xxxx.com"
       }
         ```
-    - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardSetIcon.json
+    - Navigate to samples\bot-formatting-cards\csharp\bot-formatting-cards\Resources\adaptivePeoplePersonaCardSetIcon.json
       1) On line 18, replace {{User-Object-ID}}  
       2) On line 19, replace {{User-Display-Name}}
       3) On line 20, replace {{User-Principal-Name}}
@@ -194,7 +194,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       }
         ```
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/fb5beb01271099430655ea0e56e8b6230c0e424e/samples/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/fb5beb01271099430655ea0e56e8b6230c0e424e/samples/bot-formatting-cards/csharp/bot-formatting-cards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
@@ -212,183 +212,183 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **Install App:**
 
-![InstallApp](BotFormattingCards/Images/1.Install.png)
+![InstallApp](bot-formatting-cards/Images/1.Install.png)
 
 **Welcome Message:**
 
-![WelcomeMessage](BotFormattingCards/Images/2.Welcome_Message.png)
+![WelcomeMessage](bot-formatting-cards/Images/2.Welcome_Message.png)
 
 **Mention Card:**
 
-![MentionCard](BotFormattingCards/Images/3.Mention_support_card.png)
+![MentionCard](bot-formatting-cards/Images/3.Mention_support_card.png)
 
 **Information Mask Card:**
 
-![InformationMaskCard](BotFormattingCards/Images/4.Info_Mask_card.png)
+![InformationMaskCard](bot-formatting-cards/Images/4.Info_Mask_card.png)
 
 **FullWidth Adaptive Card:**
 
-![FullWidthCard](BotFormattingCards/Images/5.Full_Width_Card.png)
+![FullWidthCard](bot-formatting-cards/Images/5.Full_Width_Card.png)
 
 **Stage View Card:**
 
-![StageViewCard](BotFormattingCards/Images/6.Stage_View_Card.png)
+![StageViewCard](bot-formatting-cards/Images/6.Stage_View_Card.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](BotFormattingCards/Images/7.Over_Flow_Menu_Card.png)
+![OverflowMenuCard](bot-formatting-cards/Images/7.Over_Flow_Menu_Card.png)
 
 **HTML Connector Card:**
 
-![HTMLFormatCard](BotFormattingCards/Images/8.HTTP_Connector_Card.png)
+![HTMLFormatCard](bot-formatting-cards/Images/8.HTTP_Connector_Card.png)
 
 **AdaptiveCard With Emoji:**
 
-![CardWithEmoji](BotFormattingCards/Images/9.Adaptive_card_with_Emoji.png)
+![CardWithEmoji](bot-formatting-cards/Images/9.Adaptive_card_with_Emoji.png)
 
 **Persona Card Icon:**
 
-![Persona](BotFormattingCards/Images/10.Persona_Card_Icon.png)
+![Persona](bot-formatting-cards/Images/10.Persona_Card_Icon.png)
 
 **Persona Set Icon:**
 
-![PersonaSet](BotFormattingCards/Images/11.Persona_Set_Icon.png)
+![PersonaSet](bot-formatting-cards/Images/11.Persona_Set_Icon.png)
 
 **Adaptive Card updated to be responsive using targetWidth:**
 
-![Layout](BotFormattingCards/Images/12.Layout_Card.png)
+![Layout](bot-formatting-cards/Images/12.Layout_Card.png)
 
 **Border Adaptive Card:**
 
-![Border](BotFormattingCards/Images/13.Border.png)
+![Border](bot-formatting-cards/Images/13.Border.png)
 
 **Rounded Corners Adaptive Card:**
 
-![Rounded Corners](BotFormattingCards/Images/14.RoundedCorners.png)
+![Rounded Corners](bot-formatting-cards/Images/14.RoundedCorners.png)
 
 **Select Fluent Icon:**
 
-![FluentIconAdaptiveCard](BotFormattingCards/Images/16.FluentIconAdaptiveCard.png)
+![FluentIconAdaptiveCard](bot-formatting-cards/Images/16.FluentIconAdaptiveCard.png)
 
 **Fluent icon in an Adaptive Card:**
 
-![FluentIconsSelectCard](BotFormattingCards/Images/17.FluentIconsSelectCard.png)
+![FluentIconsSelectCard](bot-formatting-cards/Images/17.FluentIconsSelectCard.png)
 
 **Select Media elements:**
 
-![MediaElementsAdaptiveCard](BotFormattingCards/Images/18.MediaElementsAdaptiveCard.png)
+![MediaElementsAdaptiveCard](bot-formatting-cards/Images/18.MediaElementsAdaptiveCard.png)
 
 **Media elements in Adaptive Card:**
 
-![MediaElementsAdaptiveCard](BotFormattingCards/Images/19.MediaElementsAdaptiveCard.png)
+![MediaElementsAdaptiveCard](bot-formatting-cards/Images/19.MediaElementsAdaptiveCard.png)
 
 **All Media elements in Adaptive Card:**
 
-![MediaElementsAdaptiveCard1](BotFormattingCards/Images/20.MediaElementsAdaptiveCard1.png)
+![MediaElementsAdaptiveCard1](bot-formatting-cards/Images/20.MediaElementsAdaptiveCard1.png)
 
 **Play video media elements in an Adaptive Card:**
 
-![MediaElementsAdaptiveCard2](BotFormattingCards/Images/21.MediaElementsAdaptiveCard2.png)
+![MediaElementsAdaptiveCard2](bot-formatting-cards/Images/21.MediaElementsAdaptiveCard2.png)
 
 **Select Star Ratings:**
 
-![SelectStarRatings](BotFormattingCards/Images/22.SelectStarRatings.png)
+![SelectStarRatings](bot-formatting-cards/Images/22.SelectStarRatings.png)
 
 **Star ratings in Adaptive Cards:**
 
-![StarRatingsAdaptiveCards](BotFormattingCards/Images/23.StarRatingsAdaptiveCards.png)
+![StarRatingsAdaptiveCards](bot-formatting-cards/Images/23.StarRatingsAdaptiveCards.png)
 
 **Star ratings in Adaptive Cards validation:**
 
-![StarRatingsAdaptiveCardsValidation](BotFormattingCards/Images/24.StarRatingsAdaptiveCardsValidation.png)
+![StarRatingsAdaptiveCardsValidation](bot-formatting-cards/Images/24.StarRatingsAdaptiveCardsValidation.png)
 
 **Star Ratings Feedback:**
 
-![StarRatingsFeedback](BotFormattingCards/Images/25.StarRatingsFeedback.png)
+![StarRatingsFeedback](bot-formatting-cards/Images/25.StarRatingsFeedback.png)
 
 **Conditional and Scrollable buttons:**
 
-![ConditionalAndScrollableButtons](BotFormattingCards/Images/28.ConditionalAndScrollableButtons.png)
+![ConditionalAndScrollableButtons](bot-formatting-cards/Images/28.ConditionalAndScrollableButtons.png)
 
 **Conditional Card Before Input:**
 
-![ConditionalCardBeforeInput](BotFormattingCards/Images/29.ConditionalCardBeforeInput.png)
+![ConditionalCardBeforeInput](bot-formatting-cards/Images/29.ConditionalCardBeforeInput.png)
 
 **Conditional Card After Input:**
 
-![ConditionalCardBeforeInput](BotFormattingCards/Images/30.ConditionalCardAfterInput.png)
+![ConditionalCardBeforeInput](bot-formatting-cards/Images/30.ConditionalCardAfterInput.png)
 
 **Scrollable Container Card:**
 
-![ScrollableContainerCard](BotFormattingCards/Images/31.ScrollableAdaptiveCard.png)
+![ScrollableContainerCard](bot-formatting-cards/Images/31.ScrollableAdaptiveCard.png)
 
 **Compound Button Option:**
 
-![CompoundButtonOption](BotFormattingCards/Images/32.CompoundButton.png)
+![CompoundButtonOption](bot-formatting-cards/Images/32.CompoundButton.png)
 
 **Compound Button Adaptive Card:**
 
-![CompoundButtonAdaptiveCard](BotFormattingCards/Images/33.CompoundButtonAdaptiveCard.png)
+![CompoundButtonAdaptiveCard](bot-formatting-cards/Images/33.CompoundButtonAdaptiveCard.png)
 
 **Container Layout and Donut Chart Buttons:**
 
-![ContainerLayoutandDonutChartButtons](BotFormattingCards/Images/34.ContainerAndDonutOptions.png)
+![ContainerLayoutandDonutChartButtons](bot-formatting-cards/Images/34.ContainerAndDonutOptions.png)
 
 **Chart Buttons:**
 
-![ChartButtons](BotFormattingCards/Images/35.ChartOptions.png)
+![ChartButtons](bot-formatting-cards/Images/35.ChartOptions.png)
 
 **Remaining Chart Buttons:**
 
-![RemainingChartButtons](BotFormattingCards/Images/36.RemainingChartOptions.png)
+![RemainingChartButtons](bot-formatting-cards/Images/36.RemainingChartOptions.png)
 
 **Container Layout:**
 
-![ContainerLayout](BotFormattingCards/Images/37.ContainerLayout.png)
+![ContainerLayout](bot-formatting-cards/Images/37.ContainerLayout.png)
 
 **Donut Chart:**
 
-![DonutChart](BotFormattingCards/Images/38.DonutChart.png)
+![DonutChart](bot-formatting-cards/Images/38.DonutChart.png)
 
 **Gauge Chart:**
 
-![GaugeChart](BotFormattingCards/Images/39.GaugeChart.png)
+![GaugeChart](bot-formatting-cards/Images/39.GaugeChart.png)
 
 **Horizontal Chart:**
 
-![HorizontalChart](BotFormattingCards/Images/40.HorizontalChart.png)
+![HorizontalChart](bot-formatting-cards/Images/40.HorizontalChart.png)
 
 **Horizontal Stacked Chart:**
 
-![HorizontalStackedChart](BotFormattingCards/Images/41.HorizontalChartStacked.png)
+![HorizontalStackedChart](bot-formatting-cards/Images/41.HorizontalChartStacked.png)
 
 **Line Chart:**
 
-![LineChart](BotFormattingCards/Images/42.LineChart.png)
+![LineChart](bot-formatting-cards/Images/42.LineChart.png)
 
 **Pie Chart:**
 
-![PieChart](BotFormattingCards/Images/43.PieChart.png)
+![PieChart](bot-formatting-cards/Images/43.PieChart.png)
 
 **Vertical Bar Chart:**
 
-![VerticalBarChart](BotFormattingCards/Images/44.VerticalBarChart.png)
+![VerticalBarChart](bot-formatting-cards/Images/44.VerticalBarChart.png)
 
 **Vertical Bar Grouped Chart:**
 
-![Vertical Bar Chart](BotFormattingCards/Images/45.VerticalBarGroupedChart.png)
+![Vertical Bar Chart](bot-formatting-cards/Images/45.VerticalBarGroupedChart.png)
 
 **Mobile:**
 
-![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
+![LayoutMobile](bot-formatting-cards/Images/15.LayoutMobile.png)
 
 **Star Ratings in Adaptive Cards:**
 
-![StarRatingsAdaptiveCards](BotFormattingCards/Images/26.StarRatingsAdaptiveCards.png)
+![StarRatingsAdaptiveCards](bot-formatting-cards/Images/26.StarRatingsAdaptiveCards.png)
 
 **Star Ratings Feedback:**
 
-![StarRatingsFeedback](BotFormattingCards/Images/27.StarRatingsFeedback.png)
+![StarRatingsFeedback](bot-formatting-cards/Images/27.StarRatingsFeedback.png)
 
 ## Deploy the bot to Azure
 
