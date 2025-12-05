@@ -29,6 +29,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@fluidframework/azure-local-service": "^2.72.0",
     "@fluidframework/test-client-utils": "~0.59.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -64,5 +65,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000/"
+  "proxy": "http://localhost:4001/"
 }
