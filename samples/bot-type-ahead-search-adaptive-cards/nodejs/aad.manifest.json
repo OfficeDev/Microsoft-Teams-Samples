@@ -1,7 +1,7 @@
 {
     "id": "${{AAD_APP_OBJECT_ID}}",
     "appId": "${{AAD_APP_CLIENT_ID}}",
-    "name": "bot-type-ahead-search-adaptive-cards-aad",
+    "name": "bot-type-ahead-search-adaptive-cards-aad-ai",
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADMultipleOrgs",
     "oauth2AllowIdTokenImplicitFlow": true,
