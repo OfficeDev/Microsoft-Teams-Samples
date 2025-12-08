@@ -25,7 +25,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 This App talks about the Teams Bot User Specific Views and Sequential Workflows in adaptive card with Node JS
 
-This bot has been created using [Bot Framework v4](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V1.4
+This bot has been created using [Teams SDK](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/), it shows how to create a simple bot that accepts food order using Adaptive Cards V1.4
 
 This is a sample app that provides an experience of managing incidents. This sample makes use of Teams platform capabilities like Universal Bots with below mentioned capabilities.
 [User Specific Views](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views)
@@ -73,36 +73,19 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
+1. Setup for Bot
+    - Register a Microsoft Entra ID aap registration in Azure portal.
+    - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-    
-  A) Select **New Registration** and on the *register an application page*, set following values:
-      * Set **name** to your app name.
-      * Choose the **supported account types** (any account type will work)
-      * Leave **Redirect URI** empty.
-      * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-  C) Navigate to **API Permissions**, and make sure to add the following permissions:
-   Select Add a permission
-      * Select Add a permission
-      * Select Microsoft Graph -\> Delegated permissions.
-      * `User.Read` (enabled by default)
-      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-2. Setup for Bot
-	- Register a Microsoft Entra ID aap registration in Azure portal.
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+2. Setup NGROK
+    - Run ngrok - point to port 3978
 
-    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
-
-3. Setup NGROK
- - Run ngrok - point to port 3978
-
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
+    ```bash
+     ngrok http 3978 --host-header="localhost:3978"
+     ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
@@ -110,25 +93,25 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-4. Setup for code
+3. Setup for code
 
-  - Clone the repository
+    - Clone the repository
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
     
 
-  - In a console, navigate to `samples/bot-sequential-flow-adaptive-cards/nodejs`
+    - In a console, navigate to `samples/bot-sequential-flow-adaptive-cards/nodejs`
 
       ```bash
       cd samples/bot-sequential-flow-adaptive-cards/nodejs
       ```
-  - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
+     - Update the `.localConfigs` configuration for the bot to use the `CLIENT_ID` (Microsoft App Id) and `CLIENT_SECRET` (App Password) from the Bot Framework registration. 
 
-> NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
+        > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
-- Install modules & Run the `NodeJS` Server 
+    - Install modules & Run the `NodeJS` Server 
     - Server will run on PORT:  `3978`
     - Open a terminal and navigate to project root directory
     
@@ -139,19 +122,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     > **This command is equivalent to:**
     _npm install  > npm start_
 
-5. Setup Manifest for Teams
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+4. Setup Manifest for Teams
+    - __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+    - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+    - Go to Microsoft Teams. From the lower left corner, select Apps
+    - From the lower left corner, choose Upload a custom App
+    - Go to your project directory, the ./appPackage folder, select the zip folder, and     choose Open.
+     - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sequential-flow-adaptive-cards/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 ## Workflows
 ### Workflow for bot interaction
@@ -267,7 +249,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams SDK Documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
