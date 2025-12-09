@@ -24,7 +24,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "supportsCalling": false,
@@ -39,7 +39,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "canUpdateConfiguration": false,
       "commands": [
         {

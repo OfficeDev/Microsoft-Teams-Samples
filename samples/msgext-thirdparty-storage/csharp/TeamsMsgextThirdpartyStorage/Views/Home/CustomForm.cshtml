@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "CustomForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -100,7 +100,7 @@
                                 if (progress >= 100) {
                                     clearInterval(interval);
                                     progressFill.style.backgroundColor = "green";
-                                    statusCell.textContent = "✔";
+                                    statusCell.textContent = "?";
                                     statusCell.style.color = "green";
 
                                     // Increment completed files counter and check if all are done
