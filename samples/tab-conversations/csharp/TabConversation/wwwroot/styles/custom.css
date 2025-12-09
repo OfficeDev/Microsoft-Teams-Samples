@@ -5,11 +5,14 @@ html, body, div.surface, div.panel {
 
 div.panel {
     padding: 15px;
+    max-width: 600px;
 }
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  max-width: 500px;
 }
 
 td, th {
@@ -20,6 +23,7 @@ td, th {
 }
 
 img {
-  margin-left:6rem;
+  margin-left:2rem;
   width:20px;
+  cursor: pointer;
 }
