@@ -6,7 +6,7 @@ using System;
 using Quartz;
 using Quartz.Impl;
 
-namespace MessagingExtensionReminder
+namespace MessagingExtensionReminder.Helpers
 {
     public class TaskScheduler
     {

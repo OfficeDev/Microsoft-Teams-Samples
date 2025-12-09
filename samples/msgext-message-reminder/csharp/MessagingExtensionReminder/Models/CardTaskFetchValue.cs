@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace MessagingExtensionReminder.Models
 {
@@ -11,13 +11,13 @@ namespace MessagingExtensionReminder.Models
     /// </summary>
     public class CardTaskFetchValue<T>
     {
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public object Type { get; set; } = "task/fetch";
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public object Id { get; set; }
 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public T Data { get; set; }
     }
 }

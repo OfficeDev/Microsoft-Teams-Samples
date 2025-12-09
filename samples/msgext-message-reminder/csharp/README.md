@@ -67,16 +67,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK
- - Run ngrok - point to port 3978
+ - Run ngrok - point to port 5130
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
 ## 2) App Registration
@@ -104,10 +104,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
- Modify the `appsettings.json` and fill in the following details:
-   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
-   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-   - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+ Modify the `appsettings.Development.json` and fill in the following details:
+   - `ClientId` - Generated from Step 1 is the application app id
+   - `ClientSecret` - Generated from Step 1, also referred to as Client secret
+   - `TenantId` - Directory (tenant) ID from Step 1
+   - `BotType` - Set to "MultiTenant" or "SingleTenant" based on your app registration
+   - `ApplicationBaseUrl` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
   
 - From a terminal, navigate to `samples/msgext-message-reminder/csharp`
 
@@ -122,7 +124,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{TEAMS_ID}}` and `{{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
@@ -132,7 +134,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-message-reminder/csharp/MessagingExtensionReminder/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
   
 ## Running the sample
 
@@ -174,7 +175,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Azure AI Bot Service Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

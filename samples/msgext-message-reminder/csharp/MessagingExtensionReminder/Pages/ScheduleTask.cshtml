@@ -59,11 +59,9 @@
             }
 
             var datetimeLocal = $('#taskdatetime').val()
-            var datetimeUTC = new Date(datetimeLocal).toUTCString();
-            var date = new Date(datetimeUTC);
             let taskInfo = {
                 title: title.replace(/%20/g," "),
-                dateTime: date,
+                dateTime: datetimeLocal,
                 description: description == "" ? $('#taskdescription').val():description.replace(/%20/g," "),
             };
 

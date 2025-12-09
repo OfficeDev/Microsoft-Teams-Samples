@@ -6,7 +6,7 @@ using Quartz;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace MessagingExtensionReminder
+namespace MessagingExtensionReminder.Helpers
 {
     public class ScheduleTaskReminder : IJob
     {
