@@ -57,16 +57,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
 
-1) Run ngrok - point to port 3978
+1) Run ngrok - point to port 5130
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
 1) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -128,23 +128,27 @@ the Teams service needs to call into the bot.
    - Navigate to `samples/bot-auth0-adaptivecard/csharp` folder
    - Select `TeamsConversationBot.csproj` or `TeamsConversationBot.sln`file
 
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-    - In addition, add your Auth0 configuration details:
-      ClientId: Found in your Auth0 application settings.
-      ClientSecret: Found in your Auth0 application settings.
-      Domain: Your Auth0 domain (e.g., your-tenant.auth0.com)
+1) Update the `appsettings.Development.json` configuration for the bot to use the App Registration details generated in Step 2:
+    - Update the `Teams` section:
+      - `ClientId`: Application (client) ID from your Azure App Registration
+      - `ClientSecret`: Client secret from your Azure App Registration
+      - `TenantId`: Directory (tenant) ID from your Azure App Registration
+      - `BotType`: Set to `SingleTenant`, `MultiTenant`, or `UserAssignedMSI`
+    - Update the `Auth0` section:
+      - `ClientId`: Found in your Auth0 application settings
+      - `ClientSecret`: Found in your Auth0 application settings
+      - `Domain`: Your Auth0 domain (e.g., your-tenant.auth0.com)
+    - Set `ApplicationUrl`: Your bot's public URL from ngrok or dev tunnel (e.g., https://1234.ngrok-free.app)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{TEAMS_APP_ID}}` and `{{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains`, replace `<<domain-name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `appPackage.zip` (Make sure that zip file does not contain any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `appPackage.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-auth0-adaptivecard/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -165,7 +169,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Azure AI Bot Service Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
