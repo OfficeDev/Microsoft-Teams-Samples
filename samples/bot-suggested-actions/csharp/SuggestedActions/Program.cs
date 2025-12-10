@@ -1,41 +1,49 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using SuggestedActions;
+using SuggestedActions.Controllers;
+using Azure.Core;
+using Azure.Identity;
+using Microsoft.Teams.Api.Auth;
+using Microsoft.Teams.Apps;
+using Microsoft.Teams.Apps.Extensions;
+using Microsoft.Teams.Common.Http;
+using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 
-namespace Microsoft.BotBuilderSamples
+var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration.Get<ConfigOptions>();
+
+Func<string[], string?, Task<ITokenResponse>> createTokenFactory = async (string[] scopes, string? tenantId) =>
 {
-    /// <summary>
-    /// The main entry point for the application.
-    /// </summary>
-    public class Program
-    {
-        /// <summary>
-        /// The main method which is the entry point of the application.
-        /// </summary>
-        /// <param name="args">The command-line arguments.</param>
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    var clientId = config.Teams.ClientId;
 
-        /// <summary>
-        /// Creates and configures the host builder.
-        /// </summary>
-        /// <param name="args">The command-line arguments.</param>
-        /// <returns>An initialized <see cref="IHostBuilder"/> instance.</returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.ConfigureLogging(logging =>
-                    {
-                        logging.AddDebug();
-                        logging.AddConsole();
-                    });
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+    var managedIdentityCredential = new ManagedIdentityCredential(clientId);
+    var tokenRequestContext = new TokenRequestContext(scopes, tenantId: tenantId);
+    var accessToken = await managedIdentityCredential.GetTokenAsync(tokenRequestContext);
+
+    return new TokenResponse
+    {
+        TokenType = "Bearer",
+        AccessToken = accessToken.Token,
+    };
+};
+var appBuilder = App.Builder();
+
+if (config.Teams.BotType == "UserAssignedMsi")
+{
+    appBuilder.AddCredentials(new TokenCredentials(
+        config.Teams.ClientId ?? string.Empty,
+        async (tenantId, scopes) =>
+        {
+            return await createTokenFactory(scopes, tenantId);
+        }
+    ));
 }
+
+builder.Services.AddSingleton<Controller>();
+builder.AddTeams(appBuilder);
+
+var app = builder.Build();
+app.UseTeams();
+app.Run();

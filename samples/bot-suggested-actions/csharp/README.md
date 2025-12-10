@@ -62,7 +62,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.Development.json.
   4. Navigate to **API Permissions**, and make sure to add the follow permissions:
    Select Add a permission
       * Select Add a permission
@@ -79,16 +79,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK
- - Run ngrok - point to port 3978
+ - Run ngrok - point to port 5130
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
 4. Setup for code
@@ -97,9 +97,11 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-   - Modify the `/appsettings.json` and fill in the following details:
-     - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
-     - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
+   - Modify the `SuggestedActions/appsettings.Development.json` and fill in the following details:
+     - `{{Teams:ClientId}}` - Generated from Step 1.3, the Application (client) ID
+     - `{{Teams:ClientSecret}}` - Generated from Step 2, also referred to as Client secret/App password
+     - `{{Teams:TenantId}}` - Generated from Step 1.3, the Directory (tenant) ID
+     - `{{Teams:BotType}}` - Set to "MultiTenant" for multi-tenant bots or "SingleTenant" for single-tenant bots
    
    - In a terminal, navigate to `samples/bot-suggested-actions/csharp`
 
@@ -122,7 +124,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
      
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{TEAMS_APP_ID}} and {{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
@@ -132,7 +134,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-suggested-actions/csharp/SuggestedActions/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -164,7 +165,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams Bot Service Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

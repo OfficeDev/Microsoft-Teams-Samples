@@ -280,9 +280,9 @@ jobs:
               name: 'bot-message-reaction'
               version: '8.0.x'
 
-            - project_path: 'samples/bot-suggested-actions/csharp/SuggestedActions/SuggestedActionsBot.csproj'
+            - project_path: 'samples/bot-suggested-actions/csharp/SuggestedActions/SuggestedActions.csproj'
               name: 'bot-suggested-actions'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/bot-task-module/csharp/TeamsTaskModule.csproj'
               name: 'bot-task-module'
