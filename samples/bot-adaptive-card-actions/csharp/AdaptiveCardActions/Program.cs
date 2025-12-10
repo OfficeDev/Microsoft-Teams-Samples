@@ -1,44 +1,56 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using AdaptiveCardActions;
+using AdaptiveCardActions.Controllers;
+using Azure.Core;
+using Azure.Identity;
+using Microsoft.Teams.Api.Auth;
+using Microsoft.Teams.Apps;
+using Microsoft.Teams.Apps.Extensions;
+using Microsoft.Teams.Common.Http;
+using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 
-namespace Microsoft.BotBuilderSamples
+// Create web application builder and load configuration
+var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration.Get<ConfigOptions>();
+
+// Factory function to create access tokens using managed identity credentials
+Func<string[], string?, Task<ITokenResponse>> createTokenFactory = async (string[] scopes, string? tenantId) =>
 {
-    /// <summary>
-    /// The main entry point for the application.
-    /// </summary>
-    public class Program
+    var clientId = config.Teams.ClientId;
+
+    var managedIdentityCredential = new ManagedIdentityCredential(clientId);
+    var tokenRequestContext = new TokenRequestContext(scopes, tenantId: tenantId);
+    var accessToken = await managedIdentityCredential.GetTokenAsync(tokenRequestContext);
+
+    return new TokenResponse
     {
-        /// <summary>
-        /// The main method which is the entry point of the application.
-        /// </summary>
-        /// <param name="args">The command-line arguments.</param>
-        public static void Main(string[] args)
+        TokenType = "Bearer",
+        AccessToken = accessToken.Token,
+    };
+};
+
+// Create Teams app builder
+var appBuilder = App.Builder();
+
+// Configure authentication using user-assigned managed identity if specified
+if (config.Teams.BotType == "UserAssignedMsi")
+{
+    appBuilder.AddCredentials(new TokenCredentials(
+        config.Teams.ClientId ?? string.Empty,
+        async (tenantId, scopes) =>
         {
-            CreateHostBuilder(args).Build().Run();
+            return await createTokenFactory(scopes, tenantId);
         }
-
-        /// <summary>
-        /// Creates and configures a host builder.
-        /// </summary>
-        /// <param name="args">The command-line arguments.</param>
-        /// <returns>An initialized <see cref="IHostBuilder"/> instance.</returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    // Configure logging to include debug and console outputs
-                    webBuilder.ConfigureLogging(logging =>
-                    {
-                        logging.AddDebug();
-                        logging.AddConsole();
-                    });
-
-                    // Specify the startup class to use
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+    ));
 }
+
+// Register controller and configure Teams services
+builder.Services.AddSingleton<Controller>();
+builder.AddTeams(appBuilder);
+
+// Build and run the application
+var app = builder.Build();
+app.UseTeams();
+app.Run();

@@ -1,25 +1,52 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>14.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdaptiveCards.Rendering.Html" Version="2.7.3" />
-    <PackageReference Include="AdaptiveCards.Templating" Version="1.3.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
-    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
+    <PackageReference Include="Azure.Identity" Version="1.13.1" />
+    <PackageReference Include="Microsoft.Teams.Api" Version="2.0.*" />
+    <PackageReference Include="Microsoft.Teams.Apps" Version="2.0.*" />
+    <PackageReference Include="Microsoft.Teams.Plugins.AspNetCore" Version="2.0.*" />
+    <PackageReference Include="Microsoft.Teams.Common" Version="2.0.*" />
+    <PackageReference Include="AdaptiveCards.Templating" Version="1.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <!-- Exclude old Bot Builder files from compilation -->
   <ItemGroup>
-    <Content Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Compile Remove="csharp\**" />
+    <Content Remove="csharp\**" />
+    <EmbeddedResource Remove="csharp\**" />
+    <None Remove="csharp\**" />
+  </ItemGroup>
+
+  <!-- Exclude generated PolySharp files -->
+  <ItemGroup>
+    <Compile Remove="obj\**\PolySharp.SourceGenerators\**\*.g.cs" />
+  </ItemGroup>
+
+  <!-- Exclude local settings from publish -->
+  <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>None</CopyToPublishDirectory>
+    </Content>
+    <Content Remove="appsettings.Playground.json" />
+    <Content Include="appsettings.Playground.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>None</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
-  
+
+  <!-- Include Cards folder in output -->
   <ItemGroup>
-      <Folder Include="Images\" />
-    </ItemGroup>
-	
+    <None Include="Cards\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

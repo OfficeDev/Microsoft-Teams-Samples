@@ -64,16 +64,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-2. Run ngrok - point to port 3978
+2. Run ngrok - point to port 5130
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
 3. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -83,13 +83,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.Development.json.
   C) Navigate to **API Permissions**, and make sure to add the follow permissions:
    Select Add a permission
       * Select Add a permission
       * Select Microsoft Graph -\> Delegated permissions.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+  D) Under **Certificates & secrets**, create a new **Client secret** and save the value. You'll need this for the `ClientSecret` in appsettings.Development.json.
 
 
 4. Setup For Code
@@ -104,16 +105,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - Launch Visual Studio
   - File -> Open Folder
   - Navigate to `samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions` folder
-  - Select `AdaptiveCardActions.sln` solution file
+  - Select `AdaptiveCardActions.slnx` solution file
 
-   - Modify the `/appsettings.json` and fill in the following details:
-     - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
-     - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
+   - Modify the `/appsettings.Development.json` and fill in the following details:
+     - `ClientId` - Generated from Step 1 is the application app id
+     - `ClientSecret` - Generated from Step 1, also referred to as Client secret
+     - `BotType` - Set the bot type (e.g., "MultiTenant" or "SingleTenant")
+     - `TenantId` - Your Microsoft 365 tenant ID from Step 3
   - Press `F5` to run the project
      
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{TEAMS_APP_ID}} and {{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{Domain-Name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
@@ -122,8 +125,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
 
 
 ## Running the sample

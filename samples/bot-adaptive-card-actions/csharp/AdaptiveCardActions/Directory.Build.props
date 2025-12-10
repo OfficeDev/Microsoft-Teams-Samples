@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <PolySharpIncludeGeneratedTypes>
+      <![CDATA[
+        System.Diagnostics.CodeAnalysis.AllowNullAttribute;
+        System.Diagnostics.CodeAnalysis.DisallowNullAttribute;
+        System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute;
+        System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute;
+        System.Diagnostics.CodeAnalysis.MaybeNullAttribute;
+        System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute;
+        System.Diagnostics.CodeAnalysis.MemberNotNullAttribute;
+        System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute;
+        System.Diagnostics.CodeAnalysis.NotNullAttribute;
+        System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute;
+        System.Diagnostics.CodeAnalysis.NotNullWhenAttribute;
+      ]]>
+    </PolySharpIncludeGeneratedTypes>
+  </PropertyGroup>
+</Project>

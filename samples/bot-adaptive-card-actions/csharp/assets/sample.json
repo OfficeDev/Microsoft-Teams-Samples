@@ -9,7 +9,7 @@
       "This sample demonstrates how to create and send Adaptive Cards with different action types using a Microsoft Teams bot. It includes features like submitting actions, showing cards, toggling visibility, and more."
     ],
     "creationDateTime": "2022-12-27",
-    "updateDateTime": "2024-10-10",
+    "updateDateTime": "2025-10-12",
     "products": [
       "Teams"
     ],
