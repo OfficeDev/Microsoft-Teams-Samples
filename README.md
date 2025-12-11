@@ -1,5 +1,11 @@
 # Microsoft Teams Samples
 [![Sample code build status](https://github.com/OfficeDev/Microsoft-Teams-Samples/actions/workflows/build-complete-samples.yml/badge.svg)](https://github.com/OfficeDev/Microsoft-Teams-Samples/actions/workflows/build-complete-samples.yml)
+
+> [!IMPORTANT]
+> We are in the process of archiving the **Bot Framework SDK** repository on GitHub. This project is no longer updated or maintained. However, customers using this tool won't be disrupted. The tool is no longer supported through service tickets in the Azure portal and won't receive product updates.
+>
+> **Simplify building AI-powered bots for Microsoft Teams with our new SDK**. It reduces boilerplate code and external dependencies while offering native AI and Teams-specific abstractions. This allows you to focus on creating intelligent bot experiences without the hassle of setup or configuration. Consider using the **Teams SDK** for a faster, streamlined development process. The Teams SDK has support for C#, JavaScript, or Python. If you have an existing bot built with the Bot Framework SDK, you can update your bot to the Teams SDK. You can review the core changes and updates at [Bot Framework SDK to Teams SDK (Teams AI Library) migration guidance](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/) Support tickets for the Bot Framework SDK are **no longer serviced as of December 31, 2025.**
+
 ##### [Click here to find out what's new with Microsoft Teams Platform](https://docs.microsoft.com/microsoftteams/platform/whats-new)
 
 >NOTE: These samples are designed to help understand Microsoft Teams platform capabilities and scenarios. If you are looking for production ready apps then please visit [App Templates for Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/samples/app-templates)
