@@ -22,15 +22,6 @@
     "color": "color.png"
   },
   "accentColor": "#FFFFFF",
-  "configurableTabs": [
-    {
-      "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
-      "canUpdateConfiguration": true,
-      "scopes": [
-        "team"
-      ]
-    }
-  ],
   "staticTabs": [
     {
       "entityId": "default_tab",
@@ -38,8 +29,7 @@
       "contentUrl": "https://${{TAB_DOMAIN}}/default_tab",
       "websiteUrl": "https://${{TAB_DOMAIN}}/default_tab",
       "scopes": [
-        "personal",
-        "team"
+        "personal"
       ]
     },
     {
@@ -48,8 +38,7 @@
       "contentUrl": "https://${{TAB_DOMAIN}}/tab_One",
       "websiteUrl": "https://${{TAB_DOMAIN}}/tab_One",
       "scopes": [
-        "personal",
-        "team"
+        "personal"
       ]
     },
     {
@@ -58,8 +47,7 @@
       "contentUrl": "https://${{TAB_DOMAIN}}/tab_two",
       "websiteUrl": "https://${{TAB_DOMAIN}}/tab_two",
       "scopes": [
-        "personal",
-        "team"
+        "personal"
       ]
     },
     {
@@ -68,8 +56,7 @@
       "contentUrl": "https://${{TAB_DOMAIN}}/tab_three",
       "websiteUrl": "https://${{TAB_DOMAIN}}/tab_three",
       "scopes": [
-        "personal",
-        "team"
+        "personal"
       ]
     }
   ],
