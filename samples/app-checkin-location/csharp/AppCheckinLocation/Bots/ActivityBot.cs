@@ -4,8 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AdaptiveCards;
@@ -16,7 +14,6 @@ using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace AppCheckinLocation.Bots
@@ -29,14 +26,14 @@ namespace AppCheckinLocation.Bots
         private readonly string _applicationBaseUrl;
         private readonly IWebHostEnvironment _env;
         protected readonly BotState _conversationState;
-        protected readonly IStatePropertyAccessor<UserLocationDetail> _UserDetail;
+        protected readonly IStatePropertyAccessor<UserLocationDetail> _userDetailProcessor;
 
         public ActivityBot(IConfiguration configuration, IWebHostEnvironment env, ConversationState conversationState)
         {
             _conversationState = conversationState;
             _env = env;
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
-            _UserDetail = conversationState.CreateProperty<UserLocationDetail>(nameof(UserLocationDetail));
+            _userDetailProcessor = conversationState.CreateProperty<UserLocationDetail>(nameof(UserLocationDetail));
         }
 
         /// <summary>
@@ -49,8 +46,8 @@ namespace AppCheckinLocation.Bots
         {
             if(turnContext.Activity.Text.ToLower().Trim() == "viewcheckin")
             {
-                var currentUserDetail = await this._UserDetail.GetAsync(turnContext, () => new UserLocationDetail());
-                List<UserDetail> userDetailsList = new List<UserDetail>();
+                var currentUserDetail = await this._userDetailProcessor.GetAsync(turnContext, () => new UserLocationDetail());
+                var userDetailsList = new List<UserDetail>();
 
                 if (currentUserDetail.UserDetails == null)
                 {
@@ -120,7 +117,7 @@ namespace AppCheckinLocation.Bots
                     Type = "continue",
                     Value = new TaskModuleTaskInfo()
                     {
-                        Url = _applicationBaseUrl + "/" + "CheckIn",
+                        Url = $"{_applicationBaseUrl}/CheckIn",
                         Height = 350,
                         Width = 350,
                         Title = "Check in details",
@@ -136,7 +133,7 @@ namespace AppCheckinLocation.Bots
                     Type = "continue",
                     Value = new TaskModuleTaskInfo()
                     {
-                        Url = _applicationBaseUrl + "/" + "ViewLocation?latitude="+ latitude+"&longitude="+longitude,
+                        Url = $"{_applicationBaseUrl}/ViewLocation?latitude={latitude}&longitude={longitude}",
                         Height = 350,
                         Width = 350,
                         Title = "View location",
@@ -162,7 +159,8 @@ namespace AppCheckinLocation.Bots
             string user = turnContext.Activity.From.Name;
             string time = turnContext.Activity.LocalTimestamp.ToString();
 
-            UserDetail userDetails = new UserDetail {
+            var userDetails = new UserDetail 
+            {
                 CheckInTime = time,
                 UserName = user,
                 Longitude = longitude,
@@ -181,7 +179,7 @@ namespace AppCheckinLocation.Bots
         /// </summary>
         private Attachment GetAdaptiveCardForTaskModule()
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
                 Body = new List<AdaptiveElement>
                 {
@@ -221,7 +219,7 @@ namespace AppCheckinLocation.Bots
         /// </summary>
         private Attachment GetAdaptiveCardForUserLocation(string time, string user, double latitude, double longitude)
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
                 Body = new List<AdaptiveElement>
                 {
@@ -271,7 +269,7 @@ namespace AppCheckinLocation.Bots
         /// </summary>
         private List<Attachment> GetAdaptiveCardForUserLastCheckIn(List<UserDetail> userDetails)
         {
-            List<Attachment> attachmentList = new List<Attachment>();
+            var attachmentList = new List<Attachment>();
 
             foreach (var user in userDetails)
             {
@@ -313,7 +311,7 @@ namespace AppCheckinLocation.Bots
                     },
                 };
 
-                Attachment attachment = new Attachment()
+                var attachment = new Attachment()
                 {
                     ContentType = AdaptiveCard.ContentType,
                     Content = card,
@@ -328,13 +326,13 @@ namespace AppCheckinLocation.Bots
         // Save user details in json file.
         private async Task SaveUserDetailsAsync(ITurnContext<IInvokeActivity> turnContext, UserDetail userDetails)
         {
-            var currentUserDetail = await this._UserDetail.GetAsync(turnContext, () => new UserLocationDetail());
-            List<UserDetail> userDetailsList = new List<UserDetail>();
+            var currentUserDetail = await this._userDetailProcessor.GetAsync(turnContext, () => new UserLocationDetail());
+            var userDetailsList = new List<UserDetail>();
             if (currentUserDetail.UserDetails == null)
             {
                 userDetailsList.Add(userDetails);
                 currentUserDetail.UserDetails = userDetailsList;
-                await this._UserDetail.SetAsync(turnContext, currentUserDetail);
+                await this._userDetailProcessor.SetAsync(turnContext, currentUserDetail);
             }
             else if (currentUserDetail.UserDetails.Count == 10)
             {
@@ -342,14 +340,14 @@ namespace AppCheckinLocation.Bots
                 userDetailsList = currentUserDetail.UserDetails;
                 userDetailsList.Add(userDetails);
                 currentUserDetail.UserDetails = userDetailsList;
-                await this._UserDetail.SetAsync(turnContext, currentUserDetail);
+                await this._userDetailProcessor.SetAsync(turnContext, currentUserDetail);
             }
             else
             {
                 userDetailsList = currentUserDetail.UserDetails;
                 userDetailsList.Add(userDetails);
                 currentUserDetail.UserDetails = userDetailsList;
-                await this._UserDetail.SetAsync(turnContext, currentUserDetail);
+                await this._userDetailProcessor.SetAsync(turnContext, currentUserDetail);
             }
         }
     }
