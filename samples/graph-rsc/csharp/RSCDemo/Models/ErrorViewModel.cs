@@ -1,4 +1,7 @@
-using System;
+// <copyright file="ErrorViewModel.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
 
 namespace RSCWithGraphAPI.Models
 {

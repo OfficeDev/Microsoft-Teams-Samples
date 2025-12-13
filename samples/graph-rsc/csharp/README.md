@@ -78,7 +78,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 1) Register your app with Microsoft identity platform via the Microsoft Entra ID portal (Microsoft Entra ID app registration)
     - Your app must be registered in the Microsoft Entra ID portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2). 
-**Note** -  Make sure you have added `TeamsAppInstallation.ReadForUser.All` as Application level 
+**Note** -  Make sure you have added below permissions
+1. `TeamsAppInstallation.ReadForUser.All` as Application level 
+2. `TeamsActivity.Send` as Application level 
 
 2) Clone the repository
    ```bash

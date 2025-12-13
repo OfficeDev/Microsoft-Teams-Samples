@@ -7,3 +7,4 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:graph-rsc-csharp
 
 environmentFolderPath: ./env
+projectId: 
