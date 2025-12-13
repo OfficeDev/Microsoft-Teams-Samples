@@ -1,0 +1,108 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.5",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "M365 platform teams",
+    "websiteUrl": "${{TAB_ENDPOINT}}",
+    "privacyUrl": "${{TAB_ENDPOINT}}/index.html#/privacy",
+    "termsOfUseUrl": "${{TAB_ENDPOINT}}/index.html#/termsofuse"
+  },
+  "icons": {
+    "color": "color1.png",
+    "outline": "outline1.png"
+  },
+  "name": {
+    "short": "To Do",
+    "full": "To Do action app"
+  },
+  "description": {
+    "short": "To Do action app",
+    "full": "To Do action app"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "${{TAB_ENDPOINT}}/index.html#/config",
+      "canUpdateConfiguration": true,
+      "scopes": ["team", "groupChat"],
+      "context": [
+        "channelTab",
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel",
+        "meetingStage"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Tasks",
+      "contentUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
+      "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
+      "scopes": ["personal"]
+    }
+  ],
+  "actions": [
+    {
+      "id": "completeLinkedTask",
+      "displayName": "Mark complete",
+      "intent": "custom",
+      "description": "Test action with open intent and openPage handler",
+      "handlers": [
+        {
+          "type": "openPage",
+          "supportedObjects": {
+            "file": {
+              "extensions": ["xlsx", "doc", "docx", "pdf", "pptx", "ppt"]
+            },
+            "folder": null
+          },
+          "pageInfo": {
+            "pageId": "index",
+            "subPageId": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "addTodoTask",
+      "displayName": "Add todo task",
+      "intent": "addTo",
+      "description": "Add this file with a short note to my to do list",
+      "handlers": [
+        {
+          "type": "openDialog",
+          "supportedObjects": {
+            "file": {
+              "extensions": ["xlsx", "doc", "dot", "docx", "pdf", "pptx", "ppt"]
+            },
+            "folder": null
+          },
+          "dialogInfo": {
+            "dialogType": "url",
+            "url": "${{TAB_ENDPOINT}}/index.html#/dialogPage",
+            "width": "small",
+            "height": "large"
+          }
+        }
+      ]
+    }
+  ],
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": [
+    "${{TAB_DOMAIN}}",
+    "*tab.azurewebsites.net",
+    "statics.teams.cdn.office.net",
+    "local.teams.office.com",
+    "local.teams.office.com:9000",
+    "jaguarshark.azurewebsites.net"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}
