@@ -1,0 +1,32 @@
+{
+    "solution": {
+        "provisionSucceeded": true,
+        "teamsAppTenantId": "450d1dc7-134f-4ea2-826a-4505007caa9a",
+        "subscriptionId": "1b2e8315-bbfb-4f77-be17-dfde4cc73976",
+        "subscriptionName": "Visual Studio Enterprise Subscription",
+        "tenantId": "a7553406-d580-4f3b-aa63-010bfb9c299f",
+        "needCreateResourceGroup": true,
+        "resourceGroupName": "AzureOpenAIApp-dev-rg",
+        "location": "East US",
+        "resourceNameSuffix": "91c71e"
+    },
+    "fx-resource-appstudio": {
+        "tenantId": "450d1dc7-134f-4ea2-826a-4505007caa9a",
+        "teamsAppId": "c8d6d7f4-5abe-4a5a-ba2c-3d0999beb819"
+    },
+    "fx-resource-bot": {
+        "botId": "6786123f-f9ce-4c63-acd3-c2e4c2f92fa6",
+        "botPassword": "{{fx-resource-bot.botPassword}}",
+        "skuName": "B1",
+        "siteName": "azureopenaf36ab2bot",
+        "domain": "azureopenaf36ab2bot.azurewebsites.net",
+        "appServicePlanName": "azureopenaf36ab2bot",
+        "resourceId": "/subscriptions/1b2e8315-bbfb-4f77-be17-dfde4cc73976/resourceGroups/AzureOpenAIApp-dev-rg/providers/Microsoft.Web/sites/azureopenaf36ab2bot",
+        "siteEndpoint": "https://azureopenaf36ab2bot.azurewebsites.net"
+    },
+    "fx-resource-identity": {
+        "identityName": "azureopenaf36ab2",
+        "identityResourceId": "/subscriptions/1b2e8315-bbfb-4f77-be17-dfde4cc73976/resourceGroups/AzureOpenAIApp-dev-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/azureopenaf36ab2",
+        "identityClientId": "08b3f75d-ef42-40de-9292-78cad3eda4e8"
+    }
+}
