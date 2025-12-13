@@ -116,16 +116,23 @@ namespace CallingBotSample.Services.MicrosoftGraph
         /// <inheritdoc/>
         public Task InviteParticipant(string id, IEnumerable<IdentitySet> participants)
         {
-            var invitationParticipants = participants.Select(participant =>
+            try {
+                var invitationParticipants = participants.Select(participant =>
                 new InvitationParticipantInfo
                 {
                     Identity = participant
                 });
 
-            return graphServiceClient.Communications.Calls[id].Participants
-                .Invite(invitationParticipants, id)
-                .Request()
-                .PostAsync();
+                return graphServiceClient.Communications.Calls[id].Participants
+                    .Invite(invitationParticipants, id)
+                    .Request()
+                    .PostAsync();
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+                return null;
+            }
+            
         }
 
         /// <inheritdoc />
