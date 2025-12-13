@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "packageName": "com.contoso.consentbot",
+  "developer": {
+    "name": "Contoso",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Consent Bot",
+    "full": "Azure AD Consent Bot for Microsoft Teams"
+  },
+  "description": {
+    "short": "Azure AD Consent Bot for Microsoft Teams",
+    "full": "This sample app demonstrates how to handle user and app permissions consent for Bots in Microsoft Teams. It also demonstrates how to work with User State, allowing you to store access tokens for users in storage."
+  },
+  "icons": {
+    "outline": "contoso20x20.png",
+    "color": "contoso96x96.png"
+  },
+  "accentColor": "#60A18E",
+  "bots": [
+    {
+      "botId": "<<REGISTERED_BOT_ID>>",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [],
+  "validDomains": [
+    "<<BASE_URI_DOMAIN>>",
+    "token.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "<<REGISTERED_BOT_ID>>",
+    "resource": "api://<<BASE_URI_DOMAIN>>/botid-<<REGISTERED_BOT_ID>>"
+  }
+}

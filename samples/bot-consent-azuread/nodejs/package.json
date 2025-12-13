@@ -1,0 +1,31 @@
+{
+  "name": "msteams-nodejs-bot-consent",
+  "version": "1.0.0",
+  "description": "Microsoft Teams Bot Consent sample app written in ES6 with Bot Framework v4 SDK",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OfficeDev/msteams-samples-hello-world-nodejs.git"
+  },
+  "author": "Microsoft Corp.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OfficeDev/msteams-samples-hello-world-nodejs/issues"
+  },
+  "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
+  "dependencies": {
+    "@azure/msal-node": "^1.9.0",
+    "axios": "^0.27.2",
+    "botbuilder": "^4.16.0",
+    "config": "^1.28.1",
+    "core-js": "^2.6.11",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.2",
+    "faker": "^4.1.0",
+    "path": "^0.12.7",
+    "restify": "^8.5.1",
+    "send": "^0.17.1"
+  }
+}
