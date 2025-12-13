@@ -1,0 +1,48 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Input.Text",
+      "id": "inputid1",
+      "label": "Please enter the id #1:",
+      "isRequired": true,
+      "errorMessage": "User id is required"
+    },
+    {
+      "type": "Input.Text",
+      "id": "inputid2",
+      "label": "Please enter the id #2:",
+      "isRequired": true,
+      "errorMessage": "User id is required"
+    },
+    {
+      "type": "Input.Text",
+      "id": "inputid3",
+      "label": "Please enter the id #3:",
+      "isRequired": true,
+      "errorMessage": "User id is required"
+    },
+    {
+      "type": "Input.Text",
+      "id": "inputid4",
+      "label": "Please enter the id #4:",
+      "isRequired": true,
+      "errorMessage": "User id is required"
+    },
+    {
+      "type": "Input.Text",
+      "id": "inputid5",
+      "label": "Please enter the id #5:",
+      "isRequired": true,
+      "errorMessage": "User id is required"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}
