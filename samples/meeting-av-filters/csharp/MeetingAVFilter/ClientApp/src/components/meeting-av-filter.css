@@ -1,0 +1,42 @@
+.horizontal {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter {
+    position: relative;
+    height: 42px;
+    border-radius: 2px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    margin: 2px;
+}
+
+.selected {
+    border-color: purple;
+    background: purple;
+}
+
+.thumbnail {
+    width: 74px;
+    height: 42px;
+    border-radius: 2px;
+}
+
+#filter-half > a {
+    width: 74px;
+    height: 42px;
+    background: url(http://localhost:3000/half.png);
+}
+
+#filter-gray > a {
+    width: 74px;
+    height: 42px;
+    background: url(http://localhost:3000/gray.png);
+}
+
+a {
+    display: block;
+}

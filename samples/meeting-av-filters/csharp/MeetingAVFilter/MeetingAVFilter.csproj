@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <UserSecretsId>82c81116-057f-40bf-9bf2-2563189614e8</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\src\components\meeting-av-filter\**" />
+    <Content Remove="ClientApp\src\components\meeting-av-filter\**" />
+    <EmbeddedResource Remove="ClientApp\src\components\meeting-av-filter\**" />
+    <None Remove="ClientApp\src\components\meeting-av-filter\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AdaptiveCards" Version="2.7.2" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.18" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.18" />
+    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.14.0" />
+  </ItemGroup>
+
+    <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ClientApp\build" />
+      <Folder Include="Images\" />
+    </ItemGroup>
+
+</Project>
