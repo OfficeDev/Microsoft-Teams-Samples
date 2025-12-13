@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceBaseName": {
+        "value": "FaqBot-${{RESOURCE_SUFFIX}}"
+    },
+    "botAadAppClientId": {
+        "value": "${{BOT_ID}}"
+    },
+    "botAadAppClientSecret": {
+        "value": "${{SECRET_BOT_PASSWORD}}"
+    },
+    "webAppSKU": {
+        "value": "B1"
+    },
+    "botDisplayName": {
+        "value": "FaqBot"
+    },
+    "linuxFxVersion": {
+    "value": "PYTHON|3.11"
+    },
+    "azureOpenAIKey": {
+        "value": "${{SECRET_AZURE_OPENAI_KEY}}"
+    },
+    "azureOpenAIEndpoint": {
+        "value": "${{SECRET_AZURE_OPENAI_ENDPOINT}}"
+    },
+    "azureSearchKey": {
+    "value": "${{SECRET_AZURE_SEARCH_KEY}}"
+    },
+    "azureSearchEndpoint": {
+        "value": "${{SECRET_AZURE_SEARCH_ENDPOINT}}"
+    },
+    "azureSearchIndex": {
+        "value": "${{AZURE_SEARCH_INDEX}}"
+    },
+    "azureOpenAIModel": {
+        "value": "${{AZURE_OPENAI_MODEL}}"
+    },
+    "teamsChannelId": {
+        "value": "${{TEAMS_CHANNEL_ID}}"
+    }
+  }
+}

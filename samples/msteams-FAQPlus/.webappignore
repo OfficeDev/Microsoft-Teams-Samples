@@ -1,0 +1,9 @@
+.venv/
+.vscode/
+.env
+env/
+README.md
+teamsapp.yml
+teamsapp.local.yml
+__pycache__
+.mypy_cache

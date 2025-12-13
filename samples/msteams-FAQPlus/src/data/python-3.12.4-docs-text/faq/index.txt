@@ -1,0 +1,18 @@
+Python Frequently Asked Questions
+*********************************
+
+* General Python FAQ
+
+* Programming FAQ
+
+* Design and History FAQ
+
+* Library and Extension FAQ
+
+* Extending/Embedding FAQ
+
+* Python on Windows FAQ
+
+* Graphic User Interface FAQ
+
+* "Why is Python Installed on my Computer?" FAQ
