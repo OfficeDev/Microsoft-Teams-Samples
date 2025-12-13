@@ -75,8 +75,11 @@ public sealed class OAuthServiceClient
             {
                 { new StringContent(_oauthClientId), "client_id" },
                 { new StringContent(_oauthClientSecret), "client_secret" },
-                { new StringContent(code), "code" }
-            },
+                { new StringContent(code), "code" },
+                { new StringContent("authorization_code"),"grant_type" },
+                //registered redirect_uri "AuthEndRedirect" from appSettings.json
+                { new StringContent("AuthEndRedirect"),"redirect_uri" },
+    },
         };
         requestMessage.Headers.Add("Accept", "application/json");
         return requestMessage;
