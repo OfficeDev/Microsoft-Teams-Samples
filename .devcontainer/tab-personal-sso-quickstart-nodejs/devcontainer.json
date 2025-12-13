@@ -1,0 +1,7 @@
+{
+	"name": "tab-personal-sso-quickstart-nodejs",
+	"dockerComposeFile": ["../../docker-compose.yml"],
+	"service": "nodejs",
+	"shutdownAction": "none",
+	"workspaceFolder": "/workspace/samples/tab-personal-sso-quickstart/js"
+}

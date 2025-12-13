@@ -1,0 +1,7 @@
+{
+	"name": "msgext-link-unfurling-python",
+	"dockerComposeFile": ["../../docker-compose.yml"],
+	"service": "Python",
+	"shutdownAction": "none",
+	"workspaceFolder": "/workspace/samples/msgext-link-unfurling/python"
+}
