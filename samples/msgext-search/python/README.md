@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to create a Python Messaging Extensio4) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python`
+description: This sample demonstrates how to create a Python Messaging Extension in Microsoft Teams that allows users to perform searches and retrieve results.
 products:
 - office-teams
 - office
@@ -15,7 +15,6 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-extension-python
 ---
 
 # Teams Messaging Extensions Search
-
 
 This comprehensive Python sample provides a detailed guide on building a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) for Microsoft Teams, empowering users to conduct searches and retrieve results efficiently. By leveraging the [Bot Framework](https://dev.botframework.com), this extension enhances user interaction within Teams, demonstrating features such as search commands, message handling, and result display.
 
