@@ -4,7 +4,7 @@
 > [!IMPORTANT]
 > The **Bot Framework SDK** repository on GitHub is being archived. This project is no longer updated or maintained. Existing customers can continue to use it without disruption. The tool is no longer supported through service tickets in the Azure portal and won’t receive product updates. Support tickets for the Bot Framework SDK are **no longer serviced as of December 31, 2025**.
 >
-> **Simplify building AI-powered bots for Microsoft Teams with the new Teams SDK.** The SDK reduces boilerplate code and external dependencies while providing native AI capabilities and Teams-specific abstractions. This enables you to focus on building intelligent bot experiences without complex setup or configuration.
+> **Simplify building AI-powered bots for Microsoft Teams with the new SDK.** The SDK reduces boilerplate code and external dependencies while providing native AI capabilities and Teams-specific abstractions. This enables you to focus on building intelligent bot experiences without complex setup or configuration.
 >
 > Consider using the **Teams SDK** for a faster, streamlined development process. The Teams SDK supports C#, JavaScript, and Python. If you have an existing bot built with the Bot Framework SDK, you can update it to the Teams SDK. For details on core changes and migration steps, see [Bot Framework SDK to Teams SDK (Teams AI Library) migration guidance](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/migrations/botbuilder/overview?pivots=typescript).
 
