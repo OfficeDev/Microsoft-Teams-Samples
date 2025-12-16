@@ -1,19 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to create a Python Messaging Extensio4) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python` folder
-
-5) Act5) Activate your desired virtual environment
-
-6) Install dependencies by running ```pip install -r requivate your desired virtual environmentrements.txt``` in6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.the project folder.
-
-7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password 7) Update the `config.py` configuration for the bot to use the Mis referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)crosoft App Id and App Password from the Bot Framework 8) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Micregistration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-
-8) __*This step is specific to Teams.*__osoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
-
-9) Run your bot with `python app.py` Teams that enables users to perform searches and retrieve results seamlessly.
+description: This sample demonstrates how to create a Python Messaging Extensio4) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python`
 products:
 - office-teams
 - office
