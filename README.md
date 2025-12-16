@@ -6,7 +6,7 @@
 >
 > **Simplify building AI-powered bots for Microsoft Teams with the new Teams SDK.** The SDK reduces boilerplate code and external dependencies while providing native AI capabilities and Teams-specific abstractions. This enables you to focus on building intelligent bot experiences without complex setup or configuration.
 >
-> Consider using the **Teams SDK** for a faster, streamlined development process. The Teams SDK supports C#, JavaScript, and Python. If you have an existing bot built with the Bot Framework SDK, you can update it to the Teams SDK. For details on core changes and migration steps, see [Bot Framework SDK to Teams SDK (Teams AI Library) migration guidance](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/migrations/botbuilder/overview?pivots=typescript)
+> Consider using the **Teams SDK** for a faster, streamlined development process. The Teams SDK supports C#, JavaScript, and Python. If you have an existing bot built with the Bot Framework SDK, you can update it to the Teams SDK. For details on core changes and migration steps, see [Bot Framework SDK to Teams SDK (Teams AI Library) migration guidance](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/migrations/botbuilder/overview?pivots=typescript).
 
 ##### [Click here to find out what's new with Microsoft Teams Platform](https://docs.microsoft.com/microsoftteams/platform/whats-new)
 
