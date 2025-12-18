@@ -25,7 +25,7 @@ Once authenticated, the bot will retrieve the AI insights for your specified mee
 
 > IMPORTANT: The **OnlineMeetingAiInsight.Read.All** permission requires administrator consent. Ensure your administrator has approved this permission.
 
-> IMPORTANT: The manifest file includes "token.botframework.com" in the `validDomains` list, which is required for any bot using the Bot Framework OAuth flow.
+> IMPORTANT: The manifest file includes "token.botframework.com" in the `validDomains` list, which is required for any bot using the OAuth flow.
 
 - **Interaction with the bot**
 ![ai-insights-bot](Images/bot-meeting-ai-insights.gif)
@@ -122,10 +122,10 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     npm start
     ```
 4) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the MicrosoftAppId may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the MicrosoftAppId may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - **Zip** up the contents of the `appPackage` folder to create a `appPackage.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `appPackage.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
 **Note:**
