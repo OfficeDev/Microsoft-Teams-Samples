@@ -1,14 +1,14 @@
-# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.7/yaml.schema.json
+# yaml-language-server: $schema=https://aka.ms/m365-agents-toolkits/v1.11/yaml.schema.json
 # Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
 # Visit https://aka.ms/teamsfx-actions for details on actions
-version: v1.7
+version: v1.11
 
 provision:
   # Creates a Teams app
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: MeetingTranscription${{APP_NAME_SUFFIX}}
+      name: meetings-transcription${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
@@ -18,8 +18,9 @@ provision:
   - uses: aadApp/create
     with:
       # The Microsoft Entra application's display name
-      name: MeetingTranscription${{APP_NAME_SUFFIX}}
+      name: meetings-transcription${{APP_NAME_SUFFIX}}
       generateClientSecret: true
+      generateServicePrincipal: true
       signInAudience: AzureADMultipleOrgs
     writeToEnvironmentFile:
       # The Microsoft Entra application's client id created for bot.
@@ -29,38 +30,21 @@ provision:
       # The Microsoft Entra application's object id created for bot.
       objectId: BOT_OBJECT_ID
 
-
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ../MeetingTranscription/appsettings.json
+      target: ../meetings-transcription/appsettings.Development.json
       content:
-        MicrosoftAppId: ${{BOT_ID}}
-        MicrosoftAppPassword: ${{SECRET_BOT_PASSWORD}}
-        MicrosoftAppTenantId: ${{TEAMS_APP_TENANT_ID}}
-        AppBaseUrl: ${{BOT_ENDPOINT}}
-
-  # Generate runtime appsettings to JSON file
-  - uses: file/createOrUpdateJsonFile
-    with:
-      target: ../MeetingTranscription/appsettings.Development.json
-      content:
-        TokenValidation:
-          Audiences:
-            ClientId: ${{BOT_ID}}
-        Connections:
-          BotServiceConnection:
-            Settings:
-              AuthType: "ClientSecret"
-              AuthorityEndpoint: "https://login.microsoftonline.com/botframework.com"
-              ClientId: ${{BOT_ID}}
-              ClientSecret: ${{SECRET_BOT_PASSWORD}}
+        Teams:
+          ClientId: ${{BOT_ID}}
+          ClientSecret: ${{SECRET_BOT_PASSWORD}}
+          TenantId: ${{TEAMS_APP_TENANT_ID}}
 
   # Create or update the bot registration on dev.botframework.com
   - uses: botFramework/create
     with:
       botId: ${{BOT_ID}}
-      name: MeetingTranscription
+      name: meetings-transcription
       messagingEndpoint: ${{BOT_ENDPOINT}}/api/messages
       description: ""
       channels:
@@ -71,7 +55,6 @@ provision:
     with:
       # Path to manifest template
       manifestPath: ./appPackage/manifest.json
-
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:

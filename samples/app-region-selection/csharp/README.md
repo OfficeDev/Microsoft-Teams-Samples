@@ -27,7 +27,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 * Adaptive Cards
 
 ## Interaction with app
-![region-selection-bot ](RegionSectionApp/Images/region-selection.gif)
+![region-selection-bot ](app-region-selection/Images/region-selection.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -70,16 +70,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup NGROK
-1) Run ngrok - point to port 3978
+1) Run ngrok - point to port 5130
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
 ### 3. Register your app with Azure AD.
@@ -90,13 +90,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.Development.json.
   4. Navigate to **API Permissions**, and make sure to add the follow permissions:
    Select Add a permission
       * Select Add a permission
       * Select Microsoft Graph -\> Delegated permissions.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+      * Under **Certificates & secrets**, create a new **Client secret** and save the value. You'll need this for the `ClientSecret` in appsettings.Development.json.
 
 
 ### 4. Setup for code
@@ -121,14 +122,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - Launch Visual Studio
   - File -> Open -> Project/Solution
   - Navigate to `samples/app-region-selection/RegionSelectionApp` folder
-  - Select `RegionSelectionApp.sln` file
+  - Select `RegionSelectionApp.slnx` file
   - Press `F5` to run the project
 
- - Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword generated in Step 1 (Setup for Bot). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+ - Update the `appsettings.Development.json` configuration for the bot to use the ClientId, ClientSecret generated in Step 1 (Setup for Bot). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
  ### 5. Setup Manifest for Teams
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{TEAMS_APP_ID}} and {{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
@@ -136,22 +137,22 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-region-selection/csharp/RegionSectionApp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-region-selection/csharp/app-region-selection/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Running the sample
 
 Install the Region Selection App manifest in Microsoft Teams. @mention the region selection bot to start the conversation.
 - Bot sends an Adaptive card in chat
-![image](RegionSectionApp/Images/region-details-bot.png)
+![image](app-region-selection/Images/region-details-bot.png)
 - Select the region from the card. Bot sets the selected region and notify user in chat
-![image](RegionSectionApp/Images/region-change-bot.png)
+![image](app-region-selection/Images/region-change-bot.png)
 
 ## Interacting with Region Selection Tab
 
 - Set up the region selection app as a Tab in channel
-![image](RegionSectionApp/Images/region-config.png)
+![image](app-region-selection/Images/region-config.png)
 - Tab will display the selected region
-![image](RegionSectionApp/Images/region-details.png)
+![image](app-region-selection/Images/region-details.png)
 
 ## Deploy the bot to Azure
 
