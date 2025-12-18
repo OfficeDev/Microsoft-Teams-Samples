@@ -1,6 +1,6 @@
 {
-    "id": "${{AAD_APP_OBJECT_ID}}",
-    "appId": "${{AAD_APP_CLIENT_ID}}",
+    "id": "${{BOT_OBJECT_ID}}",
+    "appId": "${{BOT_ID}}",
     "name": "bot-meeting-ai-insights-aad",
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADandPersonalMicrosoftAccount",
@@ -20,30 +20,30 @@
     },
     "requiredResourceAccess": [
         {
-            "resourceAppId": "Microsoft Graph",
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
             "resourceAccess": [
                 {
-                    "id": "User.Read",
+                    "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
                     "type": "Scope"
                 },
                 {
-                    "id": "profile",
+                    "id": "14dad69e-099b-42c9-810b-d002981feec1",
                     "type": "Scope"
                 },
                 {
-                    "id": "openid",
+                    "id": "37f7f235-527c-4136-accd-4a02d197296e",
                     "type": "Scope"
                 },
                 {
-                    "id": "email",
+                    "id": "64a6cdd6-aab1-4aaf-94b8-3cc8405e90d0",
                     "type": "Scope"
                 },
                 {
-                    "id": "OnlineMeetings.ReadWrite",
+                    "id": "a65f2972-a4f8-4f5e-afd7-69ccb046d5dc",
                     "type": "Scope"
                 },
                 {
-                    "id": "OnlineMeetings.Read",
+                    "id": "9be106e1-f4e3-4df5-bdff-e4bc531cbe43",
                     "type": "Scope"
                 },
                 {
@@ -61,7 +61,7 @@
         {
             "adminConsentDescription": "Allows Teams to call the app's web APIs as the current user.",
             "adminConsentDisplayName": "Teams can access app's web APIs",
-            "id": "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}",
+            "id": "${{BOT_ID}}",
             "isEnabled": true,
             "type": "User",
             "userConsentDescription": "Enable Teams to call this app's web APIs with the same rights that you have",
@@ -73,59 +73,59 @@
         {
             "appId": "1fec8e78-bce4-4aaf-ab1b-5451cc387264",
             "permissionIds": [
-                "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}"
+                "${{BOT_ID}}"
             ]
         },
         {
             "appId": "5e3ce6c0-2b1f-4285-8d4b-75ee78787346",
             "permissionIds": [
-                "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}"
+                "${{BOT_ID}}"
             ]
         },
         {
             "appId": "d3590ed6-52b3-4102-aeff-aad2292ab01c",
             "permissionIds": [
-                "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}"
+                "${{BOT_ID}}"
             ]
         },
         {
             "appId": "00000002-0000-0ff1-ce00-000000000000",
             "permissionIds": [
-                "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}"
+                "${{BOT_ID}}"
             ]
         },
         {
             "appId": "bc59ab01-8403-45c6-8796-ac3ef710b3e3",
             "permissionIds": [
-                "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}"
+                "${{BOT_ID}}"
             ]
         },
         {
             "appId": "0ec893e0-5785-4de6-99da-4ed124e5296c",
             "permissionIds": [
-                "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}"
+                "${{BOT_ID}}"
             ]
         },
         {
             "appId": "4765445b-32c6-49b0-83e6-1d93765276ca",
             "permissionIds": [
-                "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}"
+                "${{BOT_ID}}"
             ]
         },
         {
             "appId": "4345a7b9-9a63-4910-a426-35363201d503",
             "permissionIds": [
-                "${{AAD_APP_ACCESS_AS_USER_PERMISSION_ID}}"
+                "${{BOT_ID}}"
             ]
         }
     ],
     "identifierUris":[
-        "api://botid-${{AAD_APP_CLIENT_ID}}"
+        "api://botid-${{BOT_ID}}"
     ],
     "replyUrlsWithType":[
         {
-          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
-          "type": "Web"
+            "url": "https://${{BOT_DOMAIN}}/auth-end.html",
+            "type": "Web"
         },
         {
 			"url": "https://token.botframework.com/.auth/web/redirect",

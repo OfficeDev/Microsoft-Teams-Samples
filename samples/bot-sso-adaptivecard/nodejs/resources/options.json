@@ -1,6 +1,6 @@
-﻿{
+{
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "appId": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "115af9ce-5373-4f85-9861-18e289e4dfc4",
   "version": "1.5",
   "type": "AdaptiveCard",
   "body": [
