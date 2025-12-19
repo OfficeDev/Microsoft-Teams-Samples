@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Bot.Core.Compat;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -24,6 +25,7 @@ namespace Microsoft.BotBuilderSamples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCompatAdapter();
             services.AddHttpClient().AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;

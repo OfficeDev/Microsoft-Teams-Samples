@@ -3,15 +3,16 @@
 
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Bot.Core;
+using Microsoft.Bot.Core.Compat;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
 {
-    public class AdapterWithErrorHandler : CloudAdapter
+    public class AdapterWithErrorHandler : CompatAdapter
     {
-        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger)
-            : base(auth, logger)
+        public AdapterWithErrorHandler(BotApplication botApp, CompatBotAdapter botAdapter, ILogger<IBotFrameworkHttpAdapter> logger)
+            : base(botApp, botAdapter)
         {
             OnTurnError = async (turnContext, exception) =>
             {
