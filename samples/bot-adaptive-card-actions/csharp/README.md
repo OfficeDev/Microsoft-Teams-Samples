@@ -64,16 +64,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-2. Run ngrok - point to port 5130
+2. Run ngrok - point to port 3978
 
    ```bash
-   ngrok http 5130 --host-header="localhost:5130"
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 5130 --allow-anonymous
+   devtunnel host -p 3978 --allow-anonymous
    ```
 
 3. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -110,7 +110,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Modify the `/appsettings.Development.json` and fill in the following details:
      - `ClientId` - Generated from Step 1 is the application app id
      - `ClientSecret` - Generated from Step 1, also referred to as Client secret
-     - `BotType` - Set the bot type (e.g., "MultiTenant" or "SingleTenant")
      - `TenantId` - Your Microsoft 365 tenant ID from Step 3
   - Press `F5` to run the project
      

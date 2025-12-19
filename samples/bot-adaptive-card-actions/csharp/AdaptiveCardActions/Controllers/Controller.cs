@@ -6,8 +6,6 @@ using Microsoft.Teams.Apps;
 using Microsoft.Teams.Apps.Activities;
 using Microsoft.Teams.Apps.Annotations;
 using Microsoft.Teams.Cards;
-using AdaptiveCards.Templating;
-using System.Text.RegularExpressions;
 using Microsoft.Teams.Api;
 using Microsoft.Teams.Api.Cards;
 
@@ -34,25 +32,23 @@ namespace AdaptiveCardActions.Controllers
 
             if (activity.Text != null)
             {
-                // Remove bot mention from the message text if present
-                var text = RemoveBotMention(activity.Text);
-                var normalizedText = text.Trim().ToLowerInvariant();
+                var normalizedText = activity.Text.Trim().ToLowerInvariant();
 
                 if (normalizedText.Contains("card actions"))
                 {
-                    await SendAdaptiveCardAsync(client, "AdaptiveCardActions.json", activity.From?.Name);
+                    await SendAdaptiveCardActionsAsync(client);
                 }
                 else if (normalizedText.Contains("suggested actions"))
                 {
                     // Respond to the user before sending suggested actions
                     await client.Send("Please Enter a color from the suggested action choices");
-                    await SendAdaptiveCardAsync(client, "SuggestedActions.json", activity.From?.Name);
+                    await SendSuggestedActionsCardAsync(client);
                     // Send native Teams SDK suggested actions
                     await SendSuggestedActionsAsync(client, log);
                 }
                 else if (normalizedText.Contains("togglevisibility"))
                 {
-                    await SendAdaptiveCardAsync(client, "ToggleVisibleCard.json", activity.From?.Name);
+                    await SendToggleVisibilityCardAsync(client);
                 }
                 else if (normalizedText.Contains("red") || normalizedText.Contains("blue") || normalizedText.Contains("yellow"))
                 {
@@ -98,53 +94,155 @@ namespace AdaptiveCardActions.Controllers
             return colorResponses.TryGetValue(text, out var response) ? response : "Please select a color from the suggested action choices";
         }
 
-        // Loads and sends an adaptive card from the specified JSON file
-        private async Task SendAdaptiveCardAsync(IContext.Client client, string cardFileName, string userName = null)
+        // Sends the Adaptive Card Actions card using Microsoft.Teams.Cards API
+        private async Task SendAdaptiveCardActionsAsync(IContext.Client client)
         {
-            try
+            var cardJson = """
             {
-                string cardPath = Path.Combine(".", "Cards", cardFileName);
-                var adaptiveCardJson = await GetAdaptiveCardAsync(cardPath, userName);
-                
-                // Deserialize the card JSON into an AdaptiveCard using the provided static method
-                var adaptiveCard = AdaptiveCard.Deserialize(adaptiveCardJson);
-
-                if (adaptiveCard == null)
+              "type": "AdaptiveCard",
+              "version": "1.0",
+              "body": [
                 {
-                    await client.Send("Error: Failed to deserialize adaptive card.");
-                    return;
+                  "type": "TextBlock",
+                  "text": "Adaptive Card Actions"
                 }
+              ],
+              "actions": [
+                {
+                  "type": "Action.OpenUrl",
+                  "title": "Action Open URL",
+                  "url": "https://adaptivecards.io"
+                },
+                {
+                  "type": "Action.ShowCard",
+                  "title": "Action Submit",
+                  "card": {
+                    "type": "AdaptiveCard",
+                    "version": "1.5",
+                    "body": [
+                      {
+                        "type": "Input.Text",
+                        "id": "name",
+                        "label": "Please enter your name:",
+                        "isRequired": true,
+                        "errorMessage": "Name is required"
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "Action.Submit",
+                        "title": "Submit"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "Action.ShowCard",
+                  "title": "Action ShowCard",
+                  "card": {
+                    "type": "AdaptiveCard",
+                    "version": "1.0",
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "text": "This card's action will show another card"
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "Action.ShowCard",
+                        "title": "Action.ShowCard",
+                        "card": {
+                          "type": "AdaptiveCard",
+                          "body": [
+                            {
+                              "type": "TextBlock",
+                              "text": "Welcome To New Card"
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": "Action.Submit",
+                              "title": "Click Me",
+                              "data": {
+                                "value": "Button has Clicked"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+            """;
 
-                // Send the adaptive card using the correct method
-                await client.Send(adaptiveCard);
-            }
-            catch (Exception ex)
-            {
-                await client.Send($"Error sending card: {ex.Message}");
-            }
+            var card = AdaptiveCard.Deserialize(cardJson);
+            await client.Send(card);
         }
 
-        // Reads adaptive card template and expands it with user data
-        private async Task<string> GetAdaptiveCardAsync(string filepath, string name = null)
+        // Sends the Suggested Actions card using Microsoft.Teams.Cards API
+        private async Task SendSuggestedActionsCardAsync(IContext.Client client)
         {
-            var adaptiveCardJson = await File.ReadAllTextAsync(filepath);
-            var template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var payloadData = new
+            var cardJson = """
             {
-                createdBy = name ?? "User"
-            };
+              "type": "AdaptiveCard",
+              "version": "1.0",
+              "body": [
+                {
+                  "type": "TextBlock",
+                  "text": "**Welcome to bot Suggested actions**"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "please use below commands, to get response form the bot."
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "- Red \r- Blue \r - Yellow",
+                  "wrap": true
+                }
+              ]
+            }
+            """;
 
-            return template.Expand(payloadData);
+            var card = AdaptiveCard.Deserialize(cardJson);
+            await client.Send(card);
         }
 
-        /// <summary>
-        /// Removes bot mention from the message text.
-        /// </summary>
-        private string RemoveBotMention(string text)
+        // Sends the Toggle Visibility card using Microsoft.Teams.Cards API
+        private async Task SendToggleVisibilityCardAsync(IContext.Client client)
         {
-            // Remove @BotName mentions using regex
-            var mentionRegex = new Regex(@"<at[^>]*>.*?</at>\s*", RegexOptions.IgnoreCase);
-            return mentionRegex.Replace(text, "").Trim();
+            var cardJson = """
+            {
+              "type": "AdaptiveCard",
+              "version": "1.0",
+              "body": [
+                {
+                  "type": "TextBlock",
+                  "text": "**Action.ToggleVisibility example**: click the button to show or hide a welcome message"
+                },
+                {
+                  "type": "TextBlock",
+                  "id": "helloWorld",
+                  "isVisible": false,
+                  "text": "**Hello World!**",
+                  "size": "extraLarge"
+                }
+              ],
+              "actions": [
+                {
+                  "type": "Action.ToggleVisibility",
+                  "title": "Click me!",
+                  "targetElements": [ "helloWorld" ]
+                }
+              ]
+            }
+            """;
+
+            var card = AdaptiveCard.Deserialize(cardJson);
+            await client.Send(card);
         }
 
         /// <summary>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>14.0</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,21 +12,6 @@
     <PackageReference Include="Microsoft.Teams.Apps" Version="2.0.*" />
     <PackageReference Include="Microsoft.Teams.Plugins.AspNetCore" Version="2.0.*" />
     <PackageReference Include="Microsoft.Teams.Common" Version="2.0.*" />
-    <PackageReference Include="AdaptiveCards.Templating" Version="1.6.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <!-- Exclude old Bot Builder files from compilation -->
-  <ItemGroup>
-    <Compile Remove="csharp\**" />
-    <Content Remove="csharp\**" />
-    <EmbeddedResource Remove="csharp\**" />
-    <None Remove="csharp\**" />
-  </ItemGroup>
-
-  <!-- Exclude generated PolySharp files -->
-  <ItemGroup>
-    <Compile Remove="obj\**\PolySharp.SourceGenerators\**\*.g.cs" />
   </ItemGroup>
 
   <!-- Exclude local settings from publish -->
@@ -43,10 +28,4 @@
     </Content>
   </ItemGroup>
 
-  <!-- Include Cards folder in output -->
-  <ItemGroup>
-    <None Include="Cards\**\*.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>
