@@ -80,7 +80,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 ],
                 new ChatCompletionOptions()
                 {
-                    Temperature = (float)0.7,
+                    //Temperature = (float)0.7,
                     FrequencyPenalty = (float)0,
                     PresencePenalty = (float)0,
                 },
