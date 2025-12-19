@@ -50,7 +50,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Manually update the `.env` configuration only for `UserId` at line 5: `UserId=<<Granting-Policy-User-Id>>`. The screenshot below shows that ObjectId corresponds to UserId.
+1. Manually update the `.localConfigs` configuration only for `UserId` at line 5: `UserId=<<Granting-Policy-User-Id>>`. The screenshot below shows that ObjectId corresponds to UserId.
 ![User Id](Images/UserID.png)
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
@@ -73,11 +73,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   -  When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to  **Multiple organizations**.
 
-  - Navigate to **API Permissions**, and make sure to add the follow permissions:
-    * Select Add a permission
-    * Select Microsoft Graph -> Delegated permissions.
-    * `User.Read` (enabled by default)
-    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
   - On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "Never". Click "Add".
@@ -137,7 +132,7 @@ Click on Add Permissions to commit your changes.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-   - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 1 , the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 1, AppBaseUrl is the URL that you get in step 3 after running the tunnel, UserId of the user used while granting the policy in step 5).
+   - Update the `.localConfigs` configuration for the bot to use the `CLIENT_ID` and `CLIENT_SECRET` and `CLIENT_PASSWORD` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 1 , the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 1, AppBaseUrl is the URL that you get in step 3 after running the tunnel, UserId of the user used while granting the policy in step 5).
 
    - Update UserId `UserId=<<Granting-Policy-User-Id>>`. The screenshot below shows that ObjectId corresponds to UserId.
 
@@ -159,22 +154,21 @@ Click on Add Permissions to commit your changes.
 
 5. Allow applications to access online meetings on behalf of a user
    - Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
-  - **Note**: Copy the User Id you used to granting the policy. You need while configuring the .env file.
+  - **Note**: Copy the User Id you used to granting the policy. You need while configuring the .localConfigs file.
   ![Policy](Images/Policy.png)
 
 6. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-transcription/nodejs/index.js#L50) line and put your debugger for local debug.
     
 **NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
 
