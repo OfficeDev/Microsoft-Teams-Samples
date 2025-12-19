@@ -1,0 +1,84 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "https://${{BOT_DOMAIN}}",
+        "privacyUrl": "https://${{BOT_DOMAIN}}/termofuse",
+        "termsOfUseUrl": "https://${{BOT_DOMAIN}}/privacy"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "AC Loop Component",
+        "full": "Adaptive Card based loop components."
+    },
+    "description": {
+        "short": "Messaging Extension with adaptive card-based loop components functionality",
+        "full": "This sample demonstrates a Node.js Messaging Extension for Microsoft Teams that utilizes adaptive card-based loop components, enabling link unfurling and dynamic interactions within the compose area."
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false
+        }
+    ],
+    "composeExtensions": [
+        {
+            "botId": "${{BOT_ID}}",
+            "commands": [
+                {
+                    "id": "searchQuery",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Messaging extension with adaptive card-based loop components functionality",
+                    "title": "Search",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "searchQuery",
+                            "title": "Search Query",
+                            "description": "Messaging extension with adaptive card-based loop components functionality",
+                            "inputType": "text"
+                        }
+                    ]
+                }
+            ],
+            "messageHandlers": [
+                {
+                    "type": "link",
+                    "value": {
+                        "domains": [
+                            "${{BOT_DOMAIN}}",
+                            "*.github.com/OfficeDev/Microsoft-Teams-Samples/tree/main",
+                            "<<Your Tunnel Domain>>"
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "${{BOT_DOMAIN}}",
+        "<<Your Tunnel Domain>>"
+    ]
+}
