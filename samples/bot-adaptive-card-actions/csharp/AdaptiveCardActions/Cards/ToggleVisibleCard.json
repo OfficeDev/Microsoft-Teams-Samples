@@ -5,7 +5,7 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "**Action.ToggleVisibility example**: click the button to show or hide a welcome message"
+      "text": "Click the button to show or hide the message!"
     },
     {
       "type": "TextBlock",

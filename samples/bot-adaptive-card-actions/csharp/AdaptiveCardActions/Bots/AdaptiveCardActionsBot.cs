@@ -9,7 +9,6 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
 using AdaptiveCards.Templating;
-using System;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -18,7 +17,11 @@ namespace Microsoft.BotBuilderSamples
     // can tap to provide input. 
     public class AdaptiveCardActionsBot : ActivityHandler
     {
-        private const string CommandString = "Please use one of these commands: **Card Actions** for Adaptive Card Actions, **Suggested Actions** for Bot Suggested Actions and **ToggleVisibility** for Action ToggleVisible Card";
+        private const string CommandString =
+    "Please use one of these commands:\n" +
+    "- **Card Actions** for Adaptive Card Actions\n" +
+    "- **Suggested Actions** for Bot Suggested Actions\n" +
+    "- **ToggleVisibility** for Action.ToggleVisibility card";
 
         /// <summary>
         /// provide logic for when members other than the bot join the conversation
@@ -50,7 +53,7 @@ namespace Microsoft.BotBuilderSamples
                 else if (text.Contains("suggested actions"))
                 {
                     // Respond to the user.
-                    await turnContext.SendActivityAsync("Please Enter a color from the suggested action choices", cancellationToken: cancellationToken);
+                    await turnContext.SendActivityAsync("Please enter a color from the Suggested Action Choices", cancellationToken: cancellationToken);
                     await SendAdaptiveCardAsync(turnContext, cancellationToken, "SuggestedActions.json");
                     // Sends a suggested action card
                     await SendSuggestedActionsAsync(turnContext, cancellationToken);
@@ -63,7 +66,6 @@ namespace Microsoft.BotBuilderSamples
                 {
                     var responseText = ProcessInput(text);
                     await turnContext.SendActivityAsync(responseText, cancellationToken: cancellationToken);
-                    await SendSuggestedActionsAsync(turnContext, cancellationToken);
                 }
                 else
                 {
@@ -78,7 +80,7 @@ namespace Microsoft.BotBuilderSamples
         /// </summary>
         private static string ProcessInput(string text)
         {
-            const string colorText = "is the best color, I agree.";
+            const string colorText = "is a great color, I agree.";
             var colorResponses = new Dictionary<string, string>
                 {
                     { "red", $"Red {colorText}" },
@@ -86,7 +88,7 @@ namespace Microsoft.BotBuilderSamples
                     { "blue", $"Blue {colorText}" }
                 };
 
-            return colorResponses.TryGetValue(text, out var response) ? response : "Please select a color from the suggested action choices";
+            return colorResponses.TryGetValue(text, out var response) ? response : "Please select a color from the Suggested Action Choices";
         }
 
         /// <summary>

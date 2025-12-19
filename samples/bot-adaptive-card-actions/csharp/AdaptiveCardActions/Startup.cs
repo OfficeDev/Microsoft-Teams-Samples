@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Core.Compat;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -23,6 +24,8 @@ namespace Microsoft.BotBuilderSamples
         {
             // Add HTTP client and controllers with NewtonsoftJson support
             services.AddHttpClient().AddControllers().AddNewtonsoftJson();
+
+            services.AddCompatAdapter();
 
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();

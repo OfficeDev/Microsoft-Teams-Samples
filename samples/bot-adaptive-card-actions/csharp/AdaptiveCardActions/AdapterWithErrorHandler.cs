@@ -6,15 +6,17 @@ using System.Net.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
+using Microsoft.Bot.Core;
+using Microsoft.Bot.Core.Compat;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
 {
-    public class AdapterWithErrorHandler : CloudAdapter
+    public class AdapterWithErrorHandler : CompatAdapter
     {
-        public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = default)
-            : base(configuration, httpClientFactory, logger)
+        public AdapterWithErrorHandler(BotApplication app, CompatBotAdapter botAdapter, IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = default)
+            : base(app, botAdapter)
         {
             OnTurnError = async (turnContext, exception) =>
             {
