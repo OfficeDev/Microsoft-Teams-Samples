@@ -2,6 +2,7 @@ const { App } = require("@microsoft/teams.apps");
 const { LocalStorage } = require("@microsoft/teams.common");
 const { ConsoleLogger } = require("@microsoft/teams.common/logging");
 const { Client } = require("@microsoft/microsoft-graph-client");
+const { AdaptiveCard, TextBlock, OpenUrlAction } = require("@microsoft/teams.cards");
 
 // Create storage for conversation history
 const storage = new LocalStorage();
@@ -11,8 +12,7 @@ const app = new App({
   storage,
   oauth: {
     defaultConnectionName: process.env.CONNECTION_NAME,
-  },
-  logger: new ConsoleLogger("graph-file-fetch", { level: "debug" }),
+  }
 });
 
 app.on("install.add", async ({ send }) => {
@@ -84,36 +84,21 @@ app.on('message', async ({ send, activity, isSignedIn }) => {
         }
 
         if (attachmentUrl) {
-          // Create an Adaptive Card with a download button
-          const adaptiveCard = {
-            type: 'AdaptiveCard',
-            version: '1.4',
-            body: [
-              {
-                type: 'TextBlock',
-                text: 'Download File',
-                weight: 'Bolder',
-                size: 'Medium'
-              }
-            ],
-            actions: [
-              {
-                type: 'Action.OpenUrl',
-                title: 'Download',
-                url: attachmentUrl
-              }
-            ]
-          };
+          // Create an Adaptive Card with a download button using @microsoft/teams.cards
+          const textBlock = new TextBlock();
+          textBlock.text = "Download File";
+          textBlock.weight = "Bolder";
+          textBlock.size = "Medium";
 
-          await send({
-            type: 'message',
-            attachments: [
-              {
-                contentType: 'application/vnd.microsoft.card.adaptive',
-                content: adaptiveCard
-              }
-            ]
-          });
+          const openUrlAction = new OpenUrlAction();
+          openUrlAction.title = "Download";
+          openUrlAction.url = attachmentUrl;
+
+          const adaptiveCard = new AdaptiveCard();
+          adaptiveCard.body = [textBlock];
+          adaptiveCard.actions = [openUrlAction];
+
+          await send(adaptiveCard);
         } else {
           await send('No attachments found in the message.');
         }

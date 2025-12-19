@@ -12,7 +12,6 @@ const app = new App({
   oauth: {
     defaultConnectionName: process.env.CONNECTION_NAME || "oauthbotsetting",
   },
-  logger: new ConsoleLogger("bot-teams-auth", { level: "debug" }),
 });
 
 app.on("install.add", async ({ send }) => {
