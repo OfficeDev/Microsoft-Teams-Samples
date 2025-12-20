@@ -163,6 +163,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ![Logout](sso_media/6.Logout.png)
 
+**Group Chat auth card**
+
+![GroupChat](sso_media/7.GroupChatAuthCard.png)
+
+**Post auth card**
+
+![GroupChat](sso_media/8.PostOauth.png)
+
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
 
 ## Further reading
