@@ -77,17 +77,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
-3. Setup NGROK
- - Run ngrok - point to port 5130
+3. Setup dev tunnel - point to port 3978
 
-    ```bash
-    ngrok http 5130 --host-header="localhost:5130"
-    ```
-
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+   Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 5130 --allow-anonymous
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+   Alternatively, you can also use ngrok:
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
    ```
 
 4. Setup for code
