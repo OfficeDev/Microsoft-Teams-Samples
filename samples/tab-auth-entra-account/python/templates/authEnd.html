@@ -1,0 +1,32 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auth End</title>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <script>
+        (async () => {
+            await microsoftTeams.app.initialize();
+
+            const idToken = '{{ idToken }}';
+            const accessToken = '{{ accessToken }}';
+
+            if (idToken && idToken !== 'undefined') {
+                const tokenResult = {
+                    idToken: idToken,
+                    accessToken: accessToken
+                };
+                microsoftTeams.authentication.notifySuccess(JSON.stringify(tokenResult));
+            } else {
+                microsoftTeams.authentication.notifyFailure("No token found in server response.");
+            }
+        })();
+    </script>
+</body>
+</html>

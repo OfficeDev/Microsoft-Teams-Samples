@@ -1,0 +1,21 @@
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env.*.user
+
+# Build output
+dist/
+build/
+
+# TeamsFx files
+.localConfigs
+appManifest/build
+
+# Misc
+.DS_Store
+*.zip
