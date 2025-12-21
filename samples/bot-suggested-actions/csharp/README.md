@@ -78,17 +78,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
- - Run ngrok - point to port 5130
+3. Setup dev tunnel - point to port 3978
+
+   Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   ngrok http 5130 --host-header="localhost:5130"
-   ```  
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+   Alternatively, you can also use ngrok:
 
    ```bash
-   devtunnel host -p 5130 --allow-anonymous
+   ngrok http 3978 --host-header="localhost:3978"
    ```
 
 4. Setup for code
@@ -101,7 +102,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
      - `{{Teams:ClientId}}` - Generated from Step 1.3, the Application (client) ID
      - `{{Teams:ClientSecret}}` - Generated from Step 2, also referred to as Client secret/App password
      - `{{Teams:TenantId}}` - Generated from Step 1.3, the Directory (tenant) ID
-     - `{{Teams:BotType}}` - Set to "MultiTenant" for multi-tenant bots or "SingleTenant" for single-tenant bots
    
    - In a terminal, navigate to `samples/bot-suggested-actions/csharp`
 
@@ -124,7 +124,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
      
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{TEAMS_APP_ID}} and {{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 

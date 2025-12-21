@@ -4,7 +4,7 @@
     "Microsoft 365 Agents Playground": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5130",
+      "applicationUrl": "http://localhost:3978",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Playground",
         "TEAMSFX_NOTIFICATION_STORE_FILENAME": ".notification.playgroundstore.json",
@@ -16,7 +16,7 @@
     "Start Project": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5130",
+      "applicationUrl": "http://localhost:3978",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
