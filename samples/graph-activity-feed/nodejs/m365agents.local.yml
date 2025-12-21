@@ -59,13 +59,11 @@ provision:
       # Path to manifest template
       manifestPath: ./appManifest/manifest.json
 
-  # Build Teams app package with latest env value
-  - uses: teamsApp/zipAppPackage
+  # Build Teams app package manually to ensure all icons are included
+  - uses: cli/runNpmCommand
     with:
-      # Path to manifest template
-      manifestPath: ./appManifest/manifest.json
-      outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
+      workingDirectory: .
+      args: run build:app-package
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
