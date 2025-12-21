@@ -27,16 +27,12 @@ namespace Bot_configuration.Controllers
         [Conversation.MembersAdded]
         public async Task OnMembersAdded([Context] ConversationUpdateActivity activity, [Context] IContext.Client client, [Context] Microsoft.Teams.Common.Logging.ILogger log)
         {
-            log.Info("Members added to conversation");
-
             const string imagePath = "Images/configbutton.png";
             string imageData = string.Empty;
-
             if (File.Exists(imagePath))
             {
                 imageData = Convert.ToBase64String(File.ReadAllBytes(imagePath));
             }
-
             var card = new Microsoft.Teams.Cards.AdaptiveCard
             {
                 Body = new List<CardElement>
@@ -49,12 +45,10 @@ namespace Bot_configuration.Controllers
                     }
                 }
             };
-
             if (!string.IsNullOrEmpty(imageData))
             {
                 card.Body.Add(new Image($"data:image/png;base64,{imageData}"));
             }
-
             await client.Send(card);
         }
 
@@ -67,9 +61,6 @@ namespace Bot_configuration.Controllers
             if (!string.IsNullOrEmpty(activity.Text))
             {
                 var text = activity.Text.ToLower().Trim();
-                
-                log.Info($"Received message: {activity.Text}");
-
                 if (text == "chosen flow" || text.Contains("chosen flow"))
                 {
                     var response = string.IsNullOrEmpty(_chosenFlow) 
@@ -96,8 +87,6 @@ namespace Bot_configuration.Controllers
         [Invoke("config/fetch")]
         public object OnConfigFetch([Context] InvokeActivity activity, [Context] Microsoft.Teams.Common.Logging.ILogger log)
         {
-            log.Info("Config fetch received - showing auth dialog");
-
             return new
             {
                 config = new
@@ -126,25 +115,18 @@ namespace Bot_configuration.Controllers
         [Invoke("config/submit")]
         public async Task<object> OnConfigSubmit([Context] InvokeActivity activity, [Context] IContext.Client client, [Context] Microsoft.Teams.Common.Logging.ILogger log)
         {
-            log.Info("Config submit received");
-
             try
             {
                 if (activity.Value != null)
                 {
                     var jsonString = JsonSerializer.Serialize(activity.Value);
-                    log.Info($"Configuration data: {jsonString}");
-
                     var valueElement = JsonSerializer.Deserialize<JsonElement>(jsonString);
                     if (valueElement.TryGetProperty("flow", out var flowProperty))
                     {
                         _chosenFlow = flowProperty.GetString() ?? string.Empty;
-                        log.Info($"Configuration updated to: {_chosenFlow}");
                     }
                 }
-
                 await client.Send("✅ You have chosen to finish setting up bot");
-
                 return new
                 {
                     config = new
