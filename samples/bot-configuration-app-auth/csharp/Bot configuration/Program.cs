@@ -1,38 +1,37 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-//
-// Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.6.2
 
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Bot_configuration;
+using Bot_configuration.Controllers;
+using Azure.Core;
+using Azure.Identity;
+using Microsoft.Teams.Api.Auth;
+using Microsoft.Teams.Apps;
+using Microsoft.Teams.Apps.Extensions;
+using Microsoft.Teams.Common.Http;
+using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 
-namespace Microsoft.Teams.Samples.HelloWorld.Web
-{
-    /// <summary>
-    /// The Program class is the entry point of the application.
-    /// </summary>
-    public class Program
-    {
-        /// <summary>
-        /// The main entry point of the application.
-        /// </summary>
-        /// <param name="args">The command-line arguments.</param>
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+// Create web application builder and load configuration
+var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration.Get<ConfigOptions>();
 
-        /// <summary>
-        /// Creates the host builder.
-        /// </summary>
-        /// <param name="args">The command-line arguments.</param>
-        /// <returns>The configured host builder.</returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+// Create Teams app builder
+var appBuilder = App.Builder();
+
+// Register controller and configure Teams services
+builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<Controller>();
+builder.AddTeams(appBuilder);
+
+// Build and run the application
+var app = builder.Build();
+
+app.UseStaticFiles();
+app.UseRouting();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseTeams();
+app.Run();

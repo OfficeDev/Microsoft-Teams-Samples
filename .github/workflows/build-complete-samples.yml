@@ -460,9 +460,9 @@ jobs:
               name: 'bot-configuration-app'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-configuration-app-auth/csharp/Bot configuration/Bot Configuration.csproj'
+            - project_path: 'samples/bot-configuration-app-auth/csharp/Bot configuration/Bot configuration.csproj'
               name: 'bot-configuration-app-auth'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/app-HR-talent/csharp/src/TeamsTalentMgmtAppV6.csproj'
               name: 'app-HR-talent'
