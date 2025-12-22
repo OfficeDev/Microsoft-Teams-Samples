@@ -110,11 +110,24 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    
 **This step is specific to Teams:**
 
-- **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- **Edit** the `manifest.json` file in the `appManifest` folder to replace the `{{TEAMS_APP_ID}}` placeholder. 
+  Use a GUID, such as the Microsoft Entra application ID for the app registered in Azure Active Directory.
 
-- **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+- **Edit** the manifest.json to replace `{{AAD_APP_CLIENT_ID}}` with your Microsoft Entra application ID for the app registered in Azure Active Directory.
 
-- **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+- **Edit**  the manifest.json to replace `{{TAB_DOMAIN}}` with your app's base domain.
+For example, if you're using ngrok, and the URL is `https://1234.ngrok-free.app`, then the domain is `1234.ngrok-free.app`.
+
+- **Edit** the webApplicationInfo.nestedAppAuthInfo section of the manifest, make sure the following structure is present to enable **Nested App Authentication (NAA).** Set the claims field to specify client capabilities (for example, CAE support). Do not use an empty string (""). If no capabilities are required, use an empty object ({}).
+   ```bash
+    "nestedAppAuthInfo": [
+    {
+      "redirectUri": "brk-multihub://${{TAB_DOMAIN}}",
+      "scopes": ["openid", "profile", "offline_access"],
+      "claims": "{\"access_token\":{\"xms_cc\":{\"values\":[\"CP1\"]}}}"
+    }
+    ```
+- **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
