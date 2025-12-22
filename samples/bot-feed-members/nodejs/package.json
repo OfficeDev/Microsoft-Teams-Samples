@@ -1,38 +1,31 @@
 {
-    "name": "teams-bot",
+    "name": "botfeedmembers",
     "version": "1.0.0",
-    "description": "Bot Builder v4 Bot Teams sample",
+    "msteams": {
+      "teamsAppId": null
+    },
+    "description": "Microsoft 365 Agents Toolkit member management bot sample using Teams AI SDK v2",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",
     "scripts": {
-        "dev:teamsfx": "npm run dev",
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
         "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
         "build": "node build.js",
-        "lint": "eslint .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
-    },
     "dependencies": {
-        "adaptive-expressions": "^4.18.0",
-        "adaptivecards-templating": "^2.3.1",
-        "botbuilder": "^4.20.0",
-        "dotenv": "^8.2.0",
-        "restify": "^10.0.0"
+        "@azure/identity": "^4.11.1",
+        "@microsoft/teams.api": "^2.0.0",
+        "@microsoft/teams.apps": "^2.0.0",
+        "@microsoft/teams.common": "^2.0.0",
+        "dotenv": "^17.2.3"
     },
     "devDependencies": {
-        "eslint": "^7.0.0",
-        "eslint-config-standard": "^14.1.1",
-        "eslint-plugin-import": "^2.20.2",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^4.2.1",
-        "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "~2.0.4",
+        "env-cmd": "^10.1.0",
+        "nodemon": "^3.1.10",
         "esbuild": "^0.18.1"
     }
 }

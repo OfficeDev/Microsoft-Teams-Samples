@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-n
 ---
 # People picker control in Adaptive Cards
 
-This sample app demonstrates how to utilize the people picker control on Adaptive Cards in Microsoft Teams, enabling users to select team members directly within a bot's response. The bot integrates with the Teams platform, supporting adaptive card functionalities, and allows for local testing with tools like ngrok or dev tunnels, as well as deployment to Azure.
+This sample app demonstrates how to utilize the people picker control on Adaptive Cards in Microsoft Teams, enabling users to select team members directly within a bot's response. The bot integrates with the Teams platform using Teams SDK, supporting adaptive card functionalities, and allows for local testing with tools like ngrok or dev tunnels, as well as deployment to Azure.
 
 Use the bot command `peoplepickercard` to get the card with people picker control
 
@@ -82,18 +82,27 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 3) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
-  A) Select **New Registration** and on the *register an application page*, set following values:
-      * Set **name** to your app name.
-      * Choose the **supported account types** (any account type will work)
-      * Leave **Redirect URI** empty.
-      * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-  C) Navigate to **API Permissions**, and make sure to add the following permissions:
-   Select Add a permission
-      * Select Add a permission
-      * Select Microsoft Graph -\> Delegated permissions.
-      * `User.Read` (enabled by default)
-      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+     A) Select **New Registration** and on the *register an application page*, set following values:
+        * Set **name** to your app name.
+
+        * Choose the **supported account types** (any account type will work)
+
+        * Leave **Redirect URI** empty.
+
+        * Choose **Register**.
+        
+     B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest.
+
+     C) Navigate to **API Permissions**, and make sure to add the following permissions:
+       Select Add a permission
+
+        * Select Add a permission
+
+        * Select Microsoft Graph -\> Delegated permissions.
+
+        * `User.Read` (enabled by default)
+        
+        * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
 4) Setup for code
@@ -112,7 +121,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     npm install
     ```
 
-- Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with the values generated while doing Microsoft Entra ID app registration including Secret creation.(ClientSecret is referred to as the "client secret" generated from your Microsoft Entra ID app registrationin.
+- Open the `config.js` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with the values generated while doing Microsoft Entra ID app registration including Secret creation.(ClientSecret is referred to as the "client secret" generated from your Microsoft Entra ID app registrationin.
 
 - Run your app
 
@@ -122,11 +131,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 5) Setup Manifest for Teams
 
-    - Edit the `manifest.json` contained in the  `appManifest/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
-    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value of MicrosoftAppId in `config.js` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-people-picker-adaptive-card/nodejs/index.js#L44) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -152,7 +160,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams SDK Documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/teams-conversation-ai-overview)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
