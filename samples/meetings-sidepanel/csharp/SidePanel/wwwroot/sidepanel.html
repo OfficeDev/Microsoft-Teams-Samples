@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Coding</title>
+    <script src="https://res.cdn.office.net/teams-js/2.19.0/js/MicrosoftTeams.min.js" 
+            integrity="sha384-VEZhqGdLdqKQ6Kt7gKL6qOJnLjY0/8dWlQJcZ4F3N2iQ4lH+jOHPz9wU5HBcHb/2" 
+            crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            padding: 20px;
+            color: #242424;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e1dfdd;
+            margin-bottom: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #242424;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            color: #605e5c;
+            font-size: 16px;
+        }
+
+        .icon-button:hover {
+            color: #242424;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #242424;
+            margin-bottom: 12px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #8a8886;
+            border-radius: 2px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6264A7;
+        }
+
+        button.primary {
+            padding: 8px 16px;
+            background-color: #e8e8e8;
+            color: #242424;
+            border: 1px solid #8a8886;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        button.primary:hover {
+            background-color: #d2d0ce;
+        }
+
+        .agenda-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .agenda-item {
+            padding: 8px 0;
+            color: #242424;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .agenda-item-number {
+            display: inline-block;
+            margin-right: 8px;
+            color: #242424;
+        }
+
+        .publish-button {
+            padding: 8px 16px;
+            background-color: #e8e8e8;
+            color: #242424;
+            border: 1px solid #8a8886;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            transition: background-color 0.2s;
+        }
+
+        .publish-button:hover {
+            background-color: #d2d0ce;
+        }
+
+        .status-message {
+            padding: 10px;
+            border-radius: 2px;
+            margin-bottom: 15px;
+            display: none;
+            font-size: 13px;
+        }
+
+        .status-message.success {
+            background-color: #dff6dd;
+            color: #107c10;
+            display: block;
+        }
+
+        .status-message.error {
+            background-color: #fde7e9;
+            color: #d13438;
+            display: block;
+        }
+
+        .empty-state {
+            color: #8a8886;
+            font-size: 14px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: 20px;
+            border-bottom: 1px solid #e1dfdd;
+            margin-bottom: 20px;
+        }
+
+        .tab-item {
+            padding: 8px 0;
+            cursor: pointer;
+            color: #605e5c;
+            font-size: 14px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab-item.active {
+            color: #6264A7;
+            border-bottom-color: #6264A7;
+        }
+
+        .tab-item:hover {
+            color: #242424;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <h1>Live Coding</h1>
+        </div>
+        <div class="header-actions">
+            <button class="icon-button" title="More options">?</button>
+            <button class="icon-button" title="Pop-out">?</button>
+            <button class="icon-button" title="Close">?</button>
+        </div>
+    </div>
+
+    <div class="tab-nav">
+        <div class="tab-item active">View</div>
+        <div class="tab-item">Notes</div>
+        <div class="tab-item">Live Coding</div>
+        <div class="tab-item">Apps</div>
+        <div class="tab-item">More</div>
+        <div class="tab-item">Camera</div>
+        <div class="tab-item">Mic</div>
+        <div class="tab-item">Share</div>
+    </div>
+
+    <div id="status" class="status-message"></div>
+
+    <div class="section">
+        <div class="section-title">Agenda</div>
+        <div class="input-group">
+            <input type="text" 
+                   id="agendaInput" 
+                   placeholder="Add New Agenda Item"
+                   maxlength="200">
+            <button class="primary" onclick="addAgendaItem()">Add New Agenda Item</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div id="agendaList"></div>
+        <button class="publish-button" onclick="sendAgendaToChat()">Publish Agenda</button>
+    </div>
+
+    <script>
+        let context = null;
+        let baseUrl = window.location.origin;
+        let agendaItems = [];
+
+        // Initialize Teams SDK
+        (async function() {
+            try {
+                await microsoftTeams.app.initialize();
+                context = await microsoftTeams.app.getContext();
+                console.log('Teams context:', context);
+                
+                // Load existing agenda
+                await loadAgenda();
+                
+                showStatus('Connected successfully', 'success');
+                setTimeout(() => hideStatus(), 3000);
+            } catch (error) {
+                console.error('Error initializing:', error);
+                showStatus('Error: ' + error.message, 'error');
+            }
+        })();
+
+        // Load agenda from server
+        async function loadAgenda() {
+            try {
+                // Default agenda items
+                agendaItems = [
+                    'Approve 5% dividend payment to shareholders.',
+                    'Increase research budget by 10%.',
+                    'Continue with WFH for next 3 months.'
+                ];
+
+                displayAgenda();
+            } catch (error) {
+                console.error('Error loading agenda:', error);
+                agendaItems = [];
+                displayAgenda();
+            }
+        }
+
+        // Display agenda items
+        function displayAgenda() {
+            const agendaList = document.getElementById('agendaList');
+
+            if (!agendaItems || agendaItems.length === 0) {
+                agendaList.innerHTML = '<div class="empty-state">No agenda items yet</div>';
+                return;
+            }
+
+            const listHtml = agendaItems.map((item, index) => `
+                <div class="agenda-item">
+                    <span class="agenda-item-number">${index + 1}.</span>
+                    <span class="agenda-item-text">${escapeHtml(item)}</span>
+                </div>
+            `).join('');
+
+            agendaList.innerHTML = listHtml;
+        }
+
+        // Add agenda item
+        async function addAgendaItem() {
+            const input = document.getElementById('agendaInput');
+            const title = input.value.trim();
+
+            if (!title) {
+                showStatus('Please enter an agenda item', 'error');
+                setTimeout(() => hideStatus(), 3000);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${baseUrl}/Home/AddNewAgendaPoint`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ Title: title })
+                });
+
+                if (response.ok) {
+                    const updatedAgenda = await response.json();
+                    agendaItems = updatedAgenda.map(item => item.Title || item.title);
+                    displayAgenda();
+                    input.value = '';
+                    showStatus('Agenda item added successfully', 'success');
+                    setTimeout(() => hideStatus(), 3000);
+                } else {
+                    showStatus('Error adding agenda item', 'error');
+                    setTimeout(() => hideStatus(), 3000);
+                }
+            } catch (error) {
+                console.error('Error adding agenda item:', error);
+                // Fallback: add locally
+                agendaItems.push(title);
+                displayAgenda();
+                input.value = '';
+                showStatus('Agenda item added (local only)', 'success');
+                setTimeout(() => hideStatus(), 3000);
+            }
+        }
+
+        // Send agenda to chat
+        async function sendAgendaToChat() {
+            try {
+                const response = await fetch(`${baseUrl}/Home/SendAgenda`);
+
+                if (response.ok) {
+                    showStatus('Agenda published to meeting chat successfully!', 'success');
+                    setTimeout(() => hideStatus(), 5000);
+                } else {
+                    const errorText = await response.text();
+                    showStatus('Error: ' + errorText, 'error');
+                    setTimeout(() => hideStatus(), 5000);
+                }
+            } catch (error) {
+                console.error('Error publishing agenda:', error);
+                showStatus('Error: ' + error.message, 'error');
+                setTimeout(() => hideStatus(), 5000);
+            }
+        }
+
+        // Show status message
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message ${type}`;
+        }
+
+        // Hide status message
+        function hideStatus() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = 'status-message';
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Allow Enter key to add item
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('agendaInput');
+            if (input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        addAgendaItem();
+                    }
+                });
+            }
+        });
+
+        // Tab navigation (visual only)
+        document.querySelectorAll('.tab-item').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

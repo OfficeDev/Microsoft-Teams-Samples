@@ -110,14 +110,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 **Note** : In the debug dropdown menu of Visual Studio, select default startup project > **SidePanel**
 
 6. Setup and run the bot from Visual Studio: 
-   Modify the `appsettings.json` and fill in the following details:
-   - `<<MicrosoftAppId>>` - Generated from Step 2 (Application (client) ID) is the application app id
-   - `<<MicrosoftAppPassword>>` - Generated from Step 3, also referred to as Client secret
-   - `<<BaseUrl>>` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+   Modify the `appsettings.Development.json` and fill in the following details:
+   - `ClientId` - Generated from Step 2 (Application (client) ID) is the application app id
+   - `ClientSecret` - Generated from Step 3, also referred to as Client secret
+   - `BaseUrl` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 7. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
-   - <<Manifest-id>> with any random GUID or your MicrosoftAppId from Microsoft Entra ID app registration.
-   - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 3
+   - `TEAMS_APP_ID` with any random GUID or your MicrosoftAppId from Microsoft Entra ID app registration.
+   - `BOT_ID` with Application id generated from Step 3
    - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
@@ -127,14 +127,11 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     ```bash
     npm install
-    npm start
     ```
 10. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-
-**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-sidepanel/csharp/SidePanel/AdapterWithErrorHandler.cs#L26) and put your debugger for local debug.
 
 ## Running the sample
 User interactions(Meeting Organizer)

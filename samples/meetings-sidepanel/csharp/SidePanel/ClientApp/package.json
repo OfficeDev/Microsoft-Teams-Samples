@@ -37,8 +37,8 @@
   },
   "scripts": {
     "clean": "npx shx rm -rf build",
-    "start": "react-scripts start",
-    "start:client": "react-scripts start",
+    "start": "set PORT=3000 && react-scripts start",
+    "start:client": "set PORT=3000 && react-scripts start",
     "start:server": "npx @fluidframework/azure-local-service@latest",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Panel</title>
+    <script src="https://res.cdn.office.net/teams-js/2.19.0/js/MicrosoftTeams.min.js" 
+            integrity="sha384-VEZhqGdLdqKQ6Kt7gKL6qOJnLjY0/8dWlQJcZ4F3N2iQ4lH+jOHPz9wU5HBcHb/2" 
+            crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #5B5FC7 0%, #7B83EB 100%);
+            border-radius: 4px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #242424;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #242424;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: #605e5c;
+            font-size: 14px;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .save-button {
+            background-color: #6264A7;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .save-button:hover {
+            background-color: #5558a0;
+        }
+
+        .save-button:active {
+            background-color: #464775;
+        }
+
+        .about-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #6264A7;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .about-link:hover {
+            text-decoration: underline;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #605e5c;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .close-button:hover {
+            color: #323130;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="about-link">About</a>
+    <button class="close-button" onclick="closeDialog()">?</button>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">?</div>
+            <span class="title">Side Panel</span>
+        </div>
+
+        <h1>Welcome to Contoso Media!</h1>
+        <p class="subtitle">Press the save button to continue.</p>
+
+        <button class="save-button" onclick="saveConfiguration()">Save</button>
+    </div>
+
+    <script>
+        let saveHandler = null;
+
+        (async function() {
+            try {
+                // Initialize Teams SDK
+                await microsoftTeams.app.initialize();
+                console.log('Teams SDK initialized successfully');
+
+                // Set up the configuration
+                microsoftTeams.pages.config.registerOnSaveHandler(function(saveEvent) {
+                    saveHandler = saveEvent;
+                    const baseUrl = window.location.origin;
+                    
+                    // Configure the content URL for the side panel
+                    microsoftTeams.pages.config.setConfig({
+                        websiteUrl: baseUrl,
+                        contentUrl: baseUrl + "/sidepanel.html",
+                        entityId: "meetingSidePanel",
+                        suggestedDisplayName: "Side Panel"
+                    });
+
+                    console.log('Configuration saved');
+                    saveEvent.notifySuccess();
+                });
+
+                // Enable the Save button
+                microsoftTeams.pages.config.setValidityState(true);
+
+            } catch (error) {
+                console.error('Error initializing Teams SDK:', error);
+                alert('Error: ' + error.message);
+            }
+        })();
+
+        function saveConfiguration() {
+            // The actual save is handled by Teams when user clicks the Teams Save button
+            // This button is just for visual feedback
+            alert('Click the "Save" button in the dialog header to continue.');
+        }
+
+        function closeDialog() {
+            // Close the configuration dialog
+            if (window.microsoftTeams) {
+                microsoftTeams.pages.config.setValidityState(false);
+            }
+        }
+    </script>
+</body>
+</html>

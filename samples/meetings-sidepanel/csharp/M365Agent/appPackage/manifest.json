@@ -24,7 +24,7 @@
   "accentColor": "#5558AF",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "groupChat"
       ],

@@ -1,17 +1,17 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.23",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
-    "name": "Microsoft",
-    "websiteUrl": "https://example.azurewebsites.net",
-    "privacyUrl": "https://example.azurewebsites.net/privacy",
-    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.example.com",
+    "privacyUrl": "https://www.example.com/privacy",
+    "termsOfUseUrl": "https://www.example.com/termofuse"
   },
   "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "name": {
     "short": "Teams SSO Auth",
@@ -24,16 +24,34 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
-        "personal"
+        "personal",
+        "groupChat"
       ],
+      "supportsFiles": false,
       "isNotificationOnly": false,
-      "supportsCalling": false,
-      "supportsVideo": false,
-      "supportsFiles": false
+      "commandLists": [
+        {
+          "scopes": [ "personal", "team", "groupChat" ],
+          "commands": [
+            {
+              "title": "/signin",
+              "description": "Sign in to the app"
+            },
+            {
+              "title": "/signout",
+              "description": "Sign out from the app"
+            }
+          ]
+        }
+      ]
     }
   ],
+  "composeExtensions": [
+  ],
+  "configurableTabs": [],
+  "staticTabs": [],
   "permissions": [
     "identity",
     "messageTeamMembers"
@@ -43,7 +61,7 @@
     "${{BOT_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
+    "id": "${{BOT_ID}}",
+    "resource": "api://botid-${{BOT_ID}}"
   }
 }
