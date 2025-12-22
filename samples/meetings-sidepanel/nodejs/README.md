@@ -87,23 +87,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     * Leave **Redirect URI** empty.
     * Choose **Register**.
 3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-4. Navigate to **API Permissions**, and make sure to add the follow permissions:
-    * Select Add a permission
-    * Select Microsoft Graph -> Delegated permissions.
-    * `User.Read` (enabled by default)
-    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 3. Clone the repository
       ```bash
       git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
       ```
 
-4. Open .env file from this path folder (samples/meetings-sidepanel/nodejs/server) and update ```MicrosoftAppId```,  ```MicrosoftAppPassword``` information with values generated values while doing Microsoft Entra ID App Registration.
-- Update ```BaseURL``` with your application domain URL like ngrok URL: https://xxxx.ngrok-free.app and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+4. Open `.localConfigs` file from the root folder and update ```CLIENT_ID```,  ```CLIENT_SECRET``` information with values generated while doing Microsoft Entra ID App Registration.
+- Update ```BOT_DOMAIN``` with your application domain URL like ngrok URL: https://xxxx.ngrok-free.app and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 5. Install node modules
 
-   Inside node js folder,  navigate to `samples/meetings-sidepanel/nodejs/server` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
+   Inside node js folder,  navigate to `samples/meetings-sidepanel/nodejs` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
    - Repeat the same step in folder `samples/meetings-sidepanel/nodejs/ClientApp`
 
@@ -113,7 +108,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 6. We have two different solutions to run, so follow below steps:
  
-- In a terminal, navigate to `samples/meetings-sidepanel/nodejs/server` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
+- In a terminal, navigate to `samples/meetings-sidepanel/nodejs` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
 ```bash
 npm install
 ```
@@ -147,15 +142,13 @@ npm install --legacy-peer-deps
 7. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
 
 8) Setup Manifest for Teams (__*This step is specific to Teams.*__)
-    - **Edit** the `manifest.json` contained in the `appManifest` folder and replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage` folder and replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Update** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Update** the `manifest.json` for `<<Manifest-id>>` with any GUID or with your MicrosoftAppId, generated during App registration in Azure portal.
 
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-
-**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-sidepanel/nodejs/server/index.js#L48) and put your debugger for local debug.
 
 ## Running the sample
 
