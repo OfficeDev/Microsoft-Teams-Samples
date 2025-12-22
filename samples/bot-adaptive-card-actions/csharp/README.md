@@ -85,7 +85,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.Development.json.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating in the appsettings.Development.json.
   C) Navigate to **API Permissions**, and make sure to add the follow permissions:
    Select Add a permission
       * Select Add a permission
