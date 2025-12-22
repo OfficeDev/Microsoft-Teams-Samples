@@ -23,10 +23,11 @@ This comprehensive python quick start sample illustrates the creation of a Messa
 * Bots
 * Message Extensions
 * Search Commands
+* Agent SDK
 
 ## Interaction with app
 
-![Sample Module](Images/msgextsearchquickstart.gif)
+![Sample Module](Images/MsgExtQuickStart.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -124,25 +125,55 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Running the sample
 
-![MsgExt Search](Images/1.Install_App.png)
+**Install the app in Teams:**
 
-![MsgExt Search](Images/2.Select_App.png)
+![Install App](Images/1.Install_App.png)
 
-![MsgExt Search](Images/3.Search_Query_With_Results.png)
+**Open the installed app:**
 
-![MsgExt Search](Images/4.Selected_Result_Card.png)
+![Open App](Images/2.Open_App.png)
 
-![MsgExt Search](Images/5.Compose_Card.png)
+**Select messaging extension search:**
 
-![MsgExt Search](Images/6.Search_Results_2.png)
+![Select MsgExt Search](Images/3.Select_MsgExt_Search_Python.png)
 
-![MsgExt Search](Images/7.Outlook_App.png)
+**Search results displayed:**
+
+![Msgext Search Results](Images/4.Msgext_Search_Results.png)
+
+**Selected search result:**
+
+![Selected Result](Images/5.Selected_Result.png)
+
+**Additional search results:**
+
+![MsgExt Search Results 2](Images/6.MsgExt_Search_Results_2.png)
+
+**Selected NPM package details:**
+
+![Selected NPM Packages](Images/7.Selected_NPM_Packages.png)
+
+**Using the app in Outlook - Click on New Mail:**
+
+![Outlook Click On New Mail](Images/8.Outlook_Click_On_NewMail.png)
+
+**Select the app from Outlook:**
+
+![Outlook Select App](Images/9.Outlook_Select_App_From_here.png)
+
+**Search results in Outlook:**
+
+![Outlook Search Results](Images/10.Outlook_Search_Results.png)
+
+**Selected card in Outlook:**
+
+![Outlook Selected Card](Images/11.Outlook_Selected_Card.png)
 
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Microsoft 365 Agent SDK Documentation](https://learn.microsoft.com/microsoft-365-copilot/extensibility/agents-are-apps)
+- [Agent SDK Python Package](https://pypi.org/project/microsoft-agents/)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Search based messaging extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command)

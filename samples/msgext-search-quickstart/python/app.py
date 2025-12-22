@@ -3,66 +3,54 @@
 
 import sys
 import traceback
-from datetime import datetime
-from http import HTTPStatus
+from os import environ
 from aiohttp import web
 from aiohttp.web import Request, Response
-from botbuilder.core import TurnContext
-from botbuilder.integration.aiohttp import (
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication,
-)
-from botbuilder.core.integration import aiohttp_error_middleware
-from botbuilder.schema import Activity, ActivityTypes
+from microsoft_agents.hosting.core import TurnContext
+from microsoft_agents.hosting.aiohttp import CloudAdapter
+from microsoft_agents.authentication.msal import MsalConnectionManager
+from microsoft_agents.activity import load_configuration_from_env
 from bots import BotActivityHandler
 from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
-# Create adapter.
-ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
+# Set up environment variables for Agent SDK authentication
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTID", CONFIG.APP_ID)
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTSECRET", CONFIG.APP_PASSWORD)
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__TENANTID", CONFIG.APP_TENANTID)
 
+# Load configuration from environment
+agents_sdk_config = load_configuration_from_env(environ)
 
-# Catch-all for errors.
+# Create MSAL connection manager for authentication
+CONNECTION_MANAGER = MsalConnectionManager(**agents_sdk_config)
+
+# Create cloud adapter with connection manager
+ADAPTER = CloudAdapter(connection_manager=CONNECTION_MANAGER)
+
 async def on_error(context: TurnContext, error: Exception):
+    """Catch-all error handler for the adapter."""
     print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
     traceback.print_exc()
 
-    await context.send_activity("The bot encountered an error or bug.")
-    await context.send_activity(
-        "To continue to run this bot, please fix the bot source code."
-    )
+    # Only send error messages for regular conversations, not for invokes (messaging extensions)
+    if context.activity.type != "invoke":
+        await context.send_activity("The bot encountered an error or bug.")
+        await context.send_activity("To continue to run this bot, please fix the bot source code.")
 
-    if context.activity.channel_id == "emulator":
-        trace_activity = Activity(
-            label="TurnError",
-            name="on_turn_error Trace",
-            timestamp=datetime.utcnow(),
-            type=ActivityTypes.trace,
-            value=f"{error}",
-            value_type="https://www.botframework.com/schemas/error",
-        )
-        await context.send_activity(trace_activity)
-
-
+# Set error handler for the adapter
 ADAPTER.on_turn_error = on_error
 
-# Create the Bot
+# Create bot instance
 BOT = BotActivityHandler()
 
-
-# Listen for incoming requests on /api/messages.
 async def messages(req: Request) -> Response:
-    try:
-        return await ADAPTER.process(req, BOT)
-    except Exception as e:
-        print(f"Error processing activity: {e}")
-        traceback.print_exc()
-        return Response(status=HTTPStatus.INTERNAL_SERVER_ERROR)
+    """Main bot message handler."""
+    return await ADAPTER.process(req, BOT)
 
-
-# Create the main application and routes
-APP = web.Application(middlewares=[aiohttp_error_middleware])
+# Create web application and configure routes
+APP = web.Application()
 APP.router.add_post("/api/messages", messages)
 
 if __name__ == "__main__":

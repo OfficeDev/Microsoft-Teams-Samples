@@ -3,28 +3,32 @@
 
 import sys
 import traceback
-from datetime import datetime
-from http import HTTPStatus
-
 from aiohttp import web
-from aiohttp.web import Request, Response, json_response
-from botbuilder.core import (
-
-    TurnContext
-)
-from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
-from botbuilder.core.integration import aiohttp_error_middleware
-from botbuilder.schema import Activity, ActivityTypes
-
+from aiohttp.web import Request, Response
+from microsoft_agents.hosting.core import TurnContext
+from microsoft_agents.hosting.aiohttp import CloudAdapter
+from microsoft_agents.authentication.msal import MsalConnectionManager
+from microsoft_agents.activity import load_configuration_from_env
+from os import environ
 from bots import LinkUnfurlingBot
 from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
-# Create adapter.
-# See https://aka.ms/about-bot-adapter to learn more about how bots work.
-ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
+# Set up environment variables for Agent SDK
+# The Agent SDK expects specific environment variable format for service connection
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTID", CONFIG.APP_ID)
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTSECRET", CONFIG.APP_PASSWORD)
+environ.setdefault("CONNECTIONS__SERVICE_CONNECTION__SETTINGS__TENANTID", CONFIG.APP_TENANTID)
 
+# Load configuration from environment using Agent SDK helper
+agents_sdk_config = load_configuration_from_env(environ)
+
+# Create connection manager for authentication
+CONNECTION_MANAGER = MsalConnectionManager(**agents_sdk_config)
+
+# Create adapter with connection manager
+ADAPTER = CloudAdapter(connection_manager=CONNECTION_MANAGER)
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
@@ -39,20 +43,6 @@ async def on_error(context: TurnContext, error: Exception):
     await context.send_activity(
         "To continue to run this bot, please fix the bot source code."
     )
-    # Send a trace activity if we're talking to the Bot Framework Emulator
-    if context.activity.channel_id == "emulator":
-        # Create a trace activity that contains the error object
-        trace_activity = Activity(
-            label="TurnError",
-            name="on_turn_error Trace",
-            timestamp=datetime.utcnow(),
-            type=ActivityTypes.trace,
-            value=f"{error}",
-            value_type="https://www.botframework.com/schemas/error",
-        )
-        # Send a trace activity, which will be displayed in Bot Framework Emulator
-        await context.send_activity(trace_activity)
-
 
 ADAPTER.on_turn_error = on_error
 
@@ -60,13 +50,13 @@ ADAPTER.on_turn_error = on_error
 BOT = LinkUnfurlingBot()
 
 
-# Listen for incoming requests on /api/messages.s
+# Listen for incoming requests on /api/messages
 async def messages(req: Request) -> Response:
     # Main bot message handler.
-       return await ADAPTER.process(req, BOT) 
+    return await ADAPTER.process(req, BOT)
 
 
-APP = web.Application(middlewares=[aiohttp_error_middleware])
+APP = web.Application()
 APP.router.add_post("/api/messages", messages)
 
 if __name__ == "__main__":

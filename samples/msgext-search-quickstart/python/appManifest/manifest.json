@@ -56,5 +56,15 @@
   ],
   "validDomains": [
     "${{BOT_DOMAIN}}"
-  ]
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MailboxItem.ReadWrite.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
 }
