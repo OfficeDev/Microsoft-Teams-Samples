@@ -1,38 +1,57 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19",
-  "version": "1.0.0",
-  "id": "${{TEAMS_APP_ID}}",
-  "developer": {
-    "name": "Microsoft",
-    "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.microsoft.com/privacy",
-    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
-  },
-  "name": {
-    "short": "Cards Formatting",
-    "full": "Cards Formatting"
-  },
-  "description": {
-    "short": "Showcase bot with various adaptive card formatting styles in Microsoft Teams.",
-    "full": "Demonstrates bot-driven adaptive card formatting capabilities in Microsoft Teams."
-  },
-  "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
-  },
-  "accentColor": "#60A18E",
-  "bots": [
-    {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
-      "scopes": [
-        "personal"
-      ],
-      "isNotificationOnly": false
-    }
-  ],
-  "validDomains": [
-    "${{BOT_DOMAIN}}",
-    "*.ngrok-free.app"
-  ]
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/privacy",
+        "termsOfUseUrl": "https://www.example.com/termofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "bot-formatting-cards${{APP_NAME_SUFFIX}}",
+        "full": "full name for bot-formatting-cards"
+    },
+    "description": {
+        "short": "Short description of bot-formatting-cards",
+        "full": "Full description of bot-formatting-cards"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+        "botId": "${{BOT_ID}}",
+        "scopes": [
+            "personal",
+            "team",
+            "groupChat"
+        ],
+        "supportsFiles": false,
+        "isNotificationOnly": false,
+        "commandLists": [
+            {
+              "scopes": ["personal", "team", "groupChat"],
+              "commands": [
+                  {
+                      "title": "Hi",
+                      "description": "Say hi to the bot."
+                  }
+              ]
+            }
+        ]
+        }
+    ],
+    "composeExtensions": [
+    ],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
 }

@@ -1,0 +1,55 @@
+﻿{
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.6",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Persona",
+      "weight": "bolder"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "JD",
+              "horizontalAlignment": "center",
+              "size": "large",
+              "weight": "bolder",
+              "color": "dark"
+            }
+          ],
+          "style": "emphasis",
+          "verticalContentAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "John Doe",
+              "weight": "bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Software Engineer",
+              "isSubtle": true,
+              "spacing": "none",
+              "wrap": true
+            }
+          ],
+          "verticalContentAlignment": "center",
+          "spacing": "medium"
+        }
+      ],
+      "spacing": "medium"
+    }
+  ]
+}

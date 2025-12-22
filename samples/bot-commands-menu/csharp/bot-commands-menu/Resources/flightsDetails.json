@@ -1,0 +1,252 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.6",
+  "speak": "Flight KL0605 to San Fransisco has been delayed.It will not leave until 10:10 AM.",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "size": "Small",
+              "url": "https://adaptivecards.io/content/airplane.png",
+              "altText": "Airplane"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Flight Status",
+              "horizontalAlignment": "Right",
+              "isSubtle": true,
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "DELAYED",
+              "horizontalAlignment": "Right",
+              "spacing": "None",
+              "size": "Large",
+              "color": "Attention",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Passengers",
+              "isSubtle": true,
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Sarah Hum",
+              "spacing": "Small",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Jeremy Goldberg",
+              "spacing": "Small",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Evan Litvak",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Seat",
+              "horizontalAlignment": "Right",
+              "isSubtle": true,
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "14A",
+              "horizontalAlignment": "Right",
+              "spacing": "Small",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "18B",
+              "horizontalAlignment": "Right",
+              "spacing": "Small",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "11C",
+              "horizontalAlignment": "Right",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Flight",
+              "isSubtle": true,
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "KL0605",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Departs",
+              "isSubtle": true,
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "10:10 AM",
+              "color": "Attention",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Arrives",
+              "isSubtle": true,
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "12:00 AM",
+              "color": "Attention",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Amsterdam",
+              "isSubtle": true,
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "AMS",
+              "size": "ExtraLarge",
+              "color": "Accent",
+              "spacing": "None",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": " ",
+              "wrap": true
+            },
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/airplane.png",
+              "size": "Small",
+              "altText": "Airplane"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "San Francisco",
+              "isSubtle": true,
+              "horizontalAlignment": "Right",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "SFO",
+              "horizontalAlignment": "Right",
+              "size": "ExtraLarge",
+              "color": "Accent",
+              "spacing": "None",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
