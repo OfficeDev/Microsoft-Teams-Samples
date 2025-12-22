@@ -1,6 +1,6 @@
-﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.21/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.21",
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.23",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
@@ -26,13 +26,13 @@
     "customEngineAgents": [
       {
         "type": "bot",
-        "id": "${{AAD_APP_CLIENT_ID}}"
+        "id": "${{BOT_ID}}"
       }
     ]
   },
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "copilot",
         "personal"

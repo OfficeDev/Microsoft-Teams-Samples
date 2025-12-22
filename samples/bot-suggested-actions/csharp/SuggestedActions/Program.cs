@@ -1,41 +1,28 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using SuggestedActions;
+using SuggestedActions.Controllers;
+using Azure.Core;
+using Azure.Identity;
+using Microsoft.Teams.Api.Auth;
+using Microsoft.Teams.Apps;
+using Microsoft.Teams.Apps.Extensions;
+using Microsoft.Teams.Common.Http;
+using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 
-namespace Microsoft.BotBuilderSamples
-{
-    /// <summary>
-    /// The main entry point for the application.
-    /// </summary>
-    public class Program
-    {
-        /// <summary>
-        /// The main method which is the entry point of the application.
-        /// </summary>
-        /// <param name="args">The command-line arguments.</param>
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+// Create web application builder and load configuration
+var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration.Get<ConfigOptions>();
 
-        /// <summary>
-        /// Creates and configures the host builder.
-        /// </summary>
-        /// <param name="args">The command-line arguments.</param>
-        /// <returns>An initialized <see cref="IHostBuilder"/> instance.</returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.ConfigureLogging(logging =>
-                    {
-                        logging.AddDebug();
-                        logging.AddConsole();
-                    });
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+// Create Teams app builder
+var appBuilder = App.Builder();
+
+// Register controller and configure Teams services
+builder.Services.AddSingleton<Controller>();
+builder.AddTeams(appBuilder);
+
+// Build and run the application
+var app = builder.Build();
+app.UseTeams();
+app.Run();
