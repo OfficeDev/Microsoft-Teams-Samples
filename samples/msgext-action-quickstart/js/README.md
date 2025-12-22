@@ -73,9 +73,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 3. Setup for Bot
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+    - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
@@ -103,7 +103,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - Build
   `npm install`
   
-- Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+- Update the `.localConfigs` configuration for the bot to use the `CLIENT_ID` and `CLIENT_PASSWORD`. (Note the MicrosoftAppId is the CLIENT_ID created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "CLIENT_PASSWORD" in step 1 (Setup for Bot) and you can always create a new client secret anytime.
 
 6) Run your app
 
@@ -113,11 +113,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 7) Setup Manifest for Teams
 
 - **This step is specific to Teams.**
-    - Edit the `manifest.json` contained in the `appManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
+    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your BOT_ID (that was created in step1.1 and is the same value of CLIENT_ID in `.env.local` file) *everywhere* you see the place holder string `${{BOT_ID}}` (depending on the scenario the BOT_ID may occur multiple times in the `manifest.json`)
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-action-quickstart/js/index.js#L43) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -137,8 +136,7 @@ Start debugging the project by hitting the `F5` key or click the debug icon in V
 ## Further reading
 
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Teams SDK Documentation](https://microsoft.github.io/teams-ai/welcome/)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
