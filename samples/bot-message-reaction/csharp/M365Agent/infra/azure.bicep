@@ -43,15 +43,15 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
           value: '1'
         }
         {
-          name: 'BOT_ID'
+          name: 'Teams__ClientId'
           value: identity.properties.clientId
         }
         {
-          name: 'BOT_TENANT_ID'
+          name: 'Teams__TenantId'
           value: identity.properties.tenantId
         }
         {
-          name: 'BOT_TYPE'
+          name: 'Teams__BotType'
           value: 'UserAssignedMsi'
         }
       ]
