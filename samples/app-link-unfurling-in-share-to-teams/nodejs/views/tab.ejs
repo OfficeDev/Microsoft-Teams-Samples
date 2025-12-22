@@ -21,7 +21,7 @@
       else {
         $("#stt-btn-teams").show();
         var element = document.getElementById("stt-btn-teams");
-        let uri = `${window.location.origin}?linkunfurling`;
+        let uri = `${window.location.origin}/linkunfurling`;
         let encoded = encodeURI(uri);
         element.setAttribute("data-href", encoded);
       }
@@ -42,7 +42,7 @@
           content: [
             {
               type: 'URL',
-              url: `${window.location.origin}?linkunfurling`,
+              url: `${window.location.origin}/linkunfurling`,
               preview: true
             }
           ]
