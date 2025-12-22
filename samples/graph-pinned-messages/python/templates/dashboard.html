@@ -1,0 +1,181 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pinned Messages Dashboard</title>
+  <script src="https://res.cdn.office.net/teams-js/2.13.0/js/MicrosoftTeams.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      padding: 2rem;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .bold {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    .radio-item {
+      margin-top: 0.5rem;
+    }
+    .trash {
+      cursor: pointer;
+      color: red;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="bold">Graph Pinned Message</div>
+
+    <div id="ssoError" style="display: none;">
+      Invalid grant error occurred. Please click on consent to grant access.<br/>
+      <button onclick="grantConsent()">Consent</button>
+    </div>
+
+    <div id="pinnedSection" style="display: none;">
+      <div class="bold">Pinned message:</div>
+      <div>
+        <span id="pinnedMessage"></span>
+        <span class="trash" onclick="deletePinnedMessage()">🗑️</span>
+      </div>
+    </div>
+
+    <div id="unPinnedSection" style="display: none;">
+      <div>Please pin a message in chat.</div>
+      <div class="bold">You can also pin message from below message list. Select any message and click on Pin new message button.</div>
+      <div id="messageList" style="margin-top: 1rem; padding-left: 0.5rem;"></div>
+      <button onclick="pinNewMessage()" style="margin-top: 1rem;">Pin new message</button>
+    </div>
+  </div>
+
+  <script>
+    let accessToken = "";
+    let context = {};
+    let pinnedMessageId = "";
+    let selectedMessageId = "";
+
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.app.getContext().then((ctx) => {
+        context = ctx;
+        microsoftTeams.authentication.getAuthToken().then((token) => {
+          accessToken = token;
+          exchangeClientTokenForServerToken(token);
+        }).catch(() => {
+          document.getElementById("ssoError").style.display = "block";
+        });
+      });
+    });
+
+    function grantConsent() {
+      microsoftTeams.authentication.authenticate({
+        url: window.location.origin + "/auth-start",
+        width: 600,
+        height: 535
+      }).then((result) => {
+        document.getElementById("ssoError").style.display = "none";
+        microsoftTeams.authentication.getAuthToken().then((token) => {
+          accessToken = token;
+          exchangeClientTokenForServerToken(token);
+        });
+      }).catch((err) => {
+        alert("Consent failed: " + err.message);
+      });
+    }
+
+    function exchangeClientTokenForServerToken(token) {
+      const chatId = context.chat.id || "ChatId"; 
+      axios.get(`/api/chat/getGraphAccessToken?ssoToken=${token}&chatId=${chatId}`).then((res) => {
+        const data = res.data;
+        pinnedMessageId = data.id;
+
+        if (data.message) {
+          document.getElementById("pinnedMessage").textContent = data.message;
+          document.getElementById("pinnedSection").style.display = "block";
+        } else {
+          document.getElementById("unPinnedSection").style.display = "block";
+        }
+
+        // Show message list
+        const container = document.getElementById("messageList");
+        container.innerHTML = "";
+        
+        if (data.messages && data.messages.length > 0) {
+          data.messages.forEach(msg => {
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = "message";
+            radio.value = msg.id;
+            radio.className = "radio-item";
+            radio.onclick = () => {
+              selectedMessageId = msg.id;
+              console.log("Selected message ID:", selectedMessageId);
+            };
+
+            const label = document.createElement("label");
+            label.textContent = msg.value || "No content";
+            label.style.marginLeft = "0.5rem";
+            label.style.cursor = "pointer";
+            label.onclick = () => {
+              radio.checked = true;
+              selectedMessageId = msg.id;
+              console.log("Selected message ID:", selectedMessageId);
+            };
+
+            const wrapper = document.createElement("div");
+            wrapper.style.marginBottom = "0.5rem";
+            wrapper.appendChild(radio);
+            wrapper.appendChild(label);
+
+            container.appendChild(wrapper);
+          });
+        } else {
+          const noMessages = document.createElement("div");
+          noMessages.textContent = "No recent messages available to pin.";
+          noMessages.style.fontStyle = "italic";
+          noMessages.style.color = "#666";
+          container.appendChild(noMessages);
+        }
+
+      }).catch(err => {
+        console.error(err);
+        document.getElementById("unPinnedSection").style.display = "block";
+      });
+    }
+
+    function deletePinnedMessage() {
+      const chatId = context.chat.id;
+      axios.get(`/api/chat/unpinMessage?ssoToken=${accessToken}&chatId=${chatId}&pinnedMessageId=${pinnedMessageId}`).then(() => {
+        alert("Message unpinned.");
+        location.reload();
+      }).catch(err => console.error(err));
+    }
+
+    function pinNewMessage() {
+      if (!selectedMessageId) {
+        alert("Please select a message to pin first.");
+        return;
+      }
+      
+      const chatId = context.chat.id;
+      axios.get(`/api/chat/pinMessage?ssoToken=${accessToken}&chatId=${chatId}&messageId=${selectedMessageId}`).then(() => {
+        alert("Message pinned.");
+        location.reload();
+      }).catch(err => {
+        console.error(err);
+        if (err.response && err.response.data && err.response.data.error) {
+          alert("Error: " + err.response.data.error);
+        } else {
+          alert("Failed to pin message. Please try again.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch App (Edge)",
+            "type": "msedge",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+            "cascadeTerminateToConfigurations": [
+                "Python: Run App Locally"
+            ],
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            },
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Launch App (Chrome)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+            "cascadeTerminateToConfigurations": [
+                "Python: Run App Locally"
+            ],
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            },
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Python: Run App Locally",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/index.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug (Edge)",
+            "configurations": [
+                "Launch App (Edge)",
+                "Python: Run App Locally"
+            ],
+            "preLaunchTask": "Prepare Teams App Resources",
+            "presentation": {
+                "group": "all",
+                "order": 1
+            },
+            "stopAll": true
+        },
+        {
+            "name": "Debug (Chrome)",
+            "configurations": [
+                "Launch App (Chrome)",
+                "Python: Run App Locally"
+            ],
+            "preLaunchTask": "Prepare Teams App Resources",
+            "presentation": {
+                "group": "all",
+                "order": 2
+            },
+            "stopAll": true
+        }
+    ]
+}

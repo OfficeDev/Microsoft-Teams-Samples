@@ -1,0 +1,49 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Start Consent</title>
+  <script src="https://res.cdn.office.net/teams-js/2.13.0/js/MicrosoftTeams.min.js"></script>
+  <script src="https://alcdn.msauth.net/browser/2.40.0/js/msal-browser.min.js"></script>
+</head>
+<body>
+  <h1>Redirecting to consent page...</h1>
+
+  <script>
+    (async () => {
+      await microsoftTeams.app.initialize();
+
+      const context = await microsoftTeams.app.getContext();
+      const loginHint = context.user.loginHint;
+      const tenantId = context.user.tenant.id;
+      const clientId = "{{ microsoft_app_id }}"; 
+
+      const msalConfig = {
+        auth: {
+          clientId: clientId,
+          authority: `https://login.microsoftonline.com/${tenantId}`,
+          navigateToLoginRequestUrl: false
+        },
+        cache: {
+          cacheLocation: "sessionStorage"
+        }
+      };
+
+      const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+      const scopes = "User.Read email openid profile offline_access Chat.Read Chat.ReadWrite ChatMessage.Send".split(" ");
+
+      const loginRequest = {
+        scopes: scopes,
+        redirectUri: window.location.origin + "/auth-end",
+        loginHint: loginHint
+      };
+
+      // Begin login redirect
+      await msalInstance.loginRedirect(loginRequest);
+    })();
+  </script>
+</body>
+</html>

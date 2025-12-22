@@ -1,0 +1,58 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "BotSharedChannelEvents",
+    "full": "This sample demonstrates how to build Sample for Shared Channel events."
+  },
+  "description": {
+    "short": "Teams Shared Channel events channelShared,channelUnshared with Bot Framework C#",
+    "full": "This sample demonstrates how to build a Microsoft Teams bot using Bot Framework SDK for .NET that responds to shared channel events. When a channel is shared or unshared across teams, or when members are added/removed in the context of a shared channel,"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "team",
+        "personal"
+      ],
+      "isNotificationOnly": false
+    }
+  ],
+  "supportsChannelFeatures": "tier1",
+  "accentColor": "#60A18E",
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}",
+    "token.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "https://AnyString"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "ChannelMember.Read.Group",
+          "type": "Application"
+        }
+      ]
+    }
+  }
+}

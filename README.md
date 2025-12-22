@@ -1,5 +1,13 @@
 # Microsoft Teams Samples
 [![Sample code build status](https://github.com/OfficeDev/Microsoft-Teams-Samples/actions/workflows/build-complete-samples.yml/badge.svg)](https://github.com/OfficeDev/Microsoft-Teams-Samples/actions/workflows/build-complete-samples.yml)
+
+> [!IMPORTANT]
+> The **Bot Framework SDK** repository on GitHub is being archived. This project is no longer updated or maintained. Existing customers can continue to use it without disruption. The tool is no longer supported through service tickets in the Azure portal and won’t receive product updates. Support tickets for the Bot Framework SDK are **no longer serviced as of December 31, 2025**.
+>
+> **Simplify building AI-powered bots for Microsoft Teams with the new Teams SDK.** Teams SDK reduces boilerplate code and external dependencies while providing native AI capabilities and Teams-specific abstractions. This enables you to focus on building intelligent bot experiences without complex setup or configuration.
+>
+> Consider using the **Teams SDK** for a faster, streamlined development process. The Teams SDK supports C#, JavaScript, and Python. If you have an existing bot built with the Bot Framework SDK, you can update it to the Teams SDK. For details on core changes and migration steps, see [Bot Framework SDK to Teams SDK (Teams AI Library) migration guidance](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/migrations/botbuilder/overview?pivots=typescript).
+
 ##### [Click here to find out what's new with Microsoft Teams Platform](https://docs.microsoft.com/microsoftteams/platform/whats-new)
 
 >NOTE: These samples are designed to help understand Microsoft Teams platform capabilities and scenarios. If you are looking for production ready apps then please visit [App Templates for Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/samples/app-templates)
@@ -85,7 +93,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | Serial | Sample Name | Description | Level       | .NET | JavaScript | Python | Java | App Manifest |
 |:------:|:-------------------|:---------------------------------------------------------------------------------|:------------|:--------|:-------------|:-------------|:-------------|:-------------|
 | 1 | Teams Conversation Bot quick-start | This app showcases bot conversation events and messaging extensions for Microsoft Teams using the Bot Framework v4. | Basic       | | [View][bot-conversation-quickstart#js] ![toolkit-icon](assets/toolkit-icon.png) | | |
-| 2 | Teams Conversation Bot SSO quick-start | This sample bot demonstrates implementing SSO in Microsoft Teams using Azure AD. | Basic       | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js] ![toolkit-icon](assets/toolkit-icon.png) | | |[View](/samples/bot-conversation-sso-quickstart/csharp_dotnetcore/demo-manifest/bot-conversation-sso-quickstart.zip) |
+| 2 | Teams Conversation Bot SSO quick-start | This sample bot demonstrates implementing SSO in Microsoft Teams using Azure AD. | Basic       | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-conversation-sso-quickstart#python] | |[View](/samples/bot-conversation-sso-quickstart/csharp_dotnetcore/demo-manifest/bot-conversation-sso-quickstart.zip) |
 | 3 | Teams Conversation Bot | Messaging and conversation event handling also includes read receipt event functionality in personal scope. Also include AI label, Citations, Feedback buttons, Sensitivity label. | Intermediate | [View][bot-conversation#cs] | [View][bot-conversation#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-conversation#python] | [View][bot-conversation#java] | [View](/samples/bot-conversation/csharp/demo-manifest/bot-conversation.zip) |
 | 4 | Message Reactions | This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework. | Intermediate | [View][bot-message-reaction#cs] | [View][bot-message-reaction#js] ![toolkit-icon](assets/toolkit-icon.png) | | [View][bot-message-reaction#java] | [View](/samples/bot-message-reaction/csharp/demo-manifest/bot-message-reaction.zip) |
 | 5 | Authentication with OAuthPrompt | Authentication and basic messaging in Bot Framework v4. | Intermediate | [View][bot-teams-authentication#cs] | [View][bot-teams-authentication#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-teams-authentication#python] | [View][bot-teams-authentication#java] | [View](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip) |
@@ -110,13 +118,14 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 24 | Bot configuration app with auth | This sample demonstrates the features of bot configuration auth and reconfiguration for both teams and group chats. | Advanced | [View][BotConfigurationAppAuth#csharp] | [View][BotConfigurationAppAuth#nodejs]![toolkit-icon](assets/toolkit-icon.png) | | |[View](/samples/bot-configuration-app-auth/csharp/demo-manifest/bot-configuration-auth-app.zip)|
 | 25 | Tag mention bot | This sample app demonstrates the use of tag mention functionality in teams scope using Bot Framework. | Advanced | [View][Tagmention#csharp] | [View][Tagmention#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 26 | Commands menu and prompt starters bot | This sample adds a command menu with a dropdown list of commands for your bot. Users can select a command from the list, which will insert the command title into the compose box. Then, they can select Send to execute the command. | Advanced | [View][CommandsMenu#csharp] | [View][CommandsMenu#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | | [View](/samples/bot-commands-menu/csharp/demo-manifest/bot-commands-menu.zip)|
-| 27 | Bot All Cards | Sample which demonstrates sending different types cards supported in teams using bot. | Advanced | [View][TypesCards#csharp] | [View][TypesCards#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | | [View](/samples/bot-all-cards/csharp/demo-manifest/bot-all-cards.zip) |
+| 27 | Bot All Cards | Sample which demonstrates sending different types cards supported in teams using bot. | Advanced | [View][TypesCards#csharp] | [View][TypesCards#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View][TypesCards#python] ![toolkit-icon](assets/toolkit-icon.png) | | [View](/samples/bot-all-cards/csharp/demo-manifest/bot-all-cards.zip) |
 | 28 | Apps in Federated | This sample app allows users to easily view a list of group members. When a new member is added, their details are promptly displayed. | Advanced | [View][bot-feed-members#js] ![toolkit-icon](assets/toolkit-icon.png) | | | | [View](/samples/bot-feed-members/nodejs/demo-manifest/bot-feed-members.zip) |
 | 29 | Requirement Targeting OneWay Dependency | Microsoft M365 RT sample app in Node.js which specifies one-way-dependency relationships between app capabilities (using elementRelationshipSet) and functionality using hostMustSupportFunctionalities. | Advanced | | [View][RequirementTargetingOneWayDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 30 | Requirement Targeting Mutual Dependency | Microsoft M365 RT sample app in Node.js which specifies mutual-dependency relationships between app capabilities using elementRelationshipSet. | Advanced | | [View][RequirementTargetingMutualDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 31 | Streaming Bot | This sample showcases the conversational streaming token scenario for teams bot in personal scope. | Advanced | [View][botstreaming#csharp] |[View][botstreaming#nodejs]![toolkit-icon](assets/toolkit-icon.png) | | |
 | 32 | Auth0 Bot | This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card. | Intermediate | [View][bot-auth0-adaptivecard#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#python] ![toolkit-icon](assets/toolkit-icon.png) | | [View](/samples/bot-auth0-adaptivecard/csharp/demo-manifest/bot-auth0-adaptivecard.zip) |
-
+| 33 | Agent Knowledge Hub | Contoso Knowledge Hub is an intelligent guidance agent built on the Teams SDK, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations. | Intermediate | [View][agent-knowledge-hub#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][agent-knowledge-hub#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][agent-knowledge-hub#python] ![toolkit-icon](assets/toolkit-icon.png) | | |
+| 34 | Bot Shared Channel Events | Microsoft Teams bot can receive transitive member add and remove events in shared channels.| Intermediate | [View][bot-shared-channel-events#cs] ![toolkit-icon](assets/toolkit-icon.png) |  |  | |  |
 
 #### Additional samples
 | No. | Sample Name                      | Description                                                                                                                                                                                                 | Level         | .NET                                  | JavaScript                           |  
@@ -186,6 +195,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 13 | Resource Specific Consent (RSC)                      | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. | Advanced     | [View][graph#rsc#cs]              | [View][graph#rsc#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-rsc/csharp/demo-manifest/graph-rsc.zip)     |
 | 14 | Graph API Teams App Catalog Life Cycle               | This sample demonstrates how to manage the lifecycle of Teams apps in the app catalog using Microsoft Graph APIs through a bot. | Advanced     | [View][graph#appctaloglifecycle#cs] | [View][graph#appcataloglifecycle#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-appcatalog-lifecycle/csharp/demo-manifest/graph-appcatalog-lifecycle.zip) |
 | 15 | Graph File Fetch| This sample demonstrates how to fetch shared files in teams group chat and team channel using graph API. | Advanced | [View][graph-file-fetch#cs] | [View][graph-file-fetch#js] | [View](samples/graph-file-fetch/csharp/demo-manifest/graph-file-fetch.zip) |
+| 16 | Membership Change Notification       | This sample application demonstrates how to manage/handle membership change notification for shared channel, such as users being added, removed, or having their membership updated, using Node.js and the Microsoft Graph API.  | Advanced     | [View][graph#membershipchangenotification#cs] | [View][graph#graph#appcataloglifecycle#js#js] ![toolkit-icon](assets/toolkit-icon.png) |  |
+| 17 | Graph chat migration bot | This sample demonstrates how to migrate external chats to teams using microsoft graph API's. | Intermediate | graph-chat-migration#cs | [View][graph-chat-migration#js] ![toolkit-icon](assets/toolkit-icon.png) | | | |
 
 
 ## [Calls and online meetings bots](https://docs.microsoft.com/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
@@ -364,6 +375,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [bot-feed-members#js]:samples/bot-feed-members/nodejs
 [bot-conversation-quickstart#js]:samples/bot-conversation-quickstart/js
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
+[bot-conversation-sso-quickstart#python]:samples/bot-conversation-sso-quickstart/python
 [bot-sharepoint-list#cs]:samples/bot-sharepoint-list/csharp
 [bot-conversation-sso-quickstart#csharp_dotnetcore]:samples/bot-conversation-sso-quickstart/csharp_dotnetcore
 [bot-calling-meeting#csharp]:samples/bot-calling-meeting/csharp
@@ -422,6 +434,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [BotSSOAdaptiveCard#nodejs]:samples/bot-sso-adaptivecard/nodejs
 [TypesCards#csharp]:samples/bot-all-cards/csharp
 [TypesCards#nodejs]:samples/bot-all-cards/nodejs
+[TypesCards#python]:samples/bot-all-cards/python
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
 [meetings-details-tab#cs]:samples/meetings-details-tab/csharp
@@ -465,6 +478,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph#chatlifecycle#js]:samples/graph-chat-lifecycle/nodejs
 [graph#appctaloglifecycle#cs]:samples/graph-appcatalog-lifecycle/csharp
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
+[graph#membershipchangenotification#cs]:samples/graph-membership-change-notification/csharp
+[graph#membershipchangenotification#js]:samples/graph-membership-change-notification/nodejs
 [graph#graphproactiveinstallation#cs]:samples/graph-proactive-installation/csharp
 [graph#graphproactiveinstallation#js]:samples/graph-proactive-installation/nodejs
 [graph-activity-feed#cs]:samples/graph-activity-feed/csharp
@@ -518,6 +533,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-context-app#python]:samples/meetings-context-app/python
 [bot-auth0-adaptivecard#python]:samples/bot-auth0-adaptivecard/python
 
+[agent-knowledge-hub#js]:samples/agent-knowledge-hub/nodejs
+[agent-knowledge-hub#cs]:samples/agent-knowledge-hub/csharp
+[agent-knowledge-hub#python]:samples/agent-knowledge-hub/python
 
 [bot-conversation#js]:samples/bot-conversation/nodejs
 [bot-auth0-adaptivecard#js]:samples/bot-auth0-adaptivecard/nodejs
@@ -533,7 +551,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-ai-sentiment-analysis#cs]:samples/msgext-ai-sentiment-analysis/csharp
 [msgext-ai-sentiment-analysis#python]:samples/msgext-ai-sentiment-analysis/python
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
-[bot-teams-authentication#nodejs]:samples/bot-teams-authentication/nodejs
+[graph-chat-migration#js]:samples\graph-chat-migration\nodejs
+[graph-chat-migration#cs]:samples\graph-chat-migration\csharp
+
 
 [bot-conversation#java]:samples/bot-conversation/java
 [bot-file-upload#java]:samples/bot-file-upload/java
@@ -549,6 +569,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 [bot-conversation#cs]:samples/bot-conversation/csharp
 [bot-auth0-adaptivecard#cs]:samples/bot-auth0-adaptivecard/csharp
+[bot-shared-channel-events#cs]:samples/bot-shared-channel-events/csharp
 [bot-file-upload#cs]:samples/bot-file-upload/csharp
 [bot-initiate-thread-in-channel#cs]:samples/bot-initiate-thread-in-channel/csharp
 [bot-message-reaction#cs]:samples/bot-message-reaction/csharp
