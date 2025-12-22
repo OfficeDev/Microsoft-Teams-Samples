@@ -5,11 +5,20 @@
     "resourceBaseName": {
       "value": "bot${{RESOURCE_SUFFIX}}"
     },
-    "webAppSKU": {
-      "value": "B1"
+    "botAppDomain": {
+      "value": "${{BOT_DOMAIN}}"
     },
     "botDisplayName": {
       "value": "graph-file-fetch"
+    },
+    "aadAppClientId": {
+      "value": "${{BOT_ID}}"
+    },
+    "aadAppClientSecret": {
+      "value": "${{SECRET_BOT_PASSWORD}}"
+    },
+    "microsoftAppTenantId": {
+      "value": "${{AAD_APP_TENANT_ID}}"
     }
   }
 }
