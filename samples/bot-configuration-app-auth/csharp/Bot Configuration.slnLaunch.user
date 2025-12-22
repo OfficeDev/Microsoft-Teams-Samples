@@ -1,35 +1,16 @@
 [
   {
-    "Name": "Microsoft 365 Agents Playground (browser)",
-    "Projects": [
-      {
-        "Path": "M365Agent\\M365Agent.atkproj",
-        "Name": "M365Agent\\M365Agent.atkproj",
-        "Action": "StartWithoutDebugging",
-        "DebugTarget": "Microsoft 365 Agents Playground (browser)"
-      },
-      {
-        "Path": "Bot configuration\\Bot configuration.csproj",
-        "Name": "Bot configuration\\Bot configuration.csproj",
-        "Action": "Start",
-        "DebugTarget": "Microsoft 365 Agents Playground"
-      }
-    ]
-  },
-  {
     "Name": "Microsoft Teams (browser)",
     "Projects": [
       {
-        "Path": "M365Agent\\M365Agent.atkproj",
-        "Name": "M365Agent\\M365Agent.atkproj",
-        "Action": "StartWithoutDebugging",
-        "DebugTarget": "Microsoft Teams (browser)"
-      },
-      {
-        "Path": "Bot configuration\\Bot configuration.csproj",
-        "Name": "Bot configuration\\Bot configuration.csproj",
+        "Path": "Bot configuration\\Bot Configuration.csproj",
         "Action": "Start",
         "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser)"
       }
     ]
   },
@@ -37,16 +18,14 @@
     "Name": "Microsoft Teams (browser) (skip update app)",
     "Projects": [
       {
-        "Path": "M365Agent\\M365Agent.atkproj",
-        "Name": "M365Agent\\M365Agent.atkproj",
-        "Action": "StartWithoutDebugging",
-        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
-      },
-      {
-        "Path": "Bot configuration\\Bot configuration.csproj",
-        "Name": "Bot configuration\\Bot configuration.csproj",
+        "Path": "Bot configuration\\Bot Configuration.csproj",
         "Action": "Start",
         "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
       }
     ]
   }

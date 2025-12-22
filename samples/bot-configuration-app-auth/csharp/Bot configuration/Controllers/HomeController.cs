@@ -1,19 +1,15 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bot_configuration.Controllers
+namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
 {
-    /// <summary>
-    /// HomeController serves the home page for the bot web application
-    /// </summary>
-    public class HomeController : Microsoft.AspNetCore.Mvc.Controller
+    public class HomeController : Controller
     {
         [Route("")]
-        [Route("Home")]
-        [Route("Home/Index")]
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

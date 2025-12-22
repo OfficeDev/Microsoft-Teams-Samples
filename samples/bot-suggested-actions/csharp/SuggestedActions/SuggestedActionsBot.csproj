@@ -6,15 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Content\msteams-16.css" />
-    <None Include="wwwroot\Content\Site.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
-    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.21.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,5 +15,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
+  
+  <ItemGroup>
+      <Folder Include="Images\" />
+    </ItemGroup>
+	
 </Project>

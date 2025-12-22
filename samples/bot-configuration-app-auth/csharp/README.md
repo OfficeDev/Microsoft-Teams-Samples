@@ -77,18 +77,17 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
-3. Setup dev tunnel - point to port 3978
+3. Setup NGROK
+ - Run ngrok - point to port 3978
 
-   Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+    ```bash
+    ngrok http 3978 --host-header="localhost:3978"
+    ```
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
-   ```
-
-   Alternatively, you can also use ngrok:
-
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
    ```
 
 4. Setup for code
@@ -98,10 +97,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - Modify the `/appsettings.Development.json` and fill in the following details:
-  - `ClientId` - Generated from Step 1 while doing AAd app registration in Azure portal.
-  - `ClientSecret` - Generated from Step 1, also referred to as Client secret
-  - `TenantId` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - Modify the `/appsettings.json` and fill in the following details:
+  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{ClientSecret}}` - Generated from Step 1, also referred to as Client secret
 
 - Run the bot from a terminal or from Visual Studio:
 
@@ -112,7 +110,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - Select `Bot Configuration.csproj` file
 
 6. This step is related to Microsoft Teams app manifest
-    - **Edit** the `manifest.json` contained in the `appPackage` or `AppManifest_Hub` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string ` {{BOT_ID}}` 
+    - **Edit** the `manifest.json` contained in the `appPackage` or `AppManifest_Hub` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` 
    - replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `Manifest` or `Manifest_hub` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
@@ -157,7 +155,7 @@ Deploy your project to Azure by following these steps:
 ## Further reading
 
 - [Bot configuration](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/bot-configuration-experience)
-- [Teams Bot Service Documentation](https://docs.botframework.com)
+- [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Send Notification to User in Chat](https://docs.microsoft.com/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
 - [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
