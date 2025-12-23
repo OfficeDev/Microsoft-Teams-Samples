@@ -9,6 +9,7 @@ appsettings.Playground.json
 
 # User-specific files
 *.user
+launchSettings.json
 
 # Build results
 [Dd]ebug/

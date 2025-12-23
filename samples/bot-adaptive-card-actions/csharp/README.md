@@ -109,6 +109,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - Navigate to `samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions` folder
   - Select `AdaptiveCardActions.slnx` solution file
 
+   - Create your local `launchSettings.json` file in the `AdaptiveCardActions/Properties` folder. This file configures how Visual Studio launches and debugs your application, including environment variables and application URLs. Use `launchSettings.example.json` as a template to create your own configuration.
+      
    - Modify the `/appsettings.Development.json` and fill in the following details:
      - `ClientId` - Generated from Step 1 is the application app id
      - `ClientSecret` - Generated from Step 1, also referred to as Client secret
