@@ -164,9 +164,9 @@ jobs:
               name: 'msgext-link-unfurling-reddit'
               version: '6.0.x'
 
-            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSelectionApp.csproj'
+            - project_path: 'samples/app-region-selection/csharp/app-region-selection/app-region-selection.csproj'
               name: 'app-region-selection'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
               name: 'tab-external-auth'
@@ -328,9 +328,9 @@ jobs:
               name: 'meetings-live-caption'
               version: '6.0.x'
 
-            - project_path: 'samples/meetings-transcription/csharp/MeetingTranscription/MeetingTranscription.csproj'
+            - project_path: 'samples/meetings-transcription/csharp/meetings-transcription/meetings-transcription.csproj'
               name: 'meetings-transcription'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Domain.Tests/Microsoft.Teams.Samples.MeetingSigning.Domain.Tests.csproj'
               name: 'meetings-share-to-stage-signing'
@@ -1202,10 +1202,6 @@ jobs:
               name: 'bot-initiate-thread-in-channel'
               version: '3.10.x'
 
-            - project_path: 'samples/graph-pinned-messages/python'
-              name: 'graph-pinned-messages'
-              version: '3.10.x'
-
             - project_path: 'samples/msgext-search/python'
               name: 'msgext-search'
               version: '3.10.x'
@@ -1220,10 +1216,6 @@ jobs:
 
             - project_path: 'samples/msgext-link-unfurling/python'
               name: 'msgext-link-unfurling'
-              version: '3.10.x'
-
-            - project_path: 'samples/msgext-message-reminder/python'
-              name: 'msgext-message-reminder'
               version: '3.10.x'
               
             - project_path: 'samples/msgext-search-auth-config/python'
@@ -1252,10 +1244,6 @@ jobs:
 
             - project_path: 'samples/agent-knowledge-hub/python'
               name: 'agent-knowledge-hub'
-              version: '3.13.x'
-
-            - project_path: 'samples/bot-all-cards/python'
-              name: 'bot-all-cards'
               version: '3.13.x'
 
       fail-fast: false

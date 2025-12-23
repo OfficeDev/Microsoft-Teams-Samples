@@ -3,9 +3,12 @@
     // Launch project within Microsoft 365 Agents Playground
     "Microsoft 365 Agents Playground (browser)": {
       "commandName": "Project",
-      "environmentVariables": { "UPDATE_TEAMS_APP": "false", "DEFAULT_CHANNEL_ID": "emulator" },
+      "environmentVariables": { 
+        "UPDATE_TEAMS_APP": "false",
+        "M365_AGENTS_PLAYGROUND_TARGET_SDK": "teams-ai-v2-dotnet"
+      },
       "launchTestTool": true,
-      "launchUrl": "http://localhost:56150"
+      "launchUrl": "http://localhost:56150",
     },
     // Launch project within Teams
     "Microsoft Teams (browser)": {

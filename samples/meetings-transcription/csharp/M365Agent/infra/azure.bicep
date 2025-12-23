@@ -43,16 +43,16 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
           value: '1'
         }
         {
-          name: 'Connections__BotServiceConnection__Settings__ClientId'
+          name: 'Teams__ClientId'
           value: identity.properties.clientId
         }
         {
-          name: 'Connections__BotServiceConnection__Settings__TenantId'
+          name: 'Teams__TenantId'
           value: identity.properties.tenantId
         }
         {
-          name: 'TokenValidation__Audiences__0'
-          value: identity.properties.clientId
+          name: 'Teams__BotType'
+          value: 'UserAssignedMsi'
         }
       ]
       ftpsState: 'FtpsOnly'
