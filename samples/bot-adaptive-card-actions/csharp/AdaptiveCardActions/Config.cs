@@ -1,0 +1,17 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+namespace AdaptiveCardActions
+{
+    public class ConfigOptions
+    {
+        public TeamsConfigOptions Teams { get; set; }
+    }
+
+    public class TeamsConfigOptions
+    {
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
+        public string TenantId { get; set; }
+    }
+}

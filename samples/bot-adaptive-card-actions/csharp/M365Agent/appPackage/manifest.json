@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
   "manifestVersion": "1.22",
   "version": "1.0.0",
@@ -24,7 +24,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "personal",
         "copilot"
@@ -40,7 +40,7 @@
     "customEngineAgents": [
       {
         "type": "bot",
-        "id": "${{AAD_APP_CLIENT_ID}}"
+        "id": "${{BOT_ID}}"
       }
     ]
   }

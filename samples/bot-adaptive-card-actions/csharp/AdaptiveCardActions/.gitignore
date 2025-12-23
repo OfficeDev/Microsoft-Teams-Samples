@@ -5,9 +5,11 @@ env/.env.*.user
 env/.env.local
 appsettings.Development.json
 .deployment
+appsettings.Playground.json
 
 # User-specific files
 *.user
+launchSettings.json
 
 # Build results
 [Dd]ebug/
@@ -23,3 +25,7 @@ bld/
 
 # Notification local store
 .notification.localstore.json
+.notification.playgroundstore.json
+
+# devTools
+devTools/
