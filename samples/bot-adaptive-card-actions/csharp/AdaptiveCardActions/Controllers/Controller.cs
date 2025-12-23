@@ -8,6 +8,7 @@ using Microsoft.Teams.Apps.Annotations;
 using Microsoft.Teams.Cards;
 using Microsoft.Teams.Api;
 using Microsoft.Teams.Api.Cards;
+using Microsoft.Teams.Common;
 
 namespace AdaptiveCardActions.Controllers
 {
@@ -97,151 +98,133 @@ namespace AdaptiveCardActions.Controllers
         // Sends the Adaptive Card Actions card using Microsoft.Teams.Cards API
         private async Task SendAdaptiveCardActionsAsync(IContext.Client client)
         {
-            var cardJson = """
+            // Build the innermost card for the nested ShowCard action
+            var nestedCard = new AdaptiveCard
             {
-              "type": "AdaptiveCard",
-              "version": "1.0",
-              "body": [
+                Body = new List<CardElement>
                 {
-                  "type": "TextBlock",
-                  "text": "Adaptive Card Actions"
-                }
-              ],
-              "actions": [
-                {
-                  "type": "Action.OpenUrl",
-                  "title": "Action Open URL",
-                  "url": "https://adaptivecards.io"
+                    new TextBlock("Welcome To New Card")
                 },
+                Actions = new List<Microsoft.Teams.Cards.Action>
                 {
-                  "type": "Action.ShowCard",
-                  "title": "Action Submit",
-                  "card": {
-                    "type": "AdaptiveCard",
-                    "version": "1.5",
-                    "body": [
-                      {
-                        "type": "Input.Text",
-                        "id": "name",
-                        "label": "Please enter your name:",
-                        "isRequired": true,
-                        "errorMessage": "Name is required"
-                      }
-                    ],
-                    "actions": [
-                      {
-                        "type": "Action.Submit",
-                        "title": "Submit"
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "Action.ShowCard",
-                  "title": "Action ShowCard",
-                  "card": {
-                    "type": "AdaptiveCard",
-                    "version": "1.0",
-                    "body": [
-                      {
-                        "type": "TextBlock",
-                        "text": "This card's action will show another card"
-                      }
-                    ],
-                    "actions": [
-                      {
-                        "type": "Action.ShowCard",
-                        "title": "Action.ShowCard",
-                        "card": {
-                          "type": "AdaptiveCard",
-                          "body": [
-                            {
-                              "type": "TextBlock",
-                              "text": "Welcome To New Card"
-                            }
-                          ],
-                          "actions": [
-                            {
-                              "type": "Action.Submit",
-                              "title": "Click Me",
-                              "data": {
-                                "value": "Button has Clicked"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
+                    new SubmitAction
+                    {
+                        Title = "Click Me",
+                        Data = new Union<string, SubmitActionData>("{\"value\": \"Button has Clicked\"}")
+                    }
                 }
-              ]
-            }
-            """;
+            };
 
-            var card = AdaptiveCard.Deserialize(cardJson);
+            // Build the middle card for the Action ShowCard
+            var showCard = new AdaptiveCard
+            {
+                Body = new List<CardElement>
+                {
+                    new TextBlock("This card's action will show another card")
+                },
+                Actions = new List<Microsoft.Teams.Cards.Action>
+                {
+                    new ShowCardAction
+                    {
+                        Title = "Action.ShowCard",
+                        Card = nestedCard
+                    }
+                }
+            };
+
+            // Build the card for Action Submit with input field
+            var submitCard = new AdaptiveCard
+            {
+                Version = new Microsoft.Teams.Cards.Version("1.5"),
+                Body = new List<CardElement>
+                {
+                    new TextInput
+                    {
+                        Id = "name",
+                        Label = "Please enter your name:",
+                        IsRequired = true,
+                        ErrorMessage = "Name is required"
+                    }
+                },
+                Actions = new List<Microsoft.Teams.Cards.Action>
+                {
+                    new SubmitAction { Title = "Submit" }
+                }
+            };
+
+            // Build the main card with all actions
+            var card = new AdaptiveCard
+            {
+                Body = new List<CardElement>
+                {
+                    new TextBlock("Adaptive Card Actions")
+                },
+                Actions = new List<Microsoft.Teams.Cards.Action>
+                {
+                    new OpenUrlAction("https://adaptivecards.io")
+                    {
+                        Title = "Action Open URL"
+                    },
+                    new ShowCardAction
+                    {
+                        Title = "Action Submit",
+                        Card = submitCard
+                    },
+                    new ShowCardAction
+                    {
+                        Title = "Action ShowCard",
+                        Card = showCard
+                    }
+                }
+            };
+
             await client.Send(card);
         }
 
         // Sends the Suggested Actions card using Microsoft.Teams.Cards API
         private async Task SendSuggestedActionsCardAsync(IContext.Client client)
         {
-            var cardJson = """
+            var card = new AdaptiveCard
             {
-              "type": "AdaptiveCard",
-              "version": "1.0",
-              "body": [
+                Body = new List<CardElement>
                 {
-                  "type": "TextBlock",
-                  "text": "**Welcome to bot Suggested actions**"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "please use below commands, to get response form the bot."
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "- Red \r- Blue \r - Yellow",
-                  "wrap": true
+                    new TextBlock("**Welcome to bot Suggested actions**"),
+                    new TextBlock("please use below commands, to get response form the bot."),
+                    new TextBlock("- Red \r- Blue \r - Yellow")
+                    {
+                        Wrap = true
+                    }
                 }
-              ]
-            }
-            """;
+            };
 
-            var card = AdaptiveCard.Deserialize(cardJson);
             await client.Send(card);
         }
 
         // Sends the Toggle Visibility card using Microsoft.Teams.Cards API
         private async Task SendToggleVisibilityCardAsync(IContext.Client client)
         {
-            var cardJson = """
+            var card = new AdaptiveCard
             {
-              "type": "AdaptiveCard",
-              "version": "1.0",
-              "body": [
+                Body = new List<CardElement>
                 {
-                  "type": "TextBlock",
-                  "text": "**Action.ToggleVisibility example**: click the button to show or hide a welcome message"
+                    new TextBlock("**Action.ToggleVisibility example**: click the button to show or hide a welcome message"),
+                    new TextBlock("**Hello World!**")
+                    {
+                        Id = "helloWorld",
+                        IsVisible = false,
+                        Size = new TextSize("extraLarge")
+                    }
                 },
+                Actions = new List<Microsoft.Teams.Cards.Action>
                 {
-                  "type": "TextBlock",
-                  "id": "helloWorld",
-                  "isVisible": false,
-                  "text": "**Hello World!**",
-                  "size": "extraLarge"
+                    new ToggleVisibilityAction
+                    {
+                        Title = "Click me!",
+                        TargetElements = new Union<IList<string>, IList<TargetElement>>((IList<string>)new List<string> { "helloWorld" })
+                    }
                 }
-              ],
-              "actions": [
-                {
-                  "type": "Action.ToggleVisibility",
-                  "title": "Click me!",
-                  "targetElements": [ "helloWorld" ]
-                }
-              ]
-            }
-            """;
+            };
 
-            var card = AdaptiveCard.Deserialize(cardJson);
             await client.Send(card);
         }
 
