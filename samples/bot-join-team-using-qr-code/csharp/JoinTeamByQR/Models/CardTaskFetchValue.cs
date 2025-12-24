@@ -1,23 +1,13 @@
-﻿// <copyright file="CardTaskFetchValue.cs" company="Microsoft">
-// Copyright (c) Microsoft. All rights reserved.
-// </copyright>
-
-using Newtonsoft.Json;
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 namespace JoinTeamByQR.Models
 {
     /// <summary>
-    /// Card task fetch value model class.
+    /// Task module fetch value.
     /// </summary>
     public class CardTaskFetchValue<T>
     {
-        [JsonProperty("type")]
-        public object Type { get; set; } = "task/fetch";
-
-        [JsonProperty("id")]
         public object Id { get; set; }
-
-        [JsonProperty("data")]
-        public T Data { get; set; }
     }
 }

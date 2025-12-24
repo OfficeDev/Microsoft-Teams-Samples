@@ -1,16 +1,15 @@
-﻿@page
-@model JoinTeamByQR.Pages.generateModel
-@{
-}
-
+<!DOCTYPE html>
+<html>
 <head>
+    <meta charset="utf-8" />
+    <title>Generate QR Code</title>
     <style>
         #mainDiv {
             padding-left: 5%;
             padding-top: 2%;
         }
     </style>
-    <script src="~/js/qrcode.js"></script>
+    <script src="/js/qrcode.js"></script>
     <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
             integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
             crossorigin="anonymous"></script>
@@ -24,7 +23,7 @@
              getTeams();
         })
 
-        // This method wil fetch team data that will be used for creating QR code.
+        // This method will fetch team data that will be used for creating QR code.
         function getTeams() {
             QR_CODE = new QRCode("qrcode", {
                 width: 160,
@@ -35,7 +34,7 @@
             });
 
             $.ajax({
-                url: '/getTeams',
+                url: '/api/teams',
                 type: "GET",
                 dataType: "json",
                 success: function (response) {
@@ -96,10 +95,10 @@
                     for (const val of teamDetails) {
                         if (val.teamId == decodedText) {
 
-                            microsoftTeams.getContext(function (context) {
+                            microsoftTeams.app.getContext().then((context) => {
                                 var teamData = {
                                     teamId: decodedText,
-                                    userId: context.userObjectId
+                                    userId: context.user.id
                                 }
                                 microsoftTeams.dialog.url.submit(teamData);
                             });
@@ -125,3 +124,4 @@
         </div>
     </div>
 </body>
+</html>

@@ -1,6 +1,5 @@
-﻿// <copyright file="TokenState.cs" company="Microsoft">
-// Copyright (c) Microsoft. All rights reserved.
-// </copyright
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 namespace JoinTeamByQR.Models
 {
@@ -9,8 +8,8 @@ namespace JoinTeamByQR.Models
     /// </summary>
     public class TeamData
     {
-        public string teamId { get; set; }
+        public string TeamId { get; set; }
 
-        public string teamName { get; set; }
+        public string TeamName { get; set; }
     }
 }
