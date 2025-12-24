@@ -13,7 +13,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
  */
 class TabConfig extends React.Component {
 
-  render() {
+  componentDidMount() {
     microsoftTeams.app.initialize().then(() => {
       /**
        * When the user clicks "Save", save the url for your configured tab.
@@ -41,7 +41,9 @@ class TabConfig extends React.Component {
        */
       microsoftTeams.pages.config.setValidityState(true);
     });
+  }
 
+  render() {
       return (
         <div>
           <h1>Tab Configuration</h1>

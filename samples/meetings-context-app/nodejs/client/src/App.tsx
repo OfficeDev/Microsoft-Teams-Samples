@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import { app } from "@microsoft/teams-js";
 import { TeamsThemeContext, getContext, ThemeStyle } from 'msteams-ui-components-react';
-import { FluentProvider, teamsDarkTheme, teamsHighContrastTheme } from '@fluentui/react-components'
+import { FluentProvider, teamsDarkTheme, teamsLightTheme, teamsHighContrastTheme } from '@fluentui/react-components'
 import Tab from './components/tab';
 import TabConfig from './components/tab-config';
 
@@ -24,8 +24,8 @@ class App extends React.Component<{}, IAppState> {
     }
   }
 
-  public componentDidMount() {
-    app.initialize();
+  public async componentDidMount() {
+    await app.initialize();
     app.getContext().then((context) => {
       let theme = context.app.theme || "";
       this.updateTheme(theme);
@@ -64,7 +64,7 @@ class App extends React.Component<{}, IAppState> {
       );
     } else {
       return (
-        <FluentProvider theme={teamsDarkTheme}>
+        <FluentProvider theme={teamsLightTheme}>
           <div className="defaultContainer">
             {this.getAppDom()}
           </div>
