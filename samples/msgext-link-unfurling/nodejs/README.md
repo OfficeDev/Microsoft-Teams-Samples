@@ -25,6 +25,7 @@ If you copy and paste the link `https://teamstestdomain.com/teams/test` or your 
 * Message Extensions
 * Search Commands
 * Link Unfurling
+* Agent SDK
 
 ## Interaction with bot
 ![Link Unfurling](Images/LinkUnfurling.gif)
@@ -133,13 +134,30 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 > Note the Teams `manifest.json` for this sample also includes a Search Query. This Messaging Extension is only introduced in order to enable installation, because there is no mechanism for installing a link unfurling feature in isolation.
 
-![InstallApp ](Images/InstallApp.png)
+![InstallApp ](Images/1.Install_App.png)
 
 If you copy and paste a link from https://teamstestdomain.com/teams/test into the compose message area the link will unfurl.
-![Link-Unfurling ](Images/Link-Unfurling.png)
 
-![Link-Unfurling ](Images/Link-Unfurling1.png)
+**Opening the App**
+![Link-Unfurling ](Images/2.Open_App.png)
 
+**Collapsed Preview of Link Unfurling**
+![Link-Unfurling ](Images/3.Collapse_Preview.png)
+
+**Expanded Preview of Link Unfurling**
+![Link-Unfurling ](Images/4.Expand_Preview.png)
+
+**Both Expanded and Collapsed Preview States**
+![Link-Unfurling ](Images/5.Both_Expand_Collapse_Preview.png)
+
+**Link Unfurling Search Test Results**
+![Link-Unfurling ](Images/6.Link_unfurling_Search_Test_Results.png)
+
+**Link Unfurling Search Card**
+![Link-Unfurling ](Images/7.Link_Unfurling_Search_Card.png)
+
+**Note: Link Unfurling Not Working in Outlook with Agent SDK**
+![Link-Unfurling ](Images/8.Not_Working_In_Outlook_With_Agent_SDK.png)
 
 ## Deploy the bot to Azure
 
@@ -149,7 +167,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Link unfurling](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet%2Cadvantages)
 - [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Agent SDK Documentation](https://learn.microsoft.com/microsoft-365-copilot/extensibility/overview-agent-sdk)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 

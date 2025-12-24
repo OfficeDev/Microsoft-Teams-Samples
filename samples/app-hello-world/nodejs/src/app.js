@@ -1,93 +1,118 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+/**
+ * This sample demonstrates a simple Teams Agent / Copilot app using
+ * the Microsoft Agents SDK (@microsoft/agents-hosting).
+ *
+ * Key points:
+ *  - No dependency on 'botbuilder'
+ *  - Uses CloudAdapter from Agents Hosting SDK
+ *  - Supports message extensions and tab routes
+ *  - Works for Teams agents or Copilot extensibility scenarios
+ */
+
 import path from "path";
-import restify from "restify";
+import express from "express";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
 import { EchoBot } from "./bot.js";
 import tabs from "./tabs.js";
-import MessageExtension from "./message-extension.js";
-import {
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication,
-    MemoryStorage,
-    ConversationState,
-    ActivityTypes,
-} from "botbuilder";
 
-// Load environment variables from .env (at project root)
-const ENV_FILE = path.join(__dirname, "../.env");
-require("dotenv").config({ path: ENV_FILE });
+// Import from @microsoft/agents-hosting (CommonJS module)
+import AgentsHosting from "@microsoft/agents-hosting";
 
-// Configure authentication using environment variables
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+const { CloudAdapter, MemoryStorage, ConversationState, loadPrevAuthConfigFromEnv } = AgentsHosting;
 
-// Define storage and conversation state
+// Load environment variables from .env file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, "../.env") });
+
+// Initialize adapter and conversation state
 const memoryStorage = new MemoryStorage();
 const conversationState = new ConversationState(memoryStorage);
 
-// Create CloudAdapter with authentication
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+// Create adapter.
+// Prefer new env variable names when available, otherwise fall back to classic bot settings.
+const authConfig = process.env.clientId ? undefined : loadPrevAuthConfigFromEnv();
+const adapter = new CloudAdapter(authConfig);
 
-// Global error handler for the adapter
+// Global error handler for adapter
 adapter.onTurnError = async (context, error) => {
     console.error(`[onTurnError] Unhandled error: ${error}`);
     console.error(error.stack);
 
     try {
-        // Clear state in case it is corrupted
+        // Reset conversation state if something went wrong
         await conversationState.delete(context);
     } catch (err) {
         console.error(`Error clearing conversation state: ${err}`);
     }
 
-    // Send generic error message to user
-    await context.sendActivity("The bot encountered an error.");
-    await context.sendActivity("Please try again later.");
+    // Send error message to the user
+    await context.sendActivity("The agent encountered an error. Please try again later.");
 };
 
-// Create HTTP server with Restify
-const server = restify.createServer({
-    formatters: {
-        "text/html": (req, res, body) => body, // return HTML as-is
-    },
+// Create and configure the HTTP server using Express
+const server = express();
+
+// Enable JSON and URL-encoded body parsing middleware
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
+// Serve static files such as tab pages or assets
+server.use(express.static(path.join(__dirname, "static")));
+
+// Simple health check endpoint for diagnostics
+server.get('/healthz', (req, res) => {
+    res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
-// Enable body parser (required for bot to process messages)
-server.use(restify.plugins.bodyParser());
-
-// Serve static files (for tabs, UI assets, etc.)
-server.get(
-    "/*",
-    restify.plugins.serveStatic({
-        directory: path.join(__dirname, "static"),
-    })
-);
-
-// Start the server
-server.listen(process.env.port || process.env.PORT || 3978, () => {
-    console.log(`${server.name} listening to ${server.url}`);
+// Start the web server
+const port = process.env.PORT || 3978;
+server.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
 });
 
-// Initialize bot and message extension
-tabs(server);
+// Initialize bot logic (now includes message extension support)
 const bot = new EchoBot();
-const messageExtension = new MessageExtension();
 
-// Handle incoming requests from Teams
+// Register tab routes
+tabs(server);
+
+// Handle incoming Teams or Copilot activities
 server.post("/api/messages", async (req, res) => {
-    console.log("Received request at /api/messages");
     await adapter.process(req, res, async (context) => {
-        console.log("Inside adapter.process");
+        const originalSendActivity = context.sendActivity.bind(context);
+        let replied = false;
+        context.sendActivity = async (...args) => {
+            replied = true;
+            return originalSendActivity(...args);
+        };
 
-        // If activity is an invoke, handle message extension
-        if (context.activity.type === ActivityTypes.Invoke) {
-            await messageExtension.run(context);
-        } else {
-            // Otherwise, pass to bot logic
-            await bot.run(context);
+        let invokeResponse;
+        try {
+            invokeResponse = await bot.run(context);
+        } catch (err) {
+            console.error('[bot] run error', err);
+            if (context.activity.type === 'invoke') {
+                invokeResponse = { status: 200, body: { composeExtension: { type: 'result', attachmentLayout: 'list', attachments: [] } } };
+            } else {
+                await context.sendActivity('The agent encountered an error handling your message.');
+            }
         }
 
-        // Save state changes
+        if (context.activity.type === 'invoke') {
+            if (invokeResponse) {
+                context.turnState.set('invokeResponse', invokeResponse);
+            } else {
+                context.turnState.set('invokeResponse', { status: 200, body: { composeExtension: { type: 'result', attachmentLayout: 'list', attachments: [] } } });
+            }
+        } else if (context.activity.type === 'message' && !replied) {
+            await context.sendActivity('Echo active (diagnostic fallback)');
+        }
+
         await conversationState.saveChanges(context, false);
     });
 });

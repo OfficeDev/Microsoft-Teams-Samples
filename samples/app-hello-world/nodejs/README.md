@@ -22,7 +22,7 @@ extensions:
     - Restify
     - GitHub Copilot Agent
   createdDate: 10/19/2022 10:02:21 PM
-  updatedDate: 06/26/2025 12:00:00 PM
+  updatedDate: 10/30/2025 12:00:00 PM
 urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs-copilot-optimized
 copilot:
   optimized: true
@@ -52,7 +52,7 @@ For more Teams samples and documentation, visit the main repository:
 
 ## Included Features
 * Tabs
-* Bots
+* Microsoft 365 Agents SDK
 * Messaging Extensions
 
 ## Interaction with app
@@ -330,7 +330,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Microsoft 365 Agents SDK](https://learn.microsoft.com/en-us/microsoft-365/agents-sdk)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
