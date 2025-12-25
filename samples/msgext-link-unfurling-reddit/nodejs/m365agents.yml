@@ -124,4 +124,6 @@ publish:
     # the specified environment variable(s).
     writeToEnvironmentFile:
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: 08f760f9-4a79-42e2-a731-8e11df80ab4c
+
+additionalMetadata:
+  sampleTag: Microsoft-Teams-Samples:reddit-link-unfurling
