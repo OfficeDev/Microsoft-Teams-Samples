@@ -4,7 +4,7 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:tab-channel-group-quickstart-ts
+  sampleTag: Microsoft-Teams-Samples:tab-app-navigation
 
 environmentFolderPath: ./env
 projectId:
