@@ -15,11 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-c
 
 # Teams Conversation Bot SSO quick-start
 
-This sample demonstrates how to implement Single Sign-On (SSO) for Teams bots using Azure Active Directory and the Bot Framework. It includes comprehensive setup instructions for authentication, tunneling, and deploying to Azure, offering a streamlined way to authenticate users and access Microsoft Graph data directly within Teams.
+This sample demonstrates how to implement Single Sign-On (SSO) for Teams bots using Azure Active Directory and the Azzure Bot Service. It includes comprehensive setup instructions for authentication, tunneling, and deploying to Azure, offering a streamlined way to authenticate users and access Microsoft Graph data directly within Teams.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with SSO in a bot for Microsoft Teams.
-
-The focus of this sample is how to use the Bot Framework support for OAuth SSO in your bot. Teams behaves slightly differently than other channels in this regard. Specifically an Invoke Activity is sent to the bot rather than the Event Activity used by other channels. _This Invoke Activity must be forwarded to the dialog if the OAuthPrompt is being used._ This is done by subclassing the ActivityHandler and this sample includes a reusable TeamsActivityHandler. This class is a candidate for future inclusion in the Bot Framework SDK.
+The focus of this sample is how to use the Azure bot service support for OAuth SSO in your bot. Teams behaves slightly differently than other channels in this regard. Specifically an Invoke Activity is sent to the bot rather than the Event Activity used by other channels. _This Invoke Activity must be forwarded to the dialog if the OAuthPrompt is being used._ This is done by subclassing the ActivityHandler and this sample includes a reusable TeamsActivityHandler. This class is a candidate for future inclusion in the Bot Framework SDK.
 
 The sample uses the bot authentication capabilities in [Azure Bot Service](https://docs.botframework.com), providing features to make it easier to develop a bot that authenticates users to various identity providers such as Microsoft Entra ID, GitHub, Uber, etc. The OAuth token is then used to make basic Microsoft Graph queries.
 
@@ -70,17 +68,19 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
-2. Run ngrok - point to port 3978
+2. Run DevTunnel - point to port 3978
 
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
-
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+  Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
+
+  Alternatively you can use ngrok
+
+  ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
 
 3. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
@@ -105,12 +105,12 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-   - Modify the `/appsettings.json` and fill in the following details:
-     - `{{TODO: MicrosoftAppId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
+   - Modify the `/appsettings.Development.json` and fill in the following details:
+     - `{{TODO: ClientId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
      - `{{ TODO: ClientSecret}}` - Generated from Step 1, also referred to as Client secret
      - `{{ TODO: ConnectionName}}` - Generated from Step 1, Connection Setting.
-     - `MicrosoftAppType` - Set this as MultiTenant to if your bot is supported on multiple tenants; SingleTenant otherwise.
-     - `MicrosoftAppTenantId` - Set your tenantId here if you are using single tenant app registration.
+     - `BotType` - Set this as MultiTenant to if your bot is supported on multiple tenants; SingleTenant otherwise.
+     - `TenantId` - Set your tenantId here if you are using single tenant app registration.
      
   
   - If you are using Visual Studio
@@ -121,12 +121,9 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Press `F5` to run this project
     
 5.  Manually update the manifest.json
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `appsettings.json` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your `BOT_ID` (that was created in step1.1 and is the same value of BOT_ID in `appsettings.json` file) *everywhere* you see the place holder string `TEAMS_APP_ID` and `BOT_ID` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
-
-**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/csharp_dotnetcore/BotConversationSsoQuickstart/AdapterWithErrorHandler.cs#L37) and put your debugger for local debug.
-
 
 ## Running the sample
 
@@ -140,7 +137,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Azure Bot Service Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Portal](https://portal.azure.com)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
