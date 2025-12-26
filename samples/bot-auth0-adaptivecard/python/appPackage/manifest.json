@@ -1,30 +1,30 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.23",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Auth0 Bot",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.teams.com/privacy",
-    "termsOfUseUrl": "https://www.teams.com/termsofuser"
-  },
-  "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
     "short": "Auth0 Bot",
     "full": "Auth0 Bot"
   },
   "description": {
-    "short": "Demo Auth0 login sample in a Teams bot for user authentication",
+    "short": "Demo Auth0 login sample in a Teams bot",
     "full": "This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details."
   },
-  "accentColor": "#FFFFFF",
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "personal",
         "groupChat",
