@@ -1,6 +1,5 @@
-﻿// <copyright file="TokenState.cs" company="Microsoft">
-// Copyright (c) Microsoft. All rights reserved.
-// </copyright
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 using Newtonsoft.Json;
 
@@ -9,12 +8,12 @@ namespace JoinTeamByQR.Models
     /// <summary>
     /// Class with taskmodule response model.
     /// </summary>
-    public class ResponseData<T>
+    public class ResponseData
     {
         [JsonProperty("teamId")]
-        public object TeamId { get; set; }
+        public string TeamId { get; set; }
 
         [JsonProperty("userId")]
-        public object UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

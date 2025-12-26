@@ -1,17 +1,18 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using JoinTeamByQR.Models;
 using Microsoft.Graph;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace JoinTeamByQR.helper
+namespace JoinTeamByQR.Helpers
 {
+    /// <summary>
+    /// Helper class for joining team operations.
+    /// </summary>
     public class JoinTeamHelper
     {
-        // Helper method to get list of all teams of organization.
+        /// <summary>
+        /// Helper method to get list of all teams of organization.
+        /// </summary>
         public static async Task<List<TeamData>> GetAllTeams(string tokenResponse)
         {
             if (tokenResponse == null)
@@ -26,14 +27,16 @@ namespace JoinTeamByQR.helper
 
                 return teamData;
             }
-            catch (ServiceException ex)
+            catch (ServiceException)
             {
-                throw ex;
+                throw;
             }
         }
 
-        // Helper method to add user to the team.
-        public static void AddUserToTeam(string tokenResponse, string teamId, string userId)
+        /// <summary>
+        /// Helper method to add user to the team.
+        /// </summary>
+        public static async Task AddUserToTeam(string tokenResponse, string teamId, string userId)
         {
             if (string.IsNullOrEmpty(tokenResponse))
             {
@@ -51,7 +54,7 @@ namespace JoinTeamByQR.helper
             }
 
             var client = new SimpleGraphClient(tokenResponse);
-            client.AddUserToTeam(teamId,userId);
+            await client.AddUserToTeam(teamId, userId);
         }
     }
 }

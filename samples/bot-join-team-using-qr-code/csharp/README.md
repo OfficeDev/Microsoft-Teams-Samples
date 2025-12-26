@@ -90,17 +90,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Add all the scopes configured when specifying permissions to downstream APIs in step 1
     - Click "Save"
 
-3. Run ngrok - point to port 3978
 
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
+3. Run devtunnel - point to port 3978
 
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
+Alternatively you can use ngrok
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
 
 4. Setup for code
 
@@ -109,12 +110,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - Modify the `/appsettings.json` and fill in the following details:
-   - `{{ MicrosoftAppId }}` - Generated from Step 1 is the application app id
-   - `{{ MicrosoftAppPassword }}` - Generated from Step 1, also referred to as Client secret
-   - `{{ ConnectionName }}` - Generated from Step 2, is the name that we provide while adding OAuth connection setting in Azure Bot resource.
+  - Modify the `/appsettings.Development.json` and fill in the following details:
+   - `ClientId` - Generated from Step 1 is the application app id
+   - `ClientSecret` - Generated from Step 1, also referred to as Client secret
+   - `ConnectionName` - Generated from Step 2, is the name that we provide while adding OAuth connection setting in Azure Bot resource.
     Please follow [Add authentication to bot](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to configure the connection.
-   - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+   - `ApplicationBaseUrl` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
    
    - In a terminal, navigate to `JoinTeamByQR`
 
@@ -143,9 +144,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 5) Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `TEAMS_APP_ID` and `BOT_ID` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{MicrosoftAppId}}"` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `"api://botid-{{MicrosoftAppId}}"`.
+     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{BOT_ID}}"` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `"api://botid-{{BOT_ID}}"`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -153,8 +154,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
  
 ## Running the sample
 
@@ -181,7 +180,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

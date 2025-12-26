@@ -66,7 +66,7 @@ jobs:
 
             - project_path: 'samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR/JoinTeamByQR.csproj'
               name: 'bot-join-team-using-qr-code'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
               name: 'bot-people-picker-adaptive-card'
