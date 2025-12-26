@@ -2,22 +2,22 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace MessagingExtensionReminder.Models
 {
     /// <summary>
     /// Location details model class.
     /// </summary>
-    public class TaskDetails<T>
+    public class TaskDetails
     {
-        [JsonProperty("title")]
-        public object Title { get; set; }
+        [JsonPropertyName("title")]
+        public string? Title { get; set; }
 
-        [JsonProperty("description")]
-        public object Description { get; set; }
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
 
-        [JsonProperty("dateTime")]
-        public object DateTime { get; set; }
+        [JsonPropertyName("dateTime")]
+        public DateTime? DateTime { get; set; }
     }
 }

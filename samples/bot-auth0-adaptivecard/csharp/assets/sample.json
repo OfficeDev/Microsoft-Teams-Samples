@@ -9,7 +9,7 @@
       "This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card"
     ],
     "creationDateTime": "2025-04-30",
-    "updateDateTime": "2025-04-30",
+    "updateDateTime": "2025-10-12",
     "products": [
       "Teams"
     ],

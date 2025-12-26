@@ -81,6 +81,11 @@ the Teams service needs to call into the bot.
 3) Create [Azure Bot resource resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
     - Use the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages` used by this sample
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - Navigate to **API Permissions** and add the following:
+      - Select **Add a permission** > **Microsoft Graph** > **Delegated permissions**
+      - Add **User.Read** (enabled by default)
+      - Click **Add permissions**
+      - Grant admin consent for the required permissions
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
 
 4) Setup Auth0 Application
@@ -110,23 +115,27 @@ __*Configure Application Settings:*__
 
 7) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-8) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+8) Update the `.env` file to include your bot configuration and Auth0 details:
+   ```
+   CLIENT_ID=<Your Microsoft App Id>
+   CLIENT_SECRET=<Your Microsoft App Password>
+   TENANT_ID=<Your Tenant Id>
+   BOT_ENDPOINT=<Your bot endpoint URL>
+   AUTH0_CLIENT_ID=<Your Auth0 Client Id>
+   AUTH0_CLIENT_SECRET=<Your Auth0 Client Secret>
+   AUTH0_DOMAIN=<Your Auth0 domain (e.g., your-tenant.auth0.com)>
+   ```
 
-9) Update the `.env` file to include your Auth0 configuration details:
-   AUTH0_CLIENT_ID: Found in your Auth0 application settings.
-   AUTH0_CLIENT_SECRET: Found in your Auth0 application settings.
-   AUTH0_DOMAIN: Your Auth0 domain (e.g., your-tenant.auth0.com)
-
-10) Run your app with `python app.py`
+9) Run your app with `python app.py`
 
 ### 4. Setup Manifest for Teams
 
  - **This step is specific to Teams.**
 
-    - **Edit** the `manifest.json` contained in the `bot-auth0-adaptivecard/python/appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `bot-auth0-adaptivecard/python/appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` and `validDomains`. Replace `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-    - **Zip** up the contents of the `bot-auth0-adaptivecard/python/appManifest` folder to create a `manifest.zip`(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `bot-auth0-adaptivecard/python/appPackage` folder to create a `manifest.zip`(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
@@ -149,7 +158,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams SDK](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/teams-conversation-ai-overview)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

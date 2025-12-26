@@ -174,7 +174,7 @@ jobs:
 
             - project_path: 'samples/tab-conversations/csharp/TabConversation/TabConversation.csproj'
               name: 'tab-conversations'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/tab-product-inspection/csharp/ProductInspection/ProductInspection.csproj'
               name: 'tab-product-inspection'
@@ -190,7 +190,7 @@ jobs:
 
             - project_path: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
               name: 'msgext-message-reminder'
-              version: '6.0.x'
+              version: '10.0.x'
               
             - project_path: 'samples/msgext-search-sso-config/csharp/TeamsMessagingExtensionsSearchSSO.csproj'
               name: 'msgext-search-sso-config'
@@ -494,7 +494,7 @@ jobs:
 
             - project_path: 'samples/bot-auth0-adaptivecard/csharp/TeamsAuth0Bot.csproj'
               name: 'bot-auth0-adaptivecard'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/agent-knowledge-hub/csharp/AgentKnowledgeHub/AgentKnowledgeHub.csproj'
               name: 'agent-knowledge-hub'

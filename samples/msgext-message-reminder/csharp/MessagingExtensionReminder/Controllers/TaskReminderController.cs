@@ -1,116 +1,52 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AdaptiveCards;
+using System.Collections.Concurrent;
 using MessagingExtensionReminder.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MessagingExtensionReminder.Controllers
 {
-    /// <summary>
-    /// Class with properties related to task reminder.
-    /// </summary>
+    /// Controller to handle task reminder API calls.
     [Route("api/task")]
     [ApiController]
     public class TaskReminderController : ControllerBase
     {
-        private readonly CloudAdapter _adapter;
-        private readonly string _appId;
         private readonly ConcurrentDictionary<string, List<SaveTaskDetail>> _taskDetails;
-        private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
-
-        public TaskReminderController(CloudAdapter adapter,
-          IConfiguration configuration,
-          ConcurrentDictionary<string, ConversationReference> conversationReferences,
-          ConcurrentDictionary<string, List<SaveTaskDetail>> taskDetails)
+        private readonly ConcurrentDictionary<string, Microsoft.Teams.Api.ConversationReference> _conversationReferences;
+        public TaskReminderController(
+            ConcurrentDictionary<string, List<SaveTaskDetail>> taskDetails,
+            ConcurrentDictionary<string, Microsoft.Teams.Api.ConversationReference> conversationReferences)
         {
-            _adapter = adapter;
-            _conversationReferences = conversationReferences;
             _taskDetails = taskDetails;
-            _appId = configuration["MicrosoftAppId"] ?? string.Empty;
+            _conversationReferences = conversationReferences;
         }
 
-        /// <summary>
-        /// This enpoint is called to send task reminder card.
-        /// </summary>
+        /// This endpoint is called by the Quartz scheduler to trigger task reminder checks.
         [HttpGet]
-        public async void GetTaskReminder()
+        public Task<IActionResult> GetTaskReminder()
         {
-            foreach (var conversationReference in _conversationReferences.Values)
+            try
             {
-                await((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
-            }
-        }
-
-        /// <summary>
-        /// Callback method to send activity.
-        /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        private async Task BotCallback(ITurnContext turnContext, CancellationToken cancellationToken)
-        {
-            var taskList = new List<SaveTaskDetail>();
-            _taskDetails.TryGetValue("taskDetails", out taskList);
-
-            foreach (var task in taskList)
-            {
-                var time = new DateTimeOffset(DateTime.Now);
-
-                if(task.DateTime.Minute == time.Minute && task.DateTime.Hour == time.Hour && task.DateTime.Day == time.Day && task.DateTime.Month == time.Month && task.DateTime.Year == time.Year)
+                var hasTasks = _taskDetails.TryGetValue("taskDetails", out var tasks);
+                var conversationCount = _conversationReferences.Count;
+                return Task.FromResult<IActionResult>(Ok(new
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskReminder(task.Title, task.Description)), cancellationToken);
-                }              
+                    status = "success",
+                    message = "Task reminder check completed",
+                    timestamp = DateTime.UtcNow,
+                    taskCount = hasTasks && tasks != null ? tasks.Count : 0,
+                    conversationCount = conversationCount
+                }));
             }
-        }
-
-        /// <summary>
-        /// Sample Adaptive card task reminder.
-        /// </summary>
-        private Attachment GetAdaptiveCardForTaskReminder(string title, string description)
-        {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            catch (Exception ex)
             {
-                Body = new List<AdaptiveElement>
+                return Task.FromResult<IActionResult>(StatusCode(500, new
                 {
-                    new AdaptiveTextBlock
-                    {
-                        Text = "Reminder for scheduled task!",
-                        Weight = AdaptiveTextWeight.Bolder,
-                        Spacing = AdaptiveSpacing.Medium,
-                        Wrap = true
-                    },
-                    new AdaptiveTextBlock
-                    {
-                        Text = "Task title: "+ title,
-                        Weight = AdaptiveTextWeight.Default,
-                        Spacing = AdaptiveSpacing.Medium,
-                        Wrap = true
-                    },
-                    new AdaptiveTextBlock
-                    {
-                        Text = "Task description: "+ description,
-                        Weight = AdaptiveTextWeight.Default,
-                        Spacing = AdaptiveSpacing.Medium,
-                        Wrap = true
-                    }
-                },
-            };
-
-            return new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card,
-            };
+                    error = "Failed to process task reminders",
+                    details = ex.Message
+                }));
+            }
         }
     }
 }

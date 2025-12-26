@@ -1,27 +1,30 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdaptiveCards" Version="2.7.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
-    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.18.1" />
-    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
-    <PackageReference Include="Quartz" Version="3.5.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.13.1" />
+    <PackageReference Include="Microsoft.Teams.Api" Version="2.0.*" />
+    <PackageReference Include="Microsoft.Teams.Apps" Version="2.0.*" />
+    <PackageReference Include="Microsoft.Teams.Plugins.AspNetCore" Version="2.0.*" />
+    <PackageReference Include="Microsoft.Teams.Common" Version="2.0.*" />
+    <PackageReference Include="Quartz" Version="3.13.0" />
   </ItemGroup>
 
-    <ItemGroup>
-    <Content Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  <!-- Exclude local settings from publish -->
+  <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>None</CopyToPublishDirectory>
+    </Content>
+    <Content Remove="appsettings.Playground.json" />
+    <Content Include="appsettings.Playground.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>None</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Images\" />
-    </ItemGroup>
-
 </Project>
