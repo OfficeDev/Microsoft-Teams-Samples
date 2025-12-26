@@ -24,7 +24,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "personal"
       ],
@@ -41,7 +41,7 @@
     "${{BOT_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
+    "id": "${{BOT_ID}}",
+    "resource": "api://botid-${{BOT_ID}}"
   }
 }

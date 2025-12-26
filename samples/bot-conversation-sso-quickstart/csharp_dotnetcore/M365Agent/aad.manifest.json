@@ -1,9 +1,9 @@
 {
-  "id": "${{AAD_APP_OBJECT_ID}}",
-  "appId": "${{AAD_APP_CLIENT_ID}}",
+  "id": "${{BOT_OBJECT_ID}}",
+  "appId": "${{BOT_ID}}",
   "displayName": "bot-conversation-sso-quickstart-aad",
   "identifierUris": [
-    "api://botid-${{AAD_APP_CLIENT_ID}}"
+    "api://botid-${{BOT_ID}}"
   ],
   "signInAudience": "AzureADMultipleOrgs",
   "api": {
