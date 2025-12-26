@@ -96,7 +96,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
 
   - In a terminal, navigate to `samples/bot-formatting-cards/nodejs`
-  - Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Update the `.localConfigs` file with your app credentials:
+    ```
+    CLIENT_ID=<your-microsoft-app-id>
+    CLIENT_SECRET=<your-microsoft-app-password>
+    ```
+    (Note: The CLIENT_ID is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the CLIENT_SECRET is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 **Update mentionSupport json**
 - Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
