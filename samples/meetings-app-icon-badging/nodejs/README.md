@@ -22,6 +22,7 @@ This sample application illustrates how to implement app icon badging notificati
 * In-Meeting Notifications
 * RSC Permissions
 * App Icon Badging
+* Teams SDK
 
 ## Interaction with app
 
@@ -99,11 +100,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     * Leave **Redirect URI** empty.
     * Choose **Register**.
 3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-4. Navigate to **API Permissions**, and make sure to add the follow permissions:
-    * Select Add a permission
-    * Select Microsoft Graph -> Delegated permissions.
-    * `User.Read` (enabled by default)
-    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 4) Setup for code   
 - Clone the repository
@@ -124,8 +120,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     npm install
     ```
 
-- Go to .env file in your project folder and update `MicrosoftAppId`, `MicrosoftAppPassword` with the values received from your Microsoft Entra ID app registration.
-  - Update `BaseUrl` as per your domain like ngrok url: https://1234.ngrok-free.app 
+- Go to `.localConfigs` file in your project folder and update the following values:
+  - `CLIENT_ID` - Your Microsoft Entra ID application (client) ID
+  - `CLIENT_SECRET` - Your Microsoft Entra ID application client secret
+  - `BOT_ENDPOINT` - Your bot endpoint URL (e.g., https://1234.ngrok-free.app)
 
 - Start the bot
 
@@ -135,16 +133,14 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
  
 5) Setup Manifest for Teams
 
-- Modify the `manifest.json` file placed in `/appManifest` folder and replace the <<YOUR-MICROSOFT-APP-ID>> with your Microsoft App Id received via doing Microsoft Entra ID app registration in your Azure Portal.
+- Modify the `manifest.json` file placed in `/appPackage` folder and replace the <<YOUR-MICROSOFT-APP-ID>> with your Microsoft App Id received via doing Microsoft Entra ID app registration in your Azure Portal.
     - **Edit** the `manifest.json` for `validDomains` and replace <<Valid-Domain>> with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `appManifest`.
+         - Then select the `manifest.zip` file from `appPackage`.
          - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-app-icon-badging/nodejs/index.js#L45) line and put your debugger for local debug.
 
 ## Running the sample
 

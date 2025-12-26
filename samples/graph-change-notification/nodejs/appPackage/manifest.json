@@ -1,0 +1,48 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.23",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "ChangeNotificationApp",
+    "full": "Send notification to user wwhen their status changes."
+  },
+  "description": {
+    "short": "Send real-time notifications for user presence changes in Microsoft Teams.",
+    "full": "This sample application demonstrates how to send notifications for changes in user presence status in Microsoft Teams using Node.js and the Bot Framework."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "token.botframework.com",
+    "${{BOT_DOMAIN}}"
+  ],
+    "webApplicationInfo": {
+    "id": "${{BOT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/botid-${{BOT_ID}}"
+  }
+}

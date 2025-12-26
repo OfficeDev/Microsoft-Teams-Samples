@@ -21,6 +21,7 @@ This sample demonstrates a bot that archives group chat messages in Microsoft Te
 * Teams SSO (bots)
 * Adaptive Cards
 * Graph API
+* Teams SDK
 
 ## Interaction with app
 
@@ -72,7 +73,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 4. Select Add OAuth Connection Settings.
 5. Complete the form as follows:
 
-    a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
+    a. **Name:** Enter a name for the connection. You'll use this name in your bot in the .localConfigs file. For example oauthbotsetting.
 
     b. **Service Provider:** Select Azure Active Directory V2. Once you select this, the Azure AD-specific fields will be displayed.
 
@@ -90,7 +91,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ![Permissions](Images/permissions.png)
 
     b.  Under left menu, select  **Authentication**  under  **Manage**  section.
-    - Select 'Accounts in any organizational directory (Any Azure AD directory - Multitenant)' under Supported account types and click "+Add a platform".
+    - Select 'Accounts in any organizational directory (Any Azure AD directory - SingleTenant)' under Supported account types and click "+Add a platform".
     -  On the flyout menu, Select "Web"    
     -  Add  `https://token.botframework.com/.auth/web/redirect`  under Redirect URLs and click Configure button.
     -  Once the flyout menu close, scroll bottom to section 'Implicit Grant' and select check boxes "Access tokens" and "ID tokens" and click "Save" at the top bar.
@@ -123,8 +124,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     npm install
     ```
 
-- Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `ConnectionName` from the Microsoft Entra ID app registration or from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
-    Also, update `connectionName` as the name of your Azure Bot connection created in previous steps.
+- Update the `.localConfigs` configuration for the bot with the following values:
+    - `CLIENT_ID` - The Application (client) ID from the Microsoft Entra ID app registration
+    - `CLIENT_SECRET` - The client secret from the Microsoft Entra ID app registration  
+    - `CONNECTION_NAME` - The name of your Azure Bot OAuth connection (e.g., "oauthbotsetting")
+    - `BOT_TYPE` - Set to "SingleTenant"
+    - `TENANT_ID` - Your Microsoft Entra tenant ID
 
 - Run your bot at the command line:
 
@@ -135,15 +140,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 4) Setup Manifest for Teams
 
 - **This step is specific to Teams.**
-    - Edit the `manifest.json` contained in the  `/appManifest` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<MICROSOFT-APP-ID>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
-        Update valid domains for `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - Zip up the contents of the `/appManifest` folder to create a `manifest.zip`
+    - Edit the `manifest.json` contained in the  `/appPackage` folder and fill in the Microsoft App ID (that was created in step 1 and matches the CLIENT_ID in `.localConfigs`) *everywhere* you see the place holder string `<<MICROSOFT-APP-ID>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+    - Update valid domains for `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-archive-groupchat-messages/nodejs/index.js#L45) line and put your debugger for local debug.
-
 
 ## Running the sample
 
@@ -179,7 +181,6 @@ Send `getchat` message to the bot, you will recieve a consent card by the bot in
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Portal](https://portal.azure.com)
 - [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
