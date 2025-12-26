@@ -1,14 +1,18 @@
 # TeamsFx files
 env/.env.*.user
 env/.env.local
-appManifest/build/
+env/.env.playground
+.env
+appPackage/build
 
 # python virtual environment
 .venv/
-
-# misc
-.env
-.deployment/
-
-# tmp files
 __pycache__/
+
+# others
+.deployment/
+node_modules/
+devTools/*.log
+
+# Dev tool directories
+/devTools/
