@@ -1,0 +1,82 @@
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.fui-FluentProvider {
+    display: contents;
+}
+.container{
+    color :black;
+}
+
+/* Custom styles */
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.circle_gray {
+    height: 150px;
+    width: 150px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .circle_red {
+    height: 150px;
+    width: 150px;
+    background-color: rgb(221, 68, 68);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .circle_blue {
+    height: 150px;
+    width: 150px;
+    background-color: rgb(68, 68, 176);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .circle_green {
+    height: 150px;
+    width: 150px;
+    background-color: rgb(68, 109, 68);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+input[type=text] {
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+button{
+    padding: 12px 20px;
+    margin: 8px 8px;
+    box-sizing: border-box;
+}
+
+label{
+    font-size: x-large;
+}
+
+
