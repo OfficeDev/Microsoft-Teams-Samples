@@ -12,13 +12,11 @@ class SimpleGraphClient {
         if (!token || !token.trim()) {
             throw new Error('SimpleGraphClient: Invalid token received.');
         }
-
         this._token = token;
-
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
         this.graphClient = Client.init({
             authProvider: (done) => {
-                done(null, this._token); // First parameter takes an error if you can't get an access token.
+                done(null, this._token);
             }
         });
     }
@@ -42,7 +40,6 @@ class SimpleGraphClient {
             ],
             "user@odata.bind": "https://graph.microsoft.com/v1.0/users('" + userId + "')"
         };
-
         return await this.graphClient
             .api('teams/' + teamId + '/members').version('beta')
             .post(teamObject).then((res) => {

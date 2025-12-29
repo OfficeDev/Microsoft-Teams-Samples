@@ -8,7 +8,6 @@
             padding-top: 2%;
         }
     </style>
-    <script src="/node_modules/qrcode/build/qrcode.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
         integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
@@ -18,15 +17,19 @@
     <script>
         var teamDetails = <%-teamDetails%>
 
-        microsoftTeams.initialize(() => {
+        $(document).ready(function() {
             setData();
-        })
+        });
+
+        if (typeof microsoftTeams !== 'undefined') {
+            microsoftTeams.initialize();
+        }
 
         function setData() {
             var select = document.createElement("select");
             select.name = "teams";
-            select.id = "teams"
-            select.class = "form-select"
+            select.id = "teams";
+            select.className = "form-select";
 
             for (const val of teamDetails) {
                 var option = document.createElement("option");
@@ -36,10 +39,13 @@
             }
 
             var label = document.createElement("label");
-            label.innerHTML = "Select the team"
+            label.innerHTML = "Select the team";
             label.htmlFor = "teams";
 
-            document.getElementById("container").appendChild(label).appendChild(select);
+            var container = document.getElementById("container");
+            container.appendChild(label);
+            container.appendChild(document.createElement("br"));
+            container.appendChild(select);
         }
 
         function generateQR() {

@@ -103,11 +103,12 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-5) Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the following details:
-  - `MicrosoftAppId` - It is the AppId created in previous step (Setup for Bot SSO)
-  - `MicrosoftAppPassword` - It is referred to as the "client secret" in step 1.a (Setup for Bot SSO) and you can always create a new client secret anytime
-  - `ConnectionName` - Generated from Step 1.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource. Please follow [Add authentication to bot](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to configure the connection.
-  - `BaseUrl` with application base url. For example your ngrok url like `https://12123xxxx.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+5) Open the `.localConfigs` configuration file in your project folder (or in Visual Studio Code) and update the following details:
+  - `CLIENT_ID` - It is the AppId created in previous step (Setup for Bot SSO)
+  - `CLIENT_SECRET` - It is referred to as the "client secret" in step 1.a (Setup for Bot SSO) and you can always create a new client secret anytime
+  - `CONNECTION_NAME` - Generated from Step 1.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource. Please follow [Add authentication to bot](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to configure the connection.
+  - `TENANT_ID` - The Microsoft Entra ID tenant ID
+  - `BASE_URL` - Application base url. For example your ngrok url like `https://12123xxxx.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 6) Run your app
 
@@ -116,17 +117,15 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
     ```
 
 **Manually update the manifest.json**
-- Edit the `manifest.json` contained in the  `appManifest/` folder to replace with your MicrosoftAppId (that was created in previous step while doing Microsoft Entra ID app registration and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in previous step while doing Microsoft Entra ID app registration and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
 - Also, update {{domain-name}} in your manifest `validDomains` section with your app domain like ngrok domain `1234.ngrok-free.app` or dev tunnels domain `12345.devtunnels.ms` excluding http/https.
 
-- Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
+- Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
 
 - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-join-team-using-qr-code/nodejs/index.js#L50) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -150,7 +149,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams SDK Documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/welcome)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

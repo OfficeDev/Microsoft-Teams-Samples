@@ -18,10 +18,14 @@
     <script>
         var qrString = <%-qrData%>
 
-        microsoftTeams.initialize(() => {
-            $("#qrImg").attr("src", `${qrString}`);
-            $("#qrImg").removeAttr("hidden");
-        })
+        $(document).ready(function() {
+            $("#qrImg").attr("src", qrString);
+            $("#qrImg").show();
+        });
+
+        if (typeof microsoftTeams !== 'undefined') {
+            microsoftTeams.initialize();
+        }
 
         function back() {
             window.location.href = window.location.origin + "/teamDetails";
