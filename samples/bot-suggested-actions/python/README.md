@@ -46,7 +46,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
 1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) and [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Press **CTRL+Shift+P** to open the command box and enter **Python: Create Environment** to create and activate your desired virtual environment. Remember to select `requirements.txt` as dependencies to install when creating the virtual environment.
+1. Press **CTRL+Shift+P** to open the command box and enter **Python: Create Environment** to create and activate your desired virtual environment. Remember to select `src/requirements.txt` as dependencies to install when creating the virtual environment.
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
@@ -101,16 +101,22 @@ the Teams service needs to call into the bot.
 
 5) Activate your desired virtual environment
 
-6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+6) Install dependencies by running ```pip install -r src/requirements.txt``` in the project folder.
 
-7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+7) Create a `.env` file in the project root and add the following variables:
+   ```
+   CLIENT_ID=
+   CLIENT_SECRET=
+   TENANT_ID=
+   ```
+   Fill in the values from your Azure Bot registration (CLIENT_ID is the Application ID, CLIENT_SECRET is the client secret from the azure portal, and TENANT_ID is the Directory/tenant ID).
 
 8) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{BOT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-9) Run your bot with `python app.py`
+9) Run your bot with `python src/app.py`
 
 ## Running the sample
 
@@ -143,7 +149,7 @@ the Teams service needs to call into the bot.
 ## Further reading
 
 - [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams SDK Documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/welcome)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
