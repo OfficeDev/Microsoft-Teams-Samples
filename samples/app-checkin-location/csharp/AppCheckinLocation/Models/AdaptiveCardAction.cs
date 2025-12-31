@@ -1,39 +1,32 @@
-﻿// <copyright file="AdaptiveCardAction.cs" company="Microsoft">
+// <copyright file="AdaptiveCardAction.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
+using System.Text.Json.Serialization;
+
 namespace AppCheckinLocation.Models
 {
-    using Microsoft.Bot.Schema;
-    using Newtonsoft.Json;
-
     /// <summary>
     /// Adaptive card action model class.
     /// </summary>
     public class AdaptiveCardAction
     {
-        /// <summary>
-        /// Gets or sets Ms Teams card action type.
-        /// </summary>
-        [JsonProperty("msteams")]
-        public CardAction MsteamsCardAction { get; set; }
+        [JsonPropertyName("msteams")]
+        public TaskAction MsteamsCardAction { get; set; }
 
-        /// <summary>
-        /// Gets or sets id value of turncontext activity.
-        /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        /// <summary>
-        /// Gets or sets id value of longitude.
-        /// </summary>
-        [JsonProperty("longitude")]
+        [JsonPropertyName("longitude")]
         public double Longitude { get; set; }
 
-        /// <summary>
-        /// Gets or sets id value of longitude.
-        /// </summary>
-        [JsonProperty("latitude")]
+        [JsonPropertyName("latitude")]
         public double Latitude { get; set; }
+    }
+
+    public class TaskAction
+    {
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
     }
 }

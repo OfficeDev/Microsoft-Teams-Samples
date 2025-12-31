@@ -1,8 +1,8 @@
-﻿// <copyright file="LocationDetails.cs" company="Microsoft">
+// <copyright file="LocationDetails.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace AppCheckinLocation.Models
 {
@@ -11,10 +11,10 @@ namespace AppCheckinLocation.Models
     /// </summary>
     public class LocationDetails<T>
     {
-        [JsonProperty("latitude")]
+        [JsonPropertyName("latitude")]
         public object Latitude { get; set; }
 
-        [JsonProperty("longitude")]
+        [JsonPropertyName("longitude")]
         public object Longitude { get; set; }
     }
 }

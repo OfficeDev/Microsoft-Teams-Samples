@@ -1,4 +1,4 @@
-﻿// <copyright file="UserDetail.cs" company="Microsoft">
+// <copyright file="UserDetail.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
