@@ -1,74 +1,105 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-const path = require('path');
+const { app, handleMessagingExtension } = require("./app");
 const express = require('express');
+const path = require('path');
 
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
+require('dotenv').config({ path: './env/.env.local' });
+require('dotenv').config({ path: './env/.env.local.user' });
+
+const port = process.env.PORT || process.env.port || 3978;
+const server = express();
+
+// Configure EJS view engine
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', path.join(__dirname, 'views'));
+
+// Add body parsing middleware
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
+// Add static file serving
+server.use("/Images", express.static(path.join(__dirname, 'Images')));
+
+server.get('/customForm', (req, res) => {
+  res.render('CustomForm');
+});
+
+server.get('/staticPage', (req, res) => {
+  res.render('StaticPage');
+});
+
 const { CloudAdapter, ConfigurationBotFrameworkAuthentication } = require('botbuilder');
-
-const { TeamsMessagingExtensionsActionBot } = require('./bots/teamsMessagingExtensionsActionBot');
-
-// Create adapter.
-// See https://aka.ms/about-bot-adapter to learn more about adapters.
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
-
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights. See https://aka.ms/bottelemetry for telemetry 
-    //       configuration instructions.
-    console.error(`\n [onTurnError] unhandled error: ${error}`);
-
-    // Send a trace activity, which will be displayed in Bot Framework Emulator
-    await context.sendTraceActivity(
-        'OnTurnError Trace',
-        `${error}`,
-        'https://www.botframework.com/schemas/error',
-        'TurnError'
-    );
-
-    // Uncomment below commented line for local debugging.
-    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+  console.error('Error:', error);
+  await context.sendTraceActivity(
+    'OnTurnError Trace',
+    `${error}`,
+    'https://www.botframework.com/schemas/error',
+    'TurnError'
+  );
 };
 
-// Create the bot that will handle incoming messages.
-const bot = new TeamsMessagingExtensionsActionBot();
+const botHandler = async (context) => {
+  const activity = context.activity;
+  
+  if (activity.type === 'invoke' && (activity.name === 'composeExtension/submitAction' || activity.name === 'composeExtension/fetchTask')) {
+    try {
+      const { handleMessagingExtension } = require('./app');
+      const result = await handleMessagingExtension(context);
+      
+      if (result !== undefined) {
+        await context.sendActivity({
+          type: 'invokeResponse',
+          value: {
+            status: 200,
+            body: result
+          }
+        });
+        return;
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+      await context.sendActivity({
+        type: 'invokeResponse',
+        value: {
+          status: 500,
+          body: { error: error.message }
+        }
+      });
+      return;
+    }
+  }
+  
+  // Handle regular messages
+  if (activity.type === 'message') {
+    const text = activity.text?.replace(/<at[^>]*>.*?<\/at>/g, '').trim();
+    if (text) {
+      if (text === '/reset') {
+        await context.sendActivity('Conversation state reset.');
+      } else if (text === '/runtime') {
+        await context.sendActivity(`Node: ${process.version}, Teams AI v2`);
+      } else {
+        await context.sendActivity(`Echo: ${text}`);
+      }
+    }
+  }
+};
 
-const server = express();
-
-// Add this line so req.body is populated
-server.use(express.json());
-
-server.engine('html', require('ejs').renderFile);
-server.set('view engine', 'ejs');
-server.set('views', __dirname);
-
-const port = process.env.PORT || 3978;
-server.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}`);
-});
-
-server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
-
-server.get('/customForm', (req, res, next) => {
-    res.render('./views/CustomForm');
-});
-
-server.get('/staticPage', (req, res, next) => {
-    res.render('./views/StaticPage');
-});
-
-server.get('*', (req, res) => {
-    res.json({ error: 'Route not found' });
-});
-
-// Listen for incoming requests.
+// Handle bot messages through the adapter
 server.post('/api/messages', async (req, res) => {
-    await adapter.process(req, res, (context) => bot.run(context));
+  await adapter.process(req, res, botHandler);
 });
+
+(async () => {
+  try {
+    server.listen(port, () => {
+      console.log(`Server listening on port ${port}`);
+    });
+  } catch (error) {
+    console.error('Server startup error:', error);
+    process.exit(1);
+  }
+})();

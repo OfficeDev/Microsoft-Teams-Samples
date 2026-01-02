@@ -24,7 +24,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "supportsCalling": false,
@@ -39,16 +39,19 @@
   ],
   "composeExtensions": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
+      "canUpdateConfiguration": true,
       "commands": [
         {
           "id": "createCard",
           "type": "action",
+          "title": "Create Card",
+          "description": "Command to run action to create a Card from Compose Box",
+          "initialRun": false,
+          "fetchTask": false,
           "context": [
             "compose"
           ],
-          "description": "Command to run action to create a Card from Compose Box",
-          "title": "Create Card",
           "parameters": [
             {
               "name": "title",
@@ -73,11 +76,13 @@
         {
           "id": "shareMessage",
           "type": "action",
+          "title": "Share Message",
+          "description": "Test command to run action on message context (message sharing)",
+          "initialRun": false,
+          "fetchTask": false,
           "context": [
             "message"
           ],
-          "description": "Test command to run action on message context (message sharing)",
-          "title": "Share Message",
           "parameters": [
             {
               "name": "includeImage",
@@ -121,10 +126,13 @@
     }
   ],
   "permissions": [
-    "identity"
+    "identity",
+    "messageTeamMembers"
   ],
   "validDomains": [
+    "token.botframework.com",
     "{{domain-name}}",
+    "*.ngrok.io",
     "${{BOT_DOMAIN}}"
   ]
 }
