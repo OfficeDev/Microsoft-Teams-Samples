@@ -1,37 +1,16 @@
-const {
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder');
-const { BotActivityHandler } = require('../bot/botActivityHandler');
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+const { createAgentApp } = require('../bot/botActivityHandler');
 
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+// Create the agent application instance
+const agent = createAgentApp();
 
-adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. server insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       serverlication insights.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
-
-    // Send a trace activity, which will be displayed in Bot Framework Emulator
-    await context.sendTraceActivity(
-        'OnTurnError Trace',
-        `${ error }`,
-        'https://www.botframework.com/schemas/error',
-        'TurnError'
-    );
-
-    // Uncomment below commented line for local debugging.
-    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
-};
-
-// Create bot handlers
-const botActivityHandler = new BotActivityHandler();
+// Export the agent's request handler
 const botHandler = async (req, res) => {
-    // Route received a request to adapter for processing
-    await adapter.process(req, res, (context) => botActivityHandler.run(context));
+    // The agent handles routing internally via its middleware
+    await agent.run(req, res);
 };
 
-module.exports = botHandler;
+// Export both the handler and the agent for use by express adapter
+module.exports = { botHandler, agent };

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 // Adaptive Card for link unfurling to show in stage view
 const adaptiveCardForTabStageView = () => ({
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',

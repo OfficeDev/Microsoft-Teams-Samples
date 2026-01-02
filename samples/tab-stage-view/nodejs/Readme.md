@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates the use of Teams tab in stage view using Node.js, featuring collaborative elements and interactive capabilities.
+description: This sample app demonstrates the use of Teams tab in stage view using Node.js and Microsoft 365 Agents SDK, featuring collaborative elements and interactive capabilities.
 products:
 - office-teams
 - office
@@ -15,21 +15,21 @@ urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
 
 # Stage View
 
-This sample app showcases the capabilities of Microsoft Teams tabs in stage view using Node.js. It demonstrates collaborative features such as multi-window support and interactive elements, allowing users to engage dynamically through adaptive cards and deep linking for a richer experience in Teams.
-This App talks about the Teams tab in stage view with Nodejs.
+This sample app showcases the capabilities of Microsoft Teams tabs in stage view using Node.js and the Microsoft 365 Agents SDK. It demonstrates collaborative features such as multi-window support and interactive elements, allowing users to engage dynamically through adaptive cards and deep linking for a richer experience in Teams.
 
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling)
 
 ## Included Features
-* Bots
+* Bots (using Microsoft 365 Agents SDK)
 * Stage View (tabs)
 * Collaborative Stageview
 * Stageview Multi-window (PopOut)
 * Stageview Modal
+* Link Unfurling
 
 ## Interaction with app
 
-![Tab Stage ViewGif](Images/TabStageView.gif)
+![Tab Stage View Demo](Images/TabStageView.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -71,7 +71,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
 1) Setup for Bot
-    - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.coms/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+    - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
    
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
@@ -121,7 +121,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     npm install
     ```
 
-- Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Azure bot registration in Azure portal or Bot Framework registration. 
+- Update the `.env` configuration for the bot to use the `clientId` (Microsoft App Id) and `clientSecret` (App Password) from the Azure bot registration in Azure portal.
 Also update `BaseUrl` according to your code runtime environment.
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
@@ -155,111 +155,137 @@ Also update `BaseUrl` according to your code runtime environment.
          - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 ## Running the sample
-- From Teams left side bar, select the ellipses ●●● and choose your app from the list.
 
-**Install App:**
+### Teams Experience
 
-![InstallApp](Images/1.Install.png)
+**Step 1: Install the App**
 
-**Welcome message with feature explanation and Adaptive Card with actions:**
+Install the Tab Stage View app from the Teams app catalog or by uploading the custom app package.
 
-![Welcome Message](Images/2.HelloAndWelcomeCard.png)
+![Install App](Images/1.Install.png)
 
-**Open the URL in tab stage view:**
+**Step 2: Open the App**
 
-![InstallApp](Images/3.Bot-ViewViaCardAction.png)
+After installation, open the app from the Teams left sidebar to access the Stage View features.
 
- **Click view via card action:**
+![Open App](Images/2.Open_App.png)
 
-![Stage View in tab](Images/4.Bot-OpenViaDeeplinkLinkButton.png)
+**Step 3: Welcome Card with Actions**
 
- **Click view via deeplink:**
+The bot sends a welcome message with an adaptive card containing action buttons to demonstrate Stage View capabilities.
 
- ![Tab View](Images/viaDeeplink.png)   
+![Welcome Card](Images/3.Welcome_Card.png)
 
-**Opening Collaborative- Desktop Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details.
+**Step 4: View via Card Action**
 
- ![Stage View in tab](Images/5.Tab-PopOutWithChat.png)
+Click the "View via card" button to open the content in Stage View directly from the adaptive card action.
 
- ![OpenMode Model](Images/6.Tab-PopOut.png) 
+![View Via Card](Images/4.View_Via_Card.png)
 
- ![OpenMode PopOut](Images/7.Tab-Model.png) 
+**Step 5: Stage View Content Display**
 
-**Opening stage view from Adaptive card via deep link:**
+The Stage View opens showing the tab content in a focused, immersive experience within Teams.
 
-![Stage View Deep Link](Images/4.Bot-OpenViaDeeplinkLinkButton.png)
+![View Via Card Result](Images/5.View_Via_Card_2.png)
 
-**Web Stage View:**
+**Step 6: View via Deep Link**
 
-![LinkUnfurlingStageView](Images/LinkUnfurlingStageView.png)
+Click the "View via Deep Link" button to open the Stage View using a Teams deep link URL.
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area, the link will unfurl.**
+![View Via Deeplink](Images/6.View_Via_Deeplink.png)
 
-![LinkUnfurlingText](Images/LinkUnfurlingText.png)
+**Step 7: Link Unfurling Preview**
 
-**Tab with execute deep link action to open stage view:**
+When you paste a URL from `https://tabstageview.com/card` in the compose message area, the bot unfurls the link and displays a preview card.
 
-![Tab View](Images/viaTabDeeplink.png)         
+![Link Unfurling Card](Images/7.Link_Unfurling_Card.png)
 
-**Click deep-link:**
+**Step 8: Link Unfurling Stage View**
 
-![Tab View](Images/viaDeeplink.png)    
+Click on the unfurled card to open the content in Stage View, providing a seamless navigation experience.
 
-## Outlook on the web
+![Link Unfurling Result](Images/8.Link_Unfurling_Card_2.png)
 
-- To view your app in Outlook on the web.
+**Step 9: Tab Stage View**
 
-- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+Access the Stage View tab directly from the app's tab interface for a full-screen collaborative experience.
 
-**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
+![Stage View Tab](Images/9.Stage_View_Tab.png)
 
-![InstallOutlook](Images/InstallOutlook.png)
+**Step 10: Stage View Tab Content**
 
-**Select your app icon to launch and preview your app running in Outlook on the web**
+The Stage View tab displays interactive content that can be shared and collaborated on with team members.
 
-![AppOutlook](Images/AppOutlook.png)
+![Stage View Tab Content](Images/10.StageView_Tab_2.png)
 
-**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+**Step 11: Collaborative Stage View with Chat**
 
-## Office on the web
+The Collaborative Stage View feature allows users to view content while maintaining access to the chat panel for real-time discussions. Please refer [Collaborative Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#collaborative-stage-view) for more details.
 
-- To preview your app running in Office on the web.
+![PopOut With Chat](Images/11.Teams_R1_PopOutWithChat.png)
 
-- Log into office.com with test tenant credentials
+---
 
-**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
+### Outlook Experience
 
-![InstallOffice](Images/InstallOffice.png)
+**Step 1: Select the App in Outlook**
 
-**Select your app icon to launch your app in Office on the web**
+Navigate to Outlook on the web and select the Tab Stage View app from the available apps.
 
-![AppOffice](Images/AppOffice.png) 
+![Outlook Select App](Images/12.Outlook_Select_App.png)
 
-**After opening Outlook web, click the "New mail" button.**
+**Step 2: Continue with the App**
 
-![Open New Mail](Images/OpenNewMail.png)
+Click Continue to proceed with launching the app in Outlook.
 
-**On the tool bar on top, select Apps icon. Your uploaded app title appears among your installed apps**
+![Outlook Continue](Images/13.Outlook_Select_Continue.png)
 
-![OpenAppIcon](Images/OpenAppIcon.png)
+**Step 3: Execute Deep Link in Outlook**
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area the link will unfurl.**
+Use the deep link functionality to open Stage View content directly within the Outlook experience.
 
-![Outlook Unfurling](Images/OutlookUnfurling.png)
+![Outlook Execute Deeplink](Images/14.Outlook_Execute_Deeplink.png)
 
-**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+---
 
-## Deploy the bot to Azure
+### Microsoft 365 Copilot Experience
 
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+**Step 1: Select the App in M365 Copilot**
+
+Access the Tab Stage View app from the Microsoft 365 Copilot interface.
+
+![M365 Copilot Select App](Images/15.M365_Copilot_Select_App.png)
+
+**Step 2: Continue with the App**
+
+Click Continue to launch the app within the M365 Copilot environment.
+
+![M365 Copilot Continue](Images/16.M365_Copilot_Click_Continue.png)
+
+**Step 3: Tab Loaded in M365 Copilot**
+
+The Stage View tab content is now loaded and ready for interaction within Microsoft 365 Copilot.
+
+![M365 Copilot Tab Loaded](Images/17.M365_Copilot_Tab_Loaded.png)
+
+---
+
+## Deploy to Azure
+
+To learn more about deploying an agent to Azure, see [Deploy your agent to Azure](https://learn.microsoft.com/microsoftteams/platform/toolkit/deploy) for a complete list of deployment instructions.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ## Further reading
 
+- [Microsoft 365 Agents SDK](https://github.com/microsoft/agents)
+- [Microsoft 365 Agents SDK for JavaScript](https://github.com/microsoft/agents-for-js)
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
-- [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
+- [Stage View](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
+- [Collaborative Stage View](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#collaborative-stage-view)
+- [Link Unfurling](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)
+- [Microsoft 365 Agents Toolkit](https://learn.microsoft.com/microsoftteams/platform/toolkit/teams-toolkit-fundamentals)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-nodejs" />
