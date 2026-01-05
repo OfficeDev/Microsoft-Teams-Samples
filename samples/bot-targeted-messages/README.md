@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "01/30/2025 05:00:17 PM"
+ createdDate: "01/05/2025 05:00:17 PM"
 urlFragment: officedev-microsoft-teams-samples-targeted-messages-csharp
 
 ---
@@ -32,7 +32,7 @@ This sample demonstrates how to use targeted messaging in Microsoft Teams. Targe
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version
 - [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
@@ -51,7 +51,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID ï¿½ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 
     1) Select **New Registration** and on the *register an application page*, set following values:
