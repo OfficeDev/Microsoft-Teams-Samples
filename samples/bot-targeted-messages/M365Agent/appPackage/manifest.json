@@ -1,0 +1,101 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.20/MicrosoftTeams.schema.json",
+  "version": "1.0.7",
+  "manifestVersion": "1.20",
+  "id": "${{TEAMS_APP_ID}}",
+  "name": {
+    "short": "targeted-msg-${{APP_NAME_SUFFIX}}",
+    "full": "Targeted Message Bot"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "mpnId": "",
+    "websiteUrl": "https://microsoft.com",
+    "privacyUrl": "https://privacy.microsoft.com/privacystatement",
+    "termsOfUseUrl": "https://www.microsoft.com/legal/terms-of-use"
+  },
+  "description": {
+    "short": "Bot for testing targeted messaging in Teams",
+    "full": "A testing bot to demonstrate and validate targeted messaging capabilities using Teams SDK methods for sending messages to specific users"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "conversations",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [ "personal" ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "scopes": [ "personal", "team", "groupChat" ],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "supportsVideo": true,
+      "supportsCalling": true,
+      "commandLists": [
+        {
+          "scopes": [ "team", "groupChat", "personal" ],
+          "commands": [
+            {
+              "title": "help",
+              "description": "Shows commands list"
+            },
+            {
+              "title": "send-l1",
+              "description": "Send l1 targeted message"
+            },
+            {
+              "title": "send-l2",
+              "description": "Send l2 targeted message"
+            },
+            {
+              "title": "send-l1-attachment",
+              "description": "Send l1 message with attachment"
+            },
+            {
+              "title": "send-l2-attachment",
+              "description": "Send l2 message with attachment"
+            },
+            {
+              "title": "send-l1-ai-generated-message",
+              "description": "Send l1 AI-generated message"
+            },
+            {
+              "title": "send-l2-ai-generated-message",
+              "description": "Send l2 AI-generated message"
+            },
+            {
+              "title": "send-l1-self-mention",
+              "description": "Send l1 message mentioning yourself"
+            },
+            {
+              "title": "send-l2-self-mention",
+              "description": "Send l2 message mentioning yourself"
+            },
+            {
+              "title": "send-l1-edit-delete",
+              "description": "Send message with edit and delete options"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}",
+    "*.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "${{BOT_ID}}",
+    "resource": "api://botid-${{BOT_ID}}"
+  }
+}
