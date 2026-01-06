@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "01/05/2025 05:00:17 PM"
+ createdDate: "01/05/2026 05:00:17 PM"
 urlFragment: officedev-microsoft-teams-samples-targeted-messages-csharp
 
 ---
