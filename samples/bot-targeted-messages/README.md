@@ -158,6 +158,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Adaptive Cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#adaptive-card)
 - [Microsoft Teams SDK for .NET](https://microsoft.github.io/teams-sdk/welcome)
 
-- 
-
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-targeted-messages-csharp" />

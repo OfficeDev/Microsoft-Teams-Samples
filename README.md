@@ -126,6 +126,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 32 | Auth0 Bot | This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card. | Intermediate | [View][bot-auth0-adaptivecard#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#python] ![toolkit-icon](assets/toolkit-icon.png) | | [View](/samples/bot-auth0-adaptivecard/csharp/demo-manifest/bot-auth0-adaptivecard.zip) |
 | 33 | Agent Knowledge Hub | Contoso Knowledge Hub is an intelligent guidance agent built on the Teams SDK, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations. | Intermediate | [View][agent-knowledge-hub#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][agent-knowledge-hub#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][agent-knowledge-hub#python] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 34 | Bot Shared Channel Events | Microsoft Teams bot can receive transitive member add and remove events in shared channels.| Intermediate | [View][bot-shared-channel-events#cs] ![toolkit-icon](assets/toolkit-icon.png) |  |  | |  |
+| 34 | Bot Targeted Messaged | Microsoft Teams bot showcasing targeted messages fearure| Intermediate | [View][bot-targeted-messages#cs] ![toolkit-icon](assets/toolkit-icon.png) |  |  | |  |
 
 #### Additional samples
 | No. | Sample Name                      | Description                                                                                                                                                                                                 | Level         | .NET                                  | JavaScript                           |  
@@ -580,6 +581,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-search-auth-config#cs]:samples/msgext-search-auth-config/csharp
 [msgext-search#cs]:samples/msgext-search/csharp
 [msgext-action#cs]:samples/msgext-action/csharp
+[bot-targeted-messages#cs]:samples/bot-targeted-messages
 
 
 
