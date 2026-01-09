@@ -29,8 +29,9 @@ async def on_error(context: TurnContext, error: Exception):
     print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
     traceback.print_exc()
 
-    await context.send_activity("The bot encountered an error or bug.")
-    await context.send_activity("To continue to run this bot, please fix the bot source code.")
+    if context.activity.type == ActivityTypes.message:
+        await context.send_activity("The bot encountered an error or bug.")
+        await context.send_activity("To continue to run this bot, please fix the bot source code.")
 
     if context.activity.channel_id == "emulator":
         trace_activity = Activity(

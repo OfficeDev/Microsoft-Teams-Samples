@@ -27,7 +27,8 @@ async def on_error(context: TurnContext, error: Exception):
 
     # Send a message to the user
     try:
-        await context.send_activity("The bot encountered an error or bug.")
+        if context.activity.type == ActivityTypes.message:
+            await context.send_activity("The bot encountered an error or bug.")
     except Exception as send_error:
         print(f"Failed to send error message: {send_error}", file=sys.stderr)
 

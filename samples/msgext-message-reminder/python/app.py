@@ -29,8 +29,10 @@ ADAPTER = BotFrameworkAdapter(SETTINGS)
 # Error handling
 async def on_error(context: TurnContext, error: Exception):
     traceback.print_exc()
-    await context.send_activity("The bot encountered an error or bug.")
-    await context.send_activity("Please fix the bot source code to continue.")
+    
+    if context.activity.type == ActivityTypes.message:
+        await context.send_activity("The bot encountered an error or bug.")
+        await context.send_activity("Please fix the bot source code to continue.")
     if context.activity.channel_id == "emulator":
         trace_activity = Activity(
             label="TurnError",

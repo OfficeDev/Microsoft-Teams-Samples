@@ -41,8 +41,10 @@ adapter.onTurnError = async (context, error) => {
     }
 
     // Send generic error message to user
-    await context.sendActivity("The bot encountered an error.");
-    await context.sendActivity("Please try again later.");
+    if (context.activity.type == "message") {
+        await context.sendActivity("The bot encountered an error.");
+        await context.sendActivity("Please try again later.");
+    }
 };
 
 // Create HTTP server with Restify

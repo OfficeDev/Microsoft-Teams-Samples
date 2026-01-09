@@ -42,10 +42,11 @@ async def on_error(context: TurnContext, error: Exception):
     traceback.print_exc()
 
     # Inform user that an error occurred
-    await context.send_activity("The bot encountered an error or bug.")
-    await context.send_activity(
-        "To continue to run this bot, please fix the bot source code."
-    )
+    if context.activity.type == ActivityTypes.message:
+        await context.send_activity("The bot encountered an error or bug.")
+        await context.send_activity(
+            "To continue to run this bot, please fix the bot source code."
+        )
 
     # Send a trace activity if using Bot Framework Emulator
     if context.activity.channel_id == "emulator":

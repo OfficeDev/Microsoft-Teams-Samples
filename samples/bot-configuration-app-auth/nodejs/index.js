@@ -34,8 +34,10 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    if (context.activity.type === 'message') {
+        await context.sendActivity('The bot encountered an error or bug.');
+        await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    }
 };
 
 // Create the bot that will handle incoming messages

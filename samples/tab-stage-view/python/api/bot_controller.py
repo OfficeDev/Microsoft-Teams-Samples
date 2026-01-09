@@ -8,7 +8,7 @@ from botbuilder.core import (
     TurnContext,
 )
 from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
-from botbuilder.schema import Activity
+from botbuilder.schema import Activity, ActivityTypes
 from bots.bot_activity_handler import BotActivityHandler
 import os
 
@@ -22,8 +22,9 @@ async def on_error(context: TurnContext, error: Exception):
     print(f"\n[on_turn_error] unhandled error: {error}", file=sys.stderr)
     traceback.print_exc()
 
-    await context.send_activity("The bot encountered an error or bug.")
-    await context.send_activity("To continue, please fix the bot source code.")
+    if context.activity.type == ActivityTypes.message:
+        await context.send_activity("The bot encountered an error or bug.")
+        await context.send_activity("To continue, please fix the bot source code.")
 
     # Send a trace activity (for Emulator)
     await context.send_trace_activity(

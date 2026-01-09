@@ -21,6 +21,7 @@ from teams.ai.planners import ActionPlanner, ActionPlannerOptions
 from teams.ai.prompts import PromptManager, PromptManagerOptions, PromptTemplate
 from teams.state import TurnState
 from azure.identity import get_bearer_token_provider, DefaultAzureCredential
+from botbuilder.schema import ActivityTypes
 from pathlib import Path
 
 from config import Config
@@ -158,4 +159,5 @@ async def on_error(context: TurnContext, error: Exception):
     traceback.print_exc()
 
     # Send a message to the user
-    await context.send_activity("The bot encountered an error or bug.")
+    if context.activity.type == ActivityTypes.message:
+        await context.send_activity("The bot encountered an error or bug.")

@@ -7,6 +7,7 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Bot.Schema;
 
 namespace Catering
 {
@@ -20,11 +21,15 @@ namespace Catering
                 // Log any leaked exception from the application.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
-                // Send a message to the user
-                await turnContext.SendActivityAsync($"The bot encountered an error or bug: {exception.Message}");
-                await turnContext.SendActivityAsync($"The bot encountered an error or bug: {exception.StackTrace.ToString()}");
-                await turnContext.SendActivityAsync($"The bot encountered an error or bug: {exception.ToString()}");
-                await turnContext.SendActivityAsync("To continue to run this bot, please fix the bot source code.");
+                // Only send error message for user messages, not for other message types so the bot doesn't spam a channel or chat.
+                if (turnContext.Activity.Type == ActivityTypes.Message)
+                {
+                    // Send a message to the user
+                    await turnContext.SendActivityAsync($"The bot encountered an error or bug: {exception.Message}");
+                    await turnContext.SendActivityAsync($"The bot encountered an error or bug: {exception.StackTrace.ToString()}");
+                    await turnContext.SendActivityAsync($"The bot encountered an error or bug: {exception.ToString()}");
+                    await turnContext.SendActivityAsync("To continue to run this bot, please fix the bot source code.");
+                }
 
                 if (conversationState != null)
                 {
