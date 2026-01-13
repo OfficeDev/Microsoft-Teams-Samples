@@ -121,14 +121,25 @@ namespace Microsoft.BotBuilderSamples
         public async Task<string> GetPhotoAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var photo = await graphClient.Me.Photo.Content.GetAsync();
-            if (photo != null)
+            try
             {
-                using var ms = new MemoryStream();
-                await photo.CopyToAsync(ms);
-                var buffers = ms.ToArray();
-                return $"data:image/png;base64,{Convert.ToBase64String(buffers)}";
+                // Try to get the user's profile photo
+                var photoStream = await graphClient.Me.Photo.Content.GetAsync();
+
+                if (photoStream != null)
+                {
+                    using var ms = new MemoryStream();
+                    await photoStream.CopyToAsync(ms);
+                    var photoBytes = ms.ToArray();
+                    return $"data:image/png;base64,{Convert.ToBase64String(photoBytes)}";
+                }
             }
+            catch (Exception)
+            {
+                // User has no photo, return default avatar
+                return string.Empty;
+            }
+
             return string.Empty;
         }
 

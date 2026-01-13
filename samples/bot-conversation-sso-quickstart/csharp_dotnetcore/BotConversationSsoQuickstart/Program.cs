@@ -10,8 +10,11 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.BotBuilderSamples;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Bot.Core.Compat;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCompatAdapter();
 
 builder.Services.AddHttpClient().AddControllers().AddNewtonsoftJson();
 

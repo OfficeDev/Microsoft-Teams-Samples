@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -96,7 +95,7 @@ namespace Microsoft.BotBuilderSamples
                         var card = new ThumbnailCard(images: new List<CardImage> { cardImage });
                         var reply = MessageFactory.Attachment(card.ToAttachment());
 
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("Sorry! User doesn't have a profile picture to display."), cancellationToken);
+                        await stepContext.Context.SendActivityAsync(reply, cancellationToken);
                     }
                     else
                     {
@@ -110,15 +109,15 @@ namespace Microsoft.BotBuilderSamples
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError("Error occurred while processing your request.", ex);
+                    _logger.LogError("Error occurred while processing your request. {Exception}", ex);
                 }
             }
             else
             {
                 _logger.LogInformation("Response token is null or empty.");
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful, please try again."), cancellationToken);
             }
-
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful, please try again."), cancellationToken);
+            
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 

@@ -8,22 +8,20 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Bot.Core.Compat;
+using Microsoft.Bot.Core;
 
 namespace Microsoft.BotBuilderSamples
 {
-    public class AdapterWithErrorHandler : CloudAdapter
+    public class AdapterWithErrorHandler : CompatAdapter
     {
-        public AdapterWithErrorHandler(
-            IConfiguration configuration,
-            IHttpClientFactory httpClientFactory,
-            ILogger<IBotFrameworkHttpAdapter> logger,
-            IStorage storage,
+        public AdapterWithErrorHandler( BotApplication app, CompatBotAdapter botAdapter,
+            ILogger<IBotFrameworkHttpAdapter> logger, IStorage storage,
             ConversationState conversationState)
-            : base(configuration, httpClientFactory, logger)
+            : base(app, botAdapter)
         {
-            base.Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
+            //base.Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
 
             OnTurnError = async (turnContext, exception) =>
             {
