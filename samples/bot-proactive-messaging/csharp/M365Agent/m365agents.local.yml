@@ -41,22 +41,13 @@ provision:
     with:
       target: ../coordinate-logger/appsettings.json
       content:
+        MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
+        MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}
         App:
           Id: ${{AAD_APP_CLIENT_ID}}
           Password: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-          MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
-          MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
 
-  # Generate runtime appsettings to JSON file
-  - uses: file/createOrUpdateJsonFile
-    with:
-      target: ../coordinate-logger/appsettings.local.json
-      content:
-        App:
-          Id: ${{AAD_APP_CLIENT_ID}}
-          Password: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-          MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
-          MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:

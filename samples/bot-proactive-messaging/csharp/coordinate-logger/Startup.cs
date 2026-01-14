@@ -1,16 +1,14 @@
-﻿
-namespace msteams_app_coordinatelogger
+﻿namespace msteams_app_coordinatelogger
 {
     using System;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Integration.AspNet.Core;
     using Microsoft.Bot.Connector.Authentication;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
     using Microsoft.Teams.CoordinateLogger.Bot;
     using Microsoft.Teams.CoordinateLogger.Services;
 
@@ -47,18 +45,38 @@ namespace msteams_app_coordinatelogger
             services
                 .AddSingleton<IConnectorClientFactory, ConnectorClientFactory>();
 
-            services
-                .AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+            services.AddSingleton<IConfiguration>(this.configuration);
+            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
             services
-                .AddTransient<CloudAdapter>();
+                .AddSingleton<CloudAdapter>((sp) =>
+                {
+                    var auth = sp.GetRequiredService<BotFrameworkAuthentication>();
+                    var logger = sp.GetRequiredService<ILogger<CloudAdapter>>();
+                    var adapter = new CloudAdapter(auth, logger);
+                    
+                    adapter.OnTurnError = async (turnContext, exception) =>
+                    {
+                        logger.LogError(exception, "Unhandled exception in bot");
+                        
+                        try
+                        {
+                            await turnContext.SendActivityAsync("Sorry, something went wrong.");
+                        }
+                        catch (Exception sendEx)
+                        {
+                            logger.LogError(sendEx, "Failed to send error message to user");
+                        }
+                    };
+                    
+                    return adapter;
+                });
 
             services
                 .AddTransient<IBot, CoordinateLoggerActivityHandler>();
 
             services
                 .AddMvc(options => options.EnableEndpointRouting = false);
-
         }
 
         /// <summary>
