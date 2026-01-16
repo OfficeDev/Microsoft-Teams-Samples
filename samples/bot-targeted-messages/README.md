@@ -17,6 +17,8 @@ urlFragment: officedev-microsoft-teams-samples-targeted-messages-csharp
 
 This sample demonstrates how to use targeted messaging in Microsoft Teams. Targeted messages are private messages that are only visible to a specific user within a channel or group chat conversation. The sample implements a personal reminder bot that sends reminders as targeted messages.
 
+![Targeted_messages](\Images\targeted_message.gif)
+
 ## Included Features
 * Bots
 * Targeted Messaging
@@ -147,6 +149,21 @@ The bot uses the Teams SDK to send targeted messages. Key points:
 - Set the `Recipient` property to specify who should see the message
 - Works in both channels and group chats
 - The message appears in the shared conversation but is only visible to the recipient
+
+**Help Message**
+![help](/Images/1.help.png)
+
+**Set Reminder**
+![help](/Images/2.set_reminder.png)
+
+**Reminder Received**
+![help](/Images/3.reminder_received.png)
+
+**Check Actve Reminders**
+![help](/Images/4.check_active_reminders.png)
+
+**Cancel Reminder**
+![help](/Images/5.cancel_reminder.png)
 
 ## Deploy the bot to Azure
 
