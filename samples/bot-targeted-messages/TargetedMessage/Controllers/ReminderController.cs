@@ -371,22 +371,56 @@ namespace TargetedMessage.Controllers
 
             _activeReminders[reminderId] = reminder;
 
-            // Send confirmation card as targeted message (only visible to the creator)
-            var confirmationCard = CreateReminderConfirmationCard(reminder, parsed.Delay);
-            confirmationCard.Recipient = new Account { Id = activity.From?.Id, Name = activity.From?.Name };
+            try
+            {
+                var confirmationCard = CreateReminderConfirmationCard(reminder, parsed.Delay);
+                confirmationCard.Recipient = activity.From;
 
-            await _app.Send(
-                channelConversationId,
-                confirmationCard,
-                reminder.ConversationType,
-                activity.ServiceUrl ?? "",
-                isTargeted: true);
+                await _app.Send(
+                    channelConversationId,
+                    confirmationCard,
+                    reminder.ConversationType,
+                    activity.ServiceUrl ?? "",
+                    isTargeted: true);
 
-            log.Info($"[REMINDER] Created reminder {reminderId} for {parsed.TargetUserName} in {parsed.Delay.TotalSeconds} seconds");
+                log.Info($"[REMINDER] Created reminder {reminderId} for {parsed.TargetUserName} in {parsed.Delay.TotalSeconds} seconds");
 
-            // Schedule the reminder delivery as a fire-and-forget background task
-            // Don't pass the request cancellation token - it will cancel when the HTTP request ends
-            _ = DeliverReminderAsync(reminder);
+                // Schedule the reminder delivery as a fire-and-forget background task
+                // Don't pass the request cancellation token - it will cancel when the HTTP request ends
+                _ = DeliverReminderAsync(reminder);
+            }
+            catch (Microsoft.Teams.Common.Http.HttpException httpEx)
+            {
+                // Serialize the error response body properly
+                var errorDetails = "No details";
+                try
+                {
+                    if (httpEx.Body != null)
+                    {
+                        errorDetails = System.Text.Json.JsonSerializer.Serialize(httpEx.Body, new JsonSerializerOptions { WriteIndented = true });
+                    }
+                }
+                catch (Exception serEx)
+                {
+                    errorDetails = $"Failed to serialize error: {serEx.Message}";
+                }
+
+                log.Error($"[REMINDER] HTTP error sending confirmation:\n" +
+                         $"  Status: {httpEx.StatusCode}\n" +
+                         $"  ConversationId: {channelConversationId}\n" +
+                         $"  ConversationType: {reminder.ConversationType.Value}\n" +
+                         $"  ServiceUrl: {activity.ServiceUrl}\n" +
+                         $"  Error Details: {errorDetails}");
+                
+                // Don't use client.Send in catch block - it may fail with same HttpException
+                // Log the error only
+                _activeReminders.TryRemove(reminderId, out _);
+            }
+            catch (Exception ex)
+            {
+                log.Error($"[REMINDER] Error sending confirmation: {ex.GetType().Name} - {ex.Message}\n{ex.StackTrace}");
+                _activeReminders.TryRemove(reminderId, out _);
+            }
         }
 
         private async Task DeliverReminderAsync(ReminderInfo reminder)
@@ -413,12 +447,12 @@ namespace TargetedMessage.Controllers
                 var reminderCard = CreateReminderDeliveryCard(reminder);
 
                 // Send targeted reminder to the recipient
-                var message = reminderCard;
-                message.Recipient = new Account { Id = reminder.TargetUserId, Name = reminder.TargetUserName };
+                // NOTE: Recipient IS REQUIRED when using isTargeted: true
+                reminderCard.Recipient = new Account { Id = reminder.TargetUserId, Name = reminder.TargetUserName };
 
                 await _app.Send(
                     reminder.ConversationId,
-                    message,
+                    reminderCard,
                     reminder.ConversationType,
                     reminder.ServiceUrl,
                     isTargeted: true);
@@ -716,7 +750,8 @@ namespace TargetedMessage.Controllers
                         if (!string.IsNullOrEmpty(activityId))
                         {
                             var updatedCard = CreateSnoozeConfirmationCard(newReminder, snoozeMinutes);
-                            updatedCard.Recipient = activity.From;
+                            // NOTE: Recipient IS REQUIRED when using isTargeted: true
+                            updatedCard.Recipient = new Account { Id = activity.From?.Id, Name = activity.From?.Name };
 
                             try
                             {
