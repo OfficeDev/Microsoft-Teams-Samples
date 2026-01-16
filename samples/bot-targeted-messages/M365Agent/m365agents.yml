@@ -86,4 +86,3 @@ deploy:
       # or add it to your environment variable file.
       resourceId: ${{BOT_AZURE_APP_SERVICE_RESOURCE_ID}}
       workingDirectory: ../TargetedMessage
-projectId: 02b12572-3558-4beb-872f-3722d6b1c880
