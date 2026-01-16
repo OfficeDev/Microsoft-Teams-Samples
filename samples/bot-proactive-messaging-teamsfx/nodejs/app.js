@@ -48,6 +48,8 @@ const tokenCredentials = {
 // Create proper credentials for Teams SDK
 let appOptions = { storage };
 
+const tenantId = process.env.TEAMS_APP_TENANT_ID;
+
 if (config.MicrosoftAppType === "UserAssignedMsi") {
   // Production: Use managed identity token factory
   appOptions = {
@@ -55,12 +57,19 @@ if (config.MicrosoftAppType === "UserAssignedMsi") {
     clientId: process.env.CLIENT_ID || "",
     token: createTokenFactory(),
   };
-} else {
-  // Local development: Use client credentials directly
+} else if (config.MicrosoftAppType === "SingleTenant") {
   appOptions = {
     ...appOptions,
     clientId: process.env.CLIENT_ID || "",
     clientSecret: process.env.CLIENT_SECRET || "",
+    tenantId: tenantId,
+  };
+} else {
+  appOptions = {
+    ...appOptions,
+    clientId: process.env.CLIENT_ID || "",
+    clientSecret: process.env.CLIENT_SECRET || "",
+    tenantId: "botframework.com",
   };
 }
 
@@ -438,13 +447,25 @@ async function getAccessToken() {
   try {
     const clientId = process.env.CLIENT_ID;
     const clientSecret = process.env.CLIENT_SECRET;
+    const appTenantId = process.env.TEAMS_APP_TENANT_ID;
     
     if (!clientId || !clientSecret) {
       throw new Error('CLIENT_ID and CLIENT_SECRET are required for proactive messaging');
     }
     
     // Use client credentials flow for proactive messaging
-    const tokenUrl = 'https://login.microsoftonline.com/botframework.com/oauth2/v2.0/token';
+    // For SingleTenant apps, use the actual tenant ID (required)
+    let tokenTenant;
+    if (config.MicrosoftAppType === 'SingleTenant') {
+      if (!appTenantId) {
+        throw new Error('TEAMS_APP_TENANT_ID is required for SingleTenant apps');
+      }
+      tokenTenant = appTenantId;
+    } else {
+      // MultiTenant apps use botframework.com
+      tokenTenant = 'botframework.com';
+    }
+    const tokenUrl = `https://login.microsoftonline.com/${tokenTenant}/oauth2/v2.0/token`;
     const params = new URLSearchParams();
     params.append('grant_type', 'client_credentials');
     params.append('client_id', clientId);

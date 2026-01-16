@@ -20,7 +20,7 @@ provision:
       # The Microsoft Entra application's display name
       name: bot-proactive-messaging-teamsfx${{APP_NAME_SUFFIX}}
       generateClientSecret: true
-      signInAudience: AzureADMultipleOrgs
+      signInAudience: AzureADMyOrg
     writeToEnvironmentFile:
       # The Microsoft Entra application's client id created for bot.
       clientId: BOT_ID
@@ -80,3 +80,4 @@ deploy:
       envs:
         CLIENT_ID: ${{BOT_ID}}
         CLIENT_SECRET: ${{SECRET_BOT_PASSWORD}}
+        TEAMS_APP_TENANT_ID: ${{TEAMS_APP_TENANT_ID}}
