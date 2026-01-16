@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to create a Python Messaging Extension in Microsoft Teams that allows users to perform searches and retrieve results.
+description: This sample demonstrates how to create a Python Messaging Extensio4) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python` folder
 products:
 - office-teams
 - office
@@ -16,7 +16,8 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-extension-python
 
 # Teams Messaging Extensions Search
 
-This comprehensive Python sample provides a detailed guide on building a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) for Microsoft Teams, empowering users to conduct searches and retrieve results efficiently. By leveraging the [Bot Framework](https://dev.botframework.com), this extension enhances user interaction within Teams, demonstrating features such as search commands, message handling, and result display.
+
+This comprehensive Python sample provides a detailed guide on building a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) for Microsoft Teams, empowering users to conduct searches and retrieve results efficiently. This extension enhances user interaction within Teams, demonstrating features such as search commands, message handling, and result display.
 
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
 build a Search-based Messaging Extension.
@@ -100,7 +101,7 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
      - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
 
-4) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python` folder
+4) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python\src` folder
 
 1) Activate your desired virtual environment
 
@@ -109,9 +110,9 @@ the Teams service needs to call into the bot.
 1) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Zip** up the contents of the `appPackage` folder to create a `appPackage.zip`
+    - **Upload** the `appPackage.zip` to Teams (in the Apps view click "Upload a custom app")
 
 1) Run your bot with `python app.py`
 

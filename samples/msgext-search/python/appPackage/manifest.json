@@ -1,0 +1,67 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.24/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.24",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "My App, Inc.",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/privacy",
+        "termsOfUseUrl": "https://www.example.com/termofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "msgext-search${{APP_NAME_SUFFIX}}",
+        "full": "GitHub Repository Search Message Extension"
+    },
+    "description": {
+        "short": "Search GitHub repositories from Teams",
+        "full": "A message extension that allows you to search GitHub repositories and share them in Teams conversations."
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": ["personal", "team", "groupChat"],
+            "isNotificationOnly": false,
+            "supportsCalling": false,
+            "supportsVideo": false,
+            "supportsFiles": false
+        }
+    ],
+    "composeExtensions": [
+        {
+            "botId": "${{BOT_ID}}",
+            "commands": [
+                {
+                    "id": "searchQuery",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Search GitHub repositories",
+                    "title": "Search",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "searchQuery",
+                            "title": "Search Query",
+                            "description": "Enter your search query to find GitHub repositories",
+                            "inputType": "text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}
