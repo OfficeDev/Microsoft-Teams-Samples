@@ -1,0 +1,56 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.24/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.24",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "My App, Inc.",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/privacy",
+        "termsOfUseUrl": "https://www.example.com/termofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "bot-task-module${{APP_NAME_SUFFIX}}",
+        "full": "Bot Task Module Sample"
+    },
+    "description": {
+        "short": "Demonstrates task module invocation from bots",
+        "full": "This sample demonstrates how to invoke task modules from bots in Microsoft Teams using Hero Cards and Adaptive Cards."
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": ["personal", "team", "groupChat"],
+            "isNotificationOnly": false,
+            "supportsCalling": false,
+            "supportsVideo": false,
+            "supportsFiles": false,
+            "commandLists": [
+                {
+                    "scopes": ["personal", "team", "groupChat"],
+                    "commands": [
+                        {
+                            "title": "hi",
+                            "description": "Say hi to see task module options"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "${{BOT_DOMAIN}}"
+    ]
+}

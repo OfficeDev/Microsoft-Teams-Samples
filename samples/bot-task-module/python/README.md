@@ -102,9 +102,9 @@ the Teams service needs to call into the bot.
 1) Update `CustomForm.html` to replace your Microsoft App Id *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}`
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). **Note:** the Task Modules containing pages will require the deployed bot's domain in validDomains of the manifest.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). **Note:** the Task Modules containing pages will require the deployed bot's domain in validDomains of the manifest.
+    - **Zip** up the contents of the `appPackage` folder to create a `appPackage.zip`
+    - **Upload** the `appPackage.zip` to Teams (in the Apps view click "Upload a custom app")
 
 1) Run your bot with `python app.py`
 
