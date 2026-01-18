@@ -1,69 +1,133 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Launch App (Edge)",
-            "type": "msedge",
-            "request": "launch",
-            "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
-            "cascadeTerminateToConfigurations": [
-                "Python: Run App Locally"
-            ],
-            "presentation": {
-                "group": "all",
-                "hidden": true
-            },
-            "internalConsoleOptions": "neverOpen"
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Remote (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 4
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Launch Remote (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 5
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Launch Remote (Desktop)",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "Start App in Desktop Client (Remote)",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 6
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Start App (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+      "presentation": {
+        "group": "all",
+        "hidden": true
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Start App (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+      "presentation": {
+        "group": "all",
+        "hidden": true
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Start Python",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/app.py",
+      "cwd": "${workspaceFolder}/src",
+      "console": "integratedTerminal"
+    },
+    {
+        "name": "Start Microsoft 365 Agents Playground",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/devTools/playground/node_modules/@microsoft/m365agentsplayground/cli.js",
+        "args": [
+            "start"
+        ],
+        "env": {
+          "PATH": "${workspaceFolder}/devTools/nodejs;${env:PATH}"
         },
-        {
-            "name": "Launch App (Chrome)",
-            "type": "chrome",
-            "request": "launch",
-            "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
-            "cascadeTerminateToConfigurations": [
-                "Python: Run App Locally"
-            ],
-            "presentation": {
-                "group": "all",
-                "hidden": true
-            },
-            "internalConsoleOptions": "neverOpen"
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug in Teams (Edge)",
+      "configurations": ["Start App (Edge)", "Start Python"],
+      "cascadeTerminateToConfigurations": ["Start Python"],
+      "preLaunchTask": "Start App Locally",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 1
+      },
+      "stopAll": true
+    },
+    {
+      "name": "Debug in Teams (Chrome)",
+      "configurations": ["Start App (Chrome)", "Start Python"],
+      "cascadeTerminateToConfigurations": ["Start Python"],
+      "preLaunchTask": "Start App Locally",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 2
+      },
+      "stopAll": true
+    },
+    {
+      "name": "Debug in Teams (Desktop)",
+      "configurations": ["Start Python"],
+      "preLaunchTask": "Start App in Desktop Client",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 3
+      },
+      "stopAll": true
+    },
+    {
+        "name": "Debug in Microsoft 365 Agents Playground",
+        "configurations": [
+            "Start Python",
+            "Start Microsoft 365 Agents Playground"
+        ],
+        "cascadeTerminateToConfigurations": [
+            "Start Microsoft 365 Agents Playground"
+        ],
+        "preLaunchTask": "Deploy (Microsoft 365 Agents Playground)",
+        "presentation": {
+            "group": "0-TestTool",
+            "order": 1
         },
-        {
-            "name": "Python: Run App Locally",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/app.py",
-            "cwd": "${workspaceFolder}",
-            "console": "integratedTerminal"
-        }
-    ],
-    "compounds": [
-        {
-            "name": "Debug (Edge)",
-            "configurations": [
-                "Launch App (Edge)",
-                "Python: Run App Locally"
-            ],
-            "preLaunchTask": "Prepare Teams App Resources",
-            "presentation": {
-                "group": "all",
-                "order": 1
-            },
-            "stopAll": true
-        },
-        {
-            "name": "Debug (Chrome)",
-            "configurations": [
-                "Launch App (Chrome)",
-                "Python: Run App Locally"
-            ],
-            "preLaunchTask": "Prepare Teams App Resources",
-            "presentation": {
-                "group": "all",
-                "order": 2
-            },
-            "stopAll": true
-        }
-    ]
+        "stopAll": true
+    }
+  ]
 }

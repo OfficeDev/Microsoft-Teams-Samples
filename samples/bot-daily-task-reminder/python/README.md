@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-python
 
 # Bot Daily Task Reminder (Python)
 
-The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurring tasks and receive reminders at designated times. Built with the Bot Framework SDK for Python and leveraging adaptive cards and task modules, this bot provides an efficient way to manage and be reminded of daily tasks directly within Teams. It includes setup instructions for Microsoft Entra ID, Teams integration, and Azure Bot Service, offering seamless scheduling and notification capabilities.
+The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurring tasks and receive reminders at designated times. Built with the Teams SDK for Python and leveraging adaptive cards and task modules, this bot provides an efficient way to manage and be reminded of daily tasks directly within Teams. It includes setup instructions for Microsoft Entra ID, Teams integration, and Azure Bot Service, offering seamless scheduling and notification capabilities.
 
 ## Included Features
 * Bots
@@ -31,7 +31,7 @@ The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurr
 
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your Teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Bot daily task reminder:** [Manifest](/samples/bot-daily-task-reminder/python/appManifest/Bot-Daily-Task-Reminder.zip)
+**Bot daily task reminder:** [Manifest](/samples/bot-daily-task-reminder/python/appPackage/Bot-Daily-Task-Reminder.zip)
 
 ## Prerequisites
 
@@ -114,7 +114,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - Install dependencies
 
     ```bash
-    pip install -r requirements.txt
+    pip install -r src/requirements.txt
     ```
 
 - Update the `config.py` file in your project folder for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` (the AppId and client secret from your Azure registration), and `BaseUrl` (your ngrok or dev tunnel URL).
@@ -122,14 +122,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - Run your app
 
     ```bash
-    python app.py
+    python src/app.py
     ```
 
 5) **Setup Manifest for Teams**
 
-    - Edit the `manifest.json` contained in the `appManifest/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value in `config.py`) *everywhere* you see the place holder string `{{Microsoft-App-Id}}`
+    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value in `config.py`) *everywhere* you see the place holder string `{{Microsoft-App-Id}}`
     - Replace `{{domain-name}}` with your base URL domain (e.g., `1234.ngrok-free.app` or `12345.devtunnels.ms`).
-    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 ## Running the sample
@@ -152,7 +152,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams SDK Documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Activity processing](https://docs.microsoft.com/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
