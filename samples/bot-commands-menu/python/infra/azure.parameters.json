@@ -5,17 +5,14 @@
     "resourceBaseName": {
       "value": "bot${{RESOURCE_SUFFIX}}"
     },
-    "botAadAppClientId": {
-      "value": "${{AAD_APP_CLIENT_ID}}"
-    },
-    "botAadAppTenantId": {
-      "value": "${{AAD_APP_TENANT_ID}}"
-    },
-    "botAppDomain": {
-      "value": "${{BOT_DOMAIN}}"
+    "webAppSKU": {
+      "value": "B3"
     },
     "botDisplayName": {
-      "value": "BotCommandsMenu"
+      "value": "bot-commands-menu"
+    },
+    "linuxFxVersion": {
+      "value": "PYTHON|3.12"
     }
   }
 }
