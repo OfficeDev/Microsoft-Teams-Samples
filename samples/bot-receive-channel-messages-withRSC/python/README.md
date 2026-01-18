@@ -94,13 +94,15 @@ the Teams service needs to call into the bot.
 
 2) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
-  A) Select **New Registration** and on the *register an application page*, set following values:
+  A. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+
+  B. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+
+  C. Navigate to **API Permissions**, and make sure to add the following permissions:
    Select Add a permission
       * Select Add a permission
       * Select Microsoft Graph -\> Delegated permissions.
@@ -124,17 +126,17 @@ the Teams service needs to call into the bot.
 
 8) Setup Manifest for Teams
 
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
         `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
          Replace <<MANIFEST-ID>> with any GUID or with your MicrosoftAppId/app id
 
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
+    - **Zip** up the contents of the `appPackage` folder to create a `appPackage.zip`
     - **Upload** in a team to test
          - Select or create a team
          - Select the ellipses **...** from the left pane. The drop-down menu appears.
          - Select **Manage Team**, then select **Apps** 
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `appManifest`, and then select **Add** to add the bot to your selected team.
+         - Then select the `appPackage.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-receive-channel-messages-withRSC/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
