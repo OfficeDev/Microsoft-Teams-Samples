@@ -23,3 +23,7 @@ bld/
 
 # Notification local store
 .notification.localstore.json
+.notification.playgroundstore.json
+
+# devTools
+devTools/

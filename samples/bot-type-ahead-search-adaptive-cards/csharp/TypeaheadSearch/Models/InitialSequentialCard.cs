@@ -1,4 +1,4 @@
-﻿// <copyright file="InitialSequentialCard.cs" company="Microsoft">
+// <copyright file="InitialSequentialCard.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
