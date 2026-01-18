@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to build a bot for Microsoft Teams using the Bot Framework in Python. It highlights key features such as sending Hero Cards and handling user messages.
+description: This sample demonstrates how to build a bot for Microsoft Teams using the Teams AI SDK in Python. It highlights key features such as sending Hero Cards and handling user messages.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-pytho
 
 # Bot Conversation QuickStart (Python) 
 
-This sample demonstrates how to build a bot for Microsoft Teams using the Bot Framework in Python. It highlights key features such as sending Hero Cards, handling user messages, and participating in Teams conversations.
+This sample demonstrates how to build a bot for Microsoft Teams using the Teams AI SDK in Python. It highlights key features such as sending Hero Cards, handling user messages, and participating in Teams conversations.
 
 Hero Card Integration: Teaches how to create and send Hero Cards with actionable buttons, allowing users to interact with predefined commands.
 
@@ -105,9 +105,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 5) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 6) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Zip** up the contents of the `appPackage` folder to create a `appPackage.zip`
+    - **Upload** the `appPackage.zip` to Teams (in the Apps view click "Upload a custom app")
 
 7) Run your bot with `python app.py`
 

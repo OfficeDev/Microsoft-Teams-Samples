@@ -1,0 +1,8 @@
+# Teams AI SDK for Python
+microsoft-teams-apps>=2.0.0a5,<3.0.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# Azure Identity for managed identity authentication
+azure-identity>=1.12.0
