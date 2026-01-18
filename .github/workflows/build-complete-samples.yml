@@ -68,9 +68,9 @@ jobs:
               name: 'bot-join-team-using-qr-code'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
+            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/bot-people-picker-adc/bot-people-picker-adc.csproj'
               name: 'bot-people-picker-adaptive-card'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/ReceiveMessagesWithRSC.csproj'
               name: 'bot-receive-channel-messages-withRSC'
@@ -164,9 +164,9 @@ jobs:
               name: 'msgext-link-unfurling-reddit'
               version: '6.0.x'
 
-            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSelectionApp.csproj'
+            - project_path: 'samples/app-region-selection/csharp/app-region-selection/app-region-selection.csproj'
               name: 'app-region-selection'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
               name: 'tab-external-auth'
@@ -264,9 +264,9 @@ jobs:
               name: 'account-linking'
               version: '6.0.x'
              
-            - project_path: 'samples/bot-conversation/csharp/TeamsConversationBot.csproj'
+            - project_path: 'samples/bot-conversation/csharp/bot-conversation/bot-conversation.csproj'
               name: 'bot-conversation'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/bot-file-upload/csharp/TeamsFileUpload/TeamsFileUpload.csproj'
               name: 'bot-file-upload'
@@ -328,9 +328,9 @@ jobs:
               name: 'meetings-live-caption'
               version: '6.0.x'
 
-            - project_path: 'samples/meetings-transcription/csharp/MeetingTranscription/MeetingTranscription.csproj'
+            - project_path: 'samples/meetings-transcription/csharp/meetings-transcription/meetings-transcription.csproj'
               name: 'meetings-transcription'
-              version: '6.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Domain.Tests/Microsoft.Teams.Samples.MeetingSigning.Domain.Tests.csproj'
               name: 'meetings-share-to-stage-signing'
@@ -372,9 +372,9 @@ jobs:
               name: 'msgext-search-auth-config'
               version: '6.0.x'
 
-            - project_path: 'samples/msgext-search/csharp/TeamsMessagingExtensionsSearch.csproj'
+            - project_path: 'samples/msgext-search/csharp/msgext-search/msgext-search.csproj'
               name: 'msgext-search'
-              version: '6.0.x'   
+              version: '10.0.x'   
                     
             - project_path: 'samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Microsoft.Teams.Apps.Selfhelp.csproj'
               name: 'msteams-application-resourcehub'
@@ -496,6 +496,22 @@ jobs:
               name: 'bot-auth0-adaptivecard'
               version: '6.0.x'
 
+            - project_path: 'samples/agent-knowledge-hub/csharp/AgentKnowledgeHub/AgentKnowledgeHub.csproj'
+              name: 'agent-knowledge-hub'
+              version: '8.0.x'
+              
+            - project_path: 'samples/bot-shared-channel-events/csharp/SharedChannelEvents/SharedChannelEvents.csproj'
+              name: 'bot-shared-channel-events'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-membership-change-notification/csharp/ChangeNotification/ChangeNotification.csproj'
+              name: 'graph-membership-change-notification'
+              version: '8.0.x'
+
+            - project_path: 'samples/graph-chat-migration/csharp/GraphChatMigration/GraphChatMigration.csproj'
+              name: 'graph-chat-migration'
+              version: '8.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -554,7 +570,7 @@ jobs:
 
             - project_path: 'samples/bot-archive-groupchat-messages/nodejs'
               name: 'bot-archive-groupchat-messages'
-              version: '14.x'
+              version: '20.x'
 
             - project_path: 'samples/bot-daily-task-reminder/nodejs'
               name: 'bot-daily-task-reminder'
@@ -1057,7 +1073,15 @@ jobs:
 
             - project_path: 'samples/bot-auth0-adaptivecard/nodejs'
               name: 'bot-auth0-adaptivecard'
-              version: '16.x'  
+              version: '16.x'
+              
+            - project_path: 'samples/graph-chat-migration/nodejs'
+              name: 'bot-graph-chat-migration'
+              version: '20.x'
+              
+            - project_path: 'samples/graph-membership-change-notification/nodejs'
+              name: 'graph-membership-change-notification'
+              version: '20.x'   
 
             - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs'
               name: 'tab-adhoccalls-transcript-recording'
@@ -1065,6 +1089,10 @@ jobs:
 
             - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs/api-server'
               name: 'tab-adhoccalls-transcript-recording-api-server'
+              version: '18.x'
+
+            - project_path: 'samples/agent-knowledge-hub/nodejs'
+              name: 'agent-knowledge-hub'
               version: '18.x'
 
       fail-fast: false
@@ -1205,10 +1233,18 @@ jobs:
             - project_path: 'samples/tab-deeplink/python'
               name: 'tab-deeplink'
               version: '3.10.x'
+            
+            - project_path: 'samples/graph-membership-change-notification/python'
+              name: 'graph-membership-change-notification'
+              version: '3.10.x'
 
             - project_path: 'samples/bot-proactive-messaging-teamsfx/python'
               name: 'bot-proactive-messaging-teamsfx'
               version: '3.10.x'
+
+            - project_path: 'samples/agent-knowledge-hub/python'
+              name: 'agent-knowledge-hub'
+              version: '3.13.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" python

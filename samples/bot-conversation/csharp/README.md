@@ -17,9 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-csharp
 
 This sample app demonstrates how to handle various bot conversation events in Microsoft Teams, including read receipts and adaptive card interactions. It showcases capabilities such as immersive reader support and message update tracking, making it ideal for personal, group, and team chat scopes.
 
-Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
+Teams SDK Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
 
-This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
+This bot has been created using [Teams SDK](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
 ## Included Features
@@ -113,8 +113,8 @@ the Teams service needs to call into the bot.
    - Navigate to `samples/bot-conversation/csharp` folder
    - Select `TeamsConversationBot.csproj` or `TeamsConversationBot.sln`file
 
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: SingleTenant, UserAssignedMSI**)
+1) Update the `appsettings.Development.json` configuration for the bot to use the ClientIdId, ClientSecreTenantId  generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Also, set MicrosoftAppType in the `appsettings.Development.json`. (**Allowed values are: SingleTenant, UserAssignedMSI**)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
@@ -125,7 +125,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `appPackage.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+
 
 
 ## Running the sample
