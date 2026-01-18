@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4.
+description: This app demonstrates how to start a conversation thread in a specific Teams channel using Teams SDK.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-py
 
 # Teams Starting Thread In Team
 
-This sample application illustrates how to initiate a conversation thread within a specific channel in Microsoft Teams using Bot Framework v4. It includes key features such as adaptive cards, bot-driven interactions, and setup instructions for Microsoft 365 Agents Toolkit in Visual Studio, enabling easy uploading and debugging. Ideal for developers looking to integrate bots in Teams channels and create engaging, context-specific conversations.
+This sample application illustrates how to initiate a conversation thread within a specific channel in Microsoft Teams using Teams SDK. It includes key features such as adaptive cards, bot-driven interactions, and setup instructions for Microsoft 365 Agents Toolkit in Visual Studio, enabling easy uploading and debugging. Ideal for developers looking to integrate bots in Teams channels and create engaging, context-specific conversations.
 
 ## Prerequisites
 
@@ -98,16 +98,16 @@ the Teams service needs to call into the bot.
 
 1) Activate your desired virtual environment
 
-1) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+1) Install dependencies by running ```pip install -r src/requirements.txt``` in the project folder.
 
 1) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-1) Run your bot with `python app.py`
+1) Run your bot with `python src/app.py`
 
 ## Running the sample
 
@@ -136,7 +136,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 # Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams AI Library Documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
