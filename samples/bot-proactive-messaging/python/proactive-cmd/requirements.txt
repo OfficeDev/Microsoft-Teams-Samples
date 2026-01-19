@@ -1,9 +1,0 @@
-# Microsoft Teams SDK packages (v2.0 alpha)
-microsoft-teams-ai==2.0.0a8
-microsoft-teams-api==2.0.0a8
-microsoft-teams-apps==2.0.0a8
-microsoft-teams-cards==2.0.0a8
-microsoft-teams-common==2.0.0a8
-
-# Pydantic settings (required for Teams SDK)
-pydantic-settings>=2.0.0
