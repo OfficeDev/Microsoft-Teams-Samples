@@ -4,30 +4,41 @@ products:
 - office-365
 languages:
 - python
-title: Microsoft Teams Proactive Messaging Bot (Teams SDK)
-description: This sample bot showcases proactive messaging capabilities in Microsoft Teams using the Microsoft Teams SDK for Python. It stores user conversation references to send scheduled or triggered reminder notifications.
+title: Microsoft Teams Proactive Messaging Sample (Teams SDK)
+description: This sample demonstrates two approaches for building proactive messaging apps in Microsoft Teams using Python. It includes a Coordinate Logger bot to capture conversation details and a command-line tool to send proactive messages with throttling policies.
 extensions:
   contentType: samples
-  createdDate: 01/08/2026 10:02:21 AM
-urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-teamsfx-python
+  createdDate: 01/19/2026 10:02:21 AM
+urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-python
 
 ---
 
-# Microsoft Teams Proactive Messaging Bot (Teams SDK for Python)
+# Teams Proactive Messaging Samples (Python)
 
-This sample bot demonstrates proactive messaging capabilities in Microsoft Teams using the **Microsoft Teams SDK for Python**. The bot stores user conversation references and provides an API endpoint to send proactive messages to all registered users.
+This sample showcases two approaches for building proactive messaging apps in Microsoft Teams using Python with the **Microsoft Teams SDK**. The Coordinate Logger solution captures user and channel conversation coordinates, while the Proactive CMD solution demonstrates how to send messages with policies that handle throttling, ensuring reliable delivery.
 
-## Key Features
+Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.
 
-- **Microsoft Teams SDK** - Built using the modern `microsoft-teams` SDK for Python
-- **Proactive Messaging** - Send messages to users without them initiating conversation
-- **Conversation Reference Storage** - Stores references when users interact with the bot
-- **Welcome Messages** - Greets users when the bot is installed
-- **Notify API Endpoint** - HTTP endpoint to trigger proactive messages
+## Contents
+
+| Folder | Description |
+|--------|-------------|
+| [/coordinate-logger](coordinate-logger) | Sample of getting conversation coordinates using Teams SDK Events |
+| [/proactive-cmd](proactive-cmd) | Sample of sending proactive messages with throttling policies |
+| /appManifest | App manifest for the teams app |
+| /Images | Sample screenshots |
 
 ## Included Features
+
 * Bots
 * Proactive Messaging
+
+- **Microsoft Teams SDK for Python (v2.0)** - Modern SDK for Teams bot development
+  - `microsoft-teams-ai` - Teams AI library
+  - `microsoft-teams-apps` - Application framework
+  - `microsoft-teams-api` - API models and types
+- **asyncio** - Asynchronous programming
+- **python-dotenv** - Environment variable management
 
 ## Interaction with app
 
@@ -40,18 +51,37 @@ This sample bot demonstrates proactive messaging capabilities in Microsoft Teams
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Project Structure
+## Architecture Overview
 
 ```
-├── app.py                          # Main application entry point (Teams SDK App)
-├── config.py                       # Configuration settings
-├── requirements.txt                # Python dependencies
-├── bots/
-│   ├── __init__.py                 # Module exports
-│   └── bot_Proactive_Message.py    # Conversation reference storage
-├── appManifest/
-│   └── manifest.json               # Teams app manifest
-└── Images/                         # Sample screenshots
+┌─────────────────────┐
+│  Coordinate Logger  │  ← Captures conversation coordinates
+│  Bot                │     (Install in Teams)
+│                     │
+│  Logs to Console:   │
+│  • Service URL      │
+│  • Tenant ID        │
+│  • Conversation ID  │
+│  • User/Channel Info│
+└─────────────────────┘
+          │
+          │ Copy coordinates
+          ▼
+┌─────────────────────┐
+│  Proactive CMD      │  ← Sends proactive messages
+│  Command Line Tool  │     (Run from terminal)
+│                     │
+│  Commands:          │
+│  • sendUserMessage  │
+│  • sendChannelThread│
+└─────────────────────┘
+          │
+          │ HTTP + JWT Auth
+          ▼
+┌─────────────────────┐
+│  Microsoft Teams    │
+│  (User/Channel)     │
+└─────────────────────┘
 ```
 
 ## Try it yourself - experience the App in your Microsoft Teams client
@@ -72,21 +102,42 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-## Setup for bot
+## Setup Overview
+
+This sample consists of **two separate applications**:
+
+### 1. Coordinate Logger Bot
+
+**Quick Setup:**
+```bash
+cd coordinate-logger
+pip install -r requirements.txt
+python app.py
+```
+
+### 2. Proactive CMD Tool
+
+**Quick Usage:**
+```bash
+cd proactive-cmd
+pip install -r requirements.txt
+python app.py sendUserMessage --app-id="..." --app-password="..." ...
+```
+
+## Setup for Azure Bot Registration
 
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append it with the path `/api/messages`
+- For bot handle, make up a name.
+- Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
+- __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
 
-## Run the app (Manually Uploading to Teams)
-## Setup for code
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-the Teams service needs to call into the bot.
+In the new Azure Bot resource in the Portal, 
+- Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append it with the path `/api/messages`
+
+## Detailed Setup Instructions
+
+> Note: These instructions are for running the sample on your local machine. The tunnelling solution is required because the Teams service needs to call into the bot.
 
 1) Clone the repository
 
@@ -94,7 +145,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) Run ngrok - point to port 3978
+2) Run ngrok or dev tunnel - point to port 3978
 
    ```bash
    ngrok http 3978 --host-header="localhost:3978"
@@ -113,7 +164,7 @@ the Teams service needs to call into the bot.
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the configuration files.
   C) Navigate to **API Permissions**, and make sure to add the following permissions:
    Select Add a permission
       * Select Add a permission
@@ -123,92 +174,148 @@ the Teams service needs to call into the bot.
 
    > **Note:** The `User.Read` delegated permission is required for the bot to function properly. If this permission is not added or admin consent is not granted, you will receive a **401 Unauthorized** error when the bot tries to authenticate.
 
-4) In a terminal, navigate to `samples/bot-proactive-messaging/python`
+4) Navigate to `samples/bot-proactive-messaging/python`
 
-5) Activate your desired virtual environment
+5) **Setup Coordinate Logger Bot:**
 
-6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+   a) Navigate to the coordinate-logger directory:
+   ```bash
+   cd coordinate-logger
+   ```
 
-   The following packages will be installed:
-   - `microsoft-teams-apps` - Teams App framework (v2.0.0a8)
-   - `microsoft-teams-api` - Teams API client (v2.0.0a8)
-   - `pydantic-settings` - Configuration management
-   - `python-dotenv` - Environment variable management
+   b) Create a virtual environment and install dependencies:
+   ```bash
+   python -m venv venv
+   # On Windows
+   venv\Scripts\activate
+   # On macOS/Linux
+   source venv/bin/activate
+   
+   pip install -r requirements.txt
+   ```
 
-7) Update the `config.py` configuration or set environment variables:
-   - `MicrosoftAppId` - Your Bot/App registration client ID
-   - `MicrosoftAppPassword` - Your Bot/App registration client secret
-   - `MicrosoftAppTenantId` - Your tenant ID
-   - `BaseUrl` - The public URL of your bot (e.g., ngrok URL)
+   c) Configure environment variables in `../env/.env.local`:
+   ```
+   CLIENT_ID=<your-bot-app-id>
+   CLIENT_SECRET=<your-bot-app-password>
+   TENANT_ID=<your-tenant-id>
+   PORT=3978
+   ```
 
-8) __*This step is specific to Teams.*__
+   d) Run the coordinate logger bot:
+   ```bash
+   python app.py
+   ```
+
+6) **Setup Proactive CMD Tool:**
+
+   a) Navigate to the proactive-cmd directory (in a new terminal):
+   ```bash
+   cd proactive-cmd
+   ```
+
+   b) Create a virtual environment and install dependencies:
+   ```bash
+   python -m venv venv
+   # On Windows
+   venv\Scripts\activate
+   # On macOS/Linux
+   source venv/bin/activate
+   
+   pip install -r requirements.txt
+   ```
+
+7) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{BOT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-9) Run your bot with `python app.py`
+## Usage Workflow
 
-## Code Highlights
+### Step 1: Run Coordinate Logger Bot
 
-### Proactive Messaging
+1. Start the coordinate logger bot:
+   ```bash
+   cd coordinate-logger
+   python app.py
+   ```
 
-```python
-# Store conversation references for proactive messaging
-conversation_references = {}
+2. Install the bot in Teams (upload manifest.zip)
 
-# Store reference when user interacts with bot
-@app.on_message
-async def on_message(context: ActivityContext[MessageActivity]):
-    activity = context.activity
-    conversation_ref = build_conversation_reference(activity)
-    conversation_references[conversation_ref.conversation.id] = conversation_ref
+3. The bot will log conversation coordinates to the console when:
+   - Bot is installed (to user or team)
+   - Users send messages (optional)
+   - Team/channel events occur
 
-# Send proactive messages to all stored conversations
-async def send_proactive_notifications():
-    sent_count = 0
-    for conversation_id in conversation_references:
-        try:
-            activity = MessageActivityInput(text="Proactive Hello!")
-            await app.send(conversation_id=conversation_id, activity=activity)
-            sent_count += 1
-        except Exception:
-            pass
-    return sent_count, len(conversation_references)
+### Step 3: Send Proactive Messages
+
+Navigate to the proactive-cmd folder and run commands:
+
+**Send to User (1-on-1):**
+```bash
+cd proactive-cmd
+python app.py sendUserMessage \
+  --app-id="<<Client-ID>>" \
+  --app-password="<<Client-Secret>>" \
+  --tenant-id="<<Tenant-ID>>" \
+  --service-url="https://smba.trafficmanager.net/amer/" \
+  --conversation-id="a:1AbCdEf....." \
+  --message="Hello! This is a proactive message."
 ```
+
+**Send to Channel:**
+```bash
+python app.py sendChannelThread \
+  --app-id="<<Client-ID>>" \
+  --app-password="<<Client-Secret>>" \
+  --tenant-id="<<Tenant-ID>>" \
+  --service-url="https://smba.trafficmanager.net/amer/" \
+  --conversation-id="19:abc123...@thread.tacv2" \
+  --message="Teams channel Proactive message!"
+```
+
+## Key Concepts
+
+The two samples correspond with two of the most common challenges when building proactive messaging apps in Microsoft Teams: getting the conversation coordinates and sending messages reliably.
+
+### Coordinate Logger
+
+The coordinate logger bot demonstrates how to obtain or generate conversation coordinates for users or channel threads using the **Microsoft Teams SDK for Python**. It captures:
+
+- **User Conversations (1-on-1)** - Personal chat coordinates
+- **Channel Conversations** - Team channel coordinates
 
 ## Running the sample
 
-This sample provides following functionality:
+**Install the app in Teams**
+![Install App](Images/1.Install_App.png)
 
-- **Echo Messages**: Send any message to the bot to receive an echo response.
+**Open the app in personal scope**
+![Open App](Images/2.Open_App.png)
 
-- **Proactive Notifications**: Navigate to `http://localhost:3978/api/notify` to send proactive messages to all users who have previously interacted with the bot.
+**Send hello message to bot**
+![Send Message](Images/3.Once_Send_Hello_Message_To_Bot.png)
 
-- **Health Check**: Navigate to `http://localhost:3978/health` to check if the bot is running.
+**Terminal shows two commands for 1-on-1 and channel messaging**
+![Terminal Commands](Images/4.Terminal_Shows_Two_Commands.png)
 
-  **Install the App in Teams**
-  ![Install App](Images/1.Install_App.png)
+**Open terminal to send proactive message**
+![Open Terminal](Images/5.Open_Proactive_In_Terminal.png)
 
-  **Open the App in Personal Scope**
-  ![Open App](Images/2.Open_App.png)
+**Paste command in terminal and press enter**
+![Run Command](Images/6.Paste_In_Terminal_and_Press_Enter.png)
 
-  **Bot sends welcome message with proactive notification link**
-  ![Proactive Link](Images/3.Proactive_Link.png)
+**Proactive message received in 1-on-1 chat**
+![Proactive Message 1-on-1](Images/7.Proacactive_Messaging_OneOnOne.png)
 
-  **Click Continue to proceed**
-  ![Click Continue](Images/4.Click_Continue.png)
+**Install bot to Teams channel**
+![Install to Teams](Images/8.Install_To_Teams.png)
 
-  **Proactive message sent notification**
-  ![Proactive Message Sent](Images/5.Proactive_Message_Sent.png)
+**Paste channel command in terminal**
+![Channel Command](Images/9.Paste_The_Command_In_Terminal_For_Channel_Notification.png)
 
-  **Proactive Hello message received in chat**
-  ![Proactive Hello Message](Images/6.Proactive_Message_Hello.png)
-
-  **Add Bot to a Team**
-  ![Add Bot to Team](Images/7.Teams_Scope.png)
-
-  **Proactive message received in Team channel**
-  ![Proactive Message in Team](Images/8.Teams_Proactive_Message.png)
+**Proactive message received in Teams channel**
+![Teams Channel Message](Images/10.Teams_Channel_Notification.png)
 
 
 ## Deploy the bot to Azure

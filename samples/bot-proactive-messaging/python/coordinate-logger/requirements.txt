@@ -4,14 +4,6 @@ microsoft-teams-api==2.0.0a8
 microsoft-teams-apps==2.0.0a8
 microsoft-teams-cards==2.0.0a8
 microsoft-teams-common==2.0.0a8
-microsoft-teams-devtools==2.0.0a8
-microsoft-teams-openai==2.0.0a8
-
-# Pydantic settings for configuration
-pydantic-settings>=2.0.0
 
 # Environment variables
 python-dotenv>=1.0.0
-
-# HTTP requests
-requests==2.32.3
