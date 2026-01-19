@@ -24,6 +24,6 @@
     }
   ],
   "authentication": {
-    "connectionName": "oauthbotsetting"
+    "connectionName": "<<YOUR-CONNECTION-NAME>>"
   }
 }
