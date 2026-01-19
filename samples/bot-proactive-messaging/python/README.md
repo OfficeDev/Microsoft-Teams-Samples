@@ -103,12 +103,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 This sample consists of **two separate applications**:
 
+**Install dependencies (required for both apps):**
+```bash
+pip install -r requirements.txt
+```
+
 ### 1. Coordinate Logger Bot
 
 **Quick Setup:**
 ```bash
 cd coordinate-logger
-pip install -r requirements.txt
 python app.py
 ```
 
@@ -117,7 +121,6 @@ python app.py
 **Quick Usage:**
 ```bash
 cd proactive-cmd
-pip install -r requirements.txt
 python app.py sendUserMessage --app-id="..." --app-password="..." ...
 ```
 
@@ -175,12 +178,7 @@ In the new Azure Bot resource in the Portal,
 
 5) **Setup Coordinate Logger Bot:**
 
-   a) Navigate to the coordinate-logger directory:
-   ```bash
-   cd coordinate-logger
-   ```
-
-   b) Create a virtual environment and install dependencies:
+   a) Create a virtual environment and install dependencies:
    ```bash
    python -m venv venv
    # On Windows
@@ -191,7 +189,7 @@ In the new Azure Bot resource in the Portal,
    pip install -r requirements.txt
    ```
 
-   c) Configure environment variables in `../env/.env.local`:
+   b) Configure environment variables in `env/.env.local`:
    ```
    CLIENT_ID=<your-bot-app-id>
    CLIENT_SECRET=<your-bot-app-password>
@@ -199,27 +197,17 @@ In the new Azure Bot resource in the Portal,
    PORT=3978
    ```
 
-   d) Run the coordinate logger bot:
+   c) Run the coordinate logger bot:
    ```bash
+   cd coordinate-logger
    python app.py
    ```
 
 6) **Setup Proactive CMD Tool:**
 
-   a) Navigate to the proactive-cmd directory (in a new terminal):
+   The dependencies are already installed from step 5. Navigate to the proactive-cmd directory to send messages:
    ```bash
    cd proactive-cmd
-   ```
-
-   b) Create a virtual environment and install dependencies:
-   ```bash
-   python -m venv venv
-   # On Windows
-   venv\Scripts\activate
-   # On macOS/Linux
-   source venv/bin/activate
-   
-   pip install -r requirements.txt
    ```
 
 7) __*This step is specific to Teams.*__
