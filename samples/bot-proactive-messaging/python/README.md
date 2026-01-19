@@ -25,8 +25,6 @@ Two samples to highlight solutions to two challenges with building proactive mes
 |--------|-------------|
 | [/coordinate-logger](coordinate-logger) | Sample of getting conversation coordinates using Teams SDK Events |
 | [/proactive-cmd](proactive-cmd) | Sample of sending proactive messages with throttling policies |
-| /appManifest | App manifest for the teams app |
-| /Images | Sample screenshots |
 
 ## Included Features
 
@@ -38,7 +36,6 @@ Two samples to highlight solutions to two challenges with building proactive mes
   - `microsoft-teams-apps` - Application framework
   - `microsoft-teams-api` - API models and types
 - **asyncio** - Asynchronous programming
-- **python-dotenv** - Environment variable management
 
 ## Interaction with app
 
