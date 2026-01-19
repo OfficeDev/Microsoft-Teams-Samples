@@ -1262,6 +1262,10 @@ jobs:
               name: 'tab-request-approval'
               version: '3.10.x'
 
+            - project_path: 'samples/bot-proactive-messaging/python'
+              name: 'bot-proactive-messaging'
+              version: '3.13.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
     defaults:
