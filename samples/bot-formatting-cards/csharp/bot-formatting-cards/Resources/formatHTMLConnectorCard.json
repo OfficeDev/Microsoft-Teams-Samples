@@ -1,0 +1,114 @@
+{
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Text Formatting Examples",
+      "weight": "bolder",
+      "size": "large"
+    },
+    {
+      "type": "TextBlock",
+      "text": "This card demonstrates various text formatting options in Adaptive Cards.",
+      "wrap": true,
+      "spacing": "medium",
+      "isSubtle": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Bold text** using markdown",
+      "wrap": true,
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "_Italic text_ using markdown",
+      "wrap": true,
+      "spacing": "small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "~~Strikethrough text~~ using markdown",
+      "wrap": true,
+      "spacing": "small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "# Header 1",
+      "wrap": true,
+      "size": "extraLarge",
+      "weight": "bolder",
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "## Header 2",
+      "wrap": true,
+      "size": "large",
+      "weight": "bolder",
+      "spacing": "small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "### Header 3",
+      "wrap": true,
+      "size": "medium",
+      "weight": "bolder",
+      "spacing": "small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Bullet list:**\n- First item\n- Second item\n- Third item",
+      "wrap": true,
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Numbered list:**\n1. First item\n2. Second item\n3. Third item",
+      "wrap": true,
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Hyperlink: [Visit Bing](https://www.bing.com/)",
+      "wrap": true,
+      "spacing": "medium"
+    },
+    {
+      "type": "Image",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "size": "medium",
+      "spacing": "medium",
+      "altText": "Sample image"
+    },
+    {
+      "type": "TextBlock",
+      "text": "`Preformatted text` or code",
+      "wrap": true,
+      "fontType": "monospace",
+      "spacing": "medium"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "> This is a blockquote\n> \n> It can span multiple lines",
+          "wrap": true
+        }
+      ],
+      "style": "emphasis",
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Note:** Adaptive Cards use Markdown for formatting instead of HTML tags.",
+      "wrap": true,
+      "size": "small",
+      "isSubtle": true,
+      "spacing": "large"
+    }
+  ]
+}

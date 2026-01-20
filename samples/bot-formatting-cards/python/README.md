@@ -111,16 +111,23 @@ the Teams service needs to call into the bot.
 
 6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+7) Update the `.env` file with your bot configuration:
+   ```
+   CLIENT_ID=<Your Microsoft App Id>
+   CLIENT_SECRET=<Your Microsoft App Password>
+   TENANT_ID=<Your Tenant Id>
+   PORT=3978
+   ```
+   (Note: The App Password is referred to as the "client secret" in the Azure portal and you can always create a new client secret anytime.)
 
 **Update mentionSupport json**
 - Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
 
-  - Navigate to samples\bot-formatting-cards\python\adaptive_cards\cards.py
-  - Go to method `def mentionSupport()` at line number `1203`
-      1) On line 1218, replace {{new-Ids}}  
-      2) On line 1226, replace {{Email-Id}}
-      3) On line 1232, replace {{Microsoft-App-Id}}
+  - Navigate to `adaptive_cards/cards.py`
+  - Go to method `def mentionSupport()` around line `1201`
+      1) Replace `{{New-Ids}}` with the user's display name
+      2) Replace `{{Email-Id}}` with the user's email (UPN)
+      3) Replace `{{Microsoft-App-Id}}` with the user's Azure AD Object ID
          
         - E.g. 
         ```
@@ -150,11 +157,11 @@ the Teams service needs to call into the bot.
 
   **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
   - Update the user Microsoft Entra object ID in your adaptive card JSON from your tenant's Microsoft Entra ID users available in the Azure portal.
-    - Navigate to samples\bot-formatting-cards\python\adaptive_cards
-    - Select method `def adaptivePeoplePersonaCardIcon` at line number `1082`
-      1) On line 1095, replace {{User-Object-ID}}  
-      2) On line 1096, replace {{User-Display-Name}}
-      3) On line 1097, replace {{User-Principal-Name}}
+    - Navigate to `adaptive_cards/cards.py`
+    - Find method `def adaptivePeoplePersonaCardIcon()` around line `1078`
+      1) Replace `{{User-Object-ID}}` with the user's Azure AD Object ID
+      2) Replace `{{User-Display-Name}}` with the user's display name
+      3) Replace `{{User-Principal-Name}}` with the user's Email
 
         - E.g. 
         ```
@@ -164,14 +171,10 @@ the Teams service needs to call into the bot.
         "userPrincipalName": "JoeSmith@xxxx.com"
       }
         ```
-    - Navigate to samples\bot-formatting-cards\python\adaptive_cards
-    - Select method `def adaptivePeoplePersonaCardSetIcon` at line number `1105`
-      1) On line 1120, replace {{User-Object-ID}}  
-      2) On line 1121, replace {{User-Display-Name}}
-      3) On line 1122, replace {{User-Principal-Name}}
-      4) On line 1125, replace {{User-Object-ID}}  
-      5) On line 1126, replace {{User-Display-Name}}
-      6) On line 1127, replace {{User-Principal-Name}}
+    
+    - Find method `def adaptivePeoplePersonaCardSetIcon()` around line `1101`
+      1) Replace first user's `{{User-Object-ID}}`, `{{User-Display-Name}}`, `{{User-Principal-Name}}`
+      2) Replace second user's `{{User-Object-ID}}`, `{{User-Display-Name}}`, `{{User-Principal-Name}}`
       
         - E.g. 
         ```
