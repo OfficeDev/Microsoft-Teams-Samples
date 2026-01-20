@@ -1,10 +1,12 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-def adaptiveCard() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+from botbuilder.core import CardFactory
+from botbuilder.schema import Attachment
+
+def adaptiveCard() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "type": "AdaptiveCard",
             "version": "1.5",
@@ -19,12 +21,11 @@ def adaptiveCard() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardBorders() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardBorders() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "version": "1.5",
@@ -111,12 +112,11 @@ def adaptiveCardBorders() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardCompoundButton() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardCompoundButton() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "version": "1.5",
@@ -132,12 +132,11 @@ def adaptiveCardCompoundButton() -> dict:
                 }
             ],
         }
-    }
+    )
 
-def adaptiveCardConditional() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardConditional() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
             "version": "1.5",
@@ -169,12 +168,11 @@ def adaptiveCardConditional() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardContainerLayouts() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardContainerLayouts() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "layouts": [
@@ -213,12 +211,11 @@ def adaptiveCardContainerLayouts() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardDonutChart() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardDonutChart() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "body": [
@@ -237,12 +234,11 @@ def adaptiveCardDonutChart() -> dict:
                 }
             ],
         }
-    }
+    )
 
-def adaptiveCardFluentIcon() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardFluentIcon() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "speak": "3 minute energy flow with kayo video",
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
@@ -283,12 +279,11 @@ def adaptiveCardFluentIcon() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardGaugeChart() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardGaugeChart() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "body": [
@@ -320,12 +315,11 @@ def adaptiveCardGaugeChart() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardHorizontalBarChart() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardHorizontalBarChart() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "body": [
@@ -393,12 +387,11 @@ def adaptiveCardHorizontalBarChart() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardHorizontalBarStacked() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardHorizontalBarStacked() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "body": [
@@ -442,12 +435,11 @@ def adaptiveCardHorizontalBarStacked() -> dict:
                 }
             ],
         }
-    }
+    )
 
-def adaptiveCardLineChart() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardLineChart() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "body": [
@@ -539,12 +531,11 @@ def adaptiveCardLineChart() -> dict:
                 }
             ],
         }
-    }
+    )
 
-def adaptiveCardMediaElements() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardMediaElements() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
             "type": "AdaptiveCard",
             "version": "1.6",
@@ -582,12 +573,11 @@ def adaptiveCardMediaElements() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardPieChart() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardPieChart() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "body": [
@@ -607,12 +597,11 @@ def adaptiveCardPieChart() -> dict:
                 }
             ],
         }
-    }
+    )
 
-def AdaptiveCardResponsiveLayout() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def AdaptiveCardResponsiveLayout() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "body": [
                 {
@@ -674,12 +663,11 @@ def AdaptiveCardResponsiveLayout() -> dict:
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "version": "1.5",
         }
-    }
+    )
 
-def adaptiveCardRoundedCorners() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardRoundedCorners() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "version": "1.5",
@@ -783,12 +771,11 @@ def adaptiveCardRoundedCorners() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardScrollable() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardScrollable() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "version": "1.5",
@@ -818,12 +805,11 @@ def adaptiveCardScrollable() -> dict:
             ],
             "actions": [{"type": "Action.OpenUrl", "title": "Click me"}],
         }
-    }
+    )
 
-def adaptiveCardStarRatings() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardStarRatings() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "version": "1.5",
@@ -867,12 +853,11 @@ def adaptiveCardStarRatings() -> dict:
             ],
             "actions": [{"type": "Action.Submit", "title": "Submit"}],
         }
-    }
+    )
 
-def adaptiveCardVerticalBarChart() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardVerticalBarChart() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "body": [
@@ -897,12 +882,11 @@ def adaptiveCardVerticalBarChart() -> dict:
                 }
             ],
         }
-    }
+    )
 
-def adaptiveCardVerticalBarGroupedChart() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardVerticalBarGroupedChart() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "version": "1.5",
             "body": [
@@ -1044,12 +1028,11 @@ def adaptiveCardVerticalBarGroupedChart() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptiveCardWithEmoji() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptiveCardWithEmoji() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
             "type": "AdaptiveCard",
             "version": "1.5",
@@ -1073,12 +1056,11 @@ def adaptiveCardWithEmoji() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptivePeoplePersonaCardIcon() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptivePeoplePersonaCardIcon() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "type": "AdaptiveCard",
             "version": "1.6",
@@ -1096,12 +1078,11 @@ def adaptivePeoplePersonaCardIcon() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def adaptivePeoplePersonaCardSetIcon() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def adaptivePeoplePersonaCardSetIcon() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "type": "AdaptiveCard",
             "version": "1.6",
@@ -1128,12 +1109,11 @@ def adaptivePeoplePersonaCardSetIcon() -> dict:
                 },
             ],
         }
-    }
+    )
 
-def codeBlocksCard() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def codeBlocksCard() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "type": "AdaptiveCard",
             "version": "1.5",
@@ -1148,38 +1128,34 @@ def codeBlocksCard() -> dict:
                 },
             ],
         }
+    )
+
+def formatHTMLConnectorCard() -> Attachment:
+    return {
+        "@type": "MessageCard",
+        "@context": "https://schema.org/extensions",
+        "summary": "Summary",
+        "title": "Connector Card HTML formatting",
+        "sections": [
+            {"text": "This is some <strong>bold</strong> text"},
+            {"text": "This is some <em>italic</em> text"},
+            {"text": "This is some <strike>strikethrough</strike> text"},
+            {"text": "<h1>Header 1</h1>\r<h2>Header 2</h2>\r <h3>Header 3</h3>"},
+            {"text": "bullet list <ul><li>text</li><li>text</li></ul>"},
+            {"text": "ordered list <ol><li>text</li><li>text</li></ol>"},
+            {"text": 'hyperlink <a href="https://www.bing.com/">Bing</a>'},
+            {
+                "text": 'embedded image <img src="https://aka.ms/Fo983c" alt="Duck on a rock"></img>'
+            },
+            {"text": "preformatted text <pre>text</pre>"},
+            {"text": "Paragraphs <p>Line a</p><p>Line b</p>"},
+            {"text": "<blockquote>Blockquote text</blockquote>"},
+        ],
     }
 
-def formatHTMLConnectorCard() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.teams.card.o365connector",
-        "content": {
-            "@type": "MessageCard",
-            "@context": "https://schema.org/extensions",
-            "summary": "Summary",
-            "title": "Connector Card HTML formatting",
-            "sections": [
-                {"text": "This is some <strong>bold</strong> text"},
-                {"text": "This is some <em>italic</em> text"},
-                {"text": "This is some <strike>strikethrough</strike> text"},
-                {"text": "<h1>Header 1</h1>\r<h2>Header 2</h2>\r <h3>Header 3</h3>"},
-                {"text": "bullet list <ul><li>text</li><li>text</li></ul>"},
-                {"text": "ordered list <ol><li>text</li><li>text</li></ol>"},
-                {"text": 'hyperlink <a href="https://www.bing.com/">Bing</a>'},
-                {
-                    "text": 'embedded image <img src="https://aka.ms/Fo983c" alt="Duck on a rock"></img>'
-                },
-                {"text": "preformatted text <pre>text</pre>"},
-                {"text": "Paragraphs <p>Line a</p><p>Line b</p>"},
-                {"text": "<blockquote>Blockquote text</blockquote>"},
-            ],
-        }
-    }
-
-def informationMaskingCard() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def informationMaskingCard() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
             "type": "AdaptiveCard",
             "version": "1.5",
@@ -1196,12 +1172,11 @@ def informationMaskingCard() -> dict:
                 {"type": "Input.Text", "id": "secretThing", "style": "password"},
             ],
         }
-    }
+    )
 
-def mentionSupport() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def mentionSupport() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
             "version": "1.5",
             "type": "AdaptiveCard",
@@ -1235,12 +1210,11 @@ def mentionSupport() -> dict:
                 ]
             },
         }
-    }
+    )
 
-def overflowMenu() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def overflowMenu() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "body": [
                 {
@@ -1260,12 +1234,11 @@ def overflowMenu() -> dict:
                 {"type": "Action.Submit", "title": "Delete", "mode": "secondary"},
             ],
         }
-    }
+    )
 
-def sampleAdaptiveWithFullWidth() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def sampleAdaptiveWithFullWidth() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "body": [
                 {
@@ -1308,12 +1281,11 @@ def sampleAdaptiveWithFullWidth() -> dict:
             "version": "1.5",
             "msteams": {"width": "Full"},
         }
-    }
+    )
 
-def stageViewForImages() -> dict:
-    return {
-        "contentType": "application/vnd.microsoft.card.adaptive",
-        "content": {
+def stageViewForImages() -> Attachment:
+    return CardFactory.adaptive_card(
+        {
             "type": "AdaptiveCard",
             "body": [
                 {
@@ -1331,4 +1303,4 @@ def stageViewForImages() -> dict:
                 },
             ],
         }
-    }
+    )

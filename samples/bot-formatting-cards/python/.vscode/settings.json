@@ -1,11 +1,5 @@
 {
     "debug.onTaskErrors": "abort",
-    "json.schemas": [
-        {
-            "fileMatch": [
-                "/aad.*.json"
-            ],
-            "schema": {}
-        }
-    ]
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python-envs.pythonProjects": []
 }
