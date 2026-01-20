@@ -1,0 +1,31 @@
+﻿{
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.6",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Persona Set",
+      "weight": "bolder"
+    },
+    {
+      "type": "Component",
+      "name": "graph.microsoft.com/users",
+      "view": "compact",
+      "properties": {
+        "users": [
+          {
+            "id": "{{User-Object-ID}}", // Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+            "displayName": "{{User-Display-Name}}", 
+            "userPrincipalName": "{{User-Principal-Name}}"
+          },
+          {
+            "id": "{{User-Object-ID}}", // Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+            "displayName": "{{User-Display-Name}}",
+            "userPrincipalName": "{{User-Principal-Name}}"
+          }
+        ]
+      }
+    }
+  ]
+}

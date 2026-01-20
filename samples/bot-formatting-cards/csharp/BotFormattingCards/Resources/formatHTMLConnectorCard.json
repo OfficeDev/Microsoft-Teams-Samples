@@ -1,0 +1,41 @@
+{
+    "@type": "MessageCard",
+    "@context": "https://schema.org/extensions",
+    "summary": "Summary",
+    "title": "Connector Card HTML formatting",
+    "sections": [
+        {
+            "text": "This is some <strong>bold</strong> text"
+        },
+        {
+            "text": "This is some <em>italic</em> text"
+        },
+        {
+            "text": "This is some <strike>strikethrough</strike> text"
+        },
+        {
+            "text": "<h1>Header 1</h1>\r<h2>Header 2</h2>\r <h3>Header 3</h3>"
+        },
+        {
+            "text": "bullet list <ul><li>text</li><li>text</li></ul>"
+        },
+        {
+            "text": "ordered list <ol><li>text</li><li>text</li></ol>"
+        },
+        {
+            "text": "hyperlink <a href=\"https://www.bing.com/\">Bing</a>"
+        },
+        {
+            "text": "embedded image <img src=\"https://aka.ms/Fo983c\" alt=\"Duck on a rock\"></img>"
+        },
+        {
+            "text": "preformatted text <pre>text</pre>"
+        },
+        {
+            "text": "Paragraphs <p>Line a</p><p>Line b</p>"
+        },
+        {
+            "text": "<blockquote>Blockquote text</blockquote>"
+        }
+    ]
+}
