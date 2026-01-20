@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="tag-container">
+  <div>
+    <h3 class="headColor">Membership Change Notifications</h3>
+    <h4>Welcome to Membership Change Notification Tab</h4>
+    <p>This Tab has successfully configured, you will get notifications of member added/removed/updated and when a channel is shared/unshared with a team, in this tab.</p>
+    <p>The member list is automatically updated when notifications are received (except when removed users still have access).</p>
+    <hr />
+    
+    <!-- Member List Section -->
+    <div id="member-section">
+      <h4>Channel Member List</h4>
+      <button onclick="fetchMemberList()" class="btn">Refresh Member List</button>
+      <div id="member-list">
+        <p>Loading initial member list...</p>
+      </div>
+      <hr />
+    </div>
+    
+    <!-- Notifications Section -->
+    <div id="notifications">
+      <p>Loading notifications...</p>
+    </div>
+  </div>
+</div>
+<script src="/static/js/channel.js"></script>
+{% endblock %}

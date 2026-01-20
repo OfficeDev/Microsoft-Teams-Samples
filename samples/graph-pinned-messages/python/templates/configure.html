@@ -1,0 +1,40 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Configure Pinned Messages Tab</title>
+  <script src="https://res.cdn.office.net/teams-js/2.13.0/js/MicrosoftTeams.min.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      padding: 2rem;
+    }
+    .message {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="message">Please click on save to proceed.</div>
+
+  <script>
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+        microsoftTeams.pages.config.setConfig({
+          entityId: "GraphPinnedMessage",
+          contentUrl: `${window.location.origin}/dashboard`,
+          suggestedTabName: "Pinned Messages",
+          websiteUrl: `${window.location.origin}/dashboard`
+        });
+
+        saveEvent.notifySuccess();
+      });
+
+      microsoftTeams.pages.config.setValidityState(true);
+      microsoftTeams.app.notifySuccess();
+    });
+  </script>
+</body>
+</html>

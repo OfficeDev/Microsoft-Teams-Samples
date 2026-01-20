@@ -1,7 +1,7 @@
-# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.11/yaml.schema.json
 # Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
 # Visit https://aka.ms/teamsfx-actions for details on actions
-version: v1.2
+version: v1.11
 
 additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:bot-conversation-python
@@ -12,6 +12,7 @@ provision:
     with:
       name: teamsConversationBot-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
+      generateServicePrincipal: true
       signInAudience: "AzureADMyOrg" # SingleTenant
     writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
       clientId: AAD_APP_CLIENT_ID
@@ -53,7 +54,7 @@ provision:
       # Path to manifest template
       manifestPath: ./appManifest/manifest.json
       outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
+      outputFolder: ./appManifest/build
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:

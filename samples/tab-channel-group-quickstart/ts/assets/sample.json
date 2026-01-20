@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-quickstart/ts/Images/TabChannelGroupModule.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-quickstart/ts/Images/tab_channel_group_module.gif",
         "alt": "Solution UX showing starter solution: channel/group tab in typescript"
       }
     ],

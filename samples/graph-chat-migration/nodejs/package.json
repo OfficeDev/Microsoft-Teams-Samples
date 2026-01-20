@@ -1,0 +1,37 @@
+{
+    "name": "graphchatmigration",
+    "version": "1.0.0",
+    "msteams": {
+      "teamsAppId": null
+    },
+    "description": "Microsoft Teams Toolkit hello world Bot sample",
+    "engines": {
+        "node": "18 || 20 || 22"
+    },
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
+        "dev:teamsfx:testtool": "env-cmd --silent -f .localConfigs.testTool npm run dev",
+        "dev:teamsfx:launch-testtool": "env-cmd --silent -f env/.env.testtool teamsapptester start",
+        "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+        "build": "node build.js",
+        "start": "node ./index.js",
+        "watch": "nodemon ./index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "botbuilder": "^4.23.1",
+        "express": "^5.0.1",
+        "axios": "^1.6.0",
+        "@azure/msal-node": "^2.6.0",
+        "request": "^2.88.2",
+        "q": "^2.0.3"
+    },
+    "devDependencies": {
+        "env-cmd": "^10.1.0",
+        "nodemon": "^3.1.7",
+        "esbuild": "^0.18.1"
+    }
+}

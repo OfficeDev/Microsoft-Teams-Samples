@@ -1,0 +1,33 @@
+{
+  "name": "graph-notification",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev:teamsfx": "npm run start:debug",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start:debug": "node --inspect=9239 server.js",
+    "build": "node build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@azure/identity": "^2.1.0",
+    "@azure/msal-node": "^1.4.0",
+    "@microsoft/microsoft-graph-client": "^2.2.1",
+    "@microsoft/teams-js": "^2.38.0",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "parallel-each": "^1.1.7",
+    "pem": "^1.14.6",
+    "request": "^2.88.2",
+    "q": "^1.5.1",
+    "esbuild": "^0.18.1"
+  }
+}

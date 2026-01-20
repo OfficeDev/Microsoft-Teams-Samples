@@ -1,0 +1,74 @@
+/* copied from React client style.css */
+.container {
+    padding: 1rem;
+}
+
+.tag-container {
+    margin: 0.5rem;
+    border-radius: 8px;
+    padding: 0.9rem;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.manage-icons {
+    cursor: pointer;
+}
+
+.text-fields-label {
+    width: 130px;
+}
+
+.input-fields-label {
+    width: 160px;
+}
+.headColor {
+    color: #5b5fc7;
+}
+
+.statusColor {
+    color: seagreen;
+}
+
+.deleteStatus {
+    color: crimson;
+}
+
+.userAccess {
+    color: #ff6b35;
+}
+
+.btn {
+    background-color: #5b5fc7;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.btn:hover {
+    background-color: #4a4fb5;
+}
+
+.error {
+    color: crimson;
+    font-style: italic;
+}
+
+#member-list {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+#member-list ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+#member-list li {
+    margin: 5px 0;
+}

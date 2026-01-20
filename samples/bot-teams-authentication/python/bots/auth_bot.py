@@ -12,7 +12,6 @@ from botbuilder.schema import ChannelAccount
 from helpers.dialog_helper import DialogHelper
 from .dialog_bot import DialogBot
 
-
 class AuthBot(DialogBot):
     def __init__(
         self,
