@@ -1220,7 +1220,7 @@ jobs:
 
             - project_path: 'samples/msgext-search/python'
               name: 'msgext-search'
-              version: '3.10.x'
+              version: '3.13.x'
 
             - project_path: 'samples/msgext-action/python'
               name: 'msgext-action'
