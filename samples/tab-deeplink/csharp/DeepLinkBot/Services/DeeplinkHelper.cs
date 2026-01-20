@@ -3,82 +3,84 @@
 // Licensed under the MIT License.
 // </copyright>
 
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Web;
 
-namespace Microsoft.BotBuilderSamples.Bots
+namespace Microsoft.AgentSamples.Services;
+
+/// <summary>
+/// Helper class for generating Teams deep links.
+/// </summary>
+public class DeeplinkHelper
 {
-    public class DeeplinkHelper
+    /// <summary>
+    /// Generates a deep link to a tab task.
+    /// </summary>
+    /// <param name="teamsUrl">Teams deep link URL base.</param>
+    /// <param name="appId">Application ID of the app.</param>
+    /// <param name="entityId">Entity ID of the tab.</param>
+    /// <param name="subEntityId">Sub-entity ID of the tab.</param>
+    /// <returns>The deep link URL.</returns>
+    public string GetDeepLinkToTabTask(string teamsUrl, string appId, string entityId, string subEntityId)
     {
-        /// <summary>
-        /// Method to generate deeplink to tab.
-        /// </summary>
-        /// <param name="teamsUrl">Teams deeplink url.</param>
-        /// <param name="appID">Application id of the app.</param>
-        /// <param name="entityId">Entity id of the tab.</param>
-        /// <param name="subEntityID">Sub entity id of the tab.</param>
-        public string GetDeepLinkToTabTask(string teamsUrl, string appID, string entityId, string subEntityID)
+        var taskValues = new Dictionary<string, string>
         {
-            Dictionary<string, string> task1Values = new Dictionary<string, string>
-            {
-                {"subEntityId",subEntityID }
-            };
-            string jsoncontext = JsonConvert.SerializeObject(task1Values);
-            string taskContext = HttpUtility.UrlEncode(jsoncontext);
-            string deepLinkURL = teamsUrl + appID + "/" + entityId + "?context=";
-            string channelDeepLink = deepLinkURL + taskContext;
-            return channelDeepLink;
-        }
+            { "subEntityId", subEntityId }
+        };
+        var jsonContext = JsonSerializer.Serialize(taskValues);
+        var taskContext = HttpUtility.UrlEncode(jsonContext);
+        var deepLinkUrl = $"{teamsUrl}{appId}/{entityId}?context=";
+        return deepLinkUrl + taskContext;
+    }
 
-        /// <summary>
-        /// Method to generate deeplink to meeting sidepanel.
-        /// </summary>
-        /// <param name="teamsUrl">Teams deeplink url.</param>
-        /// <param name="appID">Application id of the app.</param>
-        /// <param name="baseUrl">Base url of the application.</param>
-        /// <param name="entityId">Entity id of the tab.</param>
-        /// <param name="chatId">Chat id of the meeting group chat.</param>
-        /// <param name="contextType">Chat context where app is installed.</param>
-        public string GetDeepLinkToMeetingSidePanel(string teamsUrl, string appID, string baseUrl, string entityId, string chatId, string contextType)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("{");
-            sb.Append("\"chatId\":\"" + chatId + "\",");
-            sb.Append("\"contextType\":\"" + contextType + "\"");
-            sb.Append("}");
+    /// <summary>
+    /// Generates a deep link to a meeting side panel.
+    /// </summary>
+    /// <param name="teamsUrl">Teams deep link URL base.</param>
+    /// <param name="appId">Application ID of the app.</param>
+    /// <param name="baseUrl">Base URL of the application.</param>
+    /// <param name="entityId">Entity ID of the tab.</param>
+    /// <param name="chatId">Chat ID of the meeting group chat.</param>
+    /// <param name="contextType">Chat context where the app is installed.</param>
+    /// <returns>The deep link URL.</returns>
+    public string GetDeepLinkToMeetingSidePanel(string teamsUrl, string appId, string baseUrl, string entityId, string chatId, string contextType)
+    {
+        var sb = new StringBuilder();
+        sb.Append('{');
+        sb.Append($"\"chatId\":\"{chatId}\",");
+        sb.Append($"\"contextType\":\"{contextType}\"");
+        sb.Append('}');
 
-            string jsoncontext = sb.ToString();
-            string taskContext = HttpUtility.UrlEncode(jsoncontext);
-            string encodedUrl = HttpUtility.UrlEncode(baseUrl + "/appInMeeting");
-            string deepLinkURL = teamsUrl + appID + "/" + entityId + "?webUrl=" + encodedUrl + "&context=";
-            string sidePanelDeepLink = deepLinkURL + taskContext;
-            return sidePanelDeepLink;
-        }
+        var jsonContext = sb.ToString();
+        var taskContext = HttpUtility.UrlEncode(jsonContext);
+        var encodedUrl = HttpUtility.UrlEncode($"{baseUrl}/appInMeeting");
+        var deepLinkUrl = $"{teamsUrl}{appId}/{entityId}?webUrl={encodedUrl}&context=";
+        return deepLinkUrl + taskContext;
+    }
 
-        /// <summary>
-        /// Method to generate deeplink to channel tab.
-        /// </summary>
-        /// <param name="teamsUrl">Teams deeplink url.</param>
-        /// <param name="appID">Application id of the app.</param>
-        /// <param name="baseUrl">Base url of the application.</param>
-        /// <param name="channelId">Channel id of teams channel where app is installed.</param>
-        /// <param name="entityId">Entity id of the tab.</param>
-        /// <param name="subEntityID">Sub entity id of the tab.</param>
-        public string GetDeepLinkToChannelTask(string teamsUrl, string appID, string baseUrl, string channelId, string entityId, string subEntityID)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("{");
-            sb.Append("\"subEntityId\":\"" + subEntityID + "\",");
-            sb.Append("\"channelId\":\"" + channelId + "\"");
-            sb.Append("}");
-            string channelContext = sb.ToString();
-            string encodedUrl = HttpUtility.UrlEncode(baseUrl + "/DeepLinkChannel");
-            string taskContext = HttpUtility.UrlEncode(channelContext);
-            string deepLinkURL = teamsUrl + appID + "/" + entityId + "?webUrl=" + encodedUrl + "&label=Topic&context=";
-            string channelDeepLink = deepLinkURL + taskContext;
-            return channelDeepLink;
-        }
+    /// <summary>
+    /// Generates a deep link to a channel tab task.
+    /// </summary>
+    /// <param name="teamsUrl">Teams deep link URL base.</param>
+    /// <param name="appId">Application ID of the app.</param>
+    /// <param name="baseUrl">Base URL of the application.</param>
+    /// <param name="channelId">Channel ID of the Teams channel where the app is installed.</param>
+    /// <param name="entityId">Entity ID of the tab.</param>
+    /// <param name="subEntityId">Sub-entity ID of the tab.</param>
+    /// <returns>The deep link URL.</returns>
+    public string GetDeepLinkToChannelTask(string teamsUrl, string appId, string baseUrl, string channelId, string entityId, string subEntityId)
+    {
+        var sb = new StringBuilder();
+        sb.Append('{');
+        sb.Append($"\"subEntityId\":\"{subEntityId}\",");
+        sb.Append($"\"channelId\":\"{channelId}\"");
+        sb.Append('}');
+
+        var channelContext = sb.ToString();
+        var encodedUrl = HttpUtility.UrlEncode($"{baseUrl}/DeepLinkChannel");
+        var taskContext = HttpUtility.UrlEncode(channelContext);
+        var deepLinkUrl = $"{teamsUrl}{appId}/{entityId}?webUrl={encodedUrl}&label=Topic&context=";
+        return deepLinkUrl + taskContext;
     }
 }

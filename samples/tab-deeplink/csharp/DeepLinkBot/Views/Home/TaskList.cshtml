@@ -1,4 +1,4 @@
-﻿@model  IEnumerable<Microsoft.BotBuilderSamples.Controllers.DeepLinksModel>
+﻿@model  IEnumerable<Microsoft.AgentSamples.Models.DeepLinksModel>
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,7 +20,7 @@
     {
         <tr style="font-family:'Segoe UI';font-size:20px">
         <td>
-            @Html.ActionLink(item.linkTitle, "Detail", new { id = item.ID })
+            @Html.ActionLink(item.LinkTitle, "Detail", new { id = item.Id })
         </td>
         </tr>
         <tr></tr>
@@ -32,9 +32,7 @@
     <span class="container" style="font-size:20px;font-weight:700;">
         Extended Deep link features
     </span>
-    @{
-        Html.RenderPartial("ExtendedDeepLinks");
-    }
+    <partial name="ExtendedDeepLinks" />
 </div>
 
 </body>

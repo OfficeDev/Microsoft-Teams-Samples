@@ -1,0 +1,26 @@
+@{
+    ViewBag.Title = "Deep Link Bot - Home";
+}
+
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
+
+<div style="padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <h1 style="color: #6264A7;">Welcome to Deep Link Bot</h1>
+    <p>This sample demonstrates deep linking functionality in Microsoft Teams.</p>
+    
+    <div style="margin-top: 20px;">
+        <h3>Available Features:</h3>
+        <ul>
+            <li><a href="/DeepLink">Deep Link Tab</a> - Navigate to tab with deep links</li>
+            <li><a href="/Configure">Configure</a> - Configure the tab</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    microsoftTeams.app.initialize().then(() => {
+        console.log("Teams SDK initialized");
+    });
+</script>

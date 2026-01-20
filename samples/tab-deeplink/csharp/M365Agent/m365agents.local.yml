@@ -41,11 +41,37 @@ provision:
     with:
       target: ../DeepLinkBot/appsettings.json
       content:
+        TokenValidation:
+          Disabled: false
+          Audiences:
+            - ${{AAD_APP_CLIENT_ID}}
+          TenantId: ${{AAD_APP_TENANT_ID}}
+        AgentApplication:
+          StartTypingTimer: true
+          RemoveRecipientMention: true
+          NormalizeMentions: true
+        Connections:
+          ServiceConnection:
+            Assembly: Microsoft.Agents.Authentication.Msal
+            Type: MsalAuth
+            Settings:
+              AuthType: ClientSecret
+              AuthorityEndpoint: ${{AAD_APP_OAUTH_AUTHORITY}}
+              ClientId: ${{AAD_APP_CLIENT_ID}}
+              ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+              TenantId: ${{AAD_APP_TENANT_ID}}
+              Scopes:
+                - https://api.botframework.com/.default
+        ConnectionsMap:
+          - ServiceUrl: "*"
+            Connection: ServiceConnection
         TeamsAppId: ${{TEAMS_APP_ID}}
-        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
-        MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         BaseURL: ${{BOT_DOMAIN}}
+        ChannelEntityId: DeepLinkApp
+        TabEntityId: com.contoso.DeeplLinkBot.help
+        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
+        MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         ManifestAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}
 
