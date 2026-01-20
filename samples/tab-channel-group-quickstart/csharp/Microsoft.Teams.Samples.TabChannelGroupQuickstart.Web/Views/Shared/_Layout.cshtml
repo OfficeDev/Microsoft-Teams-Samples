@@ -1,0 +1,26 @@
+﻿@* Copyright(c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Microsoft Teams Sample App</title>
+    <base href="@(Url.Content("~"))" />
+    <link href="/Content/msteams-16.css" rel="stylesheet" />
+    <link href="/Content/Site.css" rel="stylesheet" />
+
+    @RenderSection("scripts", required: false)
+</head>
+    
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/Scripts/teamsapp.js"></script>
+</body>
+</html>
