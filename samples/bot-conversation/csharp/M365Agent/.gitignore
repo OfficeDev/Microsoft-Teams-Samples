@@ -1,9 +1,0 @@
-# TeamsFx files
-build
-appPackage/build
-env/.env.*.user
-env/.env.local
-.deployment
-
-# User-specific files
-*.user
