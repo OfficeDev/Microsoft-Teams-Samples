@@ -20,6 +20,7 @@ Discover this Microsoft Teams sample app designed to demonstrate deeplinks for s
 * Tabs
 * Bots
 * Deep Links
+* Agent SDK
 
 ## Interaction with bot
 
@@ -306,13 +307,27 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
+## Copilot for Microsoft 365
+
+**Select the app from Copilot:**
+
+![Copilot-M365-Select-App](DeepLinkBot/images/Copilot_M365_Select_App.png)
+
+**Click Continue to proceed:**
+
+![Copilot-M365-Click-Continue](DeepLinkBot/images/Copilot_M365_Click_Continue.png)
+
+**Tab loaded successfully in Copilot:**
+
+![Copilot-M365-Tab-Loaded](DeepLinkBot/images/Copilot_M365_Tab_Loaded_Successfully.png)
+
  ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
  ## Further reading
 
-- [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
+- [Microsoft 365 Agents SDK](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agents-sdk-overview)
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
