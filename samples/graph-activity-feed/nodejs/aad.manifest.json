@@ -51,6 +51,10 @@
                 {
                     "id": "TeamsTab.Read.All",
                     "type": "Scope"
+                },
+                {
+                    "id": "Directory.Read.All",
+                    "type": "Role"
                 }
             ]
         }
@@ -130,7 +134,15 @@
             "type": "Spa"
         },
         {
-            "url": "${{TAB_ENDPOINT}}/auth-end",
+            "url": "${{TAB_ENDPOINT}}/UserNotification",
+            "type": "Spa"
+        },
+        {
+            "url": "${{TAB_ENDPOINT}}/GroupChatNotification",
+            "type": "Spa"
+        },
+        {
+            "url": "${{TAB_ENDPOINT}}/TeamNotification",
             "type": "Spa"
         }
     ]

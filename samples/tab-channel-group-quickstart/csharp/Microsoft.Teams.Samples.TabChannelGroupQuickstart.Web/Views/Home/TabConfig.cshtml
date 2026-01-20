@@ -1,0 +1,57 @@
+@* Copyright(c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License *@
+
+@{
+    ViewData["Title"] = "Tab Config";
+}
+<h1>Tab Configuration</h1>
+<div>
+    <p>
+        This page is used to configure the tab settings for your Microsoft Teams application.
+        When you add this tab to a team or group chat, users will see the configuration options
+        defined here.
+    </p>
+    <p>
+        You can customize the tab's display name, content URL, and other settings that will be
+        presented to users when they add this tab to their Teams experience.
+    </p>
+    <p>
+        The configuration options will be saved when the user clicks the "Save" button in the Teams
+        tab configuration dialog.
+    </p>
+    <p>
+        Make sure to test the configuration by adding this tab to a team or group chat in Microsoft Teams.
+    </p>
+ </div>  
+
+@section Scripts {
+    <script>
+        // Initializes the Microsoft Teams SDK and sets up the tab configuration
+        // This function is called when the tab configuration page is loaded in Teams.
+        function handleTeamsConfig() {
+            // Check if the Microsoft Teams SDK is available
+            if (window.microsoftTeams) {
+                // Initialize the Microsoft Teams SDK
+                microsoftTeams.app.initialize().then(() => {
+                    // Register save handler for Teams tab configuration
+                    microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                        const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
+                        microsoftTeams.pages.config.setConfig({
+                            suggestedDisplayName: "My Tab",
+                            entityId: "Test",
+                            contentUrl: baseUrl + "/tab",
+                            websiteUrl: baseUrl + "/tab"
+                        });
+                        saveEvent.notifySuccess();
+                    });
+                    // Enable the save button in the configuration dialog
+                    microsoftTeams.pages.config.setValidityState(true);
+                });
+            } else {
+                console.error("Microsoft Teams SDK not loaded or not running inside Teams.");
+            }
+        }
+        // Call the function on page load
+        window.onload = handleTeamsConfig;
+    </script>
+}

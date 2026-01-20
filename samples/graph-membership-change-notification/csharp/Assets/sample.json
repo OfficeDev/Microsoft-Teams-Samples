@@ -1,0 +1,67 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-graph-change-notification-team-channel",
+    "source": "officeDev",
+    "title": "Graph Membership Change Notification",
+    "shortDescription": "This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated, using C# and the Microsoft Graph API.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-membership-change-notification/csharp",
+    "longDescription": [
+      "This application demonstrates how to implement real-time notifications for shared channel membership changes in Microsoft Teams. Using C# and the Microsoft Graph API, it showcases how to handle user addition, removal, and membership updates in shared channels. The sample includes comprehensive setup for Azure AD registration, bot configuration, self-signed certificate management, and can be deployed using the Microsoft 365 Agents Toolkit for Visual Studio Code. It supports RSC permissions and provides a seamless interaction through a Teams tab interface."
+    ],
+    "creationDateTime": "2025-07-02",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-membership-change-notification/csharp/ChangeNotification/Images/ChangeNotifications.gif",
+        "alt": "Solution UX showing Graph Membership Change Notification Team/Channel csharp"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
