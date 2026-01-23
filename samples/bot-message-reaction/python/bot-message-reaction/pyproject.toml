@@ -1,0 +1,13 @@
+[project]
+name = "bot-message-reaction"
+version = "1.0.0"
+description = "A Microsoft Teams bot sample demonstrating message reaction handling using Teams AI SDK"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "python-dotenv>=0.9.9",
+    "microsoft-teams-apps>=2.0.0a5",
+    "pydantic-settings>=2.0.0",
+]
+
+[project.scripts]
+start = "main:app.start"
