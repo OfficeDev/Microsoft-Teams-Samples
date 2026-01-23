@@ -135,6 +135,10 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ![token](Images/4.Your_Token.png)
 
+![GroupChat](Images/5.GroupChatAuthCard.png)
+
+![GroupChat](Images/6.PostOauth.png)
+
 ## Further reading
 
 - [Azure Bot Service Documentation](https://docs.botframework.com)

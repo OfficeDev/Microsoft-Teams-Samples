@@ -125,5 +125,31 @@
             },
             "stopAll": true
         },
+        {
+            "name": "Debug in team channel for RSC permissions (Chrome)",
+            "configurations": [
+                "Attach to Frontend in Teams (Chrome)",
+                "Attach to Local Service"
+            ],
+            "preLaunchTask": "Start Teams App Locally for team",
+            "presentation": {
+                "group": "group 2: Teams (Chrome)",
+                "order": 1
+            },
+            "stopAll": true
+        },
+        {
+            "name": "Debug in group chat for RSC permissions (Chrome)",
+            "configurations": [
+                "Attach to Frontend in Teams (Chrome)",
+                "Attach to Local Service"
+            ],
+            "preLaunchTask": "Start Teams App Locally for chat",
+            "presentation": {
+                "group": "group 2: Teams (Chrome)",
+                "order": 2
+            },
+            "stopAll": true
+        }
     ]
 }

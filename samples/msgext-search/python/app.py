@@ -1,76 +1,115 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-import sys
-import traceback
-from datetime import datetime
-from http import HTTPStatus
+import asyncio
+import requests
 
-from aiohttp import web
-from aiohttp.web import Request, Response, json_response
-
-from botbuilder.core import (
-    TurnContext
+from microsoft_teams.api import (
+    MessageExtensionQueryInvokeActivity,
+    MessagingExtensionResult,
+    MessagingExtensionResultType,
+    AttachmentLayout,
+    MessagingExtensionInvokeResponse,
+    HeroCardAttachment,
+    AdaptiveCardAttachment,
+    card_attachment,
+    MessagingExtensionAttachment,
+    InvokeResponse,
 )
-from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
-from botbuilder.core.integration import aiohttp_error_middleware
+from microsoft_teams.api.models.card import CardAction, CardActionType
+from microsoft_teams.cards import AdaptiveCard, TextBlock, OpenUrlAction
+from microsoft_teams.apps import ActivityContext, App
 
-from botbuilder.schema import Activity, ActivityTypes
-from bots import SearchBasedMessagingExtension
 from config import DefaultConfig
 
-CONFIG = DefaultConfig()
+# Initialize configuration
+config = DefaultConfig()
 
-# Create adapter.
-# See https://aka.ms/about-bot-adapter to learn more about how bots work.
+# Initialize the Teams app
+app = App()
 
-ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
-# Catch-all for errors.
-async def on_error(context: TurnContext, error: Exception):
-    # This check writes out errors to console log .vs. app insights.
-    # NOTE: In production environment, you should consider logging this to Azure
-    #       application insights.
-    print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
-    traceback.print_exc()
+def get_search_results(query: str):
+    """Search GitHub repositories."""
+    url = f"https://api.github.com/search/repositories?q={query}"
+    headers = {"Accept": "application/vnd.github.v3+json"}
+    response = requests.get(url, headers=headers)
+    search_results = []
+    for result in response.json().get("items", []):
+        name = result["name"]
+        description = result["description"]
+        repo_url = result["html_url"]
+        search_results.append({
+            "name": name, 
+            "summary": description if description else "", 
+            "url": repo_url
+        })
+    return search_results[:10]
 
-    # Send a message to the user
-    await context.send_activity("The bot encountered an error or bug.")
-    await context.send_activity(
-        "To continue to run this bot, please fix the bot source code."
-    )
-    # Send a trace activity if we're talking to the Bot Framework Emulator
-    if context.activity.channel_id == "emulator":
-        # Create a trace activity that contains the error object
-        trace_activity = Activity(
-            label="TurnError",
-            name="on_turn_error Trace",
-            timestamp=datetime.utcnow(),
-            type=ActivityTypes.trace,
-            value=f"{error}",
-            value_type="https://www.botframework.com/schemas/error",
+
+@app.on_message_ext_query
+async def handle_message_ext_query(ctx: ActivityContext[MessageExtensionQueryInvokeActivity]):
+    """Handle message extension query actions."""
+    print("[DEBUG] ====== on_message_ext_query called ======")
+    
+    command_id = ctx.activity.value.command_id
+    search_query = ""
+    
+    if ctx.activity.value.parameters and len(ctx.activity.value.parameters) > 0:
+        search_query = ctx.activity.value.parameters[0].value or ""
+    
+    print(f"[DEBUG] command_id: {command_id}, search_query: {search_query}")
+    
+    if command_id == "searchQuery":
+        # Get search results from GitHub
+        results = get_search_results(search_query) if search_query else []
+        print(f"[DEBUG] Got {len(results)} results")
+        
+        attachments: list[MessagingExtensionAttachment] = []
+        
+        for item in results:
+            # Create Adaptive Card for main content with button
+            adaptive_card = AdaptiveCardAttachment(
+                content=AdaptiveCard(
+                    body=[
+                        TextBlock(text=item["name"], size="Large", weight="Bolder"),
+                        TextBlock(text=item["summary"][:100] if item["summary"] else "", wrap=True)
+                    ],
+                    actions=[
+                        OpenUrlAction(title="View on GitHub", url=item["url"])
+                    ]
+                )
+            )
+            
+            # Create hero card for preview
+            thumbnail = HeroCardAttachment(
+                content={
+                    "title": item["name"],
+                    "subtitle": item["summary"][:50] if item["summary"] else ""
+                }
+            )
+            
+            main_attachment = card_attachment(adaptive_card)
+            preview_attachment = card_attachment(thumbnail)
+            
+            attachment = MessagingExtensionAttachment(
+                content_type=main_attachment.content_type,
+                content=main_attachment.content,
+                preview=preview_attachment
+            )
+            attachments.append(attachment)
+        
+        result = MessagingExtensionResult(
+            type=MessagingExtensionResultType.RESULT,
+            attachment_layout=AttachmentLayout.LIST,
+            attachments=attachments
         )
+        
+        print(f"[DEBUG] Returning {len(attachments)} attachments")
+        return MessagingExtensionInvokeResponse(compose_extension=result)
+    
+    return InvokeResponse[MessagingExtensionInvokeResponse](status=400)
 
-        # Send a trace activity, which will be displayed in Bot Framework Emulator
-        await context.send_activity(trace_activity)
-
-
-ADAPTER.on_turn_error = on_error
-
-# Create the Bot
-BOT = SearchBasedMessagingExtension()
-
-
-# Listen for incoming requests on /api/messages
-async def messages(req: Request) -> Response:
-    return await ADAPTER.process(req, BOT)
-
-
-APP = web.Application(middlewares=[aiohttp_error_middleware])
-APP.router.add_post("/api/messages", messages)
 
 if __name__ == "__main__":
-    try:
-        web.run_app(APP, host="localhost", port=CONFIG.PORT)
-    except Exception as error:
-        raise error
+    asyncio.run(app.start())

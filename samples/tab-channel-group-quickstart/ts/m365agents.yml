@@ -7,3 +7,4 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:tab-channel-group-quickstart-ts
 
 environmentFolderPath: ./env
+projectId:

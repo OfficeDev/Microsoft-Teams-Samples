@@ -244,7 +244,7 @@ app.post('/channelTabTeamNotification', (req, res) => {
     headers: {
       "accept": "application/json",
       "contentType": 'application/json',
-      "authorization": "bearer " + applicationToken
+      "authorization": "bearer " + req.body.accessToken
     }
   })
     .then(res => {
@@ -278,7 +278,7 @@ app.post('/channelTabTeamNotification', (req, res) => {
         headers: {
           "accept": "application/json",
           "contentType": 'application/json',
-          "authorization": "bearer " + applicationToken
+          "authorization": "bearer " + req.body.accessToken
         }
       }).then(response => {
         console.log(`statusCode: ${response.status}`)
@@ -303,7 +303,7 @@ app.post('/customTopicTeamNotification', (req, res) => {
     headers: {
       "accept": "application/json",
       "contentType": 'application/json',
-      "authorization": "bearer " + delegatedToken
+      "authorization": "bearer " + req.body.accessToken
     }
   })
     .then(res => {
@@ -319,7 +319,7 @@ app.post('/customTopicTeamNotification', (req, res) => {
         },
         "recipient": {
           "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-          "userId": req.body.userId
+          "userId": process.env.UserId
         },
         "templateParameters": [
           {
@@ -333,7 +333,7 @@ app.post('/customTopicTeamNotification', (req, res) => {
         headers: {
           "accept": "application/json",
           "contentType": 'application/json',
-          "authorization": "bearer " + applicationToken
+          "authorization": "bearer " + req.body.accessToken
         }
       }).then(response => {
         console.log(`statusCode: ${response.status}`)
@@ -360,7 +360,7 @@ app.post('/sendNotificationToUser', (req, res) => {
       "topic": {
         "source": "text",
         "value": "Loop thread",
-        "webUrl": "https://teams.microsoft.com/l/entity/" + process.env.ClientId
+        "webUrl": "https://teams.microsoft.com/l/entity/" + process.env.TeamsAppId
       },
       "activityType": "approvalRequired",
       "previewText": {

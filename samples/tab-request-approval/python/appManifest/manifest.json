@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Tab Request Approval",
+    "full": "Activity feed notification to notify about approval request."
+  },
+  "description": {
+    "short": "App helps user to raise a request and notify manager for approve or reject it.",
+    "full": "This application facilitates task approval requests in Microsoft Teams, where requesters can send notifications to their managers and track their request status. Managers can view pending requests through the activity feed and respond by approving or rejecting them, leveraging Teams SSO and Graph API for seamless interaction."
+  },
+  "accentColor": "#235EA5",
+  "staticTabs": [
+    {
+      "entityId": "request",
+      "name": "Request",
+      "contentUrl": "https://${{TAB_DOMAIN}}/UserNotification",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/UserNotification",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}",
+    "${{TAB_DOMAIN}}"
+  ],
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "approvalRequired",
+        "description": "Required approval",
+        "templateText": "A task created with title {approvalTaskId}"
+      }
+    ]
+  },
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}

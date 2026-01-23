@@ -168,6 +168,10 @@ jobs:
               name: 'app-region-selection'
               version: '6.0.x'
 
+            - project_path: 'samples/tab-app-navigation/csharp/Microsoft.Teams.Samples.TabAppNavigation.Web/Microsoft.Teams.Samples.TabAppNavigation.Web.csproj'
+              name: 'tab-app-navigation'
+              version: '6.0.x'
+
             - project_path: 'samples/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
               name: 'tab-external-auth'
               version: '6.0.x'
@@ -198,6 +202,10 @@ jobs:
 
             - project_path: 'samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/TabAuthentication.csproj'
               name: 'tab-channel-group-config-page-auth'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-channel-group-quickstart/csharp/Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web/Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web.csproj'
+              name: 'tab-channel-group-quickstart'
               version: '6.0.x'
 
             - project_path: 'samples/tab-deeplink/csharp/DeepLinkBot/DeepLinkBot.csproj'
@@ -744,6 +752,10 @@ jobs:
               name: 'msgext-search-quickstart'
               version: '14.x'
 
+            - project_path: 'samples/tab-channel-group/nodejs'
+              name: 'tab-channel-group'
+              version: '16.x'
+
             - project_path: 'samples/tab-channel-group-quickstart/js'
               name: 'tab-channel-group-quickstart'
               version: '14.x'
@@ -1208,7 +1220,7 @@ jobs:
 
             - project_path: 'samples/msgext-search/python'
               name: 'msgext-search'
-              version: '3.10.x'
+              version: '3.13.x'
 
             - project_path: 'samples/msgext-action/python'
               name: 'msgext-action'
@@ -1257,6 +1269,10 @@ jobs:
             - project_path: 'samples/bot-all-cards/python'
               name: 'bot-all-cards'
               version: '3.13.x'
+
+            - project_path: 'samples/tab-request-approval/python'
+              name: 'tab-request-approval'
+              version: '3.10.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" python

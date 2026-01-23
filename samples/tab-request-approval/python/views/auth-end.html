@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auth End</title>
+  <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+          integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+          crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.app.getContext().then(async (context) => {
+        
+        const msalConfig = {
+          auth: {
+            clientId: {{ clientId|safe }},
+            authority: `https://login.microsoftonline.com/${context.tid}`,
+            navigateToLoginRequestUrl: false
+          },
+          cache: {
+            cacheLocation: "sessionStorage",
+          },
+        };
+
+        const msalInstance = new window.msal.PublicClientApplication(msalConfig);
+
+        msalInstance.handleRedirectPromise()
+          .then((tokenResponse) => {
+            if (tokenResponse !== null) {
+              microsoftTeams.authentication.notifySuccess("Authentication succeeded");
+            } else {
+              microsoftTeams.authentication.notifyFailure("Get empty response.");
+            }
+          })
+          .catch((error) => {
+            microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
+          });
+      });
+    });
+  </script>
+</body>
+</html>
