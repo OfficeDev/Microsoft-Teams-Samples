@@ -6,9 +6,6 @@ This sample demonstrates a Message Reaction Bot for Microsoft Teams using Node.j
 
 - [Node.js](https://nodejs.org/) (LTS version recommended)
 
-## Interaction with bot
- ![Message Reaction](Images/MessageReactions.gif)
-
 ## Run the sample
 
 1. Navigate to this directory:
