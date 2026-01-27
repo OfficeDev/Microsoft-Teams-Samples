@@ -33,31 +33,7 @@ This sample demonstrates a file upload bot for Microsoft Teams that integrates w
 
 # How to run these samples
 
-You can run these samples locally using the `agentsplayground` tool, without provisioning the Teams App, or you can run in the Teams Client after you have provisioned the Teams Application and configured the application with your local DevTunnels URL.
-
-## Run in the `agentsplayground`
-
-Install the tool agentsplayground for your platform
-
-Windows
-
-```
-winget install agentsplayground
-```
-
-Linux
-
-```
-curl -s https://raw.githubusercontent.com/OfficeDev/microsoft-365-agents-toolkit/dev/.github/scripts/install-agentsplayground-linux.sh | bash
-```
-
-Other platforms (like MacOS, via npm)
-
-```
-npm install -g @microsoft/m365agentsplayground
-```
-
-Once the tool is installed, you can run it from your terminal with the command `agentsplayground`, and it will try to connect to `localhost:3978` where your bot is running.
+You can run in the Teams Client after you have provisioned the Teams Application and configured the application with your local DevTunnels URL.
 
 ## Run in the Teams Client
 
