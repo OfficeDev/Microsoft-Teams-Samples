@@ -1,0 +1,10 @@
+[project]
+name = "bot-file-upload"
+version = "0.1.0"
+description = "Bot File Upload sample"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "microsoft-teams-apps",
+]
