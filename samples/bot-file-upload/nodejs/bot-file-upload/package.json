@@ -6,7 +6,9 @@
     "start" : "tsx --env-file-if-exists .env index.ts"
   },
   "dependencies": {
-    "@microsoft/teams.apps": "^2.0.0"
+    "@microsoft/teams.apps": "^2.0.0",
+    "axios": "^1.0.0",
+    "@microsoft/teams.api": "^1.0.0"
   },
   "devDependencies": {
     "tsx": "^4.21.0"
