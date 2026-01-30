@@ -7,16 +7,16 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Teams.Bot.Compat;
 
 namespace Microsoft.BotBuilderSamples
 {
     /// <summary>
     /// A CloudAdapter with error handling capabilities.
     /// </summary>
-    public class AdapterWithErrorHandler : CloudAdapter
+    public class AdapterWithErrorHandler : CompatAdapter
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AdapterWithErrorHandler"/> class.
@@ -26,8 +26,8 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="logger">The logger.</param>
         /// <param name="storage">The storage.</param>
         /// <param name="conversationState">The conversation state.</param>
-        public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, IStorage storage, ConversationState conversationState)
-            : base(configuration, httpClientFactory, logger)
+        public AdapterWithErrorHandler(IServiceProvider sp, IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, IStorage storage, ConversationState conversationState)
+            : base(sp)
         {
             if (configuration.GetValue<bool>("UseSingleSignOn"))
             {
