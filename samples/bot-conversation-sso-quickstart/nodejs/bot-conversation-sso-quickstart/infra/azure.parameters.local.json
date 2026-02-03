@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceBaseName": {
+      "value": "bot${{RESOURCE_SUFFIX}}"
+    },
+    "botAadAppClientId": {
+      "value": "${{BOT_ID}}"
+    },
+    "botAppDomain": {
+      "value": "${{BOT_DOMAIN}}"
+    },
+    "botDisplayName": {
+      "value": "bot-conversation-sso-quickstart"
+    },
+    "aadAppClientId": {
+      "value": "${{BOT_ID}}"
+    },
+    "aadAppClientSecret": {
+      "value": "${{SECRET_BOT_PASSWORD}}"
+    },
+    "microsoftAppType": {
+      "value": "SingleTenant"
+    },
+    "microsoftAppTenantId": {
+      "value": "${{AAD_APP_TENANT_ID}}"
+    }
+  }
+}
