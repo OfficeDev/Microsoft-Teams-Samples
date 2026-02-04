@@ -14,8 +14,8 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Bot Conv SSO QuickStart",
-    "full": "Bot Conv SSO QuickStart"
+    "short": "Bot-Tabs",
+    "full": "Bot-Tabs"
   },
   "description": {
     "short": "Quickly set up Teams bot with SSO for seamless user authentication.",

@@ -23,7 +23,9 @@
         "@azure/identity": "^4.11.1",
         "@microsoft/teams.api": "^2.0.0",
         "@microsoft/teams.apps": "^2.0.0",
+        "@microsoft/teams.cards": "^2.0.0",
         "@microsoft/teams.common": "^2.0.0",
+        "@microsoft/teams.graph": "^2.0.0",
         "@microsoft/teams.graph-endpoints": "^2.0.0",
         "isomorphic-fetch": "^3.0.0"
     },

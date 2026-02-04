@@ -82,6 +82,66 @@ const setUserState = (userId: string, state: UserState): void => {
   storage.set(key, state);
 };
 
+// Helper function to handle logout
+async function handleLogout(context: any): Promise<boolean> {
+  const { isSignedIn, send } = context;
+  
+  if (!isSignedIn) {
+    await send('You are not signed in.');
+    return true;
+  }
+  
+  await context.signout();
+  await send('You have been signed out.');
+  return true;
+}
+
+// Helper function to handle login
+async function handleLogin(context: any, isExplicitLoginCommand: boolean): Promise<boolean> {
+  const { isSignedIn, signin, send } = context;
+  
+  if (isSignedIn && isExplicitLoginCommand) {
+    await send('You are already signed in.');
+    return true;
+  }
+  
+  if (!isSignedIn) {
+    try {
+      await signin();
+    } catch (error: any) {
+      console.error('Sign-in error:', error);
+    }
+    return true;
+  }
+  
+  return false;
+}
+
+// Helper function to handle token confirmation response
+async function handleTokenConfirmation(context: any, textLower: string, userId: string, userState: UserState): Promise<boolean> {
+  const { send } = context;
+  const userToken = context.userToken;
+  
+  if (!userState.waitingForTokenConfirmation || !context.isSignedIn) {
+    return false;
+  }
+  
+  if (textLower === 'yes') {
+    if (userToken) {
+      await send(`Here is your token: ${userToken}`);
+    } else {
+      await send('Token is available but not accessible in this context. Authentication is working correctly.');
+    }
+  } else if (textLower === 'no') {
+    await send('Thank you.');
+  }
+  
+  // Reset state
+  userState.waitingForTokenConfirmation = false;
+  setUserState(userId, userState);
+  return true;
+}
+
 // Handle conversation updates (members added)
 app.on('conversationUpdate', async (context) => {
   const membersAdded = context.activity.membersAdded;
@@ -163,71 +223,26 @@ app.on('message', async (context) => {
   const text: string = stripMentionsText(activity) || '';
   const textLower = text.toLowerCase().trim();
   
-  const { isSignedIn, signin, send, userGraph } = context;
+  const { isSignedIn, send } = context;
   
   const userId = activity.from.id;
   const userState = getUserState(userId);
-  
-  // Get the user token from context
-  const userToken = context.userToken;
 
   // Handle logout/signout commands
   if (textLower === 'logout' || textLower === 'signout') {
-    if (!isSignedIn) {
-      await send('You are not signed in.');
-      return;
-    }
-    
-    await context.signout();
-    await send('You have been signed out.');
-    return;
-  }
-
-  // Handle login/signin commands
-  if (textLower === 'login' || textLower === 'signin') {
-    if (isSignedIn) {
-      await send('You are already signed in.');
-      return;
-    }
-    
-    try {
-      await signin();
-    } catch (error: any) {
-      console.error('Sign-in error:', error);
-    }
+    await handleLogout(context);
     return;
   }
 
   // Check if user is responding to token confirmation
-  if (userState.waitingForTokenConfirmation && isSignedIn) {
-    if (textLower === 'yes') {
-      if (userToken) {
-        await send(`Here is your token: ${userToken}`);
-      } else {
-        await send('Token is available but not accessible in this context. Authentication is working correctly.');
-      }
-    } else if (textLower === 'no') {
-      await send('Thank you.');
-    }
-    
-    // Reset state
-    userState.waitingForTokenConfirmation = false;
-    setUserState(userId, userState);
+  if (await handleTokenConfirmation(context, textLower, userId, userState)) {
     return;
   }
 
-  // Don't process simple responses as commands
-  if (textLower === 'yes' || textLower === 'no' || textLower === 'thank you' || textLower === 'thanks') {
-    return;
-  }
-
-  // Check if user is signed in, if not prompt for signin
-  if (!isSignedIn) {
-    try {
-      await signin();
-    } catch (error: any) {
-      console.error('Sign-in error:', error);
-    }
+  // Handle login/signin or check if user is signed in
+  const isExplicitLoginCommand = textLower === 'login' || textLower === 'signin';
+  if (!isSignedIn || isExplicitLoginCommand) {
+    await handleLogin(context, isExplicitLoginCommand);
     return;
   }
 

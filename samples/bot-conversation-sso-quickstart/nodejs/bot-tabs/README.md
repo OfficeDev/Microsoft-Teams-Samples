@@ -11,7 +11,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "03/02/2026 13:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-nodejs
+urlFragment: officedev-microsoft-teams-samples-bot-tabs-nodejs
 ---
 # Teams Conversation Bot SSO quick-start
 
@@ -167,4 +167,4 @@ You can interact with this bot by sending it a message. The bot will respond by 
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-sso-quickstart-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-tabs-nodejs" />
