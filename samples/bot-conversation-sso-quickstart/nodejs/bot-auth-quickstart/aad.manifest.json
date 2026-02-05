@@ -1,7 +1,7 @@
 {
   "id": "${{BOT_OBJECT_ID}}",
   "appId": "${{BOT_ID}}",
-  "displayName": "bot-tabs${{APP_NAME_SUFFIX}}",
+  "displayName": "bot-auth-quickstart${{APP_NAME_SUFFIX}}",
   "identifierUris": [
     "api://botid-${{BOT_ID}}"
   ],

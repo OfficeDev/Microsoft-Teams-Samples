@@ -11,9 +11,9 @@ languages:
 extensions:
  contentType: samples
  createdDate: "03/02/2026 13:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-tabs-nodejs
+urlFragment: officedev-microsoft-teams-samples-bot-auth-quickstart-nodejs
 ---
-# Teams Conversation Bot SSO quick-start
+# Teams Bot Auth Quickstart
 
 This sample demonstrates how to implement Single Sign-On (SSO) for Teams bots using Azure Active Directory and the Teams SDK. It includes comprehensive setup instructions for authentication, tunneling, and deploying to Azure, offering a streamlined way to authenticate users and access Microsoft Graph data directly within Teams.
 
@@ -167,4 +167,4 @@ You can interact with this bot by sending it a message. The bot will respond by 
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-tabs-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-auth-quickstart-nodejs" />

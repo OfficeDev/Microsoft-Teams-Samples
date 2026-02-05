@@ -1,7 +1,7 @@
 {
-    "name": "botconversationssoquick",
+    "name": "bot-auth-quickstart",
     "version": "1.0.0",
-    "description": "Microsoft 365 Agents Toolkit echo bot sample",
+    "description": "Microsoft 365 Agents Toolkit Bot-Auth-Quickstart Sample",
     "author": "Microsoft",
     "license": "MIT",
     "main": "./lib/index.js",
