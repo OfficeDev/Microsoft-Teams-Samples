@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-file-upload-python",
+    "name": "officedev-microsoft-teams-samples-bot-cards-python",
     "source": "officeDev",
-    "title": "File Upload with Bot using Teams SDK",
-    "shortDescription": "This bot sample for Teams demonstrates file upload capabilities using Teams SDK, enabling users to upload files and view inline images within chats.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-file-upload/python/bot-file-upload",
+    "title": "Bot Cards using Teams SDK",
+    "shortDescription": "This bot sample for Teams demonstrates various card types including Adaptive Card Actions, Suggested Actions, Toggle Visibility Cards, and file upload capabilities using Teams SDK.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-cards/python/bot-cards",
     "longDescription": [
-      "This bot allows users to upload files and send inline images directly in Microsoft Teams, utilizing Teams SDK for seamless file handling. It also shows how to manage and process file attachments within chat conversations."
+      "This bot demonstrates multiple card types in Microsoft Teams using Teams SDK. It showcases Adaptive Card Actions (OpenURL, ShowCard, Submit), Suggested Actions with interactive buttons, Toggle Visibility Cards, and file upload with OneDrive integration."
     ],
     "creationDateTime": "2026-01-30",
-    "updateDateTime": "2026-01-30",
+    "updateDateTime": "2026-02-06",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-file-upload/bot-file-upload.gif",
-        "alt": "Solution UX showing file upload with bot using Teams SDK"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-cards/bot-cards.gif",
+        "alt": "Solution UX showing bot cards using Teams SDK"
       }
     ],
     "authors": [

@@ -1,17 +1,17 @@
-# Bot File Upload - Python
+# Bot Cards
 
-This sample demonstrates a File Upload Bot for Microsoft Teams using Python. The bot can send files to users and receive files from users.
+This sample demonstrates a Bot with various card types for Microsoft Teams using Python. The bot showcases Adaptive Card Actions, Suggested Actions, Toggle Visibility Cards, and file upload capabilities.
 
 ## Prerequisites
 
-- [Python >=3.12,<3.15  a](https://www.python.org/downloads/)
+- [Python >=3.12,<3.15](https://www.python.org/downloads/)
 - [uv](https://docs.astral.sh/uv/)
 
 ## Run the sample
 
 1. Navigate to this directory:
    ```bash
-   cd python/echo_bot
+   cd python/bot-cards
    ```
 2. Run the bot using pip:
 
