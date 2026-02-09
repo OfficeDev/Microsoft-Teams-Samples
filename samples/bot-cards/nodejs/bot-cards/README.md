@@ -1,6 +1,6 @@
-# Bot Cards - Node.js (TypeScript)
+# Bot Cards - TypeScript
 
-This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript.
+This sample demonstrates various card types, actions, and attachments for Microsoft Teams using Node.js and TypeScript.
 
 ## Prerequisites
 

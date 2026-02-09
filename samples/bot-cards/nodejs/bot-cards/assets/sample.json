@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-cards-nodejs",
     "source": "officeDev",
-    "title": "Bot Cards",
-    "shortDescription": "This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript.",
+    "title": "Bot Cards and Attachments",
+    "shortDescription": "This sample demonstrates various card types, actions, and attachments for Microsoft Teams using Node.js and TypeScript.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-cards/nodejs/bot-cards",
     "longDescription": [
-      "This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript."
+      "This sample demonstrates various card types, actions, and attachments for Microsoft Teams using Node.js and TypeScript."
     ],
     "creationDateTime": "2026-02-06",
     "updateDateTime": "2026-02-06",
