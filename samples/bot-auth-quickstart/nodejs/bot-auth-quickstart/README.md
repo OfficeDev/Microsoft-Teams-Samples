@@ -1,21 +1,23 @@
 ---
 page_type: sample
-description: This sample bot demonstrates implementing SSO in Microsoft Teams using Azure AD.
+description: This sample bot demonstrates implementing SSO in Microsoft Teams using Azure AD with proactive app installation functionality using Microsoft Graph APIs.
 products:
 - office-teams
 - office
 - office-365
 languages:
-- javascript
+- typescript
 - nodejs
 extensions:
  contentType: samples
  createdDate: "03/02/2026 13:38:26 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-auth-quickstart-nodejs
 ---
-# Teams Bot Auth Quickstart
+# Teams Bot Auth Quickstart with Proactive Installation
 
 This sample demonstrates how to implement Single Sign-On (SSO) for Teams bots using Azure Active Directory and the Teams SDK. It includes comprehensive setup instructions for authentication, tunneling, and deploying to Azure, offering a streamlined way to authenticate users and access Microsoft Graph data directly within Teams.
+
+Additionally, this sample illustrates how to proactively install a Microsoft Teams app for users in a team or group chat using Microsoft Graph APIs. The bot can check if the app is installed for all members and send proactive messages to users, enhancing communication and app management within Teams.
 
 This bot has been created using [Teams SDK](https://learn.microsoft.com/microsoftteams/platform/), it shows how to get started with SSO in a bot for Microsoft Teams.
 
@@ -28,6 +30,8 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 ## Included Features
 * Teams SSO (bots)
 * Graph API
+* Proactive App Installation
+* Proactive Messaging to Users
 
 ## Interaction with app
 
@@ -98,6 +102,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       * Select Add a permission
       * Select Microsoft Graph -\> Delegated permissions.
       * `User.Read` (enabled by default)
+      * Select Microsoft Graph -\> Application permissions.
+      * `TeamsAppInstallation.ReadWriteForUser.All` (for proactive installation)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
@@ -120,6 +126,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     Also, update `connectionName` as the name of your Azure Bot connection created in step 1.
      - `MicrosoftAppType` - Set this as MultiTenant to if your bot is supported on multiple tenants, otherwise SingleTenant.
      - `MicrosoftAppTenantId` - Set your tenantId here if you are using single tenant app registration.
+     - `APP_CATALOG_TEAM_APP_ID` - To get this ID, navigate to [Get TeamsAppCatalogId](https://developer.microsoft.com/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20%27organization%27&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer. Search with your app name or based on Manifest App id in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
 
 - Run your bot at the command line:
 
@@ -158,13 +165,20 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ![Logout](Images/5.Logout.png)
 
-You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
+You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout".
+
+**Proactive Installation Commands:**
+
+Once signed in, you can use the following commands:
+- **Check and Install**: Proactively installs the app for all members in the team or group chat
+- **Send message**: Sends a proactive message to all members who have the app installed 
 
 ## Further reading
 
 - [Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/)
 - [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+- [Proactive Installation using Graph API](https://learn.microsoft.com/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-auth-quickstart-nodejs" />

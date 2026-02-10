@@ -11,6 +11,9 @@ import { ManagedIdentityCredential } from "@azure/identity";
 // Create storage for user and conversation state
 const storage = new LocalStorage();
 
+// Store conversation references for proactive messaging
+const conversationReferences = new Map<string, any>();
+
 const createTokenFactory = () => {
   return async (scope: string | string[], tenantId?: string): Promise<string> => {
     const managedIdentityCredential = new ManagedIdentityCredential({
@@ -82,6 +85,226 @@ const setUserState = (userId: string, state: UserState): void => {
   storage.set(key, state);
 };
 
+// Store conversation reference for proactive messaging
+const storeConversationReference = (activity: any): void => {
+  const userId = activity.from.aadObjectId || activity.from.id;
+  conversationReferences.set(userId, {
+    userId: activity.from.id,
+    conversationId: activity.conversation.id,
+    serviceUrl: activity.serviceUrl,
+    tenantId: activity.conversation.tenantId || "",
+  });
+};
+
+// Install app for a specific user using Graph API
+async function installAppForUser(userId: string, userToken: string): Promise<number> {
+  if (!config.appCatalogTeamAppId) {
+    throw new Error("APP_CATALOG_TEAM_APP_ID is not configured");
+  }
+
+  try {
+    // Check if app is already installed
+    const checkResponse = await fetch(
+      `https://graph.microsoft.com/v1.0/users/${userId}/teamwork/installedApps?$expand=teamsAppDefinition&$filter=teamsAppDefinition/teamsAppId eq '${config.appCatalogTeamAppId}'`,
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+
+    if (checkResponse.ok) {
+      const data = await checkResponse.json();
+      if (data.value && data.value.length > 0) {
+        console.log(`App already installed for user ${userId}`);
+        return 409; // Already installed
+      }
+    }
+
+    // Install app for user
+    const installResponse = await fetch(
+      `https://graph.microsoft.com/v1.0/users/${userId}/teamwork/installedApps`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "teamsApp@odata.bind": `https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/${config.appCatalogTeamAppId}`,
+        }),
+      }
+    );
+
+    if (installResponse.ok) {
+      console.log(`Successfully installed app for user ${userId}`);
+      return 201; // Newly installed
+    } else {
+      const errorText = await installResponse.text();
+      throw new Error(`Failed to install app: ${installResponse.statusText} - ${errorText}`);
+    }
+  } catch (error: any) {
+    console.error(`Error installing app for user ${userId}:`, error);
+    throw error;
+  }
+}
+
+// Check and install app for all members in team/chat
+async function checkAndInstallForAllMembers(context: any, userToken: string): Promise<{ newInstalls: number; existing: number; errors: string[] }> {
+  let newInstalls = 0;
+  let existing = 0;
+  const errors: string[] = [];
+
+  try {
+    // Get team/chat members using Teams context
+    const activity = context.activity;
+    const conversationId = activity.conversation.id;
+    const tenantId = activity.conversation.tenantId;
+
+    // Fetch members from Graph API based on conversation type
+    let members: any[] = [];
+    const conversationType = activity.conversation.conversationType;
+
+    if (conversationType === "channel") {
+      // Team scenario
+      const teamId = conversationId;
+      const response = await fetch(
+        `https://graph.microsoft.com/v1.0/teams/${teamId}/members`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        members = data.value || [];
+      }
+    } else {
+      // Group chat scenario
+      const chatId = conversationId;
+      const response = await fetch(
+        `https://graph.microsoft.com/v1.0/chats/${chatId}/members`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        members = data.value || [];
+      }
+    }
+
+    // Install app for each member
+    const installPromises = members.map(async (member) => {
+      try {
+        const userId = member.userId;
+        const statusCode = await installAppForUser(userId, userToken);
+        return { status: statusCode, name: member.displayName };
+      } catch (error: any) {
+        return { status: 'error', name: member.displayName, error: error.message };
+      }
+    });
+
+    const results = await Promise.all(installPromises);
+
+    results.forEach((result) => {
+      if (result.status === 201) {
+        newInstalls++;
+      } else if (result.status === 409) {
+        existing++;
+      } else {
+        errors.push(`${result.name}: ${result.error}`);
+      }
+    });
+
+    return { newInstalls, existing, errors };
+  } catch (error: any) {
+    console.error("Error in checkAndInstallForAllMembers:", error);
+    throw error;
+  }
+}
+
+// Send proactive message to all members
+async function sendProactiveMessageToAll(context: any, userToken: string): Promise<{ sent: number; errors: string[] }> {
+  let sent = 0;
+  const errors: string[] = [];
+
+  try {
+    const activity = context.activity;
+    const conversationId = activity.conversation.id;
+    const conversationType = activity.conversation.conversationType;
+
+    // Fetch members from Graph API
+    let members: any[] = [];
+
+    if (conversationType === "channel") {
+      // Team scenario
+      const teamId = conversationId;
+      const response = await fetch(
+        `https://graph.microsoft.com/v1.0/teams/${teamId}/members`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        members = data.value || [];
+      }
+    } else {
+      // Group chat scenario
+      const chatId = conversationId;
+      const response = await fetch(
+        `https://graph.microsoft.com/v1.0/chats/${chatId}/members`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        members = data.value || [];
+      }
+    }
+
+    // Send message to each member using adapter's createConversation
+    for (const member of members) {
+      try {
+        const ref = {
+          ...context.activity.getConversationReference(),
+          user: {
+            id: member.userId,
+            name: member.displayName,
+          },
+        };
+
+        await context.adapter.createConversation(ref, async (turnContext: any) => {
+          await turnContext.sendActivity("Proactive hello.");
+        });
+
+        sent++;
+      } catch (error: any) {
+        console.error(`Failed to send message to ${member.displayName}:`, error);
+        errors.push(`${member.displayName}: ${error.message}`);
+      }
+    }
+
+    return { sent, errors };
+  } catch (error: any) {
+    console.error("Error in sendProactiveMessageToAll:", error);
+    throw error;
+  }
+}
+
 // Helper function to handle logout
 async function handleLogout(context: any): Promise<boolean> {
   const { isSignedIn, send } = context;
@@ -144,11 +367,16 @@ async function handleTokenConfirmation(context: any, textLower: string, userId: 
 
 // Handle conversation updates (members added)
 app.on('conversationUpdate', async (context) => {
-  const membersAdded = context.activity.membersAdded;
+  const activity = context.activity;
+  
+  // Store conversation reference whenever there's a conversation update
+  storeConversationReference(activity);
+  
+  const membersAdded = activity.membersAdded;
   if (membersAdded) {
     for (const member of membersAdded) {
-      if (member.id !== context.activity.recipient?.id) {
-        await context.send('Welcome to TeamsBot. Type anything to get logged in. Type \'logout\' to sign-out.');
+      if (member.id !== activity.recipient?.id) {
+        await context.send('Welcome to TeamsBot with Proactive Installation! Type anything to get logged in. Type \'logout\' to sign-out.\n\nCommands:\n- **Check and Install** or **Install**: Install the app for all members in the team/chat\n- **Send message** or **Send**: Send a proactive message to all members\n- **Login**: Sign in to the bot\n- **Logout**: Sign out from the bot');
       }
     }
   }
@@ -228,9 +456,76 @@ app.on('message', async (context) => {
   const userId = activity.from.id;
   const userState = getUserState(userId);
 
+  // Store conversation reference for proactive messaging
+  storeConversationReference(activity);
+
   // Handle logout/signout commands
   if (textLower === 'logout' || textLower === 'signout') {
     await handleLogout(context);
+    return;
+  }
+
+  // Handle check and install command (requires authentication)
+  if (textLower === 'check and install' || textLower === 'install') {
+    if (!isSignedIn) {
+      await send('Please sign in first to use this feature.');
+      await handleLogin(context, false);
+      return;
+    }
+
+    try {
+      const userToken = context.userToken;
+      if (!userToken) {
+        await send('Unable to get authentication token. Please try signing in again.');
+        return;
+      }
+
+      await send('Checking and installing app for all members...');
+      const result = await checkAndInstallForAllMembers(context, userToken);
+      
+      let message = `**Installation Complete**\n\nExisting: ${result.existing}\nNewly Installed: ${result.newInstalls}`;
+      
+      if (result.errors.length > 0) {
+        message += `\n\n**Errors:**\n${result.errors.join('\n')}`;
+      }
+      
+      await send(message);
+    } catch (error: any) {
+      console.error('Error in check and install:', error);
+      await send(`Error installing app: ${error.message}`);
+    }
+    return;
+  }
+
+  // Handle send message command (requires authentication)
+  if (textLower === 'send message' || textLower === 'send') {
+    if (!isSignedIn) {
+      await send('Please sign in first to use this feature.');
+      await handleLogin(context, false);
+      return;
+    }
+
+    try {
+      const userToken = context.userToken;
+      if (!userToken) {
+        await send('Unable to get authentication token. Please try signing in again.');
+        return;
+      }
+
+      await send('Sending proactive messages to all members...');
+      const result = await sendProactiveMessageToAll(context, userToken);
+      
+      let message = `**Messages Sent:** ${result.sent}`;
+      
+      if (result.errors.length > 0) {
+        message += `\n\n**Errors:**\n${result.errors.join('\n')}`;
+      }
+      
+      await send(message);
+    } catch (error: any) {
+      console.error('Error in send message:', error);
+      await send(`Error sending messages: ${error.message}`);
+    }
     return;
   }
 
