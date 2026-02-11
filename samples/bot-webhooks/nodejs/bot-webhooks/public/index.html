@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incoming Webhook</title>
+  <script src="https://res.cdn.office.net/teams-js/2.22.0/js/MicrosoftTeams.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { color: #5558AF; margin-bottom: 8px; }
+    p { color: #666; margin-top: 0; }
+    label { display: block; font-weight: 600; margin-bottom: 4px; }
+    input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+    textarea { width: 100%; height: 400px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; font-size: 13px; resize: vertical; }
+    button { background: #5558AF; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-size: 14px; cursor: pointer; white-space: nowrap; }
+    button:hover { background: #4448A0; }
+    button:disabled { background: #999; cursor: not-allowed; }
+    .field { margin-bottom: 16px; background: white; padding: 16px; border-radius: 8px; }
+    .url-row { display: flex; gap: 10px; align-items: flex-end; }
+    .url-input { flex: 1; }
+    .status { margin-top: 10px; padding: 10px; border-radius: 4px; display: none; }
+    .success { background: #d4edda; color: #155724; display: block; }
+    .error { background: #f8d7da; color: #721c24; display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Incoming Webhook</h1>
+    <p>Send message cards through Incoming Webhooks in Microsoft Teams</p>
+    
+    <div class="field">
+      <div class="url-row">
+        <div class="url-input">
+          <label for="url">Webhook URL</label>
+          <input type="text" id="url" placeholder="Paste your incoming webhook URL here">
+        </div>
+        <button id="send" onclick="sendCard()">Send Card</button>
+      </div>
+      <div id="status" class="status"></div>
+    </div>
+    
+    <div class="field">
+      <label for="card">Card Payload (JSON)</label>
+      <textarea id="card"></textarea>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Teams JS
+    microsoftTeams.app.initialize().catch(() => {});
+
+    // Default card payload
+    const baseUrl = window.location.origin;
+    document.getElementById('card').value = JSON.stringify({
+      "@type": "MessageCard",
+      "@context": "http://schema.org/extensions",
+      "themeColor": "0076D7",
+      "summary": "Larry Bryant created a new task",
+      "sections": [{
+        "activityTitle": "Larry Bryant created a new task",
+        "activitySubtitle": "On Project Tango",
+        "activityImage": "https://adaptivecards.io/content/cats/1.png",
+        "facts": [
+          { "name": "Assigned to", "value": "Megan Bowen" },
+          { "name": "Due date", "value": "Mon Feb 09 2026" },
+          { "name": "Status", "value": "Not started" }
+        ],
+        "markdown": true
+      }],
+      "potentialAction": [{
+        "@type": "ActionCard",
+        "name": "Add a comment",
+        "inputs": [{
+          "@type": "TextInput",
+          "id": "comment",
+          "title": "Add a comment here for this task"
+        }],
+        "actions": [{
+          "@type": "HttpPOST",
+          "name": "Add comment",
+          "target": baseUrl + "/api/save",
+          "body": "{\"comment\":\"{{comment.value}}\"}",
+          "bodyContentType": "application/json"
+        }]
+      },
+      {
+        "@type": "OpenUri",
+        "name": "Learn More",
+        "targets": [{ "os": "default", "uri": "https://docs.microsoft.com/outlook/actionable-messages" }]
+      }]
+    }, null, 2);
+
+    async function sendCard() {
+      const btn = document.getElementById('send');
+      const status = document.getElementById('status');
+      const url = document.getElementById('url').value.trim();
+      const card = document.getElementById('card').value;
+
+      if (!url) {
+        status.textContent = 'Please enter a webhook URL';
+        status.className = 'status error';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.className = 'status';
+
+      try {
+        const res = await fetch('/api/Send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ webhookUrl: url, cardBody: card })
+        });
+        
+        if (res.ok) {
+          status.textContent = 'Card sent successfully!';
+          status.className = 'status success';
+        } else {
+          const data = await res.json();
+          throw new Error(data.error || 'Failed to send card');
+        }
+      } catch (err) {
+        status.textContent = 'Error: ' + err.message;
+        status.className = 'status error';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Send Card';
+      }
+    }
+  </script>
+</body>
+</html>
