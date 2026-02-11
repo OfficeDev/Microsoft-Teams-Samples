@@ -95,3 +95,4 @@ deploy:
         BOT_TYPE: SingleTenant
         TENANT_ID: ${{AAD_APP_TENANT_ID}}
         CONNECTION_NAME: ${{CONNECTION_NAME}}
+        TEAMS_APP_ID: ${{TEAMS_APP_ID}}

@@ -94,12 +94,25 @@
         {
           "id": "User.Read",
           "type": "Scope"
+        },
+        {
+          "id": "User.Read.All",
+          "type": "Role"
+        },
+        {
+          "id": "ChatMember.Read.All",
+          "type": "Role"
+        },
+        {
+          "id": "TeamsAppInstallation.ReadWriteForUser.All",
+          "type": "Role"
         }
       ]
     }
   ],
   "web": {
     "redirectUris": [
+      "https://${{BOT_DOMAIN}}/auth-end.html",
       "https://token.botframework.com/.auth/web/redirect"
     ],
     "implicitGrantSettings": {

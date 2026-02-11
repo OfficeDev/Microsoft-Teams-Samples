@@ -4,6 +4,7 @@ const config = {
   MicrosoftAppTenantId: process.env.TENANT_ID,
   MicrosoftAppPassword: process.env.CLIENT_PASSWORD,
   connectionName: process.env.CONNECTION_NAME || 'oauthbotsetting',
+  teamsAppId: process.env.TEAMS_APP_ID,
   appCatalogTeamAppId: process.env.APP_CATALOG_TEAM_APP_ID,
 };
 
