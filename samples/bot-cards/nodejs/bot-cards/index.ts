@@ -3,9 +3,8 @@
 
 import { stripMentionsText } from "@microsoft/teams.api";
 import { App } from "@microsoft/teams.apps";
-import { handleFileDownload, sendFileCard, handleFileConsent, processInlineImage } from "./handlers/fileHandler.js";
-import { sendSuggestedActions } from "./handlers/suggestedActionsHandler.js";
-import { sendAdaptiveCardActions, sendToggleVisibilityCard } from "./handlers/cardHandler.js";
+import { HandleFileDownload, SendFileCard, HandleFileConsent, ProcessInlineImage } from "./handlers/attachments.js";
+import { SendAdaptiveCardActions, SendToggleVisibilityCard } from "./handlers/adaptive-cards.js";
 
 const app = new App();
 
@@ -17,7 +16,7 @@ app.on('conversationUpdate', async (context) => {
     for (const member of membersAdded) {
         // Check if bot was added to the conversation
         if (member.id === activity.recipient.id) {
-            await sendWelcomeMessage(context);
+            await SendWelcomeMessage(context);
         }
     }
 });
@@ -36,49 +35,39 @@ app.on("message", async (context) => {
     
     // Handle card-related commands
     if (normalizedText.includes('card actions')) {
-      await sendAdaptiveCardActions(context);
-    } else if (normalizedText.includes('suggested actions')) {
-      await sendSuggestedActions(context);
+      await SendAdaptiveCardActions(context);
     } else if (normalizedText.includes('togglevisibility')) {
-      await sendToggleVisibilityCard(context);
-    } 
-    // Handle color input
-    else if (normalizedText.includes('red')) {
-      await context.send('Red is the best color, I agree.');
-    } else if (normalizedText.includes('blue')) {
-      await context.send('Blue is the best color, I agree.');
-    } else if (normalizedText.includes('yellow')) {
-      await context.send('Yellow is the best color, I agree.');
+      await SendToggleVisibilityCard(context);
     } 
     // Handle file commands
     else if (normalizedText.includes('send file') || normalizedText.includes('file')) {
-      await sendFileCard(context);
+      await SendFileCard(context);
     } else {
       // Unrecognized command
-      await sendWelcomeMessage(context);
+      await SendWelcomeMessage(context);
     }
   } else if (attachment) {
     // Handle file attachments
     const imageRegex = /image\/.*/;
     if (attachment.contentType === 'application/vnd.microsoft.teams.file.download.info') {
-      await handleFileDownload(attachment, context);
+      await HandleFileDownload(attachment, context);
     } else if (imageRegex.test(attachment.contentType)) {
-      await processInlineImage(context);
+      await ProcessInlineImage(context);
     } else {
-      await sendFileCard(context);
+      await SendFileCard(context);
     }
   } else {
-    await sendWelcomeMessage(context);
+    await SendWelcomeMessage(context);
   }
 });
 
 // Handle all invoke activities including file consent
 app.on("invoke", async (context) => {
-  await handleFileConsent(context);
+  await HandleFileConsent(context);
 });
 
 // Sends welcome message
-async function sendWelcomeMessage(context: any) {
+async function SendWelcomeMessage(context: any) {
   await context.send("Welcome to the Teams Bot Cards!");
 }
 
