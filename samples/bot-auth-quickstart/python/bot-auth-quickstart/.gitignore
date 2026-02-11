@@ -1,0 +1,29 @@
+# TeamsFx files
+env/.env.*.user
+env/.env.local
+env/.env.playground
+appPackage/build
+
+# Environment files
+.env
+
+# Python virtual environment
+.venv/
+__pycache__/
+
+# uv lock file
+uv.lock
+
+# others
+.deployment/
+node_modules/
+devTools/*.log
+
+# Dev tool directories
+/devTools/
+
+# Build output
+build/
+
+# src folder (deprecated)
+src/
