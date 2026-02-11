@@ -6,12 +6,6 @@ node_modules/
 
 # Lock files
 package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Build outputs
-dist/
-build/
 
 # IDE and editor files
 .vscode/
@@ -26,4 +20,3 @@ Thumbs.db
 
 # Logs
 *.log
-npm-debug.log*
