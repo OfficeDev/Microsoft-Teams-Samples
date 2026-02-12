@@ -1,4 +1,4 @@
-# Bot Cards - TypeScript
+# Bot Webhooks - TypeScript
 
 This sample demonstrates sending a message to a groupchat or teams chanel using a webhook.
 
