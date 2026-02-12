@@ -4,12 +4,12 @@
     "source": "officeDev",
     "title": "Teams Bot Auth Quick-start with Proactive Installation",
     "shortDescription": "This sample bot demonstrates implementing authentication and proactive app installation in Microsoft Teams using Azure AD and Microsoft Graph.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-auth-quickstart/csharp_dotnetcore",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-auth-quickstart/csharp",
     "longDescription": [
       "This Teams bot sample showcases authentication integration using Azure AD for seamless user authentication, and proactive app installation using Microsoft Graph API. It demonstrates how to install the Teams app for users programmatically and send proactive messages without user interaction, making it ideal for enterprise scenarios requiring mass deployment and notifications."
     ],
-    "creationDateTime": "2021-07-07",
-    "updateDateTime": "2024-10-10",
+    "creationDateTime": "2026-02-11",
+    "updateDateTime": "2026-02-11",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-auth-quickstart/csharp_dotnetcore/BotAuthQuickstart/Images/BotAuthQuickstart.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-auth-quickstart/bot-auth-quickstart.gif",
         "alt": "Solution UX showing teams bot auth quick-start with proactive installation"
       }
     ],

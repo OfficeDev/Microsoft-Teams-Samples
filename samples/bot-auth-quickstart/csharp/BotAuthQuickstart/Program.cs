@@ -68,11 +68,7 @@ teams.Use(async context =>
 teams.OnMembersAdded(async context =>
 {
     await context.Send(
-        "Welcome to TeamsBot. Available commands:\n\n" +
-        "- Type anything to **login**\n" +
-        "- Type **logout** to sign-out\n" +
-        "- Type **install** to install app for all team members\n" +
-        "- Type **send** to send proactive messages to all team members");
+        "Welcome to TeamsBot.");
 });
 
 // Handle sign-in completion - capture the token
@@ -223,13 +219,9 @@ teams.OnMessage(async context =>
     }
     catch (Exception ex)
     {
-        await context.Send($"Error fetching user details: {ex.Message}");
+        Console.WriteLine($"Error fetching user details: {ex.Message}");
     }
 });
-
-// Health endpoints
-app.MapGet("/", () => Results.Ok(new { status = "Bot is running", timestamp = DateTime.UtcNow }));
-app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
 
 // Proactive endpoints - List all users
 app.MapGet("/api/users", async () =>
@@ -289,7 +281,7 @@ app.MapPost("/api/proactive/install/{userId}", async (string userId) =>
             {
                 Body = new ItemBody
                 {
-                    Content = "👋 Hello! This is a proactive message from your Teams bot. The app has been installed successfully!"
+                    Content = "Hello! This is a proactive message from your Teams bot. The app has been installed successfully!"
                 }
             };
 
@@ -430,9 +422,7 @@ app.MapPost("/api/proactive/notify", async (HttpContext httpContext) =>
 
 app.Run();
 
-// =============================================================================
 // Helper Functions
-// =============================================================================
 
 GraphServiceClient CreateAppGraphClient(ConfigOptions? cfg)
 {
@@ -805,9 +795,7 @@ async Task<bool> SendProactiveMessageViaBotConnector(string botToken, string bot
     }
 }
 
-// =============================================================================
 // Model Classes
-// =============================================================================
 
 public class ConfigOptions { public TeamsConfigOptions? Teams { get; set; } }
 public class TeamsConfigOptions { public string? ClientId { get; set; } public string? ClientSecret { get; set; } public string? TenantId { get; set; } public string? ConnectionName { get; set; } public string? TeamsAppId { get; set; } }
