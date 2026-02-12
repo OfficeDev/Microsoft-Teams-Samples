@@ -2,9 +2,6 @@
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the MIT License.
 
-Bot Auth Quickstart - Teams SDK V2
-This sample demonstrates implementing SSO in Microsoft Teams using Azure AD.
-It also includes proactive app installation and messaging capabilities.
 """
 
 import asyncio
@@ -49,9 +46,7 @@ CONNECTION_NAME = os.environ.get("CONNECTION_NAME", "")
 APP_CATALOG_TEAM_APP_ID = os.environ.get("APP_CATALOG_TEAM_APP_ID", "")
 
 
-# =============================================================================
 # Storage and State Management
-# =============================================================================
 
 class LocalStorage:
     """Simple in-memory storage for user and conversation state."""
@@ -115,9 +110,7 @@ def StoreConversationReference(activity: Any) -> None:
         }
 
 
-# =============================================================================
 # Token Credential
-# =============================================================================
 
 class TokenCredentialFromString(TokenCredential):
     """Custom token credential that uses an existing access token."""
@@ -129,9 +122,7 @@ class TokenCredentialFromString(TokenCredential):
         return AccessToken(self._token, 0)
 
 
-# =============================================================================
 # App Configuration
-# =============================================================================
 
 # Create app with OAuth configuration
 app = App(
@@ -142,9 +133,7 @@ app = App(
 )
 
 
-# =============================================================================
 # Helper Functions
-# =============================================================================
 
 def StripMentionsText(text: str) -> str:
     """Remove bot mentions from message text."""
@@ -180,10 +169,9 @@ async def InstallAppForUser(user_id: str, user_token: str) -> int:
             if check_response.status_code == 200:
                 data = check_response.json()
                 if data.get("value") and len(data["value"]) > 0:
-                    logging.info(f"App already installed for user {user_id}")
                     return 409  # Already installed
-    except Exception as e:
-        logging.debug(f"Check installed apps failed: {e}")
+    except Exception:
+        pass
 
     # Install app for user
     install_url = f"https://graph.microsoft.com/v1.0/users/{user_id}/teamwork/installedApps"
@@ -200,7 +188,6 @@ async def InstallAppForUser(user_id: str, user_token: str) -> int:
             install_url, headers=install_headers, content=install_data
         )
         if install_response.status_code in (200, 201):
-            logging.info(f"Successfully installed app for user {user_id}")
             return 201  # Newly installed
         else:
             error_text = install_response.text
@@ -228,8 +215,6 @@ async def GetConversationMembers(
     is_group = getattr(conversation, 'is_group', None)
     headers = {"Authorization": f"Bearer {user_token}"}
 
-    logging.info(f"get_conversation_members: conv_type={conversation_type}, is_group={is_group}, conv_id={conv_id}")
-
     if conversation_type == 'channel':
         # In a channel, the conversation ID is like "19:xxx@thread.tacv2"
         # which is NOT a valid team GUID. The team ID comes from channel_data.
@@ -245,7 +230,6 @@ async def GetConversationMembers(
             # Fallback: try the conversation ID itself (some older formats)
             team_id = conv_id.split(';')[0] if ';' in conv_id else conv_id
         
-        logging.info(f"Channel scenario - using team_id={team_id}")
         url = f"https://graph.microsoft.com/v1.0/teams/{team_id}/members"
     elif conversation_type == 'groupChat' or is_group:
         # Group chat scenario
@@ -260,7 +244,6 @@ async def GetConversationMembers(
             if response.status_code == 200:
                 data = response.json()
                 members = data.get("value", [])
-                logging.info(f"Found {len(members)} members")
                 return members
             else:
                 logging.error(
@@ -401,10 +384,6 @@ async def SendProactiveMessageToAll(
                 errors.append(f"{display_name}: No conversation ID returned")
                 continue
 
-            logging.info(
-                f"Created conversation for {display_name}: {conversation_id}"
-            )
-
             # Build a ConversationReference with the correct service URL
             # so ctx.send() dispatches to the right endpoint.
             conv_ref = ConversationReference(
@@ -418,7 +397,6 @@ async def SendProactiveMessageToAll(
 
             await ctx.send("Proactive hello.", conversation_ref=conv_ref)
             sent += 1
-            logging.info(f"  Sent proactive message to {display_name}")
 
         except Exception as e:
             logging.error(f"Failed to send message to {display_name}: {e}")
@@ -426,10 +404,7 @@ async def SendProactiveMessageToAll(
 
     return {"sent": sent, "errors": errors}
 
-
-# =============================================================================
-# Auth Helpers
-# =============================================================================
+# Auth Helpers      
 
 async def HandleLogout(ctx: ActivityContext) -> bool:
     """Handle logout command."""
@@ -508,11 +483,8 @@ async def DisplayUserDetails(
                     f'alt="Profile Photo" />'
                 )
                 await ctx.send(photo_html)
-            else:
-                logging.info("Profile photo not available.")
-        except Exception as photo_error:
-            error_msg = str(photo_error)
-            logging.info(f"Profile photo not available: {error_msg[:100]}")
+        except Exception:
+            pass
 
         # Ask for token confirmation
         await ctx.send("Would you like to view your token?\n\n**Yes or No**")
@@ -522,29 +494,16 @@ async def DisplayUserDetails(
 
     except Exception as e:
         logging.error(f"Error fetching user details: {e}")
-        await ctx.send(f"Failed to get user profile: {str(e)}")
 
 
-# =============================================================================
 # Event Handlers
-# =============================================================================
 
 @app.on_install_add
 async def OnInstallAdd(ctx: ActivityContext):
     """Handle install add event - welcome new users."""
     StoreConversationReference(ctx.activity)
 
-    await ctx.send(
-        "Welcome to TeamsBot with Proactive Installation! "
-        "Type anything to get logged in. Type 'logout' to sign-out.\n\n"
-        "Commands:\n"
-        "- **Login**: Sign in to the bot\n"
-        "- **Check and Install** or **Install**: "
-        "Install the app for all members in the team/chat\n"
-        "- **Send message** or **Send**: "
-        "Send a proactive message to all members\n"
-        "- **Logout**: Sign out from the bot"
-    )
+    await ctx.send("Welcome to TeamsBot with Proactive Installation!")
 
 
 @app.event("sign_in")
@@ -558,7 +517,6 @@ async def OnSignIn(event: SignInEvent):
     )
     user_id = from_user.id if from_user else "unknown"
 
-    logging.info("User signed in successfully")
     await ctx.send("You have been signed in successfully!")
 
     # Automatically display user details after successful sign-in
@@ -612,7 +570,6 @@ async def HandleMessage(ctx: ActivityContext[MessageActivity]):
             await ctx.send(message)
         except Exception as e:
             logging.error(f"Error in check and install: {e}")
-            await ctx.send(f"Error installing app: {str(e)}")
         return
 
     # Handle send message command (requires authentication)
@@ -630,10 +587,6 @@ async def HandleMessage(ctx: ActivityContext[MessageActivity]):
                 install_result = await CheckAndInstallForAllMembers(
                     ctx, user_state.token
                 )
-                logging.info(
-                    f"Pre-send install: new={install_result['newInstalls']}, "
-                    f"existing={install_result['existing']}"
-                )
                 if install_result['newInstalls'] > 0:
                     # Brief pause to allow installations to propagate
                     await asyncio.sleep(2)
@@ -650,7 +603,6 @@ async def HandleMessage(ctx: ActivityContext[MessageActivity]):
             await ctx.send(message)
         except Exception as e:
             logging.error(f"Error in send message: {e}")
-            await ctx.send(f"Error sending messages: {str(e)}")
         return
 
     # Check if user is responding to token confirmation
