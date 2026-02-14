@@ -116,12 +116,15 @@ const SidePanel = (props) => {
             agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
         }
 
-        var divStart = "<ol type=\"1\">";
+        const ol = document.createElement("ol");
+        ol.type = "1";
         agendaValue.forEach(x => {
-            divStart += "<li>" + x + "</li>";
+            const li = document.createElement("li");
+            li.textContent = x;
+            ol.appendChild(li);
         });
-        divStart += "</ol>";
-        document.getElementById("agendaList").innerHTML = divStart;
+        const agendaList = document.getElementById("agendaList");
+        agendaList.replaceChildren(ol);
     }
 
     function showAgendaInput() {

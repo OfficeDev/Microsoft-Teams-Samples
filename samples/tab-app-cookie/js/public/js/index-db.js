@@ -10,9 +10,15 @@ function initElementReferences() {
   nameInput = document.getElementById("name");
 }
 
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function setNoDBNotice() {
   console.error("No database connection");
-  indexDBElement.innerHTML = "No database connection; create a database first.";
+  indexDBElement.textContent = "No database connection; create a database first.";
 }
 
 function getDatabaseEntries() {
@@ -32,7 +38,7 @@ function getDatabaseEntries() {
   request.onsuccess = (event) => {
     const cursor = event.target.result;
     if (cursor) {
-      html += `<tr><td>${JSON.stringify(cursor.value)}</td></tr>`;
+      html += `<tr><td>${escapeHtml(JSON.stringify(cursor.value))}</td></tr>`;
       cursor.continue();
     } else {
       html += "</table>";
@@ -91,7 +97,7 @@ function destroyIndexdb() {
       deleteRequest.onsuccess = function (e) {
         console.log("success");
         globalDBInstance = null;
-        indexDBElement.innerHTML = "";
+        indexDBElement.textContent = "";
       };
       deleteRequest.onblocked = function (e) {
         console.log("blocked: " + e);
