@@ -115,18 +115,6 @@
                 "order": 3
             },
             "stopAll": true
-        },
-        {
-            "name": "Debug in Microsoft 365 Agents Playground",
-            "configurations": [
-                "Attach to Local Service"
-            ],
-            "preLaunchTask": "Start App in Microsoft 365 Agents Playground",
-            "presentation": {
-                "group": "1-local",
-                "order": 1
-            },
-            "stopAll": true
         }
     ]
 }

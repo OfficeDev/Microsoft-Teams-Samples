@@ -1,10 +1,8 @@
 .webappignore
 .fx
 .deployment
-.localConfigs.playground
 .localConfigs
 .notification.localstore.json
-.notification.playgroundstore.json
 .vscode
 *.js.map
 *.ts.map
