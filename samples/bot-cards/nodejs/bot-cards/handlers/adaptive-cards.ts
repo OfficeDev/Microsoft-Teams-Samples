@@ -12,7 +12,7 @@ import {
 } from "@microsoft/teams.cards";
 
 // Send Adaptive Card with various actions
-export async function SendAdaptiveCardActions(context: any) {
+export async function sendAdaptiveCardActions(context: any) {
   // Build innermost nested card
   const nestedCard = new AdaptiveCard(
     new TextBlock('Welcome To New Card')
@@ -72,7 +72,7 @@ export async function SendAdaptiveCardActions(context: any) {
 }
 
 // Send Toggle Visibility Card
-export async function SendToggleVisibilityCard(context: any) {
+export async function sendToggleVisibilityCard(context: any) {
   const card = new AdaptiveCard(
     new TextBlock('**Action.ToggleVisibility example**: click the button to show or hide a welcome message', {
       wrap: true

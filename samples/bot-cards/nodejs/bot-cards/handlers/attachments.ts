@@ -8,13 +8,13 @@ import axios from 'axios';
 const FILES_DIR = 'files';
 
 // Handles file download and saves the file
-export async function HandleFileDownload(file: any, context: any) {
+export async function handleFileDownload(file: any, context: any) {
   try {
     const config = {
       responseType: 'stream' as const
     };
     const filePath = path.join(FILES_DIR, file.name);
-    await WriteFile(file.content.downloadUrl, config, filePath);
+    await writeFile(file.content.downloadUrl, config, filePath);
     await context.send(`<b>${file.name}</b> received and saved.`);
   } catch (error: any) {
     console.error('Error downloading file:', error);
@@ -22,7 +22,7 @@ export async function HandleFileDownload(file: any, context: any) {
 }
 
 // Sends a file card for user consent
-export async function SendFileCard(context: any) {
+export async function sendFileCard(context: any) {
   try {
     const filename = 'teams-logo.png';
     const filePath = path.join(FILES_DIR, filename);
@@ -49,7 +49,7 @@ export async function SendFileCard(context: any) {
 }
 
 // Handle file consent invoke
-export async function HandleFileConsent(context: any) {
+export async function handleFileConsent(context: any) {
   const activity = context.activity;  
   if (activity.name === 'fileConsent/invoke') {
     const fileConsentCardResponse = activity.value;        
@@ -71,7 +71,7 @@ export async function HandleFileConsent(context: any) {
           maxBodyLength: Infinity,
           maxContentLength: Infinity
         });
-        await FileUploadCompleted(context, fileConsentCardResponse);        
+        await fileUploadCompleted(context, fileConsentCardResponse);        
       } catch (e: any) {
         console.error(`[FILE_CONSENT] Upload error: ${e.message}`);
       }
@@ -84,7 +84,7 @@ export async function HandleFileConsent(context: any) {
 }
 
 // Notifies the user when the file upload is completed
-async function FileUploadCompleted(context: any, fileConsentCardResponse: any) {
+async function fileUploadCompleted(context: any, fileConsentCardResponse: any) {
   const downloadCard = {
     uniqueId: fileConsentCardResponse.uploadInfo?.uniqueId,
     fileType: fileConsentCardResponse.uploadInfo?.fileType
@@ -102,17 +102,17 @@ async function FileUploadCompleted(context: any, fileConsentCardResponse: any) {
 }
 
 // Processes an inline image by saving it and notifying the user
-export async function ProcessInlineImage(context: any) {
+export async function processInlineImage(context: any) {
   try {
     const file = context.activity.attachments[0];
     const config = {
       responseType: 'stream' as const
     };
-    const fileName = await GenerateFileName(FILES_DIR);
+    const fileName = await generateFileName(FILES_DIR);
     const filePath = path.join(FILES_DIR, fileName);
-    await WriteFile(file.contentUrl, config, filePath);
-    const fileSize = await GetFileSize(filePath);
-    const inlineAttachment = GetInlineAttachment(fileName);
+    await writeFile(file.contentUrl, config, filePath);
+    const fileSize = await getFileSize(filePath);
+    const inlineAttachment = getInlineAttachment(fileName);
     await context.send({
       type: 'message',
       text: `Image <b>${fileName}</b> of size <b>${fileSize}</b> bytes received and saved.`,
@@ -124,7 +124,7 @@ export async function ProcessInlineImage(context: any) {
 }
 
 // Creates an inline attachment for the image
-function GetInlineAttachment(fileName: string) {
+function getInlineAttachment(fileName: string) {
   const imageData = fs.readFileSync(path.join(FILES_DIR, fileName));
   const base64Image = Buffer.from(imageData).toString('base64');
   return {
@@ -135,7 +135,7 @@ function GetInlineAttachment(fileName: string) {
 }
 
 // Generates a file name based on a sequence of existing files
-async function GenerateFileName(fileDir: string): Promise<string> {
+async function generateFileName(fileDir: string): Promise<string> {
   const filenamePrefix = 'UserAttachment';
   const files = await fs.promises.readdir(fileDir);
   const filteredFiles = files
@@ -148,7 +148,7 @@ async function GenerateFileName(fileDir: string): Promise<string> {
 }
 
 // Downloads content from a URL and saves it to the specified file path
-async function WriteFile(contentUrl: string, config: any, filePath: string): Promise<void> {
+async function writeFile(contentUrl: string, config: any, filePath: string): Promise<void> {
   try {
     const response = await axios({ method: 'GET', url: contentUrl, ...config });
     return new Promise((resolve, reject) => {
@@ -163,7 +163,7 @@ async function WriteFile(contentUrl: string, config: any, filePath: string): Pro
 }
 
 // Returns the size of a file
-async function GetFileSize(filePath: string): Promise<number | undefined> {
+async function getFileSize(filePath: string): Promise<number | undefined> {
   try {
     const stats = await fs.promises.stat(filePath);
     return stats.size;
