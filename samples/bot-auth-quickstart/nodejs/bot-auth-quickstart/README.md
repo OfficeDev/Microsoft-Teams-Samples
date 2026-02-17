@@ -14,6 +14,7 @@ This sample demonstrates how to implement Single Sign-On (SSO) authentication fo
 
 - [Interaction with Bot](#interaction-with-bot)
 - [Sample Implementations](#sample-implementations)
+- [Microsoft Graph Integration](#microsoft-graph-integration)
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
   - [Option 1: Using Microsoft 365 Agents Toolkit](#option-1-using-microsoft-365-agents-toolkit-for-vs-code)
@@ -40,6 +41,68 @@ The bot responds to the following commands:
 | C# | .NET 10 / ASP.NET Core | [dotnet/bot-auth-quickstart](dotnet/bot-auth-quickstart) |
 | TypeScript | Node.js 16.14.2+ | [nodejs/bot-auth-quickstart](nodejs/bot-auth-quickstart) |
 | Python | Python 3.8+ | [python/bot-auth-quickstart](python/bot-auth-quickstart) |
+
+## Microsoft Graph Integration
+
+This sample demonstrates comprehensive Microsoft Graph API integration to access Microsoft 365 data and services on behalf of authenticated users.
+
+### Graph API Capabilities
+
+The bot leverages Microsoft Graph to:
+
+1. **User Profile Access**:
+   - Retrieves authenticated user's profile information
+   - Accesses user display name, email, and other profile data
+   - Uses delegated permissions with user consent
+
+2. **Team and Chat Member Management**:
+   - Reads team and chat membership information
+   - Retrieves member details for proactive messaging
+   - Uses `ChatMember.Read.All` application permission
+
+3. **Proactive App Installation**:
+   - Automatically installs the Teams app for team/chat members
+   - Uses Graph API to manage app installations programmatically
+   - Requires `TeamsAppInstallation.ReadWriteForUser.All` and `TeamsAppInstallation.ReadWriteForTeam.All` permissions
+
+4. **Catalog Discovery**:
+   - Dynamically discovers the app catalog ID
+   - Eliminates manual configuration of catalog information
+   - Uses Graph API to query installed apps
+
+### Graph API Permissions Used
+
+This sample requires the following Microsoft Graph permissions:
+
+**Delegated Permissions** (user consent required):
+- `User.Read` - Read the signed-in user's profile
+
+**Application Permissions** (admin consent required):
+- `User.Read.All` - Read all users' profiles
+- `ChatMember.Read.All` - Read all chat and team members
+- `TeamsAppInstallation.ReadWriteForUser.All` - Manage app installations for users
+- `TeamsAppInstallation.ReadWriteForTeam.All` - Manage app installations for teams
+
+### Authentication Flow
+
+The sample uses Azure AD SSO (Single Sign-On) with the Teams SDK OAuth flow:
+
+1. User initiates login via the bot
+2. Bot requests SSO token from Teams
+3. Teams prompts user for consent (first time only)
+4. Bot exchanges SSO token for Graph access token
+5. Bot makes Graph API calls on behalf of the user
+
+### Graph API Endpoints Used
+
+- `GET /me` - Get current user's profile
+- `GET /users/{id}` - Get user information
+- `GET /teams/{id}/members` - Get team members
+- `GET /chats/{id}/members` - Get chat members
+- `POST /users/{id}/teamwork/installedApps` - Install app for user
+- `GET /appCatalogs/teamsApps` - Query Teams app catalog
+
+For more information about Microsoft Graph, see the [Microsoft Graph documentation](https://developer.microsoft.com/graph) and [Graph Explorer](https://developer.microsoft.com/graph/graph-explorer) to test API calls.
 
 ## Prerequisites
 
