@@ -36,11 +36,11 @@ The bot responds to the following commands:
 
 ## Sample Implementations
 
-| Language | Platform | Location |
-|----------|----------|----------|
-| C# | .NET 10 / ASP.NET Core | [dotnet/bot-auth-quickstart](dotnet/bot-auth-quickstart) |
-| TypeScript | Node.js 16.14.2+ | [nodejs/bot-auth-quickstart](nodejs/bot-auth-quickstart) |
-| Python | Python 3.8+ | [python/bot-auth-quickstart](python/bot-auth-quickstart) |
+| Language | Framework | Directory |
+|----------|-----------|-----------|
+| C# | .NET 10 / ASP.NET Core | [dotnet/bot-auth-quickstart](dotnet/bot-auth-quickstart/README.md) |
+| TypeScript | Node.js | [nodejs/bot-auth-quickstart](nodejs/bot-auth-quickstart/README.md) |
+| Python | Python | [python/bot-auth-quickstart](python/bot-auth-quickstart/README.md) |
 
 ## Microsoft Graph Integration
 
@@ -314,6 +314,7 @@ Once the bot is running and added to Teams, you can interact with it using the f
 - Verify that "token.botframework.com" is included in `validDomains` in your manifest.json
 - For OAuth issues, confirm your Azure AD app registration has the correct redirect URIs
 - Check that admin consent has been granted for the required Graph API permissions
+- Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors (not available in Teams Developer Portal)
 
 ## Further Reading
 
