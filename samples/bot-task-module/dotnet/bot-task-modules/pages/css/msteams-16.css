@@ -1,0 +1,352 @@
+.theme-light .surface {
+    background-color: #F0F2F4;
+    color: #16233A;
+    font-family: 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem
+}
+
+.theme-light .panel {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-color: #FFFFFF;
+    border-color: transparent;
+    border-radius: 0.1875rem;
+    border-style: solid;
+    border-width: 0.125rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden
+}
+
+.theme-light .panel-header {
+    flex: 0 0 auto;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 2rem
+}
+
+.theme-light .panel-body {
+    flex: 1 1 auto;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    overflow: auto
+}
+
+.theme-light .panel-footer {
+    flex: 0 0 auto;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem
+}
+
+.theme-light .button-primary {
+    background: #5558AF;
+    border: 0.125rem solid;
+    border-color: transparent;
+    border-radius: 0.1875rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: inherit;
+    height: 2rem;
+    min-width: 6rem;
+    padding: 0.25rem;
+    white-space: nowrap
+}
+
+.theme-light .button-primary:hover:enabled {
+    background: #4C509D;
+    border-color: transparent;
+    color: #FFFFFF
+}
+
+.theme-light .button-primary:active {
+    background: #454A92;
+    border-color: transparent;
+    color: #FFFFFF
+}
+
+.theme-light .button-primary:disabled {
+    background: #F3F4F5;
+    border-color: transparent;
+    color: #ABB0B8
+}
+
+.theme-light .button-primary:focus {
+    background: #4C509D;
+    border-color: transparent;
+    color: #FFFFFF;
+    outline: 0.125rem solid #FFFFFF;
+    outline-offset: -0.25rem
+}
+
+.theme-light .button-secondary {
+    background: #FFFFFF;
+    border: 0.125rem solid;
+    border-color: #ABB0B8;
+    border-radius: 0.1875rem;
+    color: #525C6D;
+    cursor: pointer;
+    font: inherit;
+    height: 2rem;
+    min-width: 6rem;
+    padding: 0.25rem;
+    white-space: nowrap
+}
+
+.theme-light .button-secondary:hover:enabled {
+    background: #ABB0B8;
+    border-color: transparent;
+    color: #16233A
+}
+
+.theme-light .button-secondary:active {
+    background: #858C98;
+    border-color: transparent;
+    color: #16233A
+}
+
+.theme-light .button-secondary:disabled {
+    background: #FFFFFF;
+    border-color: #F3F4F5;
+    color: #ABB0B8
+}
+
+.theme-light .button-secondary:focus {
+    background: #ABB0B8;
+    border-color: transparent;
+    color: #16233A;
+    outline: 0.125rem solid #16233A;
+    outline-offset: -0.25rem
+}
+
+.theme-light .font-title {
+    font-size: 1.5rem;
+    line-height: 2rem
+}
+
+.theme-light .font-title2 {
+    font-size: 1.125rem;
+    line-height: 1.5rem
+}
+
+.theme-light .font-base {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+}
+
+.theme-light .font-caption {
+    font-size: 0.75rem;
+    line-height: 1rem
+}
+
+.theme-light .font-xsmall {
+    font-size: 0.625rem;
+    line-height: 0.6875rem
+}
+
+.theme-light .font-semilight {
+    font-family: 'Segoe UI Light', 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-weight: 300
+}
+
+.theme-light .font-regular {
+    font-family: 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-weight: 400
+}
+
+.theme-light .font-semibold {
+    font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-weight: 600
+}
+
+.theme-light .font-bold {
+    font-family: 'Segoe UI Bold', 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-weight: 700
+}
+
+.theme-light .input-container {
+    overflow: hidden;
+    position: relative
+}
+
+.theme-light .input-field {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: #F0F2F4;
+    border: 0.125rem solid transparent;
+    border-radius: 0.1875rem;
+    box-sizing: border-box;
+    color: #525C6D;
+    font: inherit;
+    height: 2rem;
+    margin: 0;
+    outline: none;
+    padding: 0.5rem 0.75rem;
+    width: 100%
+}
+
+.theme-light .label {
+    border: 0;
+    color: #4E586A;
+    display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding: 0
+}
+
+.theme-light .input-field:hover:inactive:enabled {
+    background: #F0F2F4;
+    border-bottom-color: transparent
+}
+
+.theme-light .input-field:disabled {
+    background: #F3F4F5;
+    border-bottom-color: transparent;
+    color: #DEE0E3
+}
+
+.theme-light .input-field:active:enabled, .theme-light .input-field:focus {
+    background: #F0F2F4;
+    border-bottom-color: #5558AF
+}
+
+.theme-dark .surface {
+    background-color: #2B2B30;
+    color: #FFFFFF;
+    font-family: 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem
+}
+
+.theme-dark .panel {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-color: #404045;
+    border-color: transparent;
+    border-radius: 0.1875rem;
+    border-style: solid;
+    border-width: 0.125rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden
+}
+
+.theme-dark .button-primary {
+    background: #9FA4FE;
+    border: 0.125rem solid;
+    border-color: transparent;
+    border-radius: 0.1875rem;
+    color: #2B2B30;
+    cursor: pointer;
+    font: inherit;
+    height: 2rem;
+    min-width: 6rem;
+    padding: 0.25rem;
+    white-space: nowrap
+}
+
+.theme-dark .button-primary:hover:enabled {
+    background: #AEB2FF;
+    border-color: transparent;
+    color: #2B2B30
+}
+
+.theme-dark .input-field {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: #2B2B30;
+    border: 0.125rem solid transparent;
+    border-radius: 0.1875rem;
+    box-sizing: border-box;
+    color: #C8C8C9;
+    font: inherit;
+    height: 2rem;
+    margin: 0;
+    outline: none;
+    padding: 0.5rem 0.75rem;
+    width: 100%
+}
+
+.theme-dark .font-title {
+    font-size: 1.5rem;
+    line-height: 2rem
+}
+
+.theme-dark .font-semibold {
+    font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-weight: 600
+}
+
+.theme-contrast .surface {
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem
+}
+
+.theme-contrast .panel {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-color: #000000;
+    border-color: #FFFFFF;
+    border-radius: 0.1875rem;
+    border-style: solid;
+    border-width: 0.125rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden
+}
+
+.theme-contrast .button-primary {
+    background: #FFFFFF;
+    border: 0.125rem solid;
+    border-color: transparent;
+    border-radius: 0.1875rem;
+    color: #000000;
+    cursor: pointer;
+    font: inherit;
+    height: 2rem;
+    min-width: 6rem;
+    padding: 0.25rem;
+    white-space: nowrap
+}
+
+.theme-contrast .input-field {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: #000000;
+    border: 0.125rem solid #FFFFFF;
+    border-radius: 0.1875rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    font: inherit;
+    height: 2rem;
+    margin: 0;
+    outline: none;
+    padding: 0.5rem 0.75rem;
+    width: 100%
+}
+
+.theme-contrast .font-title {
+    font-size: 1.5rem;
+    line-height: 2rem
+}
+
+.theme-contrast .font-semibold {
+    font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+    font-weight: 600
+}
