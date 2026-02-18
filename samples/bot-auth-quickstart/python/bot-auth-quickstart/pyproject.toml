@@ -3,10 +3,10 @@ name = "bot-auth-quickstart"
 version = "1.0.0"
 description = "Bot Auth Quickstart - Teams SDK V2"
 readme = "README.md"
-requires-python = ">=3.12,<3.14"
+requires-python = ">=3.12,<3.15"
 dependencies = [
     "python-dotenv>=1.0.0",
-    "microsoft-teams-apps",
+    "microsoft-teams-apps==2.0.0a9",
     "msgraph-sdk>=1.0.0",
     "azure-identity>=1.12.0"
 ]

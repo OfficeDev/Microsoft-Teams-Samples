@@ -1,0 +1,70 @@
+"""
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License.
+
+"""
+
+from typing import Dict, Any, Optional
+
+
+class LocalStorage:
+    """Simple in-memory storage for user and conversation state."""
+
+    def __init__(self):
+        self._data: Dict[str, Any] = {}
+
+    def get(self, key: str) -> Optional[Any]:
+        return self._data.get(key)
+
+    def set(self, key: str, value: Any) -> None:
+        self._data[key] = value
+
+    def delete(self, key: str) -> None:
+        if key in self._data:
+            del self._data[key]
+
+
+class UserState:
+    """User state for tracking token confirmation flow."""
+
+    def __init__(self):
+        self.waiting_for_token_confirmation: bool = False
+        self.token: str = ""
+
+
+# Create storage instance
+storage = LocalStorage()
+
+# Store conversation references for proactive messaging
+conversation_references: Dict[str, Any] = {}
+
+
+def GetUserState(user_id: str) -> UserState:
+    """Get or create user state for a given user ID."""
+    key = f"user_{user_id}"
+    state = storage.get(key)
+    if state is None:
+        state = UserState()
+        storage.set(key, state)
+    return state
+
+
+def SetUserState(user_id: str, state: UserState) -> None:
+    """Save user state for a given user ID."""
+    key = f"user_{user_id}"
+    storage.set(key, state)
+
+
+def StoreConversationReference(activity: Any) -> None:
+    """Store conversation reference for proactive messaging.
+    Uses aad_object_id as the key (matches working single-file version).
+    """
+    from_user = getattr(activity, 'from_', None) or getattr(activity, 'from_property', None)
+    if from_user:
+        aad_object_id = getattr(from_user, 'aad_object_id', None)
+        if aad_object_id:
+            conversation_references[aad_object_id] = {
+                "conversation": activity.conversation,
+                "user": from_user,
+                "service_url": getattr(activity, 'service_url', ''),
+            }

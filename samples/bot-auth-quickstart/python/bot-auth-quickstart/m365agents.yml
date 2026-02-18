@@ -11,7 +11,7 @@ provision:
   - uses: teamsApp/create
     with:
       # app name
-      name: BotConversationSsoQuickstart${{APP_NAME_SUFFIX}}
+      name: BotAuthQuickstart${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
@@ -125,4 +125,4 @@ publish:
     # the specified environment variable(s).
     writeToEnvironmentFile:
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-
+projectId: 016df3cf-59f7-4044-bc51-7216acf65cd7

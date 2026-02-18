@@ -9,7 +9,7 @@
       "value": "B1"
     },
     "botDisplayName": {
-      "value": "BotConversationSsoQuickstart"
+      "value": "BotAuthQuickstart"
     },
     "linuxFxVersion": {
       "value": "PYTHON|3.12"

@@ -63,21 +63,6 @@
       "program": "${workspaceFolder}/main.py",
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal"
-    },
-    {
-        "name": "Start Microsoft 365 Agents Playground",
-        "type": "node",
-        "request": "launch",
-        "program": "${workspaceFolder}/devTools/playground/node_modules/@microsoft/m365agentsplayground/cli.js",
-        "args": [
-            "start"
-        ],
-        "env": {
-          "PATH": "${workspaceFolder}/devTools/nodejs;${env:PATH}"
-        },
-        "cwd": "${workspaceFolder}",
-        "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen"
     }
   ],
   "compounds": [
@@ -112,22 +97,6 @@
         "order": 3
       },
       "stopAll": true
-    },
-    {
-        "name": "Debug in Microsoft 365 Agents Playground",
-        "configurations": [
-            "Start Python",
-            "Start Microsoft 365 Agents Playground"
-        ],
-        "cascadeTerminateToConfigurations": [
-            "Start Microsoft 365 Agents Playground"
-        ],
-        "preLaunchTask": "Deploy (Microsoft 365 Agents Playground)",
-        "presentation": {
-            "group": "0-TestTool",
-            "order": 1
-        },
-        "stopAll": true
     }
   ]
 }
