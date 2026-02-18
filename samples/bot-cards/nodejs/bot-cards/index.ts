@@ -7,6 +7,7 @@ import { handleFileDownload, sendFileCard, handleFileConsent, processInlineImage
 import { sendAdaptiveCardActions, sendToggleVisibilityCard } from "./handlers/adaptive-cards.js";
 
 const app = new App();
+const imageRegex = /image\/.*/;
 
 // Handle bot installation and new members
 app.on('conversationUpdate', async (context) => {
@@ -48,7 +49,6 @@ app.on("message", async (context) => {
     }
   } else if (attachment) {
     // Handle file attachments
-    const imageRegex = /image\/.*/;
     if (attachment.contentType === 'application/vnd.microsoft.teams.file.download.info') {
       await handleFileDownload(attachment, context);
     } else if (imageRegex.test(attachment.contentType)) {
@@ -56,8 +56,6 @@ app.on("message", async (context) => {
     } else {
       await sendFileCard(context);
     }
-  } else {
-    await sendWelcomeMessage(context);
   }
 });
 
@@ -68,7 +66,7 @@ app.on("invoke", async (context) => {
 
 // Sends welcome message
 async function sendWelcomeMessage(context: any) {
-  await context.send("Welcome to the Teams Bot Cards!");
+  await context.send("Welcome to the Teams Bot Cards and Attachments!");
 }
 
 app.start().catch(console.error);
