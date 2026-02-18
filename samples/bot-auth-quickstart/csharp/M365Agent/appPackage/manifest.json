@@ -18,8 +18,8 @@
     "full": "Auth Bot"
   },
   "description": {
-    "short": "Quickly set up Teams bot with authentication for seamless user authentication.",
-    "full": "This sample bot demonstrates implementing authentication in Microsoft Teams using Azure AD."
+    "short": "Teams bot with SSO authentication and Graph-based proactive app installation.",
+    "full": "This bot demonstrates SSO authentication in Microsoft Teams using Azure AD, and supports proactive app installation for team members via Microsoft Graph API."
   },
   "accentColor": "#FFFFFF",
   "bots": [
