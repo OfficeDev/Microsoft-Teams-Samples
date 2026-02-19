@@ -6,8 +6,12 @@ import { App } from "@microsoft/teams.apps";
 import { handleFileDownload, sendFileCard, handleFileConsent, processInlineImage } from "./handlers/attachments.js";
 import { sendAdaptiveCardActions, sendToggleVisibilityCard } from "./handlers/adaptive-cards.js";
 
-const app = new App();
+// Constants
+const FILE_DOWNLOAD_TYPE = 'application/vnd.microsoft.teams.file.download.info';
 const imageRegex = /image\/.*/;
+
+// Initialize Teams app
+const app = new App();
 
 // Handle bot installation and new members
 app.on('conversationUpdate', async (context) => {
@@ -49,7 +53,7 @@ app.on("message", async (context) => {
     }
   } else if (attachment) {
     // Handle file attachments
-    if (attachment.contentType === 'application/vnd.microsoft.teams.file.download.info') {
+    if (attachment.contentType === FILE_DOWNLOAD_TYPE) {
       await handleFileDownload(attachment, context);
     } else if (imageRegex.test(attachment.contentType)) {
       await processInlineImage(context);
