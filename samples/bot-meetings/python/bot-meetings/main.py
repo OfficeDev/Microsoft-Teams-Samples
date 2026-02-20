@@ -129,42 +129,138 @@ async def handle_task_fetch(ctx: ActivityContext) -> Dict:
                 }
             }
 
-@app.on_meeting_participant_join
-async def handle_participant_join(ctx: ActivityContext[MeetingParticipantJoinEventActivity]) -> None:
-    """Handle participant join event."""
+@app.on_meeting_end
+async def handle_meeting_end(ctx: ActivityContext) -> None:
+    """Handle meeting end event."""
     try:
-        print(f"[DEBUG] Participant join event received")
-        print(f"[DEBUG] Activity: {ctx.activity}")
+        meeting_id = None
+        ms_graph_resource_id = None
+        duration_text = ""
+        end_time_str = ""
         
-        # Get the first member who joined from the event value
-        participant_name = "A participant"
-        if ctx.activity.value and ctx.activity.value.members:
-            member = ctx.activity.value.members[0]
-            if member.user and member.user.name:
-                participant_name = member.user.name
-        
-        card = AdaptiveCard(
-            body=[
-                TextBlock(
-                    text=f"{participant_name} has joined the meeting.",
-                    weight="Bolder",
-                    size="Medium"
+        if hasattr(ctx.activity, 'channel_data') and ctx.activity.channel_data:
+            if hasattr(ctx.activity.channel_data, 'meeting') and ctx.activity.channel_data.meeting:
+                meeting_id = ctx.activity.channel_data.meeting.id                    
+                if hasattr(ctx.activity.channel_data.meeting, 'details'):
+                    ms_graph_resource_id = getattr(ctx.activity.channel_data.meeting.details, 'ms_graph_resource_id', None)
+        if meeting_id and not ms_graph_resource_id:
+            try:
+                meeting_info = await ctx.api.meetings.get_by_id(meeting_id)
+                if meeting_info and meeting_info.details:
+                    ms_graph_resource_id = meeting_info.details.ms_graph_resource_id
+            except Exception as ex:
+                pass            
+        if meeting_id:
+            # Calculate meeting duration
+            global meeting_data
+            print(f"[DEBUG] Meeting end - ID: {meeting_id}, Stored data: {meeting_data}")
+            if meeting_id in meeting_data:
+                start_time = meeting_data[meeting_id].get('start_time')
+                if start_time and hasattr(ctx.activity, 'value') and ctx.activity.value:
+                    # Get end_time (lowercase with underscore, datetime object)
+                    end_time_dt = getattr(ctx.activity.value, 'end_time', None)
+                    if end_time_dt:
+                        from datetime import datetime
+                        # Convert to ISO string if it's a datetime object
+                        end_time = end_time_dt.isoformat() if hasattr(end_time_dt, 'isoformat') else end_time_dt
+                        start_dt = datetime.fromisoformat(start_time.replace('Z', '+00:00'))
+                        end_dt = datetime.fromisoformat(end_time.replace('Z', '+00:00'))
+                        duration_seconds = int((end_dt - start_dt).total_seconds())
+                        minutes = duration_seconds // 60
+                        seconds = duration_seconds % 60
+                        duration_text = f"{minutes} min {seconds} sec" if minutes >= 1 else f"{seconds} sec"
+                        # Format end time for display - match meetings-events format (JavaScript toString())
+                        print(f"[DEBUG] end_dt: {end_dt}, type: {type(end_dt)}")
+                        end_time_str = str(end_dt)
+                # Clean up stored data
+                del meeting_data[meeting_id]
+            
+            result = None
+            if ms_graph_resource_id:
+                result = await get_meeting_transcript(ms_graph_resource_id)                
+            if result:
+                result = result.replace("<v", "")
+                global transcripts_dictionary
+                found_index = next((i for i, item in enumerate(transcripts_dictionary) if item['id'] == ms_graph_resource_id), -1)                    
+                if found_index != -1:
+                    transcripts_dictionary[found_index]['data'] = result
+                else:
+                    transcripts_dictionary.append({
+                        'id': ms_graph_resource_id,
+                        'data': result
+                    })
+                
+                # Build card body with end time and duration
+                card_body = [
+                    TextBlock(
+                        text="Meeting has ended!",
+                        weight="Bolder",
+                        size="Large",
+                        wrap=True
+                    )
+                ]
+                
+                if end_time_str:
+                    card_body.append(TextBlock(
+                        text=f"**End Time:** {end_time_str}",
+                        wrap=True
+                    ))
+                
+                if duration_text:
+                    card_body.append(TextBlock(
+                        text=f"**Duration:** {duration_text}",
+                        wrap=True
+                    ))
+                
+                card_body.append(TextBlock(
+                    text="Transcript is available below:",
+                    wrap=True
+                ))
+                
+                card = AdaptiveCard(
+                    body=card_body,
+                    actions=[
+                        SubmitAction(
+                            title="View Transcript",
+                            data={
+                                "msteams": {
+                                    "type": "task/fetch"
+                                },
+                                "meetingId": ms_graph_resource_id
+                            }
+                        )
+                    ]
+                )                    
+                attachment = {
+                    "contentType": "application/vnd.microsoft.card.adaptive",
+                    "content": card.model_dump(exclude_none=True, by_alias=True)
+                }                    
+                activity = MessageActivityInput(
+                    text="",
+                    attachments=[attachment]
                 )
-            ]
-        )
-        
-        attachment = {
-            "contentType": "application/vnd.microsoft.card.adaptive",
-            "content": card.model_dump(exclude_none=True, by_alias=True)
-        }
-        
-        activity = MessageActivityInput(
-            text="",
-            attachments=[attachment]
-        )
-        await ctx.send(activity)
+                await ctx.send(activity)
+            else:
+                not_found_card = AdaptiveCard(
+                    body=[
+                        TextBlock(
+                            text="Transcript not found for this meeting.",
+                            weight="Bolder",
+                            size="Large"
+                        )
+                    ]
+                )                    
+                attachment = {
+                    "contentType": "application/vnd.microsoft.card.adaptive",
+                    "content": not_found_card.model_dump(exclude_none=True, by_alias=True)
+                }                    
+                activity = MessageActivityInput(
+                    text="",
+                    attachments=[attachment]
+                )
+                await ctx.send(activity)
     except Exception as error:
-        print(f"[ERROR] Participant join handler exception: {str(error)}")
+        print(f"[ERROR] Meeting end handler exception: {str(error)}")
 
 @app.http.get('/home')
 async def home_handler(request: Request):
