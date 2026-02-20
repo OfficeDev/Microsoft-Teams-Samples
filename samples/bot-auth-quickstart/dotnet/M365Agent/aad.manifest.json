@@ -96,16 +96,12 @@
           "type": "Scope"
         },
         {
-          "id": "User.Read.All",
-          "type": "Role"
+          "id": "Chat.Read",
+          "type": "Scope"
         },
         {
-          "id": "TeamsAppInstallation.ReadWriteForUser.All",
-          "type": "Role"
-        },
-        {
-          "id": "Chat.ReadWrite.All",
-          "type": "Role"
+          "id": "TeamsAppInstallation.ReadForChat",
+          "type": "Scope"
         }
       ]
     }

@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-auth-quickstart-csharp_dotnetcore",
+    "name": "officedev-microsoft-teams-samples-bot-auth-quickstart-dotnet",
     "source": "officeDev",
-    "title": "Teams Bot Auth Quick-start with Proactive Installation",
-    "shortDescription": "This sample bot demonstrates implementing authentication and proactive app installation in Microsoft Teams using Azure AD and Microsoft Graph.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-auth-quickstart/csharp",
+    "title": "Teams Bot Auth Quick-start with Graph API",
+    "shortDescription": "This sample bot demonstrates implementing authentication in Microsoft Teams using Azure AD and Microsoft Graph API.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-auth-quickstart/dotnet",
     "longDescription": [
-      "This Teams bot sample showcases authentication integration using Azure AD for seamless user authentication, and proactive app installation using Microsoft Graph API. It demonstrates how to install the Teams app for users programmatically and send proactive messages without user interaction, making it ideal for enterprise scenarios requiring mass deployment and notifications."
+      "This Teams bot sample showcases authentication integration using Azure AD for seamless user authentication, and Microsoft Graph API integration to fetch the group chats, where the user is a member."
     ],
     "creationDateTime": "2026-02-11",
     "updateDateTime": "2026-02-11",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-auth-quickstart/bot-auth-quickstart.gif",
-        "alt": "Solution UX showing teams bot auth quick-start with proactive installation"
+        "alt": "Solution UX showing teams bot auth quick-start with Microsoft Graph API integration"
       }
     ],
     "authors": [
@@ -56,8 +56,8 @@
         "url": "https://aka.ms/TeamsPlatformFeedback"
       },
       {
-        "name": "Proactive installation of apps using Graph API",
-        "url": "https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages"
+        "name": "Microsoft Graph API - List chats",
+        "url": "https://learn.microsoft.com/en-us/graph/api/chat-list"
       },
       {
         "name": "Teams development videos from Microsoft",

@@ -53,7 +53,6 @@ provision:
           ClientSecret: ${{SECRET_BOT_PASSWORD}}
           TenantId: ${{TEAMS_APP_TENANT_ID}}
           ConnectionName: ${{CONNECTION_NAME}}
-          TeamsAppId: ${{TEAMS_APP_ID}}
 
   - uses: aadApp/update # Apply the AAD manifest to an existing AAD app. Will use the object id in manifest file to determine which AAD app to update.
     with:
