@@ -17,11 +17,9 @@ from microsoft_teams.apps import ActivityContext, App
 from microsoft_teams.apps.events import SignInEvent
 
 from storage import (
-    LocalStorage,
     UserState,
-    storage,
-    GetUserState,
-    SetUserState,
+    get_user_state,
+    set_user_state,
 )
 from group_chat_service import get_graph_client, handle_chats_command
 
@@ -60,7 +58,7 @@ app = App(
 
 # Helper Functions
 
-def StripMentionsText(text: str) -> str:
+def strip_mentions_text(text: str) -> str:
     """Remove bot mentions from message text."""
     if not text:
         return ""
@@ -69,53 +67,30 @@ def StripMentionsText(text: str) -> str:
 
 # Auth Helpers      
 
-async def HandleLogout(ctx: ActivityContext) -> bool:
+async def handle_logout(ctx: ActivityContext) -> bool:
     """Handle logout command."""
     await ctx.sign_out()
     await ctx.send("You have been signed out.")
     return True
 
 
-async def HandleLogin(ctx: ActivityContext, is_explicit_login_command: bool) -> bool:
+async def handle_login(ctx: ActivityContext, is_explicit_login_command: bool) -> bool:
     """Handle login command."""
     try:
         await ctx.sign_in()
+        return True
     except Exception as error:
         logging.error(f"Sign-in error: {error}")
-    return True
-
-
-async def HandleTokenConfirmation(
-    ctx: ActivityContext, text_lower: str, user_id: str, user_state: UserState
-) -> bool:
-    """Handle token confirmation response (Yes/No)."""
-    if not user_state.waiting_for_token_confirmation:
+        if is_explicit_login_command:
+            print("There was a problem signing you in. Please try again in a moment.")
         return False
 
-    if text_lower == "yes":
-        if user_state.token:
-            await ctx.send(f"Here is your token: {user_state.token}")
-        else:
-            await ctx.send(
-                "Token is available but not accessible in this context. "
-                "Authentication is working correctly."
-            )
-    elif text_lower == "no":
-        await ctx.send("Thank you.")
-    else:
-        return False
 
-    # Reset state
-    user_state.waiting_for_token_confirmation = False
-    SetUserState(user_id, user_state)
-    return True
-
-
-async def DisplayUserDetails(
+async def display_user_details(
     ctx: ActivityContext, token: str, user_id: str
 ) -> None:
     """Display user details after successful sign-in."""
-    user_state = GetUserState(user_id)
+    user_state = get_user_state(user_id)
     user_state.token = token
 
     # Create Graph client using the SSO token
@@ -148,12 +123,6 @@ async def DisplayUserDetails(
         except Exception:
             pass
 
-        # Ask for token confirmation
-        await ctx.send("Would you like to view your token?\n\n**Yes or No**")
-
-        user_state.waiting_for_token_confirmation = True
-        SetUserState(user_id, user_state)
-
     except Exception as e:
         logging.error(f"Error fetching user details: {e}")
 
@@ -162,18 +131,13 @@ async def DisplayUserDetails(
 
 
 @app.on_install_add
-async def OnInstallAdd(ctx: ActivityContext):
+async def on_install_add(ctx: ActivityContext):
     """Handle install add event - welcome new users."""
-    await ctx.send(
-        "Welcome to the SSO Bot! I can help you with:\n\n"
-        "- **login** / **signin** — Sign in with SSO\n"
-        "- **logout** / **signout** — Sign out\n"
-        "- **chats** — List group chats you're a member of"
-    )
+    await ctx.send("Welcome to the Bot Auth Quickstart.")
 
 
 @app.event("sign_in")
-async def OnSignIn(event: SignInEvent):
+async def on_sign_in(event: SignInEvent):
     """Handle successful sign in event."""
     ctx = event.activity_ctx
     token = event.token_response.token
@@ -186,14 +150,14 @@ async def OnSignIn(event: SignInEvent):
     await ctx.send("You have been signed in successfully!")
 
     # Automatically display user details after successful sign-in
-    await DisplayUserDetails(ctx, token, user_id)
+    await display_user_details(ctx, token, user_id)
 
 
 @app.on_message
-async def HandleMessage(ctx: ActivityContext[MessageActivity]):
+async def handle_message(ctx: ActivityContext[MessageActivity]):
     """Handle all messages."""
     raw_text = ctx.activity.text if ctx.activity.text else ""
-    text = StripMentionsText(raw_text)
+    text = strip_mentions_text(raw_text)
     text_lower = text.lower().strip()
 
     from_user = (
@@ -201,16 +165,16 @@ async def HandleMessage(ctx: ActivityContext[MessageActivity]):
         or getattr(ctx.activity, 'from_property', None)
     )
     user_id = from_user.id if from_user else "unknown"
-    user_state = GetUserState(user_id)
+    user_state = get_user_state(user_id)
 
     # Handle logout/signout commands
     if text_lower in ("logout", "signout"):
-        await HandleLogout(ctx)
+        await handle_logout(ctx)
         return
 
     # Handle chats command — lists group chats
     if text_lower == "chats":
-        user_state = GetUserState(user_id)
+        user_state = get_user_state(user_id)
         if user_state.token:
             await handle_chats_command(ctx, user_state.token)
         else:
@@ -219,13 +183,9 @@ async def HandleMessage(ctx: ActivityContext[MessageActivity]):
             )
         return
 
-    # Check if user is responding to token confirmation
-    if await HandleTokenConfirmation(ctx, text_lower, user_id, user_state):
-        return
-
     # Handle login/signin commands or any other message (triggers login)
     is_explicit_login_command = text_lower in ("login", "signin")
-    await HandleLogin(ctx, is_explicit_login_command)
+    await handle_login(ctx, is_explicit_login_command)
 
 
 if __name__ == "__main__":

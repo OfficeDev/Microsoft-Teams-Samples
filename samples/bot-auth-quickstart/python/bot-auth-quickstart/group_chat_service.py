@@ -6,6 +6,8 @@ Licensed under the MIT License.
 
 import logging
 
+import time
+
 from azure.core.credentials import AccessToken, TokenCredential
 from msgraph import GraphServiceClient
 from msgraph.generated.models.chat_type import ChatType
@@ -21,7 +23,7 @@ class TokenCredentialFromString(TokenCredential):
         self._token = access_token
 
     def get_token(self, *scopes, **kwargs) -> AccessToken:
-        return AccessToken(self._token, 0)
+        return AccessToken(self._token, int(time.time()) + 3600)
 
 
 def get_graph_client(token: str) -> GraphServiceClient:
@@ -38,10 +40,10 @@ async def handle_chats_command(ctx: ActivityContext[MessageActivity], token: str
     # Verify this is a personal scope
     conversation = ctx.activity.conversation
     if conversation and getattr(conversation, 'conversation_type', None) != "personal":
-        await ctx.send("This command is only available in personal chat with the bot.")
+        print("This command is only available in personal chat with the bot.")
         return
 
-    await ctx.send("Fetching your group chats...")
+    print("Fetching your group chats...")
 
     try:
         graph_client = get_graph_client(token)
@@ -72,4 +74,4 @@ async def handle_chats_command(ctx: ActivityContext[MessageActivity], token: str
         await ctx.send(message)
 
     except Exception:
-        await ctx.send("Failed to fetch group chats. Please ensure you have the required permissions.")
+        print("Failed to fetch group chats. Please ensure you have the required permissions.")

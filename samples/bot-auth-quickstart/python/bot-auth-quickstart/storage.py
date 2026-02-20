@@ -28,7 +28,6 @@ class UserState:
     """User state for tracking token confirmation flow."""
 
     def __init__(self):
-        self.waiting_for_token_confirmation: bool = False
         self.token: str = ""
 
 
@@ -36,7 +35,7 @@ class UserState:
 storage = LocalStorage()
 
 
-def GetUserState(user_id: str) -> UserState:
+def get_user_state(user_id: str) -> UserState:
     """Get or create user state for a given user ID."""
     key = f"user_{user_id}"
     state = storage.get(key)
@@ -46,7 +45,7 @@ def GetUserState(user_id: str) -> UserState:
     return state
 
 
-def SetUserState(user_id: str, state: UserState) -> None:
+def set_user_state(user_id: str, state: UserState) -> None:
     """Save user state for a given user ID."""
     key = f"user_{user_id}"
     storage.set(key, state)
