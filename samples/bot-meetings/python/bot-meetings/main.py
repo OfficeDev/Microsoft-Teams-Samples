@@ -129,6 +129,99 @@ async def handle_task_fetch(ctx: ActivityContext) -> Dict:
                 }
             }
 
+@app.on_meeting_start
+async def handle_meeting_start(ctx: ActivityContext) -> None:
+    """Handle meeting start event."""
+    try:
+        meeting_id = None
+        start_time = None
+        start_time_str = ""
+        join_url = ""
+        meeting_title = ""
+        
+        # Get start_time from activity.value (it's a datetime object)
+        if hasattr(ctx.activity, 'value') and ctx.activity.value:
+            start_time_dt = getattr(ctx.activity.value, 'start_time', None)
+            if start_time_dt:
+                # Convert datetime to ISO string format for storage
+                start_time = start_time_dt.isoformat()
+                # Format for display - match meetings-events format (JavaScript toString())
+                from datetime import datetime
+                print(f"[DEBUG] start_time_dt: {start_time_dt}, type: {type(start_time_dt)}")
+                # Convert to string similar to JavaScript's toString()
+                start_time_str = str(start_time_dt)
+            
+            # Get join URL and title
+            join_url = getattr(ctx.activity.value, 'join_url', '')
+            meeting_title = getattr(ctx.activity.value, 'title', '')
+            
+        # Get meeting_id from channel_data
+        if hasattr(ctx.activity, 'channel_data') and ctx.activity.channel_data:
+            if hasattr(ctx.activity.channel_data, 'meeting') and ctx.activity.channel_data.meeting:
+                meeting_id = ctx.activity.channel_data.meeting.id
+        
+        # Store start time for duration calculation
+        if meeting_id and start_time:
+            global meeting_data
+            meeting_data[meeting_id] = {'start_time': start_time}
+            print(f"[DEBUG] Stored meeting start - ID: {meeting_id}, Time: {start_time}")
+        else:
+            print(f"[DEBUG] Missing data - meeting_id: {meeting_id}, start_time: {start_time}")
+        
+        # Build card body
+        card_body = [
+            TextBlock(
+                text="Meeting has started!",
+                weight="Bolder",
+                size="Large",
+                wrap=True
+            )
+        ]
+        
+        if meeting_title:
+            card_body.append(TextBlock(
+                text=f"**Title:** {meeting_title}",
+                wrap=True
+            ))
+        
+        if start_time_str:
+            card_body.append(TextBlock(
+                text=f"**Start Time:** {start_time_str}",
+                wrap=True
+            ))
+        
+        # Add actions if join URL is available
+        actions = []
+        if join_url:
+            # Use raw action for opening URL since SDK might not have OpenUrlAction
+            actions.append({
+                "type": "Action.OpenUrl",
+                "title": "Join Meeting",
+                "url": join_url
+            })
+        
+        card = AdaptiveCard(
+            body=card_body
+        )
+        
+        # Convert to dict and add actions manually
+        card_dict = card.model_dump(exclude_none=True, by_alias=True)
+        if actions:
+            card_dict["actions"] = actions
+        
+        attachment = {
+            "contentType": "application/vnd.microsoft.card.adaptive",
+            "content": card_dict
+        }
+        
+        activity = MessageActivityInput(
+            text="",
+            attachments=[attachment]
+        )
+        await ctx.send(activity)
+    except Exception as error:
+        print(f"[ERROR] Meeting start handler exception: {str(error)}")
+
 @app.on_meeting_end
 async def handle_meeting_end(ctx: ActivityContext) -> None:
     """Handle meeting end event."""
