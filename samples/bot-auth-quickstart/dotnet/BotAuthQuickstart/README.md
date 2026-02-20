@@ -7,22 +7,6 @@ A Microsoft Teams bot with SSO authentication and Microsoft Graph API integratio
 - **SSO Authentication** - Single Sign-On with Microsoft Entra ID
 - **Graph API Integration** - List group chats where the user is a member
 
-## Bot Commands
-
-| Command | Description |
-|---------|-------------|
-| `login` | Sign in using SSO |
-| `logout` | Sign out from the bot |
-| `chats` | List all group chats where you are a member (personal scope only) |
-
-## Graph API Permissions
-
-This bot uses the following Microsoft Graph API permissions:
-
-| Permission | Type | Description |
-|------------|------|-------------|
-| `User.Read` | Delegated | Read user profile |
-| `Chat.Read` | Delegated | Read user's chat messages |
 
 ## Prerequisites
 

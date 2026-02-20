@@ -11,8 +11,7 @@
         "Teams__ClientSecret": "<your-client-secret>",
         "Teams__TenantId": "<your-tenant-id>",
         "Teams__ConnectionName": "<your-oauth-connection-name>"
-      },
-      "hotReloadProfile": "aspnetcore"
+      }
     }
   }
 }

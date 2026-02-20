@@ -59,7 +59,7 @@ teams.OnSignIn(async (_, @event) =>
     }
     catch (Exception ex)
     {
-        await context.Send($"Could not retrieve profile photo: {ex.Message}");
+        Console.WriteLine($"Could not retrieve profile photo: {ex.Message}");
     }
 });
 

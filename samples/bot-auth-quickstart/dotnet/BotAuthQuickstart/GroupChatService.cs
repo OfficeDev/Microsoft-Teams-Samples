@@ -19,11 +19,11 @@ public static class GroupChatService
         // Verify this is a personal scope
         if (context.Activity.Conversation?.Type != "personal")
         {
-            await context.Send("This command is only available in personal chat with the bot.");
+            Console.WriteLine("This command is only available in personal chat with the bot.");
             return;
         }
 
-        await context.Send("Fetching your group chats...");
+        Console.WriteLine("Fetching your group chats...");
 
         try
         {
@@ -61,7 +61,7 @@ public static class GroupChatService
         }
         catch (Exception)
         {
-            await context.Send("Failed to fetch group chats. Please ensure you have the required permissions.");
+            Console.WriteLine("Failed to fetch group chats. Please ensure you have the required permissions.");
         }
     }
 }
