@@ -62,7 +62,9 @@
       "request": "launch",
       "program": "${workspaceFolder}/main.py",
       "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "timeout": 120000,
+      "debugAdapterPath": "${workspaceFolder}/.venv/Lib/site-packages/debugpy/adapter"
     }
   ],
   "compounds": [

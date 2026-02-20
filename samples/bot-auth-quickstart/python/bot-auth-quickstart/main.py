@@ -9,12 +9,8 @@ import base64
 import os
 import re
 import logging
-from typing import Dict, Any, Optional, List
 
-import httpx
 from dotenv import load_dotenv
-from azure.core.credentials import AccessToken, TokenCredential
-from msgraph import GraphServiceClient
 
 from microsoft_teams.api import MessageActivity
 from microsoft_teams.apps import ActivityContext, App
@@ -24,15 +20,10 @@ from storage import (
     LocalStorage,
     UserState,
     storage,
-    conversation_references,
     GetUserState,
     SetUserState,
-    StoreConversationReference,
 )
-from ProactiveInstallationService import (
-    install_app_for_team_members,
-    send_proactive_notification,
-)
+from group_chat_service import get_graph_client, handle_chats_command
 
 # Load environment variables from env/.env.local
 env_path = os.path.join(os.path.dirname(__file__), "env", ".env.local")
@@ -54,20 +45,6 @@ CLIENT_ID = os.environ.get("CLIENT_ID", "")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET", "")
 TENANT_ID = os.environ.get("TENANT_ID", "")
 CONNECTION_NAME = os.environ.get("CONNECTION_NAME", "")
-TEAMS_APP_ID = os.environ.get("TEAMS_APP_ID", "")
-APP_CATALOG_TEAM_APP_ID = os.environ.get("APP_CATALOG_TEAM_APP_ID", "")
-
-
-# Token Credential
-
-class TokenCredentialFromString(TokenCredential):
-    """Custom token credential that uses an existing access token."""
-
-    def __init__(self, access_token: str):
-        self._token = access_token
-
-    def get_token(self, *scopes, **kwargs) -> AccessToken:
-        return AccessToken(self._token, 0)
 
 
 # App Configuration
@@ -142,8 +119,7 @@ async def DisplayUserDetails(
     user_state.token = token
 
     # Create Graph client using the SSO token
-    credential = TokenCredentialFromString(token)
-    graph_client = GraphServiceClient(credentials=credential)
+    graph_client = get_graph_client(token)
 
     try:
         # Get user profile using Graph SDK
@@ -188,9 +164,12 @@ async def DisplayUserDetails(
 @app.on_install_add
 async def OnInstallAdd(ctx: ActivityContext):
     """Handle install add event - welcome new users."""
-    StoreConversationReference(ctx.activity)
-
-    await ctx.send("Welcome to TeamsBot with Proactive Installation!")
+    await ctx.send(
+        "Welcome to the SSO Bot! I can help you with:\n\n"
+        "- **login** / **signin** — Sign in with SSO\n"
+        "- **logout** / **signout** — Sign out\n"
+        "- **chats** — List group chats you're a member of"
+    )
 
 
 @app.event("sign_in")
@@ -224,28 +203,20 @@ async def HandleMessage(ctx: ActivityContext[MessageActivity]):
     user_id = from_user.id if from_user else "unknown"
     user_state = GetUserState(user_id)
 
-    # Store conversation reference for proactive messaging
-    StoreConversationReference(ctx.activity)
-
     # Handle logout/signout commands
     if text_lower in ("logout", "signout"):
         await HandleLogout(ctx)
         return
 
-    # Handle install command - install app for team members
-    if text_lower == "install":
-        await install_app_for_team_members(
-            ctx, CLIENT_ID, CLIENT_SECRET, TENANT_ID,
-            APP_CATALOG_TEAM_APP_ID, TEAMS_APP_ID, conversation_references
-        )
-        return
-
-    # Handle send command - send proactive messages
-    if text_lower == "send":
-        await send_proactive_notification(
-            ctx, app.id, CLIENT_ID, CLIENT_SECRET, TENANT_ID,
-            APP_CATALOG_TEAM_APP_ID, TEAMS_APP_ID, conversation_references
-        )
+    # Handle chats command — lists group chats
+    if text_lower == "chats":
+        user_state = GetUserState(user_id)
+        if user_state.token:
+            await handle_chats_command(ctx, user_state.token)
+        else:
+            await ctx.send(
+                "You need to sign in first. Type **login** to authenticate."
+            )
         return
 
     # Check if user is responding to token confirmation

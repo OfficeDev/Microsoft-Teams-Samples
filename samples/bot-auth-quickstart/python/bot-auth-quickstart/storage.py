@@ -35,9 +35,6 @@ class UserState:
 # Create storage instance
 storage = LocalStorage()
 
-# Store conversation references for proactive messaging
-conversation_references: Dict[str, Any] = {}
-
 
 def GetUserState(user_id: str) -> UserState:
     """Get or create user state for a given user ID."""
@@ -53,18 +50,3 @@ def SetUserState(user_id: str, state: UserState) -> None:
     """Save user state for a given user ID."""
     key = f"user_{user_id}"
     storage.set(key, state)
-
-
-def StoreConversationReference(activity: Any) -> None:
-    """Store conversation reference for proactive messaging.
-    Uses aad_object_id as the key (matches working single-file version).
-    """
-    from_user = getattr(activity, 'from_', None) or getattr(activity, 'from_property', None)
-    if from_user:
-        aad_object_id = getattr(from_user, 'aad_object_id', None)
-        if aad_object_id:
-            conversation_references[aad_object_id] = {
-                "conversation": activity.conversation,
-                "user": from_user,
-                "service_url": getattr(activity, 'service_url', ''),
-            }

@@ -1,20 +1,12 @@
-# Auth Bot
+# Bot Auth Quickstart - Python
 
-A Microsoft Teams bot with SSO authentication and Graph-based proactive app installation.
+A Microsoft Teams bot with SSO authentication and Microsoft Graph integration.
 
 ## Features
 
 - **SSO Authentication** - Single Sign-On with Microsoft Entra ID
-- **Proactive Messaging** - Install the bot and send notifications to team members via Microsoft Graph
+- **Graph Integration** - Fetch user profile, profile photo, and list group chats via Microsoft Graph
 
-## Bot Commands
-
-| Command | Description |
-|---------|-------------|
-| `login` | Sign in using SSO |
-| `logout` | Sign out from the bot |
-| `install` | Install the app for all team/group chat members |
-| `send` | Send proactive messages to all team/group chat members |
 
 ## Prerequisites
 
