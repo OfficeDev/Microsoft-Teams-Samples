@@ -1,0 +1,210 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+
+import asyncio
+import os
+from typing import Dict
+import httpx
+
+from fastapi import Response, Request
+from dotenv import load_dotenv
+from microsoft_teams.api import MessageActivityInput
+from microsoft_teams.api.activities.event.meeting_participant_join import MeetingParticipantJoinEventActivity
+from microsoft_teams.api.activities.event.meeting_participant_leave import MeetingParticipantLeaveEventActivity
+from microsoft_teams.apps import ActivityContext, App
+from microsoft_teams.cards import AdaptiveCard, TextBlock, SubmitAction
+
+# Load environment variables
+load_dotenv()
+
+# Constants
+GRAPH_API_ENDPOINT = 'https://graph.microsoft.com/beta'
+
+# Global transcript storage
+transcripts_dictionary = []
+
+# Global meeting data storage for tracking start times
+meeting_data = {}
+
+# Create app instance
+app = App()
+
+async def get_access_token() -> str:
+    try:
+        client_id = os.environ.get('CLIENT_ID', '')
+        client_secret = os.environ.get('CLIENT_SECRET', '')
+        tenant_id = os.environ.get('TENANT_ID', '')
+        token_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"        
+        data = {
+            'grant_type': 'client_credentials',
+            'client_id': client_id,
+            'client_secret': client_secret,
+            'scope': 'https://graph.microsoft.com/.default'
+        }        
+        async with httpx.AsyncClient() as client:
+            response = await client.post(token_url, data=data)
+            if response.status_code == 200:
+                result = response.json()
+                return result.get('access_token', '')
+            else:
+                error_text = response.text
+                print(f"Error getting token: {response.status_code} - {error_text}")
+                return ''
+    except Exception as e:
+        print(f"Exception getting access token: {str(e)}")
+        return ''
+
+
+async def get_meeting_transcript(ms_graph_resource_id: str) -> str:
+    try:
+        access_token = await get_access_token()
+        if not access_token:
+            return ""        
+        user_id = os.environ.get('USER_ID', '')
+        if not user_id:
+            return ""        
+        async with httpx.AsyncClient() as client:
+            headers = {'Authorization': f'Bearer {access_token}'}            
+            transcripts_url = f"{GRAPH_API_ENDPOINT}/users/{user_id}/onlineMeetings/{ms_graph_resource_id}/transcripts"            
+            trans_response = await client.get(transcripts_url, headers=headers)
+            if trans_response.status_code == 200:
+                transcripts_data = trans_response.json()
+                transcripts = transcripts_data.get('value', [])                    
+                if transcripts:
+                    transcript_id = transcripts[0].get('id')
+                    content_url = f"{transcripts_url}/{transcript_id}/content?$format=text/vtt"                        
+                    content_response = await client.get(content_url, headers=headers)
+                    if content_response.status_code == 200:
+                        transcript_content = content_response.text
+                        return transcript_content
+                    else:
+                        error_text = content_response.text
+                        print(f"[ERROR] Getting transcript content: {content_response.status_code} - {error_text}")            
+            return ""    
+    except Exception as ex:
+        print(f"[ERROR] Exception in get_meeting_transcript: {str(ex)}")
+        return ""
+
+
+@app.on_invoke
+async def handle_task_fetch(ctx: ActivityContext) -> Dict:
+    if hasattr(ctx.activity, 'name') and ctx.activity.name == 'task/fetch':
+        try:
+            meeting_id = None
+            if hasattr(ctx.activity, 'value') and ctx.activity.value:
+                value_data = ctx.activity.value
+                if isinstance(value_data, dict):
+                    data_section = value_data.get('data', {})
+                    meeting_id = data_section.get('meetingId')
+                elif hasattr(value_data, 'data'):
+                    data_section = value_data.data
+                    meeting_id = getattr(data_section, 'meetingId', None) if hasattr(data_section, 'meetingId') else data_section.get('meetingId') if isinstance(data_section, dict) else None            
+            base_url = os.environ.get('APP_BASE_URL', '')
+            task_module_url = f"{base_url}/home"
+            if meeting_id:
+                task_module_url += f"?meetingId={meeting_id}"            
+            response = {
+                "task": {
+                    "type": "continue",
+                    "value": {
+                        "title": "Meeting Transcript",
+                        "height": 600,
+                        "width": 600,
+                        "url": task_module_url
+                    }
+                }
+            }
+            return response
+        except Exception as ex:
+            print(f"[ERROR] Task fetch handler error: {str(ex)}")
+            return {
+                "task": {
+                    "type": "continue",
+                    "value": {
+                        "title": "Meeting Transcript",
+                        "height": 600,
+                        "width": 600,
+                        "url": f"{os.environ.get('APP_BASE_URL', '')}/home"
+                    }
+                }
+            }
+
+@app.on_meeting_participant_join
+async def handle_participant_join(ctx: ActivityContext[MeetingParticipantJoinEventActivity]) -> None:
+    """Handle participant join event."""
+    try:
+        print(f"[DEBUG] Participant join event received")
+        print(f"[DEBUG] Activity: {ctx.activity}")
+        
+        # Get the first member who joined from the event value
+        participant_name = "A participant"
+        if ctx.activity.value and ctx.activity.value.members:
+            member = ctx.activity.value.members[0]
+            if member.user and member.user.name:
+                participant_name = member.user.name
+        
+        card = AdaptiveCard(
+            body=[
+                TextBlock(
+                    text=f"{participant_name} has joined the meeting.",
+                    weight="Bolder",
+                    size="Medium"
+                )
+            ]
+        )
+        
+        attachment = {
+            "contentType": "application/vnd.microsoft.card.adaptive",
+            "content": card.model_dump(exclude_none=True, by_alias=True)
+        }
+        
+        activity = MessageActivityInput(
+            text="",
+            attachments=[attachment]
+        )
+        await ctx.send(activity)
+    except Exception as error:
+        print(f"[ERROR] Participant join handler exception: {str(error)}")
+
+@app.http.get('/home')
+async def home_handler(request: Request):
+    try:
+        transcript = "Transcript not found."
+        meeting_id = request.query_params.get('meetingId')       
+        if meeting_id:
+            global transcripts_dictionary
+            found_index = next((i for i, item in enumerate(transcripts_dictionary) if item['id'] == meeting_id), -1)            
+            if found_index != -1:
+                transcript = f"Format: {transcripts_dictionary[found_index]['data']}"
+            else:
+                result = await get_meeting_transcript(meeting_id)                
+                if result:
+                    transcripts_dictionary.append({
+                        'id': meeting_id,
+                        'data': result
+                    })
+                    transcript = f"Format: {result}"
+        html_content = f'''
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Meeting Transcript</title>
+            <style>
+                body {{ font-family: Arial, sans-serif; padding: 20px; }}
+                h1 {{ color: #464775; }}
+                pre {{ white-space: pre-wrap; word-wrap: break-word; }}
+            </style>
+        </head>
+        <body>
+            <h1>Meeting Transcript</h1>
+            <pre>{transcript}</pre>
+        </body>
+        </html>
+        '''
+        return Response(content=html_content, media_type='text/html')
+    except Exception as error:
+        print(f"[ERROR] /home endpoint: {str(error)}")
+        return Response(content=f"Error: {str(error)}", status_code=500, media_type='text/plain')
+
+if __name__ == "__main__":
+    asyncio.run(app.start())
