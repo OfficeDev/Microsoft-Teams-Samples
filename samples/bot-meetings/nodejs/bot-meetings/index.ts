@@ -10,6 +10,16 @@ import qs from 'qs';
 // Global transcript storage
 const transcriptsDictionary: { id: string; data: string }[] = [];
 
+// HTML escape helper to prevent XSS
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // Storage for meeting start times (keyed by conversationId)
 const meetingStartTimes: Map<string, string> = new Map();
 
@@ -47,6 +57,7 @@ app.http.use('/api/messages', async (req: any, res: any, next: any) => {
 
 // Graph Helper Functions
 async function GetAccessToken(): Promise<string> {
+  try {
   const data = qs.stringify({
     'grant_type': 'client_credentials',
     'client_id': process.env.CLIENT_ID,
@@ -60,9 +71,14 @@ async function GetAccessToken(): Promise<string> {
     { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
   );
   return response.data.access_token;
+  } catch (error: any) {
+    console.error("Failed to acquire Graph access token:", error.response?.data || error.message);
+    throw error;
+  }
 }
 
 async function GetBotToken(): Promise<string> {
+  try {
   const data = qs.stringify({
     'grant_type': 'client_credentials',
     'client_id': process.env.CLIENT_ID,
@@ -76,6 +92,10 @@ async function GetBotToken(): Promise<string> {
     { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
   );
   return response.data.access_token;
+  } catch (error: any) {
+    console.error("Failed to acquire Bot Framework token:", error.response?.data || error.message);
+    throw error;
+  }
 }
 
 async function GetMeetingInfo(serviceUrl: string, meetingId: string): Promise<any> {
@@ -409,7 +429,7 @@ app.http.get('/home', async (req, res) => {
 <body>
     <p>Transcription details:</p>
     <div class="pre-container">
-        <pre id="transcription">${transcript}</pre>
+        <pre id="transcription">${escapeHtml(transcript)}</pre>
     </div>
 </body>
 </html>`);
