@@ -10,6 +10,6 @@
     "incremental": true,
     "tsBuildInfoFile": "./lib/.tsbuildinfo",
     "resolveJsonModule": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   }
 }
