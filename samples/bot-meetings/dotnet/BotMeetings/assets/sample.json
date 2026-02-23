@@ -1,0 +1,72 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-meetings-dotnet",
+    "source": "officeDev",
+    "title": "Bot Meetings - Meeting Events and Transcription",
+    "shortDescription": "This dotnet sample demonstrates how a bot can receive real-time meeting events and retrieve meeting transcripts within Microsoft Teams.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-meetings/dotnet",
+    "longDescription": [
+      "This sample showcases the capabilities of a bot in Microsoft Teams to capture real-time meeting events such as meeting start, meeting end, participant join, and participant leave. It also retrieves meeting transcripts via the Microsoft Graph API and displays them in a task module. Built using the Teams AI SDK."
+    ],
+    "creationDateTime": "2026-02-11",
+    "updateDateTime": "2026-02-11",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-meetings/bot-meetings.gif",
+        "alt": "Solution UX showing teams bot meetings lifecycle events with transcript capture"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Microsoft Graph API - Meeting transcripts",
+        "url": "https://learn.microsoft.com/en-us/graph/api/resources/calltranscript"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
