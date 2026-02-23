@@ -50,7 +50,7 @@ The bot supports the following functionalities:
 
 ### Run in the Teams Client
 
-In the Teams Client after you have provisioned the Teams Application and configured the application with your local DevTunnels URL.
+In the Teams client after you have provisioned the Teams Application, configured the application with your local DevTunnels URL, and sideloaded the app.
 
 1. Install the tool DevTunnels https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started
 2. Get Access to a M365 Developer Tenant https://learn.microsoft.com/en-us/office/developer-program/microsoft-365-developer-program-get-started
@@ -61,8 +61,8 @@ In the Teams Client after you have provisioned the Teams Application and configu
 Create a persistent tunnel for the port 3978 with anonymous access
 
 ```bash
-devtunnel create -a my-tunnel  
-devtunnel port create -p 3978 my-tunnel 
+devtunnel create my-tunnel --allow-anonymous
+devtunnel port create my-tunnel -p 3978
 devtunnel host my-tunnel
 ```
 
@@ -85,7 +85,7 @@ Navigate to the Teams Developer Portal http://dev.teams.microsoft.com
 1. Navigate to `Apps` and create a `New App`
 2. Fill the required values in Basic information (short and long name, short and long description and App URLs)
 3. In `App features->Bot` select the bot you created previously
-4. Select `Preview in Teams`
+4. Select `Preview in Teams` to sideload the app
 
 > **Note.** When using an Azure Bot resource, provide the ClientID instead of selecting an existing bot.
 
