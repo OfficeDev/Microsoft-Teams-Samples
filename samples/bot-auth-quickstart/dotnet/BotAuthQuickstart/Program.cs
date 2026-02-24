@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using BotAuthQuickstart;
 using Microsoft.Teams.Api.Activities;
 using Microsoft.Teams.Apps;
 using Microsoft.Teams.Apps.Activities;
@@ -30,10 +29,9 @@ string GetCleanMessageText(MessageActivity activity)
 }
 
 // Welcome message
-teams.OnMembersAdded(async context =>
+teams.OnInstall(async context =>
 {
-    await context.Send(
-        "Welcome to TeamsBot.");
+    await context.Send("Welcome to TeamsBot.");
 });
 
 // Handle sign-in completion
@@ -44,23 +42,7 @@ teams.OnSignIn(async (_, @event) =>
     var me = await graphClient.Me.GetAsync();
     var jobTitle = me?.JobTitle ?? "Not specified";
 
-    await context.Send($"You're signed in as {me!.DisplayName} ({me.UserPrincipalName}); Your job title is: {jobTitle}; Your photo is:");
-
-    try
-    {
-        var photoStream = await graphClient.Me.Photo.Content.GetAsync();
-        if (photoStream != null)
-        {
-            using var memoryStream = new MemoryStream();
-            await photoStream.CopyToAsync(memoryStream);
-            var base64Photo = Convert.ToBase64String(memoryStream.ToArray());
-            await context.Send($"<img src=\"data:image/jpeg;base64,{base64Photo}\" alt=\"Profile Photo\" />");
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Could not retrieve profile photo: {ex.Message}");
-    }
+    await context.Send($"You're signed in as {me!.DisplayName} ({me.UserPrincipalName}). Your job title is: {jobTitle}");
 });
 
 // Handle all messages
@@ -78,13 +60,6 @@ teams.OnMessage(async context =>
         }
         await context.SignOut();
         await context.Send("You have been signed out.");
-        return;
-    }
-
-    // Handle chats command - list group chats where the user is a member
-    if (textLower == "chats")
-    {
-        await GroupChatService.HandleChatsCommand(context);
         return;
     }
 
@@ -108,7 +83,7 @@ teams.OnMessage(async context =>
     }
 
     // Default response for signed-in users
-    await context.Send("Available commands: 'chats', 'logout'");
+    await context.Send("You are signed in. Type 'logout' to sign out.");
 });
 
 app.Run();
