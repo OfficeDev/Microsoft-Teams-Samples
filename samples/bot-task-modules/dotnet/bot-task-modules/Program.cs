@@ -29,12 +29,6 @@ webApp.UseStaticFiles(new StaticFileOptions
 });
 
 // Map routes for task module pages
-webApp.MapGet("/youtube", async context =>
-{
-    var filePath = Path.Combine(builder.Environment.ContentRootPath, "pages", "Youtube", "index.html");
-    await context.Response.SendFileAsync(filePath);
-});
-
 webApp.MapGet("/customform", async context =>
 {
     var filePath = Path.Combine(builder.Environment.ContentRootPath, "pages", "CustomForm", "index.html");
@@ -43,6 +37,10 @@ webApp.MapGet("/customform", async context =>
 
 // Get base URL for task modules
 var baseUrl = builder.Configuration["BaseUrl"];
+if (string.IsNullOrEmpty(baseUrl))
+{
+    throw new InvalidOperationException("BaseUrl configuration is required. Please set it in appsettings.json or environment variables.");
+}
 
 // Handle incoming messages - send HeroCard and AdaptiveCard with task module options
 teamsApp.OnMessage(async (IContext<MessageActivity> context) =>
@@ -85,7 +83,6 @@ teamsApp.OnActivity(ActivityType.Invoke, async (IContext<IActivity> context) =>
         return await HandleTaskModuleSubmit(context, invokeActivity);
     }
     
-    await System.Threading.Tasks.Task.CompletedTask;
     return null;
 });
 
@@ -108,12 +105,6 @@ static Attachment CreateHeroCardAttachment()
                 type = "invoke",
                 title = TaskModuleUIConstants.CustomForm.ButtonTitle,
                 value = new { type = "task/fetch", data = TaskModuleIds.CustomForm }
-            },
-            new
-            {
-                type = "invoke",
-                title = TaskModuleUIConstants.YouTube.ButtonTitle,
-                value = new { type = "task/fetch", data = TaskModuleIds.YouTube }
             }
         }
     });
@@ -147,10 +138,6 @@ static AdaptiveCardType CreateAdaptiveCardWithTaskModuleOptions()
             new TaskFetchAction(new Dictionary<string, object?> { { "data", TaskModuleIds.CustomForm } })
             {
                 Title = TaskModuleUIConstants.CustomForm.ButtonTitle
-            },
-            new TaskFetchAction(new Dictionary<string, object?> { { "data", TaskModuleIds.YouTube } })
-            {
-                Title = TaskModuleUIConstants.YouTube.ButtonTitle
             }
         }
     };
@@ -217,18 +204,7 @@ static System.Threading.Tasks.Task<object> HandleTaskModuleFetch(InvokeActivity 
     
     TaskInfo taskInfo;
     
-    if (cardData == TaskModuleIds.YouTube)
-    {
-        taskInfo = new TaskInfo
-        {
-            Title = TaskModuleUIConstants.YouTube.Title,
-            Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(TaskModuleUIConstants.YouTube.Width),
-            Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(TaskModuleUIConstants.YouTube.Height),
-            Url = $"{baseUrl}/youtube",
-            FallbackUrl = $"{baseUrl}/youtube"
-        };
-    }
-    else if (cardData == TaskModuleIds.CustomForm)
+    if (cardData == TaskModuleIds.CustomForm)
     {
         taskInfo = new TaskInfo
         {
@@ -239,7 +215,7 @@ static System.Threading.Tasks.Task<object> HandleTaskModuleFetch(InvokeActivity 
             FallbackUrl = $"{baseUrl}/customform"
         };
     }
-    else if (cardData == TaskModuleIds.AdaptiveCard)
+    else  // Default to ADAPTIVE_CARD
     {
         taskInfo = new TaskInfo
         {
@@ -308,6 +284,10 @@ static async System.Threading.Tasks.Task<object> HandleTaskModuleSubmit(IContext
     {
         foreach (var kvp in data)
         {
+            // Skip password fields
+            if (kvp.Key.ToLower().Contains("password"))
+                continue;
+            
             // Format the key (capitalize, replace underscores with spaces)
             var formattedKey = kvp.Key.Replace("_", " ");
             formattedKey = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(formattedKey);
