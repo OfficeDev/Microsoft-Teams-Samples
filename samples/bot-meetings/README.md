@@ -155,7 +155,7 @@ pip install -e .
 
 **Configure environment variables:**
 
-Update the configuration file (`.env`, `appsettings.json`, or `.env` depending on language) with the values from step 2 (Azure AD app registration):
+Update the configuration file for your selected language (for Node.js/Python, the `.env` file; for .NET, `appsettings.json` or `launchSettings.json`) with the values from step 2 (Azure AD app registration):
 
 For NodeJS and Python you will need a `.env` file with the following fields:
 
