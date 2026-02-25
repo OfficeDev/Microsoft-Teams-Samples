@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-cards-nodejs",
+    "name": "officedev-microsoft-teams-samples-bot-attachments-nodejs",
     "source": "officeDev",
-    "title": "Bot Cards",
-    "shortDescription": "This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-cards/nodejs/bot-cards",
+    "title": "Bot Attachments",
+    "shortDescription": "This sample demonstrates file handling and attachments for Microsoft Teams using Node.js and TypeScript.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-attachments/nodejs/bot-attachments",
     "longDescription": [
-      "This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript."
+      "This sample demonstrates file handling and attachments for Microsoft Teams using Node.js and TypeScript."
     ],
     "creationDateTime": "2026-02-06",
     "updateDateTime": "2026-02-06",
@@ -35,8 +35,8 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-cards/bot-cards.gif",
-        "alt": "Solution UX showing various card types and actions in bot"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-attachments/bot-attachments.gif",
+        "alt": "Solution UX showing file handling and attachments in bot"
       }
     ],
     "authors": [

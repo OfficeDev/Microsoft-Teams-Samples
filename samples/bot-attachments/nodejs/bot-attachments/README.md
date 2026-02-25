@@ -1,6 +1,6 @@
-# Bot Cards - TypeScript
+# Bot Attachments - TypeScript
 
-This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript.
+This sample demonstrates file handling and attachments for Microsoft Teams using Node.js and TypeScript.
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ This sample demonstrates various card types and actions for Microsoft Teams usin
 
 1. Navigate to this directory:
    ```bash
-   cd nodejs/bot-cards
+   cd nodejs/bot-cards/bot-attachments
    ```
 
 2. Install dependencies:

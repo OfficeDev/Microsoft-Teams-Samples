@@ -1,76 +1,114 @@
-// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 import { stripMentionsText } from "@microsoft/teams.api";
 import { App } from "@microsoft/teams.apps";
-import { handleFileDownload, sendFileCard, handleFileConsent, processInlineImage } from "./handlers/attachments.js";
-import { sendAdaptiveCardActions, sendToggleVisibilityCard } from "./handlers/adaptive-cards.js";
+import { 
+  AdaptiveCard, 
+  TextBlock, 
+  TextInput, 
+  SubmitAction, 
+  OpenUrlAction, 
+  ShowCardAction, 
+  ToggleVisibilityAction
+} from "@microsoft/teams.cards";
 
-// Constants
-const FILE_DOWNLOAD_TYPE = 'application/vnd.microsoft.teams.file.download.info';
-const imageRegex = /image\/.*/;
-
-// Initialize Teams app
 const app = new App();
 
-// Handle bot installation and new members
-app.on('conversationUpdate', async (context) => {
-    const { activity } = context;
-    const membersAdded = (activity as any).membersAdded || [];
+function createCardActionsCard(): AdaptiveCard {
+  const innermostCard = new AdaptiveCard(
+    new TextBlock('**Welcome To Your New Card**'),
+    new TextBlock('This is your new card inside another card')
+  );
 
-    for (const member of membersAdded) {
-        // Check if bot was added to the conversation
-        if (member.id === activity.recipient.id) {
-            await sendWelcomeMessage(context);
-        }
-    }
-});
+  const middleCard = new AdaptiveCard(
+    new TextBlock("This card's action will show another card")
+  ).withActions(
+    new ShowCardAction({
+      title: 'Action.ShowCard',
+      card: innermostCard
+    })
+  );
 
-// Handle message events
+  const submitFormCard = new AdaptiveCard(
+    new TextInput({
+      id: 'name',
+      label: 'Please enter your name:',
+      isRequired: true,
+      errorMessage: 'Name is required'
+    })
+  ).withActions(
+    new SubmitAction({ title: 'Submit' })
+  );
+
+  return new AdaptiveCard(
+    new TextBlock('Adaptive Card Actions')
+  ).withActions(
+    new OpenUrlAction('https://adaptivecards.io', {
+      title: 'Action Open URL'
+    }),
+    new ShowCardAction({
+      title: 'Action Submit',
+      card: submitFormCard
+    }),
+    new ShowCardAction({
+      title: 'Action ShowCard',
+      card: middleCard
+    })
+  );
+}
+
+function createToggleVisibilityCard(): AdaptiveCard {
+  return new AdaptiveCard(
+    new TextBlock('**Action.ToggleVisibility example**: click the button to show or hide the welcome message', {
+      wrap: true
+    }),
+    new TextBlock('**Hello World!**', {
+      id: 'helloWorld',
+      isVisible: false,
+      size: 'ExtraLarge'
+    })
+  ).withActions(
+    new ToggleVisibilityAction({
+      title: 'Click me!',
+      targetElements: ['helloWorld']
+    })
+  );
+}
+
 app.on("message", async (context) => {
   const activity = context.activity;
   const text = stripMentionsText(activity) || "";
-  const attachment = activity.attachments && activity.attachments[0];
   
-  // Handle data submission from adaptive cards
   if (activity.value) {
-    await context.send(`Data Submitted: ${JSON.stringify(activity.value)}`);
+    await context.send(`Data Submitted: ${activity.value.name}`);
   } else if (text) {
     const normalizedText = text.trim().toLowerCase();
     
-    // Handle card-related commands
     if (normalizedText.includes('card actions')) {
-      await sendAdaptiveCardActions(context);
-    } else if (normalizedText.includes('togglevisibility')) {
-      await sendToggleVisibilityCard(context);
+      const card = createCardActionsCard();
+      await context.send({
+        type: 'message',
+        attachments: [{
+          contentType: 'application/vnd.microsoft.card.adaptive',
+          content: JSON.parse(JSON.stringify(card))
+        }]
+      });
     } 
-    // Handle file commands
-    else if (normalizedText.includes('send file') || normalizedText.includes('file')) {
-      await sendFileCard(context);
-    } else {
-      // Unrecognized command
-      await sendWelcomeMessage(context);
-    }
-  } else if (attachment) {
-    // Handle file attachments
-    if (attachment.contentType === FILE_DOWNLOAD_TYPE) {
-      await handleFileDownload(attachment, context);
-    } else if (imageRegex.test(attachment.contentType)) {
-      await processInlineImage(context);
-    } else {
-      await sendFileCard(context);
+    else if (normalizedText.includes('toggle visibility')) {
+      const card = createToggleVisibilityCard();
+      await context.send({
+        type: 'message',
+        attachments: [{
+          contentType: 'application/vnd.microsoft.card.adaptive',
+          content: JSON.parse(JSON.stringify(card))
+        }]
+      });
+    } 
+    else {
+      await context.send("Welcome to the Cards Bot! To interact with me, send one of the following commands: 'card actions' or 'toggle visibility'");
     }
   }
 });
-
-// Handle all invoke activities including file consent
-app.on("invoke", async (context) => {
-  await handleFileConsent(context);
-});
-
-// Sends welcome message
-async function sendWelcomeMessage(context: any) {
-  await context.send("Welcome to the Teams Bot Cards and Attachments!");
-}
 
 app.start().catch(console.error);
