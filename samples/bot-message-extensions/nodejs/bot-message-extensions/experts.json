@@ -1,0 +1,112 @@
+[
+  {
+    "displayName": "Alice Johnson",
+    "jobTitle": "Senior Software Engineer",
+    "department": "Engineering",
+    "email": "alice.johnson@contoso.com",
+    "officeLocation": "Building 25, Floor 3",
+    "phone": "+1 (425) 555-0101",
+    "skills": ["C#", ".NET", "Azure", "Microservices", "Docker"],
+    "about": "Alice is a seasoned software engineer specializing in cloud-native applications and distributed systems on Azure.",
+    "userPrincipalName": "alice.johnson@contoso.com"
+  },
+  {
+    "displayName": "Bob Smith",
+    "jobTitle": "Cloud Solutions Architect",
+    "department": "Cloud Infrastructure",
+    "email": "bob.smith@contoso.com",
+    "officeLocation": "Building 18, Floor 2",
+    "phone": "+1 (425) 555-0102",
+    "skills": ["Azure", "AWS", "Terraform", "Kubernetes", "DevOps"],
+    "about": "Bob designs and implements scalable cloud infrastructure solutions for enterprise clients.",
+    "userPrincipalName": "bob.smith@contoso.com"
+  },
+  {
+    "displayName": "Carol Williams",
+    "jobTitle": "Frontend Developer",
+    "department": "Product Development",
+    "email": "carol.williams@contoso.com",
+    "officeLocation": "Building 40, Floor 1",
+    "phone": "+1 (425) 555-0103",
+    "skills": ["React", "TypeScript", "JavaScript", "CSS", "Accessibility"],
+    "about": "Carol is passionate about creating accessible and performant user interfaces using modern web technologies.",
+    "userPrincipalName": "carol.williams@contoso.com"
+  },
+  {
+    "displayName": "David Chen",
+    "jobTitle": "Data Scientist",
+    "department": "AI & Research",
+    "email": "david.chen@contoso.com",
+    "officeLocation": "Building 99, Floor 4",
+    "phone": "+1 (425) 555-0104",
+    "skills": ["Python", "Machine Learning", "TensorFlow", "Data Analysis", "NLP"],
+    "about": "David works on machine learning models and natural language processing to drive intelligent product features.",
+    "userPrincipalName": "david.chen@contoso.com"
+  },
+  {
+    "displayName": "Eva Martinez",
+    "jobTitle": "Security Engineer",
+    "department": "Cybersecurity",
+    "email": "eva.martinez@contoso.com",
+    "officeLocation": "Building 33, Floor 5",
+    "phone": "+1 (425) 555-0105",
+    "skills": ["Security", "Penetration Testing", "Identity", "Zero Trust", "Compliance"],
+    "about": "Eva focuses on application security, identity management, and implementing zero-trust architectures.",
+    "userPrincipalName": "eva.martinez@contoso.com"
+  },
+  {
+    "displayName": "Frank Lee",
+    "jobTitle": "DevOps Engineer",
+    "department": "Platform Engineering",
+    "email": "frank.lee@contoso.com",
+    "officeLocation": "Building 20, Floor 2",
+    "phone": "+1 (425) 555-0106",
+    "skills": ["DevOps", "CI/CD", "GitHub Actions", "Azure DevOps", "Linux"],
+    "about": "Frank builds and maintains CI/CD pipelines and developer tooling to improve engineering velocity.",
+    "userPrincipalName": "frank.lee@contoso.com"
+  },
+  {
+    "displayName": "Grace Kim",
+    "jobTitle": "UX Designer",
+    "department": "Design",
+    "email": "grace.kim@contoso.com",
+    "officeLocation": "Building 42, Floor 3",
+    "phone": "+1 (425) 555-0107",
+    "skills": ["UX Design", "Figma", "User Research", "Prototyping", "Design Systems"],
+    "about": "Grace creates intuitive user experiences through research-driven design and collaborative prototyping.",
+    "userPrincipalName": "grace.kim@contoso.com"
+  },
+  {
+    "displayName": "Henry Patel",
+    "jobTitle": "Backend Developer",
+    "department": "Engineering",
+    "email": "henry.patel@contoso.com",
+    "officeLocation": "Building 25, Floor 4",
+    "phone": "+1 (425) 555-0108",
+    "skills": ["Node.js", "TypeScript", "GraphQL", "PostgreSQL", "Redis"],
+    "about": "Henry specializes in building high-performance backend services and API design with Node.js and TypeScript.",
+    "userPrincipalName": "henry.patel@contoso.com"
+  },
+  {
+    "displayName": "Isabella Torres",
+    "jobTitle": "Product Manager",
+    "department": "Product Management",
+    "email": "isabella.torres@contoso.com",
+    "officeLocation": "Building 31, Floor 2",
+    "phone": "+1 (425) 555-0109",
+    "skills": ["Product Strategy", "Agile", "Scrum", "Market Research", "Roadmapping"],
+    "about": "Isabella drives product vision and strategy, working closely with engineering and design teams to deliver customer value.",
+    "userPrincipalName": "isabella.torres@contoso.com"
+  },
+  {
+    "displayName": "James Wilson",
+    "jobTitle": "Mobile Developer",
+    "department": "Mobile Engineering",
+    "email": "james.wilson@contoso.com",
+    "officeLocation": "Building 36, Floor 1",
+    "phone": "+1 (425) 555-0110",
+    "skills": ["React Native", "Swift", "Kotlin", "Mobile", "Flutter"],
+    "about": "James builds cross-platform mobile applications with a focus on performance and native user experience.",
+    "userPrincipalName": "james.wilson@contoso.com"
+  }
+]

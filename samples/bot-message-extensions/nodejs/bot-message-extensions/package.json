@@ -1,0 +1,19 @@
+{
+  "main": "index.ts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx --env-file-if-exists .env index.ts"
+  },
+  "dependencies": {
+    "@microsoft/teams.api": "^2.0.0",
+    "@microsoft/teams.apps": "^2.0.0",
+    "@microsoft/teams.cards": "^2.0.0",
+    "@microsoft/teams.dev": "^2.0.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "tsx": "^4.21.0"
+  }
+}
