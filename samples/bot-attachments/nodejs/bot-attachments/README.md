@@ -1,6 +1,6 @@
 # Bot Attachments - TypeScript
 
-This sample demonstrates file handling and attachments for Microsoft Teams using Node.js and TypeScript.
+This sample demonstrates how to upload files in Microsoft Teams using a bot built with Teams SDK.
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ This sample demonstrates file handling and attachments for Microsoft Teams using
 
 1. Navigate to this directory:
    ```bash
-   cd nodejs/bot-cards/bot-attachments
+   cd nodejs/bot-attachments
    ```
 
 2. Install dependencies:

@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-attachments-nodejs",
     "source": "officeDev",
-    "title": "Bot Attachments",
-    "shortDescription": "This sample demonstrates file handling and attachments for Microsoft Teams using Node.js and TypeScript.",
+    "title": "Bot Attachments using Teams SDK",
+    "shortDescription": "This sample demonstrates file upload capabilities using Teams SDK.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-attachments/nodejs/bot-attachments",
     "longDescription": [
-      "This sample demonstrates file handling and attachments for Microsoft Teams using Node.js and TypeScript."
+      "This bot demonstrates file upload with OneDrive integration."
     ],
     "creationDateTime": "2026-02-06",
     "updateDateTime": "2026-02-06",
@@ -24,7 +24,7 @@
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "teams-sdk"
+        "value": "nodejs"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -36,7 +36,7 @@
         "type": "Image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-attachments/bot-attachments.gif",
-        "alt": "Solution UX showing file handling and attachments in bot"
+        "alt": "Solution UX showing bot attachments using Teams SDK"
       }
     ],
     "authors": [
