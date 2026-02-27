@@ -1,17 +1,21 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { stripMentionsText } from "@microsoft/teams.api";
-import { App } from "@microsoft/teams.apps";
+import { App, IActivityContext } from '@microsoft/teams.apps';
+import { 
+  AdaptiveCardInvokeActivity,
+  IMessageActivity
+} from '@microsoft/teams.api';
+import type { AdaptiveCardActionResponse, AdaptiveCardActionMessageResponse } from '@microsoft/teams.api';
 import { 
   AdaptiveCard, 
   TextBlock, 
   TextInput, 
-  SubmitAction, 
+  ExecuteAction, 
   OpenUrlAction, 
   ShowCardAction, 
   ToggleVisibilityAction
-} from "@microsoft/teams.cards";
+} from '@microsoft/teams.cards';
 
 const app = new App();
 
@@ -32,13 +36,18 @@ function createCardActionsCard(): AdaptiveCard {
 
   const submitFormCard = new AdaptiveCard(
     new TextInput({
-      id: 'name',
-      label: 'Please enter your name:',
-      isRequired: true,
-      errorMessage: 'Name is required'
+      id: 'name'
     })
+      .withLabel('Please enter your name:')
+      .withIsRequired(true)
+      .withErrorMessage('Name is required')
   ).withActions(
-    new SubmitAction({ title: 'Submit' })
+    new ExecuteAction({ 
+      title: 'Submit',
+      verb: 'submit_name',
+      data: { action: 'submit_name' },
+      associatedInputs: 'auto'
+    })
   );
 
   return new AdaptiveCard(
@@ -58,11 +67,10 @@ function createCardActionsCard(): AdaptiveCard {
   );
 }
 
+
 function createToggleVisibilityCard(): AdaptiveCard {
   return new AdaptiveCard(
-    new TextBlock('**Action.ToggleVisibility example**: click the button to show or hide the welcome message', {
-      wrap: true
-    }),
+    new TextBlock('Click to show or hide the message'),
     new TextBlock('**Hello World!**', {
       id: 'helloWorld',
       isVisible: false,
@@ -76,38 +84,29 @@ function createToggleVisibilityCard(): AdaptiveCard {
   );
 }
 
-app.on("message", async (context) => {
-  const activity = context.activity;
-  const text = stripMentionsText(activity) || "";
-  
-  if (activity.value) {
-    await context.send(`Data Submitted: ${activity.value.name}`);
-  } else if (text) {
-    const normalizedText = text.trim().toLowerCase();
-    
-    if (normalizedText.includes('card actions')) {
-      const card = createCardActionsCard();
-      await context.send({
-        type: 'message',
-        attachments: [{
-          contentType: 'application/vnd.microsoft.card.adaptive',
-          content: JSON.parse(JSON.stringify(card))
-        }]
-      });
-    } 
-    else if (normalizedText.includes('toggle visibility')) {
-      const card = createToggleVisibilityCard();
-      await context.send({
-        type: 'message',
-        attachments: [{
-          contentType: 'application/vnd.microsoft.card.adaptive',
-          content: JSON.parse(JSON.stringify(card))
-        }]
-      });
-    } 
-    else {
-      await context.send("Welcome to the Cards Bot! To interact with me, send one of the following commands: 'card actions' or 'toggle visibility'");
-    }
+app.on('card.action', async (context: IActivityContext<AdaptiveCardInvokeActivity>): Promise<AdaptiveCardActionResponse> => {
+  const data = context.activity.value.action.data;
+  await context.send(`Data Submitted: ${data.name}`);
+
+  return {
+    statusCode: 200,
+    type: 'application/vnd.microsoft.activity.message',
+    value: 'Action processed successfully'
+  };
+});
+
+
+app.on('message', async (context) => {
+  const { activity } = context;
+  const messageActivity = activity as IMessageActivity;
+  const text = (messageActivity.text || '').trim().toLowerCase();
+
+  if (text.includes('card actions')) {
+    await context.send(createCardActionsCard());
+  } else if (text.includes('toggle visibility')) {
+    await context.send(createToggleVisibilityCard());
+  } else {
+    await context.send("Welcome to the Cards Bot! To interact with me, send one of the following commands: 'card actions' or 'toggle visibility'");
   }
 });
 

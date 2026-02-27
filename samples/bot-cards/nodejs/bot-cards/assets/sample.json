@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-cards-nodejs",
     "source": "officeDev",
-    "title": "Bot Cards",
-    "shortDescription": "This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript.",
+    "title": "Bot Cards using Teams SDK",
+    "shortDescription": "This sample demonstrates adaptive cards with the Teams SDK.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-cards/nodejs/bot-cards",
     "longDescription": [
-      "This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript."
+      "This bot demonstrates cards in Microsoft Teams using Teams SDK. It showcases taking various actions on cards, and toggling visibility."
     ],
     "creationDateTime": "2026-02-06",
     "updateDateTime": "2026-02-06",
@@ -24,7 +24,7 @@
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "teams-sdk"
+        "value": "nodejs"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -36,7 +36,7 @@
         "type": "Image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-cards/bot-cards.gif",
-        "alt": "Solution UX showing various card types and actions in bot"
+        "alt": "Solution UX showing bot cards using Teams SDK"
       }
     ],
     "authors": [

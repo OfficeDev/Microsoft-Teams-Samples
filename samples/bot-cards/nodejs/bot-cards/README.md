@@ -1,6 +1,6 @@
 # Bot Cards - TypeScript
 
-This sample demonstrates various card types and actions for Microsoft Teams using Node.js and TypeScript.
+This sample demonstrates how to interact with adaptive cards in Microsoft Teams using a bot built with Teams SDK.
 
 ## Prerequisites
 
