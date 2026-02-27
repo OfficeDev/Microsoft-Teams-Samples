@@ -1,4 +1,6 @@
 {
+    "name": "bot-task-modules",
+    "description": "This sample demonstrates Task Modules in Microsoft Teams using the Teams SDK for Node.js.",
     "main": "index.ts",
     "private": true,
     "type": "module",

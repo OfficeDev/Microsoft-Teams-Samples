@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Custom Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+          integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+          crossorigin="anonymous">
+  </script>
+  <style>
+    body { margin: 0; padding: 10px; }
+    .form-group { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="customForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    microsoftTeams.app.initialize();
+
+    document.getElementById('customForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      microsoftTeams.dialog.url.submit({
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        submissiontype: 'custom_form',
+      });
+    });
+  </script>
+</body>
+</html>

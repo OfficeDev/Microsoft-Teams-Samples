@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-task-modules-nodejs",
     "source": "officeDev",
-    "title": "Task Module using Teams SDK for TypeScript",
-    "shortDescription": "This sample app demonstrate how to use Task Module",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-task-module/nodejs",
+    "title": "Task Modules using Teams SDK for TypeScript",
+    "shortDescription": "This sample app demonstrate how to use Task Modules",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-task-modules/nodejs",
     "longDescription": [
-      "This sample app demonstrate how to use Task Module"
+      "This sample app demonstrate how to use Task Modules"
     ],
     "creationDateTime": "2026-02-18",
     "products": [
@@ -34,8 +34,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-task-module/bot-task-modules.gif",
-        "alt": "Solution UX showing Task Module"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-task-modules/bot-task-modules.gif",
+        "alt": "Solution UX showing Task Modules"
       }
     ],
     "authors": [

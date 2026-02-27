@@ -1,100 +1,34 @@
-/**
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
- */
-
-/**
- * Teams Bot Task Module Sample
- * 
- * This bot demonstrates how to use task modules (dialogs) in Microsoft Teams.
- * It shows how to invoke task modules from bot Hero Cards and Adaptive Cards
- * with support for different types of task module content (web pages and cards).
- */
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { App } from '@microsoft/teams.apps';
-import { 
-    Attachment, 
-    TaskModuleRequest, 
+import {
+    Attachment,
+    TaskModuleRequest,
     TaskModuleResponse,
     UrlTaskModuleTaskInfo,
     CardTaskModuleTaskInfo,
-    HeroCard,
     cardAttachment,
-    CardAction
 } from '@microsoft/teams.api';
 import type { IActivityContext } from '@microsoft/teams.apps';
 import type { IAdaptiveCard } from '@microsoft/teams.cards';
 
-// Configuration
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3978;
-const BASE_URL = process.env.BaseUrl || 'http://localhost:3978';
+const BASE_URL = process.env.BOT_ENDPOINT || 'http://localhost:3978';
 
-// Task Module Constants
-interface UISettings {
-    width: number;
-    height: number;
-    title: string;
-    id: string;
-    buttonTitle: string;
+if (!process.env.BOT_ENDPOINT) {
+    console.log('No remote endpoint detected. Using webpages will not work as expected');
 }
 
-const TaskModuleIds = {
-    CustomForm: 'CustomForm',
-    AdaptiveCard: 'AdaptiveCard'
-} as const;
-
-const TaskModuleUIConstants: Record<string, UISettings> = {
-    CustomForm: {
-        width: 510,
-        height: 450,
-        title: 'Custom Form',
-        id: 'CustomForm',
-        buttonTitle: 'Custom Form'
-    },
-    AdaptiveCard: {
-        width: 400,
-        height: 200,
-        title: 'Adaptive Card: Inputs',
-        id: 'AdaptiveCard',
-        buttonTitle: 'Adaptive Card'
-    }
-};
-
-const Actions = [
-    TaskModuleUIConstants.AdaptiveCard,
-    TaskModuleUIConstants.CustomForm
-];
-
-/**
- * Creates a Hero Card with task module buttons
- */
-function createTaskModuleHeroCard(): Attachment {
-    const heroCardContent: HeroCard = {
-        title: 'Task Module Invocation from Hero Card',
-        buttons: Actions.map((action): CardAction => ({
-            type: 'invoke',
-            title: action.buttonTitle,
-            value: {
-                type: 'task/fetch',
-                data: action.id
-            }
-        }))
-    };
-    
-    return cardAttachment('hero', heroCardContent);
-}
-
-/**
- * Creates an Adaptive Card with task module buttons
- */
+/** Returns an Adaptive Card attachment with three task/fetch buttons to open each task module type. */
 function createTaskModuleAdaptiveCard(): Attachment {
-    const adaptiveCardContent: IAdaptiveCard = {
+    const card: IAdaptiveCard = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
         version: '1.4',
         type: 'AdaptiveCard',
@@ -103,210 +37,176 @@ function createTaskModuleAdaptiveCard(): Attachment {
                 type: 'TextBlock',
                 text: 'Task Module Invocation from Adaptive Card',
                 weight: 'Bolder',
-                size: 'Large'
-            }
-        ],
-        actions: Actions.map((action) => ({
-            type: 'Action.Submit',
-            title: action.buttonTitle,
-            data: {
-                msteams: { type: 'task/fetch' },
-                data: action.id
-            }
-        }))
-    };
-
-    return cardAttachment('adaptive', adaptiveCardContent);
-}
-
-/**
- * Creates an Adaptive Card for text input in task module
- */
-function createInputAdaptiveCard(): Attachment {
-    const adaptiveCardContent: IAdaptiveCard = {
-        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        version: '1.0',
-        type: 'AdaptiveCard',
-        body: [
-            {
-                type: 'TextBlock',
-                text: 'Enter Text Here',
-                weight: 'Bolder'
+                size: 'Large',
             },
-            {
-                type: 'Input.Text',
-                id: 'usertext',
-                placeholder: 'add some text and submit',
-                isMultiline: true
-            }
         ],
         actions: [
             {
                 type: 'Action.Submit',
-                title: 'Submit'
-            }
-        ]
+                title: 'Adaptive Card',
+                data: { msteams: { type: 'task/fetch' }, data: 'AdaptiveCard' },
+            },
+            {
+                type: 'Action.Submit',
+                title: 'Custom Form',
+                data: { msteams: { type: 'task/fetch' }, data: 'CustomForm' },
+            },
+            {
+                type: 'Action.Submit',
+                title: 'Multi-step Form',
+                data: { msteams: { type: 'task/fetch' }, data: 'MultiStep' },
+            },
+        ],
     };
-
-    return cardAttachment('adaptive', adaptiveCardContent);
+    return cardAttachment('adaptive', card);
 }
 
-/**
- * Creates a task module continue response
- */
-function createTaskModuleContinueResponse(taskInfo: UrlTaskModuleTaskInfo | CardTaskModuleTaskInfo): TaskModuleResponse {
-    return {
-        task: {
-            type: 'continue',
-            value: taskInfo
-        }
+/** Returns an Adaptive Card attachment with a multiline text input field used inside the AdaptiveCard task module. */
+function createTextInputCard(): Attachment {
+    const card: IAdaptiveCard = {
+        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+        version: '1.0',
+        type: 'AdaptiveCard',
+        body: [
+            { type: 'TextBlock', text: 'Enter Text Here', weight: 'Bolder' },
+            {
+                type: 'Input.Text',
+                id: 'usertext',
+                placeholder: 'add some text and submit',
+                isMultiline: true,
+            },
+        ],
+        actions: [{ type: 'Action.Submit', title: 'Submit' }],
     };
+    return cardAttachment('adaptive', card);
 }
 
-/**
- * Creates a task module message response
- */
-function createTaskModuleMessageResponse(message: string): TaskModuleResponse {
-    return {
-        task: {
-            type: 'message',
-            value: message
-        }
-    };
-}
-
-// Teams App Setup
-const app = new App({
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    tenantId: process.env.TENANT_ID
-});
-
-/**
- * Handle incoming messages - Display task module cards
- */
-app.message(/.*/i, async (context: IActivityContext<any>) => {
-    const heroCard = createTaskModuleHeroCard();
-    const adaptiveCard = createTaskModuleAdaptiveCard();
-    
-    await context.send({
-        type: 'message',
-        attachments: [heroCard, adaptiveCard],
-        attachmentLayout: 'list'
-    });
-});
-
-/**
- * Handle dialog.open - Show task module (equivalent to @app.on_dialog_open in Python)
- */
-app.on('dialog.open', async (context: IActivityContext<any>) => {
-    const taskModuleRequest = context.activity.value as TaskModuleRequest;
-    let cardData = taskModuleRequest.data?.data;
-    
-    // Default to AdaptiveCard if no data provided
-    if (!cardData) {
-        cardData = TaskModuleIds.AdaptiveCard;
-    }
-    
-    let taskInfo: UrlTaskModuleTaskInfo | CardTaskModuleTaskInfo;
-    
-    if (cardData === TaskModuleIds.CustomForm) {
-        taskInfo = {
-            title: TaskModuleUIConstants.CustomForm.title,
-            width: TaskModuleUIConstants.CustomForm.width,
-            height: TaskModuleUIConstants.CustomForm.height,
-            url: `${BASE_URL}/CustomForm.html`,
-            fallbackUrl: `${BASE_URL}/CustomForm.html`
-        };
-    } else {
-        taskInfo = {
-            title: TaskModuleUIConstants.AdaptiveCard.title,
-            width: TaskModuleUIConstants.AdaptiveCard.width,
-            height: TaskModuleUIConstants.AdaptiveCard.height,
-            card: createInputAdaptiveCard()
-        };
-    }
-    
-    return createTaskModuleContinueResponse(taskInfo);
-});
-
-/**
- * Handle dialog.submit - Process task module submission (equivalent to @app.on_dialog_submit in Python)
- */
-app.on('dialog.submit', async (context: IActivityContext<any>) => {
-    const taskModuleRequest = context.activity.value as TaskModuleRequest;
-    const submittedData = taskModuleRequest.data || {};
-    
-    // Build a formatted Adaptive Card to display the submitted data
-    const bodyItems: any[] = [
-        {
-            type: 'TextBlock',
-            text: 'Task Module Submission Received',
-            size: 'Large',
-            weight: 'Bolder'
-        }
-    ];
-    
-    // Add each field from the submitted data
-    if (submittedData && Object.keys(submittedData).length > 0) {
-        for (const [key, value] of Object.entries(submittedData)) {
-            // Format the key nicely (capitalize, replace underscores with spaces)
-            const formattedKey = key.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
-            bodyItems.push({
-                type: 'TextBlock',
-                text: `**${formattedKey}:** ${value}`,
-                wrap: true
-            });
-        }
-    } else {
-        bodyItems.push({
-            type: 'TextBlock',
-            text: 'No data submitted',
-            isSubtle: true
-        });
-    }
-    
-    const resultCard: IAdaptiveCard = {
+/** Returns step 1 of the multi-step form card, collecting the user's name. */
+function createMultiStepStep1Card(): Attachment {
+    const card: IAdaptiveCard = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
         version: '1.4',
         type: 'AdaptiveCard',
-        body: bodyItems
+        body: [
+            { type: 'TextBlock', text: 'Step 1 of 2 - Your Name', size: 'Large', weight: 'Bolder' },
+            { type: 'Input.Text', id: 'name', label: 'Name', placeholder: 'Enter your name', isRequired: true } as any,
+        ],
+        actions: [
+            { type: 'Action.Submit', title: 'Next', data: { submissiontype: 'multi_step_1' } } as any,
+        ],
     };
-    
-    // Send the formatted card
+    return cardAttachment('adaptive', card);
+}
+
+/** Returns step 2 of the multi-step form card, collecting the user's email and carrying the name from step 1. */
+function createMultiStepStep2Card(name: string): Attachment {
+    const card: IAdaptiveCard = {
+        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+        version: '1.4',
+        type: 'AdaptiveCard',
+        body: [
+            { type: 'TextBlock', text: 'Step 2 of 2 - Your Email', size: 'Large', weight: 'Bolder' },
+            { type: 'Input.Text', id: 'email', label: 'Email', placeholder: 'Enter your email', isRequired: true } as any,
+        ],
+        actions: [
+            { type: 'Action.Submit', title: 'Submit', data: { submissiontype: 'multi_step_2', name } } as any,
+        ],
+    };
+    return cardAttachment('adaptive', card);
+}
+
+const app = new App({
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+});
+
+/** Handles any incoming message by sending the adaptive card with task module launch buttons. */
+app.message(/.*/i, async (context: IActivityContext<any>) => {
     await context.send({
         type: 'message',
-        text: 'Task module submission received',
-        attachments: [cardAttachment('adaptive', resultCard)]
-    });
-    
-    // Return a message response
-    return createTaskModuleMessageResponse('Thanks!');
-});
-
-/**
- * Serve app configuration endpoint (used by task module web pages)
- */
-app.http.get('/getAppConfig', async (_req: any, res: any) => {
-    res.json({
-        MicrosoftAppId: process.env.CLIENT_ID
+        attachments: [createTaskModuleAdaptiveCard()],
     });
 });
 
-/**
- * Serve static HTML pages for task modules (CustomForm.html)
- */
-const pagesPath = path.join(__dirname, 'pages');
-app.http.use(express.static(pagesPath));
+/** Handles task/fetch invocations by returning the appropriate task module (URL page, adaptive card, or multi-step card) based on the requested type. */
+app.on('dialog.open', async (context: IActivityContext<any>) => {
+    const taskModuleRequest = context.activity.value as TaskModuleRequest;
+    const cardData = taskModuleRequest.data?.data ?? 'AdaptiveCard';
 
+    if (cardData === 'CustomForm') {
+        const taskInfo: UrlTaskModuleTaskInfo = {
+            title: 'Custom Form',
+            width: 510,
+            height: 450,
+            url: `${BASE_URL}/CustomForm/`,
+            fallbackUrl: `${BASE_URL}/CustomForm/`,
+        };
+        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
+    }
 
-// Error Handling
+    if (cardData === 'MultiStep') {
+        const taskInfo: CardTaskModuleTaskInfo = {
+            title: 'Multi-step Form',
+            width: 400,
+            height: 300,
+            card: createMultiStepStep1Card(),
+        };
+        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
+    }
+
+    // Default: AdaptiveCard
+    const taskInfo: CardTaskModuleTaskInfo = {
+        title: 'Adaptive Card: Inputs',
+        width: 400,
+        height: 200,
+        card: createTextInputCard(),
+    };
+    return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
+});
+
+/** Handles task/submit invocations by routing on submissiontype: advances multi-step flow, confirms custom form, or echoes adaptive card text input. */
+app.on('dialog.submit', async (context: IActivityContext<any>) => {
+    const taskModuleRequest = context.activity.value as TaskModuleRequest;
+    const data = taskModuleRequest.data || {};
+    const submissionType = typeof data === 'object' ? data.submissiontype : undefined;
+
+    if (submissionType === 'multi_step_1') {
+        const taskInfo: CardTaskModuleTaskInfo = {
+            title: 'Multi-step Form: Step 2',
+            width: 400,
+            height: 300,
+            card: createMultiStepStep2Card(data.name),
+        };
+        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
+    }
+
+    if (submissionType === 'multi_step_2') {
+        const { name, email } = data;
+        await context.send(`Hi ${name}, thanks for submitting! Your email is ${email}`);
+        return { task: { type: 'message', value: 'Multi-step form completed!' } } as TaskModuleResponse;
+    }
+
+    if (submissionType === 'custom_form') {
+        const { name, email } = data;
+        await context.send(`Hi ${name}, thanks for submitting! Your email is ${email}`);
+        return { task: { type: 'message', value: 'Form submitted successfully' } } as TaskModuleResponse;
+    }
+
+    // Default: adaptive card text input
+    const usertext = data?.usertext;
+    await context.send(`You submitted: ${usertext}`);
+    return { task: { type: 'message', value: 'Thanks for submitting!' } } as TaskModuleResponse;
+});
+
+/** Logs any unhandled errors raised by the app framework to the console. */
 app.event('error', async (event: any) => {
-    console.error('[Error]', event.error);
-    if (event.error instanceof Error) {
-        console.error(event.error.stack);
+    console.log(`Error occurred: ${event.error}`);
+    if (event.context) {
+        console.log(`Context: ${event.context}`);
     }
 });
 
-// Start Server
+const pagesPath = path.join(__dirname, 'pages');
+app.http.use(express.static(pagesPath));
+
 await app.start(PORT);
