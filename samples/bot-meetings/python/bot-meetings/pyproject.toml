@@ -5,6 +5,7 @@ description = "This sample demonstrates a bot that handles meeting events and tr
 readme = "README.md"
 requires-python = ">=3.12,<3.15"
 dependencies = [
-    "python-dotenv>=1.0.*",
-    "microsoft-teams-apps==2.0.0a9",
+    "python-dotenv>=1.0",
+    "microsoft-teams-apps[graph]==2.0.0a9",
+    "azure-identity>=1.0",
 ]

@@ -6,7 +6,7 @@
     "shortDescription": "This sample demonstrates a bot that handles meeting events and transcripts in Microsoft Teams using Python",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-meetings/python/bot-meetings",
     "longDescription": [
-      "This sample demonstrates a bot that handles meeting events and transcripts in Microsoft Teams using Python. The bot showcases meeting start/end events, participant join/leave notifications, and meeting transcript retrieval"
+      "The bot showcases meeting start/end events, participant join/leave notifications, and meeting transcript retrieval"
     ],
     "creationDateTime": "2026-02-20",
     "updateDateTime": "2026-02-20",

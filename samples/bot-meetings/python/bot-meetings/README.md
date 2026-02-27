@@ -1,6 +1,6 @@
 # Bot Meetings - Python
 
-This sample demonstrates a bot for Microsoft Teams that handles real-time meeting events (start, end, participant join/leave) and retrieves meeting transcripts via the Microsoft Graph API.
+This sample demonstrates a bot for Microsoft Teams that handles real-time meeting events (start, end, participant join/leave) and retrieves meeting transcripts via Microsoft Graph.
 
 ## Prerequisites
 
