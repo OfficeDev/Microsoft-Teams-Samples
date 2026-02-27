@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-task-modules-dotnet",
     "source": "officeDev",
-    "title": "Task Modules Bot using Teams SDK",
-    "shortDescription": "This sample demonstrates Task Modules in Microsoft Teams using dotnet",
+    "title": "Task Modules Bot using Teams SDK for dotnet",
+    "shortDescription": "This sample app demonstrates how to use Task Modules",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-task-modules/dotnet/bot-task-modules",
     "longDescription": [
-      "This sample demonstrates how to use Task Modules in Microsoft Teams using dotnet. The bot showcases three types of task modules: YouTube video embed, custom form with HTML page, and adaptive card-based input form. Users can interact with task modules via Hero Card and Adaptive Card buttons."
+      "This sample app demonstrates how to use Task Modules"
     ],
     "creationDateTime": "2026-02-18",
     "updateDateTime": "2026-02-18",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-task-modules/bot-task-modules.gif",
-        "alt": "Solution UX showing Task Modules Bot using Teams SDK"
+        "alt": "Solution UX showing Task Modules"
       }
     ],
     "authors": [

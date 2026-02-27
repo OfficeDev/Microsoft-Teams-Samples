@@ -1,81 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Custom Form</title>
-    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
-            crossorigin="anonymous">
-    </script>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-        h2 { margin-top: 0; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: 600; }
-        input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        input:focus { border-color: #5558AF; outline: none; }
-        button {
-            background: #5558AF;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        button:hover { background: #4C509D; }
-    </style>
+  <title>Custom Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+          integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+          crossorigin="anonymous">
+  </script>
+  <style>
+    body { margin: 0; padding: 10px; }
+    .form-group { margin-bottom: 10px; }
+  </style>
 </head>
 <body>
-    <h2>Enter new customer information</h2>
-    <form id="customerForm" onsubmit="return submitForm()">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input id="name" type="text" placeholder="First and last" name="name" autofocus>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="name@email.com" name="email">
-        </div>
-        <div class="form-group">
-            <label for="favoriteBook">Favorite book</label>
-            <input id="favoriteBook" type="text" placeholder="Title of book" name="favoriteBook">
-        </div>
-        <div class="form-group">
-            <label for="pw">Password</label>
-            <input id="pw" type="password" name="password">
-        </div>
-        <div class="form-group">
-            <label for="pw2">Confirm password</label>
-            <input id="pw2" type="password" name="confirmPassword">
-        </div>
-        <button type="submit">Sign up</button>
+  <div class="container">
+    <form id="customForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <script>
-        microsoftTeams.app.initialize();
+  </div>
 
-        function submitForm() {
-            const form = document.getElementById("customerForm");
-            microsoftTeams.dialog.url.submit({
-                name: form.name.value,
-                email: form.email.value,
-                favoriteBook: form.favoriteBook.value,
-                password: form.password.value,
-                confirmPassword: form.confirmPassword.value
-            });
-            return false;
-        }
-    </script>
+  <script>
+    microsoftTeams.app.initialize();
+
+    document.getElementById('customForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      microsoftTeams.dialog.url.submit({
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        submissiontype: 'custom_form',
+      });
+    });
+  </script>
 </body>
 </html>

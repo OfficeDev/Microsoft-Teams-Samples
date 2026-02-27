@@ -10,331 +10,167 @@ using Microsoft.Teams.Api.TaskModules;
 using Microsoft.Teams.Cards;
 using Microsoft.Teams.Common;
 using System.Text.Json;
-using BotTaskModules.Models;
-using AdaptiveCardType = Microsoft.Teams.Cards.AdaptiveCard;
 
-// Initialize Teams App
 var builder = WebApplication.CreateBuilder(args);
 builder.AddTeams();
 
 var webApp = builder.Build();
 var teamsApp = webApp.UseTeams(true);
 
-// Serve static files from pages folder
-webApp.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-        Path.Combine(builder.Environment.ContentRootPath, "pages")),
-    RequestPath = ""
-});
-
-// Map routes for task module pages
 webApp.MapGet("/customform", async context =>
 {
-    var filePath = Path.Combine(builder.Environment.ContentRootPath, "pages", "CustomForm", "index.html");
-    await context.Response.SendFileAsync(filePath);
+    await context.Response.SendFileAsync(Path.Combine(builder.Environment.ContentRootPath, "pages", "CustomForm", "index.html"));
 });
 
-// Get base URL for task modules
-var baseUrl = builder.Configuration["BaseUrl"];
+var baseUrl = builder.Configuration["BotEndpoint"];
 if (string.IsNullOrEmpty(baseUrl))
-{
-    throw new InvalidOperationException("BaseUrl configuration is required. Please set it in appsettings.json or environment variables.");
-}
+    throw new InvalidOperationException("BotEndpoint configuration is required.");
 
-// Handle incoming messages - send HeroCard and AdaptiveCard with task module options
 teamsApp.OnMessage(async (IContext<MessageActivity> context) =>
 {
-    // Create hero card attachment
-    var heroCard = CreateHeroCardAttachment();
-    
-    // Create adaptive card with task module options
-    var adaptiveCard = CreateAdaptiveCardWithTaskModuleOptions();
-    
-    // Send both cards
-    var heroMessage = new MessageActivity();
-    heroMessage.Attachments = new List<Attachment> { heroCard };
-    await context.Send(heroMessage);
-    
-    var adaptiveMessage = new MessageActivity();
-    adaptiveMessage.Attachments = new List<Attachment>
+    var card = new AdaptiveCard
     {
-        new Attachment
+        Body = new List<CardElement>
         {
-            ContentType = new ContentType("application/vnd.microsoft.card.adaptive"),
-            Content = adaptiveCard
+            new TextBlock("Task Module Invocation from Adaptive Card") { Weight = TextWeight.Bolder, Size = TextSize.Large }
+        },
+        Actions = new List<Microsoft.Teams.Cards.Action>
+        {
+            new TaskFetchAction(new Dictionary<string, object?> { { "data", "AdaptiveCard" } }) { Title = "Adaptive Card" },
+            new TaskFetchAction(new Dictionary<string, object?> { { "data", "CustomForm" } }) { Title = "Custom Form" },
+            new TaskFetchAction(new Dictionary<string, object?> { { "data", "MultiStep" } }) { Title = "Multi-step Form" }
         }
     };
-    await context.Send(adaptiveMessage);
+
+    await context.Send(new MessageActivity 
+    { 
+        Attachments = new List<Attachment> 
+        { 
+            new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = card } 
+        } 
+    });
 });
 
-// Handle task module fetch (dialog open)
 teamsApp.OnActivity(ActivityType.Invoke, async (IContext<IActivity> context) =>
 {
-    var invokeActivity = context.Activity as InvokeActivity;
-    var activityName = invokeActivity.Name;
-    
-    if (activityName == "task/fetch")
+    var activity = context.Activity as InvokeActivity;
+    if (activity == null) return null;
+
+    if (activity.Name == "task/fetch")
     {
-        return await HandleTaskModuleFetch(invokeActivity, baseUrl);
+        var json = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize(activity));
+        var data = json.GetProperty("value").GetProperty("data").GetProperty("data").GetString();
+
+        TaskInfo taskInfo;
+
+        if (data == "CustomForm")
+        {
+            taskInfo = new TaskInfo
+            {
+                Title = "Custom Form",
+                Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(510),
+                Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(450),
+                Url = $"{baseUrl}/customform",
+                FallbackUrl = $"{baseUrl}/customform"
+            };
+        }
+        else if (data == "MultiStep")
+        {
+            var step1Card = new AdaptiveCard
+            {
+                Body = new List<CardElement>
+                {
+                    new TextBlock("Step 1 of 2 - Your Name") { Size = TextSize.Large, Weight = TextWeight.Bolder },
+                    new TextInput { Id = "name", Label = "Name", Placeholder = "Enter your name", IsRequired = true }
+                },
+                Actions = new List<Microsoft.Teams.Cards.Action> { new SubmitAction { Title = "Next" } }
+            };
+
+            taskInfo = new TaskInfo
+            {
+                Title = "Multi-step Form",
+                Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(400),
+                Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(300),
+                Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = step1Card }
+            };
+        }
+        else
+        {
+            var dialogCard = new AdaptiveCard
+            {
+                Body = new List<CardElement>
+                {
+                    new TextBlock("Enter Text Here") { Weight = TextWeight.Bolder },
+                    new TextInput { Id = "UserText", Placeholder = "add some text and submit", IsMultiline = true }
+                },
+                Actions = new List<Microsoft.Teams.Cards.Action> { new SubmitAction { Title = "Submit" } }
+            };
+
+            taskInfo = new TaskInfo
+            {
+                Title = "Adaptive Card: Inputs",
+                Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(400),
+                Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(200),
+                Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = dialogCard }
+            };
+        }
+
+        return new { task = new { type = "continue", value = taskInfo } };
     }
-    else if (activityName == "task/submit")
+
+    if (activity.Name == "task/submit")
     {
-        return await HandleTaskModuleSubmit(context, invokeActivity);
+        var json = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize(activity));
+        var submitData = JsonSerializer.Deserialize<Dictionary<string, object>>(json.GetProperty("value").GetProperty("data").GetRawText());
+
+        if (submitData?.ContainsKey("name") == true && submitData?.ContainsKey("email") == false && submitData?.ContainsKey("UserText") == false)
+        {
+            var name = submitData["name"]?.ToString();
+            var step2Card = new AdaptiveCard
+            {
+                Body = new List<CardElement>
+                {
+                    new TextBlock("Step 2 of 2 - Your Email") { Size = TextSize.Large, Weight = TextWeight.Bolder },
+                    new TextInput { Id = "name", Value = name, IsVisible = false },
+                    new TextInput { Id = "email", Label = "Email", Placeholder = "Enter your email", IsRequired = true }
+                },
+                Actions = new List<Microsoft.Teams.Cards.Action> { new SubmitAction { Title = "Submit" } }
+            };
+
+            return new 
+            { 
+                task = new 
+                { 
+                    type = "continue", 
+                    value = new TaskInfo
+                    {
+                        Title = "Multi-step Form: Step 2",
+                        Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(400),
+                        Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(300),
+                        Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = step2Card }
+                    }
+                } 
+            };
+        }
+
+        if (submitData?.ContainsKey("name") == true && submitData?.ContainsKey("email") == true)
+        {
+            await context.Send($"Hi {submitData["name"]}, thanks for submitting! Your email is {submitData["email"]}");
+            return new { task = new { type = "message", value = "Multi-step form completed!" } };
+        }
+
+        if (submitData?.GetValueOrDefault("submissiontype")?.ToString() == "custom_form")
+        {
+            await context.Send($"Hi {submitData["name"]}, thanks for submitting! Your email is {submitData["email"]}");
+            return new { task = new { type = "message", value = "Form submitted successfully" } };
+        }
+
+        var usertext = submitData?.GetValueOrDefault("UserText")?.ToString();
+        await context.Send($"You submitted: {usertext}");
+        return new { task = new { type = "message", value = "Thanks for submitting!" } };
     }
-    
+
     return null;
 });
 
-// Create HeroCard with task module options
-static Attachment CreateHeroCardAttachment()
-{
-    var heroCardJson = JsonSerializer.Serialize(new
-    {
-        title = "Task Module Invocation from Hero Card",
-        buttons = new[]
-        {
-            new
-            {
-                type = "invoke",
-                title = TaskModuleUIConstants.AdaptiveCard.ButtonTitle,
-                value = new { type = "task/fetch", data = TaskModuleIds.AdaptiveCard }
-            },
-            new
-            {
-                type = "invoke",
-                title = TaskModuleUIConstants.CustomForm.ButtonTitle,
-                value = new { type = "task/fetch", data = TaskModuleIds.CustomForm }
-            }
-        }
-    });
-    
-    return new Attachment
-    {
-        ContentType = new ContentType("application/vnd.microsoft.card.hero"),
-        Content = JsonSerializer.Deserialize<JsonElement>(heroCardJson)
-    };
-}
-
-// Create AdaptiveCard with task module options
-static AdaptiveCardType CreateAdaptiveCardWithTaskModuleOptions()
-{
-    var card = new AdaptiveCardType
-    {
-        Body = new List<CardElement>
-        {
-            new TextBlock("Task Module Invocation from Adaptive Card")
-            {
-                Weight = TextWeight.Bolder,
-                Size = TextSize.Large
-            }
-        },
-        Actions = new List<Microsoft.Teams.Cards.Action>
-        {
-            new TaskFetchAction(new Dictionary<string, object?> { { "data", TaskModuleIds.AdaptiveCard } })
-            {
-                Title = TaskModuleUIConstants.AdaptiveCard.ButtonTitle
-            },
-            new TaskFetchAction(new Dictionary<string, object?> { { "data", TaskModuleIds.CustomForm } })
-            {
-                Title = TaskModuleUIConstants.CustomForm.ButtonTitle
-            }
-        }
-    };
-    
-    return card;
-}
-
-// Create AdaptiveCard to be shown in task module
-static AdaptiveCardType CreateAdaptiveCardForTaskModule()
-{
-    var card = new AdaptiveCardType
-    {
-        Schema = "http://adaptivecards.io/schemas/adaptive-card.json",
-        Body = new List<CardElement>
-        {
-            new TextBlock("Enter Text Here")
-            {
-                Weight = TextWeight.Bolder
-            },
-            new TextInput
-            {
-                Id = "UserText",
-                Placeholder = "Add some text and submit",
-                IsMultiline = true
-            }
-        },
-        Actions = new List<Microsoft.Teams.Cards.Action>
-        {
-            new SubmitAction
-            {
-                Title = "Submit"
-            }
-        }
-    };
-    
-    return card;
-}
-
-// Handle task module fetch - called when user selects an option
-static System.Threading.Tasks.Task<object> HandleTaskModuleFetch(InvokeActivity activity, string baseUrl)
-{
-    string? cardData = null;
-    
-    try
-    {
-        var activityJson = JsonSerializer.Serialize(activity);
-        var activityElement = JsonSerializer.Deserialize<JsonElement>(activityJson);
-        
-        if (activityElement.TryGetProperty("value", out var valueElement))
-        {
-            if (valueElement.TryGetProperty("data", out var dataElement))
-            {
-                if (dataElement.TryGetProperty("data", out var taskModuleIdElement) && taskModuleIdElement.ValueKind == JsonValueKind.String)
-                {
-                    cardData = taskModuleIdElement.GetString();
-                }
-            }
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error extracting task module data: {ex.Message}");
-    }
-    
-    TaskInfo taskInfo;
-    
-    if (cardData == TaskModuleIds.CustomForm)
-    {
-        taskInfo = new TaskInfo
-        {
-            Title = TaskModuleUIConstants.CustomForm.Title,
-            Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(TaskModuleUIConstants.CustomForm.Width),
-            Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(TaskModuleUIConstants.CustomForm.Height),
-            Url = $"{baseUrl}/customform",
-            FallbackUrl = $"{baseUrl}/customform"
-        };
-    }
-    else  // Default to ADAPTIVE_CARD
-    {
-        taskInfo = new TaskInfo
-        {
-            Title = TaskModuleUIConstants.AdaptiveCard.Title,
-            Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(TaskModuleUIConstants.AdaptiveCard.Width),
-            Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(TaskModuleUIConstants.AdaptiveCard.Height),
-            Card = new Attachment
-            {
-                ContentType = new ContentType("application/vnd.microsoft.card.adaptive"),
-                Content = CreateAdaptiveCardForTaskModule()
-            }
-        };
-    }
-    
-    // Return TaskModuleResponse with TaskModuleContinueResponse
-    var response = new
-    {
-        task = new
-        {
-            type = "continue",
-            value = taskInfo
-        }
-    };
-    
-    return System.Threading.Tasks.Task.FromResult<object>(response);
-}
-
-// Handle task module submit - called when data is being returned
-static async System.Threading.Tasks.Task<object> HandleTaskModuleSubmit(IContext<IActivity> context, InvokeActivity activity)
-{
-    Dictionary<string, object>? data = null;
-    
-    try
-    {
-        var activityJson = JsonSerializer.Serialize(activity);
-        var activityElement = JsonSerializer.Deserialize<JsonElement>(activityJson);
-        
-        if (activityElement.TryGetProperty("value", out var valueElement))
-        {
-            if (valueElement.TryGetProperty("data", out var dataElement))
-            {
-                if (dataElement.ValueKind == JsonValueKind.Object)
-                {
-                    data = JsonSerializer.Deserialize<Dictionary<string, object>>(dataElement.GetRawText());
-                }
-            }
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error extracting submit data: {ex.Message}");
-    }
-    
-    // Build Adaptive Card to display the submitted data
-    var bodyItems = new List<CardElement>
-    {
-        new TextBlock("Task Module Submission Received")
-        {
-            Size = TextSize.Large,
-            Weight = TextWeight.Bolder
-        }
-    };
-    
-    // Add each field from the submitted data
-    if (data != null && data.Count > 0)
-    {
-        foreach (var kvp in data)
-        {
-            // Skip password fields
-            if (kvp.Key.ToLower().Contains("password"))
-                continue;
-            
-            // Format the key (capitalize, replace underscores with spaces)
-            var formattedKey = kvp.Key.Replace("_", " ");
-            formattedKey = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(formattedKey);
-            bodyItems.Add(new TextBlock($"**{formattedKey}:** {kvp.Value}")
-            {
-                Wrap = true
-            });
-        }
-    }
-    else
-    {
-        bodyItems.Add(new TextBlock("No data submitted")
-        {
-            IsSubtle = true
-        });
-    }
-    
-    var resultCard = new AdaptiveCardType
-    {
-        Schema = "http://adaptivecards.io/schemas/adaptive-card.json",
-        Body = bodyItems
-    };
-    
-    // Send the formatted card
-    var message = new MessageActivity("Task module submission received");
-    message.Attachments = new List<Attachment>
-    {
-        new Attachment
-        {
-            ContentType = new ContentType("application/vnd.microsoft.card.adaptive"),
-            Content = resultCard
-        }
-    };
-    await context.Send(message);
-    
-    // Return a message response
-    var response = new
-    {
-        task = new
-        {
-            type = "message",
-            value = "Thanks!"
-        }
-    };
-    
-    return response;
-}
-
-// Starts the Teams bot application and listens for incoming requests
 webApp.Run();
