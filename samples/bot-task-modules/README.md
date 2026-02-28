@@ -1,12 +1,13 @@
 # Bot Task Modules
 
-This sample demonstrates how to use task modules (dialogs) in Microsoft Teams using a bot built with Teams SDK. The bot showcases two key approaches: opening task modules through Adaptive Cards with submit actions, and launching custom HTML/JavaScript webpages as task modules. This comprehensive sample illustrates how to create rich, interactive dialog experiences in Teams, allowing users to complete forms and interact with custom UI components without leaving the Teams conversation context.
+This sample demonstrates how to use task modules (dialogs) in Microsoft Teams using a bot built with Teams SDK. The bot showcases a few approaches: opening task modules through Adaptive Cards with submit actions, multistep dialogs, and launching custom HTML/JavaScript webpages as task modules.
 
 ## Table of Contents
 
 - [Interaction with Bot](#interaction-with-bot)
   - [1. Adaptive Card Task Module](#1-adaptive-card-task-module)
   - [2. Custom Form Task Module](#2-custom-form-task-module)
+  - [3. Multistep Form Task Module](#3-multistep-form-task-module)
 - [Sample Implementations](#sample-implementations)
 - [How to run these samples](#how-to-run-these-samples)
   - [Run in the Teams Client](#run-in-the-teams-client)
@@ -37,6 +38,15 @@ The bot supports the following functionalities:
 - Collects user information through an interactive form
 - Handles form submission and data processing
 - Shows Teams-themed styling for consistent user experience
+
+### 3. Multistep Form Task Module
+
+- Opens a two-step Adaptive Card dialog within a single task module session
+- **Step 1** collects the user's name and advances to the next step on submit
+- **Step 2** carries forward the name from step 1 and collects the user's email address
+- On final submission, the bot sends a personalized confirmation message (`Hi {name}, thanks for submitting! Your email is {email}`)
+- Demonstrates chaining task module responses using `task/continue` to transition between steps
+- Shows how to pass data between steps using the Adaptive Card `Action.Submit` `data` payload
 
 ## Sample Implementations
 
