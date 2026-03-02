@@ -248,7 +248,7 @@ jobs:
               name: 'tab-personal'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-personal-sso-quickstart/csharp_dotnetcore/PersonalTabSSO.csproj'
+            - project_path: 'samples/TeamsJS/tab-personal-sso-quickstart/csharp_dotnetcore/PersonalTabSSO.csproj'
               name: 'tab-personal-sso-quickstart'
               version: '6.0.x'
 
