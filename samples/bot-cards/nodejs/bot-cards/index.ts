@@ -6,7 +6,7 @@ import {
   AdaptiveCardInvokeActivity,
   IMessageActivity
 } from '@microsoft/teams.api';
-import type { AdaptiveCardActionResponse, AdaptiveCardActionMessageResponse } from '@microsoft/teams.api';
+import type { AdaptiveCardActionMessageResponse } from '@microsoft/teams.api';
 import { 
   AdaptiveCard, 
   TextBlock, 
@@ -84,15 +84,17 @@ function createToggleVisibilityCard(): AdaptiveCard {
   );
 }
 
-app.on('card.action', async (context: IActivityContext<AdaptiveCardInvokeActivity>): Promise<AdaptiveCardActionMessageResponse> => {
+app.on('card.action', async (context) => {
   const data = context.activity.value.action.data;
   await context.send(`Data Submitted: ${data.name}`);
 
-  return {
+  const response: AdaptiveCardActionMessageResponse = {
     statusCode: 200,
     type: 'application/vnd.microsoft.activity.message',
     value: 'Action processed successfully'
   };
+  
+  return response;
 });
 
 
