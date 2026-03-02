@@ -7,9 +7,11 @@
     "start": "node --import tsx --env-file=.env index.ts"
   },
   "dependencies": {
+    "@azure/identity": "^4.0.0",
     "@microsoft/teams.apps": "^2.0.0",
     "@microsoft/teams.api": "^2.0.0",
     "axios": "^1.7.0",
+    "dotenv": "^16.0.0",
     "qs": "^6.13.0"
   },
   "devDependencies": {
