@@ -2,14 +2,14 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-meetings-nodejs",
     "source": "officeDev",
-    "title": "Bot Meetings - Meeting Events and Transcription",
-    "shortDescription": "This Node.js sample demonstrates how a bot can receive real-time meeting events and retrieve meeting transcripts within Microsoft Teams.",
-    "url": "https://github.com/AwareLabs/Teams-AI-Library-Samples/tree/main/nodejs/bot-meetings",
+    "title": "Bot Meetings",
+    "shortDescription": "This sample demonstrates a bot that handles meeting events and transcripts in Microsoft Teams using Node.js",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-meetings/nodejs/bot-meetings",
     "longDescription": [
-      "This sample showcases the capabilities of a bot in Microsoft Teams to capture real-time meeting events such as meeting start, meeting end, participant join, and participant leave. It also retrieves meeting transcripts via the Microsoft Graph API and displays them in a task module. Built using the Teams AI SDK."
+      "The bot showcases meeting start/end events, participant join/leave notifications, and meeting transcript retrieval"
     ],
-    "creationDateTime": "2026-02-16",
-    "updateDateTime": "2026-02-16",
+    "creationDateTime": "2026-02-20",
+    "updateDateTime": "2026-02-20",
     "products": [
       "Teams"
     ],
@@ -24,19 +24,19 @@
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "teams-ai-sdk"
+        "value": "nodejs"
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot"
+        "value": "bot,meeting"
       }
     ],
     "thumbnails": [
       {
-        "type": "image",
+        "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/AwareLabs/Teams-AI-Library-Samples/main/nodejs/bot-meetings/assets/bot-meetings.gif",
-        "alt": "Solution UX showing meeting events and transcription"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-meetings/Images/bot-meetings.gif",
+        "alt": "Solution UX showing meeting events and transcript for teams bot"
       }
     ],
     "authors": [
