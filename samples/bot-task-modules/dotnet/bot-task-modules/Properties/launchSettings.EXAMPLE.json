@@ -8,7 +8,7 @@
       "applicationUrl": "http://localhost:3978",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BotEndpoint": "YOUR_BotEndpoint"
+        "botEndpoint": "YOUR_botEndpoint"
       }
     },
     "teamsbot": {
@@ -18,7 +18,7 @@
       "applicationUrl": "http://localhost:3978",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BotEndpoint": "YOUR_BotEndpoint",
+        "botEndpoint": "YOUR_botEndpoint",
         "Teams__TenantId": "YOUR_TenantId",
         "Teams__ClientId": "YOUR_ClientId",
         "Teams__ClientSecret": "YOUR_ClientSecret"
