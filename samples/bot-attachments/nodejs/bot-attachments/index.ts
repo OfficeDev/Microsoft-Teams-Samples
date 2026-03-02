@@ -16,10 +16,6 @@ const app = new App();
 
 const pendingUploads: Map<string, Buffer> = new Map();
 
-app.on('install.add', async (context) => {
-    await context.send("Welcome to the Bot Attachments sample!");
-});
-
 app.on("file.consent", async (context) => {
   const value = context.activity.value;
   const contextData = value.context || {};
