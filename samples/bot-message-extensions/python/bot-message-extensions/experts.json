@@ -1,0 +1,134 @@
+[
+  {
+    "id": "1",
+    "displayName": "Alice Johnson",
+    "jobTitle": "Senior Software Engineer",
+    "department": "Engineering",
+    "email": "alice.johnson@contoso.com",
+    "officeLocation": "Building 25, Redmond",
+    "phone": "+1-425-555-0101",
+    "skills": ["C#", ".NET", "Azure", "Microservices", "Docker"],
+    "about": "Alice is a Senior Software Engineer with 10+ years of experience building cloud-native applications on Azure. She specializes in microservices architecture and containerized deployments."
+  },
+  {
+    "id": "2",
+    "displayName": "Bob Smith",
+    "jobTitle": "Principal Data Scientist",
+    "department": "Data & AI",
+    "email": "bob.smith@contoso.com",
+    "officeLocation": "Building 18, Redmond",
+    "phone": "+1-425-555-0102",
+    "skills": ["Python", "Machine Learning", "Azure AI", "TensorFlow", "Data Analytics"],
+    "about": "Bob is a Principal Data Scientist leading AI/ML initiatives. He has published research on NLP and computer vision, and has built production ML pipelines serving millions of users."
+  },
+  {
+    "id": "3",
+    "displayName": "Carol Davis",
+    "jobTitle": "UX Design Lead",
+    "department": "Design",
+    "email": "carol.davis@contoso.com",
+    "officeLocation": "Building 30, Redmond",
+    "phone": "+1-425-555-0103",
+    "skills": ["Figma", "UX Research", "Accessibility", "Design Systems", "Prototyping"],
+    "about": "Carol leads UX Design for Teams platform. She is passionate about accessibility and inclusive design, and has redesigned several key user journeys improving satisfaction scores by 40%."
+  },
+  {
+    "id": "4",
+    "displayName": "David Lee",
+    "jobTitle": "DevOps Architect",
+    "department": "Engineering",
+    "email": "david.lee@contoso.com",
+    "officeLocation": "Building 20, Redmond",
+    "phone": "+1-425-555-0104",
+    "skills": ["Kubernetes", "Terraform", "CI/CD", "Azure DevOps", "GitHub Actions"],
+    "about": "David is a DevOps Architect who designs and maintains CI/CD pipelines and infrastructure-as-code solutions. He has automated deployment workflows for 50+ services across multiple regions."
+  },
+  {
+    "id": "5",
+    "displayName": "Emily Chen",
+    "jobTitle": "Security Engineer",
+    "department": "Security",
+    "email": "emily.chen@contoso.com",
+    "officeLocation": "Building 40, Redmond",
+    "phone": "+1-425-555-0105",
+    "skills": ["Cybersecurity", "Penetration Testing", "Zero Trust", "Identity", "Azure AD"],
+    "about": "Emily is a Security Engineer specializing in identity and zero trust architecture. She has led security audits for critical services and implemented SSO solutions across the organization."
+  },
+  {
+    "id": "6",
+    "displayName": "Frank Wilson",
+    "jobTitle": "Full Stack Developer",
+    "department": "Engineering",
+    "email": "frank.wilson@contoso.com",
+    "officeLocation": "Building 25, Redmond",
+    "phone": "+1-425-555-0106",
+    "skills": ["React", "TypeScript", "Node.js", "GraphQL", "Azure Functions"],
+    "about": "Frank is a Full Stack Developer with expertise in modern web technologies. He has built several Teams apps and is an advocate for TypeScript-first development."
+  },
+  {
+    "id": "7",
+    "displayName": "Grace Kim",
+    "jobTitle": "Product Manager",
+    "department": "Product",
+    "email": "grace.kim@contoso.com",
+    "officeLocation": "Building 33, Redmond",
+    "phone": "+1-425-555-0107",
+    "skills": ["Product Strategy", "Agile", "Customer Research", "Roadmapping", "Teams Platform"],
+    "about": "Grace is a Product Manager for Teams extensibility. She works closely with partners and developers to shape the future of Teams apps and messaging extensions."
+  },
+  {
+    "id": "8",
+    "displayName": "Henry Martinez",
+    "jobTitle": "Cloud Solutions Architect",
+    "department": "Engineering",
+    "email": "henry.martinez@contoso.com",
+    "officeLocation": "Building 18, Redmond",
+    "phone": "+1-425-555-0108",
+    "skills": ["Azure", "AWS", "Cloud Architecture", "Cost Optimization", "Networking"],
+    "about": "Henry is a Cloud Solutions Architect who designs scalable, resilient cloud infrastructure. He holds multiple Azure and AWS certifications and has migrated 100+ workloads to the cloud."
+  },
+  {
+    "id": "9",
+    "displayName": "Irene Patel",
+    "jobTitle": "QA Lead",
+    "department": "Quality",
+    "email": "irene.patel@contoso.com",
+    "officeLocation": "Building 22, Redmond",
+    "phone": "+1-425-555-0109",
+    "skills": ["Test Automation", "Selenium", "Playwright", "Performance Testing", "API Testing"],
+    "about": "Irene leads QA efforts for the messaging platform. She has built comprehensive test automation frameworks and reduced regression testing time by 70%."
+  },
+  {
+    "id": "10",
+    "displayName": "James Taylor",
+    "jobTitle": "Technical Writer",
+    "department": "Documentation",
+    "email": "james.taylor@contoso.com",
+    "officeLocation": "Building 36, Redmond",
+    "phone": "+1-425-555-0110",
+    "skills": ["Technical Writing", "API Documentation", "Developer Experience", "Markdown", "OpenAPI"],
+    "about": "James is a Technical Writer who creates developer documentation for Teams APIs. He focuses on clear, example-driven docs and has improved developer onboarding satisfaction by 50%."
+  },
+  {
+    "id": "11",
+    "displayName": "Karen Nguyen",
+    "jobTitle": "Mobile Developer",
+    "department": "Engineering",
+    "email": "karen.nguyen@contoso.com",
+    "officeLocation": "Building 25, Redmond",
+    "phone": "+1-425-555-0111",
+    "skills": ["React Native", "iOS", "Android", "Flutter", "Mobile CI/CD"],
+    "about": "Karen is a Mobile Developer building cross-platform mobile experiences. She has shipped apps with millions of downloads and is an expert in React Native performance optimization."
+  },
+  {
+    "id": "12",
+    "displayName": "Liam Brown",
+    "jobTitle": "Database Administrator",
+    "department": "Engineering",
+    "email": "liam.brown@contoso.com",
+    "officeLocation": "Building 20, Redmond",
+    "phone": "+1-425-555-0112",
+    "skills": ["SQL Server", "PostgreSQL", "CosmosDB", "Database Optimization", "Data Migration"],
+    "about": "Liam is a Database Administrator managing large-scale databases. He specializes in query optimization, high availability, and seamless data migrations across database platforms."
+  }
+]

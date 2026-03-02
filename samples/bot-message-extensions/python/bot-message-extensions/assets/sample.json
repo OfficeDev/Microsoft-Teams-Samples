@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-message-extensions-nodejs",
+    "name": "officedev-microsoft-teams-samples-bot-message-extensions-python",
     "source": "officeDev",
-    "title": "Bot Message Extensions",
-    "shortDescription": "This sample demonstrates message extensions for Microsoft Teams using Node.js and TypeScript",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-message-extensions/nodejs",
+    "title": "Bot Message Extensions - Search Based Messaging Extension",
+    "shortDescription": "This Python sample demonstrates how to create a search-based messaging extension in Microsoft Teams that allows users to perform searches and retrieve results.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-message-extensions/python",
     "longDescription": [
-      "This sample demonstrates message extensions for Microsoft Teams using Node.js and TypeScript, built with the Teams SDK. It supports search commands (Wikipedia search, NuGet package search, expert finder by name and skill), action commands (create card, get message details), link unfurling, and result grid display"
+      "This sample showcases the capabilities of a search-based messaging extension in Microsoft Teams. Users can search for NuGet packages or Wikipedia articles directly within the Teams compose area. The extension supports search commands, item selection, link unfurling, and result display."
     ],
-    "creationDateTime": "2026-02-26",
-    "updateDateTime": "2026-02-26",
+    "creationDateTime": "2026-02-23",
+    "updateDateTime": "2026-02-23",
     "products": [
       "Teams"
     ],
@@ -20,23 +20,23 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "typescript"
+        "value": "python"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "nodejs"
+        "value": "python"
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "msgext,search,action,link-unfurling"
+        "value": "ME"
       }
     ],
     "thumbnails": [
       {
-        "type": "Image",
+        "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-message-extensions/Images/bot-message-extensions.gif",
-        "alt": "Solution UX showing bot message extensions for Microsoft Teams"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-message-extensions/bot-message-extensions.gif",
+        "alt": "Solution UX showing search based messaging extension"
       }
     ],
     "authors": [
