@@ -375,7 +375,7 @@ namespace MeetingTranscriptRecording.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
