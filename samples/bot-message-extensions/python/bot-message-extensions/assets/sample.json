@@ -6,7 +6,7 @@
     "shortDescription": "This Python sample demonstrates how to create a search-based messaging extension in Microsoft Teams that allows users to perform searches and retrieve results.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-message-extensions/python",
     "longDescription": [
-      "This sample showcases the capabilities of a search-based messaging extension in Microsoft Teams. Users can search for NuGet packages or Wikipedia articles directly within the Teams compose area. The extension supports search commands, item selection, link unfurling, and result display."
+      "This sample showcases the capabilities of a search-based messaging extension in Microsoft Teams. Users can search for Wikipedia articles directly within the Teams compose area. The extension supports search commands, item selection, link unfurling, and result display."
     ],
     "creationDateTime": "2026-02-23",
     "updateDateTime": "2026-02-23",

@@ -1,6 +1,6 @@
 # Bot Message Extensions - Python
 
-This sample demonstrates a search-based messaging extension in Microsoft Teams that allows users to search for NuGet packages, Wikipedia articles, and find experts directly within the compose area and also in Copilot.
+This sample demonstrates a search-based messaging extension in Microsoft Teams that allows users to search for  Wikipedia articles.
 
 ## Prerequisites
 

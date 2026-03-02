@@ -3,20 +3,19 @@
 
 import asyncio
 import re
-import json
-import os
 from typing import List, Dict, Any
-from urllib.parse import quote, urlencode
+from urllib.parse import urlencode
 import httpx
 from dotenv import load_dotenv
 from microsoft_teams.api import (
     MessageActivity,
     MessageActivityInput,
     MessageExtensionQueryInvokeActivity,
-    MessageExtensionSelectItemInvokeActivity,
     MessageExtensionQueryLinkInvokeActivity,
     card_attachment,
     AdaptiveCardAttachment,
+    ThumbnailCard,
+    ThumbnailCardAttachment,
     AttachmentLayout,
     MessagingExtensionAttachment,
     MessagingExtensionInvokeResponse,
@@ -27,33 +26,60 @@ from microsoft_teams.apps import ActivityContext, App
 from microsoft_teams.cards import (
     AdaptiveCard,
     TextBlock,
-    Image,
-    FactSet,
-    Fact,
-    ColumnSet,
-    Column,
     OpenUrlAction,
 )
 
 load_dotenv()
 app = App()
 
-
-# ==================== CARD BUILDERS ====================
-
-def create_package_card(pkg: Dict[str, Any]) -> AdaptiveCard:
-    """Create adaptive card for NuGet package."""
-    return AdaptiveCard(
-        body=[
-            TextBlock(text=f"{pkg.get('id', 'Unknown')}, {pkg.get('version', '')}", weight="Bolder", size="Large"),
-            TextBlock(text=pkg.get('description', ''), wrap=True, is_subtle=True),
-            TextBlock(text=f"NuGet: https://www.nuget.org/packages/{pkg.get('id', '')}", wrap=True, size="Small"),
-        ]
+@app.on_message_ext_query
+async def handle_query(ctx: ActivityContext[MessageExtensionQueryInvokeActivity]):
+    command_id = ctx.activity.value.command_id
+    params = ctx.activity.value.parameters or []
+    query = params[0].value if params else ""
+    
+    print(f"Query: command={command_id}, query={query}")
+    
+    # Route to appropriate search
+    if command_id == "wikipediaSearch":
+        results = await search_wikipedia(query)
+        attachments = [create_attachment(create_wikipedia_card(r), r['title'], re.sub(r'<[^>]+>', '', r.get('snippet', ''))) 
+                      for r in results]
+    
+    if not attachments:
+        return MessagingExtensionInvokeResponse(
+        compose_extension=MessagingExtensionResult(
+            type=MessagingExtensionResultType.MESSAGE,
+            text=f"No results found for '{query}'"
+        )
+    )
+    
+    return MessagingExtensionInvokeResponse(
+        compose_extension=MessagingExtensionResult(
+            type=MessagingExtensionResultType.RESULT,
+            attachment_layout=AttachmentLayout.LIST,
+            attachments=attachments
+        )
     )
 
+@app.on_message_ext_query_link
+async def handle_link(ctx: ActivityContext[MessageExtensionQueryLinkInvokeActivity]):
+    return _card_result_response(create_link_preview_card(ctx.activity.value.url))
+
+
+@app.on_message
+async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
+    text = (ctx.activity.text or "").lower()
+    
+    if "help" in text:
+        await ctx.send(MessageActivityInput(
+            text="Hi! I'm the Search Messaging Extension Bot!\n\n"
+                 "Use me in the compose area to search for Wikipedia articles\n"
+        ))
+    else:
+        await ctx.send(MessageActivityInput(text=f"You said: {ctx.activity.text}\n\nType 'help' to learn more."))
 
 def create_wikipedia_card(result: Dict[str, Any]) -> AdaptiveCard:
-    """Create adaptive card for Wikipedia article."""
     title = result.get('title', 'No Title')
     snippet = re.sub(r'<[^>]+>', '', result.get('snippet', ''))
     
@@ -67,62 +93,7 @@ def create_wikipedia_card(result: Dict[str, Any]) -> AdaptiveCard:
         ]
     )
 
-
-def create_expert_card(expert: Dict[str, Any], full_details: bool = False) -> AdaptiveCard:
-    """Create adaptive card for expert profile."""
-    name = expert.get('displayName', 'Unknown')
-    title = expert.get('jobTitle', 'N/A')
-    dept = expert.get('department', 'N/A')
-    email = expert.get('email', 'N/A')
-    office = expert.get('officeLocation', 'N/A')
-    phone = expert.get('phone', 'N/A')
-    skills = expert.get('skills', 'N/A')
-    upn = expert.get('userPrincipalName', email)
-    
-    body = [
-        ColumnSet(
-            columns=[
-                Column(
-                    width="auto",
-                    items=[Image(url="https://cdn-icons-png.flaticon.com/512/3135/3135715.png", size="Medium", style="Person")]
-                ),
-                Column(
-                    width="stretch",
-                    items=[
-                        TextBlock(text=name, weight="Bolder", size="Large" if full_details else "Medium"),
-                        TextBlock(text=title, is_subtle=True, spacing="None", size="Small"),
-                        TextBlock(text=dept, is_subtle=True, spacing="None", size="Small"),
-                    ]
-                )
-            ]
-        ),
-        FactSet(facts=[
-            Fact(title="Email", value=email),
-            Fact(title="Office", value=office),
-            Fact(title="Phone", value=phone),
-        ])
-    ]
-    
-    if skills != "N/A":
-        body.append(TextBlock(text=f"**Skills:** {skills}", wrap=True, size="Small"))
-    
-    if full_details and expert.get('about'):
-        body.extend([
-            TextBlock(text="**About**", weight="Bolder", spacing="Medium"),
-            TextBlock(text=expert['about'], wrap=True, is_subtle=True)
-        ])
-    
-    actions = [
-        OpenUrlAction(title="Chat in Teams" if full_details else "Chat", 
-                     url=f"https://teams.microsoft.com/l/chat/0/0?users={quote(upn)}"),
-        OpenUrlAction(title="Send Email" if full_details else "Email", url=f"mailto:{email}")
-    ]
-    
-    return AdaptiveCard(body=body, actions=actions)
-
-
 def create_link_preview_card(url: str) -> AdaptiveCard:
-    """Create adaptive card for link preview."""
     return AdaptiveCard(
         body=[
             TextBlock(text="Link Preview", weight="Bolder", size="Medium"),
@@ -132,26 +103,7 @@ def create_link_preview_card(url: str) -> AdaptiveCard:
         ]
     )
 
-
-# ==================== EXTERNAL API CALLS ==
-
-async def search_nuget(query: str) -> List[Dict[str, Any]]:
-    """Search NuGet packages."""
-    if not query:
-        return []
-    try:
-        url = f"https://azuresearch-usnc.nuget.org/query?q=id:{quote(query)}&prerelease=true"
-        async with httpx.AsyncClient(timeout=10) as client:
-            resp = await client.get(url)
-            resp.raise_for_status()
-            return resp.json().get("data", [])[:10]
-    except Exception as e:
-        print(f"NuGet search error: {e}")
-    return []
-
-
 async def search_wikipedia(query: str) -> List[Dict[str, Any]]:
-    """Search Wikipedia articles."""
     if not query:
         return []
     try:
@@ -165,236 +117,24 @@ async def search_wikipedia(query: str) -> List[Dict[str, Any]]:
         print(f"Wikipedia search error: {e}")
     return []
 
-
-async def get_graph_access_token() -> str:
-    """Get Microsoft Graph access token using client credentials."""
-    tenant_id = os.getenv("TENANT_ID", "")
-    client_id = os.getenv("CLIENT_ID", "")
-    client_secret = os.getenv("CLIENT_SECRET", "")
-    
-    token_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
-    data = {
-        "client_id": client_id,
-        "client_secret": client_secret,
-        "scope": "https://graph.microsoft.com/.default",
-        "grant_type": "client_credentials",
-    }
-    
-    async with httpx.AsyncClient() as client:
-        resp = await client.post(token_url, data=data)
-        resp.raise_for_status()
-        return resp.json()["access_token"]
-
-
-async def search_users_by_name(query: str) -> List[Dict[str, Any]]:
-    """Search users via Microsoft Graph using direct HTTP calls."""
-    if not query:
-        return []
-    try:
-        access_token = await get_graph_access_token()
-        
-        graph_url = (
-            f"https://graph.microsoft.com/v1.0/users"
-            f"?$search=\"displayName:{query}\""
-            f"&$select=id,displayName,jobTitle,department,mail,officeLocation,businessPhones,userPrincipalName"
-            f"&$top=10&$count=true"
-        )
-        
-        headers = {
-            "Authorization": f"Bearer {access_token}",
-            "ConsistencyLevel": "eventual",
-        }
-        
-        async with httpx.AsyncClient() as client:
-            resp = await client.get(graph_url, headers=headers)
-            if resp.status_code != 200:
-                print(f"Graph API error: {resp.status_code} - {resp.text}")
-                return []
-            
-            data = resp.json()
-            graph_users = data.get("value", [])
-        
-        users = []
-        for user in graph_users:
-            phones = user.get("businessPhones", [])
-            users.append({
-                "displayName": user.get("displayName") or "Unknown",
-                "jobTitle": user.get("jobTitle") or "N/A",
-                "department": user.get("department") or "N/A",
-                "email": user.get("mail") or "N/A",
-                "officeLocation": user.get("officeLocation") or "N/A",
-                "phone": phones[0] if phones else "N/A",
-                "userPrincipalName": user.get("userPrincipalName") or "",
-                "source": "expertFinder"
-            })
-        return users
-    except Exception as e:
-        print(f"Graph search error: {e}")
-    return []
-
-
-def search_experts_by_skill(query: str) -> List[Dict[str, Any]]:
-    """Search experts from local JSON file."""
-    if not query or not os.path.exists("experts.json"):
-        return []
-    try:
-        with open("experts.json", 'r', encoding='utf-8') as f:
-            experts = json.load(f)
-        
-        q_lower = query.lower()
-        results = []
-        for expert in experts:
-            skills = expert.get("skills", [])
-            if any(q_lower in s.lower() for s in skills) or \
-               q_lower in expert.get("jobTitle", "").lower() or \
-               q_lower in expert.get("department", "").lower() or \
-               q_lower in expert.get("about", "").lower():
-                exp = expert.copy()
-                exp["skills"] = ", ".join(skills) if skills else "N/A"
-                exp["source"] = "expertFinder"
-                results.append(exp)
-                if len(results) >= 10:
-                    break
-        return results
-    except Exception as e:
-        print(f"Expert search error: {e}")
-    return []
-
-
-# ==================== MESSAGE EXTENSION HANDLERS ====================
-
-@app.on_message_ext_query
-async def handle_query(ctx: ActivityContext[MessageExtensionQueryInvokeActivity]):
-    """Handle search queries."""
-    command_id = ctx.activity.value.command_id
-    params = ctx.activity.value.parameters or []
-    query = params[0].value if params else ""
-    
-    print(f"Query: command={command_id}, query={query}")
-    
-    # Route to appropriate search
-    if command_id == "wikipediaSearch":
-        results = await search_wikipedia(query)
-        attachments = [create_attachment(create_wikipedia_card(r), r['title'], re.sub(r'<[^>]+>', '', r.get('snippet', ''))) 
-                      for r in results]
-    elif command_id == "searchByName":
-        users = await search_users_by_name(query)
-        attachments = [create_expert_attachment(u) for u in users]
-    elif command_id == "searchBySkill":
-        experts = search_experts_by_skill(query)
-        attachments = [create_expert_attachment(e) for e in experts]
-    else:
-        # Default: NuGet search
-        packages = await search_nuget(query)
-        attachments = [create_attachment(create_package_card(p), p.get('id', ''), p.get('description', '')) 
-                      for p in packages]
-    
-    if not attachments:
-        return create_message_response(f"No results found for '{query}'")
-    
-    return MessagingExtensionInvokeResponse(
-        compose_extension=MessagingExtensionResult(
-            type=MessagingExtensionResultType.RESULT,
-            attachment_layout=AttachmentLayout.LIST,
-            attachments=attachments
-        )
-    )
-
-
-@app.on_message_ext_select_item
-async def handle_select(ctx: ActivityContext[MessageExtensionSelectItemInvokeActivity]):
-    """Handle item selection."""
-    item = ctx.activity.value.option
-    
-    if item.get("source") == "expertFinder":
-        card = create_expert_card(item, full_details=True)
-    else:
-        card = create_package_card(item)
-    
-    return _card_result_response(card)
-
-
-@app.on_message_ext_query_link
-async def handle_link(ctx: ActivityContext[MessageExtensionQueryLinkInvokeActivity]):
-    """Handle link unfurling."""
-    url = ctx.activity.value.url
-    return _card_result_response(create_link_preview_card(url))
-
-
-@app.on_message
-async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
-    """Handle regular messages."""
-    text = (ctx.activity.text or "").lower()
-    
-    if "help" in text:
-        await ctx.send(MessageActivityInput(
-            text="I'm the Search Messaging Extension Bot!\n\n"
-                 "Use me in the compose area to search for:\n"
-                 "- NuGet packages\n- Wikipedia articles\n- Experts in your organization"
-        ))
-    else:
-        await ctx.send(MessageActivityInput(text=f"You said: {ctx.activity.text}\n\nType 'help' to learn more."))
-
-
-# ==================== HELPER FUNCTIONS ====================
-
-def _adaptive_attachment(card: AdaptiveCard):
-    """Wrap an AdaptiveCard into an Attachment."""
-    return card_attachment(AdaptiveCardAttachment(content=card))
-
-
 def create_attachment(card: AdaptiveCard, title: str, text: str) -> MessagingExtensionAttachment:
-    """Create messaging extension attachment with preview."""
-    main = _adaptive_attachment(card)
+    attachment = card_attachment(AdaptiveCardAttachment(content=card))
+    preview = card_attachment(ThumbnailCardAttachment(content=ThumbnailCard(title=title, text=text, images=None)))
     return MessagingExtensionAttachment(
-        content_type=main.content_type,
-        content=main.content,
-        preview={"contentType": "application/vnd.microsoft.card.thumbnail", "content": {"title": title, "text": text}}
+        content_type=attachment.content_type,
+        content=attachment.content,
+        preview=preview
     )
-
-
-def create_expert_attachment(expert: Dict[str, Any]) -> MessagingExtensionAttachment:
-    """Create expert card attachment."""
-    main = _adaptive_attachment(create_expert_card(expert, full_details=False))
-    name = expert.get('displayName', 'Unknown')
-    title = expert.get('jobTitle', 'N/A')
-    skills = expert.get('skills', 'N/A')
-    preview_text = f"{title} | {skills}" if skills != "N/A" else f"{title} | {expert.get('department', 'N/A')}"
-    return MessagingExtensionAttachment(
-        content_type=main.content_type,
-        content=main.content,
-        preview={
-            "contentType": "application/vnd.microsoft.card.hero",
-            "content": {
-                "title": name,
-                "text": preview_text,
-                "images": [{"url": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}]
-            }
-        }
-    )
-
 
 def _card_result_response(card: AdaptiveCard) -> MessagingExtensionInvokeResponse:
-    """Create a single-card result response from an AdaptiveCard."""
-    att = _adaptive_attachment(card)
+    attachment = card_attachment(AdaptiveCardAttachment(content=card))
     return MessagingExtensionInvokeResponse(
         compose_extension=MessagingExtensionResult(
             type=MessagingExtensionResultType.RESULT,
             attachment_layout=AttachmentLayout.LIST,
-            attachments=[MessagingExtensionAttachment(content_type=att.content_type, content=att.content)]
+            attachments=[MessagingExtensionAttachment(content_type=attachment.content_type, content=attachment.content)]
         )
     )
-
-
-def create_message_response(message: str) -> MessagingExtensionInvokeResponse:
-    """Create text message response."""
-    return MessagingExtensionInvokeResponse(
-        compose_extension=MessagingExtensionResult(
-            type=MessagingExtensionResultType.MESSAGE,
-            text=message
-        )
-    )
-
 
 if __name__ == "__main__":
     asyncio.run(app.start())
