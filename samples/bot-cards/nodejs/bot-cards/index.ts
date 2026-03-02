@@ -84,7 +84,7 @@ function createToggleVisibilityCard(): AdaptiveCard {
   );
 }
 
-app.on('card.action', async (context: IActivityContext<AdaptiveCardInvokeActivity>): Promise<AdaptiveCardActionResponse> => {
+app.on('card.action', async (context: IActivityContext<AdaptiveCardInvokeActivity>): Promise<AdaptiveCardActionMessageResponse> => {
   const data = context.activity.value.action.data;
   await context.send(`Data Submitted: ${data.name}`);
 
