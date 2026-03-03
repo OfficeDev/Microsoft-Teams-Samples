@@ -27,9 +27,9 @@ async function getMeetingTranscript(meetingResourceId: string, userId: string): 
   try {
     const token = await getToken();
     
-    // Retrieve metadata for all the transcripts
+    // Retrieve metadata for all the transcripts (using beta endpoint)
     const transcriptsResponse = await axios.get(
-      `https://graph.microsoft.com/v1.0/users/${userId}/onlineMeetings/${meetingResourceId}/transcripts`,
+      `https://graph.microsoft.com/beta/users/${userId}/onlineMeetings/${meetingResourceId}/transcripts`,
       { headers: { 'Authorization': `Bearer ${token}` } }
     );
 
@@ -37,16 +37,12 @@ async function getMeetingTranscript(meetingResourceId: string, userId: string): 
       return '';
     }
 
-    // Get the latest transcript
-    const latestTranscript = transcriptsResponse.data.value.reduce((latest: any, current: any) => {
-      return new Date(current.createdDateTime) > new Date(latest.createdDateTime) ? current : latest;
-    });
-    
-    const transcriptId = latestTranscript.id;
+    // Get the first transcript (current meeting's transcript)
+    const transcriptId = transcriptsResponse.data.value[0].id;
 
     // Retrieve the transcript content
     const contentResponse = await axios.get(
-      `https://graph.microsoft.com/v1.0/users/${userId}/onlineMeetings/${meetingResourceId}/transcripts/${transcriptId}/content?$format=text/vtt`,
+      `https://graph.microsoft.com/beta/users/${userId}/onlineMeetings/${meetingResourceId}/transcripts/${transcriptId}/content?$format=text/vtt`,
       { headers: { 'Authorization': `Bearer ${token}` } }
     );
 
@@ -105,11 +101,21 @@ app.on('meetingEnd', async (context) => {
     msGraphResourceId = meetingInfo.details.msGraphResourceId;
   }
 
+  // Wait 30 seconds for the transcript to become available, then retry up to 3 times
+  await new Promise(resolve => setTimeout(resolve, 30000));
+
   let transcript = '';
   if (msGraphResourceId) {
-    const vttTranscript = await getMeetingTranscript(msGraphResourceId, userId);
-    if (vttTranscript) {
-      transcript = parseVtt(vttTranscript);
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const vttTranscript = await getMeetingTranscript(msGraphResourceId, userId);
+      if (vttTranscript) {
+        transcript = parseVtt(vttTranscript);
+        break;
+      }
+      if (attempt < 3) {
+        console.log(`Transcript not ready, retrying in 10s (attempt ${attempt}/3)...`);
+        await new Promise(resolve => setTimeout(resolve, 10000));
+      }
     }
   }
 
@@ -129,8 +135,13 @@ app.on('meetingEnd', async (context) => {
 
 app.on('meetingParticipantJoin', async (context) => {
   const meetingData = context.activity.value;
-  const member = meetingData.members[0].user.name;
-  const role = meetingData.members[0].meeting?.role || 'a participant';
+  const participant = meetingData.members[0];
+
+  // Skip bot's own join event (no aadObjectId)
+  if (!participant.user?.aadObjectId) return;
+
+  const member = participant.user.name || 'A participant';
+  const role = participant.meeting?.role || 'a participant';
 
   const card = new AdaptiveCard(
     new TextBlock(`${member} has joined the meeting as ${role}.`, {
@@ -144,7 +155,12 @@ app.on('meetingParticipantJoin', async (context) => {
 
 app.on('meetingParticipantLeave', async (context) => {
   const meetingData = context.activity.value;
-  const member = meetingData.members[0].user.name;
+  const participant = meetingData.members[0];
+
+  // Skip bot's own leave event (no aadObjectId)
+  if (!participant.user?.aadObjectId) return;
+
+  const member = participant.user.name || 'A participant';
 
   const card = new AdaptiveCard(
     new TextBlock(`${member} has left the meeting.`, {
