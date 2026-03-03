@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-auth-quickstart-nodejs",
     "source": "officeDev",
     "title": "Teams Bot Auth Quickstart",
-    "shortDescription": "This sample bot demonstrates implementing SSO in Microsoft Teams using Azure AD.",
+    "shortDescription": "This sample bot demonstrates implementing SSO in Microsoft Teams using the Teams SDK and Azure AD.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-auth-quickstart/nodejs",
     "longDescription": [
-      "This Teams bot sample showcases Single Sign-On (SSO) integration using Azure AD for seamless user authentication. It includes adaptive cards, and uses Microsoft Graph to fetch user details, making it easy to develop authenticated experiences within Teams."
+      "This Teams bot sample showcases Single Sign-On (SSO) integration using Azure AD for seamless user authentication. Built with the Microsoft Teams SDK, it uses Microsoft Graph to fetch user details."
     ],
     "creationDateTime": "2026-02-03",
     "updateDateTime": "2026-02-03",
@@ -20,7 +20,7 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "typescrip"
+        "value": "typescript"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot"
+        "value": "bot, sso"
       }
     ],
     "thumbnails": [
