@@ -28,7 +28,7 @@ namespace JoinTeamByQR.helper
             }
             catch (ServiceException ex)
             {
-                throw ex;
+                throw;
             }
         }
 

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-attachments-dotnet",
+    "source": "officeDev",
+    "title": "Bot Attachments",
+    "shortDescription": "This sample demonstrates how to send and receive file attachments in Microsoft Teams using a bot built with the Teams SDK.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-attachments/dotnet/bot-attachments",
+    "longDescription": [
+      "This sample demonstrates file attachment handling in Microsoft Teams using a bot built with the Teams SDK. When a user sends a file, the bot downloads it, stores it in memory, and sends a File Consent Card requesting permission to upload to OneDrive. Upon acceptance, the bot uploads the file and sends a File Info Card with a direct link. Declined requests are handled gracefully with a notification message."
+    ],
+    "creationDateTime": "2026-01-30",
+    "updateDateTime": "2026-01-30",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "dotnet"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot attachments"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-attachments/bot-attachments.gif",
+        "alt": "Solution UX showing bot attachments with file consent and OneDrive upload using Teams SDK"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
