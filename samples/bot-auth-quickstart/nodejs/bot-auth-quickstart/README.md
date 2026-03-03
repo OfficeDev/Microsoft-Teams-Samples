@@ -1,12 +1,9 @@
-# Teams Bot Auth Quickstart with Proactive Installation
+# Teams Bot Auth Quickstart
 
 This sample demonstrates how to implement Single Sign-On (SSO) authentication for Microsoft Teams bots using Azure Active Directory. It showcases:
 
 - **Authentication**: Seamless SSO authentication using Azure AD with OAuth support
-- **Microsoft Graph Integration**: Access user data and perform operations on behalf of authenticated users  
-- **Proactive App Installation**: Automatically install the Teams app for all members in a team or group chat using Graph APIs
-- **Dynamic Catalog Discovery**: Automatically discover the app catalog ID without manual configuration
-- **Proactive Messaging**: Send messages to team/chat members
+- **Microsoft Graph Integration**: Access user data and perform operations on behalf of authenticated users
 
 > **IMPORTANT**: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Teams SDK OAuth flow.
 
@@ -29,10 +26,9 @@ This sample demonstrates how to implement Single Sign-On (SSO) authentication fo
 
 The bot responds to the following commands:
 
-- **Login** - Sign in using your Microsoft 365 account with SSO authentication
-- **Check and Install** or **Install** - Proactively installs the app for all team/chat members
-- **Send message** or **Send** - Sends a message mentioning all members in the conversation
-- **Logout** - Sign out from the bot and clear authentication session
+- **signin** - Sign in using your Microsoft 365 account with SSO authentication
+- **profile** - View your profile information (Name, Email, Job Title, Department, Office)
+- **signout** - Sign out from the bot and clear authentication session
 
 ## Sample Implementations
 
@@ -52,23 +48,8 @@ The bot leverages Microsoft Graph to:
 
 1. **User Profile Access**:
    - Retrieves authenticated user's profile information
-   - Accesses user display name, email, and other profile data
+   - Accesses user display name, email, job title, department, and office location
    - Uses delegated permissions with user consent
-
-2. **Team and Chat Member Management**:
-   - Reads team and chat membership information
-   - Retrieves member details for proactive messaging
-   - Uses `ChatMember.Read.All` application permission
-
-3. **Proactive App Installation**:
-   - Automatically installs the Teams app for team/chat members
-   - Uses Graph API to manage app installations programmatically
-   - Requires `TeamsAppInstallation.ReadWriteForUser.All` and `TeamsAppInstallation.ReadWriteForTeam.All` permissions
-
-4. **Catalog Discovery**:
-   - Dynamically discovers the app catalog ID
-   - Eliminates manual configuration of catalog information
-   - Uses Graph API to query installed apps
 
 ### Graph API Permissions Used
 
@@ -76,12 +57,6 @@ This sample requires the following Microsoft Graph permissions:
 
 **Delegated Permissions** (user consent required):
 - `User.Read` - Read the signed-in user's profile
-
-**Application Permissions** (admin consent required):
-- `User.Read.All` - Read all users' profiles
-- `ChatMember.Read.All` - Read all chat and team members
-- `TeamsAppInstallation.ReadWriteForUser.All` - Manage app installations for users
-- `TeamsAppInstallation.ReadWriteForTeam.All` - Manage app installations for teams
 
 ### Authentication Flow
 
@@ -96,13 +71,6 @@ The sample uses Azure AD SSO (Single Sign-On) with the Teams SDK OAuth flow:
 ### Graph API Endpoints Used
 
 - `GET /me` - Get current user's profile
-- `GET /users/{id}` - Get user information
-- `GET /teams/{id}/members` - Get team members
-- `GET /chats/{id}/members` - Get chat members
-- `POST /users/{id}/teamwork/installedApps` - Install app for user
-- `GET /appCatalogs/teamsApps` - Query Teams app catalog
-
-For more information about Microsoft Graph, see the [Microsoft Graph documentation](https://developer.microsoft.com/graph) and [Graph Explorer](https://developer.microsoft.com/graph/graph-explorer) to test API calls.
 
 ## Prerequisites
 
@@ -112,7 +80,7 @@ For more information about Microsoft Graph, see the [Microsoft Graph documentati
 - Language-specific prerequisites:
   - **Node.js**: [NodeJS](https://nodejs.org/en/download/) version 16.14.2 or higher
   - **.NET**: [.NET 10 SDK](https://dotnet.microsoft.com/download)
-  - **Python**: Python 3.8 or higher
+  - **Python**: Python or higher
 
 > **Note**: Authentication samples require Microsoft Teams and cannot be tested using the `agentsplayground` tool. The OAuth flow and SSO authentication features only work within the Teams client environment.
 
@@ -124,7 +92,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
 2. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-3. Select **File > Open Folder** in VS Code and choose your language-specific sample directory (nodejs/dotnet/python)
+3. Select **File > Open Folder** in VS Code and choose this sample directory
 4. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 5. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client
 6. In the browser that launches, select the **Add** button to install the app to Teams
@@ -186,11 +154,6 @@ Register a new application in the [Microsoft Entra ID – App Registrations](htt
 - Click **Add a permission**
 - Select **Microsoft Graph** -> **Delegated permissions**:
   - `User.Read` (enabled by default)
-- Select **Microsoft Graph** -> **Application permissions**:
-  - `User.Read.All` (for reading user information)
-  - `ChatMember.Read.All` (for reading chat members)
-  - `TeamsAppInstallation.ReadWriteForUser.All` (for proactive installation)
-  - `TeamsAppInstallation.ReadWriteForTeam.All` (for proactive installation in teams)
 - Click **Add permissions**
 - Click **Grant admin consent** to grant admin consent for the required permissions
 
@@ -202,22 +165,15 @@ Register a new application in the [Microsoft Entra ID – App Registrations](htt
 git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 ```
 
-**Navigate to your chosen language sample directory:**
+**Navigate to the sample directory:**
 
 ```bash
 # For Node.js:
 cd samples/bot-auth-quickstart/nodejs/bot-auth-quickstart
-
-# For .NET:
-cd samples/bot-auth-quickstart/dotnet/bot-auth-quickstart
-
-# For Python:
-cd samples/bot-auth-quickstart/python/bot-auth-quickstart
 ```
 
 **Install dependencies:**
 
-For Node.js:
 ```bash
 npm install
 ```
@@ -236,13 +192,11 @@ pip install -r requirements.txt
 
 Update the configuration file (`.env`, `appsettings.json`, or `.env` depending on language) with the values from step 3 (Azure AD app registration):
 
-- `MicrosoftAppId` / `CLIENT_ID` - The Application (client) ID from step 3
-- `MicrosoftAppPassword` / `CLIENT_PASSWORD` - The client secret value from step 3C
-- `MicrosoftAppType` / `BOT_TYPE` - Set to `MultiTenant` if your bot supports multiple tenants, otherwise `SingleTenant`
-- `MicrosoftAppTenantId` / `TENANT_ID` - Your Directory (tenant) ID from step 3 (required for SingleTenant)
-- `connectionName` / `CONNECTION_NAME` - The name of your Azure Bot OAuth connection created in step 1
-
-**Note**: The `APP_CATALOG_TEAM_APP_ID` is discovered dynamically by the bot when you use the installation feature, so no manual configuration is needed.
+- `CLIENT_ID` - The Application (client) ID from step 3
+- `CLIENT_PASSWORD` - The client secret value from step 3C
+- `BOT_TYPE` - Set to `MultiTenant` if your bot supports multiple tenants, otherwise `SingleTenant`
+- `TENANT_ID` - Your Directory (tenant) ID from step 3 (required for SingleTenant)
+- `CONNECTION_NAME` - The name of your Azure Bot OAuth connection created in step 1
 
 **Start the bot:**
 
@@ -289,23 +243,16 @@ Once the bot is running and added to Teams, you can interact with it using the f
 ### Bot Commands
 
 **Authentication:**
-- **Login** - Sign in to the bot using your Microsoft 365 account
+- **signin** - Sign in to the bot using your Microsoft 365 account
   - The bot will request your consent to access your profile information
   - After consent, the bot exchanges an SSO token and accesses Microsoft Graph on your behalf
-  - You remain logged in until you explicitly logout
+  - You remain signed in until you explicitly sign out
 
-**Proactive Installation:**
-- **Check and Install** or **Install** - Proactively installs the app for all members in the team or group chat
-  - The bot automatically discovers the catalog ID from installed apps
-  - Shows installation status for each member (newly installed, already installed, or errors)
-
-**Messaging:**
-- **Send message** or **Send** - Sends a message mentioning all members in the conversation
-  - Retrieves all members from the team/chat
-  - Posts a message mentioning everyone
+**Profile:**
+- **profile** - View your Microsoft 365 profile (Name, Email, Job Title, Department, Office)
 
 **Sign Out:**
-- **Logout** - Sign out from the bot and clear your authentication session
+- **signout** - Sign out from the bot and clear your authentication session
 
 ## Troubleshooting
 
@@ -320,16 +267,11 @@ Once the bot is running and added to Teams, you can interact with it using the f
 
 ### Teams Development
 - [Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/) - Official Microsoft Teams platform documentation
-- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/) - Comprehensive guide for Teams app development
 
 ### Authentication & Graph API
 - [Teams Bot Authentication](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/authentication/auth-aad-sso-bots) - SSO authentication for Teams bots
 - [Microsoft Graph API](https://developer.microsoft.com/graph) - Access Microsoft 365 data and services
 - [Graph API Permissions](https://learn.microsoft.com/graph/permissions-reference) - Complete permissions reference
-
-### Proactive Messaging
-- [Proactive Installation using Graph API](https://learn.microsoft.com/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages) - Guide for proactive bot implementation
-- [Send Proactive Messages](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/send-proactive-messages) - Best practices for proactive messaging
 
 ### Tools & Resources
 - [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) - VS Code extension for Teams development
