@@ -94,14 +94,6 @@
         {
           "id": "User.Read",
           "type": "Scope"
-        },
-        {
-          "id": "Chat.Read",
-          "type": "Scope"
-        },
-        {
-          "id": "TeamsAppInstallation.ReadForChat",
-          "type": "Scope"
         }
       ]
     }

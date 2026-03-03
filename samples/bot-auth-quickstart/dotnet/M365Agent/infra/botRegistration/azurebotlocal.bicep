@@ -51,7 +51,7 @@ location: 'global'
 properties: {
   serviceProviderDisplayName: 'Azure Active Directory v2'
   serviceProviderId: '30dd229c-58e3-4a48-bdfd-91ec48eb906c'
-  scopes: 'User.Read Chat.Read TeamsAppInstallation.ReadForChat'
+  scopes: 'User.Read'
     parameters: [
       {
         key: 'clientId'

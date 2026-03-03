@@ -11,8 +11,6 @@ using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// TeamsSettings from SDK handles ClientId, ClientSecret, TenantId
-// ConnectionName is additional config needed for OAuth
 var connectionName = builder.Configuration["Teams:ConnectionName"]
     ?? throw new InvalidOperationException("Teams:ConnectionName is not configured. Please set it in appsettings.json or environment variables.");
 
@@ -21,6 +19,8 @@ builder.AddTeams(App.Builder().AddOAuth(connectionName));
 var app = builder.Build();
 var teams = app.UseTeams();
 
+var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("BotAuthQuickstart");
+
 string GetCleanMessageText(MessageActivity activity)
 {
     var text = activity.Text ?? "";
@@ -28,62 +28,144 @@ string GetCleanMessageText(MessageActivity activity)
     return text.Trim().ToLowerInvariant();
 }
 
-// Welcome message
-teams.OnInstall(async context =>
-{
-    await context.Send("Welcome to TeamsBot.");
-});
-
-// Handle sign-in completion
+// Handle successful sign-in events
 teams.OnSignIn(async (_, @event) =>
 {
     var context = @event.Context;
-    var graphClient = context.GetUserGraphClient();
-    var me = await graphClient.Me.GetAsync();
-    var jobTitle = me?.JobTitle ?? "Not specified";
-
-    await context.Send($"You're signed in as {me!.DisplayName} ({me.UserPrincipalName}). Your job title is: {jobTitle}");
+    await context.Send(
+        "✅ **Successfully signed in!**\n\n" +
+        "You can now use these commands:\n\n" +
+        "• **profile** - View your profile\n\n" +
+        "• **signout** - Sign out when done"
+    );
 });
 
-// Handle all messages
+// Handle all messages - route to appropriate handler based on message pattern
 teams.OnMessage(async context =>
 {
-    var textLower = GetCleanMessageText(context.Activity);
-
-    // Handle logout
-    if (textLower == "logout" || textLower == "signout")
+    // Helper function to handle authentication and create Graph client using Token pattern.
+    async Task<Microsoft.Graph.GraphServiceClient?> GetAuthenticatedGraphClient()
     {
         if (!context.IsSignedIn)
         {
-            await context.Send("You are not signed in.");
-            return;
+            await context.Send("🔐 Please sign in first to access Microsoft Graph.");
+            await context.SignIn();
+            return null;
         }
-        await context.SignOut();
-        await context.Send("You have been signed out.");
-        return;
+
+        try
+        {
+            return context.GetUserGraphClient();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to create Graph client");
+            await context.Send("🔐 Failed to create authenticated client. Trying to sign in again.");
+            await context.SignIn();
+            return null;
+        }
     }
 
-    // Handle explicit login command
-    if (textLower == "login" || textLower == "signin")
+    // Handle sign-in command
+    async Task HandleSignInCommand()
     {
         if (context.IsSignedIn)
         {
-            await context.Send("You are already signed in.");
-            return;
+            await context.Send("✅ You are already signed in!");
         }
-        await context.SignIn();
-        return;
+        else
+        {
+            await context.Send("🔐 Signing you in to access Microsoft Graph...");
+            await context.SignIn();
+        }
     }
 
-    // If not signed in, prompt to sign in
-    if (!context.IsSignedIn)
+    // Handle sign-out command
+    async Task HandleSignOutCommand()
     {
-        await context.Send("Please type 'login' to sign in first.");
-        return;
+        if (!context.IsSignedIn)
+        {
+            await context.Send("ℹ️ You are not currently signed in.");
+        }
+        else
+        {
+            await context.SignOut();
+            await context.Send("👋 You have been signed out successfully!");
+        }
     }
 
-    // Default response for signed-in users
-    await context.Send("You are signed in. Type 'logout' to sign out.");
+    // Handle profile command using Graph API with TokenProtocol pattern.
+    async Task HandleProfileCommand()
+    {
+        try
+        {
+            var graphClient = await GetAuthenticatedGraphClient();
+            if (graphClient == null)
+            {
+                return;
+            }
+
+            var me = await graphClient.Me.GetAsync();
+
+            if (me != null)
+            {
+                var profileInfo =
+                    "👤 **Your Profile**\n\n" +
+                    $"**Name:** {me.DisplayName ?? "N/A"}\n\n" +
+                    $"**Email:** {me.UserPrincipalName ?? "N/A"}\n\n" +
+                    $"**Job Title:** {me.JobTitle ?? "N/A"}\n\n" +
+                    $"**Department:** {me.Department ?? "N/A"}\n\n" +
+                    $"**Office:** {me.OfficeLocation ?? "N/A"}";
+
+                await context.Send(profileInfo);
+            }
+            else
+            {
+                await context.Send("❌ Could not retrieve your profile information.");
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error getting profile");
+            await context.Send($"❌ Failed to get your profile: {ex.Message}");
+        }
+    }
+
+    // Handle default message when no pattern matches
+    async Task HandleDefaultMessage()
+    {
+        await context.Send(
+            "👋 **Hello! I'm a Teams Auth Quickstart and Graph bot.**\n\n" +
+            "**Available commands:**\n\n" +
+            "• **signin** - Sign in to your Microsoft account\n\n" +
+            "• **signout** - Sign out\n\n" +
+            "• **profile** - Show your profile information\n\n"
+        );
+    }
+
+    var textLower = GetCleanMessageText(context.Activity);
+
+    switch (textLower)
+    {
+        case "signin":
+            await HandleSignInCommand();
+            break;
+        case "signout":
+            await HandleSignOutCommand();
+            break;
+        case "profile":
+            await HandleProfileCommand();
+            break;
+        default:
+            await HandleDefaultMessage();
+            break;
+    }
+});
+
+// Handle error events
+teams.OnError(async (_, @event) =>
+{
+    logger.LogError(@event.Exception, "Error occurred");
 });
 
 app.Run();
