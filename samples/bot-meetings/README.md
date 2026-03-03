@@ -27,7 +27,7 @@ This sample demonstrates how to handle real-time meeting events and retrieve mee
 |----------|-----------|-----------|
 | C# | .NET / ASP.NET Core | [dotnet/bot-meetings](dotnet/bot-meetings/README.md) |
 | TypeScript | Node.js | [nodejs/bot-meetings](nodejs/bot-meetings/README.md) |
-| Python | Python 3.12+ | [python/bot-meetings](python/bot-meetings/README.md) |
+| Python | Python | [python/bot-meetings](python/bot-meetings/README.md) |
 
 ## Prerequisites
 
@@ -41,7 +41,11 @@ This sample demonstrates how to handle real-time meeting events and retrieve mee
 
 ## Setup Instructions
 
-> Note: These instructions are for running the sample on your local machine. The tunnelling solution is required because the Teams service needs to call into the bot.
+To run these samples in the Teams Client, you need to provision your app in a M365 Tenant, and configure the app to your DevTunnels URL.
+
+1. Install the tool DevTunnels https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started
+2. Get Access to a M365 Developer Tenant https://learn.microsoft.com/en-us/office/developer-program/microsoft-365-developer-program-get-started
+3. Create a Teams App with the Bot Feature in the Teams Developer Portal (in your tenant) https://dev.teams.microsoft.com
 
 ### 1. Setup Local Tunnel
 
@@ -98,6 +102,8 @@ Register a new application in the [Microsoft Entra ID – App Registrations](htt
 **E) Configure Application Access Policy:**
 
 Follow this link - [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
+
+Follow this link - [Manage policies via PowerShell](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-managing-teams#manage-policies-via-powershell)
 
 **Note**: Copy the User Id you used to granting the policy. You need it while configuring the .env file.
 
@@ -163,8 +169,6 @@ For NodeJS and Python you will need a `.env` file with the following fields:
 TENANT_ID=<Your Directory (tenant) ID>
 CLIENT_ID=<Your Application (client) ID>
 CLIENT_SECRET=<Your client secret value>
-USER_ID=<User ID from application access policy>
-APP_BASE_URL=<Your tunnel URL>
 ```
 
 For .NET you need to add these values to `appsettings.json` or `launchSettings.json` using the next syntax:
@@ -176,8 +180,7 @@ appSettings.json:
 "Teams": {
     "ClientID": "<Your Application (client) ID>",
     "ClientSecret": "<Your client secret value>",
-    "TenantId": "<Your Directory (tenant) ID>",
-    "AppBaseUrl":"<Your tunnel URL>"
+    "TenantId": "<Your Directory (tenant) ID>"
   },
 ```
 
@@ -193,8 +196,7 @@ Or to use Env Vars from the profile defined in `launchSettings.json` (using the 
         "ASPNETCORE_ENVIRONMENT": "Development",
         "Teams__TenantId": "YOUR_TenantId",
         "Teams__ClientID": "YOUR_ClientId",
-        "Teams__ClientSecret": "YOUR_ClientSecret",
-        "Teams__AppBaseUrl":"YOUR_AppBaseUrl"
+        "Teams__ClientSecret": "YOUR_ClientSecret"
       }
     }
 ```
@@ -230,6 +232,22 @@ python app.py
   - `<<DOMAIN-NAME>>` - Replace with your tunnel domain:
     - For ngrok: `1234.ngrok-free.app` (from `https://1234.ngrok-free.app`)
     - For dev tunnels: `12345.devtunnels.ms`
+
+The scopes section must include team, and groupChat:
+
+```json
+"bots": [
+  {
+    "botId": "",
+    "scopes": [
+      "team",
+      "personal",
+      "groupChat"
+    ],
+    "isNotificationOnly": false
+  }
+]
+```
 
 **Configure RSC Permissions:**
 
