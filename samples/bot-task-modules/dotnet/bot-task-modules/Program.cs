@@ -28,9 +28,9 @@ webApp.MapGet("/customform", async context =>
     await context.Response.SendFileAsync(Path.Combine(builder.Environment.ContentRootPath, "pages", "CustomForm", "index.html"));
 });
 
-var baseUrl = builder.Configuration["botEndpoint"];
-if (string.IsNullOrEmpty(baseUrl))
-    throw new InvalidOperationException("No botEndpoint detected. Using webpages will not work as expected");
+var botEndpoint = builder.Configuration["BotEndpoint"];
+if (string.IsNullOrEmpty(botEndpoint))
+    throw new InvalidOperationException("No BotEndpoint detected. Using webpages will not work as expected");
 
 teamsApp.OnMessage(async (context) =>
 {
@@ -72,8 +72,8 @@ teamsApp.OnTaskFetch(async (context) =>
             Title = "Custom Form",
             Width = new Union<int, Size>(510),
             Height = new Union<int, Size>(450),
-            Url = $"{baseUrl}/customform",
-            FallbackUrl = $"{baseUrl}/customform"
+            Url = $"{botEndpoint}/customform",
+            FallbackUrl = $"{botEndpoint}/customform"
         };
     }
     else if (data == "MultiStep")
