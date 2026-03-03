@@ -8,19 +8,24 @@ import { App } from '@microsoft/teams.apps';
 import {
     Attachment,
     TaskModuleRequest,
-    TaskModuleResponse,
     UrlTaskModuleTaskInfo,
     CardTaskModuleTaskInfo,
     cardAttachment,
 } from '@microsoft/teams.api';
 import type { IActivityContext } from '@microsoft/teams.apps';
-import type { IAdaptiveCard } from '@microsoft/teams.cards';
+import {
+    AdaptiveCard,
+    TextBlock,
+    TextInput,
+    SubmitAction,
+    TaskFetchAction,
+} from '@microsoft/teams.cards';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3978;
-const BASE_URL = process.env.BOT_ENDPOINT || 'http://localhost:3978';
+const BOT_ENDPOINT = process.env.BOT_ENDPOINT || 'http://localhost:3978';
 
 if (!process.env.BOT_ENDPOINT) {
     console.log('No remote endpoint detected. Using webpages will not work as expected');
@@ -28,90 +33,46 @@ if (!process.env.BOT_ENDPOINT) {
 
 /** Returns an Adaptive Card attachment with three task/fetch buttons to open each task module type. */
 function createTaskModuleAdaptiveCard(): Attachment {
-    const card: IAdaptiveCard = {
-        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        version: '1.4',
-        type: 'AdaptiveCard',
-        body: [
-            {
-                type: 'TextBlock',
-                text: 'Task Module Invocation from Adaptive Card',
-                weight: 'Bolder',
-                size: 'Large',
-            },
-        ],
-        actions: [
-            {
-                type: 'Action.Submit',
-                title: 'Adaptive Card',
-                data: { msteams: { type: 'task/fetch' }, data: 'AdaptiveCard' },
-            },
-            {
-                type: 'Action.Submit',
-                title: 'Custom Form',
-                data: { msteams: { type: 'task/fetch' }, data: 'CustomForm' },
-            },
-            {
-                type: 'Action.Submit',
-                title: 'Multi-step Form',
-                data: { msteams: { type: 'task/fetch' }, data: 'MultiStep' },
-            },
-        ],
-    };
+    const card = new AdaptiveCard(
+        new TextBlock('Task Module Invocation from Adaptive Card', { weight: 'Bolder', size: 'Large' }),
+    ).withVersion('1.4').withActions(
+        new TaskFetchAction({ data: 'AdaptiveCard' }).withTitle('Adaptive Card'),
+        new TaskFetchAction({ data: 'CustomForm' }).withTitle('Custom Form'),
+        new TaskFetchAction({ data: 'MultiStep' }).withTitle('Multi-step Form'),
+    );
     return cardAttachment('adaptive', card);
 }
 
 /** Returns an Adaptive Card attachment with a multiline text input field used inside the AdaptiveCard task module. */
 function createTextInputCard(): Attachment {
-    const card: IAdaptiveCard = {
-        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        version: '1.0',
-        type: 'AdaptiveCard',
-        body: [
-            { type: 'TextBlock', text: 'Enter Text Here', weight: 'Bolder' },
-            {
-                type: 'Input.Text',
-                id: 'usertext',
-                placeholder: 'add some text and submit',
-                isMultiline: true,
-            },
-        ],
-        actions: [{ type: 'Action.Submit', title: 'Submit' }],
-    };
+    const card = new AdaptiveCard(
+        new TextBlock('Enter Text Here', { weight: 'Bolder' }),
+        new TextInput({ id: 'usertext', placeholder: 'add some text and submit', isMultiline: true }),
+    ).withVersion('1.0').withActions(
+        new SubmitAction({ title: 'Submit' }),
+    );
     return cardAttachment('adaptive', card);
 }
 
 /** Returns step 1 of the multi-step form card, collecting the user's name. */
 function createMultiStepStep1Card(): Attachment {
-    const card: IAdaptiveCard = {
-        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        version: '1.4',
-        type: 'AdaptiveCard',
-        body: [
-            { type: 'TextBlock', text: 'Step 1 of 2 - Your Name', size: 'Large', weight: 'Bolder' },
-            { type: 'Input.Text', id: 'name', label: 'Name', placeholder: 'Enter your name', isRequired: true } as any,
-        ],
-        actions: [
-            { type: 'Action.Submit', title: 'Next', data: { submissiontype: 'multi_step_1' } } as any,
-        ],
-    };
+    const card = new AdaptiveCard(
+        new TextBlock('Step 1 of 2 - Your Name', { size: 'Large', weight: 'Bolder' }),
+        new TextInput({ id: 'name', label: 'Name', placeholder: 'Enter your name', isRequired: true }),
+    ).withVersion('1.4').withActions(
+        new SubmitAction({ title: 'Next', data: { submissiontype: 'multi_step_1' } }),
+    );
     return cardAttachment('adaptive', card);
 }
 
 /** Returns step 2 of the multi-step form card, collecting the user's email and carrying the name from step 1. */
 function createMultiStepStep2Card(name: string): Attachment {
-    const card: IAdaptiveCard = {
-        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        version: '1.4',
-        type: 'AdaptiveCard',
-        body: [
-            { type: 'TextBlock', text: 'Step 2 of 2 - Your Email', size: 'Large', weight: 'Bolder' },
-            { type: 'Input.Text', id: 'email', label: 'Email', placeholder: 'Enter your email', isRequired: true } as any,
-        ],
-        actions: [
-            { type: 'Action.Submit', title: 'Submit', data: { submissiontype: 'multi_step_2', name } } as any,
-        ],
-    };
+    const card = new AdaptiveCard(
+        new TextBlock('Step 2 of 2 - Your Email', { size: 'Large', weight: 'Bolder' }),
+        new TextInput({ id: 'email', label: 'Email', placeholder: 'Enter your email', isRequired: true }),
+    ).withVersion('1.4').withActions(
+        new SubmitAction({ title: 'Submit', data: { submissiontype: 'multi_step_2', name } }),
+    );
     return cardAttachment('adaptive', card);
 }
 
@@ -138,10 +99,10 @@ app.on('dialog.open', async (context: IActivityContext<any>) => {
             title: 'Custom Form',
             width: 510,
             height: 450,
-            url: `${BASE_URL}/CustomForm/`,
-            fallbackUrl: `${BASE_URL}/CustomForm/`,
+            url: `${BOT_ENDPOINT}/CustomForm/`,
+            fallbackUrl: `${BOT_ENDPOINT}/CustomForm/`,
         };
-        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
+        return { task: { type: 'continue', value: taskInfo } };
     }
 
     if (cardData === 'MultiStep') {
@@ -151,7 +112,7 @@ app.on('dialog.open', async (context: IActivityContext<any>) => {
             height: 300,
             card: createMultiStepStep1Card(),
         };
-        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
+        return { task: { type: 'continue', value: taskInfo } };
     }
 
     // Default: AdaptiveCard
@@ -161,7 +122,7 @@ app.on('dialog.open', async (context: IActivityContext<any>) => {
         height: 200,
         card: createTextInputCard(),
     };
-    return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
+    return { task: { type: 'continue', value: taskInfo } };
 });
 
 /** Handles task/submit invocations by routing on submissiontype: advances multi-step flow, confirms custom form, or echoes adaptive card text input. */
@@ -177,25 +138,25 @@ app.on('dialog.submit', async (context: IActivityContext<any>) => {
             height: 300,
             card: createMultiStepStep2Card(data.name),
         };
-        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
+        return { task: { type: 'continue', value: taskInfo } };
     }
 
     if (submissionType === 'multi_step_2') {
         const { name, email } = data;
         await context.send(`Hi ${name}, thanks for submitting! Your email is ${email}`);
-        return { task: { type: 'message', value: 'Multi-step form completed!' } } as TaskModuleResponse;
+        return { task: { type: 'message', value: 'Multi-step form completed!' } };
     }
 
     if (submissionType === 'custom_form') {
         const { name, email } = data;
         await context.send(`Hi ${name}, thanks for submitting! Your email is ${email}`);
-        return { task: { type: 'message', value: 'Form submitted successfully' } } as TaskModuleResponse;
+        return { task: { type: 'message', value: 'Form submitted successfully' } };
     }
 
     // Default: adaptive card text input
     const usertext = data?.usertext;
     await context.send(`You submitted: ${usertext}`);
-    return { task: { type: 'message', value: 'Thanks for submitting!' } } as TaskModuleResponse;
+    return { task: { type: 'message', value: 'Thanks for submitting!' } };
 });
 
 /** Logs any unhandled errors raised by the app framework to the console. */
