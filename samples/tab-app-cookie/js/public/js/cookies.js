@@ -1,17 +1,17 @@
 function getCookies() {
-  document.getElementById("cookies").innerHTML = document.cookie;
+  document.getElementById("cookies").textContent = document.cookie;
   if (!cookieStore) {
-    document.getElementById("cookieStore").innerHTML =
+    document.getElementById("cookieStore").textContent =
       "Cookie Store API not supported";
     return;
   }
 
   cookieStore.getAll().then((cookies) => {
     if (cookies.length === 0) {
-      document.getElementById("cookieStore").innerHTML = "No cookies";
+      document.getElementById("cookieStore").textContent = "No cookies";
       return;
     }
-    document.getElementById("cookieStore").innerHTML = JSON.stringify(
+    document.getElementById("cookieStore").textContent = JSON.stringify(
       cookies,
       null,
       2

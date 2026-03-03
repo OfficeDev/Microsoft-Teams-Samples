@@ -59,8 +59,8 @@ namespace ProactiveBot.Bots
                 else
                 {
                     throw;
-                }
-            }
+            	}
+       		}
         }
 
         public async Task TriggerConversationUpdate(string Userid, string MicrosoftTenantId, string MicrosoftAppId, string MicrosoftAppPassword, string MicrosoftTeamAppid)
@@ -85,7 +85,7 @@ namespace ProactiveBot.Bots
             }
             catch (Microsoft.Graph.ServiceException ex)
             {
-                throw ex;
+                throw;
             }
         }
 

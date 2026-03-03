@@ -12,7 +12,7 @@ function initElementReferences() {
 
 function setNoDBNotice() {
   console.error("No database connection");
-  indexDBElement.innerHTML = "No database connection; create a database first.";
+  indexDBElement.textContent = "No database connection; create a database first.";
 }
 
 function getDatabaseEntries() {
@@ -27,16 +27,17 @@ function getDatabaseEntries() {
   const index = store.index("id");
 
   const request = index.openCursor();
-  let html = "<table>";
+  const table = document.createElement("table");
 
   request.onsuccess = (event) => {
     const cursor = event.target.result;
     if (cursor) {
-      html += `<tr><td>${JSON.stringify(cursor.value)}</td></tr>`;
+      const row = table.insertRow();
+      row.insertCell().textContent = JSON.stringify(cursor.value);
       cursor.continue();
     } else {
-      html += "</table>";
-      indexDBElement.innerHTML = html;
+      indexDBElement.innerHTML = "";
+      indexDBElement.appendChild(table);
       console.log("No more entries");
     }
   };

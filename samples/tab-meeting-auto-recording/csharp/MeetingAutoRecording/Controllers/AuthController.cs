@@ -451,7 +451,7 @@ namespace MeetingAutoRecording.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -528,7 +528,7 @@ namespace MeetingAutoRecording.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -603,7 +603,7 @@ namespace MeetingAutoRecording.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -630,7 +630,7 @@ namespace MeetingAutoRecording.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
