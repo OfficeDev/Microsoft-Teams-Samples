@@ -91,9 +91,20 @@
                 "Validate prerequisites",
                 "Start local tunnel",
                 "Provision",
-                "Deploy"
+                "Deploy",
+                "setup-env"
             ],
             "dependsOrder": "sequence"
+        },
+        {
+            "label": "setup-env",
+            "type": "shell",
+            "command": "uv sync",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             // Check all required prerequisites.
@@ -103,6 +114,7 @@
             "command": "debug-check-prerequisites",
             "args": {
                 "prerequisites": [
+                    "python",
                     "m365Account", // Sign-in prompt for Microsoft 365 account, then validate if the account enables the sideloading permission.
                     "portOccupancy" // Validate available ports to ensure those debug ones are not occupied.
                 ],

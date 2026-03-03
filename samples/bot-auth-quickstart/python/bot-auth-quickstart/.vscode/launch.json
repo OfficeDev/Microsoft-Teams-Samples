@@ -61,10 +61,10 @@
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/main.py",
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
-      "timeout": 120000,
-      "debugAdapterPath": "${workspaceFolder}/.venv/Lib/site-packages/debugpy/adapter"
+      "envFile": "${workspaceFolder}/.env"
     }
   ],
   "compounds": [
