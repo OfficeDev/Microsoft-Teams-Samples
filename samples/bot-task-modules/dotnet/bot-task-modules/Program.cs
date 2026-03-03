@@ -12,6 +12,10 @@ using Microsoft.Teams.Api.TaskModules;
 using Microsoft.Teams.Cards;
 using Microsoft.Teams.Common;
 using System.Text.Json;
+using AdaptiveCard = Microsoft.Teams.Cards.AdaptiveCard;
+using Action = Microsoft.Teams.Cards.Action;
+using Size = Microsoft.Teams.Api.TaskModules.Size;
+using Response = Microsoft.Teams.Api.TaskModules.Response;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddTeams();
@@ -30,7 +34,7 @@ if (string.IsNullOrEmpty(baseUrl))
 
 teamsApp.OnMessage(async (context) =>
 {
-    var card = new Microsoft.Teams.Cards.AdaptiveCard
+    var card = new AdaptiveCard
     {
         Body = new List<CardElement>
         {
@@ -44,7 +48,7 @@ teamsApp.OnMessage(async (context) =>
         }
     };
 
-    await context.Send(new Microsoft.Teams.Api.Activities.MessageActivity 
+    await context.Send(new MessageActivity 
     { 
         Attachments = new List<Attachment> 
         { 
@@ -66,54 +70,54 @@ teamsApp.OnTaskFetch(async (context) =>
         taskInfo = new TaskInfo
         {
             Title = "Custom Form",
-            Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(510),
-            Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(450),
+            Width = new Union<int, Size>(510),
+            Height = new Union<int, Size>(450),
             Url = $"{baseUrl}/customform",
             FallbackUrl = $"{baseUrl}/customform"
         };
     }
     else if (data == "MultiStep")
     {
-        var step1Card = new Microsoft.Teams.Cards.AdaptiveCard
+        var step1Card = new AdaptiveCard
         {
             Body = new List<CardElement>
             {
                 new TextBlock("Step 1 of 2 - Your Name") { Size = TextSize.Large, Weight = TextWeight.Bolder },
                 new TextInput { Id = "name", Label = "Name", Placeholder = "Enter your name", IsRequired = true }
             },
-            Actions = new List<Microsoft.Teams.Cards.Action> { new SubmitAction { Title = "Next" } }
+            Actions = new List<Action> { new SubmitAction().WithTitle("Next").WithData(new Union<string, SubmitActionData>(new SubmitActionData { NonSchemaProperties = new Dictionary<string, object?> { { "submissiontype", "multi_step_1" } } })) }
         };
 
         taskInfo = new TaskInfo
         {
             Title = "Multi-step Form",
-            Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(400),
-            Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(300),
+            Width = new Union<int, Size>(400),
+            Height = new Union<int, Size>(300),
             Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = step1Card }
         };
     }
     else
     {
-        var dialogCard = new Microsoft.Teams.Cards.AdaptiveCard
+        var dialogCard = new AdaptiveCard
         {
             Body = new List<CardElement>
             {
                 new TextBlock("Enter Text Here") { Weight = TextWeight.Bolder },
-                new TextInput { Id = "UserText", Placeholder = "add some text and submit", IsMultiline = true }
+                new TextInput { Id = "usertext", Placeholder = "add some text and submit", IsMultiline = true }
             },
-            Actions = new List<Microsoft.Teams.Cards.Action> { new SubmitAction { Title = "Submit" } }
+            Actions = new List<Action> { new SubmitAction { Title = "Submit" } }
         };
 
         taskInfo = new TaskInfo
         {
             Title = "Adaptive Card: Inputs",
-            Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(400),
-            Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(200),
+            Width = new Union<int, Size>(400),
+            Height = new Union<int, Size>(200),
             Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = dialogCard }
         };
     }
 
-    return new Microsoft.Teams.Api.TaskModules.Response(new ContinueTask(taskInfo));
+    return new Response(new ContinueTask(taskInfo));
 });
 
 teamsApp.OnTaskSubmit(async (context) =>
@@ -121,47 +125,47 @@ teamsApp.OnTaskSubmit(async (context) =>
     var activity = context.Activity;
     var json = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize(activity));
     var submitData = JsonSerializer.Deserialize<Dictionary<string, object>>(json.GetProperty("value").GetProperty("data").GetRawText());
+    var submissionType = submitData?.GetValueOrDefault("submissiontype")?.ToString();
 
-    if (submitData?.ContainsKey("name") == true && submitData?.ContainsKey("email") == false && submitData?.ContainsKey("UserText") == false)
+    if (submissionType == "multi_step_1")
     {
         var name = submitData["name"]?.ToString();
-        var step2Card = new Microsoft.Teams.Cards.AdaptiveCard
+        var step2Card = new AdaptiveCard
         {
             Body = new List<CardElement>
             {
                 new TextBlock("Step 2 of 2 - Your Email") { Size = TextSize.Large, Weight = TextWeight.Bolder },
-                new TextInput { Id = "name", Value = name, IsVisible = false },
                 new TextInput { Id = "email", Label = "Email", Placeholder = "Enter your email", IsRequired = true }
             },
-            Actions = new List<Microsoft.Teams.Cards.Action> { new SubmitAction { Title = "Submit" } }
+            Actions = new List<Action> { new SubmitAction().WithTitle("Submit").WithData(new Union<string, SubmitActionData>(new SubmitActionData { NonSchemaProperties = new Dictionary<string, object?> { { "submissiontype", "multi_step_2" }, { "name", name! } } })) }
         };
 
         var taskInfo = new TaskInfo
         {
             Title = "Multi-step Form: Step 2",
-            Width = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(400),
-            Height = new Union<int, Microsoft.Teams.Api.TaskModules.Size>(300),
+            Width = new Union<int, Size>(400),
+            Height = new Union<int, Size>(300),
             Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = step2Card }
         };
 
-        return new Microsoft.Teams.Api.TaskModules.Response(new ContinueTask(taskInfo));
+        return new Response(new ContinueTask(taskInfo));
     }
 
-    if (submitData?.ContainsKey("name") == true && submitData?.ContainsKey("email") == true)
+    if (submissionType == "multi_step_2")
     {
         await context.Send($"Hi {submitData["name"]}, thanks for submitting! Your email is {submitData["email"]}");
-        return new Microsoft.Teams.Api.TaskModules.Response(new MessageTask("Multi-step form completed!"));
+        return new Response(new MessageTask("Multi-step form completed!"));
     }
 
-    if (submitData?.GetValueOrDefault("submissiontype")?.ToString() == "custom_form")
+    if (submissionType == "custom_form")
     {
         await context.Send($"Hi {submitData["name"]}, thanks for submitting! Your email is {submitData["email"]}");
-        return new Microsoft.Teams.Api.TaskModules.Response(new MessageTask("Form submitted successfully"));
+        return new Response(new MessageTask("Form submitted successfully"));
     }
 
-    var usertext = submitData?.GetValueOrDefault("UserText")?.ToString();
+    var usertext = submitData?.GetValueOrDefault("usertext")?.ToString();
     await context.Send($"You submitted: {usertext}");
-    return new Microsoft.Teams.Api.TaskModules.Response(new MessageTask("Thanks for submitting!"));
+    return new Response(new MessageTask("Thanks for submitting!"));
 });
 
 webApp.Run();
