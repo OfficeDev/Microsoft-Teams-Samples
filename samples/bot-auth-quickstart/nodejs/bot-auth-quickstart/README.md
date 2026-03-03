@@ -78,7 +78,7 @@ The sample uses Azure AD SSO (Single Sign-On) with the Teams SDK OAuth flow:
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 - Language-specific prerequisites:
-  - **Node.js**: [NodeJS](https://nodejs.org/en/download/) version 16.14.2 or higher
+  - **Node.js**: [NodeJS](https://nodejs.org/en/download/)
   - **.NET**: [.NET 10 SDK](https://dotnet.microsoft.com/download)
   - **Python**: Python or higher
 
