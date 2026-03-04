@@ -2,7 +2,7 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-auth-quickstart-nodejs",
     "source": "officeDev",
-    "title": "Teams Bot Auth Quickstart",
+    "title": "Bot Auth Quickstart",
     "shortDescription": "This sample bot demonstrates implementing SSO in Microsoft Teams using the Teams SDK and Azure AD.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-auth-quickstart/nodejs",
     "longDescription": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-auth-quickstart/nodejs/bot-auth-quickstart/bot-auth-quickstart.gif",
-        "alt": "Solution UX showing teams conversation bot sso quick-start"
+        "alt": "Solution UX showing teams bot auth quick-start"
       }
     ],
     "authors": [
