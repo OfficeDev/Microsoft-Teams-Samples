@@ -91,7 +91,6 @@ deploy:
       envs:
         CLIENT_ID: ${{BOT_ID}}
         CLIENT_SECRET: ${{SECRET_BOT_PASSWORD}}
-        CLIENT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
         BOT_TYPE: SingleTenant
         TENANT_ID: ${{AAD_APP_TENANT_ID}}
         CONNECTION_NAME: ${{CONNECTION_NAME}}
