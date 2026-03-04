@@ -1,0 +1,104 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Remote (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 4
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Launch Remote (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 5
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Launch Remote (Desktop)",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "Start App in Desktop Client (Remote)",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 6
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Start App (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+      "presentation": {
+        "group": "all",
+        "hidden": true
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Start App (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+      "presentation": {
+        "group": "all",
+        "hidden": true
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Start Python",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug in Teams (Edge)",
+      "configurations": ["Start App (Edge)", "Start Python"],
+      "cascadeTerminateToConfigurations": ["Start Python"],
+      "preLaunchTask": "Start App Locally",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 1
+      },
+      "stopAll": true
+    },
+    {
+      "name": "Debug in Teams (Chrome)",
+      "configurations": ["Start App (Chrome)", "Start Python"],
+      "cascadeTerminateToConfigurations": ["Start Python"],
+      "preLaunchTask": "Start App Locally",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 2
+      },
+      "stopAll": true
+    },
+    {
+      "name": "Debug in Teams (Desktop)",
+      "configurations": ["Start Python"],
+      "preLaunchTask": "Start App in Desktop Client",
+      "presentation": {
+        "group": "1-Teams",
+        "order": 3
+      },
+      "stopAll": true
+    }
+  ]
+}
