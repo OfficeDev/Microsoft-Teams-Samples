@@ -96,11 +96,11 @@ jobs:
               name: 'bot-type-ahead-search-adaptive-cards'
               version: '6.0.x'
 
-            - project_path: 'samples/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast/ActivityFeedBroadcast.csproj'
+            - project_path: 'samples/TeamsJS/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast/ActivityFeedBroadcast.csproj'
               name: 'graph-activity-feed-broadcast'
               version: '6.0.x'
 
-            - project_path: 'samples/graph-app-installation-lifecycle/csharp/AppInstallation/AppInstallation.csproj'
+            - project_path: 'samples/TeamsJS/graph-app-installation-lifecycle/csharp/AppInstallation/AppInstallation.csproj'
               name: 'graph-app-installation-lifecycle'
               version: '6.0.x'
 
@@ -112,7 +112,7 @@ jobs:
               name: 'graph-change-notification'
               version: '6.0.x'
 
-            - project_path: 'samples/graph-channel-lifecycle/csharp/ChannelLifecycle/ChannelLifecycle.csproj'
+            - project_path: 'samples/TeamsJS/graph-channel-lifecycle/csharp/ChannelLifecycle/ChannelLifecycle.csproj'
               name: 'graph-channel-lifecycle'
               version: '6.0.x'
 
@@ -120,11 +120,11 @@ jobs:
               name: 'graph-chat-lifecycle'
               version: '6.0.x'
 
-            - project_path: 'samples/graph-rsc/csharp/RSCDemo/RSCDemo.csproj'
+            - project_path: 'samples/TeamsJS/graph-rsc/csharp/RSCDemo/RSCDemo.csproj'
               name: 'graph-rsc'
               version: '6.0.x'
 
-            - project_path: 'samples/meeting-recruitment-app/csharp/MeetingApp/MeetingApp.csproj'
+            - project_path: 'samples/TeamsJS/meeting-recruitment-app/csharp/MeetingApp/MeetingApp.csproj'
               name: 'meeting-recruitment-app'
               version: '6.0.x'
 
@@ -136,7 +136,7 @@ jobs:
               name: 'meetings-details-tab'
               version: '6.0.x'
 
-            - project_path: 'samples/meetings-live-code-interview/csharp/MeetingLiveCoding/MeetingLiveCoding.csproj'
+            - project_path: 'samples/TeamsJS/meetings-live-code-interview/csharp/MeetingLiveCoding/MeetingLiveCoding.csproj'
               name: 'meetings-live-code-interview'
               version: '6.0.x'
 
@@ -144,7 +144,7 @@ jobs:
               name: 'meetings-sidepanel'
               version: '6.0.x'
 
-            - project_path: 'samples/meetings-stage-view/csharp/AppInMeeting/AppInMeeting.csproj'
+            - project_path: 'samples/TeamsJS/meetings-stage-view/csharp/AppInMeeting/AppInMeeting.csproj'
               name: 'meetings-stage-view'
               version: '6.0.x'
 
@@ -168,11 +168,11 @@ jobs:
               name: 'app-region-selection'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-app-navigation/csharp/Microsoft.Teams.Samples.TabAppNavigation.Web/Microsoft.Teams.Samples.TabAppNavigation.Web.csproj'
+            - project_path: 'samples/TeamsJS/tab-app-navigation/csharp/Microsoft.Teams.Samples.TabAppNavigation.Web/Microsoft.Teams.Samples.TabAppNavigation.Web.csproj'
               name: 'tab-app-navigation'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
+            - project_path: 'samples/TeamsJS/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
               name: 'tab-external-auth'
               version: '6.0.x'
 
@@ -180,11 +180,11 @@ jobs:
               name: 'tab-conversations'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-product-inspection/csharp/ProductInspection/ProductInspection.csproj'
+            - project_path: 'samples/TeamsJS/tab-product-inspection/csharp/ProductInspection/ProductInspection.csproj'
               name: 'tab-product-inspection'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-request-approval/csharp/TabRequestApproval/TabRequestApproval.csproj'
+            - project_path: 'samples/TeamsJS/tab-request-approval/csharp/TabRequestApproval/TabRequestApproval.csproj'
               name: 'tab-request-approval'
               version: '6.0.x'
 
@@ -204,7 +204,7 @@ jobs:
               name: 'tab-channel-group-config-page-auth'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-channel-group-quickstart/csharp/Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web/Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web.csproj'
+            - project_path: 'samples/TeamsJS/tab-channel-group-quickstart/csharp/Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web/Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web.csproj'
               name: 'tab-channel-group-quickstart'
               version: '6.0.x'
 
@@ -212,7 +212,7 @@ jobs:
               name: 'tab-deeplink'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-graph-toolkit/csharp/TabGraphToolkit/TabGraphToolkit.csproj'
+            - project_path: 'samples/TeamsJS/tab-graph-toolkit/csharp/TabGraphToolkit/TabGraphToolkit.csproj'
               name: 'tab-graph-toolkit'
               version: '6.0.x'
 
@@ -236,7 +236,7 @@ jobs:
               name: 'bot-release-management'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-people-picker/csharp/TabPeoplePicker/TabPeoplePicker.csproj'
+            - project_path: 'samples/TeamsJS/tab-people-picker/csharp/TabPeoplePicker/TabPeoplePicker.csproj'
               name: 'tab-people-picker'
               version: '6.0.x'
 
@@ -248,19 +248,19 @@ jobs:
               name: 'tab-personal'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-personal-sso-quickstart/csharp_dotnetcore/PersonalTabSSO.csproj'
+            - project_path: 'samples/TeamsJS/tab-personal-sso-quickstart/csharp_dotnetcore/PersonalTabSSO.csproj'
               name: 'tab-personal-sso-quickstart'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-channel-group/mvc-csharp/ChannelGroupTabMVC.csproj'
+            - project_path: 'samples/TeamsJS/tab-channel-group/mvc-csharp/ChannelGroupTabMVC.csproj'
               name: 'tab-channel-group'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-channel-group/razor-csharp/channelGroupTab.csproj'
+            - project_path: 'samples/TeamsJS/tab-channel-group/razor-csharp/channelGroupTab.csproj'
               name: 'tab-channel-group'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-channel-group-sso-quickstart/csharp_dotnetcore/GroupTabSSO.csproj'
+            - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/csharp_dotnetcore/GroupTabSSO.csproj'
               name: 'tab-channel-group-sso-quickstart'
               version: '6.0.x'
 
@@ -304,23 +304,23 @@ jobs:
               name: 'bot-teams-catering'
               version: '6.0.x'
 
-            - project_path: 'samples/graph-bulk-meetings/csharp/EventMeeting/EventMeeting.csproj'
+            - project_path: 'samples/TeamsJS/graph-bulk-meetings/csharp/EventMeeting/EventMeeting.csproj'
               name: 'graph-bulk-meetings'
               version: '6.0.x' 
 
-            - project_path: 'samples/graph-change-notification-team-channel/csharp/ChangeNotification/ChangeNotification.csproj'
+            - project_path: 'samples/TeamsJS/graph-change-notification-team-channel/csharp/ChangeNotification/ChangeNotification.csproj'
               name: 'graph-change-notification-team-channel'
               version: '6.0.x' 
 
-            - project_path: 'samples/graph-pinned-messages/csharp/GraphPinnedMessage/GraphPinnedMessage.csproj'
+            - project_path: 'samples/TeamsJS/graph-pinned-messages/csharp/GraphPinnedMessage/GraphPinnedMessage.csproj'
               name: 'graph-pinned-messages'
               version: '6.0.x'
 
-            - project_path: 'samples/graph-teams-tag/csharp/GraphTeamsTag/GraphTeamsTag.csproj'
+            - project_path: 'samples/TeamsJS/graph-teams-tag/csharp/GraphTeamsTag/GraphTeamsTag.csproj'
               name: 'graph-teams-tag'
               version: '6.0.x'
 
-            - project_path: 'samples/incoming-webhook/csharp/IncomingWebhook/IncomingWebhook.csproj'
+            - project_path: 'samples/TeamsJS/incoming-webhook/csharp/IncomingWebhook/IncomingWebhook.csproj'
               name: 'incoming-webhook'
               version: '6.0.x'
 
@@ -404,7 +404,7 @@ jobs:
               name: 'msteams-application-qbot'
               version: '3.1'    
 
-            - project_path: 'samples/graph-activity-feed/csharp/ActivityFeedNotification/TabActivityFeed.csproj'
+            - project_path: 'samples/TeamsJS/graph-activity-feed/csharp/ActivityFeedNotification/TabActivityFeed.csproj'
               name: 'graph-activity-feed'
               version: '6.0.x' 
 
@@ -428,7 +428,7 @@ jobs:
               name: 'bot-formatting-cards'
               version: '6.0.x'
 
-            - project_path: 'samples/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
+            - project_path: 'samples/TeamsJS/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
               name: 'meeting-tabs'
               version: '6.0.x'
               
@@ -456,7 +456,7 @@ jobs:
               name: 'msgext-unfurling-ac-loop-components'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/MeetingTranscriptRecording.csproj'
+            - project_path: 'samples/TeamsJS/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/MeetingTranscriptRecording.csproj'
               name: 'tab-meeting-transcript-recording'
               version: '6.0.x'
 
@@ -484,7 +484,7 @@ jobs:
               name: 'tab-meeting-auto-recording'
               version: '6.0.x'
             
-            - project_path: 'samples/tab-nested-auth/csharp/TabNestedAuth/TabNestedAuth.csproj'
+            - project_path: 'samples/TeamsJS/tab-nested-auth/csharp/TabNestedAuth/TabNestedAuth.csproj'
               name: 'tab-nested-auth'
               version: '6.0.x'
 
@@ -512,7 +512,7 @@ jobs:
               name: 'bot-shared-channel-events'
               version: '8.0.x'
 
-            - project_path: 'samples/graph-membership-change-notification/csharp/ChangeNotification/ChangeNotification.csproj'
+            - project_path: 'samples/TeamsJS/graph-membership-change-notification/csharp/ChangeNotification/ChangeNotification.csproj'
               name: 'graph-membership-change-notification'
               version: '8.0.x'
 
@@ -572,7 +572,7 @@ jobs:
               name: 'app-sso-client'
               version: '18.x'
 
-            - project_path: 'samples/app-task-module/nodejs'
+            - project_path: 'samples/TeamsJS/app-task-module/nodejs'
               name: 'app-task-module'
               version: '14.x'
 
@@ -616,19 +616,19 @@ jobs:
               name: 'connector-generic'
               version: '14.x'
 
-            - project_path: 'samples/connector-github-notification/nodejs'
+            - project_path: 'samples/TeamsJS/connector-github-notification/nodejs'
               name: 'connector-github-notification'
               version: '14.x'
             
-            - project_path: 'samples/graph-activity-feed-broadcast/nodejs'
+            - project_path: 'samples/TeamsJS/graph-activity-feed-broadcast/nodejs'
               name: 'graph-activity-feed-broadcast'
               version: '14.x'
 
-            - project_path: 'samples/graph-activity-feed/nodejs'
+            - project_path: 'samples/TeamsJS/graph-activity-feed/nodejs'
               name: 'graph-activity-feed'
               version: '14.x'
 
-            - project_path: 'samples/graph-app-installation-lifecycle/nodejs'
+            - project_path: 'samples/TeamsJS/graph-app-installation-lifecycle/nodejs'
               name: 'graph-app-installation-lifecycle'
               version: '14.x'
 
@@ -640,7 +640,7 @@ jobs:
               name: 'graph-change-notification'
               version: '14.x'
 
-            - project_path: 'samples/graph-channel-lifecycle/nodejs'
+            - project_path: 'samples/TeamsJS/graph-channel-lifecycle/nodejs'
               name: 'graph-channel-lifecycle'
               version: '14.x'
 
@@ -652,7 +652,7 @@ jobs:
               name: 'graph-proactive-installation'
               version: '14.x'
 
-            - project_path: 'samples/graph-rsc/nodejs'
+            - project_path: 'samples/TeamsJS/graph-rsc/nodejs'
               name: 'graph-rsc'
               version: '14.x'
 
@@ -672,11 +672,11 @@ jobs:
               name: 'meetings-sidepanel-clientapp'
               version: '18.x'
 
-            - project_path: 'samples/meetings-stage-view/nodejs'
+            - project_path: 'samples/TeamsJS/meetings-stage-view/nodejs'
               name: 'meetings-stage-view'
               version: '14.x'
             
-            - project_path: 'samples/meetings-stage-view/nodejs/ClientApp'
+            - project_path: 'samples/TeamsJS/meetings-stage-view/nodejs/ClientApp'
               name: 'meetings-stage-view-clientapp'
               version: '14.x'
 
@@ -684,11 +684,11 @@ jobs:
               name: 'meetings-token-app'
               version: '16.18.0'
 
-            - project_path: 'samples/meeting-recruitment-app/nodejs/api'
+            - project_path: 'samples/TeamsJS/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
               version: '16.8.x'
 
-            - project_path: 'samples/meeting-recruitment-app/nodejs'
+            - project_path: 'samples/TeamsJS/meeting-recruitment-app/nodejs'
               name: 'meeting-recruitment-app-clientapp'
               version: '16.8.x'
 
@@ -704,11 +704,11 @@ jobs:
               name: 'tab-deeplink'
               version: '14.x'
 
-            - project_path: 'samples/tab-product-inspection/nodejs'
+            - project_path: 'samples/TeamsJS/tab-product-inspection/nodejs'
               name: 'tab-product-inspection'
               version: '14.x'
 
-            - project_path: 'samples/tab-request-approval/nodejs'
+            - project_path: 'samples/TeamsJS/tab-request-approval/nodejs'
               name: 'tab-request-approval'
               version: '14.x'
 
@@ -724,7 +724,7 @@ jobs:
               name: 'tab-staggered-permission'
               version: '14.x'
 
-            - project_path: 'samples/meetings-live-code-interview/nodejs/api'
+            - project_path: 'samples/TeamsJS/meetings-live-code-interview/nodejs/api'
               name: 'meetings-live-code-interview'
               version: '14.x'
 
@@ -740,7 +740,7 @@ jobs:
               name: 'bot-release-management'
               version: '14.x'
 
-            - project_path: 'samples/tab-people-picker/nodejs'
+            - project_path: 'samples/TeamsJS/tab-people-picker/nodejs'
               name: 'tab-people-picker'
               version: '14.x'
 
@@ -752,59 +752,59 @@ jobs:
               name: 'msgext-search-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/tab-channel-group/nodejs'
+            - project_path: 'samples/TeamsJS/tab-channel-group/nodejs'
               name: 'tab-channel-group'
               version: '16.x'
 
-            - project_path: 'samples/tab-channel-group-quickstart/js'
+            - project_path: 'samples/TeamsJS/tab-channel-group-quickstart/js'
               name: 'tab-channel-group-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/tab-channel-group-quickstart/ts'
+            - project_path: 'samples/TeamsJS/tab-channel-group-quickstart/ts'
               name: 'tab-channel-group-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/tab-channel-group-sso-quickstart/js'
+            - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/js'
               name: 'tab-channel-group-sso-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/tab-channel-group-sso-quickstart/js/api-server'
+            - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/js/api-server'
               name: 'tab-channel-group-sso-quickstart-api-server'
               version: '14.x'
 
-            - project_path: 'samples/tab-channel-group-sso-quickstart/ts'
+            - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/ts'
               name: 'tab-channel-group-sso-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/tab-channel-group-sso-quickstart/ts/api-server'
+            - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/ts/api-server'
               name: 'tab-channel-group-sso-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/tab-personal-quickstart/js'
+            - project_path: 'samples/TeamsJS/tab-personal-quickstart/js'
               name: 'tab-personal-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/tab-personal-quickstart/ts'
+            - project_path: 'samples/TeamsJS/tab-personal-quickstart/ts'
               name: 'tab-personal-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/tab-personal-sso-quickstart/js'
+            - project_path: 'samples/TeamsJS/tab-personal-sso-quickstart/js'
               name: 'tab-personal-sso-quickstart'
               version: '18.x'
 
-            - project_path: 'samples/tab-personal-sso-quickstart/js/api-server'
+            - project_path: 'samples/TeamsJS/tab-personal-sso-quickstart/js/api-server'
               name: 'tab-personal-sso-quickstart-api-server'
               version: '18.x'
 
-            - project_path: 'samples/tab-personal-sso-quickstart/ts'
+            - project_path: 'samples/TeamsJS/tab-personal-sso-quickstart/ts'
               name: 'tab-personal-sso-quickstart'
               version: '18.x'
 
-            - project_path: 'samples/tab-personal-sso-quickstart/ts/api-server'
+            - project_path: 'samples/TeamsJS/tab-personal-sso-quickstart/ts/api-server'
               name: 'tab-personal-sso-quickstart-api-server'
               version: '18.x'
 
-            - project_path: 'samples/tab-graph-toolkit/nodejs'
+            - project_path: 'samples/TeamsJS/tab-graph-toolkit/nodejs'
               name: 'tab-graph-toolkit'
               version: '16.x'
             
@@ -860,43 +860,43 @@ jobs:
               name: 'connector-todo-notification'
               version: '16.x' 
 
-            - project_path: 'samples/graph-bulk-meetings/nodejs'
+            - project_path: 'samples/TeamsJS/graph-bulk-meetings/nodejs'
               name: 'graph-bulk-meetings'
               version: '16.x' 
 
-            - project_path: 'samples/graph-bulk-meetings/nodejs/client'
+            - project_path: 'samples/TeamsJS/graph-bulk-meetings/nodejs/client'
               name: 'graph-bulk-meetings-client'
               version: '16.x' 
 
-            - project_path: 'samples/graph-change-notification-team-channel/nodejs'
+            - project_path: 'samples/TeamsJS/graph-change-notification-team-channel/nodejs'
               name: 'graph-change-notification-team-channel'
               version: '16.x' 
 
-            - project_path: 'samples/graph-change-notification-team-channel/nodejs/client'
+            - project_path: 'samples/TeamsJS/graph-change-notification-team-channel/nodejs/client'
               name: 'graph-change-notification-team-channel-client'
               version: '16.x' 
 
-            - project_path: 'samples/graph-pinned-messages/nodejs'
+            - project_path: 'samples/TeamsJS/graph-pinned-messages/nodejs'
               name: 'graph-pinned-messages'
               version: '16.x'
 
-            - project_path: 'samples/graph-pinned-messages/nodejs/ClientApp'
+            - project_path: 'samples/TeamsJS/graph-pinned-messages/nodejs/ClientApp'
               name: 'graph-pinned-messages-clientapp'
               version: '16.x'
 
-            - project_path: 'samples/graph-teams-tag/nodejs'
+            - project_path: 'samples/TeamsJS/graph-teams-tag/nodejs'
               name: 'graph-teams-tag'
               version: '16.x'
 
-            - project_path: 'samples/graph-teams-tag/nodejs/client'
+            - project_path: 'samples/TeamsJS/graph-teams-tag/nodejs/client'
               name: 'graph-teams-tag-client'
               version: '16.x'
 
-            - project_path: 'samples/incoming-webhook/nodejs/ClientApp'
+            - project_path: 'samples/TeamsJS/incoming-webhook/nodejs/ClientApp'
               name: 'incoming-webhook-client-app'
               version: '16.x'
 
-            - project_path: 'samples/incoming-webhook/nodejs/api'
+            - project_path: 'samples/TeamsJS/incoming-webhook/nodejs/api'
               name: 'incoming-webhook-server-apis'
               version: '16.x'
 
@@ -940,19 +940,19 @@ jobs:
               name: 'msgext-search'
               version: '16.x'
 
-            - project_path: 'samples/tab-app-monetization/nodejs'
+            - project_path: 'samples/TeamsJS/tab-app-monetization/nodejs'
               name: 'tab-app-monetization'
               version: '16.x'
 
-            - project_path: 'samples/tab-device-permissions/nodejs'
+            - project_path: 'samples/TeamsJS/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
               version: '16.x'
             
-            - project_path: 'samples/tab-channel-context/nodejs'
+            - project_path: 'samples/TeamsJS/tab-channel-context/nodejs'
               name: 'tab-channel-context'  
               version: '16.x'
             
-            - project_path: 'samples/meetings-audio-state/nodejs'
+            - project_path: 'samples/TeamsJS/meetings-audio-state/nodejs'
               name: 'meetings-audio-state'
               version: '16.x'
 
@@ -960,7 +960,7 @@ jobs:
               name: 'app-localization'
               version: '16.x'
               
-            - project_path: 'samples/tab-ui-templates/ts'
+            - project_path: 'samples/TeamsJS/tab-ui-templates/ts'
               name: 'tab-ui-templates'
               version: '18.x'
 
@@ -968,7 +968,7 @@ jobs:
               name: 'bot-adaptive-card-actions'
               version: '18.x'
             
-            - project_path: 'samples/tab-navbar-menu/ts'
+            - project_path: 'samples/TeamsJS/tab-navbar-menu/ts'
               name: 'tab-navbar-menu'
               version: '16.x'
             
@@ -976,7 +976,7 @@ jobs:
               name: 'bot-formatting-cards'
               version: '18.x'
 
-            - project_path: 'samples/meeting-tabs/nodejs'
+            - project_path: 'samples/TeamsJS/meeting-tabs/nodejs'
               name: 'meeting-tabs'
               version: '18.x'
 
@@ -984,7 +984,7 @@ jobs:
               name: 'bot-all-cards'
               version: '18.x'
 
-            - project_path: 'samples/app-cache-meetings/nodejs'
+            - project_path: 'samples/TeamsJS/app-cache-meetings/nodejs'
               name: 'app-cache-meetings'
               version: '18.x'
 
@@ -1008,11 +1008,11 @@ jobs:
               name: 'meetings-app-icon-badging'
               version: '18.x'
 
-            - project_path: 'samples/tab-multi-hub/ts/api-server'
+            - project_path: 'samples/TeamsJS/tab-multi-hub/ts/api-server'
               name: 'tab-multi-hub-api-server'
               version: '18.x'
 
-            - project_path: 'samples/tab-multi-hub/ts'
+            - project_path: 'samples/TeamsJS/tab-multi-hub/ts'
               name: 'tab-multi-hub'
               version: '18.x'
             
@@ -1040,11 +1040,11 @@ jobs:
               name: 'tab-add-in-combined'
               version: '18.x'
 
-            - project_path: 'samples/tab-meeting-transcript-recording/nodejs'
+            - project_path: 'samples/TeamsJS/tab-meeting-transcript-recording/nodejs'
               name: 'tab-meeting-transcript-recording'
               version: '18.x'
 
-            - project_path: 'samples/tab-meeting-transcript-recording/nodejs/api-server'
+            - project_path: 'samples/TeamsJS/tab-meeting-transcript-recording/nodejs/api-server'
               name: 'tab-meeting-transcript-recording-api-server'
               version: '18.x'
               
@@ -1067,11 +1067,11 @@ jobs:
               name: 'bot-feed-members'
               version: '18.x'
 
-            - project_path: 'samples/graph-rsc-helper/nodejs'
+            - project_path: 'samples/TeamsJS/graph-rsc-helper/nodejs'
               name: 'graph-rsc-helper'
               version: '18.x'
 
-            - project_path: 'samples/tab-nested-auth/nodejs'
+            - project_path: 'samples/TeamsJS/tab-nested-auth/nodejs'
               name: 'tab-nested-auth'
               version: '18.x'
             
@@ -1091,15 +1091,15 @@ jobs:
               name: 'bot-graph-chat-migration'
               version: '20.x'
               
-            - project_path: 'samples/graph-membership-change-notification/nodejs'
+            - project_path: 'samples/TeamsJS/graph-membership-change-notification/nodejs'
               name: 'graph-membership-change-notification'
               version: '20.x'   
 
-            - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs'
+            - project_path: 'samples/TeamsJS/tab-adhoccalls-transcript-recording/nodejs'
               name: 'tab-adhoccalls-transcript-recording'
               version: '18.x'
 
-            - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs/api-server'
+            - project_path: 'samples/TeamsJS/tab-adhoccalls-transcript-recording/nodejs/api-server'
               name: 'tab-adhoccalls-transcript-recording-api-server'
               version: '18.x'
 
@@ -1214,7 +1214,7 @@ jobs:
               name: 'bot-initiate-thread-in-channel'
               version: '3.10.x'
 
-            - project_path: 'samples/graph-pinned-messages/python'
+            - project_path: 'samples/TeamsJS/graph-pinned-messages/python'
               name: 'graph-pinned-messages'
               version: '3.10.x'
 
@@ -1246,7 +1246,7 @@ jobs:
               name: 'msgext-thirdparty-storage'
               version: '3.10.x'
 
-            - project_path: 'samples/tab-app-navigation/python'
+            - project_path: 'samples/TeamsJS/tab-app-navigation/python'
               name: 'tab-app-navigation'
               version: '3.10.x'
 
@@ -1254,7 +1254,7 @@ jobs:
               name: 'tab-deeplink'
               version: '3.10.x'
             
-            - project_path: 'samples/graph-membership-change-notification/python'
+            - project_path: 'samples/TeamsJS/graph-membership-change-notification/python'
               name: 'graph-membership-change-notification'
               version: '3.10.x'
 
@@ -1270,7 +1270,7 @@ jobs:
               name: 'bot-all-cards'
               version: '3.13.x'
 
-            - project_path: 'samples/tab-request-approval/python'
+            - project_path: 'samples/TeamsJS/tab-request-approval/python'
               name: 'tab-request-approval'
               version: '3.10.x'
 
