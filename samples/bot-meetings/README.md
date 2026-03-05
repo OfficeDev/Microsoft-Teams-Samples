@@ -34,10 +34,6 @@ This sample demonstrates how to handle real-time meeting events and retrieve mee
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
-- Language-specific prerequisites:
-  - **Node.js**: [NodeJS](https://nodejs.org/en/download/) version 16.14.2 or higher
-  - **.NET**: [.NET SDK](https://dotnet.microsoft.com/download)
-  - **Python**: Python 3.12 or higher
 
 ## Setup Instructions
 
@@ -105,7 +101,6 @@ Follow this link - [Configure application access policy](https://docs.microsoft.
 
 Follow this link - [Manage policies via PowerShell](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-managing-teams#manage-policies-via-powershell)
 
-**Note**: Copy the User Id you used to granting the policy. You need it while configuring the .env file.
 
 ![Policy](Images/Policy.png)
 
@@ -123,7 +118,7 @@ Navigate to the Teams Developer Portal http://dev.teams.microsoft.com
 
 **Enable Meeting Participant Events:**
 
-To receive real-time participant join and leave events, enable Meeting event subscriptions for `Participant Join` and `Participant Leave` in your bot by following the guidance in the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#receive-meeting-participant-events) documentation.
+To receive real-time participant join and leave events, enable Meeting event subscriptions for `Participant Join` and `Participant Leave` in your bot on Teams Developer Portal by following the guidance in the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#receive-meeting-participant-events) documentation.
 
 ![Extra Setup](Images/event_subscription.png)
 
