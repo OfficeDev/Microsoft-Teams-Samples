@@ -1,6 +1,6 @@
 # Bot Message Extensions - .NET (C#)
 
-This sample demonstrates a search-based messaging extension in Microsoft Teams that allows users to search for NuGet packages and Wikipedia articles directly within the compose area.
+This sample demonstrates a search-based messaging extension in Microsoft Teams that allows users to search for Wikipedia articles..
 
 ## Prerequisites
 
