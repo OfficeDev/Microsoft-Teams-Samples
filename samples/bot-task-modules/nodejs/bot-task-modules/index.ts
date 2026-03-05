@@ -8,6 +8,7 @@ import { App } from '@microsoft/teams.apps';
 import {
     Attachment,
     TaskModuleRequest,
+    TaskModuleResponse,
     UrlTaskModuleTaskInfo,
     CardTaskModuleTaskInfo,
     cardAttachment,
@@ -102,7 +103,7 @@ app.on('dialog.open', async (context: IActivityContext<any>) => {
             url: `${BOT_ENDPOINT}/CustomForm/`,
             fallbackUrl: `${BOT_ENDPOINT}/CustomForm/`,
         };
-        return { task: { type: 'continue', value: taskInfo } };
+        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
     }
 
     if (cardData === 'MultiStep') {
@@ -112,7 +113,7 @@ app.on('dialog.open', async (context: IActivityContext<any>) => {
             height: 300,
             card: createMultiStepStep1Card(),
         };
-        return { task: { type: 'continue', value: taskInfo } };
+        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
     }
 
     // Default: AdaptiveCard
@@ -122,7 +123,7 @@ app.on('dialog.open', async (context: IActivityContext<any>) => {
         height: 200,
         card: createTextInputCard(),
     };
-    return { task: { type: 'continue', value: taskInfo } };
+    return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
 });
 
 /** Handles task/submit invocations by routing on submissiontype: advances multi-step flow, confirms custom form, or echoes adaptive card text input. */
@@ -138,25 +139,25 @@ app.on('dialog.submit', async (context: IActivityContext<any>) => {
             height: 300,
             card: createMultiStepStep2Card(data.name),
         };
-        return { task: { type: 'continue', value: taskInfo } };
+        return { task: { type: 'continue', value: taskInfo } } as TaskModuleResponse;
     }
 
     if (submissionType === 'multi_step_2') {
         const { name, email } = data;
         await context.send(`Hi ${name}, thanks for submitting! Your email is ${email}`);
-        return { task: { type: 'message', value: 'Multi-step form completed!' } };
+        return { task: { type: 'message', value: 'Multi-step form completed!' } } as TaskModuleResponse;
     }
 
     if (submissionType === 'custom_form') {
         const { name, email } = data;
         await context.send(`Hi ${name}, thanks for submitting! Your email is ${email}`);
-        return { task: { type: 'message', value: 'Form submitted successfully' } };
+        return { task: { type: 'message', value: 'Form submitted successfully' } } as TaskModuleResponse;
     }
 
     // Default: adaptive card text input
     const usertext = data?.usertext;
     await context.send(`You submitted: ${usertext}`);
-    return { task: { type: 'message', value: 'Thanks for submitting!' } };
+    return { task: { type: 'message', value: 'Thanks for submitting!' } } as TaskModuleResponse;
 });
 
 /** Logs any unhandled errors raised by the app framework to the console. */
