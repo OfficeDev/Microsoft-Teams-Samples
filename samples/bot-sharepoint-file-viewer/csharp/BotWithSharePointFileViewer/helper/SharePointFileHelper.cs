@@ -29,7 +29,7 @@ namespace BotWithSharePointFileViewer.helper
             }
             catch (ServiceException ex)
             {
-                throw ex;
+                throw;
             }
         }
 

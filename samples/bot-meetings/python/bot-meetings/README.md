@@ -1,0 +1,37 @@
+# Bot Meetings - Python
+
+This sample demonstrates a bot for Microsoft Teams that handles real-time meeting events (start, end, participant join/leave) and retrieves meeting transcripts via Microsoft Graph.
+
+## Prerequisites
+
+- [Python >=3.12, <3.15](https://www.python.org/downloads/)
+- pip (recommended) or [uv](https://docs.astral.sh/uv/)
+
+## Run the sample
+
+1. Navigate to this directory:
+   ```bash
+   cd python/bot-meetings
+   ```
+2. Run the bot using pip:
+
+```bash
+pip install -e .
+python main.py
+```
+
+### Alternative: Using uv
+
+1. Install dependencies using uv:
+   ```bash
+   uv sync
+   ```
+
+2. Run the bot:
+   ```bash
+   uv run main.py
+   ```
+
+The bot will start listening on `http://localhost:3978`.
+
+Refer to the main [README.md](../../README.md) to interact with your bot in the agentsplayground or in Teams.

@@ -303,7 +303,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
                 if (ex.StatusCode != HttpStatusCode.NotFound)
                 {
                     // If it's not a NotFound error please ignore
-                    throw ex;
+                    throw;
                 }
 
                 return "That action failed. Unable to find call";

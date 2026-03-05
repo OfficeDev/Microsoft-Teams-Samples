@@ -1,5 +1,5 @@
 function getCookies() {
-    document.getElementById("cookies").innerHTML = document.cookie;
+    document.getElementById("cookies").textContent = document.cookie;
   }
   
   function setCookies() {

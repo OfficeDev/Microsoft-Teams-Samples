@@ -1,27 +1,31 @@
 function getAllLocalStorage() {
+    const container = document.getElementById("localStorage");
+    container.innerHTML = "";
+
     if (!localStorage) {
-        document.getElementById("localStorage").innerHTML = "Local Storage API not supported";
+        container.textContent = "Local Storage API not supported";
         return;
     }
 
     if (localStorage.length === 0) {
-        document.getElementById("localStorage").innerHTML = "No local storage items";
+        container.textContent = "No local storage items";
         return;
     }
 
-    let html = "<table>";
+    const table = document.createElement("table");
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const value = localStorage.getItem(key);
-        html += `<tr><td>${key}</td><td>${value}</td></tr>`;
+        const row = table.insertRow();
+        row.insertCell().textContent = key;
+        row.insertCell().textContent = value;
     }
-    html += "</table>";
-    document.getElementById("localStorage").innerHTML = html;
+    container.appendChild(table);
 }
 
 function clearAllLocalStorage() {
     if (!localStorage) {
-        document.getElementById("localStorage").innerHTML = "Local Storage API not supported";
+        document.getElementById("localStorage").textContent = "Local Storage API not supported";
         return;
     }
 
@@ -35,7 +39,7 @@ function setInLocalStorage() {
     const valueElement = document.getElementById("value");
 
     if (!localStorage) {
-        document.getElementById("localStorage").innerHTML = "Local Storage API not supported";
+        document.getElementById("localStorage").textContent = "Local Storage API not supported";
         return;
     }
 
