@@ -1,6 +1,6 @@
 # Bot Meetings - .NET (C#)
 
-This sample demonstrates a Teams bot that handles meeting lifecycle events such as meeting start/end, participant join/leave, and automatically captures meeting transcripts when transcription is enabled in Microsoft Teams meetings.
+This sample demonstrates a bot for Microsoft Teams that handles real-time meeting events (start, end, participant join/leave) and retrieves meeting transcripts via Microsoft Graph.
 
 ## Prerequisites
 
