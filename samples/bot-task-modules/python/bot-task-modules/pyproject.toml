@@ -1,0 +1,12 @@
+[project]
+name = "bot-task-modules"
+version = "0.1.0"
+description = "This sample demonstrates Task Modules in Microsoft Teams using the Teams SDK for Python."
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "microsoft-teams-apps==2.0.0a9",
+    "microsoft-teams-api==2.0.0a9",
+    "microsoft-teams-cards==2.0.0a9",
+    "python-dotenv>=1.0.0",
+]

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "localhost": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:3978",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "BotEndpoint": "YOUR_BotEndpoint"
+      }
+    },
+    "teamsbot": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:3978",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "BotEndpoint": "YOUR_BotEndpoint",
+        "Teams__TenantId": "YOUR_TenantId",
+        "Teams__ClientId": "YOUR_ClientId",
+        "Teams__ClientSecret": "YOUR_ClientSecret"
+      }
+    }
+  }
+}

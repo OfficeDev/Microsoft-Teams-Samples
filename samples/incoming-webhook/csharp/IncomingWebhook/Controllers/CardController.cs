@@ -33,7 +33,7 @@ namespace IncomingWebhook.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -59,7 +59,7 @@ namespace IncomingWebhook.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
     }

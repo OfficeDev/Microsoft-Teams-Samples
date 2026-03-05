@@ -1,0 +1,11 @@
+[project]
+name = "bot-cards"
+version = "0.1.0"
+description = "Bot Cards sample"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "microsoft-teams-apps==2.0.0a9",
+    "microsoft-teams-cards==2.0.0a9",
+]
