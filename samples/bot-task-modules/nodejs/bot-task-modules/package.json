@@ -1,0 +1,21 @@
+{
+    "name": "bot-task-modules",
+    "description": "This sample demonstrates Task Modules in Microsoft Teams using the Teams SDK for Node.js.",
+    "main": "index.ts",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "start": "tsx --env-file-if-exists .env index.ts"
+    },
+    "dependencies": {
+        "@microsoft/teams.api": "^2.0.5",
+        "@microsoft/teams.apps": "^2.0.5",
+        "@microsoft/teams.cards": "^2.0.5",
+        "express": "^4.18.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.25",
+        "@types/node": "^20.0.0",
+        "tsx": "^4.21.0"
+    }
+}
