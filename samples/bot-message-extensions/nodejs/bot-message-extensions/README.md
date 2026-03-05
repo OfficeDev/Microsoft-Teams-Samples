@@ -1,6 +1,6 @@
 # Bot Message Extensions - Node.js (TypeScript)
 
-This sample demonstrates message extensions for Microsoft Teams using Node.js and TypeScript, built with the Teams SDK. It supports search commands (Wikipedia search, NuGet package search, expert finder by name and skill), action commands (create card, get message details), link unfurling, and result grid display.
+This sample demonstrates a search-based messaging extension in Microsoft Teams that allows users to search for  Wikipedia articles.
 
 ## Prerequisites
 
