@@ -4,9 +4,8 @@ This sample demonstrates how to enhance AI-generated bot messages for Microsoft 
 
 ## Prerequisites
 
-- [Python](https://www.python.org/downloads/)
-- [pip](https://pip.pypa.io/en/stable/installation/)
-- [uv](https://docs.astral.sh/uv/)
+- [Python >=3.12, <3.15](https://www.python.org/downloads/)
+- pip (recommended) or [uv](https://docs.astral.sh/uv/)
 
 ## Run the sample
 
@@ -37,8 +36,3 @@ python main.py
 The bot will start listening on `http://localhost:3978`.
 
 Refer to the main [README.md](../../README.md) to interact with your bot in Teams.
-
-## Further Reading
-
-- [Microsoft Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/)
-- [Teams SDK Documentation](https://microsoft.github.io/teams-sdk/welcome)
