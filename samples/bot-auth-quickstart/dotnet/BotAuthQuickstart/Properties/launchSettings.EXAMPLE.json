@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    
+    "Start Project": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5130",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Teams__ClientId": "<your-client-id>",
+        "Teams__ClientSecret": "<your-client-secret>",
+        "Teams__TenantId": "<your-tenant-id>",
+        "Teams__ConnectionName": "<your-oauth-connection-name>"
+      }
+    }
+  }
+}
