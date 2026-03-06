@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-ai-python",
+    "name": "officedev-microsoft-teams-samples-bot-ai-messages-python",
     "source": "officeDev",
-    "title": "Bot AI",
-    "shortDescription": "This sample demonstrates AI bot message formatting features for Microsoft Teams using Python",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-ai/python",
+    "title": "Bot AI Messages Sample",
+    "shortDescription": "This sample demonstrates how to enhance AI-generated bot messages for Microsoft Teams using Python.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-ai-messages/python",
     "longDescription": [
-      "This sample demonstrates AI bot message formatting features for Microsoft Teams using Python, built with the Teams SDK. It showcases AI labels, citations, feedback buttons, sensitivity labels, and a combined AI message with all features"
+      "This sample demonstrates how to enhance AI-generated bot messages for Microsoft Teams, built with the Teams SDK. It showcases AI labels, citations, feedback buttons, and sensitivity labels."
     ],
     "creationDateTime": "2026-03-05",
     "updateDateTime": "2026-03-05",
@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-ai/Bot_Conversation.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-ai-messages/Bot_Conversation.gif",
         "alt": "Solution UX showing AI bot message formatting features for Microsoft Teams"
       }
     ],
