@@ -154,28 +154,5 @@ static async Task SendAIMessage(IContext<MessageActivity> context)
 
 static async Task SendWelcomeCard(IContext<MessageActivity> context)
 {
-    await context.Send(new MessageActivity
-    {
-        Type = ActivityType.Message,
-        Attachments = new List<Microsoft.Teams.Api.Attachment>
-        {
-            new Microsoft.Teams.Api.Attachment
-            {
-                ContentType = Microsoft.Teams.Api.ContentType.HeroCard,
-                Content = JsonSerializer.SerializeToElement(new
-                {
-                    title = "Bot AI - Welcome!",
-                    text = "This bot demonstrates AI features in Teams SDK. Select an option below:",
-                    buttons = new[]
-                    {
-                        new { type = "imBack", title = "AI Label", value = "label" },
-                        new { type = "imBack", title = "Citations", value = "citation" },
-                        new { type = "imBack", title = "Feedback Buttons", value = "feedback" },
-                        new { type = "imBack", title = "Sensitivity Label", value = "sensitivity" },
-                        new { type = "imBack", title = "Send AI Message", value = "aitext" }
-                    }
-                })
-            }
-        }
-    });
+    await context.Send("Welcome to Bot AI!");
 }
