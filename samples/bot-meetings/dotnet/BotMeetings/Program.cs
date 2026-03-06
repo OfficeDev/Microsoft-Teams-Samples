@@ -165,25 +165,24 @@ teamsApp.OnMeetingStart(async context =>
 teamsApp.OnMeetingEnd(async context =>
 {
     var activity = context.Activity.Value;
-    var meetingId = context.Activity.ChannelData.Meeting.Id;
-    var msGraphResourceId = context.Activity.ChannelData.Meeting.Details?.MsGraphResourceId;
+    var meetingId = activity.Id;
+    
+    // Get meeting info from API
     var meetingInfo = await context.Api.Meetings.GetByIdAsync(meetingId);
 
     // Retrieve the user ID of the organizer for the transcript API
     var userId = "";
-    if (meetingInfo != null && meetingInfo.Organizer != null)
+    if (meetingInfo?.Organizer != null)
     {
         userId = meetingInfo.Organizer.AadObjectId ?? "";
     }
 
-    if (string.IsNullOrEmpty(msGraphResourceId) && meetingInfo?.Details != null)
-    {
-        msGraphResourceId = meetingInfo.Details.MsGraphResourceId;
-    }
+    // Get MS Graph Resource ID from meeting details
+    var msGraphResourceId = meetingInfo?.Details?.MSGraphResourceId;
 
     // Retrieve transcript
     var transcript = "";
-    if (!string.IsNullOrEmpty(msGraphResourceId))
+    if (!string.IsNullOrEmpty(msGraphResourceId) && !string.IsNullOrEmpty(userId))
     {
         var vttTranscript = await GetMeetingTranscriptAsync(msGraphResourceId, userId);
         if (!string.IsNullOrEmpty(vttTranscript))
