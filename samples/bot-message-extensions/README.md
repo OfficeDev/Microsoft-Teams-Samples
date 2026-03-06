@@ -214,6 +214,42 @@ python app.py
     - For ngrok: `1234.ngrok-free.app` (from `https://1234.ngrok-free.app`)
     - For dev tunnels: `12345.devtunnels.ms`
 
+- Ensure the `manifest.json` includes the `composeExtensions` section as shown below:
+
+```json
+"composeExtensions": [
+  {
+    "botId": "${BOT_ID}",
+    "canUpdateConfiguration": true,
+    "commands": [
+      {
+        "id": "wikipediaSearch",
+        "context": [ "compose", "commandBox" ],
+        "description": "Search Wikipedia articles",
+        "title": "Wikipedia Search",
+        "type": "query",
+        "parameters": [
+          {
+            "name": "searchQuery",
+            "title": "Search Query",
+            "description": "Your search query",
+            "inputType": "text"
+          }
+        ]
+      }
+    ],
+    "messageHandlers": [
+      {
+        "type": "link",
+        "value": {
+          "domains": ["*.wikipedia.org"]
+        }
+      }
+    ]
+  }
+],
+```
+
 **Create app package:**
 
 - Zip up the contents of the `appManifest/` or `appPackage/` folder to create a `manifest.zip`
