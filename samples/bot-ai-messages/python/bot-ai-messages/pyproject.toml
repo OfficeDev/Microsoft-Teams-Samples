@@ -1,0 +1,11 @@
+[project]
+name = "bot-ai-messages"
+version = "0.1.0"
+description = "Bot AI messaging sample that demonstrates how to enhance AI-generated bot messages"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "microsoft-teams-apps==2.0.0a9",
+    "microsoft-teams-api==2.0.0a9",
+    "microsoft-teams-cards==2.0.0a9",
+]
