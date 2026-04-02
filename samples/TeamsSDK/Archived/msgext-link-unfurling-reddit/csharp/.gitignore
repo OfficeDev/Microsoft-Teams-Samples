@@ -1,9 +1,0 @@
-**/.ionide/*
-**/node_modules/
-**/.vscode/
-**/bin/
-**/obj
-ngrok-config.yml
-web/dist/*.js*
-web/yarn-error.log
-**/.env
