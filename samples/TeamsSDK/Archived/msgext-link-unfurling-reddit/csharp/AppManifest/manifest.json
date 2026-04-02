@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "{{Your Teams App Id Here}}",
+  "developer": {
+    "name": "{{Company Name}}",
+    "websiteUrl": "{{Company Website}}",
+    "privacyUrl": "{{Privacy Page}}",
+    "termsOfUseUrl": "{{TOS Page}}"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Reddit Link Unfurler",
+    "full": "Reddit Link Unfurler"
+  },
+  "description": {
+    "short": "C# Messaging Extension for Reddit links with link unfurling support.",
+    "full": "This sample demonstrates a C# Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams."
+  },
+  "accentColor": "#FC4518",
+  "bots": [
+    {
+      "botId": "{{Bot Framework Id Here}}",
+      "scopes": [
+        "personal"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "{{Bot Framework Id Here}}",
+      "canUpdateConfiguration": false,
+      "commands": [
+        {
+          "id": "Search",
+          "type": "query",
+          "title": "Title",
+          "description": "Description",
+          "initialRun": false,
+          "fetchTask": false,
+          "parameters": [
+            {
+              "name": "Parameter",
+              "title": "Title",
+              "description": "Description",
+              "inputType": "text"
+            }
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "www.reddit.com",
+              "reddit.com"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity"
+  ],
+  "validDomains": []
+}

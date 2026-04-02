@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
+# Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
+# Visit https://aka.ms/teamsfx-actions for details on actions
+version: v1.2
+
+additionalMetadata:
+  sampleTag: Microsoft-Teams-Samples:bot-initiate-thread-in-channel-python
+
+provision:
+  # Creates a new Azure Active Directory (AAD) app to authenticate users
+  - uses: aadApp/create
+    with:
+      name: botinitiatethread-aad
+      generateClientSecret: true
+      signInAudience: "AzureADandPersonalMicrosoftAccount"   # single tenant only
+    writeToEnvironmentFile:
+      clientId: AAD_APP_CLIENT_ID
+      clientSecret: SECRET_AAD_APP_CLIENT_SECRET
+      objectId: AAD_APP_OBJECT_ID
+      tenantId: AAD_APP_TENANT_ID
+      authority: AAD_APP_OAUTH_AUTHORITY
+      authorityHost: AAD_APP_OAUTH_AUTHORITY_HOST
+
+  # Creates a Teams app
+  - uses: teamsApp/create
+    with:
+      name: botinitiatethread${{APP_NAME_SUFFIX}}
+    writeToEnvironmentFile:
+      teamsAppId: TEAMS_APP_ID
+
+  # Deploy ARM templates for Azure resources
+  - uses: arm/deploy
+    with:
+      subscriptionId: ${{AZURE_SUBSCRIPTION_ID}}
+      resourceGroupName: ${{AZURE_RESOURCE_GROUP_NAME}}
+      templates:
+        - path: ./infra/azure.bicep
+          parameters: ./infra/azure.parameters.json
+          deploymentName: Create-resources-for-bot
+      bicepCliVersion: v0.9.1
+
+  # Apply the AAD manifest to update the created AAD app
+  - uses: aadApp/update
+    with:
+      manifestPath: ./aad.manifest.json
+      outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
+
+  # Validate Teams manifest
+  - uses: teamsApp/validateManifest
+    with:
+      manifestPath: ./appManifest/manifest.json
+
+  # Build Teams app package with latest env values
+  - uses: teamsApp/zipAppPackage
+    with:
+      manifestPath: ./appManifest/manifest.json
+      outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
+
+  # Validate the built app package
+  - uses: teamsApp/validateAppPackage
+    with:
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+
+  # Update Teams app in Developer Portal
+  - uses: teamsApp/update
+    with:
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+
+deploy:
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.env
+      envs:
+        MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
+        MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        MicrosoftAppType: SingleTenant
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

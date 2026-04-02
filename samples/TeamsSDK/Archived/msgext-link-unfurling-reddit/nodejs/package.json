@@ -1,0 +1,32 @@
+{
+    "name": "linkunfurlingreddit",
+    "version": "1.0.0",
+    "description": "Microsoft 365 Agents Toolkit link unfurling sample",
+    "engines": {
+        "node": "18 || 20 || 22"
+    },
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "./src/index.js",
+    "scripts": {
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
+        "dev": "tsx watch --clear-screen=false ./src/index.js",
+        "start": "node ./src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "tsx watch ./src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com"
+    },
+    "dependencies": {
+        "adaptivecards-templating": "^2.3.1",
+        "axios": "^1.7.9",
+        "botbuilder": "^4.23.2",
+        "restify": "^11.1.0"
+    },
+    "devDependencies": {
+        "env-cmd": "^10.1.0",
+        "tsx": "^4.21.0"
+    }
+}
