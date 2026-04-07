@@ -62,15 +62,15 @@ server.listen(port, () =>
 );
 server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
 
-server.get('/CheckIn', (req, res, next) => {
+server.get('/CheckIn', (req, res) => {
     res.render('./views/CheckIn')
 });
 
-server.get('/ViewLocation', (req, res, next) => {
+server.get('/ViewLocation', (req, res) => {
     res.render('./views/ViewLocation')
 });
 
-server.get('*', (req, res) => {
+server.get('/*path', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 
