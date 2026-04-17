@@ -8,6 +8,7 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "microsoft-teams-apps==2.0.0a50",
     "microsoft-teams-graph==2.0.0a50",
+    "microsoft-teams-common==2.0.0a50",
     "msgraph-sdk>=1.0.0",
     "azure-identity>=1.12.0"
 ]
