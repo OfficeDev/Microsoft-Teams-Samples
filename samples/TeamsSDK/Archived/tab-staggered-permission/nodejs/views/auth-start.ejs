@@ -1,0 +1,54 @@
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.52.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-j4GNIru3mNYN+q8XdBRVyvbUx+0U867Cy90v6H61tpIZoR2pUq+bZDZmmpT8N7VG"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/3.30.0/js/msal-browser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+     <script type="text/javascript">
+         let data = <%-data%>
+         $(document).ready(function () {
+            getAuthToken(data.clientId);
+        });
+       
+        // Get auth token.
+        function getAuthToken(clientId) {
+             var clientId = clientId;
+             const scope = data.scope;
+            if (clientId != undefined && clientId != null && clientId !== '') {
+                microsoftTeams.app.initialize().then(() => {
+                    // Get the tab context, and use the information to navigate to Azure AD login page
+                    microsoftTeams.app.getContext().then(async (context) => {
+                        var currentURL = new URL(window.location);
+                        var loginHint = context.user.loginHint;
+						
+                        const msalConfig = {
+                            auth: {
+                                clientId: clientId,
+                                authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
+                                navigateToLoginRequestUrl: false
+                            },
+                            cache: {
+                                cacheLocation: "sessionStorage",
+                            },
+                        };
+						
+                        const msalInstance = new msal.PublicClientApplication(msalConfig);
+                        await msalInstance.initialize();
+						
+                        const scopesArray = scope.split(" ");
+                        const scopesRequest = {
+                            scopes: scopesArray,
+                            redirectUri: window.location.origin + `/auth-end`,
+                            loginHint: loginHint
+                        };
+						
+                        await msalInstance.loginRedirect(scopesRequest);
+                    });
+                });
+            }
+        }
+    </script>
+</head>
+<body class="theme-light">
+</body>
