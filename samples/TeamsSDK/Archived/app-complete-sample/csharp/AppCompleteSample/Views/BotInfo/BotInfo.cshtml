@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AppCompleteSample.BotInfoDetails>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function ShowPage(fileName) {
+        var dataFileName = {
+            FileName: fileName
+        };
+        $.ajax({
+            type: "POST",
+            url: '/BotInfo/JqAJAX',
+            data: dataFileName,
+            datatype: "html",
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                $('#divFileContent').show();
+                $('span#spanfileName').html(data.fileName);
+                $('span#fileContent').html(data.fileCodeLines);
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+
+    }
+</script>
+
+<div style="width: 15%; float: left;">
+    @foreach (var item in Model)
+    {
+        <ul style="height: 1px;">
+            <li>
+                <a href="javascript:void(0)" onclick="ShowPage('@Html.DisplayFor(modelItem => item.Name)')" class="btnSave">@Html.DisplayFor(modelItem => item.Name)</a>
+            </li>
+        </ul>
+    }
+</div>
+<div style="width: 65%; float: right;">
+    <div>
+        <span style="font-weight: bold;" id="spanfileName"></span>
+    </div>
+    <div id="divFileContent" style="width: 90%; border: solid; border-width: 1px; padding-left: 25px; display: none">
+        <span id="fileContent" style="color: green"></span>
+    </div>
+</div>
+
+
