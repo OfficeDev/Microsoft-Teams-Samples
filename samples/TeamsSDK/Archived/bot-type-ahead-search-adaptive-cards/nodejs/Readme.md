@@ -24,11 +24,6 @@ This sample shows the feature of typeahead search (static, dynamic and dependant
 ## Interaction with bot
  ![Bot Typeahead Search Adaptive Cards](Images/BotTypeaheadSearchAdaptiveCards.gif)
 
- ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Typeahead search control in Adaptive Cards:** [Manifest](/samples/bot-type-ahead-search-adaptive-cards/csharp/demo-manifest/Typeahead-search-adaptive-cards.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account

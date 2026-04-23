@@ -27,11 +27,6 @@ This sample code demonstrates how to get enable SSO authentication for your Adap
 
  ![Preview](Images/PreviewAppSSO.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Implement SSO authentication for your Adaptive Cards:** [Manifest](/samples/bot-sso-adaptivecard/csharp/demo-manifest/bot-sso-adaptivecard.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account

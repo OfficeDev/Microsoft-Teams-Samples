@@ -25,11 +25,6 @@ This sample app demonstrates how to utilize the people picker control on Adaptiv
 
  ![Bot People Picker Adaptive CardGif ](Images/botpeoplepickeradaptivecard.gif)
 
- ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your Teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**People picker control in Adaptive Cards:** [Manifest](/samples/bot-people-picker-adaptive-card/csharp/demo-manifest/People-picker-adaptive-card.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
