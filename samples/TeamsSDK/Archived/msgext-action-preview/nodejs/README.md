@@ -25,11 +25,6 @@ Explore a sample of an action-based messaging extension for Microsoft Teams, fea
 ## Interaction with bot
  ![Messaging Extension Action Preview](Images/MsgExtPreview.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Teams Messaging Extensions Action Preview:** [Manifest](/samples/msgext-action-preview/csharp/demo-manifest/msgext-action-preview.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account

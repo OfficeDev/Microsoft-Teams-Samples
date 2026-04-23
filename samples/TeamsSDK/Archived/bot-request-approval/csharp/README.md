@@ -24,11 +24,6 @@ This sample demonstrates a Teams bot that facilitates task approval requests wit
 
 ![Preview Image](BotRequestApproval/Images/Preview.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Bot request approval:** [Manifest](/samples/bot-request-approval/csharp/demo-manifest/Bot-Request-Approval.zip)
-
 # Send task request using Universal Adaptive Cards in a group chat
 
 This sample shows a feature where:
