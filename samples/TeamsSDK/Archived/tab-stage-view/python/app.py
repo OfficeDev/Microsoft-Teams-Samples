@@ -9,7 +9,8 @@ from api.routes import api_routes
 load_dotenv()
 
 PORT = int(os.getenv("PORT", 3978))
-VIEWS_DIR = Path(__file__).parent / "views"
+BASE_DIR = Path(__file__).parent
+VIEWS_DIR = BASE_DIR / "views"
 
 app = web.Application()
 

@@ -12,6 +12,8 @@ using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TabInStageView.Models;
 
 namespace TabInStageView.Bots
@@ -116,9 +118,10 @@ namespace TabInStageView.Bots
                 },
             };
 
+            var cardContent = JObject.Parse(card.ToJson());
             var attachments = new MessagingExtensionAttachment()
             {
-                Content = card,
+                Content = cardContent,
                 ContentType = AdaptiveCard.ContentType
             };
             return Task.FromResult(new MessagingExtensionResponse
@@ -131,7 +134,7 @@ namespace TabInStageView.Bots
                     {
                         new MessagingExtensionAttachment
                         {
-                             Content = card,
+                             Content = cardContent,
                              ContentType = AdaptiveCard.ContentType,
                              Preview = attachments,
                         },
@@ -191,7 +194,7 @@ namespace TabInStageView.Bots
             return new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
-                Content = card,
+                Content = JObject.Parse(card.ToJson()),
             };
         }
 

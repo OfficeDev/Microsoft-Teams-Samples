@@ -3,9 +3,13 @@
 import sys
 import traceback
 from aiohttp.web import Request, Response
-from botbuilder.core import TurnContext
+from botbuilder.core import (
+    TurnContext,
+)
 from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
+from botbuilder.schema import Activity
 from bots.bot_activity_handler import BotActivityHandler
+
 from config import DefaultConfig
 CONFIG = DefaultConfig()
 # Adapter settings using environment variables

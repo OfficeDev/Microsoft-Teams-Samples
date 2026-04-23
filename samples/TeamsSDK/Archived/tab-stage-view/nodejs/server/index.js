@@ -12,13 +12,12 @@ server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
-server.engine('.html', require('ejs').renderFile);
 server.set('views', __dirname);
 server.set('view engine', 'ejs');
 server.use('/api', require('./api'));
 
 server.get('/content', (req, res) => {
-    res.sendFile('views/content-tab.html', {root: __dirname })
+    res.sendFile('views/content-tab.html', { root: __dirname });
 });
 
 server.get('/tab', (req, res) => {
@@ -28,6 +27,7 @@ server.get('/tab', (req, res) => {
 server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
+
 server.listen(PORT, () => {
-     console.log('Server listening on port: ' + PORT);
+    console.log('Server listening on port: ' + PORT);
 });
