@@ -4,7 +4,7 @@
     "source": "officeDev",
     "title": "Targeted Messages",
     "shortDescription": "This sample bot demonstrates how to use targeted messaging in Microsoft Teams to send private reminders, confirmations, and lists visible only to the intended recipient.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/targeted-messages/bot-quickstart",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/bot-targeted-messages/nodejs/bot-targeted-messages",
     "longDescription": [
       "This sample demonstrates targeted messaging in Microsoft Teams using TypeScript. Targeted messages are private messages visible only to a specific user within a channel or group chat. The bot implements a reminder system where every response — reminder confirmations, deliveries, active reminder lists, and snooze confirmations — is sent as a targeted message using MessageActivity.withRecipient(). It also demonstrates proactive targeted messaging via app.send() and interactive Adaptive Cards with Action.Execute for dismiss, snooze, and cancel actions."
     ],
@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/TeamsSDK/targeted-messages/bot-quickstart/assets/targeted-reminder-bot.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/TeamsSDK/bot-targeted-messages/nodejs/bot-targeted-messages/assets/targeted-reminder-bot.gif",
         "alt": "Targeted Reminder Bot showing reminder delivery with snooze and dismiss options"
       }
     ],
