@@ -1,7 +1,10 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const { BotFrameworkAdapter } = require('botbuilder');
+const { CloudAdapter, ConfigurationBotFrameworkAuthentication } = require('botbuilder');
 const { TeamsBot } = require('./teamsBot');
 const config = require("./config");
 
@@ -17,10 +20,8 @@ server.use(express.urlencoded({ extended: true }));
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: config.botId,
-    appPassword: config.botPassword
-});
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(config);
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 /**
  * Handles errors that occur during the bot's turn.
@@ -54,12 +55,12 @@ server.listen(PORT, () => {
 
 server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
 
-server.get('*', (req, res) => {
+server.get('/*splat', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
+server.post('/api/messages', async (req, res) => {
+    await adapter.process(req, res, async (context) => {
         await bot.run(context);
     });
 });

@@ -15,6 +15,12 @@ param webAppSKU string
 @maxLength(42)
 param botDisplayName string
 
+@description('The type of Microsoft app identity')
+param microsoftAppType string = 'SingleTenant'
+
+@description('The tenant ID for SingleTenant app type')
+param microsoftAppTenantId string = ''
+
 param serverfarmsName string = resourceBaseName
 param webAppName string = resourceBaseName
 param location string = resourceGroup().location
@@ -46,7 +52,7 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         }
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
-          value: '~18' // Set NodeJS version to 18.x for your site
+          value: '~22' // Set NodeJS version to 22.x for your site
         }
         {
           name: 'RUNNING_ON_AZURE'
@@ -59,6 +65,14 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         {
           name: 'BOT_PASSWORD'
           value: botAadAppClientSecret
+        }
+        {
+          name: 'MICROSOFT_APP_TYPE'
+          value: microsoftAppType
+        }
+        {
+          name: 'MICROSOFT_APP_TENANT_ID'
+          value: microsoftAppTenantId
         }
       ]
       ftpsState: 'FtpsOnly'
@@ -74,6 +88,8 @@ module azureBotRegistration './botRegistration/azurebot.bicep' = {
     botAadAppClientId: botAadAppClientId
     botAppDomain: webApp.properties.defaultHostName
     botDisplayName: botDisplayName
+    microsoftAppType: microsoftAppType
+    microsoftAppTenantId: microsoftAppTenantId
   }
 }
 

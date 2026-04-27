@@ -11,6 +11,12 @@ param botServiceSku string = 'F0'
 param botAadAppClientId string
 param botAppDomain string
 
+@description('The type of Microsoft app identity')
+param microsoftAppType string = 'SingleTenant'
+
+@description('The tenant ID for SingleTenant app type')
+param microsoftAppTenantId string = ''
+
 // Register your web service as a bot with the Bot Framework
 resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
   kind: 'azurebot'
@@ -20,6 +26,8 @@ resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
     displayName: botDisplayName
     endpoint: 'https://${botAppDomain}/api/messages'
     msaAppId: botAadAppClientId
+    msaAppType: microsoftAppType
+    msaAppTenantId: microsoftAppType == 'SingleTenant' ? microsoftAppTenantId : ''
   }
   sku: {
     name: botServiceSku

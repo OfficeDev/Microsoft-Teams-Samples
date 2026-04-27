@@ -3,7 +3,6 @@
 
 const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 const fs = require('fs');
-const AdaptiveCard = require('adaptivecards');
 
 /**
  * TeamsBot class handles Teams bot activities.

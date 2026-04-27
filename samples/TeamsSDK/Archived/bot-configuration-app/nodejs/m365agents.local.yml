@@ -78,3 +78,5 @@ deploy:
       envs:
         BOT_ID: ${{BOT_ID}}
         BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        MICROSOFT_APP_TYPE: SingleTenant
+        MICROSOFT_APP_TENANT_ID: ${{TEAMS_APP_TENANT_ID}}
