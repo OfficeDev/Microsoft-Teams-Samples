@@ -7,24 +7,22 @@ const server = express();
 var Helper = require("../helpers/chatHelper");
 
 // Decide which port to use
-var port = process.env.PORT || config["port"] ? config["port"] : 3978;
+var port = process.env.PORT || config["port"] || 3978;
 
 // Listen for incoming requests
 server.listen(port, function () {
   console.log(`App started listening on port ${port}`);
 });
 
-const fetch = require("node-fetch");
 const querystring = require("querystring");
 
-var bodyParser = require("body-parser");
 server.use(express.static(__dirname + '/views'));
 server.use(express.static(__dirname + '/static'));
 server.set("view engine", "ejs");
 server.set("views", __dirname + "/views");
 
 server.engine('html', require('ejs').renderFile);
-server.use(bodyParser.urlencoded({ extended: false }));
+server.use(express.urlencoded({ extended: false }));
 server.get('/tab', (req, res) => { res.render('chatLifecycle.html') });
 
 server.post('/api/getAdaptiveCard', Helper.getAdaptiveCard);
