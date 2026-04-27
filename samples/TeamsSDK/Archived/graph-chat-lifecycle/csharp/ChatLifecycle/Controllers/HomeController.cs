@@ -65,7 +65,7 @@ namespace ChatLifecycle.Controllers
                
                  return accessToken;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
