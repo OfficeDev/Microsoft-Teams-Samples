@@ -1,9 +1,9 @@
 import os
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify
 import requests
 from config import DefaultConfig
 
-from helpers.chatHelper import get_adaptive_card, create_group_chat  # You'll need to implement this
+from helpers.chatHelper import get_adaptive_card, create_group_chat
 
 app = Flask(__name__, template_folder='src/views')
 config = DefaultConfig()
