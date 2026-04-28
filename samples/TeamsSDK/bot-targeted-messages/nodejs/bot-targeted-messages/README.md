@@ -18,7 +18,7 @@ This sample demonstrates how to use **targeted messaging** in Microsoft Teams. T
 
 1. Navigate to this directory:
    ```
-   cd targeted-messages/bot-quickstart
+   cd targeted-messages/bot-targeted-messages/nodejs
    ```
 
 2. Install dependencies:

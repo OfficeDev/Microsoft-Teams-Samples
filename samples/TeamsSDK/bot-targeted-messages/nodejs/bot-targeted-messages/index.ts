@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { App } from '@microsoft/teams.apps';
-import { MessageActivity, AdaptiveCardActionResponse, stripMentionsText } from '@microsoft/teams.api';
+import { MessageActivity, stripMentionsText } from '@microsoft/teams.api';
 import { AdaptiveCard, TextBlock, FactSet, ExecuteAction } from '@microsoft/teams.cards';
 
 const app = new App();
@@ -87,8 +87,12 @@ function parseReminderCommand(msg: MessageActivity, commandText: string): {
         if (mentioned) {
             targetUserId = mentioned.userId;
             targetUserName = mentioned.userName;
-            // Use SDK's built-in stripMentionsText to remove target user's mention from text
-            text = stripMentionsText(msg, { accountId: mentioned.userId })?.trim() || text;
+            // Remove the target user's mention tag from the local text (not the raw activity)
+            for (const entity of msg.entities || []) {
+                if (entity.type === 'mention' && (entity as any).mentioned?.id === mentioned.userId && (entity as any).text) {
+                    text = text.replace((entity as any).text, '').trim();
+                }
+            }
         } else {
             // Default to self if no target specified
             isSelfReminder = true;
@@ -303,15 +307,22 @@ async function showMyReminders(ctx: { activity: any; send: Function }): Promise<
 async function cancelReminder(ctx: { activity: any; send: Function }, reminderId: string): Promise<void> {
     const { activity, send } = ctx;
     const userId = activity.from?.id;
+    const sender = { id: activity.from.id, name: activity.from.name, role: 'user' as const };
 
     if (!reminderId) {
-        await send('Please specify a reminder ID. Use `my-reminders` to see your active reminders.');
+        await send(
+            new MessageActivity('Please specify a reminder ID. Use `my-reminders` to see your active reminders.')
+                .withRecipient(sender, true)
+        );
         return;
     }
 
     const reminder = activeReminders.get(reminderId);
     if (!reminder) {
-        await send(`Reminder **${reminderId}** not found or already completed.`);
+        await send(
+            new MessageActivity(`Reminder **${reminderId}** not found or already completed.`)
+                .withRecipient(sender, true)
+        );
         return;
     }
 
@@ -319,10 +330,16 @@ async function cancelReminder(ctx: { activity: any; send: Function }, reminderId
     if (reminder.creatorId === userId || reminder.targetUserId === userId) {
         clearTimeout(reminder.timer);
         activeReminders.delete(reminderId);
-        await send(`Reminder **${reminderId}** has been cancelled.`);
+        await send(
+            new MessageActivity(`Reminder **${reminderId}** has been cancelled.`)
+                .withRecipient(sender, true)
+        );
         console.log(`[REMINDER] Reminder ${reminderId} cancelled by ${activity.from?.name}`);
     } else {
-        await send('You can only cancel reminders you created or are assigned to you.');
+        await send(
+            new MessageActivity('You can only cancel reminders you created or are assigned to you.')
+                .withRecipient(sender, true)
+        );
     }
 }
 
