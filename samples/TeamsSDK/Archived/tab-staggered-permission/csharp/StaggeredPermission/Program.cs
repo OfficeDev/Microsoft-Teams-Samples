@@ -8,9 +8,6 @@ using StaggeredPermission.helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
-
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
     {

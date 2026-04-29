@@ -20,7 +20,7 @@ provision:
       generateClientSecret: true
       # Authenticate users with a Microsoft work or school account in your
       # organization's Azure AD tenant (for example, single tenant).
-      signInAudience: AzureADMultipleOrgs
+      signInAudience: AzureADMyOrg
     # Write the information of created resources into environment file for the
     # specified environment variable(s).
     writeToEnvironmentFile:

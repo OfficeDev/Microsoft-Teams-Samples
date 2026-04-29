@@ -3,7 +3,7 @@
   "appId": "${{AAD_APP_CLIENT_ID}}",
   "name": "tab-staggered-permission-aad",
   "accessTokenAcceptedVersion": 2,
-  "signInAudience": "AzureADMultipleOrgs",
+  "signInAudience": "AzureADMyOrg",
   "optionalClaims": {
     "idToken": [],
     "accessToken": [

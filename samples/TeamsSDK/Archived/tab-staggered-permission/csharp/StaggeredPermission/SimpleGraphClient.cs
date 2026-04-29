@@ -41,22 +41,19 @@ namespace StaggeredPermission
         {
             var graphClient = GetAuthenticatedClient();
             var photo = await graphClient.Me.Photo.Content.GetAsync();
-            if (photo != null)
+            if (photo == null)
             {
-                var ms = new MemoryStream();
-                photo.CopyTo(ms);
-                var buffers = ms.ToArray();
-                var imgDataURL = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(buffers));
-                return imgDataURL;
+                return string.Empty;
             }
-            else
-            {
-                return "";
-            }
+
+            using var memoryStream = new MemoryStream();
+            await photo.CopyToAsync(memoryStream);
+            var buffers = memoryStream.ToArray();
+            return $"data:image/png;base64,{Convert.ToBase64String(buffers)}";
         }
 
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
-        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        private sealed class SimpleAccessTokenProvider : IAccessTokenProvider
         {
             private readonly string _accessToken;
 

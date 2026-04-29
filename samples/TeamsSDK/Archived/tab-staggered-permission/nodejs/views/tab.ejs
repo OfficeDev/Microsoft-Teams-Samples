@@ -90,14 +90,12 @@
             getToken(scope)
                 .then(data => {
                     $("#divError").hide();
-                    microsoftTeams.app.getContext().then((context) => {
-                        if (scope == "User.Read") {
-                            getUserPhoto();
-                        }
-                        else {
-                            getUserMail();
-                        }
-                    });
+                    if (scope === "User.Read") {
+                        getUserPhoto();
+                    }
+                    else {
+                        getUserMail();
+                    }
                 });
         }
 
@@ -146,10 +144,9 @@
                 },
                 success: function (responseJson) {
                     const userMails = responseJson;
-                     let j=1;
-                     for (let i = 0; i < userMails.length; i++) {
-                        if (userMails[i].subject !="")
-                        {
+                    let j = 1;
+                    for (let i = 0; i < userMails.length; i++) {
+                        if (userMails[i].subject !== "" && userMails[i].toRecipients?.[0]?.emailAddress?.address) {
                             $('#mail-list-table').append(`<tr style="padding:1px" >
                             <td><label id=${j}>${j}</label></td>
                             <td>${userMails[i].from.emailAddress.address}</td>
@@ -158,7 +155,7 @@
                             <td>${userMails[i].receivedDateTime}</td>
                             </tr>`);
                             j++;
-                        };
+                        }
                     }
                     $("#mails").show();
                     $("#getmails").hide();

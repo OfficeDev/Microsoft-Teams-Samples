@@ -67,7 +67,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
-    * Choose the **supported account types** (any account type will work)
+   * Choose **Accounts in this organizational directory only (Single tenant)**.
     * Leave **Redirect URI** empty.
     * Choose **Register**.
   - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.

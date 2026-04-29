@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -19,7 +20,7 @@ namespace StaggeredPermission.helper
         {
             var clientId = configuration["AzureAd:ClientId"];
             var applicationIdUri = configuration["AzureAd:ApplicationIdURI"];
-            var validAudiences = new List<string> { clientId, applicationIdUri.ToLower() };
+            var validAudiences = new List<string> { clientId, applicationIdUri.ToLowerInvariant() };
             return validAudiences;
         }
         /// <summary>
@@ -76,21 +77,69 @@ namespace StaggeredPermission.helper
         /// <param name="configuration">IConfiguration instance.</param>
         /// <param name="idToken">The id token from the client.</param>
         /// <returns>App access token on behalf of user.</returns>
-        public static async Task<string> GetAccessTokenOnBehalfUserAsync(IConfiguration configuration, string idToken)
+        public static async Task<string> GetAccessTokenOnBehalfUserAsync(IConfiguration configuration, IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor, string idToken)
         {
-            var tenantId = configuration["AzureAd:TenantId"];
-            IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:ClientId"])
-                                                .WithClientSecret(configuration["AzureAd:AppSecret"])
-                                                .WithAuthority($"https://login.microsoftonline.com/{tenantId}")
-                                                .Build();
-
             try
             {
-                var assert = new UserAssertion(idToken);
+                var tenantId = configuration["AzureAd:TenantId"];
+                var instance = configuration["AzureAd:Instance"];
+
+                if (string.IsNullOrWhiteSpace(instance))
+                {
+                    instance = "https://login.microsoftonline.com/";
+                }
+
+                if (!instance.EndsWith("/", StringComparison.Ordinal))
+                {
+                    instance += "/";
+                }
+
+                if (string.IsNullOrWhiteSpace(tenantId) || tenantId.Contains("{{", StringComparison.Ordinal) || tenantId.Contains("}}", StringComparison.Ordinal))
+                {
+                    tenantId = "common";
+                }
+
+                var authority = new Uri(new Uri(instance), tenantId).ToString();
+
+                IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:ClientId"])
+                    .WithClientSecret(configuration["AzureAd:AppSecret"])
+                    .WithAuthority(authority)
+                    .Build();
+
+                UserAssertion assert = new UserAssertion(idToken);
                 var scopes = new List<string> { "https://graph.microsoft.com/User.Read" };
                 var responseToken = await app.AcquireTokenOnBehalfOf(scopes, assert).ExecuteAsync();
 
                 return responseToken.AccessToken;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get token using on-behalf-of flow. (Overload for backward compatibility)
+        /// </summary>
+        /// <param name="configuration">IConfiguration instance.</param>
+        /// <param name="idToken">The id token from the client.</param>
+        /// <returns>App access token on behalf of user.</returns>
+        public static async Task<string> GetAccessTokenOnBehalfUserAsync(IConfiguration configuration, string idToken)
+        {
+            var tenantId = configuration["AzureAd:TenantId"];
+            IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:ClientId"])
+                                            .WithClientSecret(configuration["AzureAd:AppSecret"])
+                                            .WithAuthority($"https://login.microsoftonline.com/{tenantId}")
+                                            .Build();
+
+            try
+            {
+                UserAssertion assert = new UserAssertion(idToken);
+                List<string> scopes = new List<string>();
+                scopes.Add("https://graph.microsoft.com/User.Read");
+                var responseToken = await app.AcquireTokenOnBehalfOf(scopes, assert).ExecuteAsync();
+
+                return responseToken.AccessToken.ToString();
             }
             catch (Exception ex)
             {
@@ -107,7 +156,7 @@ namespace StaggeredPermission.helper
         {
             var configurationSettingsValue = configuration["AzureAd:ValidIssuers"];
             var settings = configurationSettingsValue
-                ?.Split(new char[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries)
+                ?.Split([';', ','], StringSplitOptions.RemoveEmptyEntries)
                 ?.Select(p => p.Trim());
 
             if (settings == null)

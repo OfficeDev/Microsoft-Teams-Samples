@@ -17,11 +17,11 @@
         "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
-        "@azure/msal-node": "^5.1.2",
+        "@azure/msal-node": "^5.1.4",
         "@microsoft/microsoft-graph-client": "^3.0.7",
         "cors": "^2.8.6",
         "dotenv": "^17.4.2",
-        "ejs": "^3.1.10",
+        "ejs": "^5.0.2",
         "express": "^5.2.1"
     },
     "devDependencies": {

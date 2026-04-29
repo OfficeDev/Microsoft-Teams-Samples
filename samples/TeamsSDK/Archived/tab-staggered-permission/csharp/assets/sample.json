@@ -24,7 +24,7 @@
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "netframework"
+        "value": "net"
       },
       {
         "key": "TEAMS-FEATURES",

@@ -13,7 +13,7 @@ require('dotenv').config({ path: ENV_FILE });
 const PORT = process.env.PORT || 3978;
 const server = express();
 
-const tid = process.env.TenantId;
+const configuredTenantId = process.env.TenantId;
 
 const scopes = ["https://graph.microsoft.com/User.Read"];
 
@@ -55,6 +55,7 @@ server.get('/auth-start', (req, res) => {
     const scope = req.query.scope;
     const data = {
         clientId: process.env.MicrosoftAppId,
+        tenantId: configuredTenantId,
         scope: scope
     };
     res.render('./views/auth-start', { data: JSON.stringify(data) });
@@ -62,15 +63,18 @@ server.get('/auth-start', (req, res) => {
 
 // End of the pop-up dialog auth flow, returns the results back to parent window.
 server.get('/auth-end', (req, res) => {
-    const clientId = process.env.MicrosoftAppId;
-    res.render('./views/auth-end', { clientId: JSON.stringify(clientId) });
+    const data = {
+        clientId: process.env.MicrosoftAppId,
+        tenantId: configuredTenantId
+    };
+    res.render('./views/auth-end', { data: JSON.stringify(data) });
 });
 
 // Exchange the id token with access token.
-const getDelegateAccessToken = async (tid, token) => {
+const getDelegateAccessToken = async (token) => {
     try {
         const result = await getMsalClient().acquireTokenOnBehalfOf({
-            authority: `https://login.microsoftonline.com/${tid}`,
+            authority: `https://login.microsoftonline.com/${configuredTenantId}`,
             oboAssertion: token,
             scopes: scopes,
             skipCache: true
@@ -82,11 +86,19 @@ const getDelegateAccessToken = async (tid, token) => {
     }
 };
 
+function getIdTokenFromRequest(req) {
+    const token = req.body?.idToken;
+    if (!token) {
+        throw new Error('Missing idToken in request body.');
+    }
+    return token;
+}
+
 // Get user photo.
 server.post('/GetUserPhoto', async (req, res) => {
     try {
-        const idToken = req.body.idToken;
-        const accessToken = await getDelegateAccessToken(tid, idToken);
+        const idToken = getIdTokenFromRequest(req);
+        const accessToken = await getDelegateAccessToken(idToken);
         const client = new SimpleGraphClient(accessToken);
         const userImage = await client.getUserPhoto();
         const result = await userImage.arrayBuffer();
@@ -101,8 +113,8 @@ server.post('/GetUserPhoto', async (req, res) => {
 // Get user mails.
 server.post('/GetUserMails', async (req, res) => {
     try {
-        const idToken = req.body.idToken;
-        const accessToken = await getDelegateAccessToken(tid, idToken);
+        const idToken = getIdTokenFromRequest(req);
+        const accessToken = await getDelegateAccessToken(idToken);
         const client = new SimpleGraphClient(accessToken);
         const userMails = await client.getMailAsync();
         res.json(userMails.value);
@@ -118,7 +130,7 @@ server.post('/decodeToken', (req, res) => {
     if (token !== null && token !== undefined) {
         const base64String = token.split('.')[1];
         const decodedValue = JSON.parse(Buffer.from(base64String,
-            'base64').toString('ascii'));
+            'base64url').toString('utf8'));
         res.json(decodedValue);
     } else {
         res.status(400).json({ error: "Invalid token" });

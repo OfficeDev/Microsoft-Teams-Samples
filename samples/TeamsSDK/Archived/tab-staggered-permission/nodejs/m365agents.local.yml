@@ -104,4 +104,4 @@ deploy:
       envs:
           MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
           MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-          TenantId: ${{TEAMS_APP_TENANT_ID}}
+          TenantId: ${{AAD_APP_TENANT_ID}}

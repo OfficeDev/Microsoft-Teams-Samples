@@ -42,7 +42,8 @@ namespace StaggeredPermission.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return null;
+                Response.StatusCode = StatusCodes.Status500InternalServerError;
+                return Json(JsonConvert.SerializeObject(new { error = "Unable to fetch user photo.", details = ex.Message }));
             }
         }
 
@@ -88,7 +89,8 @@ namespace StaggeredPermission.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return null;
+                Response.StatusCode = StatusCodes.Status500InternalServerError;
+                return Json(JsonConvert.SerializeObject(new { error = "Unable to fetch user mails.", details = ex.Message }));
             }
         }
 
@@ -114,8 +116,8 @@ namespace StaggeredPermission.Controllers
 
                 var userInfo = new UserData()
                 {
-                    Name = nameObj.ToString(),
-                    Email = emailObj.ToString()
+                    Name = nameObj?.ToString(),
+                    Email = emailObj?.ToString()
                 };
 
                 var jsonString = JsonConvert.SerializeObject(userInfo);
@@ -124,7 +126,8 @@ namespace StaggeredPermission.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return null;
+                Response.StatusCode = StatusCodes.Status500InternalServerError;
+                return Json(JsonConvert.SerializeObject(new { error = "Unable to decode token.", details = ex.Message }));
             }
         }
     }
