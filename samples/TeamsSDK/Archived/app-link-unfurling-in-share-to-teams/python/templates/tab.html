@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Link Unfurling Tab</title>
+
+  <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-QXdQxWIYy1PLsb9pdWIm5k6mjLxVKAF4ISp0BVCZZCiZNyaKXinYNAQVT8+8hEIf"
+        crossorigin="anonymous"></script>
+  <script defer src="https://teams.microsoft.com/share/launcher.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/static/tab.css" />
+
+  <script>
+  microsoftTeams.app.initialize().then(() => {
+    microsoftTeams.app.notifySuccess(); 
+  });
+
+  $(document).ready(function () {
+    const params = new URLSearchParams(window.location.search);
+    const isOpenedInTeams = params.get("openInTeams");
+
+    if (isOpenedInTeams === "true") {
+      $("#stt-btn-custom").show();
+    } else {
+      $("#stt-btn-teams").show();
+      const shareUri = `${window.location.origin}?linkunfurling`;
+      $("#stt-btn-teams").attr("data-href", encodeURI(shareUri));
+    }
+  });
+
+  function shareTeamsHandler() {
+    console.log("Share button clicked");
+    microsoftTeams.sharing.shareWebContent({
+      content: [
+        {
+          type: "URL",
+          url: `${window.location.origin}?linkunfurling`,
+          preview: true
+        }
+      ]
+    });
+  }
+</script>
+</head>
+
+<body class="theme-light">
+  <div class="surface">
+    <h3 id="tabheader">Link unfurling in STT</h3>
+    <img id="reportimg" src="/Images/report.png" width="500" height="425" />
+    
+    <div id="stt-btn-teams"
+         class="teams-share-button"
+         data-href=""
+         data-button-type="medium"
+         data-icon-px-size="160"
+         data-preview="true"
+         hidden></div>
+    
+    <button id="stt-btn-custom" onclick="shareTeamsHandler()" hidden>Share to Teams (custom)</button>
+  </div>
+</body>
+</html>
