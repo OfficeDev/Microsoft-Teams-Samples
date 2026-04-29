@@ -13,7 +13,7 @@ extensions:
 
 # Teams Streaming Bot Sample
 
-This bot has been created using [Bot Framework](https://dev.botframework.com) and [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) as a secondary/alternative option to using [Teams AI SDK](https://github.com/microsoft/teams-ai/tree/main/js/samples/04.ai-apps/i.teamsChefBot-streaming). 
+This bot has been created using [Bot Framework](https://dev.botframework.com) and [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) as a secondary/alternative option to using [Teams AI SDK](https://github.com/microsoft/teams-ai/tree/main/js/samples/TeamsSDK/Archived/04.ai-apps/i.teamsChefBot-streaming). 
 
 Its main purpose is to demonstrate how to build a bot connected to an LLM and send messages through Teams.
 
@@ -60,7 +60,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### Register your app with Azure AD.
 
-  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -123,7 +123,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-streaming/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-streaming/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -168,4 +168,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Stream message through REST API](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/streaming-ux?branch=pr-en-us-10850&tabs=csharp#stream-message-through-rest-api) 
 - [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-streaming-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-streaming-csharp" />
