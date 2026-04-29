@@ -24,7 +24,7 @@ This sample demonstrates how to use **targeted messaging** in Microsoft Teams. T
 
 ## Interaction with Bot
 
-The bot works in **channels** and **group chats** and supports the following commands:
+![Targeted Messages Bot](bot-targeted-messages.gif)
 
 ### Set a Reminder
 
