@@ -1,0 +1,13 @@
+[project]
+name = "targeted-messages-bot"
+version = "0.1.0"
+description = "This sample demonstrates targeted messaging in Microsoft Teams using Python — a reminder bot where all responses are private targeted messages."
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "python-dotenv>=1.0.*",
+    "microsoft-teams-apps==2.0.0a78",
+    "microsoft-teams-api==2.0.0a78",
+    "microsoft-teams-common==2.0.0a78",
+    "microsoft-teams-cards==2.0.0a78",
+]
