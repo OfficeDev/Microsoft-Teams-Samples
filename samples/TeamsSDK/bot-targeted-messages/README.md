@@ -64,9 +64,7 @@ Every bot response in this sample is a targeted message — only the intended re
 
 # How to run these samples
 
-You can run these samples locally using:
-
-1. In the Teams Client after you have provisioned the Teams Application and configured the application with your local DevTunnels URL.
+1. You can run these samples locally in the Teams Client after you have provisioned the Teams Application and configured it with your local DevTunnels URL.
 
 ## Run in the Teams Client
 
