@@ -82,7 +82,7 @@ The message appears in the shared conversation thread but is **only visible to t
 
 ## Further reading
 
-- [Targeted Messages in Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/send-proactive-messages)
+- [Targeted Messages in Teams](https://microsoft.github.io/teams-sdk/typescript/essentials/sending-messages/#targeted-messages)
 - [Send and receive messages with a bot](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/conversation-messages)
 - [Adaptive Cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#adaptive-card)
 - [Microsoft Teams SDK for Node.js](https://www.npmjs.com/package/@microsoft/teams.apps)
