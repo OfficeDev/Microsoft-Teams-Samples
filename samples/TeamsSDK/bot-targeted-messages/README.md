@@ -168,3 +168,4 @@ az ad app credential reset --id $appId
 ## Further Reading
 
 - [Microsoft Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/)
+- [Targeted Messages in Teams](https://microsoft.github.io/teams-sdk/typescript/essentials/sending-messages/#targeted-messages)
