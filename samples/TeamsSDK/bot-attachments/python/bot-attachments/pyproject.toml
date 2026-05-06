@@ -6,5 +6,5 @@ readme = "README.md"
 requires-python = ">=3.12,<3.15"
 dependencies = [
     "python-dotenv>=1.0.0",
-    "microsoft-teams-apps==2.0.0a50",
+    "microsoft-teams-apps==2.0.0",
 ]
