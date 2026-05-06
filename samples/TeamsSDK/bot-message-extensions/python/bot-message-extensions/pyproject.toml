@@ -5,8 +5,8 @@ description = "This sample demonstrates a search-based messaging extension in Mi
 readme = "README.md"
 requires-python = ">=3.12,<3.15"
 dependencies = [
-    "python-dotenv>=1.0",
-    "microsoft-teams-apps==2.0.0a50",
-    "microsoft-teams-cards==2.0.0a50",
-    "microsoft-teams-api==2.0.0a50"
+    "python-dotenv>=1.2.2",
+    "microsoft-teams-apps==2.0.0",
+    "microsoft-teams-cards==2.0.0",
+    "microsoft-teams-api==2.0.0"
 ]
