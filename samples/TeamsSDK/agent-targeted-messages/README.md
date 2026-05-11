@@ -1,11 +1,11 @@
-# Bot Targeted Messages
+# Agent Targeted Messages
 
-This sample demonstrates how to use **targeted messaging** in Microsoft Teams. Targeted messages are private messages that appear in a shared channel or group chat but are **only visible to a specific user**. The sample implements a reminder bot where all bot responses — confirmations, reminder deliveries, active reminder lists, and snooze confirmations — are sent as targeted messages.
+This sample demonstrates how to use **targeted messaging** in Microsoft Teams. Targeted messages are private messages that appear in a shared channel or group chat but are **only visible to a specific user**. The sample implements a reminder agent where all agent responses — confirmations, reminder deliveries, active reminder lists, and snooze confirmations — are sent as targeted messages.
 
 ## Table of Contents
 
 - [Included Features](#included-features)
-- [Interaction with Bot](#interaction-with-bot)
+- [Interaction with Agent](#interaction-with-agent)
 - [Sample Implementations](#sample-implementations)
 - [How to run these samples](#how-to-run-these-samples)
   - [Run in the Teams Client](#run-in-the-teams-client)
@@ -16,15 +16,15 @@ This sample demonstrates how to use **targeted messaging** in Microsoft Teams. T
 
 ## Included Features
 
-- Bots
+- Agents
 - Targeted Messaging (`MessageActivity.withRecipient()`)
 - Proactive Targeted Messaging (`app.send()`)
 - Adaptive Cards with `Action.Execute`
 - Mention Stripping (`stripMentionsText()`)
 
-## Interaction with Bot
+## Interaction with Agent
 
-![Targeted Messages Bot](bot-targeted-messages.gif)
+![Targeted Messages Agent](agent-targeted-messages.gif)
 
 ### Set a Reminder
 
@@ -47,7 +47,7 @@ This sample demonstrates how to use **targeted messaging** in Microsoft Teams. T
 
 ### Where Targeted Messages Are Used
 
-Every bot response in this sample is a targeted message — only the intended recipient can see it:
+Every agent response in this sample is a targeted message — only the intended recipient can see it:
 
 | Action | Recipient | How |
 |---|---|---|
@@ -60,7 +60,9 @@ Every bot response in this sample is a targeted message — only the intended re
 
 | Language | Framework | Directory |
 |----------|-----------|-----------|
-| TypeScript | Node.js | [nodejs/bot-targeted-messages](nodejs/bot-targeted-messages/README.md) |
+| TypeScript | Node.js | [nodejs/agent-targeted-messages](nodejs/agent-targeted-messages/README.md) |
+| C# | .NET 10.0 | [dotnet/agent-targeted-messages](dotnet/agent-targeted-messages/README.md) |
+| Python | Python | [python/agent-targeted-messages](python/agent-targeted-messages/README.md) |
 
 # How to run these samples
 
@@ -160,7 +162,7 @@ az ad app credential reset --id $appId
 
 ## Troubleshooting
 
-- If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable.
+- If Teams cannot communicate with your agent, verify your DevTunnels URL is reachable.
 - Ensure your .env or appsettings file is setup correctly.
 - Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors (not available in Teams Developer Portal).
 
