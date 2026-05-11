@@ -82,19 +82,10 @@ server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 
-const { ConnectorClient } = require('botframework-connector');
-
 // ------------------ Bot Message Endpoint ------------------
 // Inside your adapter.process call:
 server.post('/api/messages', async (req, res) => {
     await adapter.process(req, res, async (context) => {
-        // ✅ Get the ConnectorClient and UserTokenClient from the adapter's turnState
-        const connectorClient = context.turnState.get(adapter.ConnectorClientKey);
-        const userTokenClient = context.turnState.get(adapter.UserTokenClientKey);
-
-        context.turnState.set(adapter.UserTokenClientKey, userTokenClient);
-        context.turnState.set(adapter.ConnectorClientKey, connectorClient);
-
         await bot.run(context);
     });
 });

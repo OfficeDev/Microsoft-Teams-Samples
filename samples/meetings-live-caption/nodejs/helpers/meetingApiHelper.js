@@ -1,33 +1,38 @@
 const axios = require('axios');
-require('isomorphic-fetch');
 
 class MeetingApiHelper {
+    static cartUrl = '';
+
+    static setCartUrl(cartUrl) {
+        MeetingApiHelper.cartUrl = cartUrl;
+    }
 
     /**
      * Post caption in live meeting.
      * @param {string} caption Caption to be post.
      * @returns Status of api operation.
      */
-    static postCaption(caption) {
+    static async postCaption(caption) {
+        if (!MeetingApiHelper.cartUrl) {
+            return 500;
+        }
+
         const config = {
             method: 'post',
-            url: MeetingCartUrl,
+            url: MeetingApiHelper.cartUrl,
             headers: { 
                 'Content-Type': 'text/plain'
             },
             data : caption
         };
 
-        return new Promise(async (resolve) => {
-            await axios(config)
-                .then(function (response) {
-                    resolve(response.status);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    resolve(500);
-                });
-        });
+        try {
+            const response = await axios(config);
+            return response.status;
+        } catch (error) {
+            console.log(error);
+            return 500;
+        }
     } 
 }
 module.exports = MeetingApiHelper;

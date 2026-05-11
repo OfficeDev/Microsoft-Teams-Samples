@@ -13,12 +13,10 @@ namespace MeetingEvents.Bots
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;
-    using Newtonsoft.Json.Linq;
-    using Newtonsoft.Json;
 
     public class ActivityBot : TeamsActivityHandler
     {
-        private BotState _conversationState;
+        private readonly ConversationState _conversationState;
 
         public ActivityBot(ConversationState conversationState)
         {
@@ -28,35 +26,48 @@ namespace MeetingEvents.Bots
         /// <summary>
         /// Activity Handler for Meeting Participant join event
         /// </summary>
-        /// <param name="meeting"></param>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         protected override async Task OnTeamsMeetingParticipantsJoinAsync(MeetingParticipantsEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(createAdaptiveCardInvokeResponseAsync(meeting.Members[0].User.Name, " has joined the meeting.")));
-            return;
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(CreateAdaptiveCardForParticipantEvent(meeting.Members[0].User.Name, " has joined the meeting.")), cancellationToken);
         }
 
         /// <summary>
         /// Activity Handler for Meeting Participant leave event
         /// </summary>
-        /// <param name="meeting"></param>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         protected override async Task OnTeamsMeetingParticipantsLeaveAsync(MeetingParticipantsEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(createAdaptiveCardInvokeResponseAsync(meeting.Members[0].User.Name, " left the meeting.")));
-            return;
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(CreateAdaptiveCardForParticipantEvent(meeting.Members[0].User.Name, " left the meeting.")), cancellationToken);
+        }
+
+        /// <summary>
+        /// Activity Handler for Meeting start event
+        /// </summary>
+        protected override async Task OnTeamsMeetingStartAsync(MeetingStartEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
+            // Save any state changes that might have occurred during the turn.
+            var conversationStateAccessors = _conversationState.CreateProperty<MeetingData>(nameof(MeetingData));
+            var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingData(), cancellationToken);
+            conversationData.StartTime = meeting.StartTime;
+            await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMeetingStart(meeting)), cancellationToken);
+        }
+
+        /// <summary>
+        /// Activity Handler for Meeting end event.
+        /// </summary>
+        protected override async Task OnTeamsMeetingEndAsync(MeetingEndEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var conversationStateAccessors = _conversationState.CreateProperty<MeetingData>(nameof(MeetingData));
+            var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingData(), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMeetingEnd(meeting, conversationData)), cancellationToken);
         }
 
         /// <summary>
         /// Sample Adaptive card for Meeting participant events.
         /// </summary>
-        private Attachment createAdaptiveCardInvokeResponseAsync(string userName, string action)
+        private static Attachment CreateAdaptiveCardForParticipantEvent(string userName, string action)
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.4"))
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion("1.4"))
             {
                 Body = new List<AdaptiveElement>
                 {
@@ -77,7 +88,7 @@ namespace MeetingEvents.Bots
                                 Size = AdaptiveTextSize.Default,
                             }
                         },
-                    Spacing = AdaptiveSpacing.Medium,
+                        Spacing = AdaptiveSpacing.Medium,
                     }
                 }
             };
@@ -90,48 +101,17 @@ namespace MeetingEvents.Bots
         }
 
         /// <summary>
-        /// Activity Handler for Meeting start event
-        /// </summary>
-        /// <param name="meeting"></param>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        protected override async Task OnTeamsMeetingStartAsync(MeetingStartEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
-        {
-            // Save any state changes that might have occurred during the turn.
-            var conversationStateAccessors = _conversationState.CreateProperty<MeetingData>(nameof(MeetingData));
-            var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingData());
-            conversationData.StartTime = meeting.StartTime;
-            await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMeetingStart(meeting)));
-        }
-
-        /// <summary>
-        /// Activity Handler for Meeting end event.
-        /// </summary>
-        /// <param name="meeting"></param>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        protected override async Task OnTeamsMeetingEndAsync(MeetingEndEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
-        {
-            var conversationStateAccessors = _conversationState.CreateProperty<MeetingData>(nameof(MeetingData));
-            var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingData());
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMeetingEnd(meeting, conversationData)));
-        }
-
-        /// <summary>
         /// Sample Adaptive card for Meeting Start event.
         /// </summary>
-        private Attachment GetAdaptiveCardForMeetingStart(MeetingStartEventDetails meeting)
+        private static Attachment GetAdaptiveCardForMeetingStart(MeetingStartEventDetails meeting)
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
                 Body = new List<AdaptiveElement>
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = meeting.Title  + "- started",
+                        Text = $"{meeting.Title} - started",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     },
@@ -158,7 +138,7 @@ namespace MeetingEvents.Bots
                                 {
                                     new AdaptiveTextBlock
                                     {
-                                        Text = Convert.ToString(meeting.StartTime.ToLocalTime()),
+                                        Text = meeting.StartTime.ToLocalTime().ToString(),
                                         Wrap = true,
                                     },
                                 },
@@ -186,25 +166,24 @@ namespace MeetingEvents.Bots
         /// <summary>
         /// Sample Adaptive card for Meeting End event.
         /// </summary>
-        private Attachment GetAdaptiveCardForMeetingEnd(MeetingEndEventDetails meeting, MeetingData conversationData)
+        private static Attachment GetAdaptiveCardForMeetingEnd(MeetingEndEventDetails meeting, MeetingData conversationData)
         {
+            var meetingDuration = meeting.EndTime - conversationData.StartTime;
+            var meetingDurationText = meetingDuration.Minutes < 1
+                ? $"{Convert.ToInt32(meetingDuration.Seconds)}s"
+                : $"{Convert.ToInt32(meetingDuration.Minutes)}min {Convert.ToInt32(meetingDuration.Seconds)}s";
 
-            TimeSpan meetingDuration = meeting.EndTime - conversationData.StartTime;
-            var meetingDurationText = meetingDuration.Minutes < 1 ?
-                  Convert.ToInt32(meetingDuration.Seconds) + "s"
-                : Convert.ToInt32(meetingDuration.Minutes) + "min " + Convert.ToInt32(meetingDuration.Seconds) + "s";
-
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
                 Body = new List<AdaptiveElement>
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = meeting.Title  + "- ended",
+                        Text = $"{meeting.Title} - ended",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     },
-                     new AdaptiveColumnSet
+                    new AdaptiveColumnSet
                     {
                         Columns = new List<AdaptiveColumn>
                         {
@@ -232,7 +211,7 @@ namespace MeetingEvents.Bots
                                 {
                                     new AdaptiveTextBlock
                                     {
-                                        Text = Convert.ToString(meeting.EndTime.ToLocalTime()),
+                                        Text = meeting.EndTime.ToLocalTime().ToString(),
                                         Wrap = true,
                                     },
                                     new AdaptiveTextBlock

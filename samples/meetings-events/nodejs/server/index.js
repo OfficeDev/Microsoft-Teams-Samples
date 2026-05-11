@@ -15,7 +15,7 @@ server.use(express.urlencoded({
 }));
 server.use('/api', require('./api'));
 
-server.get('*', (req, res) => {
+server.use((req, res) => {
     res.json({ error: 'Route not found' });
 });
 server.listen(PORT, () => {

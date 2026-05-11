@@ -22,7 +22,7 @@ class BotActivityHandler extends TeamsActivityHandler {
     // Get the state properties from the turn context.
     const conversationData = await this.conversationDataAccessor.get(
       context, { startTime: '' });
-    var meetingObject = context.activity.value;
+    const meetingObject = context.activity.value;
     conversationData.startTime = meetingObject.StartTime;
     await context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardForMeetingStart(meetingObject))] });
     
@@ -35,12 +35,12 @@ class BotActivityHandler extends TeamsActivityHandler {
     // Get the state properties from the turn context.
     const conversationData = await this.conversationDataAccessor.get(
       context, { startTime: '' });
-    var meetingObject = context.activity.value;
-    var startTime = conversationData.startTime;
-    var timeDuration = new Date(meetingObject.EndTime) - new Date(startTime);
-    var minutes = Math.floor(timeDuration / 60000);
-    var seconds = ((timeDuration % 60000) / 1000).toFixed(0);
-    var meetingDurationText = minutes >= 1 ? minutes + "min " + seconds + "s": seconds + "s";
+    const meetingObject = context.activity.value;
+    const startTime = conversationData.startTime;
+    const timeDuration = new Date(meetingObject.EndTime) - new Date(startTime);
+    const minutes = Math.floor(timeDuration / 60000);
+    const seconds = ((timeDuration % 60000) / 1000).toFixed(0);
+    const meetingDurationText = minutes >= 1 ? `${minutes}min ${seconds}s` : `${seconds}s`;
     await context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardForMeetingEnd(meetingObject, meetingDurationText))] });
   };
 

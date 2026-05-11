@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-//
-// Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.14.0
 
 namespace MeetingBots
 {
@@ -14,7 +12,7 @@ namespace MeetingBots
     public class AdapterWithErrorHandler : CloudAdapter
     {
         public AdapterWithErrorHandler(IConfiguration configuration, ILogger<IBotFrameworkHttpAdapter> logger)
-            : base(configuration, null, logger)
+            : base(configuration, new SingleTenantServiceClientCredentialFactory(), logger)
         {
             OnTurnError = async (turnContext, exception) =>
             {

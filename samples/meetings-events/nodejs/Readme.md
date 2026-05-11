@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-events-nodejs
 
 # Realtime meeting events
 
- Experience real-time meeting and participant events with this C# bot sample for Microsoft Teams. Currently available in public developer preview, it supports Adaptive Cards, bot interactions, and RSC permissions, allowing seamless integration for enhanced meeting management. To try it out, simply upload the provided manifest in your Teams client.
+ Experience real-time meeting and participant events with this Node.js bot sample for Microsoft Teams. Currently available in public developer preview, it supports Adaptive Cards, bot interactions, and RSC permissions, allowing seamless integration for enhanced meeting management. To try it out, simply upload the provided manifest in your Teams client.
  
 Using this Node JS sample, a bot can receive real-time meeting events.
 For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
@@ -40,7 +40,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program).
 
-2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2 or higher).
+2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 18 or higher).
 
     ```bash
     # determine node version

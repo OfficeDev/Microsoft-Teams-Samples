@@ -3,7 +3,6 @@
 
 using JoinTeamByQR.helper;
 using JoinTeamByQR.Models;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Teams;

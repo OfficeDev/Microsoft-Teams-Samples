@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using JoinTeamByQR.Models;
-using Microsoft.Graph;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,17 +18,8 @@ namespace JoinTeamByQR.helper
                 throw new ArgumentNullException(nameof(tokenResponse));
             }
 
-            try
-            {
-                var client = new SimpleGraphClient(tokenResponse);
-                var teamData = await client.GetAllTeams();
-
-                return teamData;
-            }
-            catch (ServiceException ex)
-            {
-                throw;
-            }
+            var client = new SimpleGraphClient(tokenResponse);
+            return await client.GetAllTeams();
         }
 
         // Helper method to add user to the team.

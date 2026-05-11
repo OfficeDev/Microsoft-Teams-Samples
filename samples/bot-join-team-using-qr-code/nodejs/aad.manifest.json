@@ -3,7 +3,7 @@
     "appId": "${{AAD_APP_CLIENT_ID}}",
     "name": "bot-join-team-using-qr-code-aad",
     "accessTokenAcceptedVersion": 2,
-    "signInAudience": "AzureADMultipleOrgs",
+    "signInAudience": "AzureADMyOrg",
     "oauth2AllowIdTokenImplicitFlow": true,
 	"oauth2AllowImplicitFlow": true,
     "optionalClaims": {

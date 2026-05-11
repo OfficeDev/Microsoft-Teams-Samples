@@ -57,28 +57,27 @@ class DialogBot extends TeamsActivityHandler {
     }
 
     async handleTeamsTaskModuleFetch(context, taskModuleRequest) {
-        var TokenState = await this.conversationDataAccessor.get(context, {});
-        if (TokenState.token == null) {
+        const tokenState = await this.conversationDataAccessor.get(context, {});
+        let taskInfo;
+
+        if (tokenState.token == null) {
             await this.dialog.run(context, this.dialogState);
         }
         else {
-            const client = new SimpleGraphClient(TokenState.token);
+            const client = new SimpleGraphClient(tokenState.token);
             const response = await client.getAllTeams();
-            var teamsData = response.value.slice(0, 5).map(i => {
-                var team = { id: i.id, name: i.displayName };
-                return team;
-            })
+            const teamsData = response.value.slice(0, 5).map((i) => ({ id: i.id, name: i.displayName }));
 
-            teamData["data"] = teamsData;
+            teamData.data = teamsData;
 
             const cardTaskFetchId = taskModuleRequest.data.id;
-            var taskInfo = {}; // TaskModuleTaskInfo
+            taskInfo = {}; // TaskModuleTaskInfo
 
-            if (cardTaskFetchId == "generate") {
+            if (cardTaskFetchId === 'generate') {
                 taskInfo.url = taskInfo.fallbackUrl = this.baseUrl + '/teamDetails';
                 taskInfo.height = 350;
                 taskInfo.width = 350;
-                taskInfo.title = "Join Team";
+                taskInfo.title = 'Join Team';
             }
         }
 
@@ -88,14 +87,14 @@ class DialogBot extends TeamsActivityHandler {
     async handleTeamsTaskModuleSubmit(context, taskModuleRequest) {
         const teamId = taskModuleRequest.data.teamId;
         const userId = taskModuleRequest.data.userId;
-        var TokenState = await this.conversationDataAccessor.get(context, {});
+        const tokenState = await this.conversationDataAccessor.get(context, {});
 
-        if (TokenState.token == null) {
+        if (tokenState.token == null) {
             await this.dialog.run(context, this.dialogState);
         }
         else {
-            const client = new SimpleGraphClient(TokenState.token);
-            const response = await client.joinTeam(userId, teamId);
+            const client = new SimpleGraphClient(tokenState.token);
+            await client.joinTeam(userId, teamId);
             await context.sendActivity("Yor are successfully added into the team.");
         }
 

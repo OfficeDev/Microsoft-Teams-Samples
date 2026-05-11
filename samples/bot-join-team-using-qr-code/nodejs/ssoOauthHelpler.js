@@ -2,8 +2,7 @@ const { ActivityTypes, tokenExchangeOperationName } = require('botbuilder');
 const { StatusCodes } = require('http-status-codes');
 
 class SsoOAuthHelpler {
-    constructor(oAuthConnectName, storage) {
-        this.oAuthConnectName = oAuthConnectName;
+    constructor(storage) {
         this.storage = storage;
     }
 
@@ -38,7 +37,7 @@ class SsoOAuthHelpler {
 
         const storeItems = { [this.getStorageKey(turnContext)]: storeItem };
         try {
-            this.storage.write(storeItems);
+            await this.storage.write(storeItems);
         }
         catch (err) {
             console.log(err);

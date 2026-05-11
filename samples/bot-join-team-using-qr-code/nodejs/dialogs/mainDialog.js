@@ -6,8 +6,7 @@ const { LogoutDialog } = require('./logoutDialog');
 const MAIN_DIALOG = 'MainDialog';
 const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
-const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
-const { polyfills } = require('isomorphic-fetch');
+const { SsoOAuthPrompt } = require('./ssoOauthPrompt');
 const adaptiveCards = require('../models/adaptiveCard');
 const { CardFactory } = require('botbuilder');
 const Token_State_Property = 'TokenData';
@@ -60,16 +59,15 @@ class MainDialog extends LogoutDialog {
         // Get the token from the previous step. Note that we could also have gotten the
         // token directly from the prompt itself. There is an example of this in the next method.
         const tokenResponse = stepContext.result;
-        console.log(tokenResponse.token);
 
         if (!tokenResponse || !tokenResponse.token) {
             await stepContext.context.sendActivity('Login was not successful please try again.');
         } 
         else {
 
-            if(stepContext.context._activity.conversation.conversationType == "personal")
+            if (stepContext.context.activity.conversation.conversationType === 'personal')
             {
-                var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+                const currentState = await this.conversationDataAccessor.get(stepContext.context, {});
                 currentState.token = tokenResponse.token;
                 await stepContext.context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.getAdaptiveCardUserDetails())] });
             }  

@@ -23,9 +23,6 @@ class SsoOAuthPrompt extends OAuthPrompt {
                 throw new Error('TokenResponse is present in TurnState, but TokenExchangeInvokeRequest is missing.');
             }
 
-            // PromptRecognizerResult
-            let result = {};
-
             // TokenExchangeInvokeResponse
             const exchangeResponse = new TokenExchangeInvokeResponse(tokenExchangeRequest.id, this.settings.ConnectionName, this.failureDetail);
 
@@ -39,16 +36,15 @@ class SsoOAuthPrompt extends OAuthPrompt {
                     }
                 });
 
-            result.succeeded = true;
             // TokenResponse
-            result.value =
+            const tokenResponse =
                 {
                     channelId: cachedTokenResponse.channelId,
                     connectionName: this.settings.ConnectionName,
                     token: cachedTokenResponse.token
                 };
 
-            return await dialogContext.endDialog(result.value);
+            return await dialogContext.endDialog(tokenResponse);
         }
 
         return await super.continueDialog(dialogContext);
