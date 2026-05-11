@@ -1,4 +1,4 @@
-# Bot Targeted Messages - .NET (C#)
+# Agent Targeted Messages - .NET (C#)
 
 This sample demonstrates how to send **targeted messages** in Microsoft Teams using the Teams SDK for .NET. Targeted messages are only visible to a specific user in a channel or group chat, enabling private notifications within shared conversations.
 
@@ -10,7 +10,7 @@ This sample demonstrates how to send **targeted messages** in Microsoft Teams us
 
 1. Navigate to this directory:
    ```bash
-   cd dotnet/bot-targeted-messages
+   cd dotnet/agent-targeted-messages
    ```
 
 2. Restore dependencies and run:
@@ -18,6 +18,6 @@ This sample demonstrates how to send **targeted messages** in Microsoft Teams us
    dotnet run
    ```
 
-The bot will start listening on `http://localhost:3978`.
+The agent will start listening on `http://localhost:3978`.
 
-Refer to the main [README.md](../../README.md) to interact with your bot in the agentsplayground or in Teams.
+Refer to the main [README.md](../../README.md) to interact with your agent in the agentsplayground or in Teams.

@@ -18,7 +18,7 @@ using Microsoft.Teams.Cards;
 using Microsoft.Teams.Common;
 using AdaptiveCard = Microsoft.Teams.Cards.AdaptiveCard;
 
-// Initialize Teams App
+// Initialize Teams Agent App
 var builder = WebApplication.CreateBuilder(args);
 builder.AddTeams();
 var webApp = builder.Build();
@@ -150,6 +150,9 @@ ParsedReminder ParseReminderCommand(MessageActivity msg, string commandText)
         reminderText = reminderText[5..].Trim();
     if (string.IsNullOrEmpty(reminderText))
         reminderText = "You have a reminder!";
+
+    /* Use preferred LLM to parse natural language time expressions */
+    /* var nlpParsed = await llmClient.ParseTimeAsync(text); */
 
     return new ParsedReminder
     {
@@ -535,6 +538,9 @@ teamsApp.OnMessage(async (context, cancellationToken) =>
     }
     else
     {
+        /* Use preferred LLM to get summarized answer */
+        /* var llmResponse = await llmClient.GetCompletionAsync(text); */
+        /* await context.Send(llmResponse); */
         await context.Send("Use `reminder-help` to see available commands.");
     }
 });
@@ -635,7 +641,7 @@ teamsApp.OnAdaptiveCardAction(async (context, cancellationToken) =>
     }
 });
 
-// Starts the Teams bot application and listens for incoming requests
+// Starts the Teams agent application and listens for incoming requests
 webApp.Run();
 
 // --- Types ---
