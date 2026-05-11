@@ -7,6 +7,14 @@ import { AdaptiveCard, TextBlock, FactSet, ExecuteAction } from '@microsoft/team
 
 const app = new App();
 
+/*
+ * === Agentic Flow Stub: LLM Client Setup ===
+ * Initialize your preferred LLM client here for agentic capabilities.
+ *
+ * import { OpenAIClient } from '@azure/openai';
+ * const llmClient = new OpenAIClient(endpoint, credential);
+ */
+
 
 interface ReminderInfo {
     id: string;
@@ -345,7 +353,7 @@ async function cancelReminder(ctx: { activity: any; send: Function }, reminderId
 
 async function showHelp(send: Function): Promise<void> {
     await send([
-        '**Personal Reminder Bot - Help**',
+        '**Personal Reminder Agent - Help**',
         '',
         '**Set a Reminder:**',
         '- `remind me in 5 minutes to check email`',
