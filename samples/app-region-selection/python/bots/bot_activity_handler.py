@@ -4,7 +4,10 @@ from botbuilder.schema import HeroCard, CardAction, ActionTypes
 from typing import List
 import os
 
+
 class RegionSelectionTab(ActivityHandler):
+    REGION_CONFIG_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "ConfigData", "Regions.json")
+
     def __init__(self, user_state: UserState):
         self._user_state = user_state
 
@@ -12,7 +15,7 @@ class RegionSelectionTab(ActivityHandler):
         welcome_user_state_accessor = self._user_state.create_property("WelcomeUserState")
         did_bot_welcome_user = await welcome_user_state_accessor.get(turn_context, lambda: WelcomeUserState())
 
-        text = turn_context.activity.text.lower()
+        text = (turn_context.activity.text or "").lower()
 
         if did_bot_welcome_user.did_user_selected_domain and text in ["change", "yes"]:
             await self.send_change_domain_confirmation_card(turn_context)
@@ -39,7 +42,7 @@ class RegionSelectionTab(ActivityHandler):
                 await self.send_welcome_intro_card(turn_context)
 
     async def send_welcome_intro_card(self, turn_context: TurnContext):
-        domain, region = "", ""
+        region = ""
         if turn_context.activity.text and self.is_any_domain_selected(turn_context.activity.text):
             await self.welcome_card(turn_context)
             return
@@ -48,10 +51,9 @@ class RegionSelectionTab(ActivityHandler):
         did_bot_welcome_user = await welcome_user_state_accessor.get(turn_context, lambda: WelcomeUserState())
 
         if did_bot_welcome_user.did_user_selected_domain:
-            domain = did_bot_welcome_user.selected_domain
             region = did_bot_welcome_user.selected_region
         else:
-            domain, region = self.get_default_info(turn_context)
+            _, region = self.get_default_info(turn_context)
 
         welcome_msg = f"Your default Region is {region}."
         card = HeroCard(
@@ -75,14 +77,12 @@ class RegionSelectionTab(ActivityHandler):
 
     def get_selected_info(self, text):
         domain, region = "", ""
-        if len(text.split("-")) > 1:
-            domain = text.split("-")[0].strip()
+        selected_region = self._extract_selected_region(text)
+        if not selected_region:
+            return domain, region
 
-        # Read JSON data from file
-        file_path = os.path.join(os.getcwd(), "ConfigData", "Regions.json")
-        with open(file_path, 'r') as file:
-            json_data = json.load(file)
-            selected_info = next((item for item in json_data["regionDomains"] if item["region"] == domain), None)
+        json_data = self._load_regions()
+        selected_info = next((item for item in json_data["regionDomains"] if item["region"] == selected_region), None)
 
         if selected_info:
             region = selected_info["region"]
@@ -91,10 +91,7 @@ class RegionSelectionTab(ActivityHandler):
         return domain, region
 
     async def send_domain_lists_card(self, turn_context: TurnContext):
-        # Read JSON data from file
-        file_path = os.path.join(os.getcwd(), "ConfigData", "Regions.json")
-        with open(file_path, 'r') as file:
-            json_data = json.load(file)
+        json_data = self._load_regions()
 
         region_button_list = [
             CardAction(
@@ -164,19 +161,24 @@ class RegionSelectionTab(ActivityHandler):
         await turn_context.send_activity(response)
 
     def is_any_domain_selected(self, text):
-        domain = ""
-        if len(text.split("-")) > 1:
-            domain = text.split("-")[0].strip()
-
-        if not domain:
+        selected_region = self._extract_selected_region(text)
+        if not selected_region:
             return False
 
-        file_path = os.path.join(os.getcwd(), "ConfigData", "Regions.json")
-        with open(file_path, 'r') as file:
-            json_data = json.load(file)
-            is_domain_selected = any(item["region"] == domain for item in json_data["regionDomains"])
+        json_data = self._load_regions()
+        is_domain_selected = any(item["region"] == selected_region for item in json_data["regionDomains"])
 
         return is_domain_selected
+
+    def _extract_selected_region(self, text: str) -> str:
+        parts = text.split("-")
+        if len(parts) > 1:
+            return parts[0].strip()
+        return ""
+
+    def _load_regions(self):
+        with open(self.REGION_CONFIG_FILE, "r", encoding="utf-8") as file:
+            return json.load(file)
     
 class WelcomeUserState:
     def __init__(self):

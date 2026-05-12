@@ -7,3 +7,11 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:app-region-selection-python
 
 environmentFolderPath: ./env
+
+deploy:
+  # Keep runtime auth mode aligned with the provisioned single-tenant app registration.
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.env
+      envs:
+        MicrosoftAppType: SingleTenant

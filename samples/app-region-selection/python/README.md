@@ -32,7 +32,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
-- [Python SDK](https://www.python.org/downloads/) min version 3.6
+- [Python SDK](https://www.python.org/downloads/) min version 3.10
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 
@@ -77,7 +77,7 @@ the Teams service needs to call into the bot.
   
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
-      * Choose the **supported account types** (any account type will work)
+            * Choose the **supported account types**: **Accounts in this organizational directory only (Single tenant)**
       * Leave **Redirect URI** empty.
       * Choose **Register**.
   B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.

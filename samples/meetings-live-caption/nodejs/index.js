@@ -35,7 +35,7 @@ const port = process.env.PORT || 3978;
 const httpsServer = https.createServer(sslOptions, server);
 
 httpsServer.listen(port, () => 
-    console.log(`\n${server.name} listening to https://localhost:${port}`)
+    console.log(`\n${ server.name } listening to https://localhost:${ port }`)
 );
 
 function getTenantIdFromRequest(req) {
@@ -76,24 +76,18 @@ server.get('/Home/Configure', (req, res) => {
 
 // Method to save CART Url in the app.
 server.post('/api/meeting/SaveCARTUrl', tenantGuard, async (req, res) => {
-    try
-    {
-        if(req.body != null && req.body.CartUrl != null){
-        if (req.body.CartUrl.trim() !== "" && req.body.CartUrl.includes("meetingid") && req.body.CartUrl.includes("token"))
-        {
-            MeetingApiHelper.setCartUrl(req.body.CartUrl);
-            return res.status(200).send();
-        }
-        else
-        {
+    try {
+        if (req.body != null && req.body.CartUrl != null) {
+            if (req.body.CartUrl.trim() !== '' && req.body.CartUrl.includes('meetingid') && req.body.CartUrl.includes('token')) {
+                MeetingApiHelper.setCartUrl(req.body.CartUrl);
+                return res.status(200).send();
+            }
+
             return res.status(400).send();
         }
-    }
 
         return res.status(400).send();
-}
-    catch (ex)
-    {
+    } catch (ex) {
         console.log(ex);
         return res.status(500).send();
     }
@@ -101,13 +95,10 @@ server.post('/api/meeting/SaveCARTUrl', tenantGuard, async (req, res) => {
 
 // Method to send caption in the live meeting.
 server.post('/api/meeting/LiveCaption', tenantGuard, async (req, res) => {
-    try
-    {
-        var response = await MeetingApiHelper.postCaption(req.body.captionText.trim());
+    try {
+        const response = await MeetingApiHelper.postCaption(req.body.captionText.trim());
         return res.status(response).send();
-    }
-    catch (ex)
-    {
+    } catch (ex) {
         console.log(ex);
         return res.status(500).send();
     }

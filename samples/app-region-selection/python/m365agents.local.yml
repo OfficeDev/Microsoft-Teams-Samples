@@ -12,7 +12,7 @@ provision:
     with:
       name: app-region-selection-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
-      signInAudience: "AzureADMultipleOrgs" # Multitenant
+      signInAudience: "AzureADMyOrg" # Single-tenant
     writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
       clientId: AAD_APP_CLIENT_ID
       clientSecret: SECRET_AAD_APP_CLIENT_SECRET # Environment variable that starts with `SECRET_` will be stored to the .env.{envName}.user environment file
@@ -39,7 +39,7 @@ provision:
         - path: ./infra/azure.bicep
           parameters: ./infra/azure.parameters.json
           deploymentName: Create-resources-for-bot
-      bicepCliVersion: v0.9.1 # Microsoft 365 Agents Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
+      bicepCliVersion: v0.43.8 # Latest stable Bicep CLI.
 
   # Validate using manifest schema
   - uses: teamsApp/validateManifest
@@ -74,7 +74,7 @@ deploy:
     with:
       target: ./.env
       envs:
-        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
+        MicrosoftAppType: SingleTenant
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

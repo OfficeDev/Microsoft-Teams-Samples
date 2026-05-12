@@ -105,7 +105,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
-    * Choose the **supported account types** (any account type will work)
+    * Choose **Accounts in this organizational directory only (Single tenant)**.
     * Leave **Redirect URI** empty.
     * Choose **Register**.
 3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
@@ -120,6 +120,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Edit the `manifest.json` contained in the  `appManifest/` folder to replace the `<<AppId>>` with any guid value and `<<APP-DOMAIN>>` with with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.com` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
     - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Manage your apps -> Upload an app -> Upload a custom app")
+
+### 4. Single-tenant runtime enforcement
+This sample now enforces single-tenant access in both UI and server APIs.
+
+1. Set `TEAMS_APP_TENANT_ID` in [env/.env.local](env/.env.local) to your Microsoft Entra tenant ID.
+2. Ensure the same tenant signs in when loading/configuring the app.
+3. Requests from other tenants are rejected with HTTP 403.
 
 **NOTE: If you are unable to send caption, try configuring tab again.**
 

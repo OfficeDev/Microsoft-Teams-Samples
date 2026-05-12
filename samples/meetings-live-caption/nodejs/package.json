@@ -30,12 +30,7 @@
     "devDependencies": {
         "env-cmd": "^11.0.0",
         "esbuild": "^0.28.0",
-        "eslint": "^8.57.1",
-        "eslint-config-standard": "^17.1.0",
-        "eslint-plugin-import": "^2.32.0",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^6.6.0",
-        "eslint-plugin-standard": "^5.0.0",
+        "eslint": "^10.3.0",
         "nodemon": "^3.1.14"
     }
 }

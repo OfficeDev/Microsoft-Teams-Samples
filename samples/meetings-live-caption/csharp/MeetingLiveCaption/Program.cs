@@ -9,9 +9,11 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpClient().AddControllers().AddNewtonsoftJson();
+builder.Services.AddHttpClient()
+    .AddControllers()
+    .AddNewtonsoftJson();
 
-builder.Services.AddMvc().AddSessionStateTempDataProvider();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -23,6 +25,7 @@ if (app.Environment.IsDevelopment())
 app.UseDefaultFiles()
     .UseStaticFiles()
     .UseWebSockets()
+    .UseSession()
     .UseRouting()
     .UseAuthorization()
     .UseEndpoints(endpoints =>

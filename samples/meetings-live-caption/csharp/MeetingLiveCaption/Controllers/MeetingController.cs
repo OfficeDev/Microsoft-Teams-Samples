@@ -11,6 +11,13 @@ namespace MeetingLiveCaption.Controllers
     [ApiController]
     public class MeetingController : ControllerBase
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public MeetingController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+
         public static string MeetingCartUrl;
 
         /// <summary>
@@ -23,7 +30,7 @@ namespace MeetingLiveCaption.Controllers
             try
             {
                 var data = new StringContent(liveCaption.CaptionText, Encoding.UTF8, "text/plain");
-                var httpClient = new HttpClient();
+                var httpClient = _httpClientFactory.CreateClient();
                 var response = await httpClient.PostAsync(MeetingCartUrl, data);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
