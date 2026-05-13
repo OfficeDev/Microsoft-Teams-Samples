@@ -10,3 +10,7 @@ dependencies = [
     "microsoft-teams-cards==2.0.0",
     "python-dotenv>=1.0.0",
 ]
+
+[tool.setuptools.packages.find]
+include = ["*"]
+exclude = ["infra*", "assets*", "appPackage*"]
