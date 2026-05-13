@@ -20,11 +20,6 @@ This sample illustrates sequential workflow, user specific views and upto date a
 ## Interaction with app
 ![Preview Image](SequentialUserSpecificFlow/Images/Preview.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Sequential workflow adaptive cards:** [Manifest](/samples/bot-sequential-flow-adaptive-cards/csharp/demo-manifest/bot-sequential-flow-adaptive-cards.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -48,7 +43,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.

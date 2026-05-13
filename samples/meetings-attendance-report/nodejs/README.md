@@ -57,7 +57,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     -  Click on "New registration", and create an Azure AD application.
 
    -  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".
@@ -197,7 +197,6 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-attendance-report-nodejs" />

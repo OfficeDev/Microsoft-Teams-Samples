@@ -26,11 +26,6 @@ This sample demonstrates a bot that archives group chat messages in Microsoft Te
 
 ![GroupChatModule](FetchGroupChatMessages/Images/FetchGroupChatModule.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Archive groupchat messages:** [Manifest](/samples/bot-archive-groupchat-messages/csharp/demo-manifest/bot-archive-groupchat-messages.zip)
-
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -61,14 +56,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. In the opened web browser, select Add button to install the app in Teams
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.   
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.   
    
     *Enter the following  to Click Expose An API Menu and add a scope details to configure the admin and user consent prompts with values that are appropriate for the access_as_user scope.*
    - Added the WebApplication Info Resource and Application ID URI in expose and API like: api://Tunnelbaseurl/App-id"
-   - Admin consent display name: Teams can access the user’s profile.
-   - Admin consent description: Teams can call the app’s web APIs as the current user.
+   - Admin consent display name: Teams can access the userâ€™s profile.
+   - Admin consent description: Teams can call the appâ€™s web APIs as the current user.
    - User consent display name: Teams can access your profile and make requests on your behalf.
-   - User consent description: Teams can call this app’s APIs with the same rights as you have.
+   - User consent description: Teams can call this appâ€™s APIs with the same rights as you have.
    
    ### Instruction on setting connection string for bot authentication on the behalf of user
 
@@ -182,7 +177,6 @@ Send `getchat` message to the bot, you will recieve a consent card by the bot in
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-archive-groupchat-messages-csharp" />

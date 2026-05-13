@@ -21,12 +21,6 @@ This sample demonstrates how to build a Microsoft Teams tab using Python (Flask)
 * Tabs (channel context)
 * Teams SDK integration
 
-## Try it yourself - experience the App in your Microsoft Teams client
-
-You can try this sample by uploading the app package (.zip file) to your Teams client as a personal or channel tab. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Microsoft Teams Tab Channel Context Sample:** [Manifest](/samples/tab-channel-context/python/appManifest/app-channel-context.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -73,7 +67,7 @@ You can try this sample by uploading the app package (.zip file) to your Teams c
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)

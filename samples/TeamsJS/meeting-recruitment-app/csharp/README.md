@@ -29,11 +29,6 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 ![Details](MeetingApp/Images/meetingrecruitment.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Recruitment App Sample:** [Manifest](/samples/TeamsJS/meeting-recruitment-app/csharp/demo-manifest/Meeting-Recruitment-App.zip)
-
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -71,7 +66,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-1.Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1.Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
    Fill out name and select third option for supported account type and click "Register".
 
    ![AppRegistration](MeetingApp/Images/AppRegistration.png)

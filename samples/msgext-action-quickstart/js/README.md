@@ -27,11 +27,6 @@ Discover this Hello World Messaging Extension that demonstrates how to accept pa
 
 ![message ext module](Images/msgextactionquickstartModule.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Messaging Extension:** [Manifest](/samples/msgext-action-quickstart/js/demo-manifest/msgext-action-quickstart.zip)
-
 ## Prerequisites
 
 **Dependencies**
@@ -59,7 +54,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -141,7 +136,6 @@ Start debugging the project by hitting the `F5` key or click the debug icon in V
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-action-quickstart-js" />

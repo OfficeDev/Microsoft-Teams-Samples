@@ -27,11 +27,6 @@ The Meeting Transcript Bot uses Microsoft Graph API to fetch and present meeting
 
 ![MeetingsTranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Meeting Transcript Bot uses Microsoft Graph API:** [Manifest](/samples/meetings-transcription/csharp/demo-manifest/meetings-transcription.zip)
-
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -62,7 +57,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **NOTE: The feature is only available only be used from the desktop app*
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     
   -  Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
 
@@ -209,8 +204,8 @@ Add the following permissions inside the **authorization** section of your `mani
 
 - In the file `m365agents.local.yml`:  
 
-- **Comment out** the section for `aad.manifest.json` (lines **52–55**).  
-- **Comment out** the section for validating `appPackage` (lines **57–61**).
+- **Comment out** the section for `aad.manifest.json` (lines **52â€“55**).  
+- **Comment out** the section for validating `appPackage` (lines **57â€“61**).
 
 
 6. Setup Manifest for Teams

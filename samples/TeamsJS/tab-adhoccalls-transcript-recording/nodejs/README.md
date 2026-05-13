@@ -18,8 +18,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-adhoccalls-transcript-recordi
 This sample demonstrates how to use the Microsoft Graph `adhocCalls` API in a Microsoft Teams tab to retrieve and display existing call recordings and transcripts.  
 It connects to Microsoft Graph to fetch completed call data for a user, including:
 
-- **Transcripts** – retrieved in VTT format and formatted with speaker labels.  
-- **Recordings** – securely accessed and streamed using authorization tokens.  
+- **Transcripts** â€“ retrieved in VTT format and formatted with speaker labels.  
+- **Recordings** â€“ securely accessed and streamed using authorization tokens.  
 
 The app uses **Express.js** on the backend for Graph API integration and **React** on the frontend to render a real-time, interactive interface via **Socket.IO**.  
 Users can view available recordings, read corresponding transcripts, and navigate large datasets with built-in pagination and live status indicators.
@@ -35,13 +35,13 @@ Users can view available recordings, read corresponding transcripts, and navigat
 
 ### Setup Register you app with Azure AD.
 
-  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the `.env` files.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. Youâ€™ll need those later when updating your Teams application manifest and in the `.env` files.
   4. Navigate to **API Permissions**, and make sure to add the follow permissions:
   -   Select Add a permission
   -   Select Microsoft Graph -\> Delegated permissions.
@@ -49,7 +49,7 @@ Users can view available recordings, read corresponding transcripts, and navigat
       ![Login-In ](Images/Permissions.png)
 
   -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-  5.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
+  5.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select â€œNeverâ€ for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
 ## Setup 
 
@@ -151,7 +151,6 @@ Each call session shows formatted transcript with speaker identification on the 
 - [Receive change notifications through webhooks](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
 - [Designing your Microsoft Teams app with basic Fluent UI components](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/design-teams-app-basic-ui-components)
 - [Validate the authenticity of notifications](https://learn.microsoft.com/en-gb/graph/change-notifications-with-resource-data?utm_source=chatgpt.com&tabs=csharp#validate-the-authenticity-of-notifications)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsJS/tab-adhoccalls-transcript-recording-nodejs" />
