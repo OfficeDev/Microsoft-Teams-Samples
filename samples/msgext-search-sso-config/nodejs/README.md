@@ -27,11 +27,6 @@ This comprehensive Node.js sample illustrates the development of a Messaging Ext
 
  ![](Images/MsgextSSO.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Teams Messaging Extensions Search:** [Manifest](/samples/msgext-search-sso-config/csharp/demo-manifest/msgext-search-sso-config.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -64,7 +59,7 @@ the Teams service needs to call into the bot.
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -151,7 +146,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
 
 - [Zero Install Link Unfurling](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet%2Cadvantages#zero-install-for-link-unfurling)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-search-sso-config-nodejs" />

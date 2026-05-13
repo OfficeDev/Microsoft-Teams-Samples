@@ -43,14 +43,14 @@ This sample application illustrates the use of online meeting subscriptions in M
 
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
    - Navigate to **API Permissions**, and make sure to add the follow permissions:
    - Select Add a permission
    - Select Microsoft Graph -> Application permissions.
    - `OnlineMeetings.Read.All`
    - Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-   - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+   - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select â€œNeverâ€ for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
 
 2. Setup for Bot
 	
@@ -138,7 +138,6 @@ Follow this documentation to get more information on custom apps and uploading t
 ## Further reading
 - [Change notifications for Microsoft Teams meeting](https://docs.microsoft.com/en-us/graph/changenotifications-for-onlinemeeting)
 - [Set up change notifications that include resource data](https://docs.microsoft.com/en-us/graph/webhooks-with-resource-data)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-meeting-notification-csharp" />

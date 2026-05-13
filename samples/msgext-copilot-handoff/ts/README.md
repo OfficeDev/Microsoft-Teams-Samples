@@ -59,7 +59,7 @@ Here are some ideas for prompts to try. If you don't get the result you expect, 
   > [!NOTE]
   > The answer to the 2nd question is in the [sample documents](./sampleDocs/).
 
-- *We’ve been receiving partial orders for Tofu. Find the supplier in Northwind and draft an email summarizing our inventory and reminding them they should stop sending partial orders per our MOQ policy.*
+- *Weâ€™ve been receiving partial orders for Tofu. Find the supplier in Northwind and draft an email summarizing our inventory and reminding them they should stop sending partial orders per our MOQ policy.*
 
   > [!NOTE]
   > The MOQ policy is in one of the [sample documents](./sampleDocs/).
@@ -89,14 +89,13 @@ This sample has a copilot agent handoff to enable users to transition from Copil
 ![Bot response](./lab/images/handoff.png)
 
 
-
 ![](https://m365-visitor-stats.azurewebsites.net/SamplesGallery/officedev-copilot-for-m365-plugins-samples-msgext-northwind-inventory-ts)
 
 ## 2) App Registration
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
   * Set **name** to your app name.
   * Choose the **supported account types** (any account type will work)

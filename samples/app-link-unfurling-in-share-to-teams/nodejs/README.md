@@ -22,11 +22,6 @@ This sample demonstrates the Share to Teams feature, which allows users to seaml
 
 ![App linkunfurling in share to teams](Images/app-link-unfurling-stt.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**App check-in location:** [Manifest](/samples/app-link-unfurling-in-share-to-teams/nodejs/demo-manifest/app-link-unfurling-stt.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
