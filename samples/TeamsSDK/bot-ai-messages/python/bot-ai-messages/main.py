@@ -10,12 +10,18 @@ from microsoft_teams.api import (
     MessageActivityInput,
     CitationAppearance,
     CitationIconName,
+    MessageSubmitActionInvokeActivity,
     SensitiveUsageEntity,
     SensitiveUsage,
-    MessageSubmitActionInvokeActivity
+    MessageFetchTaskInvokeActivity,
+    TaskModuleInvokeResponse,
+    AdaptiveCardAttachment,
+    card_attachment,
+    CardTaskModuleTaskInfo, 
+    TaskModuleContinueResponse,
 )
 from microsoft_teams.apps import ActivityContext, App
-from microsoft_teams.cards import AdaptiveCard, TextBlock
+from microsoft_teams.cards import AdaptiveCard, SubmitAction, TextBlock, TextInput
 
 app = App()
 
@@ -26,6 +32,28 @@ async def handle_feedback(ctx: ActivityContext[MessageSubmitActionInvokeActivity
     raw_feedback = action_value.feedback
     feedback_text = json.loads(raw_feedback).get("feedbackText") or "No feedback was provided."
     await ctx.send(MessageActivityInput(text=f"Provided reaction: {reaction}<br> Feedback: {feedback_text}"))
+    
+
+@app.on_message_fetch_task
+async def handle_feedback_fetch_task(ctx: ActivityContext[MessageFetchTaskInvokeActivity]):
+    card = AdaptiveCard(
+        version="1.4",
+        body=[
+            TextBlock(text="Tell us more about your feedback:"),
+            TextInput(id="feedbackText", placeholder="Enter your feedback here...", is_multiline=True),
+        ],
+        actions=[
+            SubmitAction(title="Submit"),
+        ],
+    )
+    return TaskModuleInvokeResponse(
+        task=TaskModuleContinueResponse(
+            value=CardTaskModuleTaskInfo(
+                title="Feedback",
+                card=card_attachment(AdaptiveCardAttachment(content=card)),
+            )
+        )
+    )
 
 
 @app.on_message_pattern(re.compile(r"label", re.IGNORECASE))
@@ -41,10 +69,10 @@ async def add_sensitivity_label(ctx: ActivityContext[MessageActivity]):
     msg = MessageActivityInput(
         text="This is an example of a sensitivity label that help users identify the confidentiality of a message",
     )
-    message_entity = msg.ensure_single_root_level_message_entity()
-    sensitive_entity = SensitiveUsageEntity(**message_entity.model_dump())
-    sensitive_entity.usage_info = SensitiveUsage(at_type="CreativeWork", name="Confidential \\ Contoso FTE", description="Please be mindful of sharing outside of your team")
-    msg._update_entity(message_entity, sensitive_entity)
+    sensitive_usage_entity = SensitiveUsageEntity(
+        usage_info=SensitiveUsage(at_type="CreativeWork", name="Confidential \\ Contoso FTE", description="Please be mindful of sharing outside of your team")
+    )
+    msg.add_entity(sensitive_usage_entity)
     await ctx.send(msg)
 
 
@@ -53,7 +81,7 @@ async def add_feedback_buttons(ctx: ActivityContext[MessageActivity]):
     await ctx.send(
         MessageActivityInput(
             text="This is an example of a feedback button - this helps to provide feedback for a message",
-        ).add_feedback()
+        ).add_feedback('custom')
     )
 
 @app.on_message_pattern(re.compile(r"citation", re.IGNORECASE))
