@@ -7,12 +7,12 @@
   "private": true,
   "dependencies": { 
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.34.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^5.1.2",
+    "@microsoft/teams-js": "^2.53.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.0",
     "react-scripts": "5.0.1",
-    "scheduler": "^0.23.0"
+    "scheduler": "^0.27.0"
   },
   "scripts": {
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
@@ -33,6 +33,6 @@
     ]
   },
   "devDependencies": {
-    "env-cmd": "^10.1.0"
+    "env-cmd": "^11.0.0"
   }
 }
