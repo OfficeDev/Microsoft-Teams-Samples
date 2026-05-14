@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { App } from '@microsoft/teams.apps';
-import { MessageActivity, stripMentionsText } from '@microsoft/teams.api';
+import { Client, MessageActivity, MessageReactionActivity, stripMentionsText } from '@microsoft/teams.api';
 import { AdaptiveCard, TextBlock, FactSet, ExecuteAction } from '@microsoft/teams.cards';
 
 const app = new App();
@@ -204,9 +204,15 @@ async function deliverReminder(reminder: ReminderInfo): Promise<void> {
     }
 }
 
-app.on('message', async ({ activity, send }) => {
+app.on('message', async ({ activity, send, api }) => {
     const msg = activity as MessageActivity;
     if (!msg.text) return;
+
+    // Check if this is a targeted message (TM) from the user via slash command
+    const isTargeted = !!(msg.recipient as any)?.isTargeted;
+    if (isTargeted) {
+        console.log(`[TM] Received targeted message from ${msg.from?.name || 'unknown'}`);
+    }
 
     // Use SDK's built-in stripMentionsText to remove bot mention
     const botId = msg.recipient?.id || '';
@@ -218,19 +224,23 @@ app.on('message', async ({ activity, send }) => {
     if (lower === 'reminder-help' || lower === 'help') {
         await showHelp(send);
     } else if (lower.startsWith('remind')) {
-        await handleRemindCommand({ activity, send }, text);
+        await handleRemindCommand({ activity, send, isTargeted }, text);
     } else if (lower === 'my-reminders') {
-        await showMyReminders({ activity, send });
+        await showMyReminders({ activity, send, isTargeted });
     } else if (lower.startsWith('cancel-reminder')) {
         const reminderId = text.replace(/^cancel-reminder\s*/i, '').trim();
-        await cancelReminder({ activity, send }, reminderId);
+        await cancelReminder({ activity, send, isTargeted }, reminderId);
+    } else if (lower.startsWith('add-reaction')) {
+        await handleAddReaction({ activity, send, api }, text);
+    } else if (lower.startsWith('remove-reaction')) {
+        await handleRemoveReaction({ activity, send, api }, text);
     } else {
         await send('Use `reminder-help` to see available commands.');
     }
 });
 
-async function handleRemindCommand(ctx: { activity: any; send: Function }, commandText: string): Promise<void> {
-    const { activity, send } = ctx;
+async function handleRemindCommand(ctx: { activity: any; send: Function; isTargeted: boolean }, commandText: string): Promise<void> {
+    const { activity, send, isTargeted } = ctx;
 
     const parsed = parseReminderCommand(activity as MessageActivity, commandText);
     if ('error' in parsed && !('targetUserId' in parsed)) {
@@ -266,11 +276,14 @@ async function handleRemindCommand(ctx: { activity: any; send: Function }, comma
         const card = createConfirmationCard(reminder, delayMs);
         const creator = { id: activity.from.id, name: activity.from.name, role: 'user' as const };
 
-        await send(
-            new MessageActivity('Reminder has been set!')
-                .addCard('adaptive', card)
-                .withRecipient(creator, true)
-        );
+        const response = new MessageActivity('Reminder has been set!')
+            .addCard('adaptive', card);
+
+        if (isTargeted) {
+            response.withRecipient(creator, true).addTargetedMessageInfo(activity.id);
+        }
+
+        await send(response);
 
         console.log(`[REMINDER] Created reminder ${reminderId} for ${targetUserName} in ${delayMs / 1000} seconds`);
     } catch (error) {
@@ -280,8 +293,8 @@ async function handleRemindCommand(ctx: { activity: any; send: Function }, comma
     }
 }
 
-async function showMyReminders(ctx: { activity: any; send: Function }): Promise<void> {
-    const { activity, send } = ctx;
+async function showMyReminders(ctx: { activity: any; send: Function; isTargeted: boolean }): Promise<void> {
+    const { activity, send, isTargeted } = ctx;
     const userId = activity.from?.id;
     if (!userId) { await send('Could not determine your user ID.'); return; }
 
@@ -292,10 +305,11 @@ async function showMyReminders(ctx: { activity: any; send: Function }): Promise<
     const sender = { id: activity.from.id, name: activity.from.name, role: 'user' as const };
 
     if (myReminders.length === 0) {
-        await send(
-            new MessageActivity('You have no active reminders.')
-                .withRecipient(sender, true)
-        );
+        const response = new MessageActivity('You have no active reminders.');
+        if (isTargeted) {
+            response.withRecipient(sender, true).addTargetedMessageInfo(activity.id);
+        }
+        await send(response);
         return;
     }
 
@@ -306,31 +320,34 @@ async function showMyReminders(ctx: { activity: any; send: Function }): Promise<
         return `- **${r.id}**: "${r.reminderText}" for ${target} (${timeStr})`;
     }).join('\n');
 
-    await send(
-        new MessageActivity(`**Your Active Reminders:**\n\n${list}\n\nUse \`cancel-reminder [id]\` to cancel a reminder.`)
-            .withRecipient(sender, true)
-    );
+    const response = new MessageActivity(`**Your Active Reminders:**\n\n${list}\n\nUse \`cancel-reminder [id]\` to cancel a reminder.`);
+    if (isTargeted) {
+        response.withRecipient(sender, true).addTargetedMessageInfo(activity.id);
+    }
+    await send(response);
 }
 
-async function cancelReminder(ctx: { activity: any; send: Function }, reminderId: string): Promise<void> {
-    const { activity, send } = ctx;
+async function cancelReminder(ctx: { activity: any; send: Function; isTargeted: boolean }, reminderId: string): Promise<void> {
+    const { activity, send, isTargeted } = ctx;
     const userId = activity.from?.id;
     const sender = { id: activity.from.id, name: activity.from.name, role: 'user' as const };
 
     if (!reminderId) {
-        await send(
-            new MessageActivity('Please specify a reminder ID. Use `my-reminders` to see your active reminders.')
-                .withRecipient(sender, true)
-        );
+        const response = new MessageActivity('Please specify a reminder ID. Use `my-reminders` to see your active reminders.');
+        if (isTargeted) {
+            response.withRecipient(sender, true).addTargetedMessageInfo(activity.id);
+        }
+        await send(response);
         return;
     }
 
     const reminder = activeReminders.get(reminderId);
     if (!reminder) {
-        await send(
-            new MessageActivity(`Reminder **${reminderId}** not found or already completed.`)
-                .withRecipient(sender, true)
-        );
+        const response = new MessageActivity(`Reminder **${reminderId}** not found or already completed.`);
+        if (isTargeted) {
+            response.withRecipient(sender, true).addTargetedMessageInfo(activity.id);
+        }
+        await send(response);
         return;
     }
 
@@ -338,16 +355,18 @@ async function cancelReminder(ctx: { activity: any; send: Function }, reminderId
     if (reminder.creatorId === userId || reminder.targetUserId === userId) {
         clearTimeout(reminder.timer);
         activeReminders.delete(reminderId);
-        await send(
-            new MessageActivity(`Reminder **${reminderId}** has been cancelled.`)
-                .withRecipient(sender, true)
-        );
+        const cancelledResponse = new MessageActivity(`Reminder **${reminderId}** has been cancelled.`);
+        if (isTargeted) {
+            cancelledResponse.withRecipient(sender, true).addTargetedMessageInfo(activity.id);
+        }
+        await send(cancelledResponse);
         console.log(`[REMINDER] Reminder ${reminderId} cancelled by ${activity.from?.name}`);
     } else {
-        await send(
-            new MessageActivity('You can only cancel reminders you created or are assigned to you.')
-                .withRecipient(sender, true)
-        );
+        const deniedResponse = new MessageActivity('You can only cancel reminders you created or are assigned to you.');
+        if (isTargeted) {
+            deniedResponse.withRecipient(sender, true).addTargetedMessageInfo(activity.id);
+        }
+        await send(deniedResponse);
     }
 }
 
@@ -375,7 +394,15 @@ async function showHelp(send: Function): Promise<void> {
         '- Reminders are delivered as **targeted messages** (only the recipient can see them)',
         '- Works in both **channels** and **group chats**',
         '- Set reminders for yourself or mention others',
-        '- Dismiss or snooze reminders via card buttons'
+        '- Dismiss or snooze reminders via card buttons',
+        '',
+        '**Reactions:**',
+        '- `add-reaction [type]` — Bot adds a reaction to your message',
+        '- `remove-reaction [type]` — Bot removes a reaction from your message',
+        '- React to any bot message and the bot will acknowledge it!',
+        '',
+        '**Supported Reaction Types:**',
+        '- `like` 👍, `heart` ❤️, `1f440_eyes` 👀, `2705_whiteheavycheckmark` ✅, `launch` 🚀, `1f4cc_pushpin` 📌'
     ].join('\n'));
 }
 
@@ -439,6 +466,90 @@ app.on('card.action', async ({ activity, send }) => {
 
         default:
             return { statusCode: 200, type: 'application/vnd.microsoft.activity.message', value: 'Unknown action.' } as AdaptiveCardActionResponse;
+    }
+});
+
+// === Reactions Feature ===
+
+type ReactionParameter = Parameters<Client['reactions']['add']>[2];
+
+async function handleAddReaction(ctx: { activity: any; send: Function; api?: any }, commandText: string): Promise<void> {
+    const { activity, send, api } = ctx;
+    const reactionType = commandText.replace(/^add-reaction\s*/i, '').trim();
+
+    if (!reactionType) {
+        await send('Please specify a reaction type. Example: `add-reaction like`\n\nSupported types: `like`, `heart`, `1f440_eyes`, `2705_whiteheavycheckmark`, `launch`, `1f4cc_pushpin`');
+        return;
+    }
+
+    if (!api) {
+        await send('API client is not available.');
+        return;
+    }
+
+    try {
+        await api.reactions.add(
+            activity.conversation.id,
+            activity.id,
+            reactionType as ReactionParameter
+        );
+        await send(`Added a **${reactionType}** reaction to your message!`);
+        console.log(`[REACTION] Added ${reactionType} reaction to message ${activity.id}`);
+    } catch (error) {
+        console.error('[REACTION] Failed to add reaction:', error);
+        await send('Sorry, I had trouble adding that reaction.');
+    }
+}
+
+async function handleRemoveReaction(ctx: { activity: any; send: Function; api?: any }, commandText: string): Promise<void> {
+    const { activity, send, api } = ctx;
+    const reactionType = commandText.replace(/^remove-reaction\s*/i, '').trim();
+
+    if (!reactionType) {
+        await send('Please specify a reaction type. Example: `remove-reaction like`');
+        return;
+    }
+
+    if (!api) {
+        await send('API client is not available.');
+        return;
+    }
+
+    try {
+        await api.reactions.delete(
+            activity.conversation.id,
+            activity.id,
+            reactionType as ReactionParameter
+        );
+        await send(`Removed the **${reactionType}** reaction from your message!`);
+        console.log(`[REACTION] Removed ${reactionType} reaction from message ${activity.id}`);
+    } catch (error) {
+        console.error('[REACTION] Failed to remove reaction:', error);
+        await send('Sorry, I had trouble removing that reaction.');
+    }
+}
+
+// Handle messageReaction events (when users add/remove reactions on messages)
+app.on('messageReaction', async ({ activity, send }) => {
+    const reactionActivity = activity as MessageReactionActivity;
+
+    // Handle added reactions
+    if (reactionActivity.reactionsAdded && reactionActivity.reactionsAdded.length > 0) {
+        for (const reaction of reactionActivity.reactionsAdded) {
+            const userName = reaction.user?.displayName || 'Someone';
+            const reactionType = reaction.type;
+            console.log(`[REACTION] ${userName} added a ${reactionType} reaction`);
+            await send(`Thanks for the **${reactionType}** reaction, ${userName}!`);
+        }
+    }
+
+    // Handle removed reactions
+    if (reactionActivity.reactionsRemoved && reactionActivity.reactionsRemoved.length > 0) {
+        for (const reaction of reactionActivity.reactionsRemoved) {
+            const userName = reaction.user?.displayName || 'Someone';
+            const reactionType = reaction.type;
+            console.log(`[REACTION] ${userName} removed a ${reactionType} reaction`);
+        }
     }
 });
 
