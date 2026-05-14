@@ -8,7 +8,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-ai-messages/nodejs/bot-ai-messages"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -17,7 +16,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-attachments/nodejs/bot-attachments"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -26,7 +24,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-auth-quickstart/nodejs/bot-auth-quickstart"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -35,7 +32,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-cards/nodejs/bot-cards"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -44,7 +40,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-meetings/nodejs/bot-meetings"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -53,7 +48,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-message-extensions/nodejs/bot-message-extensions"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -62,7 +56,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-quickstart/nodejs/bot-quickstart"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -71,7 +64,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-task-modules/nodejs/bot-task-modules"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -83,7 +75,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-ai-messages/dotnet/bot-ai-messages"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -92,7 +83,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-attachments/dotnet/bot-attachments"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -101,7 +91,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-auth-quickstart/dotnet/bot-auth-quickstart/BotAuthQuickstart"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -110,7 +99,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-cards/dotnet/bot-cards"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -119,7 +107,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-meetings/dotnet/bot-meetings"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -128,7 +115,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-message-extensions/dotnet/bot-message-extensions"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -137,7 +123,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-quickstart/dotnet/bot-quickstart"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -146,7 +131,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-task-modules/dotnet/bot-task-modules"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -158,7 +142,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-ai-messages/python/bot-ai-messages"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -167,7 +150,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-attachments/python/bot-attachments"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -176,7 +158,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-auth-quickstart/python/bot-auth-quickstart"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -185,7 +166,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-cards/python/bot-cards"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -194,7 +174,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-meetings/python/bot-meetings"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -203,7 +182,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-message-extensions/python/bot-message-extensions"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -212,7 +190,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-quickstart/python/bot-quickstart"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -221,7 +198,6 @@ updates:
     directory: "/samples/TeamsSDK/bot-task-modules/python/bot-task-modules"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -233,7 +209,6 @@ updates:
     directory: "/samples/TeamsJS/app-anonymous-users/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -242,7 +217,6 @@ updates:
     directory: "/samples/TeamsJS/app-anonymous-users/nodejs/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -251,7 +225,6 @@ updates:
     directory: "/samples/TeamsJS/app-anonymous-users/csharp/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -260,7 +233,6 @@ updates:
     directory: "/samples/TeamsJS/app-cache-meetings/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -269,7 +241,6 @@ updates:
     directory: "/samples/TeamsJS/app-caching-for-multiple-tabs/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -278,7 +249,6 @@ updates:
     directory: "/samples/TeamsJS/app-sso/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -287,7 +257,6 @@ updates:
     directory: "/samples/TeamsJS/app-sso/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -296,7 +265,6 @@ updates:
     directory: "/samples/TeamsJS/app-task-module/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -305,7 +273,6 @@ updates:
     directory: "/samples/TeamsJS/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -314,7 +281,6 @@ updates:
     directory: "/samples/TeamsJS/connector-github-notification/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -323,7 +289,6 @@ updates:
     directory: "/samples/TeamsJS/graph-activity-feed/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -332,7 +297,6 @@ updates:
     directory: "/samples/TeamsJS/graph-activity-feed-broadcast/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -341,7 +305,6 @@ updates:
     directory: "/samples/TeamsJS/graph-app-installation-lifecycle/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -350,7 +313,6 @@ updates:
     directory: "/samples/TeamsJS/graph-bulk-meetings/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -359,7 +321,6 @@ updates:
     directory: "/samples/TeamsJS/graph-bulk-meetings/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -368,7 +329,6 @@ updates:
     directory: "/samples/TeamsJS/graph-bulk-meetings/csharp/EventMeeting/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -377,7 +337,6 @@ updates:
     directory: "/samples/TeamsJS/graph-change-notification-team-channel/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -386,7 +345,6 @@ updates:
     directory: "/samples/TeamsJS/graph-change-notification-team-channel/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -395,7 +353,6 @@ updates:
     directory: "/samples/TeamsJS/graph-change-notification-team-channel/csharp/ChangeNotification/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -404,7 +361,6 @@ updates:
     directory: "/samples/TeamsJS/graph-channel-lifecycle/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -413,7 +369,6 @@ updates:
     directory: "/samples/TeamsJS/graph-membership-change-notification/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -422,7 +377,6 @@ updates:
     directory: "/samples/TeamsJS/graph-membership-change-notification/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -431,7 +385,6 @@ updates:
     directory: "/samples/TeamsJS/graph-membership-change-notification/csharp/ChangeNotification/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -440,7 +393,6 @@ updates:
     directory: "/samples/TeamsJS/graph-pinned-messages/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -449,7 +401,6 @@ updates:
     directory: "/samples/TeamsJS/graph-pinned-messages/nodejs/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -458,7 +409,6 @@ updates:
     directory: "/samples/TeamsJS/graph-pinned-messages/csharp/GraphPinnedMessage/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -467,7 +417,6 @@ updates:
     directory: "/samples/TeamsJS/graph-rsc/nodeJs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -476,7 +425,6 @@ updates:
     directory: "/samples/TeamsJS/graph-rsc-helper/nodeJs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -485,7 +433,6 @@ updates:
     directory: "/samples/TeamsJS/graph-teams-tag/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -494,7 +441,6 @@ updates:
     directory: "/samples/TeamsJS/graph-teams-tag/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -503,7 +449,6 @@ updates:
     directory: "/samples/TeamsJS/graph-teams-tag/csharp/GraphTeamsTag/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -512,7 +457,6 @@ updates:
     directory: "/samples/TeamsJS/incoming-webhook/nodejs/api"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -521,7 +465,6 @@ updates:
     directory: "/samples/TeamsJS/incoming-webhook/nodejs/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -530,7 +473,6 @@ updates:
     directory: "/samples/TeamsJS/incoming-webhook/csharp/IncomingWebhook/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -539,7 +481,6 @@ updates:
     directory: "/samples/TeamsJS/meeting-recruitment-app/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -548,7 +489,6 @@ updates:
     directory: "/samples/TeamsJS/meeting-recruitment-app/nodejs/api"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -557,7 +497,6 @@ updates:
     directory: "/samples/TeamsJS/meeting-recruitment-app/csharp/MeetingApp/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -566,7 +505,6 @@ updates:
     directory: "/samples/TeamsJS/meeting-tabs/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -575,7 +513,6 @@ updates:
     directory: "/samples/TeamsJS/meeting-tabs/csharp/MeetingTabs/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -584,7 +521,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-audio-state/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -593,7 +529,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-context-app/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -602,7 +537,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-context-app/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -611,7 +545,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-context-app/csharp/MeetingContextApp/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -620,7 +553,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-details-tab/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -629,7 +561,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-details-tab/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -638,7 +569,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-live-code-interview/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -647,7 +577,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-live-code-interview/nodejs/api"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -656,7 +585,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-live-code-interview/csharp/MeetingLiveCoding/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -665,7 +593,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Web/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -674,7 +601,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-sidepanel/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -683,7 +609,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-sidepanel/nodejs/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -692,7 +617,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-sidepanel/csharp/SidePanel/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -701,7 +625,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-stage-view/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -710,7 +633,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-stage-view/nodejs/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -719,7 +641,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-stage-view/csharp/AppInMeeting/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -728,7 +649,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-stage-view/python/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -737,7 +657,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-token-app/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -746,7 +665,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-token-app/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -755,7 +673,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-token-app/csharp/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -764,7 +681,6 @@ updates:
     directory: "/samples/TeamsJS/msgext-link-unfurling-meeting/csharp/Source/Microsoft.Teams.Samples.LinkUnfurling.Web/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -773,7 +689,6 @@ updates:
     directory: "/samples/TeamsJS/msgext-link-unfurling-reddit/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -782,7 +697,6 @@ updates:
     directory: "/samples/TeamsJS/msgext-link-unfurling-reddit/csharp/dotnet_user_auth/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -791,7 +705,6 @@ updates:
     directory: "/samples/TeamsJS/msteams-application-qbot/Source/Microsoft.Teams.Apps.QBot.Web/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -800,7 +713,6 @@ updates:
     directory: "/samples/TeamsJS/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -809,7 +721,6 @@ updates:
     directory: "/samples/TeamsJS/tab-adhoccalls-transcript-recording/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -818,7 +729,6 @@ updates:
     directory: "/samples/TeamsJS/tab-adhoccalls-transcript-recording/nodejs/api-server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -827,7 +737,6 @@ updates:
     directory: "/samples/TeamsJS/tab-app-monetization/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -836,7 +745,6 @@ updates:
     directory: "/samples/TeamsJS/tab-app-navigation/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -845,7 +753,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-context/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -854,7 +761,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -863,7 +769,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group/spfx"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -872,7 +777,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group-quickstart/js"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -881,7 +785,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group-quickstart/ts"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -890,7 +793,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group-sso-quickstart/js"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -899,7 +801,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group-sso-quickstart/js/api-server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -908,7 +809,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group-sso-quickstart/ts"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -917,7 +817,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group-sso-quickstart/ts/api-server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -926,7 +825,6 @@ updates:
     directory: "/samples/TeamsJS/tab-deeplink-pass-values/ts"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -935,7 +833,6 @@ updates:
     directory: "/samples/TeamsJS/tab-device-permissions/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -944,7 +841,6 @@ updates:
     directory: "/samples/TeamsJS/tab-external-auth/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -953,7 +849,6 @@ updates:
     directory: "/samples/TeamsJS/tab-external-auth/nodejs/api-server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -962,7 +857,6 @@ updates:
     directory: "/samples/TeamsJS/tab-graph-toolkit/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -971,7 +865,6 @@ updates:
     directory: "/samples/TeamsJS/tab-graph-toolkit/csharp/TabGraphToolkit/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -980,7 +873,6 @@ updates:
     directory: "/samples/TeamsJS/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -989,7 +881,6 @@ updates:
     directory: "/samples/TeamsJS/tab-meeting-transcript-recording/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -998,7 +889,6 @@ updates:
     directory: "/samples/TeamsJS/tab-meeting-transcript-recording/nodejs/api-server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1007,7 +897,6 @@ updates:
     directory: "/samples/TeamsJS/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/ClientApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1016,7 +905,6 @@ updates:
     directory: "/samples/TeamsJS/tab-multi-hub/ts"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1025,7 +913,6 @@ updates:
     directory: "/samples/TeamsJS/tab-multi-hub/ts/api-server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1034,7 +921,6 @@ updates:
     directory: "/samples/TeamsJS/tab-navbar-menu/ts"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1043,7 +929,6 @@ updates:
     directory: "/samples/TeamsJS/tab-nested-auth/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1052,7 +937,6 @@ updates:
     directory: "/samples/TeamsJS/tab-people-picker/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1061,7 +945,6 @@ updates:
     directory: "/samples/TeamsJS/tab-personal-quickstart/js"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1070,7 +953,6 @@ updates:
     directory: "/samples/TeamsJS/tab-personal-quickstart/ts"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1079,7 +961,6 @@ updates:
     directory: "/samples/TeamsJS/tab-personal-sso-quickstart/js"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1088,7 +969,6 @@ updates:
     directory: "/samples/TeamsJS/tab-personal-sso-quickstart/js/api-server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1097,7 +977,6 @@ updates:
     directory: "/samples/TeamsJS/tab-personal-sso-quickstart/ts"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1106,7 +985,6 @@ updates:
     directory: "/samples/TeamsJS/tab-personal-sso-quickstart/ts/api-server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1115,7 +993,6 @@ updates:
     directory: "/samples/TeamsJS/tab-product-inspection/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1124,7 +1001,6 @@ updates:
     directory: "/samples/TeamsJS/tab-request-approval/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1133,7 +1009,6 @@ updates:
     directory: "/samples/TeamsJS/tab-request-approval/python"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1142,7 +1017,6 @@ updates:
     directory: "/samples/TeamsJS/tab-support-offline/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1151,7 +1025,6 @@ updates:
     directory: "/samples/TeamsJS/tab-support-offline/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1160,7 +1033,6 @@ updates:
     directory: "/samples/TeamsJS/tab-support-offline/nodejs/server"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1169,7 +1041,6 @@ updates:
     directory: "/samples/TeamsJS/tab-ui-templates/ts"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1178,7 +1049,6 @@ updates:
     directory: "/samples/TeamsJS/user-scope-web-application/nodejs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1187,7 +1057,6 @@ updates:
     directory: "/samples/TeamsJS/user-scope-web-application/nodejs/client"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1199,7 +1068,6 @@ updates:
     directory: "/samples/TeamsJS/app-anonymous-users/csharp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1208,7 +1076,6 @@ updates:
     directory: "/samples/TeamsJS/app-sso/csharp/App SSO Sample"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1217,7 +1084,6 @@ updates:
     directory: "/samples/TeamsJS/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1226,7 +1092,6 @@ updates:
     directory: "/samples/TeamsJS/bot-tab-conversations/csharp/Source/ConversationalTabs.Web"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1235,7 +1100,6 @@ updates:
     directory: "/samples/TeamsJS/graph-activity-feed/csharp/ActivityFeedNotification"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1244,7 +1108,6 @@ updates:
     directory: "/samples/TeamsJS/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1253,7 +1116,6 @@ updates:
     directory: "/samples/TeamsJS/graph-app-installation-lifecycle/csharp/AppInstallation"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1262,7 +1124,6 @@ updates:
     directory: "/samples/TeamsJS/graph-bulk-meetings/csharp/EventMeeting"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1271,7 +1132,6 @@ updates:
     directory: "/samples/TeamsJS/graph-change-notification-team-channel/csharp/ChangeNotification"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1280,7 +1140,6 @@ updates:
     directory: "/samples/TeamsJS/graph-channel-lifecycle/csharp/ChannelLifecycle"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1289,7 +1148,6 @@ updates:
     directory: "/samples/TeamsJS/graph-membership-change-notification/csharp/ChangeNotification"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1298,7 +1156,6 @@ updates:
     directory: "/samples/TeamsJS/graph-pinned-messages/csharp/GraphPinnedMessage"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1307,7 +1164,6 @@ updates:
     directory: "/samples/TeamsJS/graph-rsc/csharp/RSCDemo"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1316,7 +1172,6 @@ updates:
     directory: "/samples/TeamsJS/graph-teams-tag/csharp/GraphTeamsTag"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1325,7 +1180,6 @@ updates:
     directory: "/samples/TeamsJS/incoming-webhook/csharp/IncomingWebhook"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1334,7 +1188,6 @@ updates:
     directory: "/samples/TeamsJS/meeting-recruitment-app/csharp/MeetingApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1343,7 +1196,6 @@ updates:
     directory: "/samples/TeamsJS/meeting-tabs/csharp/MeetingTabs"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1352,7 +1204,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-context-app/csharp/MeetingContextApp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1361,7 +1212,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-details-tab/csharp/DetailsTab"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1370,7 +1220,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-live-code-interview/csharp/MeetingLiveCoding"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1379,7 +1228,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Web"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1388,7 +1236,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-sidepanel/csharp/SidePanel"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1397,7 +1244,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-stage-view/csharp/AppInMeeting"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1406,7 +1252,6 @@ updates:
     directory: "/samples/TeamsJS/meetings-token-app/csharp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1415,7 +1260,6 @@ updates:
     directory: "/samples/TeamsJS/msgext-link-unfurling-meeting/csharp/Source/Microsoft.Teams.Samples.LinkUnfurling.Web"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1424,7 +1268,6 @@ updates:
     directory: "/samples/TeamsJS/msgext-link-unfurling-reddit/csharp/dotnet"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1433,7 +1276,6 @@ updates:
     directory: "/samples/TeamsJS/msgext-link-unfurling-reddit/csharp/dotnet_user_auth"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1442,7 +1284,6 @@ updates:
     directory: "/samples/TeamsJS/msteams-application-qbot/Source/Microsoft.Teams.Apps.QBot.Web"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1451,7 +1292,6 @@ updates:
     directory: "/samples/TeamsJS/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1460,7 +1300,6 @@ updates:
     directory: "/samples/TeamsJS/tab-app-navigation/csharp/Microsoft.Teams.Samples.TabAppNavigation.Web"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1469,7 +1308,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group/mvc-csharp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1478,7 +1316,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group/razor-csharp"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1487,7 +1324,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group-quickstart/csharp/Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1496,7 +1332,6 @@ updates:
     directory: "/samples/TeamsJS/tab-channel-group-sso-quickstart/csharp_dotnetcore"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1505,7 +1340,6 @@ updates:
     directory: "/samples/TeamsJS/tab-external-auth/csharp/TabExternalAuth"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1514,7 +1348,6 @@ updates:
     directory: "/samples/TeamsJS/tab-graph-toolkit/csharp/TabGraphToolkit"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1523,7 +1356,6 @@ updates:
     directory: "/samples/TeamsJS/tab-meeting-auto-recording/csharp/MeetingAutoRecording"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1532,7 +1364,6 @@ updates:
     directory: "/samples/TeamsJS/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1541,7 +1372,6 @@ updates:
     directory: "/samples/TeamsJS/tab-nested-auth/csharp/TabNestedAuth"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1550,7 +1380,6 @@ updates:
     directory: "/samples/TeamsJS/tab-people-picker/csharp/TabPeoplePicker"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1559,7 +1388,6 @@ updates:
     directory: "/samples/TeamsJS/tab-personal-sso-quickstart/csharp_dotnetcore"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1568,7 +1396,6 @@ updates:
     directory: "/samples/TeamsJS/tab-product-inspection/csharp/ProductInspection"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1577,7 +1404,6 @@ updates:
     directory: "/samples/TeamsJS/tab-request-approval/csharp/TabRequestApproval"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-dependencies:
         patterns: ["*"]
@@ -1589,7 +1415,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     groups:
       all-actions:
         patterns: ["*"]
