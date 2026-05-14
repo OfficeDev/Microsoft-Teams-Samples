@@ -3,23 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.34.0",
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.6.0",
-    "@types/jest": "^26.0.19",
-    "@types/node": "^12.19.9",
-    "@types/react": "^18.0.25",
-    "@types/react-dom": "^18.0.9",
+    "@fluentui/react-components": "^9.73.8",
+    "@microsoft/teams-js": "^2.53.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.7.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
-    "ajv": "^8.17.1",
+    "ajv": "^8.20.0",
     "ajv-keywords": "^5.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.3",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.3"
+    "typescript": "^6.0.3"
   },
   "scripts": {
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
@@ -47,6 +47,6 @@
     ]
   },
   "devDependencies": {
-    "env-cmd": "^10.1.0"
+    "env-cmd": "^11.0.0"
   }
 }
