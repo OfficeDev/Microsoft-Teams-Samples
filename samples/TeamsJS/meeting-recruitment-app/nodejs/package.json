@@ -3,21 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fluentui/react-northstar": "^0.58.0",
-    "@microsoft/teams-js": "^2.35.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "axios": "^1.8.4",
+    "@fluentui/react-northstar": "^0.71.4",
+    "@microsoft/teams-js": "^2.53.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "axios": "^1.16.1",
     "msteams-ui-components-react": "^0.8.4",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "react-meta-tags": "^1.0.1",
-    "react-router-dom": "^5.3.0",
+    "react-router-dom": "^7.15.0",
     "react-scripts": "^5.0.1",
-    "typescript": "^4.4.2",
+    "typescript": "^6.0.3",
     "typestyle": "^2.1.0",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^5.2.0"
   },
   "scripts": {
     "dev:teamsfx": "npm run dev",
@@ -46,11 +46,11 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@types/react": "^16.7.17",
-    "@types/react-dom": "^16.7.17",
+    "@babel/core": "^7.29.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.0",
-    "nodemon": "^2.0.13"
+    "nodemon": "^3.1.14"
   },
   "proxy": "http://localhost:3978"
 }
