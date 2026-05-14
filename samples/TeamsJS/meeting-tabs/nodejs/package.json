@@ -5,12 +5,12 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
-    "@fluentui/react-components": "^9.0.0-rc.10",
+    "@fluentui/react-components": "^9.73.8",
     "@microsoft/teams-js": "^2.35.0",
-    "axios": "^0.21.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.3",
+    "axios": "^1.16.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.0",
     "react-scripts": "^5.0.1"
   },
   "scripts": {
@@ -37,6 +37,6 @@
   },
   "devDependencies": {
     "ajv": "^8.17.1",
-    "env-cmd": "^10.1.0"
+    "env-cmd": "^11.0.0"
   }
 }
