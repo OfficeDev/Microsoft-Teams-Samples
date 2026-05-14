@@ -25,7 +25,6 @@ Command line:
 MoreInfo: https://docs.microsoft.com/en-us/azure/bot-service/tutorial-provision-a-bot?view=azure-bot-service-4.0&tabs=userassigned%2Cnewgroup#create-an-identity-resource
 
 
-
 # parameters-for-template-AzureBot-new-rg:
 
 - **groupName**:(required)            Specifies the name of the new Resource Group.

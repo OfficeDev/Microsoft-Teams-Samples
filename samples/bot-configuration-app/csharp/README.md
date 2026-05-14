@@ -26,11 +26,6 @@ This sample demonstrates a bot for configuring and reconfiguring adaptive cards 
 
 ![Configuration Bot](Images/ConfigurationBot.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Bot Configuration:** [Manifest](/samples/bot-configuration-app/csharp/demo-manifest/bot-configuration-app.zip)
-
 ## Prerequisites
 
 Verify you have the right account for building Teams apps and install some recommended development tools.
@@ -55,7 +50,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Azure Active Directory â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -145,8 +140,6 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   ![configurable-card-Interaction3 ](Images/configurable-card-Interaction3.png)
     
   ![configurable-card-Interaction4 ](Images/configurable-card-Interaction4.png)
-
-
 
 
 ## Deploy to Azure

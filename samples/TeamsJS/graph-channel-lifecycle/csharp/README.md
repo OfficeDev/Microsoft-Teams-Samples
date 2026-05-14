@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample application demonstrates how to manage the channel lifecycle—create, update, and delete channels—using the Microsoft Graph API through a Teams tab.
+description: This sample application demonstrates how to manage the channel lifecycleâ€”create, update, and delete channelsâ€”using the Microsoft Graph API through a Teams tab.
 products:
 - office-teams
 - office
@@ -25,11 +25,6 @@ This sample application illustrates how to effectively manage the lifecycle of c
 ## Interaction with app
 
  ![ChannelLifeCycleModule](ChannelLifecycle/Images/ChannelLifeCycleModule.gif)
-
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Channel life cycle:** [Manifest](/samples/TeamsJS/graph-channel-lifecycle/csharp/demo-manifest/graph-channel-lifecycle.zip)
 
 ## Prerequisites
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -60,7 +55,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### Register your app with Azure AD.
 
-  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -76,7 +71,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 
 ## Setup
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
@@ -157,7 +152,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
  [sample feature](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel
   
  
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsJS/graph-channel-lifecycle-csharp" />

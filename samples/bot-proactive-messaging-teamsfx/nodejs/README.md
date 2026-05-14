@@ -20,7 +20,7 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
 ## Prerequisites
 ### Register your app with Azure AD.
 
-  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -37,11 +37,6 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 - [Microsoft 365 Agents Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version after 1.55 or [Microsoft 365 Agents Toolkit CLI](https://aka.ms/teams-toolkit-cli)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Proactive message bots app:** [Manifest](/samples/bot-proactive-messaging-teamsfx/nodejs/demo-manifest/bot-proactive-messaging-teamsfx.zip)
-
 ## Debug
 
 - From Visual Studio Code: Start debugging the project by hitting the `F5` key in Visual Studio Code. 
@@ -50,10 +45,10 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   - Install [dev tunnel cli](https://aka.ms/teamsfx-install-dev-tunnel).
   - Login with your M365 Account using the command `devtunnel user login`.
   - Start your local tunnel service by running the command `devtunnel host -p 3978 --protocol http --allow-anonymous`.
-  - In the `env/.env.local` file, fill in the values for `PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN` and `PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT` with your dev tunnel URL.
+  - In the `env/.env.local` file, fill in the values for `PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN` and `PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT` with your dev tunnel URL.
     ```
-    PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN=sample-id-3978.devtunnels.ms
-    PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT=https://sample-id-3978.devtunnels.ms
+    PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN=sample-id-3978.devtunnels.ms
+    PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT=https://sample-id-3978.devtunnels.ms
     ```
   - Executing the command `atk provision --env local` in your project directory.
   - Executing the command `atk deploy --env local` in your project directory.
