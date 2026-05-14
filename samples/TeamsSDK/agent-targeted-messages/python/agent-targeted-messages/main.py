@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 from microsoft_teams.api import (
     MessageActivity,
     MessageActivityInput,
+    MessageReactionActivity,
     AdaptiveCardActionMessageResponse,
     Account,
 )
@@ -225,7 +226,7 @@ async def deliver_reminder(reminder: ReminderInfo) -> None:
         active_reminders.pop(reminder.id, None)
 
 
-async def handle_remind_command(ctx: ActivityContext[MessageActivity], command_text: str) -> None:
+async def handle_remind_command(ctx: ActivityContext[MessageActivity], command_text: str, is_targeted: bool) -> None:
     activity = ctx.activity
     parsed = parse_reminder_command(activity, command_text)
 
@@ -261,8 +262,10 @@ async def handle_remind_command(ctx: ActivityContext[MessageActivity], command_t
     try:
         card = create_confirmation_card(reminder, delay_s)
         creator = targeted_account(activity.from_.id, activity.from_.name)
-        msg = MessageActivityInput(text="Reminder has been set!").add_card(card).with_recipient(creator, is_targeted=True)
-        await ctx.send(msg)
+        response = MessageActivityInput(text="Reminder has been set!").add_card(card)
+        if is_targeted:
+            response.with_recipient(creator).with_reply_to_id(activity.id)
+        await ctx.send(response)
         print(f"[REMINDER] Created reminder {reminder_id} for {target_user_name} in {delay_s} seconds")
     except Exception as error:
         print(f"[REMINDER] Error sending confirmation: {error}")
@@ -271,7 +274,7 @@ async def handle_remind_command(ctx: ActivityContext[MessageActivity], command_t
             reminder.task.cancel()
 
 
-async def show_my_reminders(ctx: ActivityContext[MessageActivity]) -> None:
+async def show_my_reminders(ctx: ActivityContext[MessageActivity], is_targeted: bool) -> None:
     activity = ctx.activity
     user_id = activity.from_.id if activity.from_ else None
     if not user_id:
@@ -285,7 +288,10 @@ async def show_my_reminders(ctx: ActivityContext[MessageActivity]) -> None:
     sender = targeted_account(activity.from_.id, activity.from_.name)
 
     if not my:
-        await ctx.send(MessageActivityInput(text="You have no active reminders.").with_recipient(sender, is_targeted=True))
+        response = MessageActivityInput(text="You have no active reminders.")
+        if is_targeted:
+            response.with_recipient(sender).with_reply_to_id(activity.id)
+        await ctx.send(response)
         return
 
     lines = []
@@ -296,44 +302,108 @@ async def show_my_reminders(ctx: ActivityContext[MessageActivity]) -> None:
         lines.append(f'- **{r.id}**: "{r.reminder_text}" for {target} ({time_str})')
 
     text = "**Your Active Reminders:**\n\n" + "\n".join(lines) + "\n\nUse `cancel-reminder [id]` to cancel a reminder."
-    await ctx.send(MessageActivityInput(text=text).with_recipient(sender, is_targeted=True))
+    response = MessageActivityInput(text=text)
+    if is_targeted:
+        response.with_recipient(sender).with_reply_to_id(activity.id)
+    await ctx.send(response)
 
 
-async def cancel_reminder_command(ctx: ActivityContext[MessageActivity], reminder_id: str) -> None:
+async def cancel_reminder_command(ctx: ActivityContext[MessageActivity], reminder_id: str, is_targeted: bool) -> None:
     activity = ctx.activity
     user_id = activity.from_.id if activity.from_ else None
     sender = targeted_account(activity.from_.id, activity.from_.name)
 
     if not reminder_id:
-        await ctx.send(
-            MessageActivityInput(text="Please specify a reminder ID. Use `my-reminders` to see your active reminders.").with_recipient(sender, is_targeted=True)
-        )
+        response = MessageActivityInput(text="Please specify a reminder ID. Use `my-reminders` to see your active reminders.")
+        if is_targeted:
+            response.with_recipient(sender).with_reply_to_id(activity.id)
+        await ctx.send(response)
         return
 
     reminder = active_reminders.get(reminder_id)
     if not reminder:
-        await ctx.send(
-            MessageActivityInput(text=f"Reminder **{reminder_id}** not found or already completed.").with_recipient(sender, is_targeted=True)
-        )
+        response = MessageActivityInput(text=f"Reminder **{reminder_id}** not found or already completed.")
+        if is_targeted:
+            response.with_recipient(sender).with_reply_to_id(activity.id)
+        await ctx.send(response)
         return
 
     if reminder.creator_id == user_id or reminder.target_user_id == user_id:
         if reminder.task:
             reminder.task.cancel()
         active_reminders.pop(reminder_id, None)
-        await ctx.send(
-            MessageActivityInput(text=f"Reminder **{reminder_id}** has been cancelled.").with_recipient(sender, is_targeted=True)
-        )
+        response = MessageActivityInput(text=f"Reminder **{reminder_id}** has been cancelled.")
+        if is_targeted:
+            response.with_recipient(sender).with_reply_to_id(activity.id)
+        await ctx.send(response)
         print(f"[REMINDER] Reminder {reminder_id} cancelled by {activity.from_.name}")
     else:
+        response = MessageActivityInput(text="You can only cancel reminders you created or are assigned to you.")
+        if is_targeted:
+            response.with_recipient(sender).with_reply_to_id(activity.id)
+        await ctx.send(response)
+
+
+async def handle_add_reaction(ctx: ActivityContext[MessageActivity], command_text: str) -> None:
+    activity = ctx.activity
+    reaction_type = re.sub(r"^add-reaction\s*", "", command_text, flags=re.IGNORECASE).strip()
+
+    if not reaction_type:
         await ctx.send(
-            MessageActivityInput(text="You can only cancel reminders you created or are assigned to you.").with_recipient(sender, is_targeted=True)
+            "Please specify a reaction type. Example: `add-reaction like`\n\n"
+            "Supported types: `like`, `heart`, `1f440_eyes`, `2705_whiteheavycheckmark`, `launch`, `1f4cc_pushpin`"
         )
+        return
+
+    api = getattr(ctx, "api", None)
+    if not api:
+        await ctx.send("API client is not available.")
+        return
+
+    try:
+        await api.reactions.add(
+            activity.conversation.id,
+            activity.id,
+            reaction_type,
+        )
+        await ctx.send(f"Added a **{reaction_type}** reaction to your message!")
+        print(f"[REACTION] Added {reaction_type} reaction to message {activity.id}")
+    except Exception as error:
+        print(f"[REACTION] Failed to add reaction: {error}")
+        await ctx.send("Sorry, I had trouble adding that reaction.")
+
+
+async def handle_remove_reaction(ctx: ActivityContext[MessageActivity], command_text: str) -> None:
+    activity = ctx.activity
+    reaction_type = re.sub(r"^remove-reaction\s*", "", command_text, flags=re.IGNORECASE).strip()
+
+    if not reaction_type:
+        await ctx.send("Please specify a reaction type. Example: `remove-reaction like`")
+        return
+
+    target_message_id = getattr(activity, "reply_to_id", None) or activity.id
+
+    api = getattr(ctx, "api", None)
+    if not api:
+        await ctx.send("API client is not available.")
+        return
+
+    try:
+        await api.reactions.delete(
+            activity.conversation.id,
+            target_message_id,
+            reaction_type,
+        )
+        await ctx.send(f"Removed the **{reaction_type}** reaction!")
+        print(f"[REACTION] Removed {reaction_type} reaction from message {target_message_id}")
+    except Exception as error:
+        print(f"[REACTION] Failed to remove reaction: {error}")
+        await ctx.send("Sorry, I had trouble removing that reaction.")
 
 
 async def show_help(ctx: ActivityContext) -> None:
     await ctx.send(
-        "**Personal Reminder Bot - Help**\n\n"
+        "**Personal Reminder Agent - Help**\n\n"
         "**Set a Reminder:**\n"
         "- `remind me in 5 minutes to check email`\n"
         "- `remind me in 1 hour meeting starts`\n"
@@ -351,7 +421,13 @@ async def show_help(ctx: ActivityContext) -> None:
         "- Reminders are delivered as **targeted messages** (only the recipient can see them)\n"
         "- Works in both **channels** and **group chats**\n"
         "- Set reminders for yourself or mention others\n"
-        "- Dismiss or snooze reminders via card buttons"
+        "- Dismiss or snooze reminders via card buttons\n\n"
+        "**Reactions:**\n"
+        "- `add-reaction [type]` — Bot adds a reaction to your message\n"
+        "- `remove-reaction [type]` — Bot removes a reaction from your message\n"
+        "- React to any bot message and the bot will acknowledge it!\n\n"
+        "**Supported Reaction Types:**\n"
+        "- `like` \U0001f44d, `heart` \u2764\ufe0f, `1f440_eyes` \U0001f440, `2705_whiteheavycheckmark` \u2705, `launch` \U0001f680, `1f4cc_pushpin` \U0001f4cc"
     )
 
 
@@ -360,6 +436,11 @@ async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
     activity = ctx.activity
     if not activity.text:
         return
+
+    # Check if this is a targeted message (TM) from the user via slash command
+    is_targeted = bool(getattr(activity.recipient, "is_targeted", False))
+    if is_targeted:
+        print(f"[TM] Received targeted message from {activity.from_.name if activity.from_ else 'unknown'}")
 
     bot_id = activity.recipient.id if activity.recipient else ""
     stripped = strip_mentions_text(activity, StripMentionsTextOptions(account_id=bot_id))
@@ -370,12 +451,16 @@ async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
     if lower in ("reminder-help", "help"):
         await show_help(ctx)
     elif lower.startswith("remind"):
-        await handle_remind_command(ctx, text)
+        await handle_remind_command(ctx, text, is_targeted)
     elif lower == "my-reminders":
-        await show_my_reminders(ctx)
+        await show_my_reminders(ctx, is_targeted)
     elif lower.startswith("cancel-reminder"):
         reminder_id = re.sub(r"^cancel-reminder\s*", "", text, flags=re.IGNORECASE).strip()
-        await cancel_reminder_command(ctx, reminder_id)
+        await cancel_reminder_command(ctx, reminder_id, is_targeted)
+    elif lower.startswith("add-reaction"):
+        await handle_add_reaction(ctx, text)
+    elif lower.startswith("remove-reaction"):
+        await handle_remove_reaction(ctx, text)
     else:
         await ctx.send("Use `reminder-help` to see available commands.")
 
@@ -435,6 +520,30 @@ async def handle_card_action(ctx: ActivityContext):
         return AdaptiveCardActionMessageResponse(value=f"Snoozed for {snooze_minutes} minutes!")
 
     return AdaptiveCardActionMessageResponse(value="Unknown action.")
+
+
+# === Reactions Feature ===
+
+
+@app.on_message_reaction
+async def handle_message_reaction(ctx: ActivityContext[MessageReactionActivity]) -> None:
+    activity = ctx.activity
+
+    # Handle added reactions
+    if activity.reactions_added:
+        for reaction in activity.reactions_added:
+            user_name = getattr(getattr(reaction, "user", None), "display_name", None) or "Someone"
+            reaction_type = getattr(reaction, "type", "unknown")
+            print(f"[REACTION] {user_name} added a {reaction_type} reaction")
+            await ctx.send(f"Thanks for the **{reaction_type}** reaction, {user_name}!")
+
+    # Handle removed reactions
+    if activity.reactions_removed:
+        for reaction in activity.reactions_removed:
+            user_name = getattr(getattr(reaction, "user", None), "display_name", None) or "Someone"
+            reaction_type = getattr(reaction, "type", "unknown")
+            print(f"[REACTION] {user_name} removed a {reaction_type} reaction")
+            await ctx.send(f"Noted! {user_name} removed their **{reaction_type}** reaction.")
 
 
 # --- Agentic Flow Stubs ---
