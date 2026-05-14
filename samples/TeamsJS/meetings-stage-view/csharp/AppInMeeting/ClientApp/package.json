@@ -5,30 +5,30 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
-    "@microsoft/live-share": "1.0.0-preview.8",
-    "@microsoft/teams-js": "^2.35.0",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@microsoft/live-share": "1.4.2",
+    "@microsoft/teams-js": "^2.53.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "assert": "^2.1.0",
-    "fluid-framework": "~0.59.0",
-    "jquery": "^3.6.0",
-    "react": "^18.0.0",
+    "fluid-framework": "~2.101.0",
+    "jquery": "^4.0.0",
+    "react": "^19.2.6",
     "react-dev-utils": "^12.0.1",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "6.2.2",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "7.15.0",
     "react-scripts": "5.0.1",
-    "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "uuid": "^14.0.0",
+    "web-vitals": "^5.2.0"
   },
   "devDependencies": {
-    "@fluidframework/test-client-utils": "~0.59.0",
+    "@fluidframework/test-client-utils": "~1.4.0",
     "cross-spawn": "^7.0.3",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "prettier": "^2.5.0",
-    "start-server-and-test": "^1.11.6"
+    "eslint": "^10.3.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.3",
+    "start-server-and-test": "^3.0.5"
   },
   "browser": {
     "url": false
