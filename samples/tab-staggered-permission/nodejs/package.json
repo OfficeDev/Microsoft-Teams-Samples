@@ -18,13 +18,13 @@
         "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
-        "@azure/msal-node": "^1.6.0",
+        "@azure/msal-node": "^1.18.4",
         "@microsoft/microsoft-graph-client": "^2.2.1",
-        "body-parser": "^1.19.1",
+        "body-parser": "^1.20.5",
         "cors": "^2.8.5",
         "dotenv": "^8.6.0",
         "ejs": "^3.1.6",
-        "express": "^4.17.2",
+        "express": "^4.22.2",
         "html-entities": "^2.3.2",
         "isomorphic-fetch": "^3.0.0"
     },
@@ -36,6 +36,6 @@
         "eslint-plugin-promise": "^4.3.1",
         "eslint-plugin-standard": "^4.0.1",
         "nodemon": "^2.0.15",
-        "esbuild": "^0.18.1"
+        "esbuild": "^0.25.0"
     }
 }
