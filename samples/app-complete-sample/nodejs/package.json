@@ -20,7 +20,7 @@
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^3.0.4",
     "@microsoft/teams-js": "^2.35.0",
-    "axios": "^0.21.1",
+    "axios": "^1.16.1",
     "body-parser": "^1.19.0",
     "botbuilder": "^4.18.0",
     "botbuilder-dialogs": "^4.18.0",
@@ -35,7 +35,7 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "uuid": "^8.3.2",
-    "nodemon": "^2.0.19"
+    "nodemon": "^3.1.14"
   },
   "devDependencies": {
     "eslint": "^7.0.0",
