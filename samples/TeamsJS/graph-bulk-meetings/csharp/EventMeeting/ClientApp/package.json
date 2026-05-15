@@ -7,7 +7,7 @@
   "dependencies": {
     "@fluentui/react-northstar": "^0.63.1",
     "@microsoft/teams-js": "^2.5.0",
-    "axios": "^0.21.1",
+    "axios": "^0.31.1",
     "date-fns": "^2.29.2",
     "moment": "^2.29.4",
     "react": "17.0.0",
