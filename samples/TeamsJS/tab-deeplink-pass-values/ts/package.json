@@ -9,7 +9,7 @@
     "@fluentui/react": "^8.115.6",
     "@fluentui/react-northstar": "~0.62.0",
     "@microsoft/teams-js": "^2.0.0",
-    "axios": "^0.27.2",
+    "axios": "^0.31.1",
     "botbuilder": "~4.16.0",
     "botbuilder-dialogs": "~4.16.0",
     "compression": "1.7.4",
