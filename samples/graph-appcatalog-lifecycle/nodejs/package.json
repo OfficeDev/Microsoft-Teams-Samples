@@ -20,9 +20,9 @@
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^3.0.4",
-        "axios": "^0.21.1",
-        "botbuilder": "^4.19.2",
-        "botbuilder-dialogs": "^4.19.2",
+        "axios": "^1.16.1",
+        "botbuilder": "^4.23.3",
+        "botbuilder-dialogs": "^4.23.3",
         "dotenv": "^8.6.0",
         "isomorphic-fetch": "^3.0.0",
         "jszip": "^3.6.0",
@@ -38,6 +38,6 @@
         "eslint-plugin-promise": "^4.3.1",
         "eslint-plugin-standard": "^4.0.1",
         "nodemon": "^2.0.19",
-        "esbuild": "^0.18.1"
+        "esbuild": "^0.25.0"
     }
 }
