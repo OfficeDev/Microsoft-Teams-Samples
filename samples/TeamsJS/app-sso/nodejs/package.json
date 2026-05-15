@@ -24,10 +24,10 @@
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",
-        "axios": "^0.21.1",
+        "axios": "^1.16.1",
         "@azure/msal-node": "^1.4.0",
-        "botbuilder": "4.20.0",
-        "botbuilder-dialogs": "4.20.0",
+        "botbuilder": "4.23.3",
+        "botbuilder-dialogs": "4.23.3",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
