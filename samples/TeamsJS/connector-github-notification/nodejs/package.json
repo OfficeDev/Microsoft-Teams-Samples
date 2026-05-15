@@ -12,7 +12,7 @@
     "express-session": "^1.15.2",
     "jade": "^1.11.0",
     "method-override": "^2.3.8",
-    "mongoose": "^4.9.5",
+    "mongoose": "^6.13.9",
     "node-uuid": "^1.4.8",
     "passport": "^0.3.2",
     "passport-github2": "^0.1.10",
