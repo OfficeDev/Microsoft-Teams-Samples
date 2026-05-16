@@ -19,10 +19,10 @@
     "dependencies": {
         "@azure/msal-node": "^1.6.0",
         "@microsoft/microsoft-graph-client": "^3.0.4",
-        "axios": "^0.21.4",
+        "axios": "^1.16.1",
         "body-parser": "^1.19.1",
-        "botbuilder": "^4.18.0",
-        "botbuilder-dialogs": "^4.18.0",
+        "botbuilder": "^4.23.3",
+        "botbuilder-dialogs": "^4.23.3",
         "cors": "^2.8.5",
         "dotenv": "^8.6.0",
         "ejs": "^3.1.6",
