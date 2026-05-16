@@ -16,7 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "ajv": "^8.17.1",
     "assert": "2.0.0",
-    "axios": "^0.21.4",
+    "axios": "^0.31.1",
     "cors": "^2.8.5",
     "fluid-framework": "~0.59.0",
     "has-cors": "^1.1.0",
