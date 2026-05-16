@@ -19,8 +19,8 @@
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
   },
   "dependencies": {
-    "axios": "^0.21.2",
-    "botbuilder": "^4.18.0",
+    "axios": "^1.16.1",
+    "botbuilder": "^4.23.3",
     "dotenv": "^8.2.0",
     "restify": "^10.0.0"
   },
