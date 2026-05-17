@@ -20,14 +20,14 @@
   },
   "dependencies": {
     "adaptive-expressions": "^4.18.0",
-    "axios": "^0.21.2",
+    "axios": "^1.16.1",
     "adaptivecards-templating": "^2.3.1",
-    "body-parser": "^1.19.0",
-    "botbuilder": "^4.19.1",
-    "cookie-parser": "^1.4.5",
+    "body-parser": "^1.20.5",
+    "botbuilder": "^4.23.3",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^8.2.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
+    "ejs": "^3.1.10",
+    "express": "^4.22.2",
     "express-sessions": "^1.0.6",
     "express-validator": "^6.10.0",
     "mongoose": "^5.11.18",
@@ -42,7 +42,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "nodemon": "~2.0.4",
-    "esbuild": "^0.18.1"
+    "esbuild": "^0.25.0"
   },
   "bugs": {
     "url": "https://github.com/Microsoft/BotBuilder-Samples/issues"
