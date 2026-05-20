@@ -13,8 +13,8 @@
     "axios": "^1.6.0"
   },
   "devDependencies": {
-    "@types/node": "^22.5.4",
+    "@types/node": "^25.9.1",
     "tsx": "^4.21.0",
-    "typescript": "~5.8.3"
+    "typescript": "~6.0.3"
   }
 }
