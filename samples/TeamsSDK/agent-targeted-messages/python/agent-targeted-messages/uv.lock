@@ -562,7 +562,7 @@ wheels = [
 ]
 
 [[package]]
-name = "targeted-messages-bot"
+name = "targeted-messages-agent"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

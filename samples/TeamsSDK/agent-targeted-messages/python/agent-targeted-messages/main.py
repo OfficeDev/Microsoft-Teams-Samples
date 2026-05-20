@@ -264,7 +264,8 @@ async def handle_remind_command(ctx: ActivityContext[MessageActivity], command_t
         creator = targeted_account(activity.from_.id, activity.from_.name)
         response = MessageActivityInput(text="Reminder has been set!").add_card(card)
         if is_targeted:
-            response.with_recipient(creator).with_reply_to_id(activity.id)
+            response.add_targeted_message_info(activity.id)
+        response.with_recipient(creator, is_targeted=True)
         await ctx.send(response)
         print(f"[REMINDER] Created reminder {reminder_id} for {target_user_name} in {delay_s} seconds")
     except Exception as error:
@@ -290,7 +291,8 @@ async def show_my_reminders(ctx: ActivityContext[MessageActivity], is_targeted: 
     if not my:
         response = MessageActivityInput(text="You have no active reminders.")
         if is_targeted:
-            response.with_recipient(sender).with_reply_to_id(activity.id)
+            response.add_targeted_message_info(activity.id)
+            response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
         return
 
@@ -304,7 +306,8 @@ async def show_my_reminders(ctx: ActivityContext[MessageActivity], is_targeted: 
     text = "**Your Active Reminders:**\n\n" + "\n".join(lines) + "\n\nUse `cancel-reminder [id]` to cancel a reminder."
     response = MessageActivityInput(text=text)
     if is_targeted:
-        response.with_recipient(sender).with_reply_to_id(activity.id)
+        response.add_targeted_message_info(activity.id)
+        response.with_recipient(sender, is_targeted=True)
     await ctx.send(response)
 
 
@@ -316,7 +319,8 @@ async def cancel_reminder_command(ctx: ActivityContext[MessageActivity], reminde
     if not reminder_id:
         response = MessageActivityInput(text="Please specify a reminder ID. Use `my-reminders` to see your active reminders.")
         if is_targeted:
-            response.with_recipient(sender).with_reply_to_id(activity.id)
+            response.add_targeted_message_info(activity.id)
+            response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
         return
 
@@ -324,7 +328,8 @@ async def cancel_reminder_command(ctx: ActivityContext[MessageActivity], reminde
     if not reminder:
         response = MessageActivityInput(text=f"Reminder **{reminder_id}** not found or already completed.")
         if is_targeted:
-            response.with_recipient(sender).with_reply_to_id(activity.id)
+            response.add_targeted_message_info(activity.id)
+            response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
         return
 
@@ -334,17 +339,19 @@ async def cancel_reminder_command(ctx: ActivityContext[MessageActivity], reminde
         active_reminders.pop(reminder_id, None)
         response = MessageActivityInput(text=f"Reminder **{reminder_id}** has been cancelled.")
         if is_targeted:
-            response.with_recipient(sender).with_reply_to_id(activity.id)
+            response.add_targeted_message_info(activity.id)
+            response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
         print(f"[REMINDER] Reminder {reminder_id} cancelled by {activity.from_.name}")
     else:
         response = MessageActivityInput(text="You can only cancel reminders you created or are assigned to you.")
         if is_targeted:
-            response.with_recipient(sender).with_reply_to_id(activity.id)
+            response.add_targeted_message_info(activity.id)
+            response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
 
 
-async def handle_add_reaction(ctx: ActivityContext[MessageActivity], command_text: str) -> None:
+async def handle_add_reaction(ctx: ActivityContext[MessageActivity], command_text: str, is_targeted: bool, quoted_message_id: Optional[str] = None) -> None:
     activity = ctx.activity
     reaction_type = re.sub(r"^add-reaction\s*", "", command_text, flags=re.IGNORECASE).strip()
 
@@ -360,20 +367,33 @@ async def handle_add_reaction(ctx: ActivityContext[MessageActivity], command_tex
         await ctx.send("API client is not available.")
         return
 
+    # Reactions cannot be added to targeted messages (slash commands)
+    if is_targeted:
+        sender = targeted_account(activity.from_.id, activity.from_.name)
+        response = MessageActivityInput(
+            text="Reactions cannot be added via slash commands. Please use `add-reaction` by @mentioning the bot in a regular message."
+        )
+        response.add_targeted_message_info(activity.id)
+        response.with_recipient(sender, is_targeted=True)
+        await ctx.send(response)
+        return
+
     try:
+        # Use quoted_message_id (from reply) if available, otherwise fallback to reply_to_id or current message
+        target_msg_id = quoted_message_id or getattr(activity, "reply_to_id", None) or activity.id
         await api.reactions.add(
             activity.conversation.id,
-            activity.id,
+            target_msg_id,
             reaction_type,
         )
         await ctx.send(f"Added a **{reaction_type}** reaction to your message!")
-        print(f"[REACTION] Added {reaction_type} reaction to message {activity.id}")
+        print(f"[REACTION] Added {reaction_type} reaction to message {target_msg_id}")
     except Exception as error:
         print(f"[REACTION] Failed to add reaction: {error}")
         await ctx.send("Sorry, I had trouble adding that reaction.")
 
 
-async def handle_remove_reaction(ctx: ActivityContext[MessageActivity], command_text: str) -> None:
+async def handle_remove_reaction(ctx: ActivityContext[MessageActivity], command_text: str, is_targeted: bool, quoted_message_id: Optional[str] = None) -> None:
     activity = ctx.activity
     reaction_type = re.sub(r"^remove-reaction\s*", "", command_text, flags=re.IGNORECASE).strip()
 
@@ -381,21 +401,32 @@ async def handle_remove_reaction(ctx: ActivityContext[MessageActivity], command_
         await ctx.send("Please specify a reaction type. Example: `remove-reaction like`")
         return
 
-    target_message_id = getattr(activity, "reply_to_id", None) or activity.id
-
     api = getattr(ctx, "api", None)
     if not api:
         await ctx.send("API client is not available.")
         return
 
+    # Reactions cannot be removed from targeted messages (slash commands)
+    if is_targeted:
+        sender = targeted_account(activity.from_.id, activity.from_.name)
+        response = MessageActivityInput(
+            text="Reactions cannot be removed via slash commands. Please use `remove-reaction` by @mentioning the bot in a regular message."
+        )
+        response.add_targeted_message_info(activity.id)
+        response.with_recipient(sender, is_targeted=True)
+        await ctx.send(response)
+        return
+
     try:
+        # Use quoted_message_id (from reply) if available, otherwise fallback to reply_to_id or current message
+        target_msg_id = quoted_message_id or getattr(activity, "reply_to_id", None) or activity.id
         await api.reactions.delete(
             activity.conversation.id,
-            target_message_id,
+            target_msg_id,
             reaction_type,
         )
-        await ctx.send(f"Removed the **{reaction_type}** reaction!")
-        print(f"[REACTION] Removed {reaction_type} reaction from message {target_message_id}")
+        await ctx.send(f"Removed the **{reaction_type}** reaction from your message!")
+        print(f"[REACTION] Removed {reaction_type} reaction from message {target_msg_id}")
     except Exception as error:
         print(f"[REACTION] Failed to remove reaction: {error}")
         await ctx.send("Sorry, I had trouble removing that reaction.")
@@ -446,6 +477,16 @@ async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
     stripped = strip_mentions_text(activity, StripMentionsTextOptions(account_id=bot_id))
     text = (stripped or activity.text or "").strip()
 
+    # Strip <quoted messageId="..."/> tag (added by Teams when replying to a message)
+    # and capture the quoted message ID for reaction targeting
+    quoted_message_id: Optional[str] = None
+    quoted_match = re.search(r'<quoted\s+messageId="([^"]+)"\s*/>', text)
+    if quoted_match:
+        quoted_message_id = quoted_match.group(1)
+        text = text.replace(quoted_match.group(0), "").strip()
+
+    print(f'[DEBUG] isTargeted: {is_targeted}, rawText: "{activity.text}", strippedText: "{text}", quotedMessageId: {quoted_message_id}')
+
     lower = text.lower()
 
     if lower in ("reminder-help", "help"):
@@ -458,11 +499,15 @@ async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
         reminder_id = re.sub(r"^cancel-reminder\s*", "", text, flags=re.IGNORECASE).strip()
         await cancel_reminder_command(ctx, reminder_id, is_targeted)
     elif lower.startswith("add-reaction"):
-        await handle_add_reaction(ctx, text)
+        await handle_add_reaction(ctx, text, is_targeted, quoted_message_id)
     elif lower.startswith("remove-reaction"):
-        await handle_remove_reaction(ctx, text)
+        await handle_remove_reaction(ctx, text, is_targeted, quoted_message_id)
     else:
-        await ctx.send("Use `reminder-help` to see available commands.")
+        response = MessageActivityInput(text="Use `reminder-help` to see available commands.")
+        if is_targeted:
+            response.add_targeted_message_info(activity.id)
+            response.with_recipient(activity.from_, is_targeted=True)
+        await ctx.send(response)
 
 
 @app.on_card_action
