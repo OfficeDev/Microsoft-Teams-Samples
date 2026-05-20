@@ -5,17 +5,17 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
-    "@azure/msal-browser": "^2.33.0",
-    "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/signalr": "6.0.3",
-    "@microsoft/teams-js": "^2.35.0",
-    "axios": "^0.21.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-router-dom": "6.4.3",
+    "@azure/msal-browser": "^5.11.0",
+    "@fluentui/react-components": "^9.73.8",
+    "@microsoft/signalr": "10.0.0",
+    "@microsoft/teams-js": "^2.53.0",
+    "axios": "^1.16.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-router-dom": "7.15.1",
     "react-scripts": "^5.0.1",
-    "reactstrap": "9.1.6",
-    "scheduler": "^0.25.0"
+    "reactstrap": "9.2.3",
+    "scheduler": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
