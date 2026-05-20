@@ -5,9 +5,9 @@ description = "This sample demonstrates Task Modules in Microsoft Teams using th
 readme = "README.md"
 requires-python = ">=3.12,<3.15"
 dependencies = [
-    "microsoft-teams-apps==2.0.0",
-    "microsoft-teams-api==2.0.0",
-    "microsoft-teams-cards==2.0.0",
+    "microsoft-teams-apps==2.0.11",
+    "microsoft-teams-api==2.0.11",
+    "microsoft-teams-cards==2.0.11",
     "python-dotenv>=1.0.0",
 ]
 
