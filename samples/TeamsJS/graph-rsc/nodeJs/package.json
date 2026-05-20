@@ -12,19 +12,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "^3.0.4",
-    "@microsoft/teams-js": "^2.35.0",
-    "axios": "^1.1.3",
-    "body-parser": "^1.19.0",
-    "dotenv": "^8.2.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
+    "@microsoft/teams-js": "^2.53.0",
+    "axios": "^1.16.1",
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
     "isomorphic-fetch": "^3.0.0",
-    "msal": "^1.4.8",
-    "nodemon": "^2.0.7",
+    "msal": "^1.4.18",
+    "nodemon": "^3.1.14",
     "q": "^1.5.1",
     "request": "^2.88.2",
-    "send": "^0.18.0",
-    "esbuild": "^0.18.1"
+    "send": "^1.2.1",
+    "esbuild": "^0.28.0"
   }
 }
