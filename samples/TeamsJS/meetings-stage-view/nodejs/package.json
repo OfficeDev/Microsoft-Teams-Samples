@@ -14,22 +14,22 @@
   "description": "",
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^3.0.4",
-    "@microsoft/teams-js": "^2.35.0",
-    "axios": "^0.21.1",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "ejs": "^3.1.6",
-    "esbuild": "^0.18.1",
-    "express": "^4.17.1",
+    "@microsoft/teams-js": "^2.53.0",
+    "axios": "^1.16.1",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "esbuild": "^0.28.0",
+    "express": "^5.2.1",
     "http": "^0.0.1-security",
-    "mkcert": "^1.5.1",
-    "nodemon": "^2.0.7",
+    "mkcert": "^3.2.0",
+    "nodemon": "^3.1.14",
     "nss": "^0.0.1",
     "q": "^1.5.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "env-cmd": "^10.1.0"
+    "env-cmd": "^11.0.0"
   }
 }
