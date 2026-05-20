@@ -18,14 +18,14 @@
         "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
-        "@microsoft/microsoft-graph-client": "^2.2.1",
-        "adaptivecards": "^2.9.0",
-        "body-parser": "^1.19.0",
-        "botbuilder": "^4.22.1",
+        "@microsoft/microsoft-graph-client": "^3.0.7",
+        "adaptivecards": "^3.0.6",
+        "body-parser": "^2.2.2",
+        "botbuilder": "^4.23.3",
         "botframework-connector": "^4.9.4",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "file-system": "^1.2.2",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "file-system": "^2.2.2",
         "fs": "^0.0.1-security",
         "http": "^0.0.1-security",
         "isomorphic-fetch": "^3.0.0",
@@ -35,19 +35,19 @@
         "npm-auth": "^1.1.0",
         "q": "^1.5.1",
         "request": "^2.88.2",
-        "restify": "^10.0.0",
-        "socket.io": "^4.0.0",
+        "restify": "^11.1.0",
+        "socket.io": "^4.8.3",
         "string-format": "^2.0.0",
-        "url": "^0.11.0"
+        "url": "^0.11.4"
     },
     "devDependencies": {
-        "esbuild": "^0.18.20",
-        "eslint": "^7.0.0",
-        "eslint-config-standard": "^14.1.1",
-        "eslint-plugin-import": "^2.20.2",
+        "esbuild": "^0.28.0",
+        "eslint": "^10.4.0",
+        "eslint-config-standard": "^17.1.0",
+        "eslint-plugin-import": "^2.32.0",
         "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^4.2.1",
-        "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "~2.0.4"
+        "eslint-plugin-promise": "^7.3.0",
+        "eslint-plugin-standard": "^5.0.0",
+        "nodemon": "~3.1.14"
     }
 }
