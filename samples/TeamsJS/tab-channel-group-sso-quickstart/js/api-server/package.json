@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@azure/msal-node": "^1.4.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jwt-decode": "^2.2.0",
-    "node-fetch": "^2.6.0",
-    "esbuild": "^0.18.1"
+    "@azure/msal-node": "^5.2.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jwt-decode": "^4.0.0",
+    "node-fetch": "^3.3.2",
+    "esbuild": "^0.28.0"
   }
 }
