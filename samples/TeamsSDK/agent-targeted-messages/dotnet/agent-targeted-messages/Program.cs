@@ -31,8 +31,6 @@ var activeReminders = new ConcurrentDictionary<string, ReminderInfo>();
 
 var timePattern = new Regex(@"in\s+(\d+)\s*(seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h)\b", RegexOptions.IgnoreCase);
 
-// --- Helper Functions ---
-
 (int DelayMs, string Label)? ParseTimeExpression(string text)
 {
     var match = timePattern.Match(text.ToLower());
@@ -166,7 +164,6 @@ ParsedReminder ParseReminderCommand(MessageActivity msg, string commandText)
     };
 }
 
-// --- Card Builders ---
 
 AdaptiveCard CreateConfirmationCard(ReminderInfo reminder, int delayMs)
 {
@@ -281,7 +278,6 @@ AdaptiveCard CreateSnoozeConfirmationCard(ReminderInfo reminder, int snoozeMinut
     };
 }
 
-// --- Proactive Delivery ---
 
 async Task DeliverReminder(ReminderInfo reminder)
 {
@@ -316,9 +312,8 @@ async Task DeliverReminder(ReminderInfo reminder)
     }
 }
 
-// --- Command Handlers ---
 
-async Task HandleRemindCommand(IContext<MessageActivity> context, string commandText, bool isTargeted)
+async Task HandleRemindCommand(IContext<MessageActivity> context, string commandText, bool isTargeted, string? targetedMessageId)
 {
     var activity = context.Activity;
     var parsed = ParseReminderCommand(activity, commandText);
@@ -374,12 +369,9 @@ async Task HandleRemindCommand(IContext<MessageActivity> context, string command
 
         var response = new MessageActivity()
             .WithText("Reminder has been set!")
-            .AddAttachment(card);
-
-        if (isTargeted)
-        {
-            response.WithRecipient(creator, true);
-        }
+            .AddAttachment(card)
+            .AddTargetedMessageInfo(targetedMessageId)
+            .WithRecipient(creator, true);
 
         await context.Send(response);
 
@@ -393,7 +385,7 @@ async Task HandleRemindCommand(IContext<MessageActivity> context, string command
     }
 }
 
-async Task ShowMyReminders(IContext<MessageActivity> context, bool isTargeted)
+async Task ShowMyReminders(IContext<MessageActivity> context, bool isTargeted, string? targetedMessageId)
 {
     var activity = context.Activity;
     var userId = activity.From?.Id;
@@ -413,12 +405,9 @@ async Task ShowMyReminders(IContext<MessageActivity> context, bool isTargeted)
     if (myReminders.Count == 0)
     {
         var emptyResponse = new MessageActivity()
-            .WithText("You have no active reminders.");
-
-        if (isTargeted)
-        {
-            emptyResponse.WithRecipient(sender, true);
-        }
+            .WithText("You have no active reminders.")
+            .AddTargetedMessageInfo(targetedMessageId)
+            .WithRecipient(sender, true);
 
         await context.Send(emptyResponse);
         return;
@@ -435,17 +424,14 @@ async Task ShowMyReminders(IContext<MessageActivity> context, bool isTargeted)
 
     var list = string.Join("\n", lines);
     var listResponse = new MessageActivity()
-        .WithText($"**Your Active Reminders:**\n\n{list}\n\nUse `cancel-reminder [id]` to cancel a reminder.");
-
-    if (isTargeted)
-    {
-        listResponse.WithRecipient(sender, true);
-    }
+        .WithText($"**Your Active Reminders:**\n\n{list}\n\nUse `cancel-reminder [id]` to cancel a reminder.")
+        .AddTargetedMessageInfo(targetedMessageId)
+        .WithRecipient(sender, true);
 
     await context.Send(listResponse);
 }
 
-async Task CancelReminder(IContext<MessageActivity> context, string reminderId, bool isTargeted)
+async Task CancelReminder(IContext<MessageActivity> context, string reminderId, bool isTargeted, string? targetedMessageId)
 {
     var activity = context.Activity;
     var userId = activity.From?.Id;
@@ -454,12 +440,9 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
     if (string.IsNullOrEmpty(reminderId))
     {
         var noIdResponse = new MessageActivity()
-            .WithText("Please specify a reminder ID. Use `my-reminders` to see your active reminders.");
-
-        if (isTargeted)
-        {
-            noIdResponse.WithRecipient(sender, true);
-        }
+            .WithText("Please specify a reminder ID. Use `my-reminders` to see your active reminders.")
+            .AddTargetedMessageInfo(targetedMessageId)
+            .WithRecipient(sender, true);
 
         await context.Send(noIdResponse);
         return;
@@ -468,12 +451,9 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
     if (!activeReminders.TryGetValue(reminderId, out var reminder))
     {
         var notFoundResponse = new MessageActivity()
-            .WithText($"Reminder **{reminderId}** not found or already completed.");
-
-        if (isTargeted)
-        {
-            notFoundResponse.WithRecipient(sender, true);
-        }
+            .WithText($"Reminder **{reminderId}** not found or already completed.")
+            .AddTargetedMessageInfo(targetedMessageId)
+            .WithRecipient(sender, true);
 
         await context.Send(notFoundResponse);
         return;
@@ -486,12 +466,9 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
         activeReminders.TryRemove(reminderId, out _);
 
         var cancelledResponse = new MessageActivity()
-            .WithText($"Reminder **{reminderId}** has been cancelled.");
-
-        if (isTargeted)
-        {
-            cancelledResponse.WithRecipient(sender, true);
-        }
+            .WithText($"Reminder **{reminderId}** has been cancelled.")
+            .AddTargetedMessageInfo(targetedMessageId)
+            .WithRecipient(sender, true);
 
         await context.Send(cancelledResponse);
         Console.WriteLine($"[REMINDER] Reminder {reminderId} cancelled by {activity.From?.Name}");
@@ -499,12 +476,9 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
     else
     {
         var deniedResponse = new MessageActivity()
-            .WithText("You can only cancel reminders you created or are assigned to you.");
-
-        if (isTargeted)
-        {
-            deniedResponse.WithRecipient(sender, true);
-        }
+            .WithText("You can only cancel reminders you created or are assigned to you.")
+            .AddTargetedMessageInfo(targetedMessageId)
+            .WithRecipient(sender, true);
 
         await context.Send(deniedResponse);
     }
@@ -559,7 +533,7 @@ async Task HandleAddReaction(IContext<MessageActivity> context, string commandTe
         await context.Api.Conversations.Reactions.AddAsync(
             activity.Conversation.Id,
             activity.Id,
-            new ReactionType(reactionType)
+            new ReactionType("1f44b_wavinghand")
         );
         await context.Send($"Added a **{reactionType}** reaction to your message!");
         Console.WriteLine($"[REACTION] Added {reactionType} reaction to message {activity.Id}");
@@ -608,7 +582,9 @@ teamsApp.OnMessage(async (context, cancellationToken) =>
     if (string.IsNullOrEmpty(msg.Text)) return;
 
     // Check if this is a targeted message (TM) from the user via slash command
-    var isTargeted = msg.Recipient?.IsTargeted ?? false;
+    var isTargeted = context.Activity.Recipient?.IsTargeted == true;
+    // Always capture the incoming message ID for prompt preview
+    var targetedMessageId = msg.Id;
     if (isTargeted)
     {
         Console.WriteLine($"[TM] Received targeted message from {msg.From?.Name ?? "unknown"}");
@@ -627,16 +603,16 @@ teamsApp.OnMessage(async (context, cancellationToken) =>
     }
     else if (lower.StartsWith("remind"))
     {
-        await HandleRemindCommand(context, text, isTargeted);
+        await HandleRemindCommand(context, text, isTargeted, targetedMessageId);
     }
     else if (lower == "my-reminders")
     {
-        await ShowMyReminders(context, isTargeted);
+        await ShowMyReminders(context, isTargeted, targetedMessageId);
     }
     else if (lower.StartsWith("cancel-reminder"))
     {
         var reminderId = Regex.Replace(text, @"^cancel-reminder\s*", "", RegexOptions.IgnoreCase).Trim();
-        await CancelReminder(context, reminderId, isTargeted);
+        await CancelReminder(context, reminderId, isTargeted, targetedMessageId);
     }
     else if (lower.StartsWith("add-reaction"))
     {
@@ -651,7 +627,12 @@ teamsApp.OnMessage(async (context, cancellationToken) =>
         /* Use preferred LLM to get summarized answer */
         /* var llmResponse = await llmClient.GetCompletionAsync(text); */
         /* await context.Send(llmResponse); */
-        await context.Send("Use `reminder-help` to see available commands.");
+        var fallbackResponse = new MessageActivity()
+            .WithText("Use `reminder-help` to see available commands.")
+            .AddTargetedMessageInfo(targetedMessageId)
+            .WithRecipient(msg.From!, true);
+
+        await context.Send(fallbackResponse);
     }
 });
 
