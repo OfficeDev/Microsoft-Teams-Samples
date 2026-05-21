@@ -13,7 +13,7 @@
     "react-i18next": "^11.8.15",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "uuid": "^8.3.2",
+    "uuid": "^14.0.0",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
