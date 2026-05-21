@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@azure/msal-node": "^1.4.0",
+    "@azure/msal-node": "^5.2.2",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
