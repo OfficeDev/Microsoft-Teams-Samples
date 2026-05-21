@@ -44,7 +44,7 @@
         "request": "^2.88.2",
         "restify": "^10.0.0",
         "url": "^0.11.3",
-        "uuid": "^10.0.0"
+        "uuid": "^14.0.0"
     },
     "devDependencies": {
         "env-cmd": "^10.1.0",
