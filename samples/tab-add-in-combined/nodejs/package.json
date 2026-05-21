@@ -16,7 +16,7 @@
         "postbuild": "ncp tab/build build && ncp add-in/dist build"
     },
     "devDependencies": {
-        "@microsoft/teamsfx-cli": "^1.2.3",
+        "@microsoft/teamsfx-cli": "^2.0.2",
         "@microsoft/teamsfx-run-utils": "alpha",
         "env-cmd": "^10.1.0",
         "office-addin-dev-settings": "^2.0.3",
