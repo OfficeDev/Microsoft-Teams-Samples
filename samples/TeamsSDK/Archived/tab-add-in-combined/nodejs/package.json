@@ -1,0 +1,24 @@
+{
+    "name": "blue-yonder-airlines-discount-teams-tab-and-outlook-add-in",
+    "version": "0.0.1",
+    "author": "Office Platform Developer Content Team",
+    "scripts": {
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start:tab",
+        "build:tab": "cd tab && npm run build",
+        "install:tab": "cd tab && npm install",
+        "start:tab": "cd tab && npm run start",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "install:add-in": "cd add-in && npm install",
+        "postinstall": "npm run install:add-in && npm run install:tab",
+        "build:add-in": "cd add-in && npm run build",
+        "build:add-in:dev": "cd add-in && npm run build:dev",
+        "build": "npm run build:tab && npm run build:add-in",
+        "postbuild": "ncp tab/build build && ncp add-in/dist build"
+    },
+    "devDependencies": {
+        "@microsoft/teamsfx-cli": "^2.1.2",
+        "env-cmd": "^11.0.0",
+        "office-addin-dev-settings": "^3.1.1",
+        "ncp": "^2.0.0"
+    }
+}

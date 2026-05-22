@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="https://res.cdn.office.net/teams-js/2.53.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<div class="col-md-8">
+    <section id="configSection">
+        <div id="primary" style="display: none">
+            <h2 style="display:inline-block">Hello</h2>
+            <div id="logoutDiv" style="display: inline-block">
+                <button onclick="logOut()" style="margin-left: 40px;">Sign Out</button>
+            </div>
+        </div>
+
+        <div id="divConfig" style="display: none">
+            <h3>Send notifications when tasks are:</h3>
+            <form id="configForm">
+                <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Created
+                <br>
+                <br>
+            </form>
+        </div>
+
+        <div id="divLogin">
+            <h2>Please Sign In:</h2>
+            <!-- Login button -->
+            <button onclick="initiateLogin()">Sign In</button>
+        </div>
+
+        <div id="divError" style="display: none"></div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            var radios = document.getElementsByName('notificationType');
+            var eventType = '';
+            if (radios[0].checked) {
+                eventType = radios[0].value;
+            } else {
+                eventType = radios[1].value;
+            }
+
+            microsoftTeams.pages.config.setConfig({
+                entityId: eventType,
+                contentUrl: window.location.origin + "/SetupAuth",
+                removeUrl: window.location.origin + "/SetupAuth",
+                configName: eventType
+            });
+
+            microsoftTeams.pages.config.getConfig().then(function (settings) {
+                $.ajax({
+                    url: '/Connector/Save',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        webhookUrl: settings.webhookUrl,
+                        eventType: eventType
+                    }),
+                    success: function (data, textStatus, jQxhr) {
+                        console.log('webhook created successfully.');
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log('error', errorThrown);
+                    }
+                });
+            });
+
+            saveEvent.notifySuccess();
+        });
+
+        microsoftTeams.pages.config.registerOnRemoveHandler(function (removeEvent) {
+            removeEvent.notifySuccess();
+        });
+    });
+
+    function onClick() {
+        microsoftTeams.pages.config.setValidityState(true);
+    }
+
+    function initiateLogin() {
+        login(window.location.origin + "/SimpleStart");
+    }
+
+    function login(url) {
+        hideProfileAndError();
+        microsoftTeams.authentication.authenticate({
+            url: url,
+            width: 600,
+            height: 535
+        }).then((result) => {
+            console.log("Login succeeded: " + result);
+            microsoftTeams.authentication.getAuthToken().then((token) => {
+                $("#primary").show();
+                $("#divConfig").show();
+                $("#divLogin").hide();
+            });
+        }).catch((reason) => {
+            console.log("Login failed: " + reason);
+            handleAuthError(reason);
+        });
+    }
+
+    function logOut() {
+        hideProfileAndError();
+        localStorage.clear();
+        $("#primary").hide();
+        $("#divConfig").hide();
+        $("#divLogin").show();
+        microsoftTeams.pages.config.setValidityState(false);
+    }
+
+    function handleAuthError(reason) {
+        $("#divError").text(reason).show();
+        $("#divConfig").hide();
+        $("#primary").hide();
+    }
+
+    function hideProfileAndError() {
+        $("#divError").text("").hide();
+        $("#divConfig").hide();
+        $("#primary").hide();
+    }
+</script>
+
+</html>
