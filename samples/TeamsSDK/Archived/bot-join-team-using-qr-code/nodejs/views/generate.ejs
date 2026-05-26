@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        #mainDiv {
+            padding-left: 5%;
+            padding-top: 2%;
+        }
+    </style>
+    <script src="/node_modules/qrcode/build/qrcode.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var teamDetails = <%-teamDetails%>
+
+        microsoftTeams.initialize(() => {
+            setData();
+        })
+
+        function setData() {
+            var select = document.createElement("select");
+            select.name = "teams";
+            select.id = "teams"
+            select.class = "form-select"
+
+            for (const val of teamDetails) {
+                var option = document.createElement("option");
+                option.value = val.id;
+                option.text = val.name;
+                select.appendChild(option);
+            }
+
+            var label = document.createElement("label");
+            label.innerHTML = "Select the team"
+            label.htmlFor = "teams";
+
+            document.getElementById("container").appendChild(label).appendChild(select);
+        }
+
+        function generateQR() {
+            var teamId = $("#teams").val();
+            window.location.href = window.location.origin + "/qrcode?teamId=" + teamId;
+        };
+
+        function scanOR() {
+            var config = {
+                timeOutIntervalInSec: 30
+            };
+
+            // Method that enables the user to scan different types of barcode, and returns the result as a string.
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                }
+                else if (decodedText) {
+                    for (const val of teamDetails) {
+                        if (val.id == decodedText) {
+                            
+                            microsoftTeams.getContext(function (context) {
+                                var teamData = {
+                                    teamId: decodedText,
+                                    userId: context.userObjectId
+                                }
+
+                                microsoftTeams.tasks.submitTask(teamData);
+                            });
+                        }
+                    }
+                }
+            }, config);
+        }
+    </script>
+</head>
+
+<body id="mainDiv">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <div id="container">
+                </div>
+                <br>
+                <button type="button" class="btn btn-outline-primary" onClick="generateQR()">Generate QR</button>
+                <button type="button" class="btn btn-outline-primary" onClick="scanOR()">Scan QR</button>
+                <img alt="QR Image" id="qrImg" hidden="hidden" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

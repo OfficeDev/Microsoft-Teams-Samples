@@ -1,0 +1,28 @@
+{
+  "regionDomains": [
+    {
+      "id": 1,
+      "region": "North America",
+      "country": "United States of America (USA)",
+      "domain": ".us"
+    },
+    {
+      "id": 2,
+      "region": "Europe",
+      "country": "United Kingdom (UK)",
+      "domain": ".uk"
+    },
+    {
+      "id": 3,
+      "region": "Asia & Pacific",
+      "country": "India",
+      "domain": ".in"
+    },
+    {
+      "id": 4,
+      "region": "Asia & Pacific",
+      "country": "China",
+      "domain": ".cn"
+    }
+  ]
+}
