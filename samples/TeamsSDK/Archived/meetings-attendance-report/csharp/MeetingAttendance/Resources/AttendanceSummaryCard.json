@@ -1,0 +1,185 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Large",
+      "weight": "Bolder",
+      "text": "Summary"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Attended Participant",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "${participantCount}",
+              "wrap": true,
+              "size": "Large"
+            }
+          ],
+          "width": "auto",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Start and end time",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "${meetingStartAndEndTime}",
+              "wrap": true,
+              "size": "Large"
+            }
+          ],
+          "width": "auto",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Meeting duration",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "${meetingDuration}",
+              "wrap": true,
+              "size": "Large"
+            }
+          ],
+          "width": "auto",
+          "horizontalAlignment": "center"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "Participants",
+      "wrap": true,
+      "weight": "Bolder",
+      "size": "Large"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Name",
+              "wrap": true,
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "$data": "${participantsInfo}",
+              "text": "${displayName}",
+              "wrap": true
+            }
+          ],
+          "width": "auto",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "First join",
+              "wrap": true,
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "$data": "${participantsInfo}",
+              "text": "${firstJoinTime}",
+              "wrap": true
+            }
+          ],
+          "width": "auto",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Last leave",
+              "wrap": true,
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "$data": "${participantsInfo}",
+              "text": "${lastLeaveTime}",
+              "wrap": true
+            }
+          ],
+          "width": "auto",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "In-meeting duration",
+              "wrap": true,
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "$data": "${participantsInfo}",
+              "text": "${duration}",
+              "wrap": true
+            }
+          ],
+          "width": "auto",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Role",
+              "wrap": true,
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "$data": "${participantsInfo}",
+              "text": "${role}",
+              "wrap": true
+            }
+          ],
+          "width": "auto",
+          "horizontalAlignment": "center"
+        }
+      ]
+    }
+  ],
+  "msteams": {
+    "width": "Full"
+  }
+}

@@ -1,0 +1,36 @@
+{
+    "name": "meeting-attendance-bot",
+    "version": "1.0.0",
+    "description": "Bot Builder v4 meeting attendance sample",
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "dev:teamsfx": "npm run dev",
+        "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+        "start": "node ./index.js",
+        "watch": "nodemon ./index.js",
+        "build": "node build.js",
+        "lint": "eslint .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+    },
+    "dependencies": {
+        "@azure/identity": "^4.13.1",
+        "@microsoft/microsoft-graph-client": "^3.0.7",
+        "adaptivecards-templating": "^2.3.1",
+        "botbuilder": "^4.23.3",
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "isomorphic-fetch": "^3.0.0"
+    },
+    "devDependencies": {
+        "esbuild": "^0.28.0",
+        "eslint": "^10.4.0",
+        "nodemon": "^3.1.14"
+    }
+}
