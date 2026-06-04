@@ -121,6 +121,8 @@ Message extensions require a `composeExtensions` section in `manifest.json`. The
 
 Once provisioning and manifest configuration are complete, start your bot and sideload the app from the prompt in Teams. See the [Teams Developer CLI documentation](https://microsoft.github.io/teams-sdk/cli/) for the full command reference.
 
+> **Tip**: Using an AI coding assistant (GitHub Copilot CLI, Claude Code, Cursor, VS Code)? Install the [`teams-dev` agent skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) to drive the CLI provisioning and manifest steps from natural language - your assistant runs the right commands, manages credentials, and guides you through bot registration end-to-end.
+
 ## Troubleshooting
 
 - If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable.
@@ -131,6 +133,7 @@ Once provisioning and manifest configuration are complete, start your bot and si
 
 - [Microsoft Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/)
 - [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/)
+- [`teams-dev` Agent Skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) - AI coding assistant skill that drives the Teams Developer CLI via natural language
 - [Message extensions overview](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions)
 - [Search commands](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command)
 - [Link unfurling](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)

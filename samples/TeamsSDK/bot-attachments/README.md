@@ -83,6 +83,8 @@ This single command creates a Microsoft Entra app registration, registers a Team
 
 Once provisioning completes, start your bot - the sample will pick up the credentials automatically - and sideload the app from the prompt in Teams. See the [Teams Developer CLI documentation](https://microsoft.github.io/teams-sdk/cli/) for the full command reference.
 
+> **Tip**: Using an AI coding assistant (GitHub Copilot CLI, Claude Code, Cursor, VS Code)? Install the [`teams-dev` agent skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) to drive these CLI steps from natural language - your assistant runs the right commands, manages credentials, and guides you through bot registration end-to-end.
+
 ## Troubleshooting
 
 - If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable.
@@ -93,3 +95,4 @@ Once provisioning completes, start your bot - the sample will pick up the creden
 
 - [Microsoft Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/)
 - [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/)
+- [`teams-dev` Agent Skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) - AI coding assistant skill that drives the Teams Developer CLI via natural language

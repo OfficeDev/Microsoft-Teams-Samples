@@ -92,6 +92,8 @@ This single command creates a Microsoft Entra app registration, registers a Team
 
 The CLI prints a Teams app ID on success - save it; you'll use it in step 5 when adding RSC permissions.
 
+> **Tip**: Using an AI coding assistant (GitHub Copilot CLI, Claude Code, Cursor, VS Code)? Install the [`teams-dev` agent skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) to drive the CLI provisioning, manifest, and RSC permission steps from natural language - your assistant runs the right commands, manages credentials, and can also help guide you through the portal-only steps below (Graph permissions, application access policy, and meeting event subscriptions).
+
 ### 3. Add Graph API Permissions and Grant Admin Consent
 
 The CLI provisions a baseline Microsoft Entra app, but the meeting Graph API permissions used by this sample must still be added manually in the portal:
@@ -237,6 +239,7 @@ Once the bot is running and added to Teams, you can interact with it in meetings
 ### Teams Development
 - [Microsoft Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/) - Official Microsoft Teams platform documentation
 - [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) - Command-line provisioning for Teams apps
+- [`teams-dev` Agent Skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) - AI coding assistant skill that drives the Teams Developer CLI via natural language
 
 ### Meeting Events & Transcripts
 - [Meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#receive-meeting-participant-events) - Real-time meeting participant events

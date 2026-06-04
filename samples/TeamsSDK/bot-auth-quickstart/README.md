@@ -242,6 +242,8 @@ python main.py
 
 The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions the Microsoft Entra app, Azure Bot resource, and Teams app manifest, and writes the credentials into your project. The OAuth/SSO specifics (redirect URI, Application ID URI, manifest `webApplicationInfo` / `validDomains`, and the OAuth connection on the Azure Bot resource) are not yet automated by the CLI and are configured manually after provisioning.
 
+> **Tip**: Using an AI coding assistant (GitHub Copilot CLI, Claude Code, Cursor, VS Code)? Install the [`teams-dev` agent skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) to drive the CLI provisioning **and** the manual SSO/OAuth configuration steps below from natural language - the skill includes dedicated SSO setup guidance and can walk you through the portal steps the CLI does not yet automate.
+
 #### 1. Install the Teams Developer CLI
 
 ```bash
@@ -334,7 +336,7 @@ teams app update <teamsAppId> --file appPackage/<package>.zip
 
 In the Azure Portal, open the Azure Bot resource created by the CLI -> **Settings** -> **Configuration** -> **OAuth Connection Settings** and add a new connection. Use **Azure Active Directory v2** as the service provider, your AAD app's client ID/secret/tenant ID, and `User.Read` as the scope. Save the connection name and add it to your environment file as `CONNECTION_NAME` (the value referenced by the sample).
 
-> The Teams Developer CLI does not currently configure OAuth connections on the Azure Bot resource; this step still needs to be done in the portal.
+> The Teams Developer CLI does not currently configure OAuth connections on the Azure Bot resource; this step still needs to be done in the portal. If you installed the [`teams-dev` agent skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills), your AI coding assistant can walk you through this portal configuration interactively.
 
 #### 7. Setup Code
 
@@ -454,6 +456,7 @@ app = App(logger=logger)
 ### Teams Development
 - [Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/) - Official Microsoft Teams platform documentation
 - [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) - Command-line provisioning for Teams apps
+- [`teams-dev` Agent Skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) - AI coding assistant skill that drives the Teams Developer CLI via natural language (includes SSO setup guidance)
 
 ### Authentication & Graph API
 - [Teams Bot Authentication](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/authentication/auth-aad-sso-bots) - SSO authentication for Teams bots
