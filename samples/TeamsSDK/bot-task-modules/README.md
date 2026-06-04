@@ -40,8 +40,8 @@ The bot supports the following functionalities:
 ### 3. Multistep Form Task Module
 
 - Opens a two-step Adaptive Card dialog within a single task module session
-- **Step 1** collects the user''s name and advances to the next step on submit
-- **Step 2** carries forward the name from step 1 and collects the user''s email address
+- **Step 1** collects the user's name and advances to the next step on submit
+- **Step 2** carries forward the name from step 1 and collects the user's email address
 - On final submission, the bot sends a personalized confirmation message (`Hi {name}, thanks for submitting! Your email is {email}`)
 - Demonstrates chaining task module responses using `task/continue` to transition between steps
 - Shows how to pass data between steps using the Adaptive Card `Action.Submit` `data` payload
@@ -56,7 +56,7 @@ The bot supports the following functionalities:
 
 # How to run these samples
 
-You can run these samples locally in the Teams Client after you have provisioned the Teams app, written its credentials into your project''s environment file, and started the bot against a public DevTunnels URL.
+You can run these samples locally in the Teams Client after you have provisioned the Teams app, written its credentials into your project's environment file, and started the bot against a public DevTunnels URL.
 
 ## Run in the Teams Client
 
@@ -80,7 +80,7 @@ Take note of the URL shown after *Connect via browser:*
 
 ## Provision with the Teams Developer CLI
 
-The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions your Microsoft Entra app, Teams-managed bot registration, Teams app manifest, and writes the credentials directly into your project''s environment file in a single command.
+The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions your Microsoft Entra app, Teams-managed bot registration, Teams app manifest, and writes the credentials directly into your project's environment file in a single command.
 
 Sign in with your M365 account:
 

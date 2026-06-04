@@ -7,7 +7,7 @@ This sample demonstrates how to implement Single Sign-On (SSO) authentication fo
 
 > **IMPORTANT**: The manifest file in this app requires the following fields for the Teams SDK OAuth flow:
 > - **`validDomains`**: Must include `"token.botframework.com"` to allow the OAuth token flow.
-> - **`webApplicationInfo`**: Must be configured with your Azure AD app''s `id` (App Id / Client ID) and `resource` (e.g., `api://botid-{AppId}`). This is required for SSO authentication to work in Teams.
+> - **`webApplicationInfo`**: Must be configured with your Azure AD app's `id` (App Id / Client ID) and `resource` (e.g., `api://botid-{AppId}`). This is required for SSO authentication to work in Teams.
 > Both fields must be present in any bot that uses Teams SSO or OAuth authentication.
 
 ## Table of Contents
@@ -17,6 +17,8 @@ This sample demonstrates how to implement Single Sign-On (SSO) authentication fo
 - [Microsoft Graph Integration](#microsoft-graph-integration)
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
+  - [Option 1: Manual Setup](#option-1-manual-setup)
+  - [Option 2: Teams Developer CLI](#option-2-teams-developer-cli)
 - [Troubleshooting](#troubleshooting)
 - [Further Reading](#further-reading)
 
@@ -47,7 +49,7 @@ This sample demonstrates comprehensive Microsoft Graph API integration to access
 The bot leverages Microsoft Graph to:
 
 1. **User Profile Access**:
-   - Retrieves authenticated user''s profile information
+   - Retrieves authenticated user's profile information
    - Accesses user display name, email, job title, department, and office location
    - Uses delegated permissions on behalf of the signed-in user
 
@@ -56,7 +58,7 @@ The bot leverages Microsoft Graph to:
 This sample requires the following Microsoft Graph permissions:
 
 **Delegated Permissions** (user or admin consent required):
-- `User.Read` - Read the signed-in user''s profile
+- `User.Read` - Read the signed-in user's profile
 
 ### User Authentication Flow
 
@@ -73,7 +75,7 @@ The sample uses Azure AD SSO (Single Sign-On) with the Teams SDK OAuth flow:
 Teams SSO involves two types of consent:
 
 - **User consent**: On the first sign-in, the user is prompted to consent to the permissions (e.g., `User.Read`). After consent is granted, subsequent sign-ins are silent - no prompt is shown.
-- **Admin consent**: An organization''s administrator can pre-consent on behalf of all users in the tenant. If admin consent has been granted, individual users will not see a consent prompt.
+- **Admin consent**: An organization's administrator can pre-consent on behalf of all users in the tenant. If admin consent has been granted, individual users will not see a consent prompt.
 
 > **Note**: If you need to reset consent and re-trigger the consent prompt (e.g., for testing), you can do so by:
 > 1. Go to [My Apps](https://myapps.microsoft.com) -> find your app -> **Remove** it, or
@@ -82,7 +84,7 @@ Teams SSO involves two types of consent:
 
 ### Graph API Endpoints Used
 
-- `GET /me` - Get current user''s profile
+- `GET /me` - Get current user's profile
 
 ## Prerequisites
 
@@ -97,16 +99,157 @@ Teams SSO involves two types of consent:
 
 ## Setup Instructions
 
+### Option 1: Manual Setup
+
+#### 1. Setup for Bot SSO
+
+- Refer to [Bot SSO Setup document](BotSSOSetup.md)
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the Azure bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint
+
+> NOTE: When you create your app registration in Azure portal, you will create a ClientID and ClientSecret - make sure you keep these for later.
+
+#### 2. Setup Local Tunnel
+
+Create a persistent tunnel for port 3978 with anonymous access so it can be reused across projects:
+
+```
+devtunnel create -a my-tunnel
+devtunnel port create -p 3978 my-tunnel
+devtunnel host my-tunnel
+```
+
+Take note of the URL shown after *Connect via browser:*
+
+#### 3. Register Azure AD Application
+
+Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+**A) Create New Registration:**
+- Select **New Registration** and on the *register an application page*, set following values:
+  - Set **name** to your app name
+  - Choose the **supported account types** (any account type will work)
+  - Leave **Redirect URI** empty
+  - Choose **Register**
+
+**B) Add Authentication Platform:**
+- Under **Manage**, navigate to **Authentication**
+- Click **Add a platform** and select **Web**
+- Set the **Redirect URI** to `https://token.botframework.com/.auth/web/redirect`
+- Click **Configure**
+
+**C) Save Application Details (skip if already done):**
+- On the overview page, copy and save the **Application (client) ID** and **Directory (tenant) ID**
+- You'll need these later when updating your Teams application manifest and configuration files
+
+**D) Create Client Secret:**
+- Under **Manage**, navigate to **Certificates & secrets**
+- In the **Client secrets** section, click on **+ New client secret**
+- Add a description (e.g., "Teams Bot Secret") and select an expiration period
+- Click **Add**
+- **Important**: Copy the client secret **Value** immediately and save it securely. You won't be able to see it again!
+
+**E) Configure API Permissions:**
+- Navigate to **API Permissions**
+- Click **Add a permission**
+- Select **Microsoft Graph** -> **Delegated permissions**:
+  - `User.Read` (enabled by default)
+- Click **Add permissions**
+- Click **Grant admin consent** to grant admin consent for the required permissions
+
+#### 4. Setup Code
+
+**Clone the repository:**
+
+```bash
+git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+```
+
+**Navigate to the sample directory:**
+
+```bash
+# For Node.js:
+cd samples/TeamsSDK/bot-auth-quickstart/nodejs/bot-auth-quickstart
+
+# For .NET:
+cd samples/TeamsSDK/bot-auth-quickstart/dotnet/bot-auth-quickstart
+
+# For Python:
+cd samples/TeamsSDK/bot-auth-quickstart/python/bot-auth-quickstart
+```
+
+**Install dependencies:**
+
+For Node.js:
+```bash
+npm install
+```
+
+For .NET:
+```bash
+dotnet restore
+```
+
+For Python:
+```bash
+pip install -r requirements.txt
+```
+
+**Configure environment variables:**
+
+Update the configuration file (`.env`, `appsettings.json`, or `.env` depending on language) with the values from step 3 (Azure AD app registration):
+
+- `CLIENT_ID` - The Application (client) ID from step 3
+- `CLIENT_SECRET` - The client secret value from step 3C
+- `TENANT_ID` - Your Directory (tenant) ID from step 3 (required for SingleTenant)
+- `CONNECTION_NAME` - The name of your Azure Bot OAuth connection created in step 1
+
+#### 5. Setup Teams App
+
+Navigate to the Teams Developer Portal at https://dev.teams.microsoft.com
+
+**Create a new Bot resource:**
+1. Navigate to **Tools** -> **Bot management**, and add a **New bot**
+2. In **Configure**, paste the devtunnel endpoint URL and append `/api/messages`
+3. In **Client secrets**, create a new secret and save it for later
+
+> **Note**: If you have access to an Azure Subscription in the same Tenant, you can also create the Azure Bot resource ([learn more](https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=singletenant)).
+
+**Create a new Teams App:**
+1. Navigate to **Apps** and create a **New App**
+2. Fill the required values in **Basic information** (short and long name, descriptions, and App URLs)
+3. In **App features** -> **Bot**, select the bot you created previously
+4. Select **Preview in Teams**
+
+#### 6. Start the Bot
+
+For Node.js:
+```bash
+npm start
+```
+
+For .NET:
+```bash
+dotnet run
+```
+
+For Python:
+```bash
+python main.py
+```
+
+### Option 2: Teams Developer CLI
+
 The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions the Microsoft Entra app, Azure Bot resource, and Teams app manifest, and writes the credentials into your project. The OAuth/SSO specifics (redirect URI, Application ID URI, manifest `webApplicationInfo` / `validDomains`, and the OAuth connection on the Azure Bot resource) are not yet automated by the CLI and are configured manually after provisioning.
 
-### 1. Install the Teams Developer CLI
+#### 1. Install the Teams Developer CLI
 
 ```bash
 npm install -g @microsoft/teams.cli
 teams login
 ```
 
-### 2. Setup Local Tunnel
+#### 2. Setup Local Tunnel
 
 Create a persistent tunnel for port 3978 with anonymous access so it can be reused across projects:
 
@@ -118,7 +261,7 @@ devtunnel host my-tunnel
 
 Take note of the URL shown after *Connect via browser:*.
 
-### 3. Provision the App with the Teams Developer CLI
+#### 3. Provision the App with the Teams Developer CLI
 
 From the language-specific sample directory you want to run, provision the Microsoft Entra app, Azure Bot resource, and manifest, and write credentials into your environment file. SSO requires an Azure-hosted bot, so the `--azure` flag is required:
 
@@ -142,7 +285,7 @@ teams app create --name "Bot Auth Quickstart" --azure \
 
 The command creates the Microsoft Entra app registration, an Azure Bot resource pointing at your tunnel endpoint, a Teams app manifest, and writes `CLIENT_ID`, `CLIENT_SECRET`, and `TENANT_ID` into the environment file you specified. Save the printed Teams app ID and Bot resource name for the next steps.
 
-### 4. Configure the AAD App for SSO
+#### 4. Configure the AAD App for SSO
 
 Open the app registration the CLI just created in the [Microsoft Entra ID - App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
@@ -165,7 +308,7 @@ Open the app registration the CLI just created in the [Microsoft Entra ID - App 
 
 For more SSO background, see [Bot SSO Setup document](BotSSOSetup.md).
 
-### 5. Configure the SSO Manifest Fields
+#### 5. Configure the SSO Manifest Fields
 
 Edit `appPackage/manifest.json` (or `appManifest/manifest.json`) and add the SSO-specific blocks:
 
@@ -187,13 +330,13 @@ teams app package
 teams app update <teamsAppId> --file appPackage/<package>.zip
 ```
 
-### 6. Create the OAuth Connection on the Azure Bot
+#### 6. Create the OAuth Connection on the Azure Bot
 
-In the Azure Portal, open the Azure Bot resource created by the CLI -> **Settings** -> **Configuration** -> **OAuth Connection Settings** and add a new connection. Use **Azure Active Directory v2** as the service provider, your AAD app''s client ID/secret/tenant ID, and `User.Read` as the scope. Save the connection name and add it to your environment file as `CONNECTION_NAME` (the value referenced by the sample).
+In the Azure Portal, open the Azure Bot resource created by the CLI -> **Settings** -> **Configuration** -> **OAuth Connection Settings** and add a new connection. Use **Azure Active Directory v2** as the service provider, your AAD app's client ID/secret/tenant ID, and `User.Read` as the scope. Save the connection name and add it to your environment file as `CONNECTION_NAME` (the value referenced by the sample).
 
 > The Teams Developer CLI does not currently configure OAuth connections on the Azure Bot resource; this step still needs to be done in the portal.
 
-### 7. Setup Code
+#### 7. Setup Code
 
 **Navigate to the sample directory:**
 
@@ -229,7 +372,7 @@ pip install -r requirements.txt
 
 The CLI populates `CLIENT_ID`, `CLIENT_SECRET`, and `TENANT_ID` from step 3. Manually add the `CONNECTION_NAME` value from step 6 to the same environment file.
 
-### 8. Start the Bot
+#### 8. Start the Bot
 
 For Node.js:
 ```bash
@@ -274,7 +417,7 @@ Detailed logs can help diagnose authentication and connection issues.
 **For Node.js (TypeScript)**, logging is configured directly in the app via `ConsoleLogger`:
 ```typescript
 const app = new App({
-  logger: new ConsoleLogger(''@samples/TeamsSDK/bot-auth-quickstart'', { level: ''debug'' }),
+  logger: new ConsoleLogger('@samples/TeamsSDK/bot-auth-quickstart', { level: 'debug' }),
 });
 ```
 

@@ -33,7 +33,7 @@ The extension supports the following capabilities:
 
 # How to run these samples
 
-You can run these samples locally in the Teams Client after you have provisioned the Teams app, written its credentials into your project''s environment file, and started the bot against a public DevTunnels URL.
+You can run these samples locally in the Teams Client after you have provisioned the Teams app, written its credentials into your project's environment file, and started the bot against a public DevTunnels URL.
 
 ## Run in the Teams Client
 
@@ -57,7 +57,7 @@ Take note of the URL shown after *Connect via browser:*
 
 ## Provision with the Teams Developer CLI
 
-The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions your Microsoft Entra app, Teams-managed bot registration, Teams app manifest, and writes the credentials directly into your project''s environment file in a single command.
+The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions your Microsoft Entra app, Teams-managed bot registration, Teams app manifest, and writes the credentials directly into your project's environment file in a single command.
 
 Sign in with your M365 account:
 

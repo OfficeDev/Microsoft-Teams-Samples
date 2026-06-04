@@ -60,11 +60,11 @@ devtunnel host -p 3978 --allow-anonymous
 ngrok http 3978 --host-header="localhost:3978"
 ```
 
-Take note of the tunnel URL (e.g. `https://12345.devtunnels.ms` or `https://1234.ngrok-free.app`); you''ll use it as the bot messaging endpoint and tunnel domain in subsequent steps.
+Take note of the tunnel URL (e.g. `https://12345.devtunnels.ms` or `https://1234.ngrok-free.app`); you'll use it as the bot messaging endpoint and tunnel domain in subsequent steps.
 
 ### 2. Provision the App with the Teams Developer CLI
 
-The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions your Microsoft Entra app, Teams-managed bot registration, Teams app manifest, and writes the credentials directly into your project''s environment file in a single command.
+The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions your Microsoft Entra app, Teams-managed bot registration, Teams app manifest, and writes the credentials directly into your project's environment file in a single command.
 
 Sign in with your M365 account:
 
@@ -90,7 +90,7 @@ teams app create --name "Bot Meetings" --teams-managed --endpoint https://<your-
 
 This single command creates a Microsoft Entra app registration, registers a Teams-managed bot pointing at your tunnel endpoint, generates the Teams app manifest, and writes `CLIENT_ID`, `CLIENT_SECRET`, and `TENANT_ID` into the environment file you specified (PascalCase keys under a `Teams` section for `appsettings.json`).
 
-The CLI prints a Teams app ID on success - save it; you''ll use it in step 5 when adding RSC permissions.
+The CLI prints a Teams app ID on success - save it; you'll use it in step 5 when adding RSC permissions.
 
 ### 3. Add Graph API Permissions and Grant Admin Consent
 
