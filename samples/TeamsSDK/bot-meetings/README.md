@@ -72,18 +72,20 @@ Sign in with your M365 account:
 teams login
 ```
 
-From the language-specific sample directory you want to run, provision the app and credentials.
+This sample uses a Teams-managed bot (registered with the Teams Developer Portal). The bot **cannot** be hosted as an Azure Bot resource - meeting event subscriptions are only available on Teams-managed bots.
+
+From the language-specific sample directory you want to run, provision the app and credentials. The `--teams-managed` flag is the default but is shown here for clarity.
 
 For Node.js and Python (`nodejs/bot-meetings` or `python/bot-meetings`):
 
 ```bash
-teams app create --name "Bot Meetings" --endpoint https://<your-tunnel-domain>/api/messages --env .env
+teams app create --name "Bot Meetings" --teams-managed --endpoint https://<your-tunnel-domain>/api/messages --env .env
 ```
 
 For .NET (`dotnet/bot-meetings`):
 
 ```bash
-teams app create --name "Bot Meetings" --endpoint https://<your-tunnel-domain>/api/messages --env appsettings.json
+teams app create --name "Bot Meetings" --teams-managed --endpoint https://<your-tunnel-domain>/api/messages --env appsettings.json
 ```
 
 This single command creates a Microsoft Entra app registration, registers a Teams-managed bot pointing at your tunnel endpoint, generates the Teams app manifest, and writes `CLIENT_ID`, `CLIENT_SECRET`, and `TENANT_ID` into the environment file you specified (PascalCase keys under a `Teams` section for `appsettings.json`).
@@ -136,7 +138,7 @@ These permissions allow the bot to:
 
 **Enable meeting participant events:**
 
-To receive real-time participant join and leave events, enable Meeting event subscriptions for `Participant Join` and `Participant Leave` on the bot registration. The Teams CLI does not currently expose meeting-event subscriptions, so configure them on the bot resource directly (e.g. in the Azure portal for an Azure Bot resource) following the guidance in the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#receive-meeting-participant-events) documentation.
+To receive real-time participant join and leave events, you must enable Meeting event subscriptions for `Participant Join` and `Participant Leave` on the bot registration. The Teams Developer CLI does not currently expose meeting-event subscriptions, so this toggle is configured in the [Teams Developer Portal](https://dev.teams.microsoft.com): open the bot the CLI created under **Tools** -> **Bot management**, then enable the participant join/leave events. See the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#receive-meeting-participant-events) documentation for details.
 
 ![Extra Setup](Images/event_subscription.png)
 
@@ -228,8 +230,7 @@ Once the bot is running and added to Teams, you can interact with it in meetings
 - Ensure your `.env` or `appsettings.json` file is set up correctly
 - Verify that admin consent has been granted for the required Graph API permissions
 - Check that the application access policy has been configured correctly for your user
-- Confirm that Meeting event subscriptions are enabled in the bot registration
-- Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors
+- Confirm that Meeting event subscriptions are enabled in the bot registration (in the [Teams Developer Portal](https://dev.teams.microsoft.com), under **Tools** -> **Bot management** -> your bot)
 
 ## Further Reading
 
@@ -242,4 +243,4 @@ Once the bot is running and added to Teams, you can interact with it in meetings
 - [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy) - Application access for online meetings
 
 ### Tools & Resources
-- [Azure Bot Service](https://azure.microsoft.com/services/bot-services/) - Cloud-based bot development service
+- [Teams Developer Portal](https://dev.teams.microsoft.com) - Manage Teams-managed bot registrations and meeting event subscriptions
