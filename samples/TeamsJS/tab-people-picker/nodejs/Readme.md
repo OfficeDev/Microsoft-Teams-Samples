@@ -25,11 +25,6 @@ urlFragment: officedev-microsoft-teams-samples-tab-people-picker-nodejs
 
 ![Tab People PickerGif](Images/TabPeoplePicker.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Tab people picker:** [Manifest](/samples/TeamsJS/tab-people-picker/csharp/demo-manifest/Tab-People-Picker.zip)
-
 ## Prerequisites
 
  - Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).

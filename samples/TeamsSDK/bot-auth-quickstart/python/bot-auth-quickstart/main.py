@@ -11,8 +11,14 @@ import logging
 from azure.core.exceptions import ClientAuthenticationError
 from microsoft_teams.api import MessageActivity
 from microsoft_teams.apps import ActivityContext, App, AppOptions, ErrorEvent, SignInEvent
+from microsoft_teams.common import ConsoleFormatter
 from microsoft_teams.graph import get_graph_client
 
+# Setup logging
+logging.getLogger().setLevel(logging.DEBUG)
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(ConsoleFormatter())
+logging.getLogger().addHandler(stream_handler)
 logger = logging.getLogger(__name__)
 
 app_options = AppOptions(default_connection_name=os.getenv("CONNECTION_NAME", "graph"))
@@ -31,7 +37,7 @@ async def get_authenticated_graph_client(ctx: ActivityContext[MessageActivity]):
         return get_graph_client(ctx.user_token)
 
     except Exception as e:
-        ctx.logger.error(f"Failed to create Graph client: {e}")
+        logger.error(f"Failed to create Graph client: {e}")
         await ctx.send("🔐 Failed to create authenticated client. Trying to sign in again.")
         await ctx.sign_in()
         return None
@@ -90,11 +96,11 @@ async def handle_profile_command(ctx: ActivityContext[MessageActivity]):
             await ctx.send("❌ Could not retrieve your profile information.")
 
     except ClientAuthenticationError as e:
-        ctx.logger.error(f"Authentication error: {e}")
+        logger.error(f"Authentication error: {e}")
         await ctx.send("🔐 Authentication failed. Please try signing in again.")
 
     except Exception as e:
-        ctx.logger.error(f"Error getting profile: {e}")
+        logger.error(f"Error getting profile: {e}")
         await ctx.send(f"❌ Failed to get your profile: {str(e)}")
 
 

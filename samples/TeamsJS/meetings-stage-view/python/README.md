@@ -19,18 +19,11 @@ urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-python
 This sample application [Enables the configuration](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings) of shared meeting stages within Microsoft Teams, leveraging the [Live Share SDK](https://aka.ms/livesharedocs) for real-time collaboration. It includes features like a meeting side panel and customizable themes, providing users with a dynamic experience during meetings. The demo manifest is available for testing in your Microsoft Teams client.
 
 
-
-
 ## Included Features
 * Meeting Stage
 * Meeting SidePanel
 * Live Share SDK
 * RSC Permissions
-
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Realtime meeting stage view:** [Manifest](/samples/TeamsJS/meetings-stage-view/csharp/demo-manifest/Meeting-stage-view.zip)
 
 ## Prerequisites
 
@@ -90,7 +83,7 @@ For reference please check [Share app content to stage API](https://docs.microso
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)

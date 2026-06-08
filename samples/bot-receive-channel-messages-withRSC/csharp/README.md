@@ -29,11 +29,6 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ![RSC Module](ReceiveMessagesWithRSC/Images/Bot_Channel_Messenging-RSC.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Receive Channel messages with RSC permissions:** [Manifest](/samples/bot-receive-channel-messages-withRSC/csharp/demo-manifest/Bot-RSC.zip)
-
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -62,7 +57,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot
 - Register a Microsoft Entra ID aap registration in Azure portal.
@@ -83,7 +78,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-4. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+4. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
@@ -110,7 +105,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - Modify the `/appsettings.json` and fill in the following details:
   - `{{BOT-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{BOT-PASSWORD}}` -Generated from Step 1, also referred to as Client secret 
-
 
 
 - Run in Visual Studio
@@ -175,10 +169,10 @@ The bot receives the message without being @mentioned.
 **Copilot Welcome Screen**  
 ![Copilot](ReceiveMessagesWithRSC/Images/Copilot_Welcome.png) 
 
-**Copilot Workflow Example – Step 1**  
+**Copilot Workflow Example â€“ Step 1**  
 ![Copilot](ReceiveMessagesWithRSC/Images/Copilot_1.png) 
 
-**Copilot Workflow Example – Step 2**  
+**Copilot Workflow Example â€“ Step 2**  
 ![Copilot](ReceiveMessagesWithRSC/Images/Copilot_2.png) 
 
 
@@ -194,7 +188,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Receive Channel messages with RSC](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
 - [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-receive-channel-messages-withRSC-csharp" />

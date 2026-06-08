@@ -30,11 +30,6 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Proactive message bots app:** [Manifest](/samples/bot-proactive-messaging-teamsfx/python/demo-manifest/bot-proactive-messaging-teamsfx.zip)
-
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
 The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
@@ -83,7 +78,7 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+3) Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
