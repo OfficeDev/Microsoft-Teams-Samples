@@ -19,6 +19,8 @@ using Microsoft.Teams.Cards;
 using Microsoft.Teams.Common;
 using Microsoft.Teams.Api.Messages;
 using AdaptiveCard = Microsoft.Teams.Cards.AdaptiveCard;
+using CardAction = Microsoft.Teams.Api.Cards.Action;
+using CardActionType = Microsoft.Teams.Api.Cards.ActionType;
 
 // Initialize Teams Agent App
 var builder = WebApplication.CreateBuilder(args);
@@ -55,6 +57,21 @@ string FormatTimeSpan(int ms)
     if (totalSecs >= 3600) return $"{totalSecs / 3600}h {(totalSecs % 3600) / 60}m";
     if (totalSecs >= 60) return $"{totalSecs / 60}m {totalSecs % 60}s";
     return $"{totalSecs}s";
+}
+
+SuggestedActions BuildSuggestedCommands(string? userId, params (string Title, string Value)[] items)
+{
+    // Mirror the doc snippet's style: object initializer + collection expressions.
+    return new SuggestedActions
+    {
+        // Scope the chips to the requesting user only — pairs naturally with our targeted messages.
+        To = string.IsNullOrEmpty(userId) ? [] : [userId],
+        Actions = [.. items.Select(i => new CardAction(CardActionType.IMBack)
+        {
+            Title = i.Title,
+            Value = i.Value
+        })]
+    };
 }
 
 string StripBotMention(MessageActivity msg, string botId)
@@ -406,6 +423,13 @@ async Task ShowMyReminders(IContext<MessageActivity> context, bool isTargeted, s
     {
         var emptyResponse = new MessageActivity()
             .WithText("You have no active reminders.")
+            // WithSuggestedActions is defined on MessageActivity, so call it before the chain
+            // narrows to the base Activity type (AddTargetedMessageInfo returns Activity).
+            .WithSuggestedActions(BuildSuggestedCommands(
+                userId,
+                ("Remind me in 5 minutes test", "remind me in 5 minutes test"),
+                ("Remind me in 1 hour meeting", "remind me in 1 hour meeting"),
+                ("Show help", "reminder-help")))
             .AddTargetedMessageInfo(targetedMessageId)
             .WithRecipient(sender, true);
 
@@ -486,7 +510,7 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
 
 async Task ShowHelp(IContext<MessageActivity> context)
 {
-    await context.Send(
+    var helpText =
         "**Personal Reminder Bot - Help**\n\n" +
         "**Set a Reminder:**\n" +
         "- `remind me in 5 minutes to check email`\n" +
@@ -511,11 +535,19 @@ async Task ShowHelp(IContext<MessageActivity> context)
         "- `remove-reaction [type]` — Bot removes a reaction from your message\n" +
         "- React to any bot message and the bot will acknowledge it!\n\n" +
         "**Supported Reaction Types:**\n" +
-        "- `like` \ud83d\udc4d, `heart` \u2764\ufe0f, `1f440_eyes` \ud83d\udc40, `2705_whiteheavycheckmark` \u2705, `launch` \ud83d\ude80, `1f4cc_pushpin` \ud83d\udccc"
-    );
+        "- `like` \ud83d\udc4d, `heart` \u2764\ufe0f, `1f440_eyes` \ud83d\udc40, `2705_whiteheavycheckmark` \u2705, `launch` \ud83d\ude80, `1f4cc_pushpin` \ud83d\udccc";
+
+    var helpResponse = new MessageActivity()
+        .WithText(helpText)
+        .WithSuggestedActions(BuildSuggestedCommands(
+            context.Activity.From?.Id,
+            ("Set a 30-second test reminder", "remind me in 30 seconds test"),
+            ("Set a 5-minute reminder", "remind me in 5 minutes check email"),
+            ("My reminders", "my-reminders")));
+
+    await context.Send(helpResponse);
 }
 
-// --- Reaction Command Handlers ---
 
 async Task HandleAddReaction(IContext<MessageActivity> context, string commandText)
 {
@@ -627,10 +659,27 @@ teamsApp.OnMessage(async (context, cancellationToken) =>
         /* Use preferred LLM to get summarized answer */
         /* var llmResponse = await llmClient.GetCompletionAsync(text); */
         /* await context.Send(llmResponse); */
-        var fallbackResponse = new MessageActivity()
-            .WithText("Use `reminder-help` to see available commands.")
-            .AddTargetedMessageInfo(targetedMessageId)
-            .WithRecipient(msg.From!, true);
+        // This is the LLM-response slot, so mark it as AI-generated and surface
+        // quick-start chips so the user doesn't have to guess what to type next.
+        // Both `WithSuggestedActions` and `AddAIGenerated` are defined on
+        // MessageActivity, so chain them before any extension (e.g. AddTargetedMessageInfo)
+        // that narrows the return type to the base Activity.
+        var fallbackResponse = new MessageActivity
+        {
+            Text = "Use `reminder-help` to see available commands."
+        }
+        .WithSuggestedActions(new SuggestedActions
+        {
+            To = [msg.From!.Id],
+            Actions = [
+                new CardAction(CardActionType.IMBack) { Title = "Show help",                   Value = "reminder-help" },
+                new CardAction(CardActionType.IMBack) { Title = "Remind me in 5 minutes test", Value = "remind me in 5 minutes test" },
+                new CardAction(CardActionType.IMBack) { Title = "My reminders",                Value = "my-reminders" }
+            ]
+        })
+        .AddAIGenerated()
+        .AddTargetedMessageInfo(targetedMessageId)
+        .WithRecipient(msg.From!, true);
 
         await context.Send(fallbackResponse);
     }
