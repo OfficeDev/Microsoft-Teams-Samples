@@ -240,7 +240,7 @@ python main.py
 
 ### Option 2: Teams Developer CLI
 
-The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions the Microsoft Entra app, Azure Bot resource, and Teams app manifest, and writes the credentials into your project. The OAuth/SSO specifics (redirect URI, Application ID URI, manifest `webApplicationInfo` / `validDomains`, and the OAuth connection on the Azure Bot resource) are not yet automated by the CLI and are configured manually after provisioning.
+The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions the Microsoft Entra app, Azure Bot resource, and Teams app manifest, and writes the credentials into your project. `teams app create` also seeds the manifest's `validDomains` with `*.botframework.com` and your endpoint domain. A few SSO-specific pieces still need manual configuration after provisioning: the AAD app's Bot Framework redirect URI and Application ID URI, the manifest's `webApplicationInfo` (settable via `teams app update --web-app-info-id --web-app-info-resource` — no manual JSON edit needed), and the OAuth connection on the Azure Bot resource.
 
 > **Tip**: Using an AI coding assistant (GitHub Copilot CLI, Claude Code, Cursor, VS Code)? Install the [`teams-dev` agent skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) to drive the CLI provisioning **and** the manual SSO/OAuth configuration steps below from natural language - the skill includes dedicated SSO setup guidance and can walk you through the portal steps the CLI does not yet automate.
 
