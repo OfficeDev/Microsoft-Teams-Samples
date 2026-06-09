@@ -1,7 +1,0 @@
-{
-    "tab": {
-        "appId": "MICROSOFT_APP_ID",
-        "clientSecret": "MICROSOFT_APP_PASSWORD"
-    },
-    "port": "3978"
-}
