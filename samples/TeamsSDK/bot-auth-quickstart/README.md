@@ -310,26 +310,14 @@ Open the app registration the CLI just created in the [Microsoft Entra ID - App 
 
 For more SSO background, see [Bot SSO Setup document](BotSSOSetup.md).
 
-#### 5. Configure the SSO Manifest Fields
+#### 5. Configure the SSO `webApplicationInfo` Fields
 
-Edit `appPackage/manifest.json` (or `appManifest/manifest.json`) and add the SSO-specific blocks:
-
-```json
-"validDomains": [
-  "token.botframework.com",
-  "<your-tunnel-domain>"
-],
-"webApplicationInfo": {
-  "id": "<Application (client) ID>",
-  "resource": "api://botid-<Application (client) ID>"
-}
-```
-
-Re-package and re-upload the manifest:
+Set the SSO `webApplicationInfo.id` and `webApplicationInfo.resource` directly on the Teams app via the CLI — no manual `manifest.json` edits or re-packaging required (`teams app create` already seeds `validDomains` with `*.botframework.com` and your tunnel domain):
 
 ```bash
-teams app package
-teams app update <teamsAppId> --file appPackage/<package>.zip
+teams app update <teamsAppId> \
+  --web-app-info-id "<Application (client) ID>" \
+  --web-app-info-resource "api://botid-<Application (client) ID>"
 ```
 
 #### 6. Create the OAuth Connection on the Azure Bot
