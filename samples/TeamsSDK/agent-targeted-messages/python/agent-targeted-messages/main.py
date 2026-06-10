@@ -19,6 +19,9 @@ from microsoft_teams.api.activities.message.message import (
     strip_mentions_text,
     StripMentionsTextOptions,
 )
+from microsoft_teams.api.models.card.card_action import CardAction
+from microsoft_teams.api.models.card.card_action_type import CardActionType
+from microsoft_teams.api.models.suggested_actions import SuggestedActions
 from microsoft_teams.apps import ActivityContext, App
 from microsoft_teams.cards import AdaptiveCard, TextBlock, FactSet, ExecuteAction
 
@@ -201,6 +204,16 @@ def targeted_account(user_id: str, user_name: str) -> Account:
     return Account(id=user_id, name=user_name)
 
 
+def build_suggested_commands(user_id: Optional[str], *items: tuple[str, str]) -> SuggestedActions:
+    return SuggestedActions(
+        to=[user_id] if user_id else [],
+        actions=[
+            CardAction(type=CardActionType.IM_BACK, title=title, value=value)
+            for title, value in items
+        ],
+    )
+
+
 async def deliver_reminder(reminder: ReminderInfo) -> None:
     if reminder.id not in active_reminders:
         print(f"[REMINDER] Reminder {reminder.id} was cancelled, skipping delivery")
@@ -289,7 +302,14 @@ async def show_my_reminders(ctx: ActivityContext[MessageActivity], is_targeted: 
     sender = targeted_account(activity.from_.id, activity.from_.name)
 
     if not my:
-        response = MessageActivityInput(text="You have no active reminders.")
+        response = MessageActivityInput(text="You have no active reminders.").with_suggested_actions(
+            build_suggested_commands(
+                user_id,
+                ("Remind me in 5 minutes test", "remind me in 5 minutes test"),
+                ("Remind me in 1 hour meeting", "remind me in 1 hour meeting"),
+                ("Show help", "reminder-help"),
+            )
+        )
         if is_targeted:
             response.add_targeted_message_info(activity.id)
             response.with_recipient(sender, is_targeted=True)
@@ -433,7 +453,7 @@ async def handle_remove_reaction(ctx: ActivityContext[MessageActivity], command_
 
 
 async def show_help(ctx: ActivityContext) -> None:
-    await ctx.send(
+    help_text = (
         "**Personal Reminder Agent - Help**\n\n"
         "**Set a Reminder:**\n"
         "- `remind me in 5 minutes to check email`\n"
@@ -460,6 +480,17 @@ async def show_help(ctx: ActivityContext) -> None:
         "**Supported Reaction Types:**\n"
         "- `like` \U0001f44d, `heart` \u2764\ufe0f, `1f440_eyes` \U0001f440, `2705_whiteheavycheckmark` \u2705, `launch` \U0001f680, `1f4cc_pushpin` \U0001f4cc"
     )
+
+    user_id = ctx.activity.from_.id if ctx.activity.from_ else None
+    response = MessageActivityInput(text=help_text).with_suggested_actions(
+        build_suggested_commands(
+            user_id,
+            ("Set a 30-second test reminder", "remind me in 30 seconds test"),
+            ("Set a 5-minute reminder", "remind me in 5 minutes check email"),
+            ("My reminders", "my-reminders"),
+        )
+    )
+    await ctx.send(response)
 
 
 @app.on_message
@@ -503,7 +534,19 @@ async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
     elif lower.startswith("remove-reaction"):
         await handle_remove_reaction(ctx, text, is_targeted, quoted_message_id)
     else:
-        response = MessageActivityInput(text="Use `reminder-help` to see available commands.")
+        user_id = activity.from_.id if activity.from_ else None
+        response = (
+            MessageActivityInput(text="Use `reminder-help` to see available commands.")
+            .with_suggested_actions(
+                build_suggested_commands(
+                    user_id,
+                    ("Show help", "reminder-help"),
+                    ("Remind me in 5 minutes test", "remind me in 5 minutes test"),
+                    ("My reminders", "my-reminders"),
+                )
+            )
+            .add_ai_generated()
+        )
         if is_targeted:
             response.add_targeted_message_info(activity.id)
             response.with_recipient(activity.from_, is_targeted=True)
