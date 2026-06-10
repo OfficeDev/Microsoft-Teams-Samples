@@ -1,0 +1,20 @@
+[
+  {
+    "interviewDate": "09/11/2018",
+    "feedbackText": "Hire",
+    "candidateId": 2,
+    "recruiterId": 6
+  },
+  {
+    "interviewDate": "01/10/2019",
+    "feedbackText": "N/A",
+    "candidateId": 2,
+    "recruiterId": 5
+  },
+  {
+    "interviewDate": "12/31/2019",
+    "feedbackText": "N/A",
+    "candidateId": 3,
+    "recruiterId": 6
+  }
+]
