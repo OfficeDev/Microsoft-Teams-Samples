@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { App } from '@microsoft/teams.apps';
-import { Client, MessageActivity, MessageReactionActivity, stripMentionsText } from '@microsoft/teams.api';
+import { Client, MessageActivity, MessageReactionActivity, SuggestedActions, stripMentionsText } from '@microsoft/teams.api';
 import { AdaptiveCard, TextBlock, FactSet, ExecuteAction } from '@microsoft/teams.cards';
 
 const app = new App();
@@ -56,6 +56,20 @@ function formatTimeSpan(ms: number): string {
     if (totalSecs >= 3600) return `${Math.floor(totalSecs / 3600)}h ${Math.floor((totalSecs % 3600) / 60)}m`;
     if (totalSecs >= 60) return `${Math.floor(totalSecs / 60)}m ${totalSecs % 60}s`;
     return `${totalSecs}s`;
+}
+
+function buildSuggestedCommands(
+    userId: string | undefined,
+    ...items: Array<{ title: string; value: string }>
+): SuggestedActions {
+    return {
+        to: userId ? [userId] : [],
+        actions: items.map(i => ({
+            type: 'imBack',
+            title: i.title,
+            value: i.value
+        }))
+    };
 }
 
 
@@ -237,7 +251,7 @@ app.on('message', async ({ activity, send, api }) => {
     const lower = text.toLowerCase();
 
     if (lower === 'reminder-help' || lower === 'help') {
-        await showHelp(send);
+        await showHelp({ activity, send });
     } else if (lower.startsWith('remind')) {
         await handleRemindCommand({ activity, send, isTargeted, targetedMessageId }, text);
     } else if (lower === 'my-reminders') {
@@ -253,7 +267,14 @@ app.on('message', async ({ activity, send, api }) => {
         /* Use preferred LLM to get summarized answer */
         /* const llmResponse = await llmClient.getCompletion(text); */
         /* await send(llmResponse); */
-        const fallbackResponse = new MessageActivity('Use `reminder-help` to see available commands.');
+        const fallbackResponse = new MessageActivity('Use `reminder-help` to see available commands.')
+            .withSuggestedActions(buildSuggestedCommands(
+                msg.from?.id,
+                { title: 'Show help', value: 'reminder-help' },
+                { title: 'Remind me in 5 minutes test', value: 'remind me in 5 minutes test' },
+                { title: 'My reminders', value: 'my-reminders' }
+            ))
+            .addAiGenerated();
         if (isTargeted) {
             fallbackResponse.addTargetedMessageInfo(targetedMessageId);
             fallbackResponse.withRecipient(msg.from!, true);
@@ -329,7 +350,13 @@ async function showMyReminders(ctx: { activity: any; send: Function; isTargeted:
     const sender = { id: activity.from.id, name: activity.from.name, role: 'user' as const };
 
     if (myReminders.length === 0) {
-        const emptyResponse = new MessageActivity('You have no active reminders.');
+        const emptyResponse = new MessageActivity('You have no active reminders.')
+            .withSuggestedActions(buildSuggestedCommands(
+                userId,
+                { title: 'Remind me in 5 minutes test', value: 'remind me in 5 minutes test' },
+                { title: 'Remind me in 1 hour meeting', value: 'remind me in 1 hour meeting' },
+                { title: 'Show help', value: 'reminder-help' }
+            ));
         if (isTargeted) {
             emptyResponse.addTargetedMessageInfo(targetedMessageId);
             emptyResponse.withRecipient(sender, true);
@@ -400,8 +427,9 @@ async function cancelReminder(ctx: { activity: any; send: Function; isTargeted: 
     }
 }
 
-async function showHelp(send: Function): Promise<void> {
-    await send([
+async function showHelp(ctx: { activity: any; send: Function }): Promise<void> {
+    const { activity, send } = ctx;
+    const helpText = [
         '**Personal Reminder Agent - Help**',
         '',
         '**Set a Reminder:**',
@@ -433,7 +461,17 @@ async function showHelp(send: Function): Promise<void> {
         '',
         '**Supported Reaction Types:**',
         '- `like` 👍, `heart` ❤️, `1f440_eyes` 👀, `2705_whiteheavycheckmark` ✅, `launch` 🚀, `1f4cc_pushpin` 📌'
-    ].join('\n'));
+    ].join('\n');
+
+    const helpResponse = new MessageActivity(helpText)
+        .withSuggestedActions(buildSuggestedCommands(
+            activity?.from?.id,
+            { title: 'Set a 30-second test reminder', value: 'remind me in 30 seconds test' },
+            { title: 'Set a 5-minute reminder', value: 'remind me in 5 minutes check email' },
+            { title: 'My reminders', value: 'my-reminders' }
+        ));
+
+    await send(helpResponse);
 }
 
 app.on('card.action', async ({ activity, send }) => {
