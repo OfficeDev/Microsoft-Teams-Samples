@@ -4,7 +4,7 @@ This sample demonstrates how to upload files in Microsoft Teams using a bot buil
 
 ## Prerequisites
 
-- [Python >=3.12](https://www.python.org/downloads/)
+- [Python >=3.11](https://www.python.org/downloads/)
 - [pip](https://pip.pypa.io/en/stable/installation/)
 - [uv](https://docs.astral.sh/uv/)
 
