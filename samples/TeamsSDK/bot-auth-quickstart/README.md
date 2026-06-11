@@ -297,10 +297,28 @@ Open the app registration the CLI just created in the [Microsoft Entra ID - App 
 - Set the **Redirect URI** to `https://token.botframework.com/.auth/web/redirect`
 - Click **Configure**
 
+Or via the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) (run `az login` first):
+
+```bash
+az ad app update --id <Application (client) ID> \
+  --web-redirect-uris https://token.botframework.com/.auth/web/redirect
+```
+
+> **Note**: `--web-redirect-uris` **replaces** all existing web redirect URIs on the AAD app. For a fresh app registration created by `teams app create` this is safe; if you've already added other redirect URIs, include them all in the command.
+
 **B) Expose an Application ID URI:**
 
 - Under **Manage**, navigate to **Expose an API**
 - Click **Add** next to **Application ID URI** and set it to `api://botid-<Application (client) ID>` (the value used in `webApplicationInfo.resource` in the manifest)
+
+Or via the Azure CLI:
+
+```bash
+az ad app update --id <Application (client) ID> \
+  --identifier-uris api://botid-<Application (client) ID>
+```
+
+> **Note**: `--identifier-uris` **replaces** all existing identifier URIs on the AAD app. For a fresh app registration created by `teams app create` this is safe.
 
 **C) Verify Graph permissions:**
 
