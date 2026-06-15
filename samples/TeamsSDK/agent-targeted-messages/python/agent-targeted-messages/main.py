@@ -205,10 +205,12 @@ def targeted_account(user_id: str, user_name: str) -> Account:
 
 
 def build_suggested_commands(user_id: Optional[str], *items: tuple[str, str]) -> SuggestedActions:
+    """Build suggested action chips using Action.Submit type.
+    Clicking a chip triggers a suggestedActions/submit invoke (no visible message posted)."""
     return SuggestedActions(
         to=[user_id] if user_id else [],
         actions=[
-            CardAction(type=CardActionType.IM_BACK, title=title, value=value)
+            CardAction(type="Action.Submit", title=title, value={"command": value})
             for title, value in items
         ],
     )
@@ -230,7 +232,7 @@ async def deliver_reminder(reminder: ReminderInfo) -> None:
     try:
         card = create_delivery_card(reminder)
         recipient = targeted_account(reminder.target_user_id, reminder.target_user_name)
-        msg = MessageActivityInput(text=f"Reminder: {reminder.reminder_text}").add_card(card).with_recipient(recipient, is_targeted=True)
+        msg = MessageActivityInput().add_card(card).with_recipient(recipient, is_targeted=True)
         await app.send(reminder.conversation_id, msg)
         print(f"[REMINDER] Delivered reminder {reminder.id} to {reminder.target_user_name}")
         active_reminders.pop(reminder.id, None)
@@ -275,10 +277,10 @@ async def handle_remind_command(ctx: ActivityContext[MessageActivity], command_t
     try:
         card = create_confirmation_card(reminder, delay_s)
         creator = targeted_account(activity.from_.id, activity.from_.name)
-        response = MessageActivityInput(text="Reminder has been set!").add_card(card)
+        response = MessageActivityInput().add_card(card)
         if is_targeted:
             response.add_targeted_message_info(activity.id)
-        response.with_recipient(creator, is_targeted=True)
+            response.with_recipient(creator, is_targeted=True)
         await ctx.send(response)
         print(f"[REMINDER] Created reminder {reminder_id} for {target_user_name} in {delay_s} seconds")
     except Exception as error:
@@ -551,6 +553,35 @@ async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
             response.add_targeted_message_info(activity.id)
             response.with_recipient(activity.from_, is_targeted=True)
         await ctx.send(response)
+
+
+# Handle suggestedActions/submit invoke when user clicks an Action.Submit suggested action chip
+@app.on_activity
+async def handle_activity(ctx: ActivityContext) -> None:
+    activity = ctx.activity
+    # Only handle suggestedActions/submit invoke
+    if getattr(activity, "type", None) != "invoke" or getattr(activity, "name", None) != "suggestedActions/submit":
+        return
+
+    value = getattr(activity, "value", None)
+    command = value.get("command") if isinstance(value, dict) else getattr(value, "command", None)
+
+    print(f"[SUGGESTED_ACTION_SUBMIT] value={value}")
+
+    if not command:
+        await ctx.send("No command specified.")
+        return
+
+    # Route the command the same way as regular messages
+    lower = command.lower()
+    if lower in ("reminder-help", "help"):
+        await show_help(ctx)
+    elif lower.startswith("remind"):
+        await handle_remind_command(ctx, command, is_targeted=False)
+    elif lower == "my-reminders":
+        await show_my_reminders(ctx, is_targeted=False)
+    else:
+        await ctx.send(f"Executing: {command}")
 
 
 @app.on_card_action
