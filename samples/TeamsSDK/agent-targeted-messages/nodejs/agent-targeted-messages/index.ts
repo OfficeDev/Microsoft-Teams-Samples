@@ -2,10 +2,13 @@
 // Licensed under the MIT License.
 
 import { App } from '@microsoft/teams.apps';
-import { Client, MessageActivity, MessageReactionActivity, SuggestedActions, stripMentionsText } from '@microsoft/teams.api';
+import { CardActionType, Client, MessageActivity, MessageReactionActivity, SuggestedActions, stripMentionsText } from '@microsoft/teams.api';
 import { AdaptiveCard, TextBlock, FactSet, ExecuteAction } from '@microsoft/teams.cards';
 
 const app = new App();
+
+// Type for adaptive card action invoke responses
+type AdaptiveCardActionResponse = { statusCode: 200; type: 'application/vnd.microsoft.activity.message'; value: string };
 
 /*
  * === Agentic Flow Stub: LLM Client Setup ===
@@ -65,9 +68,9 @@ function buildSuggestedCommands(
     return {
         to: userId ? [userId] : [],
         actions: items.map(i => ({
-            type: 'imBack',
+            type: 'Action.Submit' as CardActionType,
             title: i.title,
-            value: i.value
+            value: { command: i.value }
         }))
     };
 }
@@ -642,6 +645,34 @@ app.on('messageReaction', async ({ activity, send }) => {
             const reactionType = reaction.type;
             console.log(`[REACTION] ${userName} removed a ${reactionType} reaction`);
         }
+    }
+});
+
+// Handle suggestedActions/submit invoke when user clicks an Action.Submit suggested action chip
+app.on('activity', async ({ activity, send }) => {
+    // Only handle suggestedActions/submit invoke
+    if ((activity as any).type !== 'invoke' || (activity as any).name !== 'suggestedActions/submit') return;
+
+    const value = (activity as any).value;
+    const command = value?.command;
+
+    console.log(`[SUGGESTED_ACTION_SUBMIT] value=${JSON.stringify(value)}`);
+
+    if (!command) {
+        await send('No command specified.');
+        return;
+    }
+
+    // Route the command the same way as regular messages
+    const lower = command.toLowerCase();
+    if (lower === 'reminder-help' || lower === 'help') {
+        await showHelp({ activity, send });
+    } else if (lower.startsWith('remind')) {
+        await handleRemindCommand({ activity, send, isTargeted: false, targetedMessageId: activity.id }, command);
+    } else if (lower === 'my-reminders') {
+        await showMyReminders({ activity, send, isTargeted: false, targetedMessageId: activity.id });
+    } else {
+        await send(`Executing: ${command}`);
     }
 });
 
