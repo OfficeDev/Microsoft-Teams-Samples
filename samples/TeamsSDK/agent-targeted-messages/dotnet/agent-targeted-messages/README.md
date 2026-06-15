@@ -1,6 +1,6 @@
 # Agent Targeted Messages - .NET (C#)
 
-This sample demonstrates how to send **targeted messages** in Microsoft Teams using the Teams SDK for .NET. Targeted messages are only visible to a specific user in a channel or group chat, enabling private notifications within shared conversations.
+This sample demonstrates how to send **targeted messages** in Microsoft Teams using the Teams SDK for .NET. Targeted messages are only visible to a specific user in a channel or group chat.
 
 ## Prerequisites
 

@@ -3,6 +3,7 @@
 
 #pragma warning disable ExperimentalTeamsTargeted
 #pragma warning disable ExperimentalTeamsReactions
+#pragma warning disable ExperimentalTeamsSuggestedAction
 
 using System.Collections.Concurrent;
 using System.Text.Json;
@@ -61,15 +62,15 @@ string FormatTimeSpan(int ms)
 
 SuggestedActions BuildSuggestedCommands(string? userId, params (string Title, string Value)[] items)
 {
-    // Mirror the doc snippet's style: object initializer + collection expressions.
+    // Use Action.Submit type — clicking a chip triggers a suggestedActions/submit invoke
+    // without posting a visible message in chat.
     return new SuggestedActions
     {
-        // Scope the chips to the requesting user only — pairs naturally with our targeted messages.
         To = string.IsNullOrEmpty(userId) ? [] : [userId],
-        Actions = [.. items.Select(i => new CardAction(CardActionType.IMBack)
+        Actions = [.. items.Select(i => new CardAction(CardActionType.Submit)
         {
             Title = i.Title,
-            Value = i.Value
+            Value = new { command = i.Value }
         })]
     };
 }
@@ -88,10 +89,11 @@ string StripBotMention(MessageActivity msg, string botId)
     return text;
 }
 
-(string? UserId, string? UserName) ExtractMentionedUser(MessageActivity msg, string botId)
+(string? UserId, string? UserName) ExtractMentionedUser(Activity msg, string botId)
 {
-    if (msg.Entities == null) return (null, null);
-    foreach (var entity in msg.Entities)
+    var entities = (msg as MessageActivity)?.Entities;
+    if (entities == null) return (null, null);
+    foreach (var entity in entities)
     {
         if (entity is MentionEntity mention && mention.Mentioned != null && mention.Mentioned.Id != botId)
         {
@@ -101,7 +103,7 @@ string StripBotMention(MessageActivity msg, string botId)
     return (null, null);
 }
 
-ParsedReminder ParseReminderCommand(MessageActivity msg, string commandText)
+ParsedReminder ParseReminderCommand(Activity msg, string commandText)
 {
     var botId = msg.Recipient?.Id ?? "";
     var text = commandText.Trim();
@@ -131,9 +133,10 @@ ParsedReminder ParseReminderCommand(MessageActivity msg, string commandText)
             targetUserId = userId;
             targetUserName = userName!;
             // Remove the target user's mention tag from text
-            if (msg.Entities != null)
+            var msgEntities = (msg as MessageActivity)?.Entities;
+            if (msgEntities != null)
             {
-                foreach (var entity in msg.Entities)
+                foreach (var entity in msgEntities)
                 {
                     if (entity is MentionEntity mention && mention.Mentioned?.Id == userId && mention.Text != null)
                     {
@@ -314,7 +317,6 @@ async Task DeliverReminder(ReminderInfo reminder)
         await teamsApp.Send(
             reminder.ConversationId,
             new MessageActivity()
-                .WithText($"Reminder: {reminder.ReminderText}")
                 .AddAttachment(card)
                 .WithRecipient(recipient, true)
         );
@@ -330,7 +332,7 @@ async Task DeliverReminder(ReminderInfo reminder)
 }
 
 
-async Task HandleRemindCommand(IContext<MessageActivity> context, string commandText, bool isTargeted, string? targetedMessageId)
+async Task HandleRemindCommand<T>(IContext<T> context, string commandText, bool isTargeted, string? targetedMessageId) where T : Activity
 {
     var activity = context.Activity;
     var parsed = ParseReminderCommand(activity, commandText);
@@ -385,10 +387,13 @@ async Task HandleRemindCommand(IContext<MessageActivity> context, string command
         var creator = new Account { Id = activity.From!.Id, Name = activity.From.Name, Role = Role.User };
 
         var response = new MessageActivity()
-            .WithText("Reminder has been set!")
-            .AddAttachment(card)
-            .AddTargetedMessageInfo(targetedMessageId)
-            .WithRecipient(creator, true);
+            .AddAttachment(card);
+
+        if (isTargeted)
+        {
+            response.AddTargetedMessageInfo(targetedMessageId);
+        }
+        response.WithRecipient(creator, true);
 
         await context.Send(response);
 
@@ -402,7 +407,7 @@ async Task HandleRemindCommand(IContext<MessageActivity> context, string command
     }
 }
 
-async Task ShowMyReminders(IContext<MessageActivity> context, bool isTargeted, string? targetedMessageId)
+async Task ShowMyReminders<T>(IContext<T> context, bool isTargeted, string? targetedMessageId) where T : Activity
 {
     var activity = context.Activity;
     var userId = activity.From?.Id;
@@ -423,15 +428,17 @@ async Task ShowMyReminders(IContext<MessageActivity> context, bool isTargeted, s
     {
         var emptyResponse = new MessageActivity()
             .WithText("You have no active reminders.")
-            // WithSuggestedActions is defined on MessageActivity, so call it before the chain
-            // narrows to the base Activity type (AddTargetedMessageInfo returns Activity).
             .WithSuggestedActions(BuildSuggestedCommands(
                 userId,
                 ("Remind me in 5 minutes test", "remind me in 5 minutes test"),
                 ("Remind me in 1 hour meeting", "remind me in 1 hour meeting"),
-                ("Show help", "reminder-help")))
-            .AddTargetedMessageInfo(targetedMessageId)
-            .WithRecipient(sender, true);
+                ("Show help", "reminder-help")));
+
+        if (isTargeted)
+        {
+            emptyResponse.AddTargetedMessageInfo(targetedMessageId);
+            emptyResponse.WithRecipient(sender, true);
+        }
 
         await context.Send(emptyResponse);
         return;
@@ -448,9 +455,13 @@ async Task ShowMyReminders(IContext<MessageActivity> context, bool isTargeted, s
 
     var list = string.Join("\n", lines);
     var listResponse = new MessageActivity()
-        .WithText($"**Your Active Reminders:**\n\n{list}\n\nUse `cancel-reminder [id]` to cancel a reminder.")
-        .AddTargetedMessageInfo(targetedMessageId)
-        .WithRecipient(sender, true);
+        .WithText($"**Your Active Reminders:**\n\n{list}\n\nUse `cancel-reminder [id]` to cancel a reminder.");
+
+    if (isTargeted)
+    {
+        listResponse.AddTargetedMessageInfo(targetedMessageId);
+        listResponse.WithRecipient(sender, true);
+    }
 
     await context.Send(listResponse);
 }
@@ -464,9 +475,13 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
     if (string.IsNullOrEmpty(reminderId))
     {
         var noIdResponse = new MessageActivity()
-            .WithText("Please specify a reminder ID. Use `my-reminders` to see your active reminders.")
-            .AddTargetedMessageInfo(targetedMessageId)
-            .WithRecipient(sender, true);
+            .WithText("Please specify a reminder ID. Use `my-reminders` to see your active reminders.");
+
+        if (isTargeted)
+        {
+            noIdResponse.AddTargetedMessageInfo(targetedMessageId);
+            noIdResponse.WithRecipient(sender, true);
+        }
 
         await context.Send(noIdResponse);
         return;
@@ -475,9 +490,13 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
     if (!activeReminders.TryGetValue(reminderId, out var reminder))
     {
         var notFoundResponse = new MessageActivity()
-            .WithText($"Reminder **{reminderId}** not found or already completed.")
-            .AddTargetedMessageInfo(targetedMessageId)
-            .WithRecipient(sender, true);
+            .WithText($"Reminder **{reminderId}** not found or already completed.");
+
+        if (isTargeted)
+        {
+            notFoundResponse.AddTargetedMessageInfo(targetedMessageId);
+            notFoundResponse.WithRecipient(sender, true);
+        }
 
         await context.Send(notFoundResponse);
         return;
@@ -490,9 +509,13 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
         activeReminders.TryRemove(reminderId, out _);
 
         var cancelledResponse = new MessageActivity()
-            .WithText($"Reminder **{reminderId}** has been cancelled.")
-            .AddTargetedMessageInfo(targetedMessageId)
-            .WithRecipient(sender, true);
+            .WithText($"Reminder **{reminderId}** has been cancelled.");
+
+        if (isTargeted)
+        {
+            cancelledResponse.AddTargetedMessageInfo(targetedMessageId);
+            cancelledResponse.WithRecipient(sender, true);
+        }
 
         await context.Send(cancelledResponse);
         Console.WriteLine($"[REMINDER] Reminder {reminderId} cancelled by {activity.From?.Name}");
@@ -500,15 +523,19 @@ async Task CancelReminder(IContext<MessageActivity> context, string reminderId, 
     else
     {
         var deniedResponse = new MessageActivity()
-            .WithText("You can only cancel reminders you created or are assigned to you.")
-            .AddTargetedMessageInfo(targetedMessageId)
-            .WithRecipient(sender, true);
+            .WithText("You can only cancel reminders you created or are assigned to you.");
+
+        if (isTargeted)
+        {
+            deniedResponse.AddTargetedMessageInfo(targetedMessageId);
+            deniedResponse.WithRecipient(sender, true);
+        }
 
         await context.Send(deniedResponse);
     }
 }
 
-async Task ShowHelp(IContext<MessageActivity> context)
+async Task ShowHelp<T>(IContext<T> context) where T : Activity
 {
     var helpText =
         "**Personal Reminder Bot - Help**\n\n" +
@@ -659,29 +686,62 @@ teamsApp.OnMessage(async (context, cancellationToken) =>
         /* Use preferred LLM to get summarized answer */
         /* var llmResponse = await llmClient.GetCompletionAsync(text); */
         /* await context.Send(llmResponse); */
-        // This is the LLM-response slot, so mark it as AI-generated and surface
-        // quick-start chips so the user doesn't have to guess what to type next.
-        // Both `WithSuggestedActions` and `AddAIGenerated` are defined on
-        // MessageActivity, so chain them before any extension (e.g. AddTargetedMessageInfo)
-        // that narrows the return type to the base Activity.
-        var fallbackResponse = new MessageActivity
+        var fallbackResponse = new MessageActivity()
+            .WithText("Use `reminder-help` to see available commands.")
+            .WithSuggestedActions(BuildSuggestedCommands(
+                msg.From?.Id,
+                ("Show help", "reminder-help"),
+                ("Remind me in 5 minutes test", "remind me in 5 minutes test"),
+                ("My reminders", "my-reminders")))
+            .AddAIGenerated();
+
+        if (isTargeted)
         {
-            Text = "Use `reminder-help` to see available commands."
+            fallbackResponse.AddTargetedMessageInfo(targetedMessageId);
+            fallbackResponse.WithRecipient(msg.From!, true);
         }
-        .WithSuggestedActions(new SuggestedActions
-        {
-            To = [msg.From!.Id],
-            Actions = [
-                new CardAction(CardActionType.IMBack) { Title = "Show help",                   Value = "reminder-help" },
-                new CardAction(CardActionType.IMBack) { Title = "Remind me in 5 minutes test", Value = "remind me in 5 minutes test" },
-                new CardAction(CardActionType.IMBack) { Title = "My reminders",                Value = "my-reminders" }
-            ]
-        })
-        .AddAIGenerated()
-        .AddTargetedMessageInfo(targetedMessageId)
-        .WithRecipient(msg.From!, true);
 
         await context.Send(fallbackResponse);
+    }
+});
+
+// Handle suggestedActions/submit invoke when user clicks an Action.Submit suggested action chip
+teamsApp.OnSuggestedActionSubmit(async (context, cancellationToken) =>
+{
+    var activity = context.Activity;
+    var value = activity.Value;
+
+    string? command = null;
+    if (value is JsonElement element && element.ValueKind == JsonValueKind.Object)
+    {
+        command = element.TryGetProperty("command", out var cmdProp) ? cmdProp.GetString() : null;
+    }
+
+    Console.WriteLine($"[SUGGESTED_ACTION_SUBMIT] value={value}");
+
+    if (string.IsNullOrEmpty(command))
+    {
+        await context.Send("No command specified.");
+        return;
+    }
+
+    // Route the command the same way as regular messages
+    var lower = command.ToLower();
+    if (lower == "reminder-help" || lower == "help")
+    {
+        await ShowHelp(context);
+    }
+    else if (lower.StartsWith("remind"))
+    {
+        await HandleRemindCommand(context, command, isTargeted: false, targetedMessageId: null);
+    }
+    else if (lower == "my-reminders")
+    {
+        await ShowMyReminders(context, isTargeted: false, targetedMessageId: null);
+    }
+    else
+    {
+        await context.Send($"Executing: {command}");
     }
 });
 
