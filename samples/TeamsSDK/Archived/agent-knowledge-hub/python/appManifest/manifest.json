@@ -1,0 +1,76 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Contoso Corporation",
+        "websiteUrl": "https://www.contoso.com",
+        "privacyUrl": "https://www.contoso.com/privacy",
+        "termsOfUseUrl": "https://www.contoso.com/terms"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Contoso Knowledge Hub",
+        "full": "Contoso Knowledge Hub - AI Academic & Career Guidance Agent"
+    },
+    "description": {
+        "short": "Intelligent guidance agent for academic and career journeys",
+        "full": "Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations."
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                    "scopes": [
+                        "personal"
+                    ],
+                    "commands": [
+                        {
+                            "title": "AI Skills Courses",
+                            "description": "Recommend courses for building AI skills"
+                        },
+                        {
+                            "title": "Career-Aligned Courses",
+                            "description": "Choose courses that align with your career goals"
+                        },
+                        {
+                            "title": "Sample Course Plan",
+                            "description": "Create a personalized sample course plan"
+                        },
+                        {
+                            "title": "Top IT Institutions",
+                            "description": "Find information about the best educational institutions in IT"
+                        },
+                        {
+                            "title": "Course Shortlist",
+                            "description": "Shortlist top courses based on career goals with next steps"
+                        },
+                        {
+                            "title": "Expert-Endorsed Recommendations",
+                            "description": "Get top courses from the Who's Who of IT in AI"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}
