@@ -4,6 +4,7 @@ param userAssignedIdentityId string
 
 var resourceBaseName = provisionParameters.resourceBaseName
 var botAadAppClientId = provisionParameters['botAadAppClientId'] // Read AAD app client id for Azure Bot Service from parameters
+var botAadAppClientSecret = provisionParameters['botAadAppClientSecret'] // Read AAD app client secret for Azure Bot Service from parameters
 var botServiceName = contains(provisionParameters, 'botServiceName') ? provisionParameters['botServiceName'] : '${resourceBaseName}' // Try to read name for Azure Bot Service from parameters
 var botServiceSku = contains(provisionParameters, 'botServiceSku') ? provisionParameters['botServiceSku'] : 'F0' // Try to read SKU for Azure Bot Service from parameters
 var botDisplayName = contains(provisionParameters, 'botDisplayName') ? provisionParameters['botDisplayName'] : '${resourceBaseName}' // Try to read display name for Azure Bot Service from parameters
@@ -20,6 +21,8 @@ resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
     displayName: botDisplayName
     endpoint: uri('https://${webApp.properties.defaultHostName}', '/api/messages')
     msaAppId: botAadAppClientId
+    msaAppType: 'SingleTenant' // Multitenant bot creation is deprecated, use SingleTenant
+    msaAppTenantId: tenant().tenantId
   }
   sku: {
     name: botServiceSku // You can follow https://aka.ms/teamsfx-bicep-add-param-tutorial to add botServiceSku property to provisionParameters to override the default value "F0".
@@ -63,6 +66,26 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
           value: '~18' // Set NodeJS version to 18.x for your site
+        }
+        {
+          name: 'BOT_ID'
+          value: botAadAppClientId
+        }
+        {
+          name: 'BOT_PASSWORD'
+          value: botAadAppClientSecret
+        }
+        {
+          name: 'TEAMS_APP_TENANT_ID'
+          value: tenant().tenantId
+        }
+        {
+          name: 'MicrosoftAppType'
+          value: 'SingleTenant'
+        }
+        {
+          name: 'MicrosoftAppTenantId'
+          value: tenant().tenantId
         }
       ]
     }

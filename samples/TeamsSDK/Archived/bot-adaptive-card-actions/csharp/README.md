@@ -52,7 +52,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Setup
    
 1. Setup For Bot
-	- Register a Microsoft Entra ID aap registration in Azure portal [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908).
+	- Register a Microsoft Entra ID aap registration in Azure portal [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908).
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
@@ -71,7 +71,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+3. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
@@ -169,7 +169,6 @@ Install App in copilot
 ![Copilot](AdaptiveCardActions/Images/Copilot9.png) 
 
 ![Copilot](AdaptiveCardActions/Images/Copilot10.png) 
-
 
 
 ## Deploy the bot to Azure

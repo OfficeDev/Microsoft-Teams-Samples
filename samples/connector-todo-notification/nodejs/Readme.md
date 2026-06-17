@@ -162,7 +162,4 @@ This sample provides a comprehensive guide to building an Office 365 Connector t
 - Review [Getting Started with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/setup)
 
 
-
-
-
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-todo-notification-nodejs" />

@@ -25,7 +25,11 @@ Use the bot command `peoplepickercard` to get the card with people picker contro
 ## Interaction with app
 
 ![people picker card ](PeoplePicker/Images/PepolePickerAdaptiveCard.gif)
+<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-people-picker-adaptive-card/csharp/README.md
  
+=======
+
+>>>>>>> origin/main:samples/bot-people-picker-adaptive-card/csharp/README.md
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -55,7 +59,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Setup
 
 1. App Registration
-Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
      
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.

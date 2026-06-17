@@ -54,9 +54,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="demo-manifest\" />
-  </ItemGroup>
-
+  
 </Project>

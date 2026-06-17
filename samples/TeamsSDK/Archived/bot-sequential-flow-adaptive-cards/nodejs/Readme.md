@@ -18,6 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-card
 
 ![Preview Image](Images/Preview.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards/nodejs/Readme.md
 This App talks about the Teams Bot User Specific Views and Sequential Workflows in adaptive card with Node JS
 
 This bot has been created using [Bot Framework v4](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V1.4
@@ -27,6 +28,8 @@ This is a sample app that provides an experience of managing incidents. This sam
 [Sequential Workflows](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/sequential-workflows)
 [Up to date cards](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/up-to-date-views)
 
+=======
+>>>>>>> origin/main:samples/bot-sequential-flow-adaptive-cards/nodejs/Readme.md
 ## Key features
 
 - Incident Creation
@@ -69,7 +72,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.

@@ -24,11 +24,6 @@ The solution not only presents results as interactive adaptive cards but is also
 
  ![msgext-doc-compliance-checkerGif](Images/msgext-doc-compliance-checkerGif.gif)
 
-## Try It Yourself - Experience the app in your Microsoft Teams and Copilot client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Compliance Checker sample app:** [Manifest](/samples/msgext-ai-doc-compliance-checker/demo-manifest/AIComplianceChecker.zip)
-
 ## Prerequisites
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
