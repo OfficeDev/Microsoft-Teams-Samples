@@ -27,11 +27,6 @@ This sample application illustrates how to display the meeting context object in
 ## Interaction with bot
 ![meeting-context](Images/meeting-context.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Teams Meeting Context Sample:** [Manifest](/samples/TeamsJS/meetings-context-app/csharp/demo-manifest/meetings-context-app.zip)
-
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
@@ -68,18 +63,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 Register your application with Azure AD
 
-- Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-- On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
-- Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
+- Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+- On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. Youâ€™ll need those later when updating your Teams application manifest and in the appsettings.json.
+- Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select â€œNeverâ€ for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
 
 - I need to update the README.md file in this repository with Azure AD registration instructions.
-Here is the exact content that must be added if it’s missing or incomplete:
+Here is the exact content that must be added if itâ€™s missing or incomplete:
 
 2) App Registration
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)

@@ -28,7 +28,10 @@ There are two basic types of Messaging Extension in Teams: [Search-based](https:
 ## Interaction with app
 ![msgext-search-auth-config ](Images/msgext-auth-config-gif.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/msgext-search-auth-config/python/README.md
 
+=======
+>>>>>>> origin/main:samples/msgext-search-auth-config/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -65,7 +68,7 @@ the Teams service needs to call into the bot.
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)

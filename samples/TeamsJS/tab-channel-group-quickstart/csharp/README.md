@@ -23,11 +23,6 @@ Explore this simple hello world app that showcases channel and group tabs in Mic
 ## Interaction with app
 ![HelloTabGif](Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web/Images/tab_channel_group_module.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Tab Channel quick start:** [Manifest](/samples/TeamsJS/tab-channel-group-quickstart/js/demo-manifest/tab-channel-group-quickstart.zip)
-
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -55,7 +50,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 2. Setup NGROK

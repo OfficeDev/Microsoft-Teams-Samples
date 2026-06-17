@@ -25,11 +25,6 @@ Explore adaptive card formatting in Microsoft Teams with this bot sample. It inc
 
 ![Types Of Cards](BotFormattingCards/Images/bot_formatting_cards.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Send different formatting on cards:** [Manifest](/samples/bot-formatting-cards/csharp/demo-manifest/bot-formatting-cards.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account).

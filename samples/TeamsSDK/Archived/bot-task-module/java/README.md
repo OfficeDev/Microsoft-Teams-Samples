@@ -29,7 +29,10 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 ## Interaction with bot
 ![TaskModule](Images/TaskModule.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-task-module/java/README.md
 
+=======
+>>>>>>> origin/main:samples/bot-task-module/java/README.md
 ## Prerequisites
 
 - Intall Java 1.8+ [Java](https://www.oracle.com/java/technologies/downloads/#java8-windows)

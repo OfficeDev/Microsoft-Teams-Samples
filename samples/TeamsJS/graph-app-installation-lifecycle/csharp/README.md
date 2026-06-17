@@ -25,11 +25,6 @@ This sample app demonstrates the installation lifecycle for Teams [Apps](https:/
 
 ![](AppInstallation/Images/GraphAppInstallationLifecycleGif.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**App Installation:** [Manifest](/samples/TeamsJS/graph-app-installation-lifecycle/csharp/demo-manifest/graph-app-installation-lifecycle.zip)
-
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -60,7 +55,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### Register your app with Azure AD.
 
-  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -77,7 +72,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
   - You need to add following permissions mentioned in the below screenshots to call respective Graph   API
     ![](https://user-images.githubusercontent.com/50989436/116188975-e155a300-a745-11eb-9ce5-7f467007e243.png)
@@ -166,7 +161,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   
   
  
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsJS/graph-app-installation-lifecycle-csharp" />

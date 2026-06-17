@@ -24,7 +24,10 @@ Discover this Microsoft Teams sample app that demonstrates the implementation of
 
 ![TabConversationModule](TabConversation/Images/tabconversationmodule.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-conversations/csharp/README.md
 
+=======
+>>>>>>> origin/main:samples/tab-conversations/csharp/README.md
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -56,7 +59,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -142,7 +145,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Further reading
 
 -[Create conversational tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-conversations-csharp" />

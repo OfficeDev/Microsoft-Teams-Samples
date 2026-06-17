@@ -35,7 +35,10 @@ In this sample we are assuming the OAuth 2 provider is Azure Active Directory V2
 ## Interaction With Messaging Extension Auth
 ![msgext-search-auth-config ](Images/msgext-search-auth-config.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/msgext-search-auth-config/csharp/README.md
 
+=======
+>>>>>>> origin/main:samples/msgext-search-auth-config/csharp/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -99,7 +102,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)

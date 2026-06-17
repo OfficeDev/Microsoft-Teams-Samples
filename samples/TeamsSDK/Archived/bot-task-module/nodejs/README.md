@@ -27,7 +27,10 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). I
 ## Interaction with botss
 ![Dialog App](Images/TeamsDialog.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-task-module/nodejs/README.md
 
+=======
+>>>>>>> origin/main:samples/bot-task-module/nodejs/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -55,7 +58,7 @@ the Teams service needs to call into the bot.
 
 ### Register your app with Azure AD.
 
-  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)

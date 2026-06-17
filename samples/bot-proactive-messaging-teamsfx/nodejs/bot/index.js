@@ -12,7 +12,8 @@ const { TeamsBot } = require("./teamsBot");
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication({
     MicrosoftAppId: process.env.BOT_ID,
     MicrosoftAppPassword: process.env.BOT_PASSWORD,
-    MicrosoftAppTenantId: process.env.TEAMS_APP_TENANT_ID
+    MicrosoftAppType: process.env.MicrosoftAppType || "SingleTenant",
+    MicrosoftAppTenantId: process.env.MicrosoftAppTenantId || process.env.TEAMS_APP_TENANT_ID
 });
 
 // Create CloudAdapter

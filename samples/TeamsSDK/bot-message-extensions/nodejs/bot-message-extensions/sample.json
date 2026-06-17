@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-message-extensions-nodejs",
+    "source": "officeDev",
+    "title": "Bot Message Extensions",
+    "shortDescription": "This sample demonstrates message extensions for Microsoft Teams using Node.js and TypeScript",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/bot-message-extensions/nodejs/bot-message-extensions",
+    "longDescription": [
+      "This sample showcases the capabilities of a search-based messaging extension in Microsoft Teams. Users can search for Wikipedia articles directly within the Teams compose area. The extension supports search commands, item selection, link unfurling, and result display."
+    ],
+    "creationDateTime": "2026-02-26",
+    "updateDateTime": "2026-02-26",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "typescript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "nodejs"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "msgext,search,action,link-unfurling"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/TeamsSDK/bot-message-extensions/bot-message-extensions.gif",
+        "alt": "Solution UX showing bot message extensions for Microsoft Teams"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
