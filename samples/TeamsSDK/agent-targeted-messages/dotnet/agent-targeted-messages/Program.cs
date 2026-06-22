@@ -543,7 +543,6 @@ async Task ShowHelp<T>(IContext<T> context) where T : Activity
         "- `remind me in 5 minutes to check email`\n" +
         "- `remind me in 1 hour meeting starts`\n" +
         "- `remind me in 30 seconds test`\n" +
-        "- `remind @John in 10 minutes review PR`\n\n" +
         "**Supported Time Formats:**\n" +
         "- Seconds: `30 seconds`, `30 secs`, `30s`\n" +
         "- Minutes: `5 minutes`, `5 mins`, `5m`\n" +
@@ -564,13 +563,18 @@ async Task ShowHelp<T>(IContext<T> context) where T : Activity
         "**Supported Reaction Types:**\n" +
         "- `like` \ud83d\udc4d, `heart` \u2764\ufe0f, `1f440_eyes` \ud83d\udc40, `2705_whiteheavycheckmark` \u2705, `launch` \ud83d\ude80, `1f4cc_pushpin` \ud83d\udccc";
 
+    var activity = context.Activity;
+    var sender = new Account { Id = activity.From!.Id, Name = activity.From.Name };
+
     var helpResponse = new MessageActivity()
         .WithText(helpText)
         .WithSuggestedActions(BuildSuggestedCommands(
-            context.Activity.From?.Id,
+            activity.From?.Id,
             ("Set a 30-second test reminder", "remind me in 30 seconds test"),
             ("Set a 5-minute reminder", "remind me in 5 minutes check email"),
             ("My reminders", "my-reminders")));
+
+    helpResponse.WithRecipient(sender, true);
 
     await context.Send(helpResponse);
 }
