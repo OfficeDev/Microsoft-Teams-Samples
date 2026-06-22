@@ -55,7 +55,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
       -  Click on "New registration", and create an Azure AD application.
 
     -  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".
@@ -143,7 +143,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - Navigate to `samples/meetings-attendance-report/csharp` folder
 - Select `MeetingAttendance.csproj` file
 - Press `F5` to run the project
-
 
 
 6. Setup Manifest for Teams

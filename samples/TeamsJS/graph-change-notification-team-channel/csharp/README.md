@@ -148,5 +148,4 @@ You can interact with Teams Tab by subscribing the teams/channel for notificatio
 - [Create subscription permissions for supported resource](https://docs.microsoft.com/en-us/graph/api/subscription-post-subscriptions?view=graph-rest-1.0&tabs=http#team-channel-and-chat)
 
 
-
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsJS/graph-change-notification-team-channel-csharp" />

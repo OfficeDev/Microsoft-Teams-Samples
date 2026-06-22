@@ -67,7 +67,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Configure Delegated Permissions in Azure AD App Registration
 
   1. Navigate to **API Permissions** in your app registration.  
-  2. Select **Microsoft Graph** → **Delegated permissions**.  
+  2. Select **Microsoft Graph** â†’ **Delegated permissions**.  
   3. Add the following permission:  
      - `User.Read`  
   4. Grant **Admin Consent** for the added permission.  
@@ -234,7 +234,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 **22. Transitive Member Removed Event:** The bot receives a transitive member removed event when a member is removed from the parent team and is automatically removed from the shared channel.
 
 ![Transitive Member Events](SharedChannelEvents/Images/22.Transitive_Member_Added_Removed_Event_Triggered.png)
-
 
 
 ## Deploy the bot to Azure

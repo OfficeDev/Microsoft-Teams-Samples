@@ -27,7 +27,10 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 ## Interaction with app
 ![image](Images/appLocalizationModule.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/app-localization/nodejs/Readme.md
 
+=======
+>>>>>>> origin/main:samples/app-localization/nodejs/Readme.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)

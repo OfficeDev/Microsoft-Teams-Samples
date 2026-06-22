@@ -24,7 +24,10 @@ This sample application illustrates the process of developing a custom personal 
 
 ![personaltabmodule](Images/PersonalTabModule.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-personal/razor-csharp/README.md
 
+=======
+>>>>>>> origin/main:samples/tab-personal/razor-csharp/README.md
 
 ## Prerequisites
 
@@ -72,7 +75,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -116,8 +119,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 [Tab-personal](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 [Create a Custom Personal Tab with ASP.NET Core](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
-
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-razor-csharp" />

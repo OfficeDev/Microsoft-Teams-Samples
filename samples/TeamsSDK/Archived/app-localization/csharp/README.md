@@ -27,7 +27,10 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 
 ![Preview Image](Images/Preview.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/app-localization/csharp/README.md
 
+=======
+>>>>>>> origin/main:samples/app-localization/csharp/README.md
 ## Prerequisites
 
 Verify you have the right account for building Teams apps and install some recommended development tools.

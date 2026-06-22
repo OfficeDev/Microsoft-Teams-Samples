@@ -59,7 +59,10 @@ For more Teams samples and documentation, visit the main repository:
 
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/app-hello-world/nodejs/README.md
 
+=======
+>>>>>>> origin/main:samples/app-hello-world/nodejs/README.md
 ## Prerequisites
 
 -  Microsoft Teams is installed and you have an account (not a guest account)

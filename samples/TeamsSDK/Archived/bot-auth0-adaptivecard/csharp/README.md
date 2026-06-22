@@ -25,7 +25,10 @@ This sample demonstrates how to authenticate users in a Microsoft Teams bot usin
 ## Interaction with bot
 ![Conversation Bot](Images/bot-auth.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-auth0-adaptivecard/csharp/README.md
 
+=======
+>>>>>>> origin/main:samples/bot-auth0-adaptivecard/csharp/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account

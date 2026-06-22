@@ -29,11 +29,6 @@ The database of candidates is hosted in an Azure Table storage, and the app itse
 
  ![expert-finder-gif](images/expert-finder.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Microsoft Teams Expert Finder sample app:** [Manifest](/samples/msgext-expert-finder-js/demo-manifest/expert-finder.zip)
-
 ## Prerequisites
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
@@ -51,7 +46,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -118,13 +113,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
         - Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the access_as_user scope. Suggestions:
 
-            - Admin consent display name: Teams can access the user’s profile
+            - Admin consent display name: Teams can access the userâ€™s profile
 
-            - Admin consent description: Allows Teams to call the app’s web APIs as the current user.
+            - Admin consent description: Allows Teams to call the appâ€™s web APIs as the current user.
 
             - User consent display name: Teams can access your user profile and make requests on your behalf
 
-            - User consent description: Enable Teams to call this app’s APIs with the same rights that you have
+            - User consent description: Enable Teams to call this appâ€™s APIs with the same rights that you have
 
         - Ensure that State is set to Enabled
 

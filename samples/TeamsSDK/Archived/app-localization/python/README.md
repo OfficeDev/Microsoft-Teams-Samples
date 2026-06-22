@@ -29,7 +29,10 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 
 ![image](Images/appLocalizationModule.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/app-localization/python/README.md
 
+=======
+>>>>>>> origin/main:samples/app-localization/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account

@@ -26,12 +26,6 @@ This comprehensive Python sample illustrates how to create a Messaging Extension
 
 ![Task Details](Images/MsgextMessageReminder.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your Teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Message reminder with messaging extension action:** [Manifest](/samples/msgext-message-reminder/python/appManifest/appManifest.local.zip)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)

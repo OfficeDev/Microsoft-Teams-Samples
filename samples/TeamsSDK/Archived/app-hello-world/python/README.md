@@ -30,7 +30,10 @@ With this sample, users can:
 
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/app-hello-world/python/README.md
 
+=======
+>>>>>>> origin/main:samples/app-hello-world/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account

@@ -28,7 +28,10 @@ This sample application provides an interactive demonstration of cookie manageme
 
 ![Cookie App](Images/Cookie_App.gif)
 
+<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-app-cookie/js/README.md
 
+=======
+>>>>>>> origin/main:samples/tab-app-cookie/js/README.md
 ## Prerequisites
 
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
