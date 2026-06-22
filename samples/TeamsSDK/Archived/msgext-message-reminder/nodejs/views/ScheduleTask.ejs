@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+                crossorigin="anonymous"></script>
+
+        <style>
+            .container {
+                margin-top: 1rem;
+                margin-left: 1.5rem;
+            }
+        </style>
+
+        <script>
+            let title = "";
+            let description = "";
+
+            (async () => {
+                await microsoftTeams.app.initialize();
+                const params = new URLSearchParams(window.location.search);
+                title = params.get("title") || "";
+                description = params.get("description") || "";
+
+                document.getElementById("taskTitle").textContent = title;
+
+                if (!description) {
+                    document.getElementById("taskdescriptionteam").style.display = "none";
+                } else {
+                    document.getElementById("taskdescriptionteam").textContent = description;
+                    document.getElementById("taskdescription").style.display = "none";
+                }
+            })();
+
+            function submit() {
+                const datetimeInput = document.getElementById("taskdatetime").value;
+                if (!datetimeInput) {
+                    document.getElementById("taskdatetime").style.border = "1px solid red";
+                    return;
+                }
+
+                document.getElementById("taskdatetime").style.border = "";
+
+                const dateUTC = new Date(datetimeInput).toUTCString();
+                const taskInfo = {
+                    title: title,
+                    dateTime: new Date(dateUTC),
+                    description: description || document.getElementById("taskdescription").value,
+                };
+
+                microsoftTeams.dialog.url.submit(taskInfo);
+            }
+        </script>
+    </head>
+    <body class="theme-light">
+        <div class="surface">
+            <div class="panel">
+                <div class="container">
+                    <label for="title" class="title">Task title</label>
+                    <br>
+                    <label id="taskTitle"></label>
+                    <br />
+                    <br />
+                    <label for="description" class="description">Task description</label>
+                    <br>
+                    <label id="taskdescriptionteam"></label>
+                    <input type="text" id="taskdescription" name="taskdescription">
+                    <br />
+                    <br />
+                    <label for="taskdatetime">Date and time</label>
+                    <br />
+                    <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+                    <br/>
+                    <br/>
+                    <button type="button" class="btn-send save" onclick="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
