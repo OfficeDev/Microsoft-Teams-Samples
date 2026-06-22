@@ -1,0 +1,66 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/privacy",
+        "termsOfUseUrl": "https://www.example.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Proactive Message TeamFx",
+        "full": "Proactive Message TeamFx"
+    },
+  "description": {
+    "short": "Bot sample for proactive notifications for proactive message teamFx",
+    "full": "This bot sends proactive reminders by saving conversation references in Teams"
+  },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                    "scopes": [
+                        "personal",
+                        "team",
+                        "groupChat"
+                    ],
+                    "commands": [
+                        {
+                            "title": "welcome",
+                            "description": "Resend welcome message of this Bot"
+                        },
+                        {
+                            "title": "learn",
+                            "description": "Learn about Proative Message and Bot Command"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "${{BOT_DOMAIN}}"
+    ]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-msgext-reaction-java",
+    "source": "officeDev",
+    "title": "Message Reaction in Messaging Extension using Bot Framework v4",
+    "shortDescription": "This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-message-reaction/java",
+    "longDescription": [
+      "This sample bot, built on the Bot Framework, responds to message reactions in Microsoft Teams. It showcases features such as adaptive cards and supports multiple scopes, including personal, group, and team interactions."
+    ],
+    "creationDateTime": "2019-10-17",
+    "updateDateTime": "2024-10-10",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "java"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "maven"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "ME"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-message-reaction/java/Images/MessageReaction.gif",
+        "alt": "Solution UX showing how to use message reaction in Messaging Extension using Bot Framework v4"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

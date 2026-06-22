@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-graph-meeting-notification-nodejs",
+    "source": "officeDev",
+    "title": "Online Teams Meeting Subscription",
+    "shortDescription": "This sample application showcases online meeting subscriptions that notify users in chat about meeting events, including when users join or leave and when meetings start or end.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-meeting-notification/nodejs",
+    "longDescription": [
+      "This sample application demonstrates the use of online meeting subscriptions in Microsoft Teams, sending real-time chat notifications for events such as user joins/leaves and meeting start/end. Built with Node.js, it features bot interactions, change notifications, and integrates with the Microsoft Graph API for seamless communication."
+    ],
+    "creationDateTime": "2022-09-24",
+    "updateDateTime": "2024-10-14",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-meeting-notification/nodejs/Images/MeetingNotification.gif",
+        "alt": "Solution UX showing graph meeting notification in meeting chat"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

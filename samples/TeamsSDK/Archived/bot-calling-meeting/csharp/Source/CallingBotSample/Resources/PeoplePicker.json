@@ -1,0 +1,30 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "Input.ChoiceSet",
+      "label": "${choiceLabel}",
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users"
+      },
+      "id": "peoplePicker",
+      "isMultiSelect": "${isMultiSelect}"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "${action}",
+      "data": {
+        "action": "${action}",
+        "msteams": {
+          "type": "task/submit"
+        },
+        "callId": "${callId}"
+      }
+    }
+  ]
+}

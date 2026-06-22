@@ -1,0 +1,65 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-proactive-messaging-teamsfx",
+    "source": "officeDev",
+    "title": "Proactive Messaging",
+    "shortDescription": "This bot sends proactive reminders by saving conversation references in Teams.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-proactive-messaging-teamsfx/nodejs",
+    "longDescription": [
+      "This bot sample demonstrates proactive messaging in Microsoft Teams by storing conversation references for sending reminder notifications. It includes guidance for local debugging, deployment to Azure, and integration with Microsoft 365 Agents Toolkit."
+    ],
+    "creationDateTime": "2022-03-06",
+    "updateDateTime": "2024-10-10",
+    "products": [
+      "Teams",
+      "Microsoft 365 Agents Toolkit"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main//samples/bot-proactive-messaging-teamsfx/nodejs/images/send-proactive-messages.gif",
+        "alt": "Proactive Messaging"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

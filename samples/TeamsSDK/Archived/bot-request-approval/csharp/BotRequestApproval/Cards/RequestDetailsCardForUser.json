@@ -1,0 +1,185 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "title": "Submit",
+      "verb": "refresh",
+      "data": {
+        "RequestTitle": "${requestTitle}",
+        "RequestDescription": "${requestDescription}",
+        "AssignedTo": "${assignedTo}",
+        "CreatedBy": "${createdBy}",
+        "CreatedById": "${createdById}",
+        "AssignedToName": "${assignedToName}",
+        "UserMRI": "${userMRI}"
+      }
+    },
+    "userIds": "${userId}"
+  },
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "text": "Request details"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "text": "Pending"
+                }
+              ],
+              "width": "auto"
+            }
+          ]
+        }
+      ],
+      "bleed": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "FactSet",
+                  "facts": [
+                    {
+                      "title": "**Request title:**",
+                      "value": "${requestTitle}"
+                    },
+                    {
+                      "title": "**Request description:**",
+                      "value": "${requestDescription}"
+                    },
+                    {
+                      "title": "**Created By:**",
+                      "value": "${createdBy}"
+                    },
+                    {
+                      "title": "**Assigned To:**",
+                      "value": "${assignedToName}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.ShowCard",
+          "title": "Edit",
+          "card": {
+            "type": "AdaptiveCard",
+            "refresh": {
+              "action": {
+                "type": "Action.Execute",
+                "title": "Submit",
+                "verb": "refresh",
+                "data": {
+                  "RequestTitle": "${requestTitle}",
+                  "RequestDescription": "${requestDescription}",
+                  "AssignedTo": "${assignedTo}",
+                  "CreatedBy": "${createdBy}",
+                  "AssignedToName": "${assignedToName}",
+                  "UserMRI": "${userMRI}"
+                }
+              },
+              "userIds": [
+                "${userMRI}"
+              ]
+            },
+            "body": [
+              {
+                "type": "Input.Text",
+                "label": "Request title",
+                "placeholder": "Request title",
+                "id": "requestTitle"
+              },
+              {
+                "type": "Input.Text",
+                "label": "Request description",
+                "placeholder": "request description",
+                "id": "requestdescription"
+              },
+              {
+                "type": "TextBlock",
+                "size": "Default",
+                "weight": "Default",
+                "text": "Select manager"
+              },
+              {
+                "type": "Input.ChoiceSet",
+                "choices": [],
+                "choices.data": {
+                  "type": "Data.Query",
+                  "dataset": "graph.microsoft.com/users?scope=currentContext"
+                },
+                "id": "AssignedTo",
+                "isMultiSelect": false
+              },
+              {
+                "type": "ActionSet",
+                "actions": [
+                  {
+                    "type": "Action.Execute",
+                    "verb": "requestCard",
+                    "title": "Submit",
+                    "data": {
+                      "CreatedBy": "${createdBy}",
+                      "AssignedTo": "${assignedTo}",
+                      "UserMRI": "${userMRI}"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "Action.Execute",
+          "verb": "cancelCard",
+          "title": "Cancel request",
+          "data": {
+            "RequestTitle": "${requestTitle}",
+            "RequestDescription": "${requestDescription}",
+            "CreatedBy": "${createdBy}",
+            "AssignedTo": "${assignedTo}",
+            "AssignedToName": "${assignedToName}",
+            "UserMRI": "${userMRI}"
+          }
+        }
+      ]
+    }
+  ],
+  "type": "AdaptiveCard",
+  "version": "1.2"
+}
