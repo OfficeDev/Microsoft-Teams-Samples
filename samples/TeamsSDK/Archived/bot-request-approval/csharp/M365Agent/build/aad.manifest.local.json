@@ -1,0 +1,32 @@
+{
+    "id": "1099bdc6-6cad-46b7-ab98-a397f23a10c2",
+    "appId": "0c7aecdb-f583-4d03-9446-ffa83d7865a3",
+    "name": "bot-request-approval-aad",
+    "accessTokenAcceptedVersion": 2,
+    "signInAudience": "AzureADMyOrg",
+    "oauth2AllowIdTokenImplicitFlow": true,
+    "oauth2AllowImplicitFlow": true,
+    "optionalClaims": {
+        "idToken": [],
+        "accessToken": [
+            {
+                "name": "idtyp",
+                "source": null,
+                "essential": false,
+                "additionalProperties": []
+            }
+        ],
+        "saml2Token": []
+    },
+    "requiredResourceAccess": [
+        {
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
+            "resourceAccess": [
+                {
+                    "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+                    "type": "Scope"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,5 @@
+[project]
+name = "bot-receive-channel-messages-withRSC"
+version = "1.0.0"
+description = "Bot receive channel messages with RSC permissions"
+requires-python = ">=3.12,<3.15"
