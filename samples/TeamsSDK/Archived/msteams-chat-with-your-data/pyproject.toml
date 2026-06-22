@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "datasource-azure-openai"
+version = "0.0.0"
+description = "Data Source - Azure OpenAI"
+authors = ["Microsoft <teams@microsoft.com>"]
+readme = "README.md"
+packages = [
+    { include = "src" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+teams-ai = "^1.1.0"
+python-dotenv = "^1.0.1"
+azure-identity = "^1.17.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pylint = "^2.17.4"
+pytest-cov = "^4.1.0"
+pytest-asyncio = "^0.21.1"
+black = "^24.3.0"
+isort = "^5.12.0"
+mypy = "^1.5.0"
+
+[tool.poetry.scripts]
+lint = "scripts:lint"
+fmt = "scripts:fmt"
+test = "scripts:test"
+clean = "scripts:clean"
+ci = "scripts:ci"
+start = "scripts:start"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "--cov-report html:coverage --cov=src"
+
+[tool.mypy]
+python_version = "3.8"
+ignore_missing_imports = true
+show_error_codes = true
+no_implicit_optional = true
+warn_unused_ignores = true
