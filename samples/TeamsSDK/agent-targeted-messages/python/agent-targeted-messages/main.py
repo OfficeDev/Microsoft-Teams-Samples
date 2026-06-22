@@ -280,7 +280,7 @@ async def handle_remind_command(ctx: ActivityContext[MessageActivity], command_t
         response = MessageActivityInput().add_card(card)
         if is_targeted:
             response.add_targeted_message_info(activity.id)
-            response.with_recipient(creator, is_targeted=True)
+        response.with_recipient(creator, is_targeted=True)
         await ctx.send(response)
         print(f"[REMINDER] Created reminder {reminder_id} for {target_user_name} in {delay_s} seconds")
     except Exception as error:
@@ -314,7 +314,7 @@ async def show_my_reminders(ctx: ActivityContext[MessageActivity], is_targeted: 
         )
         if is_targeted:
             response.add_targeted_message_info(activity.id)
-            response.with_recipient(sender, is_targeted=True)
+        response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
         return
 
@@ -329,7 +329,7 @@ async def show_my_reminders(ctx: ActivityContext[MessageActivity], is_targeted: 
     response = MessageActivityInput(text=text)
     if is_targeted:
         response.add_targeted_message_info(activity.id)
-        response.with_recipient(sender, is_targeted=True)
+    response.with_recipient(sender, is_targeted=True)
     await ctx.send(response)
 
 
@@ -342,7 +342,7 @@ async def cancel_reminder_command(ctx: ActivityContext[MessageActivity], reminde
         response = MessageActivityInput(text="Please specify a reminder ID. Use `my-reminders` to see your active reminders.")
         if is_targeted:
             response.add_targeted_message_info(activity.id)
-            response.with_recipient(sender, is_targeted=True)
+        response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
         return
 
@@ -351,7 +351,7 @@ async def cancel_reminder_command(ctx: ActivityContext[MessageActivity], reminde
         response = MessageActivityInput(text=f"Reminder **{reminder_id}** not found or already completed.")
         if is_targeted:
             response.add_targeted_message_info(activity.id)
-            response.with_recipient(sender, is_targeted=True)
+        response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
         return
 
@@ -362,14 +362,14 @@ async def cancel_reminder_command(ctx: ActivityContext[MessageActivity], reminde
         response = MessageActivityInput(text=f"Reminder **{reminder_id}** has been cancelled.")
         if is_targeted:
             response.add_targeted_message_info(activity.id)
-            response.with_recipient(sender, is_targeted=True)
+        response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
         print(f"[REMINDER] Reminder {reminder_id} cancelled by {activity.from_.name}")
     else:
         response = MessageActivityInput(text="You can only cancel reminders you created or are assigned to you.")
         if is_targeted:
             response.add_targeted_message_info(activity.id)
-            response.with_recipient(sender, is_targeted=True)
+        response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
 
 
@@ -483,7 +483,10 @@ async def show_help(ctx: ActivityContext) -> None:
         "- `like` \U0001f44d, `heart` \u2764\ufe0f, `1f440_eyes` \U0001f440, `2705_whiteheavycheckmark` \u2705, `launch` \U0001f680, `1f4cc_pushpin` \U0001f4cc"
     )
 
-    user_id = ctx.activity.from_.id if ctx.activity.from_ else None
+    activity = ctx.activity
+    user_id = activity.from_.id if activity.from_ else None
+    sender = targeted_account(activity.from_.id, activity.from_.name)
+
     response = MessageActivityInput(text=help_text).with_suggested_actions(
         build_suggested_commands(
             user_id,
@@ -492,6 +495,7 @@ async def show_help(ctx: ActivityContext) -> None:
             ("My reminders", "my-reminders"),
         )
     )
+    response.with_recipient(sender, is_targeted=True)
     await ctx.send(response)
 
 
@@ -537,6 +541,7 @@ async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
         await handle_remove_reaction(ctx, text, is_targeted, quoted_message_id)
     else:
         user_id = activity.from_.id if activity.from_ else None
+        sender = targeted_account(activity.from_.id, activity.from_.name)
         response = (
             MessageActivityInput(text="Use `reminder-help` to see available commands.")
             .with_suggested_actions(
@@ -551,7 +556,7 @@ async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
         )
         if is_targeted:
             response.add_targeted_message_info(activity.id)
-            response.with_recipient(activity.from_, is_targeted=True)
+        response.with_recipient(sender, is_targeted=True)
         await ctx.send(response)
 
 
