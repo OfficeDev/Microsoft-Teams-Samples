@@ -1,0 +1,66 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.1",
+    "id": "$ClientId",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.teams.com",
+        "privacyUrl": "https://www.teams.com/privacy",
+        "termsOfUseUrl": "https://www.teams.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "SharePoint-Tab-Request-Approval",
+        "full": "App using SharePoint Embedded for storage of task approvals being sent to the manager."
+    },
+    "description": {
+        "short": "Sample app showcasing SharePoint Embedded for storage in Teams tab.",
+        "full": "This sample app demonstrates the integration of SharePoint Embedded for storage management within the Teams Tab Request Approval application, featuring Teams SSO, activity feed notifications, and Graph API support."
+    },
+    "accentColor": "#235EA5",
+    "configurableTabs": [
+        {
+            "configurationUrl": "$BaseUrl/config",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team",
+                "groupChat"
+            ]
+        }
+    ],
+    "staticTabs": [
+        {
+            "entityId": "request",
+            "name": "Request",
+            "contentUrl": "$BaseUrl/request",
+            "websiteUrl": "$BaseUrl/request",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "$DomainName"
+    ],
+    "activities": {
+        "activityTypes": [
+            {
+                "type": "approvalRequired",
+                "description": "Required approval",
+                "templateText": "A task created with title {approvalTaskId}"
+            }
+        ]
+    },
+    "webApplicationInfo": {
+        "id": "$ClientId",
+        "resource": "api://$DomainName/$ClientId"
+    }
+}
