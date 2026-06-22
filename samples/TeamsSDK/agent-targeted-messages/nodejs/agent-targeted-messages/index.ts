@@ -362,8 +362,8 @@ async function showMyReminders(ctx: { activity: any; send: Function; isTargeted:
             ));
         if (isTargeted) {
             emptyResponse.addTargetedMessageInfo(targetedMessageId);
-            emptyResponse.withRecipient(sender, true);
         }
+        emptyResponse.withRecipient(sender, true);
         await send(emptyResponse);
         return;
     }
@@ -378,8 +378,8 @@ async function showMyReminders(ctx: { activity: any; send: Function; isTargeted:
     const listResponse = new MessageActivity(`**Your Active Reminders:**\n\n${list}\n\nUse \`cancel-reminder [id]\` to cancel a reminder.`);
     if (isTargeted) {
         listResponse.addTargetedMessageInfo(targetedMessageId);
-        listResponse.withRecipient(sender, true);
     }
+    listResponse.withRecipient(sender, true);
     await send(listResponse);
 }
 
@@ -392,8 +392,8 @@ async function cancelReminder(ctx: { activity: any; send: Function; isTargeted: 
         const noIdResponse = new MessageActivity('Please specify a reminder ID. Use `my-reminders` to see your active reminders.');
         if (isTargeted) {
             noIdResponse.addTargetedMessageInfo(targetedMessageId);
-            noIdResponse.withRecipient(sender, true);
         }
+        noIdResponse.withRecipient(sender, true);
         await send(noIdResponse);
         return;
     }
@@ -403,8 +403,8 @@ async function cancelReminder(ctx: { activity: any; send: Function; isTargeted: 
         const notFoundResponse = new MessageActivity(`Reminder **${reminderId}** not found or already completed.`);
         if (isTargeted) {
             notFoundResponse.addTargetedMessageInfo(targetedMessageId);
-            notFoundResponse.withRecipient(sender, true);
         }
+        notFoundResponse.withRecipient(sender, true);
         await send(notFoundResponse);
         return;
     }
@@ -416,16 +416,16 @@ async function cancelReminder(ctx: { activity: any; send: Function; isTargeted: 
         const cancelledResponse = new MessageActivity(`Reminder **${reminderId}** has been cancelled.`);
         if (isTargeted) {
             cancelledResponse.addTargetedMessageInfo(targetedMessageId);
-            cancelledResponse.withRecipient(sender, true);
         }
+        cancelledResponse.withRecipient(sender, true);
         await send(cancelledResponse);
         console.log(`[REMINDER] Reminder ${reminderId} cancelled by ${activity.from?.name}`);
     } else {
         const deniedResponse = new MessageActivity('You can only cancel reminders you created or are assigned to you.');
         if (isTargeted) {
             deniedResponse.addTargetedMessageInfo(targetedMessageId);
-            deniedResponse.withRecipient(sender, true);
         }
+        deniedResponse.withRecipient(sender, true);
         await send(deniedResponse);
     }
 }
@@ -466,6 +466,8 @@ async function showHelp(ctx: { activity: any; send: Function }): Promise<void> {
         '- `like` 👍, `heart` ❤️, `1f440_eyes` 👀, `2705_whiteheavycheckmark` ✅, `launch` 🚀, `1f4cc_pushpin` 📌'
     ].join('\n');
 
+    const sender = { id: activity.from.id, name: activity.from.name, role: 'user' as const };
+
     const helpResponse = new MessageActivity(helpText)
         .withSuggestedActions(buildSuggestedCommands(
             activity?.from?.id,
@@ -473,6 +475,8 @@ async function showHelp(ctx: { activity: any; send: Function }): Promise<void> {
             { title: 'Set a 5-minute reminder', value: 'remind me in 5 minutes check email' },
             { title: 'My reminders', value: 'my-reminders' }
         ));
+
+    helpResponse.withRecipient(sender, true);
 
     await send(helpResponse);
 }
