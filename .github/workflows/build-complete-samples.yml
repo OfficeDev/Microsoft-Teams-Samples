@@ -542,6 +542,10 @@ jobs:
               name: 'tab-request-approval'
               version: '3.10.x'
 
+            - project_path: 'samples/TeamsSDK/agent-targeted-messages/python/agent-targeted-messages'
+              name: 'agent-targeted-messages'
+              version: '3.12.x'
+
             - project_path: 'samples/TeamsSDK/bot-ai-messages/python/bot-ai-messages'
               name: 'bot-ai-messages'
               version: '3.12.x'
