@@ -1,6 +1,0 @@
-{
-    "debug.onTaskErrors": "abort",
-    "chat.tools.terminal.autoApprove": {
-        "pip": true
-    }
-}

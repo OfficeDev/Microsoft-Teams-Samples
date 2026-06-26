@@ -1,0 +1,131 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Task</title>
+
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .container {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.3rem;
+            box-sizing: border-box;
+        }
+
+        button.save {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+        }
+    </style>
+
+    <script>
+        let title = "";
+        let description = "";
+
+        // Initialize Teams SDK
+        microsoftTeams.app.initialize().then(() => {
+            console.log("Teams SDK initialized successfully");
+            
+            const params = new URLSearchParams(window.location.search);
+            title = params.get("title") || "";
+            description = params.get("description") || "";
+
+            $("#taskTitle").val("");
+
+            if (!description) {
+                $("#taskdescriptionteam").hide();
+                $("#taskdescription").show();
+            } else {
+                $("#taskdescriptionteam").text(decodeURIComponent(description));
+                $("#taskdescription").hide();
+            }
+            
+            const now = new Date();
+            const localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+            $("#taskdatetime").attr("min", localTime.toISOString().slice(0, 16));
+            
+        }).catch((error) => {
+            console.error("Teams SDK initialization failed:", error);
+            const params = new URLSearchParams(window.location.search);
+            title = params.get("title") || "";
+            description = params.get("description") || "";
+            $("#taskTitle").val("");
+        });
+
+        function submit() {
+            let isValid = true;
+            const dateTimeInput = $('#taskdatetime');
+
+            if (!dateTimeInput.val()) {
+                isValid = false;
+                dateTimeInput.css({ "border": "1px solid red" });
+                alert("Please select a date and time for the reminder.");
+                return false;
+            } else {
+                dateTimeInput.css({ "border": "", "background": "" });
+            }
+
+            const datetimeValue = dateTimeInput.val();
+            const taskInfo = {
+                taskTitle: $('#taskTitle').val(),  
+                dateTime: datetimeValue,
+                description: description ? decodeURIComponent(description) : $('#taskdescription').val(),
+            };
+
+            console.log("Submitting task:", taskInfo);
+            
+            try {
+                microsoftTeams.tasks.submitTask(taskInfo);
+            } catch (error) {
+                console.error("Error submitting task:", error);
+                alert("Error submitting task. Please try again.");
+            }
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="container">
+                <label for="title" class="title">Task title</label>
+                <br>
+                <label for="taskTitle"></label>
+                <input type="text" id="taskTitle" name="taskTitle">
+                <br><br>
+
+                <label for="description" class="description">Task description</label>
+                <br>
+                <label id="taskdescriptionteam"></label>
+                <input type="text" id="taskdescription" name="taskdescription">
+                <br><br>
+
+                <label for="taskdatetime">Date and time</label>
+                <br>
+                <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+                <br><br>
+
+                <button type="button" class="btn-send save" onclick="submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

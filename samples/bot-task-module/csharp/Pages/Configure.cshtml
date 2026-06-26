@@ -1,0 +1,53 @@
+﻿@page
+@using Microsoft.Teams.Samples.TaskModule.Web.Helper
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "Configure";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="font-semibold font-title">Configure your app here</div>
+<form>
+    <p>
+        <label for="tabChoice">Select the tab you would like to see: </label>
+        <div>
+            <input type="radio" name="tabType" value="tasks" onclick="setValidityState()"> Teams Dialogs<br>
+            <input type="radio" name="tabType" value="helloworld" onclick="setValidityState()"> Hello World
+        </div>
+    </p>
+</form>
+
+<script type="text/javascript">
+    // Initialize Microsoft Teams SDK
+    microsoftTeams.initialize();
+
+    // Register the save handler for the settings
+    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+        var radios = document.getElementsByName("tabType");
+        var baseUrl = @Html.Raw(Json.Serialize(Configuration["BaseUrl"]));
+
+        if (radios[0].checked) {
+            microsoftTeams.settings.setSettings({
+                entityId: "tasks",
+                contentUrl: baseUrl + "/tasks",
+                suggestedDisplayName: "Teams Dialogs CSharp",
+                websiteUrl: baseUrl + "/tasks"
+            });
+        } else {
+            microsoftTeams.settings.setSettings({
+                entityId: "helloworld",
+                contentUrl: baseUrl + "/helloworld",
+                suggestedDisplayName: "Hello World",
+                websiteUrl: baseUrl + "/helloworld"
+            });
+        }
+
+        saveEvent.notifySuccess();
+    });
+
+    // Function to set the validity state of the settings
+    function setValidityState() {
+        microsoftTeams.settings.setValidityState(true);
+    }
+</script>

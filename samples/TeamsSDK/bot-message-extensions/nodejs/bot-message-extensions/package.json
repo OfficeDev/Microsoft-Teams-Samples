@@ -3,8 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "tsx --env-file-if-exists .env index.ts",
-    "build": "tsc --build"
+    "start": "tsx --env-file-if-exists .env index.ts"
   },
   "dependencies": {
     "@microsoft/teams.api": "^2.0.0",
@@ -14,7 +13,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.5.4",
-    "tsx": "^4.21.0",
-    "typescript": "~5.8.3"
+    "tsx": "^4.21.0"
   }
 }

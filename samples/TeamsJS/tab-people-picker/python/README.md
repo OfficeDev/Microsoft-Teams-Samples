@@ -28,6 +28,12 @@ This sample application demonstrates the People Picker feature within a Microsof
 *People Picker functionality showcasing various selection modes*
 
 
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Tab people picker:** [Manifest](/samples/tab-people-picker/python/appManifest/appManifest.local.zip)
+
 ## Prerequisites
 
 - **Office 365 tenant** - You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).

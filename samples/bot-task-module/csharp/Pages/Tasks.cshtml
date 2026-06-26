@@ -1,0 +1,133 @@
+﻿@page
+@using Microsoft.Teams.Samples.TaskModule.Web.Helper
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    ViewData["Title"] = "Tasks";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@{
+    // Passing BaseUrl and MicrosoftAppId to DeepLinkHelper as a parameter
+    DeeplinkHelper deepLinkHelper = new DeeplinkHelper(
+        @Json.Serialize(Configuration["MicrosoftTeamsAppId"]).ToString(),
+        @Json.Serialize(Configuration["BaseUrl"]).ToString()
+    );
+}
+
+<div class="font-semibold font-title">Microsoft Teams Dialogs (referred as task modules in TeamsJS v1.x) Demo</div>
+<p>
+    A dialog (referred to as task modules in TeamsJS v1.x) allows Teams app developers to create one or more custom, modal experiences with custom code for their users, particularly useful for initiating and/or completing tasks using a GUI that does not litter a Teams conversation with superfluous, intermediate task completion information.
+</p>
+<p>
+    Let's try it out!
+    <div style="text-align: center; margin-left: auto; margin-right: auto;">
+        <button class="button-primary" onclick="submitTask('youtube');">YouTube</button>
+        <p></p>
+        <button class="button-primary" onclick="submitTask('powerapp');">PowerApp</button>
+        <p></p>
+        <button class="button-primary" onclick="submitTask('customform');">Custom Form (results &rarr; tab)</button>
+        <p></p>
+        <button class="button-primary" onclick="submitTask('customform bot');">Custom Form (results &rarr; bot)</button>
+        <p></p>
+        <button class="button-primary" onclick="submitTask('adaptivecard');">Adaptive Card (results &rarr; tab)</button>
+        <p></p>
+        <button class="button-primary" onclick="submitTask('adaptivecard bot');">Adaptive Card (results &rarr; bot)</button>
+        <p></p>
+        <p></p>
+        <a target="_blank" href="@(deepLinkHelper.DeepLink)">Deep link to Custom Form page</a>
+    </div>
+</p>
+<p></p>
+
+<script src="~/Scripts/teamsapp.js"></script>
+<script>
+    microsoftTeams.app.initialize();
+
+    const adaptiveCardJson = {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "version": "1.0",
+        "type": "AdaptiveCard",
+        "body": [
+            {
+                "type": "TextBlock",
+                "text": "Enter Text Here",
+                "weight": "bolder",
+                "isSubtle": false
+            },
+            {
+                "type": "Input.Text",
+                "id": "usertext",
+                "spacing": "none",
+                "isMultiLine": "true",
+                "placeholder": "add some text and submit"
+            }
+        ],
+        "actions": [
+            {
+                "type": "Action.Submit",
+                "title": "Submit"
+            }
+        ]
+    };
+
+    const submitHandler = (err) => {
+        // If err is an object, try to log more detailed info about it.
+        console.error("Error details:", err);
+    };
+
+    function submitTask(type) {
+        let taskInfo = {
+            title: null,
+            size: null,
+            url: null,
+            card: null,
+            fallbackUrl: null,
+            completionBotId: null,
+        };
+
+        let taskModuleSize = {
+            height: 600,
+            width: 600,
+        };
+
+        taskInfo.title = "Teams Dialogs Demo";
+
+        if (type.includes('youtube')) {
+            taskInfo.url = @Json.Serialize(Configuration["BaseUrl"]) + "/youtube";
+            taskInfo.title = "@(TaskModuleUIConstants.YouTube.Title)";
+            taskModuleSize.height = "@(TaskModuleUIConstants.YouTube.Height)";
+            taskModuleSize.width = "@(TaskModuleUIConstants.YouTube.Width)";
+            taskInfo.size = taskModuleSize;
+        } else if (type.includes('powerapp')) {
+            taskInfo.url = @Json.Serialize(Configuration["BaseUrl"]) + "/powerapp";
+            taskInfo.title = "@(TaskModuleUIConstants.PowerApp.Title)";
+            taskModuleSize.height = "@(TaskModuleUIConstants.PowerApp.Height)";
+            taskModuleSize.width = "@(TaskModuleUIConstants.PowerApp.Width)";
+            taskInfo.size = taskModuleSize;
+        } else if (type.includes('customform')) {
+            taskInfo.url = @Json.Serialize(Configuration["BaseUrl"]) + "/customform";
+            taskInfo.title = "@(TaskModuleUIConstants.CustomForm.Title)";
+            taskModuleSize.height = "@(TaskModuleUIConstants.CustomForm.Height)";
+            taskModuleSize.width = "@(TaskModuleUIConstants.CustomForm.Width)";
+            taskInfo.size = taskModuleSize;
+        } else {
+            taskInfo.card = adaptiveCardJson;
+            taskInfo.title = "@(TaskModuleUIConstants.AdaptiveCard.Title)";
+            taskModuleSize.height = "@(TaskModuleUIConstants.AdaptiveCard.Height)";
+            taskModuleSize.width = "@(TaskModuleUIConstants.AdaptiveCard.Width)";
+            taskInfo.size = taskModuleSize;
+            microsoftTeams.dialog.adaptiveCard.open(taskInfo, submitHandler);
+        }
+
+        // Set fallback URL
+        taskInfo.fallbackUrl = taskInfo.url;
+
+        if (type.includes('bot'))
+            taskInfo.completionBotId = @Json.Serialize(Configuration["MicrosoftAppId"]);
+
+        // Adjust the size of the task module based on the content
+        microsoftTeams.dialog.url.open(taskInfo, submitHandler);
+    }
+</script>

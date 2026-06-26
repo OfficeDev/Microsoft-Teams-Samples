@@ -1,0 +1,35 @@
+{
+  "name": "msteams-nodejs-tab-sso",
+  "version": "1.0.0",
+  "description": "This sample shows how to implement Azure AD single sign-on support for tabs.",
+  "scripts": {
+    "dev:teamsfx": "npm run start",
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OfficeDev/msteams-samples-hello-world-nodejs.git"
+  },
+  "author": "Microsoft Corp.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/issues"
+  },
+  "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
+  "dependencies": {
+    "@azure/msal-node": "^1.14.3",
+    "config": "^3.3.8",
+    "express": "^4.16.2",
+    "faker": "^6.6.6",
+    "node-fetch": "^2.1.2",
+    "pug": "^2.0.0-rc.4"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^4.0.0",
+    "esbuild": "^0.18.1"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "teams-bot",
+  "version": "1.0.0",
+  "description": "Bot Builder v4 Bot Teams sample",
+  "author": "Microsoft",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+    "start": "node ./index.js",
+    "watch": "nodemon ./index.js",
+    "build": "node build.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+  },
+  "dependencies": {
+    "axios": "^0.21.2",
+    "botbuilder": "^4.18.0",
+    "dotenv": "^8.2.0",
+    "restify": "^10.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "~2.0.4",
+    "esbuild": "^0.18.1"
+  }
+}

@@ -26,6 +26,11 @@ This sample app illustrates a robust CRUD application that operates effectively 
 
 ![tab-support-offline-Mobile](Images/Mobile/tab-support-offline-mobile.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Microsoft Teams offline support tickets sample app:** [Manifest](/samples/TeamsJS/tab-support-offline/nodejs/demo-manifest/tab-support-offline.zip)
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)

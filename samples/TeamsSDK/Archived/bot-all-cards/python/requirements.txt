@@ -1,9 +1,0 @@
-# Microsoft Teams SDK packages
-microsoft-teams-api==2.0.0a31
-microsoft-teams-apps==2.0.0a31
-microsoft-teams-cards==2.0.0a31
-microsoft-teams-common==2.0.0a31
-microsoft-teams-devtools==2.0.0a31
-
-# Environment variables
-python-dotenv>=1.0.0

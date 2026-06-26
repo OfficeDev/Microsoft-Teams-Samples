@@ -28,6 +28,11 @@ If you copy and paste a link from `https://github.com/OfficeDev/Microsoft-Teams-
 ## Interaction with teams
 ![msgext-unfurling-ac-loop-components](Images/msgext-unfurling-ac-loop-components.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Msgext-Unfurling-Adaptive-Card-Loop-Components:** [Manifest](/samples/msgext-unfurling-ac-loop-components/nodejs/demo-manifest/msgext-unfurling-ac-loop-components.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -51,20 +56,20 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### 1. Register you app with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. Youâ€™ll need those later when updating your Teams application manifest and in the .env.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env.
   4. Navigate to **API Permissions**, and make sure to add the follow permissions:
     * Select Add a permission
     * Select Microsoft Graph -> Delegated permissions.
     * `User.Read` (enabled by default)
     * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-  5.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select â€œNeverâ€ for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
+  5.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
 ### 2. Setup
 

@@ -71,6 +71,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "${{PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN}}"
+    "${{PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN}}"
   ]
 }

@@ -1,0 +1,100 @@
+{
+    "id": "23871761-27ee-4e4a-b66a-dc9982ee9b69",
+    "appId": "b638320d-b7d0-4309-aea3-18be9fe55434",
+    "displayName": "teamsTaskModuleBot-aad",
+    "signInAudience": "AzureADMyOrg",
+    "api": {
+        "requestedAccessTokenVersion": 2,
+        "oauth2PermissionScopes": [
+            {
+                "adminConsentDescription": "Allows Teams to call the app's web APIs as the current user.",
+                "adminConsentDisplayName": "Teams can access app's web APIs",
+                "id": "8e039081-acff-4f1e-809b-2d1e36126cba",
+                "isEnabled": true,
+                "type": "User",
+                "userConsentDescription": "Enable Teams to call this app's web APIs with the same rights that you have",
+                "userConsentDisplayName": "Teams can access app's web APIs and make requests on your behalf",
+                "value": "access_as_user"
+            }
+        ],
+        "preAuthorizedApplications": [
+            {
+                "appId": "1fec8e78-bce4-4aaf-ab1b-5451cc387264",
+                "delegatedPermissionIds": [
+                    "8e039081-acff-4f1e-809b-2d1e36126cba"
+                ]
+            },
+            {
+                "appId": "5e3ce6c0-2b1f-4285-8d4b-75ee78787346",
+                "delegatedPermissionIds": [
+                    "8e039081-acff-4f1e-809b-2d1e36126cba"
+                ]
+            },
+            {
+                "appId": "d3590ed6-52b3-4102-aeff-aad2292ab01c",
+                "delegatedPermissionIds": [
+                    "8e039081-acff-4f1e-809b-2d1e36126cba"
+                ]
+            },
+            {
+                "appId": "00000002-0000-0ff1-ce00-000000000000",
+                "delegatedPermissionIds": [
+                    "8e039081-acff-4f1e-809b-2d1e36126cba"
+                ]
+            },
+            {
+                "appId": "bc59ab01-8403-45c6-8796-ac3ef710b3e3",
+                "delegatedPermissionIds": [
+                    "8e039081-acff-4f1e-809b-2d1e36126cba"
+                ]
+            },
+            {
+                "appId": "0ec893e0-5785-4de6-99da-4ed124e5296c",
+                "delegatedPermissionIds": [
+                    "8e039081-acff-4f1e-809b-2d1e36126cba"
+                ]
+            },
+            {
+                "appId": "4765445b-32c6-49b0-83e6-1d93765276ca",
+                "delegatedPermissionIds": [
+                    "8e039081-acff-4f1e-809b-2d1e36126cba"
+                ]
+            },
+            {
+                "appId": "4345a7b9-9a63-4910-a426-35363201d503",
+                "delegatedPermissionIds": [
+                    "8e039081-acff-4f1e-809b-2d1e36126cba"
+                ]
+            }
+        ]
+    },
+    "info": {},
+    "optionalClaims": {
+        "idToken": [],
+        "accessToken": [
+            {
+                "name": "idtyp",
+                "source": null,
+                "essential": false,
+                "additionalProperties": []
+            }
+        ],
+        "saml2Token": []
+    },
+    "publicClient": {},
+    "requiredResourceAccess": [
+        {
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
+            "resourceAccess": [
+                {
+                    "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+                    "type": "Scope"
+                }
+            ]
+        }
+    ],
+    "web": {
+        "implicitGrantSettings": {}
+    },
+    "spa": {}
+}

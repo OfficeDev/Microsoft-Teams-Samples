@@ -1,5 +1,0 @@
-botbuilder-integration-aiohttp>=4.17.1
-aiohttp>=3.10.0
-aiohttp-jinja2>=1.6.0
-jinja2>=3.1.0
-schedule==1.2.2

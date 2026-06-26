@@ -19,6 +19,11 @@ This sample application for Microsoft Teams illustrates how to implement Azure A
 **Interaction with app**
 ![tab-nested-auth](Images/tab-nested-auth.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Nested app authentication:** [Manifest](/samples/TeamsJS/tab-nested-auth/csharp/demo-manifest/tab-nested-auth.zip)
+
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
 
 The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
@@ -36,13 +41,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. Youâ€™ll need those later when updating your Teams application manifest and in the `appsettings.json` files.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the `appsettings.json` files.
   4. Navigate to **Authentication**
       If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
   - Set a redirect URI:
@@ -54,11 +59,11 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       
   5. Navigate to **API Permissions**, and make sure to add the follow permissions:
     -   Select Add a permission
-    -  Â Select Microsoft Graph -\>Â Delegated permissions.
+    -   Select Microsoft Graph -\> Delegated permissions.
         * User.Read (enabled by default)
     -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-  6.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select â€œNeverâ€ for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+  6.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup NGROK
  - Run ngrok - point to port 3978
@@ -144,6 +149,7 @@ In the debug dropdown menu of Visual Studio, select default startup project > **
 - [Nested app authentication](https://review.learn.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/nested-authentication?branch=pr-en-us-10768)
 
 - [SPA Redirect URL](https://learn.microsoft.com/en-us/office/dev/add-ins/develop/enable-nested-app-authentication-in-your-add-in#add-a-trusted-broker-through-spa-redirect)
+
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsJS/tab-nested-auth-csharp" />

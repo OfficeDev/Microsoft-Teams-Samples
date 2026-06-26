@@ -4,7 +4,7 @@ This sample demonstrates how to interact with adaptive cards in Microsoft Teams 
 
 ## Prerequisites
 
-- [Python >=3.11](https://www.python.org/downloads/)
+- [Python >=3.12,<3.15](https://www.python.org/downloads/)
 - [pip](https://pip.pypa.io/en/stable/installation/)
 - [uv](https://docs.astral.sh/uv/)
 
@@ -35,4 +35,4 @@ python main.py
 
 The bot will start listening on `http://localhost:3978`.
 
-Once the bot is running, follow the main [README.md](../../README.md) to provision your app and side-load it into Teams using the [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/).
+Refer to the main [README.md](../../README.md) to interact with your bot in the agentsplayground or in Teams.

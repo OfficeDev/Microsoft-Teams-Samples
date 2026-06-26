@@ -1,0 +1,69 @@
+{
+  "name": "office-addin-taskpane",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+  },
+  "license": "MIT",
+  "config": {
+    "app_to_debug": "outlook",
+    "app_type_to_debug": "desktop",
+    "dev_server_port": 3000
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "dev-server": "webpack serve --mode development",
+    "lint": "office-addin-lint check",
+    "lint:fix": "office-addin-lint fix",
+    "signin": "office-addin-dev-settings m365-account login",
+    "signout": "office-addin-dev-settings m365-account logout",
+    "prettier": "office-addin-lint prettier",
+    "start": "office-addin-debugging start ../appManifest/build/appManifest.local.zip",
+    "stop": "office-addin-debugging stop ../appManifest/build/manifest.local.json",
+    "validate": "office-addin-manifest validate ../appManifest/build//manifest.local.json",
+    "watch": "webpack --mode development --watch"
+  },
+  "dependencies": {
+    "@fluentui/react-components": "^9.20.0",
+    "core-js": "^3.9.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "regenerator-runtime": "^0.13.7",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/office-js-preview": "^1.0.389",
+    "@types/office-runtime": "^1.0.23",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "acorn": "^8.5.0",
+    "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^9.0.1",
+    "eslint-plugin-office-addins": "^2.1.5",
+    "file-loader": "^6.2.0",
+    "html-loader": "^4.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "office-addin-cli": "^1.6.5",
+    "office-addin-debugging": "^5.1.6",
+    "office-addin-dev-certs": "^1.13.5",
+    "office-addin-lint": "^2.2.5",
+    "office-addin-manifest": "^1.13.6",
+    "office-addin-prettier-config": "^1.2.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "source-map-loader": "^3.0.0",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.3.5",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "4.13.1"
+  },
+  "prettier": "office-addin-prettier-config",
+  "browserslist": [
+    "ie 11"
+  ]
+}

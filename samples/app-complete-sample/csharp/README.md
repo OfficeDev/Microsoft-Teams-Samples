@@ -31,6 +31,11 @@ Develop a robust Microsoft Teams bot using C# and Bot Framework v4, featuring se
 
 ![ Module ](AppCompleteSample/Images/Sample.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Microsoft Teams Bot:** [Manifest](/samples/app-complete-sample/csharp/demo-manifest/app-complete-sample.zip)
+
 ## Prerequisites
 
 * Install Git for windows: https://git-for-windows.github.io/

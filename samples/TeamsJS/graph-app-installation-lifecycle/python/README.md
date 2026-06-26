@@ -10,6 +10,11 @@ This sample app demonstrates the installation lifecycle for Teams [Apps](https:/
 
 ![](Images/GraphAppInstallationLifecycleGif.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**App Installation:** [Manifest](/samples/graph-app-installation-lifecycle/python/appManifest/build/manifest.localhost.json)
+
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 - To test locally, [Python](https://www.python.org/downloads/) must be installed on your development machine (version 3.7 or higher)
@@ -32,7 +37,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-### 1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+### 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -145,6 +150,7 @@ The application provides a comprehensive interface for managing Teams app instal
 ![Clicking Get Info](Images/7.clicking_get_info.png)
 
 ![Clicking Update](Images/8.clicking_update.png)
+
 
 
 ## Further reading

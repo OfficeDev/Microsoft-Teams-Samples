@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
+    integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+    integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m"
+    crossorigin="anonymous"></script>
+
+<div class="col-md-8">
+    <section id="configSection">
+        <div id="primary" style="display: none">
+            <h2 style="display:inline-block">Hello</h2>
+            <div id="logoutDiv" style="display: inline-block">
+                <button onclick="logOut()" style="margin-left: 40px;">Sign Out</button>
+            </div>
+        </div>
+
+        <div id="divConfig" style="display: none">
+            <h3>Send notifications when tasks are:</h3>
+            <form id="configForm">
+                <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Created
+                <br>
+                <br>
+            </form>
+        </div>
+
+        <div id="divLogin">
+            <h2>Please Sign In:</h2>
+            <!-- Login button -->
+            <button onclick="initiateLogin()">Sign In</button>
+        </div>
+
+        <div id="divError" style="display: none"></div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    microsoftTeams.initialize();
+    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+        var radios = document.getElementsByName('notificationType');
+        var eventType = '';
+        if (radios[0].checked) {
+            eventType = radios[0].value;
+        } else {
+            eventType = radios[1].value;
+        }
+
+        microsoftTeams.settings.setSettings({
+            entityId: eventType,
+            contentUrl: window.location.origin + "/SetupAuth",
+            removeUrl: window.location.origin + "/SetupAuth",
+            configName: eventType
+        });
+
+        microsoftTeams.settings.getSettings(function (settings) {
+            // We get the Webhook URL in settings.webhookUrl which needs to be saved.
+            $.ajax({
+                url: '/Connector/Save',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    webhookUrl: settings.webhookUrl,
+                    eventType: eventType
+                }),
+                success: function (data, textStatus, jQxhr) {
+                    console.log('webhook created successfully.');
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+        });
+
+        saveEvent.notifySuccess();
+    });
+
+    microsoftTeams.settings.registerOnRemoveHandler(function (removeEvent) {
+        var removeCalled = true;
+    });
+
+    function onClick() {
+        // Enable the save button.
+        microsoftTeams.settings.setValidityState(true);
+    }
+
+    function initiateLogin() {
+        login(window.location.origin + "/SimpleStart");
+    }
+
+    function login(url) {
+        hideProfileAndError();
+        microsoftTeams.authentication.authenticate({
+            url: url,
+            width: 600,
+            height: 535,
+            successCallback: function (result) {
+                console.log("Login succeeded: " + result);
+                microsoftTeams.authentication.getAuthToken().then((result) => {
+                    idToken = result;
+                    decodingJWT(result)
+                    $("#primary").show();
+                    $("#divConfig").show();
+                    $("#divLogin").hide();
+            });
+            },
+            failureCallback: function (reason) {
+                console.log("Login failed: " + reason);
+                handleAuthError(reason);
+            }
+        });
+    }
+
+    function decodingJWT(token) {
+            $.ajax({
+                type: 'POST',
+                url: '/decodeToken',
+                dataType: 'json',
+                data: {
+                    'idToken': token,
+                },
+                success: function (responseJson) {
+                    const userDetails = responseJson;
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                }
+            });
+        }
+
+    function logOut() {
+        hideProfileAndError();
+        // Clear the session.
+        localStorage.clear();
+        $("#primary").hide();
+        $("#divConfig").hide();
+        $("#divLogin").show();
+        microsoftTeams.settings.setValidityState(false);
+    }
+
+    function getUserProfile(accessToken) {
+        $.ajax({
+            url: "https://graph.microsoft.com/v1.0/me/",
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", "Bearer " + accessToken);
+            },
+            success: function (profile) {
+                $("#primary h2").html(`Welcome ${profile.displayName}!`);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                $("#divError").text(errorThrown).show();
+                $("#divProfile").hide();
+            },
+        });
+    }
+
+    // Show error information
+    function handleAuthError(reason) {
+        $("#divError").text(reason).show();
+        $("#divConfig").hide();
+        $("#primary").hide();
+    }
+
+    // Clear all information in tab
+    function hideProfileAndError() {
+        $("#divError").text("").hide();
+        $("#divConfig").hide();
+        $("#primary").hide();
+    }
+</script>
+
+</html>

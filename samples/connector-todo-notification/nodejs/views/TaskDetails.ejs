@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Connector App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        #mainDiv {
+            padding: 4%;
+        }
+    </style>
+</head>
+
+<body id=mainDiv>
+    <h4>Task Details</h4>
+    <br />
+    <button type="button" class="btn btn-outline-info" id="btnAddApp">Create task</button>
+    <br />
+    <br />
+    <div>
+        <h5>List of tasks:</h5>
+        <table border="1" id="task-list-table" class="table table-hover">
+            <thead>
+                <tr>
+                    <td>Sr No.</td>
+                    <td>Task Name</td>
+                    <td>Description</td>
+                    <td>Assigned To</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <script>
+        var tasks =  <%-taskList%>
+            $(document).ready(function () {
+                debugger;
+                console.log("task" + tasks);
+                taskDetails(tasks);
+            })
+
+        // show the list of top 10 apps installed in a team
+        function taskDetails(tasks) {
+            var list = tasks.task;
+            var i;
+            for (i = 0; i < list.length; i++) {
+                $('#task-list-table').append(`<tr style="padding:1px" >
+        <td><label id=${i + 1}>${i + 1}</label></td>
+        <td>${list[i].Title}</td>
+        <td>${list[i].Description}</td>
+        <td>${list[i].Assigned}</td>
+         </tr>`);
+            };
+        }
+
+        $("#btnAddApp").on('click', function (e) {
+            window.location.href = window.location.origin + "/Create";
+        })
+    </script>
+</body>
+
+</html>

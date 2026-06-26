@@ -1,4 +1,0 @@
-[project]
-name = "msgext-action-preview"
-version = "1.0.0"
-requires-python = ">=3.12,<3.15"

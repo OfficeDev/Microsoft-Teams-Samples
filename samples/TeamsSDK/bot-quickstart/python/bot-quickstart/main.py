@@ -17,11 +17,7 @@ app = App()
 async def send_welcome_message(ctx: ActivityContext) -> None:
     """Sends a welcome message with available commands."""
     welcome_message = (
-        "Welcome to the Teams Quickstart Bot! Here are some commands you can try:\n"
-        "- `mention me`: I will mention you in a message.\n"
-        "- `whoami`: I will tell you your user information.\n"
-        "- `welcome`: I will send a welcome message.\n"
-        "- `hi` or `hello`: I will echo back your message."
+        "Welcome to the Teams Quickstart Bot!"
     )
     await ctx.send(MessageActivityInput(text=welcome_message))
 

@@ -10,7 +10,7 @@ A Microsoft Teams bot with SSO authentication and Microsoft Graph integration.
 
 ## Prerequisites
 
-- [Python >=3.11](https://www.python.org/downloads/)
+- [Python >=3.12, <3.15](https://www.python.org/downloads/)
 - pip (recommended) or [uv](https://docs.astral.sh/uv/)
 - [Visual Studio Code](https://code.visualstudio.com/) with [Microsoft 365 Agents Toolkit](https://aka.ms/teams-toolkit) extension
 

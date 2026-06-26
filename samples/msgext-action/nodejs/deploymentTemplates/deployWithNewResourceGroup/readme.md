@@ -25,6 +25,7 @@ BotApp must be deployed prior to AzureBot.
 More info: https://docs.microsoft.com/en-us/azure/bot-service/tutorial-provision-a-bot?view=azure-bot-service-4.0&tabs=userassigned%2Cnewgroup#create-an-identity-resource
 
 
+
 ## Parameters for template-AzureBot-new-rg.json:
 
 - **groupName**: (required)           The name of the new Resource Group.

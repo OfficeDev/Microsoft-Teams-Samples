@@ -30,6 +30,11 @@ This sample showcases muting/unmuting Teams meeting audio directly from the side
 **Interaction with Teams Themes**
 ![TeamsTheme](Images/TeamsThemes.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Meeting-Tabs:** [Manifest](/samples/TeamsJS/meeting-tabs/csharp/demo-manifest/meeting-tabs.zip)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -76,7 +81,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
    **Register your application with Azure AD:**
 
-    - Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+    - Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
     - Select **New Registration** and on the *register an application page*, set following values:
            * Set **name** to your app name.
@@ -84,7 +89,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
            * Leave **Redirect URI** empty.
            * Choose **Register**.
 
-    - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. Youâ€™ll need those later when updating your Teams application manifest and in the appsettings.json.
+    - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 
     - Navigate to **API Permissions**, and make sure to add the follow permissions:
     * Select Add a permission

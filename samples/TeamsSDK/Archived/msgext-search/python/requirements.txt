@@ -1,5 +1,0 @@
-botbuilder-core==4.17.1
-botbuilder-integration-aiohttp==4.17.1
-botbuilder-schema==4.17.1
-python-dotenv==1.1.0
-requests==2.33.1

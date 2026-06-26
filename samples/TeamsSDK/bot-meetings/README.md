@@ -13,12 +13,6 @@ This sample demonstrates how to handle real-time meeting events and retrieve mee
 - [Sample Implementations](#sample-implementations)
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
-  - [1. Setup Local Tunnel](#1-setup-local-tunnel)
-  - [2. Provision the App with the Teams Developer CLI](#2-provision-the-app-with-the-teams-developer-cli)
-  - [3. Add Graph API Permissions and Grant Admin Consent](#3-add-graph-api-permissions-and-grant-admin-consent)
-  - [4. Configure Application Access Policy](#4-configure-application-access-policy)
-  - [5. Add RSC Permissions and Enable Meeting Participant Events](#5-add-rsc-permissions-and-enable-meeting-participant-events)
-  - [6. Setup Code](#6-setup-code)
 - [Running the Sample](#running-the-sample)
 - [Troubleshooting](#troubleshooting)
 - [Further Reading](#further-reading)
@@ -40,9 +34,14 @@ This sample demonstrates how to handle real-time meeting events and retrieve mee
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
-- [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/installation): `npm install -g @microsoft/teams.cli`
 
 ## Setup Instructions
+
+To run these samples in the Teams Client, you need to provision your app in a M365 Tenant, and configure the app to your DevTunnels URL.
+
+1. Install the tool DevTunnels https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started
+2. Get Access to a M365 Developer Tenant https://learn.microsoft.com/en-us/office/developer-program/microsoft-365-developer-program-get-started
+3. Create a Teams App with the Bot Feature in the Teams Developer Portal (in your tenant) https://dev.teams.microsoft.com
 
 ### 1. Setup Local Tunnel
 
@@ -60,116 +59,70 @@ devtunnel host -p 3978 --allow-anonymous
 ngrok http 3978 --host-header="localhost:3978"
 ```
 
-Take note of the tunnel URL (e.g. `https://12345.devtunnels.ms` or `https://1234.ngrok-free.app`); you'll use it as the bot messaging endpoint and tunnel domain in subsequent steps.
 
-### 2. Provision the App with the Teams Developer CLI
+### 2. Register Azure AD Application
 
-The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions your Microsoft Entra app, Teams-managed bot registration, Teams app manifest, and writes the credentials directly into your project's environment file in a single command.
+Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-Sign in with your M365 account:
+**A) Create New Registration:**
+- Select **New Registration** and on the *register an application page*, set following values:
+  - Set **name** to your app name
+  - Choose the **supported account types** (any account type will work)
+  - Leave **Redirect URI** empty
+  - Choose **Register**
 
-```bash
-teams login
-```
+**B) Save Application Details:**
+- On the overview page, copy and save the **Application (client) ID** and **Directory (tenant) ID**
+- You'll need these later when updating your Teams application manifest and configuration files
 
-This sample uses a Teams-managed bot (registered with the Teams Developer Portal). The bot **cannot** be hosted as an Azure Bot resource - meeting event subscriptions are only available on Teams-managed bots.
+**C) Create Client Secret:**
+- Under **Manage**, navigate to **Certificates & secrets**
+- In the **Client secrets** section, click on **+ New client secret**
+- Add a description (e.g., "Teams Bot Secret") and select an expiration period
+- Click **Add**
+- **Important**: Copy the client secret **Value** immediately and save it securely. You won't be able to see it again!
 
-From the language-specific sample directory you want to run, provision the app and credentials. The `--teams-managed` flag is the default but is shown here for clarity.
-
-For Node.js and Python (`nodejs/bot-meetings` or `python/bot-meetings`):
-
-```bash
-teams app create --name "Bot Meetings" --teams-managed --endpoint https://<your-tunnel-domain>/api/messages --env .env
-```
-
-For .NET (`dotnet/bot-meetings`):
-
-```bash
-teams app create --name "Bot Meetings" --teams-managed --endpoint https://<your-tunnel-domain>/api/messages --env appsettings.json
-```
-
-This single command creates a Microsoft Entra app registration, registers a Teams-managed bot pointing at your tunnel endpoint, generates the Teams app manifest, and writes `CLIENT_ID`, `CLIENT_SECRET`, and `TENANT_ID` into the environment file you specified (PascalCase keys under a `Teams` section for `appsettings.json`).
-
-The CLI prints a Teams app ID on success - save it; you'll use it in step 5 when adding RSC permissions.
-
-> **Tip**: Using an AI coding assistant (GitHub Copilot CLI, Claude Code, Cursor, VS Code)? Install the [`teams-dev` agent skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) to drive the CLI provisioning, manifest, and RSC permission steps from natural language - your assistant runs the right commands, manages credentials, and can also help guide you through the portal-only steps below (Graph permissions, application access policy, and meeting event subscriptions).
-
-### 3. Add Graph API Permissions and Grant Admin Consent
-
-The CLI provisions a baseline Microsoft Entra app, but the meeting Graph API permissions used by this sample must still be added manually in the portal:
-
-- Open your app registration in the [Microsoft Entra ID - App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal (it will be named "Bot Meetings" from step 2)
-- Navigate to **API Permissions** -> **Add a permission** -> **Microsoft Graph**
-- Under **Delegated permissions**, ensure `User.Read` is present (added by default)
-- Under **Application permissions**, add:
+**D) Configure API Permissions:**
+- Navigate to **API Permissions**
+- Click **Add a permission**
+- Select **Microsoft Graph** -> **Delegated permissions**:
+  - `User.Read` (enabled by default)
+- Select **Microsoft Graph** -> **Application permissions**:
   - `OnlineMeetings.Read.All` (for reading meeting information)
   - `OnlineMeetingTranscript.Read.All` (for reading meeting transcripts)
 - Click **Add permissions**
-- Click **Grant admin consent** to consent for the required permissions
+- Click **Grant admin consent** to grant admin consent for the required permissions
 
 > **Note**: Admin consent is required for application permissions. If you are not a Global Administrator, contact your tenant admin to grant consent, or use this link: `https://login.microsoftonline.com/common/adminconsent?client_id=<YOUR_APP_ID>`
 
-### 4. Configure Application Access Policy
-
-Online meeting application access policies cannot be configured through the Teams CLI; they must be created and granted via PowerShell.
+**E) Configure Application Access Policy:**
 
 Follow this link - [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
 Follow this link - [Manage policies via PowerShell](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-managing-teams#manage-policies-via-powershell)
 
+
 ![Policy](Images/Policy.png)
 
-### 5. Add RSC Permissions and Enable Meeting Participant Events
+### 3. Create Bot Registration
 
-**Add RSC permissions via the Teams CLI:**
+Navigate to the Teams Developer Portal http://dev.teams.microsoft.com
 
-Using the Teams app ID returned by `teams app create` in step 2, add the resource-specific consent permissions this sample requires:
+**Create a new Bot resource:**
 
-```bash
-teams app rsc add <teamsAppId> OnlineMeeting.ReadBasic.Chat --type Application
-teams app rsc add <teamsAppId> OnlineMeetingTranscript.Read.Chat --type Application
-teams app rsc add <teamsAppId> ChannelMeeting.ReadBasic.Group --type Application
-teams app rsc add <teamsAppId> OnlineMeetingParticipant.Read.Chat --type Application
-```
+1. Navigate to `Tools->Bot management`, and add a `New bot`
+2. In Configure, paste the Endpoint address from devtunnels and append `/api/messages`
+3. In Client secrets, create a new secret and save it for later
 
-These permissions allow the bot to:
-- Read basic meeting information
-- Access meeting transcripts
-- Read channel meeting details
-- Monitor meeting participant events
+> Note. If you have access to an Azure Subscription in the same Tenant, you can also create the Azure Bot resource ([learn more](https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=singletenant)).
 
-**Enable meeting participant events:**
+**Enable Meeting Participant Events:**
 
-To receive real-time participant join and leave events, you must enable Meeting event subscriptions for `Participant Join` and `Participant Leave` on the bot registration. The Teams Developer CLI does not currently expose meeting-event subscriptions, so this toggle is configured in the [Teams Developer Portal](https://dev.teams.microsoft.com): open the bot the CLI created under **Tools** -> **Bot management**, then enable the participant join/leave events. See the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#receive-meeting-participant-events) documentation for details.
+To receive real-time participant join and leave events, enable Meeting event subscriptions for `Participant Join` and `Participant Leave` in your bot on Teams Developer Portal by following the guidance in the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#receive-meeting-participant-events) documentation.
 
 ![Extra Setup](Images/event_subscription.png)
 
-**Update manifest scopes:**
-
-Ensure the `bots` entry in `manifest.json` includes the `team`, `personal`, and `groupChat` scopes so the bot can be added to meetings:
-
-```json
-"bots": [
-  {
-    "botId": "",
-    "scopes": [
-      "team",
-      "personal",
-      "groupChat"
-    ],
-    "isNotificationOnly": false
-  }
-]
-```
-
-Re-package and re-upload the manifest if you make changes:
-
-```bash
-teams app package
-teams app update <teamsAppId> --file appPackage/<package>.zip
-```
-
-### 6. Setup Code
+### 4. Setup Code
 
 **Navigate to your chosen language sample directory:**
 
@@ -201,6 +154,52 @@ For Python:
 pip install -e .
 ```
 
+**Configure environment variables:**
+
+Update the configuration file for your selected language (for Node.js/Python, the `.env` file; for .NET, `appsettings.json` or `launchSettings.json`) with the values from step 2 (Azure AD app registration):
+
+For NodeJS and Python you will need a `.env` file with the following fields:
+
+```
+TENANT_ID=<Your Directory (tenant) ID>
+CLIENT_ID=<Your Application (client) ID>
+CLIENT_SECRET=<Your client secret value>
+```
+
+For .NET you need to add these values to `appsettings.json` or `launchSettings.json` using the next syntax:
+
+appSettings.json:
+
+```json
+"urls" : "http://localhost:3978",
+"Teams": {
+    "ClientID": "<Your Application (client) ID>",
+    "ClientSecret": "<Your client secret value>",
+    "TenantId": "<Your Directory (tenant) ID>"
+  },
+```
+
+Or to use Env Vars from the profile defined in `launchSettings.json` (using the Environment Configuration Provider):
+
+```json
+ "teamsbot": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:3978",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Teams__TenantId": "YOUR_TenantId",
+        "Teams__ClientID": "YOUR_ClientId",
+        "Teams__ClientSecret": "YOUR_ClientSecret"
+      }
+    }
+```
+
+> **Pro Tip**: To obtain the TenantId, ClientId and SecretId you can use the Azure CLI with: `az ad app credential reset --id $appId`
+> 
+> Note. If you don't have access to an Azure Subscription you can still use the Azure CLI, make sure you login with `az login --allow-no-subscription`
+
 **Start the bot:**
 
 For Node.js:
@@ -218,6 +217,72 @@ For Python:
 python app.py
 ```
 
+### 5. Setup Teams App Manifest
+
+**Edit the manifest:**
+
+- Navigate to the `appManifest/` or `appPackage/` folder
+- Edit `manifest.json` and replace:
+  - `{MicrosoftAppId}` or `<<MICROSOFT-APP-ID>>` - Replace with your Application (client) ID from step 2 (appears in multiple places)
+  - `<<DOMAIN-NAME>>` - Replace with your tunnel domain:
+    - For ngrok: `1234.ngrok-free.app` (from `https://1234.ngrok-free.app`)
+    - For dev tunnels: `12345.devtunnels.ms`
+
+The scopes section must include team, and groupChat:
+
+```json
+"bots": [
+  {
+    "botId": "",
+    "scopes": [
+      "team",
+      "personal",
+      "groupChat"
+    ],
+    "isNotificationOnly": false
+  }
+]
+```
+
+**Configure RSC Permissions:**
+
+Add the following RSC (Resource-Specific Consent) permissions to your Teams app `manifest.json` file in the `webApplicationInfo.authorization.permissions.resourceSpecificPermissions` array:
+
+```json
+{
+    "name": "OnlineMeeting.ReadBasic.Chat",
+    "type": "Application"
+},
+{
+    "name": "OnlineMeetingTranscript.Read.Chat",
+    "type": "Application"
+},
+{
+    "name": "ChannelMeeting.ReadBasic.Group",
+    "type": "Application"
+},
+{
+    "name": "OnlineMeetingParticipant.Read.Chat",
+    "type": "Application"
+}
+```
+
+These permissions allow the bot to:
+- Read basic meeting information
+- Access meeting transcripts
+- Read channel meeting details
+- Monitor meeting participant events
+
+**Create app package:**
+
+- Zip up the contents of the `appManifest/` or `appPackage/` folder to create a `manifest.zip`
+
+**Upload to Teams:**
+
+- In Microsoft Teams, go to **Apps** (left sidebar)
+- Click **Manage your apps** → **Upload an app** → **Upload a custom app**
+- Select the `manifest.zip` file
+
 ## Running the Sample
 
 Once the bot is running and added to Teams, you can interact with it in meetings to:
@@ -228,22 +293,23 @@ Once the bot is running and added to Teams, you can interact with it in meetings
 
 ## Troubleshooting
 
-- If Teams cannot communicate with your bot, verify your tunnel URL is reachable
-- Ensure your `.env` or `appsettings.json` file is set up correctly
+- If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable
+- Ensure your .env or appsettings file is setup correctly
 - Verify that admin consent has been granted for the required Graph API permissions
 - Check that the application access policy has been configured correctly for your user
-- Confirm that Meeting event subscriptions are enabled in the bot registration (in the [Teams Developer Portal](https://dev.teams.microsoft.com), under **Tools** -> **Bot management** -> your bot)
+- Confirm that Meeting event subscriptions are enabled in the bot registration
+- Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors (not available in Teams Developer Portal)
 
 ## Further Reading
 
 ### Teams Development
 - [Microsoft Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/) - Official Microsoft Teams platform documentation
-- [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) - Command-line provisioning for Teams apps
-- [`teams-dev` Agent Skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) - AI coding assistant skill that drives the Teams Developer CLI via natural language
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/) - Comprehensive guide for Teams app development
 
 ### Meeting Events & Transcripts
 - [Meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#receive-meeting-participant-events) - Real-time meeting participant events
 - [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy) - Application access for online meetings
 
 ### Tools & Resources
-- [Teams Developer Portal](https://dev.teams.microsoft.com) - Manage Teams-managed bot registrations and meeting event subscriptions
+- [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) - VS Code extension for Teams development
+- [Azure Bot Service](https://azure.microsoft.com/services/bot-services/) - Cloud-based bot development service

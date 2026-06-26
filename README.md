@@ -6,8 +6,6 @@
 
 ## Welcome to the Teams Samples Repo
 
-[![Sample code build status](https://github.com/OfficeDev/Microsoft-Teams-Samples/actions/workflows/build-complete-samples.yml/badge.svg)](https://github.com/OfficeDev/Microsoft-Teams-Samples/actions/workflows/build-complete-samples.yml)
-
 This repository features samples using Teams SDK and TeamsJS. These samples were created to help developers design and build collaborative and rich AI-powered experiences for Microsoft Teams. Teams SDK reduces boilerplate code and external dependencies while providing native AI capabilities and Teams-specific abstractions. TeamsJS provides the client-side APIs that let apps integrate with the Microsoft Teams host and build contextual, interactive experiences inside Teams. 
 
 Teams SDK supports C#, JavaScript, and Python. 

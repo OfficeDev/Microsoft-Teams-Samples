@@ -25,6 +25,12 @@ This sample demonstrates the Share to Teams feature, allowing users to seamlessl
 
 ![App linkunfurling in share to teams](Images/AppLinkUnfurling.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your Teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**App check-in location:** [Manifest](/samples/app-link-unfurling-in-share-to-teams/python/demo-manifest/app-link-unfurling-stt.zip)
+
 ## Prerequisites
 
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program).

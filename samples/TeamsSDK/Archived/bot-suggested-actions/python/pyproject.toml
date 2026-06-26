@@ -1,8 +1,0 @@
-[project]
-name = "bot-suggested-actions"
-version = "1.0.0"
-requires-python = ">=3.12,<3.15"
-dependencies = [
-    "aiohttp>=3.9.0",
-    "botbuilder-integration-aiohttp>=4.14.5",
-]

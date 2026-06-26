@@ -12,7 +12,9 @@ This sample demonstrates how to use task modules (dialogs) in Microsoft Teams us
 - [How to run these samples](#how-to-run-these-samples)
   - [Run in the Teams Client](#run-in-the-teams-client)
     - [Configure DevTunnels](#configure-devtunnels)
-  - [Provision with the Teams Developer CLI](#provision-with-the-teams-developer-cli)
+    - [Provisioning the Teams Application](#provisioning-the-teams-application)
+  - [Configure the new project to use the new Teams Bot Application](#configure-the-new-project-to-use-the-new-teams-bot-application)
+  - [Pro Tip: Read the configuration settings using the Azure CLI](#pro-tip-read-the-configuration-settings-using-the-azure-cli)
 - [Troubleshooting](#troubleshooting)
 - [Further Reading](#further-reading)
 
@@ -54,72 +56,79 @@ The bot supports the following functionalities:
 | Typescript | Node.js | [nodejs/bot-task-modules](nodejs/bot-task-modules/README.md) |
 | Python | Python | [python/bot-task-modules](python/bot-task-modules/README.md) |
 
-# How to run these samples
+## How to run these samples
 
-You can run these samples locally in the Teams Client after you have provisioned the Teams app, written its credentials into your project's environment file, and started the bot against a public DevTunnels URL.
+### Run in the Teams Client
 
-## Run in the Teams Client
+In the Teams client after you have provisioned the Teams Application, configured the application with your local DevTunnels URL, and sideloaded the app.
 
-To run these samples in the Teams Client, you need to provision your app in an M365 tenant and configure the app to your DevTunnels URL.
+1. Install the tool DevTunnels https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started
+2. Get Access to a M365 Developer Tenant https://learn.microsoft.com/en-us/office/developer-program/microsoft-365-developer-program-get-started
+3. Create a Teams App with the Bot Feature in the Teams Developer Portal (in your tenant) https://dev.teams.microsoft.com
 
-1. Install the [DevTunnels CLI](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started)
-2. Get access to an [M365 Developer Tenant](https://learn.microsoft.com/en-us/office/developer-program/microsoft-365-developer-program-get-started)
-3. Install the [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/installation): `npm install -g @microsoft/teams.cli`
+#### Configure DevTunnels
 
-### Configure DevTunnels
-
-Create a persistent tunnel for port 3978 with anonymous access:
+Create a persistent tunnel for the port 3978 with anonymous access
 
 ```bash
-devtunnel create -a my-tunnel
-devtunnel port create -p 3978 my-tunnel
+devtunnel create my-tunnel --allow-anonymous
+devtunnel port create my-tunnel -p 3978
 devtunnel host my-tunnel
 ```
 
-Take note of the URL shown after *Connect via browser:*
+Take note of the URL shown after Connect via browser:
 
-## Provision with the Teams Developer CLI
+#### Provisioning the Teams Application
 
-The [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/) provisions your Microsoft Entra app, Teams-managed bot registration, Teams app manifest, and writes the credentials directly into your project's environment file in a single command.
+Navigate to the Teams Developer Portal http://dev.teams.microsoft.com
 
-Sign in with your M365 account:
+##### Create a new Bot resource
 
-```bash
-teams login
+1. Navigate to `Tools->Bot management`, and add a `New bot`
+2. In Configure, paste the Endpoint address from devtunnels and append `/api/messages`
+3. In Client secrets, create a new secret and save it for later
+
+> **Note.** If you have access to an Azure Subscription in the same Tenant, you can also create the Azure Bot resource ([learn more](https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=singletenant)).
+
+##### Create a new Teams App
+
+1. Navigate to `Apps` and create a `New App`
+2. Fill the required values in Basic information (short and long name, short and long description and App URLs)
+3. In `App features->Bot` select the bot you created previously
+4. Select `Preview in Teams` to sideload the app
+
+> **Note.** When using an Azure Bot resource, provide the ClientID instead of selecting an existing bot.
+
+### Configure the new project to use the new Teams Bot Application
+
+For NodeJS you will need a `.env` file with the next fields:
+
+```
+TENANT_ID=
+CLIENT_ID=
+CLIENT_SECRET=
 ```
 
-From the language-specific sample directory you want to run, provision the app and credentials.
+### Pro Tip: Read the configuration settings using the Azure CLI
 
-For Node.js and Python (`nodejs/bot-task-modules` or `python/bot-task-modules`):
+To obtain the TenantId, ClientId and SecretId you can use the Azure CLI with:
 
-```bash
-teams app create --name "Bot Task Modules" --endpoint https://<your-devtunnel-domain>/api/messages --env .env
-```
-
-For .NET (`dotnet/bot-task-modules`):
+> **Note.** If you don't have access to an Azure Subscription you can still use the Azure CLI, make sure you login with `az login --allow-no-subscription`
 
 ```bash
-teams app create --name "Bot Task Modules" --endpoint https://<your-devtunnel-domain>/api/messages --env appsettings.json
+az ad app credential reset --id $appId
 ```
-
-This single command creates a Microsoft Entra app registration, registers a Teams-managed bot pointing at your DevTunnels endpoint, generates and uploads the Teams app manifest, and writes `CLIENT_ID`, `CLIENT_SECRET`, and `TENANT_ID` into the environment file you specified (PascalCase keys under a `Teams` section for `appsettings.json`).
-
-Once provisioning completes, start your bot - the sample will pick up the credentials automatically - and sideload the app from the prompt in Teams. See the [Teams Developer CLI documentation](https://microsoft.github.io/teams-sdk/cli/) for the full command reference.
-
-> **Tip**: Using an AI coding assistant (GitHub Copilot CLI, Claude Code, Cursor, VS Code)? Install the [`teams-dev` agent skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) to drive these CLI steps from natural language - your assistant runs the right commands, manages credentials, and guides you through bot registration end-to-end.
 
 ## Troubleshooting
 
 - If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable.
-- Ensure your `.env` or `appsettings.json` file is set up correctly.
+- Ensure your .env or appsettings file is setup correctly.
 - Verify that the task module URL (for custom form) is properly configured and accessible.
 - For custom form issues, ensure your bot endpoint is serving static files correctly.
-- Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors.
+- The Azure Bot Service (ABS) Channels UI is very useful to see any errors in the endpoint (only available in ABS, not in Teams Developer Portal).
 
 ## Further Reading
 
 - [Task Modules in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
 - [Invoke and dismiss task modules](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/task-modules/invoking-task-modules)
 - [Microsoft Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/)
-- [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/)
-- [`teams-dev` Agent Skill](https://microsoft.github.io/teams-sdk/developer-tools/agent-skills) - AI coding assistant skill that drives the Teams Developer CLI via natural language

@@ -26,6 +26,11 @@ This sample application illustrates the complete lifecycle of channels in Micros
    
   ![GraphChannelLifeCycleModule](Images/GraphChannelLifeCycleModule.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Channel life cycle:** [Manifest](/samples/TeamsJS/graph-channel-lifecycle/csharp/demo-manifest/graph-channel-lifecycle.zip)
+
 
 ## Prerequisites
 
@@ -50,7 +55,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### Register your app with Azure AD.
 
-  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -66,7 +71,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 
 ## Setup.
-1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
 **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
@@ -130,6 +135,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 
   [Grpah-Channel-lifecycel](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
+
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsJS/graph-channel-lifecycle-nodejs" />

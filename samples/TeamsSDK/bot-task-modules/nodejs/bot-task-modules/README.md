@@ -22,4 +22,4 @@ This sample demonstrates Task Modules for Microsoft Teams using TypeScript.
 
 The bot will start listening on `http://localhost:3978`.
 
-Once the bot is running, follow the main [README.md](../../README.md) to provision your app and side-load it into Teams using the [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/).
+Refer to the main [README.md](../../README.md) to interact with your bot in the agentsplayground or in Teams.
