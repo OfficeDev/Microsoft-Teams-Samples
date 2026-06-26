@@ -1,0 +1,28 @@
+{
+    "name": "teams-bot",
+    "version": "1.0.0",
+    "description": "Bot formatting cards",
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "dev:teamsfx": "npm run dev",
+        "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+        "start": "node ./index.js",
+        "watch": "nodemon ./index.js",
+        "build": "node build.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+    },
+    "dependencies": {
+        "botbuilder": "^4.23.3",
+        "dotenv": "^16.6.1",
+        "express": "^4.22.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.14",
+        "esbuild": "^0.27.4"
+    }
+}

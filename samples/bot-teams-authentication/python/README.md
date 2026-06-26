@@ -38,15 +38,10 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 - **Bot Teams Authentication Teams Desktop**
 ![bot-teams-auth](Images/Bot_Teams_Auth_Desktop.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Teams Auth Bot:** [Manifest](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
-
 ## Prerequisites
 ### Register your app with Azure AD.
 
-  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -82,7 +77,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot
  Create [Bot Framework registration resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure

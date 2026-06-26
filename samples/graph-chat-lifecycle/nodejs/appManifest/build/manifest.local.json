@@ -1,0 +1,55 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.1",
+    "id": "caba76db-28d2-4438-ab68-e5358e9d4c22",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.microsoft.com/privacy",
+        "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "name": {
+        "short": "Chat Lifecycle App",
+        "full": "Chat Lifecycle App"
+    },
+    "description": {
+        "short": "Manage chat lifecycle in Teams with Microsoft Graph APIs using Node.js.",
+        "full": "This sample demonstrates how to manage the chat lifecycle in Microsoft Teams using Node.js and Microsoft Graph APIs, including creating chats, adding members, and deleting members."
+    },
+    "icons": {
+        "outline": "outline.png",
+        "color": "color.png"
+    },
+    "accentColor": "#60A18E",
+    "staticTabs": [
+        {
+            "entityId": "com.contoso.chatlifecycle.static",
+            "name": "Chat Lifecycle",
+            "contentUrl": "https://fhc7mcb8-3978.inc1.devtunnels.ms/chatLifecycle",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://fhc7mcb8-3978.inc1.devtunnels.ms/configure",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "fhc7mcb8-3978.inc1.devtunnels.ms"
+    ],
+    "webApplicationInfo": {
+        "id": "3f56c73c-6387-4d6c-9dac-7902c2b1ef13",
+        "resource": "api://fhc7mcb8-3978.inc1.devtunnels.ms/3f56c73c-6387-4d6c-9dac-7902c2b1ef13"
+    }
+}

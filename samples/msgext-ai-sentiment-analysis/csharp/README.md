@@ -34,7 +34,6 @@ Discover this sample application that integrates Azure Open AI into a Teams mess
 - [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
 
-
 `SECRET_AZURE_OPENAPI_KEY=<Azure OpenAI Service Key>`
 
 `CHAT_COMPLETION_MODEL_NAME=gpt-3.5-turbo`
@@ -78,7 +77,7 @@ the Teams service needs to call into the bot.
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)

@@ -1,0 +1,67 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "0aaeed08-e78b-48b3-a826-b709eb33d3a4",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.microsoft.com/privacy",
+        "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Teams Dialogs",
+        "full": "Teams Dialog (referred as task modules in TeamsJS v1.x)"
+    },
+    "description": {
+        "short": "Teams Dialog (referred as task modules in TeamsJS v1.x)",
+        "full": "This is an sample application which showcases how to invoke dialog (referred as task modules in TeamsJS v1.x) from adaptive and hero cards."
+    },
+    "accentColor": "#FFFFFF",
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://9lf64z8c-3978.inc1.devtunnels.ms/configure.html",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team",
+                "groupChat"
+            ]
+        }
+    ],
+    "staticTabs": [
+        {
+            "entityId": "com.microsoft.teams.taskmodule.statictab",
+            "name": "Tasks!",
+            "contentUrl": "https://9lf64z8c-3978.inc1.devtunnels.ms/taskmodule.html",
+            "websiteUrl": "https://9lf64z8c-3978.inc1.devtunnels.ms/taskmodule.html",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "bots": [
+        {
+            "botId": "aa12fdba-6233-4212-9b01-7c9e2da4c567",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "isNotificationOnly": false,
+            "supportsCalling": false,
+            "supportsVideo": false,
+            "supportsFiles": false
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "9lf64z8c-3978.inc1.devtunnels.ms"
+    ]
+}

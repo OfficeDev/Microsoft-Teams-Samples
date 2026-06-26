@@ -1,0 +1,131 @@
+{
+    "id": "1c76bdca-8596-48bf-bab2-7907f4a73b39",
+    "appId": "bb0ff984-509f-446c-931a-5f355974d7af",
+    "name": "app-installation-using-qr-code-aad",
+    "accessTokenAcceptedVersion": 2,
+    "signInAudience": "AzureADMultipleOrgs",
+    "oauth2AllowIdTokenImplicitFlow": true,
+    "oauth2AllowImplicitFlow": true,
+    "optionalClaims": {
+        "idToken": [],
+        "accessToken": [
+            {
+                "name": "idtyp",
+                "source": null,
+                "essential": false,
+                "additionalProperties": []
+            }
+        ],
+        "saml2Token": []
+    },
+    "requiredResourceAccess": [
+        {
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
+            "resourceAccess": [
+                {
+                    "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+                    "type": "Scope"
+                },
+                {
+                    "id": "e4aa47b9-9a69-4109-82ed-36ec70d85ff1",
+                    "type": "Scope"
+                },
+                {
+                    "id": "570282fd-fa5c-430d-a7fd-fc8dc98a9dca",
+                    "type": "Scope"
+                },
+                {
+                    "id": "e383f46e-2787-4529-855e-0e479a3ffac0",
+                    "type": "Scope"
+                },
+                {
+                    "id": "37f7f235-527c-4136-accd-4a02d197296e",
+                    "type": "Scope"
+                },
+                {
+                    "id": "14dad69e-099b-42c9-810b-d002981feec1",
+                    "type": "Scope"
+                },
+                {
+                    "id": "b340eb25-3456-403f-be2f-af7a0d370277",
+                    "type": "Scope"
+                }
+            ]
+        }
+    ],
+    "oauth2Permissions": [
+        {
+            "adminConsentDescription": "Allows Teams to call the app's web APIs as the current user.",
+            "adminConsentDisplayName": "Teams can access app's web APIs",
+            "id": "7c04aaac-8d1d-40a9-ad66-ceeee8799c86",
+            "isEnabled": true,
+            "type": "User",
+            "userConsentDescription": "Enable Teams to call this app's web APIs with the same rights that you have",
+            "userConsentDisplayName": "Teams can access app's web APIs and make requests on your behalf",
+            "value": "access_as_user"
+        }
+    ],
+    "preAuthorizedApplications": [
+        {
+            "appId": "1fec8e78-bce4-4aaf-ab1b-5451cc387264",
+            "permissionIds": [
+                "7c04aaac-8d1d-40a9-ad66-ceeee8799c86"
+            ]
+        },
+        {
+            "appId": "5e3ce6c0-2b1f-4285-8d4b-75ee78787346",
+            "permissionIds": [
+                "7c04aaac-8d1d-40a9-ad66-ceeee8799c86"
+            ]
+        },
+        {
+            "appId": "d3590ed6-52b3-4102-aeff-aad2292ab01c",
+            "permissionIds": [
+                "7c04aaac-8d1d-40a9-ad66-ceeee8799c86"
+            ]
+        },
+        {
+            "appId": "00000002-0000-0ff1-ce00-000000000000",
+            "permissionIds": [
+                "7c04aaac-8d1d-40a9-ad66-ceeee8799c86"
+            ]
+        },
+        {
+            "appId": "bc59ab01-8403-45c6-8796-ac3ef710b3e3",
+            "permissionIds": [
+                "7c04aaac-8d1d-40a9-ad66-ceeee8799c86"
+            ]
+        },
+        {
+            "appId": "0ec893e0-5785-4de6-99da-4ed124e5296c",
+            "permissionIds": [
+                "7c04aaac-8d1d-40a9-ad66-ceeee8799c86"
+            ]
+        },
+        {
+            "appId": "4765445b-32c6-49b0-83e6-1d93765276ca",
+            "permissionIds": [
+                "7c04aaac-8d1d-40a9-ad66-ceeee8799c86"
+            ]
+        },
+        {
+            "appId": "4345a7b9-9a63-4910-a426-35363201d503",
+            "permissionIds": [
+                "7c04aaac-8d1d-40a9-ad66-ceeee8799c86"
+            ]
+        }
+    ],
+    "identifierUris": [
+        "api://botid-bb0ff984-509f-446c-931a-5f355974d7af"
+    ],
+    "replyUrlsWithType": [
+        {
+            "url": "https://pwf4kv6d-3978.inc1.devtunnels.ms/auth-end",
+            "type": "Web"
+        },
+        {
+            "url": "https://token.botframework.com/.auth/web/redirect",
+            "type": "Web"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "c55ddd13-a41f-488b-9010-552dbd9d9c87",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.microsoft.com/privacy",
+        "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "name": {
+        "short": "Adaptive Card Actions",
+        "full": "Adaptive Card Actions"
+    },
+    "description": {
+        "short": "Adaptive Card Actions",
+        "full": "This sample shows the feature where user can send Adaptive Card with different actions using bot."
+    },
+    "icons": {
+        "outline": "outline.png",
+        "color": "color.png"
+    },
+    "accentColor": "#60A18E",
+    "bots": [
+        {
+            "botId": "c190173e-62af-480a-9cb7-6181a0e8c57c",
+            "scopes": [
+                "personal"
+            ],
+            "isNotificationOnly": false
+        }
+    ],
+    "validDomains": [
+        "bqbxtscz-3978.inc1.devtunnels.ms",
+        "*ngrok-free.app"
+    ]
+}

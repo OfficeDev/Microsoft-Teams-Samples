@@ -169,6 +169,6 @@ app.event('error', async (event: any) => {
 });
 
 const pagesPath = path.join(__dirname, 'pages');
-app.http.use(express.static(pagesPath));
+app.http?.use(express.static(pagesPath));
 
 await app.start(PORT);

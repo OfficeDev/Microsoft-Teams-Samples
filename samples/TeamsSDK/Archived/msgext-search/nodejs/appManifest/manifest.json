@@ -1,0 +1,65 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft Corp",
+    "websiteUrl": "https://example.azurewebsites.net",
+    "privacyUrl": "https://example.azurewebsites.net/privacy",
+    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+  },
+  "name": {
+    "short": "Search Messaging Extension",
+    "full": "Microsoft Teams V4 Search Messaging Extension Bot and settings"
+  },
+  "description": {
+    "short": "Node.js Messaging Extension for searching and retrieving results in Teams.",
+    "full": "This sample demonstrates how to create a Node.js Messaging Extension in Microsoft Teams that enables users to perform searches and retrieve results seamlessly."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#abcdef",
+  "composeExtensions": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "searchQuery",
+          "context": [
+            "compose",
+            "commandBox"
+          ],
+          "description": "Test command to run query",
+          "title": "Search",
+          "type": "query",
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search Query",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        },
+        {
+          "id": "wikipediaSearch",
+          "title": "wikipedia",
+          "initialRun": false,
+          "description": "Type to search in wikipedia",
+          "parameters": [
+            {
+              "name": "name",
+              "title": "Name",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

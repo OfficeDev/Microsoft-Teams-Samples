@@ -1,0 +1,109 @@
+{
+  "type": "AdaptiveCard",
+  "appId": "86ee312e-e8f2-4a03-9515-4ac80986abd5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "What would you like for lunch?",
+      "size": "Medium",
+      "weight": "Bolder"
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Standard Entres",
+          "italic": true,
+          "size": "medium"
+        }
+      ]
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Execute",
+          "verb": "order",
+          "title": "Chicken",
+          "data": {
+            "nextCardToSend": 1,
+            "currentCard": 0,
+            "option": "chicken"
+          }
+        },
+        {
+          "type": "Action.Execute",
+          "verb": "order",
+          "title": "Beef",
+          "data": {
+            "nextCardToSend": 1,
+            "currentCard": 0,
+            "option": "beef"
+          }
+        },
+        {
+          "type": "Action.Execute",
+          "verb": "order",
+          "title": "Vegan",
+          "data": {
+            "nextCardToSend": 1,
+            "currentCard": 0,
+            "option": "vegan"
+          }
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Custom Order",
+          "italic": true,
+          "size": "medium"
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "verticalContentAlignment": "Center",
+          "items": [
+            {
+              "type": "Input.Text",
+              "id": "custom",
+              "placeholder": "Custom"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "verticalContentAlignment": "Center",
+          "items": [
+            {
+              "type": "ActionSet",
+              "actions": [
+                {
+                  "type": "Action.Execute",
+                  "verb": "order",
+                  "title": "Custom",
+                  "data": {
+                    "nextCardToSend": 1,
+                    "currentCard": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

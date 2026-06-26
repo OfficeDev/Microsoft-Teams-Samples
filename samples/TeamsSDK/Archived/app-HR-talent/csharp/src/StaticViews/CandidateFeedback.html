@@ -1,0 +1,469 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Candidate Feedback</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
+    <script type="text/javascript" src="/StaticViews/js/jwt-decode.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css" />
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css" />
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.components.min.css" />
+
+    <style type="text/css">
+        .teams {
+            font-family: "Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+        }
+
+        .row {
+            padding: 5px 20px;
+        }
+
+        .wideRow {
+            padding: 10px 20px;
+        }
+
+        .copyRow {
+            padding: 30px 20px;
+        }
+
+        .applying-for-row {
+            padding: 0 20px 15px;
+        }
+
+        .jobTitleHeader {
+            width: 100%;
+            color: rgba(37, 36, 36, 0.75);
+            background-color: #edebea;
+        }
+
+        .feedback-for {
+            font-size: 18px;
+            font-weight: bold;
+            color: rgba(37, 36, 36, 0.75);
+        }
+
+        .applying-for {
+            font-size: 14px;
+            color: #575555
+        }
+
+        #position-title {
+            font-weight: 600;
+        }
+
+        .itemImage {
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            margin-right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .medium-font-size {
+            font-size: 14px;
+        }
+
+        .small-font-size {
+            font-size: 12px;
+        }
+
+        .itemImage img {
+            display: block;
+            opacity: 1;
+            width: 100%;
+            height: auto;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .stageColumn {
+            cursor: pointer;
+        }
+
+        .gridList .headerRow {
+            color: rgba(37, 36, 36, 0.65);
+            font-size: 12px;
+            padding: 10px 0;
+        }
+
+        .gridList .itemRow {
+            padding: 10px 0;
+            background-color: white;
+        }
+
+            .gridList .itemRow .text-row {
+                padding-top: 8px;
+            }
+
+        .commentsGrid .itemRow {
+            background-color: white;
+        }
+
+            .gridList .itemRow:hover, .commentsGrid .itemRow:hover {
+                background-color: #eee;
+            }
+
+        .commentsGrid .itemCell {
+            min-height: 54px;
+            padding: 10px;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eaeaea;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            outline: transparent;
+            position: relative;
+        }
+
+            .commentsGrid .itemCell .itemContent {
+                overflow: hidden;
+                -webkit-box-flex: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+                margin-left: 10px;
+            }
+
+            .commentsGrid .itemCell .itemContent {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+                .commentsGrid .itemCell .itemContent .itemIndex {
+                    font-size: 12px;
+                    color: rgba(37, 36, 36, 0.65);
+                    margin-bottom: 10px;
+                }
+
+        .commentsGrid .itemName {
+            color: rgba(37, 36, 36, 0.65);
+        }
+
+        .commentsGrid {
+            padding: 0;
+        }
+
+        .show-no-interview-section {
+            display: none;
+        }
+
+        .copyToClipboard {
+            cursor: pointer;
+            padding-left: 10px;
+            vertical-align: middle;
+        }
+
+            .copyToClipboard:hover {
+                color: #6264a7;
+            }
+
+        .show-comments-section {
+            display: none;
+        }
+
+        .tooltiptext {
+            visibility: hidden;
+            font-size: 12px;
+            width: 200px;
+            background-color: #6264a7;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            /* Position the tooltip */
+            position: absolute;
+            line-height: 50px;
+            right: -20%;
+            top: -10%;
+        }
+
+        .close-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+
+        function closeTaskModule() {
+            microsoftTeams.dialog.url.submit(null);
+        }
+
+        async function loadPage() {
+            var candidateId = getQueryStringValue('candidateId');
+            let appId = await getApp();
+            let json = await getCandidates(candidateId);
+            getData(json, candidateId, appId);
+        }
+
+        async function getApp() {
+
+            let accessToken = window.localStorage.getItem("userToken");
+            let authorization = "Bearer " + accessToken;
+            let data = await fetch(window.location.origin + '/api/app', {
+                headers: {
+                    Authorization: authorization,
+                }
+            });
+
+            if (data.ok) {
+                let json = await data.json();
+                var appId = json.appId;
+                return appId
+            } else {
+                console.error("HTTP-Error: " + data.status);
+            }
+        }
+
+        async function getCandidates(candidateId) {
+
+            let accessToken = window.localStorage.getItem("userToken");
+            let authorization = "Bearer " + accessToken;
+            let data = await fetch(window.location.origin + '/api/candidates/' + candidateId, {
+                headers: {
+                    Authorization: authorization,
+                }
+            });
+
+            if (data.ok) {
+                let json = await data.json();
+                return json
+            } else {
+                console.error("HTTP-Error: " + data.status);
+            }
+        }
+
+
+        function getData(data, candidateId, appId) {
+
+            var taskInfo = {
+                url: window.location.origin + '/StaticViews/CandidateFeedback.html?candidateId=' + encodeURIComponent(candidateId),
+                width: "large",
+                height: "large"
+            };
+
+
+            $('#candidate-name').text(data.name);
+            $('#position-title').text(data.positionTitle);
+
+            taskInfo.title = encodeURIComponent('Feedback for ' + data.name);
+
+            var taskModuleUrl = 'https://teams.microsoft.com/l/task/' + appId + '?url=' + taskInfo.url + '&title=' + taskInfo.title + '&height=' + taskInfo.height + '&width=' + taskInfo.width;
+            $(".copyToClipboard").click(function () {
+                $(".tooltiptext").css("visibility", "visible");
+                setTimeout(function () {
+                    $(".tooltiptext").css("visibility", "hidden");
+                }, 1500);
+                copyToClipboard(taskModuleUrl);
+            });
+
+            var conductedRecruiters = [];
+            var upcomingHtml = '';
+            var conductedHtml = '';
+            var commentsHtml = '';
+            if (data.interviews && data.interviews.length > 0) {
+                data.interviews.forEach(function (i) {
+                    if (i) {
+                        var personImage = buildIconTemplate(i.recruiter);
+                        var interviewDate = new Date(i.interviewDate);
+                        var interviewTemplate = '<div class="ms-Grid-row itemRow small-font-size">'
+                            + '<div class="ms-sm1 ms-Grid-col">' + personImage + '</div>'
+                            + '<div class="ms-sm4 ms-Grid-col text-row">' + i.recruiter.name + '</div>'
+                            + '<div class="ms-sm3 ms-Grid-col text-row">' + (interviewDate.getMonth() + 1) + '/' + interviewDate.getDate() + '/' + interviewDate.getFullYear() + '</div>'
+                            + '<div class="ms-sm4 ms-Grid-col text-row">' + i.feedbackText + '</div>'
+                            + '</div>';
+                        if (interviewDate <= Date.now()) {
+                            conductedHtml += interviewTemplate;
+                            conductedRecruiters.push(i.recruiter);
+                        }
+                        else {
+                            upcomingHtml += interviewTemplate;
+                        }
+                    }
+                });
+            }
+
+            if (data.comments && data.comments.length > 0) {
+                data.comments.forEach(function (c) {
+                    var role = c.authorRole == null ? "" : c.authorRole;
+                    var icon = buildIconTemplate({ name: c.authorName, profilePicture: c.authorProfilePicture });
+                    commentsHtml += '<div class="itemRow">'
+                        + '<div class="itemCell">'
+                        + icon
+                        + '<div class="itemContent">'
+                        + '<div class="itemName small-font-size">' + c.authorName + '</div>'
+                        + '<div class="itemIndex small-font-size">' + role + '</div>'
+                        + '<div class="small-font-size">' + c.text + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>';
+                });
+            }
+
+            if (upcomingHtml.length === 0) {
+                $(".show-upcoming-section").hide();
+            }
+            else {
+                $("#upcoming-label").text('(' + (data.interviews.length - conductedRecruiters.length) + ')');
+                $("#upcoming-rows").html(upcomingHtml);
+            }
+
+            if (conductedHtml.length === 0) {
+                $(".show-conducted-section").hide();
+            }
+            else {
+                $("#conducted-label").text('(' + conductedRecruiters.length + ')');
+                $("#conducted-rows").html(conductedHtml);
+            }
+
+            if (commentsHtml.length === 0) {
+                $(".show-comments-section").hide();
+            }
+            else {
+                $(".show-comments-section").show();
+                $("#comments-label").text('(' + data.comments.length + ')');
+                $("#comments-rows").html(commentsHtml);
+            }
+
+            if (conductedHtml.length === 0 && upcomingHtml.length === 0) {
+                if (commentsHtml.length === 0) {
+                    $(".show-no-interview-section").show();
+                }
+                $("#interviews-conducted").hide();
+            }
+            else {
+                $("#interviews-conducted").text('(' + conductedRecruiters.length + '/' + data.interviews.length + ' interviews conducted)');
+            }
+        }
+
+        function buildIconTemplate(person) {
+            if (person.profilePicture == null) {
+                person.profilePicture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAABIlJREFUaIHtWV1oHFUU/s6ZTKT4k0pbIhhFqqEbyyZUtNqHin+h0iTMzG6KtJWiiAUFH6qC6IPLgvhQKD4IChYEQa2aZmeaBF9StCAUKyK64Lqh9edBGxvskzaGzuw5Pogl3d3Z7N7ZrSL5Hs893znfN3fu3bl3gVX8u6BOFHUc5xbLsraLSB8Riar+SEQnfN9faHevthrwPO8eVX2ViO6vHhORCjMXoih6aXp6+ky7erbNgOu6OVV9mZm5UZ6I/ElE+4MgeLcdfa12FPE87xARvUhEKz4QIrKJKJNKpc6Wy+WvkvZOPAOe5+0D8I4BNQKw3ff9z5P0T2TAdd11RHQGwFrDEqWurq7BiYmJiqmGhu9rE3gW5uIB4PZKpfJIEgHGBnK5HBPRE0maA4Cq7k/CNzZQLBa3AuhN0hwARGT7yMjI9aZ8YwOqercp9zIBzNzd3X2nMT9B71sTcKux0ZRobICIrjPl1oHxRpBkBqIE3MtARMa1kqyB30y51RAR41pJXqE5U241VPW0KdfYADN/YcpdDhEJFxcXvzHWYUqcnJz8VlV/MeVfEsB8anZ29oIxP2H/iYR8qOrRJPykBt4CoKZkEVkCkOhckMhAEATfAThmyieit4MgOJ9Eg5GBTCazJ5vNbgEAVX1BRC4alPmdiF4BAMdxHnNdd5uJlpZOZLt27bqhv7//GBE9X6lU+ubm5t4vl8vnBwYGIiJ6qJVaqnogCIJPR0dH1zPzx8z89MDAQG86nZ4tlUpNnw+anoFsNrslDMMvmfkBAGDmkUwmsxMAhoaGDqqq32wtEXkvCII3AcC27deYuQd/H66eiqLoxOjo6Pq2GnAcJx1F0XEiunF5XFUPj4+Pb8jn87K0tLQbTawHVT3a29v7OHDpOPpoVco227ZnHcdp6vtoxSOl67rrVPVrZu6LSTkZhuHwzMzMIgDyPO85Eckx8zXLk0TkD2bO+75/CIB6nvewiBxj5u56RVX1+NDQ0I58Pi+N9K24BlKp1AfMfFeDlJuI6L50Oj1dKpUulMvlk4ODg29EUTQH4CciOqWqhwHsD4LgEwDwPG8vgCNEdFVcUSLaeO7cuYvlcvmzRvoazoDrug4RBY1y/oGIzFuWdaBQKHyEmN+GsbGxXsuyDhLRviZrLlmWtblQKPwQlxNrIJfLcbFYLAHY1EyzZZgD8CERnSSin0WERGQTM+8Ukd3MvKbFekd8398TNxhroJWn30mISIWINgVB8H298dhdSFWf7Jys5sHMVqPbj7oGHMdZy8w7OierNajq3rixuBl4EEBXZ+S0DiK6OZvNDtYbizNwbwf1GKFSqdRc2QMxBpj5js7KMcLWesG6BkSk1a2z41DVzfXiNQbGx8fXMPOGzktqDcxc9/KrxkAYhk1/CV5hXDs8PHx1dbDGgGVZNUn/FfT09NR8odYYEJGO/HPZDoRhaFfHagzYtm18xdFp2LYdVsdqDCwsLJwVkfkrI6l5iMg8Ef1aHa/7umQymZSIPENEtwHojsu7AlAAF0XktKq+PjU11bbrzFWs4v+CvwBK55JqrWzONgAAAABJRU5ErkJggg==";
+            }
+
+            return '<div class="ms-textAlignCenter">'
+                + '<div class="ms-Image itemImage">'
+                + '<img alt="' + person.name + '" class="ms-Image-image is-loaded ms-Image-image--cover ms-Image-image--portrait is-fadeIn" src="' + person.profilePicture + '" />'
+                + '</div>'
+                + '</div>';
+        }
+
+        function copyToClipboard(text) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val(text).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+
+        function getQueryStringValue(key) {
+            return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+        }
+
+        $(async () => {
+            await this.handlePageLoad();
+            this.loadPage();
+        })
+
+    </script>
+</head>
+<body>
+    <div class="teams">
+        <div class="jobTitleHeader">
+            <div class="ms-Grid-row row">
+                <div class="ms-Grid-col ms-sm6">
+                    <div class="row feedback-for">
+                        Feedback for <span id="candidate-name"></span>
+                        <i class="ms-Icon ms-Icon--Copy icon copyToClipboard" title="Copy To Clipboard" aria-hidden="true"></i>
+                        <span class="tooltiptext"><i class="ms-Icon ms-Icon--Copy icon" aria-hidden="true"></i> Copied to clipboard</span>
+                    </div>
+                </div>
+                <div class="ms-Grid-col ms-sm6">
+                    <div id="interviews-conducted" class="row applying-for"></div>
+                </div>
+            </div>
+            <div class="ms-Grid-row row applying-for-row">
+                <div class="ms-Grid-col ms-sm12">
+                    <div class="row applying-for">Applying for: <span id="position-title"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ms-Grid-row show-no-interview-section">
+            <div class="ms-sm12 wideRow ms-Grid-col applicantsTitle">
+                <div class="ms-Grid-col ms-sm12 ms-textAlignCenter">
+                    <span class="applicantsHeader">No feedback yet.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ms-Grid-row show-comments-section">
+            <div class="ms-sm12 wideRow ms-Grid-col applicantsTitle">
+                <div class="ms-Grid-col ms-sm12">
+                    <span class="applicantsHeader">Comments</span>
+                    <span id="comments-label"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ms-Grid commentsGrid show-comments-section">
+            <div id="comments-rows"></div>
+        </div>
+
+        <div class="row ms-Grid-row show-conducted-section">
+            <div class="ms-sm12 wideRow ms-Grid-col applicantsTitle">
+                <div class="ms-Grid-col ms-sm12">
+                    <span class="applicantsHeader">Conducted</span>
+                    <span id="conducted-label"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ms-Grid gridList show-conducted-section">
+            <div class="ms-Grid-row headerRow">
+                <div class="ms-sm1 ms-Grid-col"></div>
+                <div class="ms-sm4 ms-Grid-col">Name</div>
+                <div class="ms-sm3 ms-Grid-col">Interview date</div>
+                <div class="ms-sm4 ms-Grid-col">Feedback</div>
+            </div>
+            <div id="conducted-rows"></div>
+        </div>
+
+        <div class="row ms-Grid-row show-upcoming-section">
+            <div class="ms-sm12 wideRow ms-Grid-col applicantsTitle">
+                <div class="ms-Grid-col ms-sm12">
+                    <span class="applicantsHeader">Upcoming</span>
+                    <span id="upcoming-label"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ms-Grid gridList show-upcoming-section">
+            <div class="ms-Grid-row headerRow">
+                <div class="ms-sm1 ms-Grid-col"></div>
+                <div class="ms-sm4 ms-Grid-col">Name</div>
+                <div class="ms-sm3 ms-Grid-col">Interview date</div>
+                <div class="ms-sm4 ms-Grid-col">Feedback</div>
+            </div>
+            <div id="upcoming-rows"></div>
+        </div>
+
+        <div class="close-button-container">
+            <button class="ms-Button" onclick="closeTaskModule()">
+                <span class="ms-Button-Label">Close</span>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

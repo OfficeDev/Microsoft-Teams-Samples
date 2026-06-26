@@ -1,0 +1,57 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Control this meeting"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Transfer call",
+      "id": "transfercall",
+      "data": {
+        "action": "transfercall",
+        "msteams": {
+          "type": "task/fetch"
+        },
+        "callId": "${callId}"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Invite participant to meeting",
+      "id": "inviteparticipant",
+      "data": {
+        "action": "inviteparticipant",
+        "msteams": {
+          "type": "task/fetch"
+        },
+        "callId": "${callId}"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Play record prompt",
+      "id": "playrecordprompt",
+      "data": {
+        "type": "playrecordprompt",
+        "callId": "${callId}"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Hang up",
+      "id": "hangup",
+      "data": {
+        "type": "hangup",
+        "callId": "${callId}"
+      }
+    }
+  ]
+}

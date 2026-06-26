@@ -1,0 +1,51 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "fc3476de-38b7-4b48-b563-b5e3bca4bbaa",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.microsoft.com/privacy",
+        "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "name": {
+        "short": "QR App Installation",
+        "full": "Install app by QR"
+    },
+    "description": {
+        "short": "Sample demonstrating app installation via QR code in Microsoft Teams.",
+        "full": "This sample demonstrates how to install a Microsoft Teams app using a QR code, enabling users to generate and scan QR codes for easy installation."
+    },
+    "icons": {
+        "outline": "outline.png",
+        "color": "color.png"
+    },
+    "accentColor": "#60A18E",
+    "bots": [
+        {
+            "botId": "bb0ff984-509f-446c-931a-5f355974d7af",
+            "scopes": [
+                "team",
+                "personal",
+                "groupChat"
+            ],
+            "isNotificationOnly": false
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "devicePermissions": [
+        "media"
+    ],
+    "validDomains": [
+        "pwf4kv6d-3978.inc1.devtunnels.ms",
+        "token.botframework.com"
+    ],
+    "webApplicationInfo": {
+        "id": "bb0ff984-509f-446c-931a-5f355974d7af",
+        "resource": "api://botid-bb0ff984-509f-446c-931a-5f355974d7af"
+    }
+}
