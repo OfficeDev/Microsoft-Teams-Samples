@@ -1,0 +1,116 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Task</title>
+
+    <script src="https://res.cdn.office.net/teams-js/2.52.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-j4GNIru3mNYN+q8XdBRVyvbUx+0U867Cy90v6H61tpIZoR2pUq+bZDZmmpT8N7VG"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .container {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.3rem;
+            box-sizing: border-box;
+        }
+
+        button.save {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+        }
+    </style>
+
+    <script>
+        let title = "";
+        let description = "";
+
+        // Initialize Teams SDK
+        microsoftTeams.app.initialize().then(() => {
+            const params = new URLSearchParams(window.location.search);
+            title = params.get("title") || "";
+            description = params.get("description") || "";
+
+            document.getElementById("taskTitle").value = "";
+
+            if (!description) {
+                document.getElementById("taskdescriptionteam").style.display = "none";
+                document.getElementById("taskdescription").style.display = "";
+            } else {
+                document.getElementById("taskdescriptionteam").textContent = decodeURIComponent(description);
+                document.getElementById("taskdescription").style.display = "none";
+            }
+
+            const now = new Date();
+            const localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+            document.getElementById("taskdatetime").setAttribute("min", localTime.toISOString().slice(0, 16));
+
+        }).catch((error) => {
+            console.error("Teams SDK initialization failed:", error);
+            const params = new URLSearchParams(window.location.search);
+            title = params.get("title") || "";
+            description = params.get("description") || "";
+            document.getElementById("taskTitle").value = "";
+        });
+
+        function submit() {
+            const dateTimeInput = document.getElementById("taskdatetime");
+
+            if (!dateTimeInput.value) {
+                dateTimeInput.style.border = "1px solid red";
+                alert("Please select a date and time for the reminder.");
+                return false;
+            } else {
+                dateTimeInput.style.border = "";
+            }
+
+            const taskInfo = {
+                taskTitle: document.getElementById("taskTitle").value,
+                dateTime: dateTimeInput.value,
+                description: description ? decodeURIComponent(description) : document.getElementById("taskdescription").value,
+            };
+
+            microsoftTeams.tasks.submitTask(taskInfo);
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="container">
+                <label for="taskTitle" class="title">Task title</label>
+                <br>
+                <input type="text" id="taskTitle" name="taskTitle">
+                <br><br>
+
+                <label for="taskdescription" class="description">Task description</label>
+                <br>
+                <label id="taskdescriptionteam"></label>
+                <input type="text" id="taskdescription" name="taskdescription">
+                <br><br>
+
+                <label for="taskdatetime">Date and time</label>
+                <br>
+                <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+                <br><br>
+
+                <button type="button" class="btn-send save" onclick="submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

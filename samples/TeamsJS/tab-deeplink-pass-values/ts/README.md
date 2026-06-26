@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app for Microsoft Teams illustrates the creation and usage of dynamic deep links to pass contextual values to tab and standalone web applications. It highlights the differences in link formatting and consumption based on the user’s access environment, enhancing navigation and data display capabilities.
+description: This sample app for Microsoft Teams illustrates the creation and usage of dynamic deep links to pass contextual values to tab and standalone web applications. It highlights the differences in link formatting and consumption based on the userâ€™s access environment, enhancing navigation and data display capabilities.
 products:
 - office-teams
 - office
@@ -67,7 +67,7 @@ All required source code are located in the `./src` folder:
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID â€“ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -179,7 +179,6 @@ If you are using Microsoft Azure to host your Microsoft Teams app, then you can 
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 - [Deep links in teams](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsJS/tab-deeplink-pass-values-ts" />

@@ -1,0 +1,8 @@
+BOT_ID={{Azure_Bot_Id}}
+BOT_PASSWORD={{Azure_Bot_Password}}
+END_POINT={{Azure_End_Point}}
+API_KEY={{Azure_Api_Key}}
+DEPLOYMENT_ID={{Azure_Deployment_Id}}
+AZURE_STORAGE_CONNECTION_STRING={{Azure_Storage_Connection_String}}
+AZURE_CONTAINER_NAME={{Azure_Container_Name}}
+CHECKLIST_NAME={{Name of the Policy Guideline document uploaded in Azure Blob}}

@@ -1,0 +1,31 @@
+﻿@page
+@model InMeetingNotificationsBot.Pages.TargetedInMeetingNotificationModel
+@{
+    ViewData["Title"] = "Layout";
+}
+
+<script>
+    microsoftTeams.app.initialize().then(() => {
+    });
+    function validateForm() {
+        var feedbackInfo = {
+            Topic: 'Targeted In-Meeting Notification',
+            Feedback: document.querySelector('input[name="inputVal"]:checked').value
+        }
+        microsoftTeams.tasks.submitTask(feedbackInfo);
+        return true;
+    }
+</script>
+
+<div class="login" style="color:aliceblue;font-family:'Segoe UI';text-align:left">
+    <form id="userLog" onSubmit="return validateForm()">
+        <h3> Provide your Feedback!</h3>
+        <b> <label id="reviewTitle">Ready for project demo ?</label></b><br /><br />
+        <input type="radio" id="yes" name="inputVal" value="Yes">
+        <label for="yes">Yes</label><br />
+        <input type="radio" id="no" name="inputVal" value="No">
+        <label for="no">No</label><br />
+        <br />
+        <input style="border-radius: 12px;display: inline-block;width:74px;height:29px;font-size:medium;text-align:center;align-items:center" type="submit" value="Submit">
+    </form>
+</div>

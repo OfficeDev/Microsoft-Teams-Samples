@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="M365Agent\**" />
+    <Content Remove="M365Agent\**" />
+    <EmbeddedResource Remove="M365Agent\**" />
+    <None Remove="M365Agent\**" />
+    <Compile Remove="AdapterWithErrorHandler.cs" />
+    <Compile Remove="Controllers\BotController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AdaptiveCards" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Agents.Hosting.AspNetCore" Version="1.4.83" />
+    <PackageReference Include="Microsoft.Agents.Extensions.Teams" Version="1.4.83" />
+    <PackageReference Include="Microsoft.Agents.Authentication.Msal" Version="1.4.83" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\Add-App.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Added-App.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Link-Unfurling.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\msgext-link-unfurling.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" Sdk="Microsoft.TeamsFx.Sdk">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>1aee8f48-7fe6-440d-9dd3-880855737303</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="aad.manifest.json" />
+    <None Include="m365agents.local.yml" />
+    <None Include="m365agents.yml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectCapability Include="ProjectConfigurationsDeclaredDimensions" />
+  </ItemGroup>
+</Project>

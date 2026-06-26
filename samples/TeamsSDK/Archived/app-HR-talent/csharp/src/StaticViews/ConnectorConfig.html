@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Connector Config</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    
+    <style type="text/css">
+        .teams {
+            font-family: "Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="teams">
+        <h2 style="text-align: center; padding-top: 30px;">
+            Send notifications when candidate stage is updated.
+        </h2>
+    </div>
+    <script type="text/javascript">
+        microsoftTeams.initialize();
+        var localSettings;
+        microsoftTeams.settings.setValidityState(true);
+        microsoftTeams.settings.setSettings({
+            contentUrl: window.location.origin + "/StaticViews/ConnectorConfig.html",
+            configName: "Contoso Talent Connector"
+        });
+        microsoftTeams.pages.getConfig(function (settings) {
+            localSettings = settings;
+        });
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            saveEvent.notifySuccess();
+            $.post(window.location.origin + "/api/connector/subscribe", { webhookUrl: getWebhookUrl(localSettings.webhookUrl) });
+        });
+
+        microsoftTeams.pages.config.registerOnRemoveHandler(function () {
+            $.ajax({ url: window.location.origin + "/api/connector/unsubscribe?webHookUrl=" + encodeURIComponent(getWebhookUrl(localSettings.webhookUrl)), type: 'DELETE' });
+        });
+
+        function getWebhookUrl(outlookWebHookUrl) {
+            var anchor = getUrlLocation(outlookWebHookUrl);
+            return anchor.pathname.toString().replace("/webhook/", "");
+        }
+
+        function getUrlLocation(href) {
+            var location = document.createElement("a");
+            location.href = href;
+            if (location.host === "") {
+                location.host = location.href;
+            }
+            return location;
+        }
+    </script>
+</body>
+</html>

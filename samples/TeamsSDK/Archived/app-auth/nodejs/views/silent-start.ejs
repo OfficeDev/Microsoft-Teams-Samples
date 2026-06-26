@@ -1,0 +1,37 @@
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script type="text/javascript">
+        microsoftTeams.app.initialize().then(() => {
+                // Get the tab context, and use the information to navigate to Azure AD login page
+                microsoftTeams.app.getContext().then((context) => {
+                    // MSAL.js configuration
+                    let msalConfig = {
+                        auth: {
+                            clientId: <%-clientId%>,
+                            redirectUri: window.location.origin + "/silent-end",     // This should be in the list of redirect uris for the AAD app
+                            navigateToLoginRequestUrl: false,
+                        },
+                        cache: {
+                            cacheLocation: "localStorage",
+                        }
+                    };
+
+                    const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+                    var request = {
+                        scopes: ["openid", "profile"],
+                        loginHint: context.user.loginHint
+                    };
+
+                    msalInstance.loginRedirect(request);
+                });
+            });
+    </script>
+</head>
+<body class="theme-light">
+</body>
