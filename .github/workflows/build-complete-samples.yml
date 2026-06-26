@@ -20,6 +20,10 @@ jobs:
     strategy:
       matrix:
         include:
+            - project_path: 'samples\TeamsSDK\agent-targeted-messages\dotnet\agent-targeted-messages\AgentTargetedMessages.csproj'
+              name: 'agent-targeted-messages'
+              version: '10.0.x'
+
             - project_path: 'samples/TeamsSDK/bot-ai-messages/dotnet/bot-ai-messages/BotAiMessages.csproj'
               name: 'bot-ai-messages'
               version: '10.0.x'
