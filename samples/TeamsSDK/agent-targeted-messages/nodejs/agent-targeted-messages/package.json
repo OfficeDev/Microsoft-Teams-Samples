@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "start": "tsx --env-file-if-exists .env index.ts"
+        "start": "tsx --env-file-if-exists .env index.ts",
         "build": "tsc --build"
     },
     "dependencies": {
