@@ -469,7 +469,7 @@ jobs:
               name: 'tab-meeting-transcript-recording-api-server'
               version: '18.x'
 
-            - project_path: 'samples/TeamsSDK/agent-targeted-messages/nodejs'
+            - project_path: 'samples/TeamsSDK/agent-targeted-messages/nodejs/agent-targeted-messages'
               name: 'agent-targeted-messages'
               version: '20.x'
               
