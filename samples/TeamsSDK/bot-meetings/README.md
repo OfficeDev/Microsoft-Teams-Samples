@@ -239,8 +239,6 @@ You can file general issues that exists across all SDK langauges [here](https://
 
 - If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable.
 - Ensure your `.env` or `appsettings.json` file is set up correctly.
-- Verify that the task module URL (for custom form) is properly configured and accessible.
-- For custom form issues, ensure your bot endpoint is serving static files correctly.
 - Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors.
 - Verify that admin consent has been granted for the required Graph API permissions
 - Check that the application access policy has been configured correctly for your user
