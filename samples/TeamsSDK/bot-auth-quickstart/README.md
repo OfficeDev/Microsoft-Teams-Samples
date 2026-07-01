@@ -396,15 +396,23 @@ For Python:
 ```bash
 python main.py
 ```
+# Teams SDK Troubleshooting
 
-## Troubleshooting
+If you encounter errors you believe exists in Teams SDK, you can file an issue in GitHub for the langauge in which you encountered the issue
+- [C#](https://github.com/microsoft/teams.net/issues/new/choose)
+- [TypeScript](https://github.com/microsoft/teams.ts/issues/new/choose)
+- [Python](https://github.com/microsoft/teams.py/issues/new/choose)
 
-- If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable
-- Ensure your configuration file (`.env`, `appsettings.json`) is set up correctly
+You can file general issues that exists across all SDK langauges [here](https://github.com/microsoft/teams-sdk/issues/new/choose)
+
+## General Troubleshooting
+
+- If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable.
+- Ensure your `.env` or `appsettings.json` file is set up correctly.
+- Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors.
 - Verify that `"token.botframework.com"` is included in `validDomains` in your manifest.json
 - For OAuth issues, confirm your Azure AD app registration has the correct redirect URIs
 - Check that admin consent has been granted for the required Graph API permissions
-- Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors
 
 ### Enabling Verbose Logs
 

@@ -226,10 +226,20 @@ Once the bot is running and added to Teams, you can interact with it in meetings
 - Request and view meeting transcripts
 - Use adaptive cards to interact with meeting data
 
-## Troubleshooting
+# Teams SDK Troubleshooting
 
-- If Teams cannot communicate with your bot, verify your tunnel URL is reachable
-- Ensure your `.env` or `appsettings.json` file is set up correctly
+If you encounter errors you believe exists in Teams SDK, you can file an issue in GitHub for the langauge in which you encountered the issue
+- [C#](https://github.com/microsoft/teams.net/issues/new/choose)
+- [TypeScript](https://github.com/microsoft/teams.ts/issues/new/choose)
+- [Python](https://github.com/microsoft/teams.py/issues/new/choose)
+
+You can file general issues that exists across all SDK langauges [here](https://github.com/microsoft/teams-sdk/issues/new/choose)
+
+## General Troubleshooting
+
+- If Teams cannot communicate with your bot, verify your DevTunnels URL is reachable.
+- Ensure your `.env` or `appsettings.json` file is set up correctly.
+- Use the Channels UI in Azure Bot Service in the Azure Portal to see detailed endpoint errors.
 - Verify that admin consent has been granted for the required Graph API permissions
 - Check that the application access policy has been configured correctly for your user
 - Confirm that Meeting event subscriptions are enabled in the bot registration (in the [Teams Developer Portal](https://dev.teams.microsoft.com), under **Tools** -> **Bot management** -> your bot)
