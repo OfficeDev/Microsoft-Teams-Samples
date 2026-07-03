@@ -13,7 +13,6 @@ const Configure = props => {
 
         microsoftTeams.app.initialize().then(() => {
 
-            microsoftTeams.app.notifySuccess();
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
                     entityID: "Anonymous User Support Demo",
@@ -24,6 +23,8 @@ const Configure = props => {
 
                 saveEvent.notifySuccess();
             });
+
+            // Enable the Save button in the configuration dialog.
             microsoftTeams.pages.config.setValidityState(true);
 
         });

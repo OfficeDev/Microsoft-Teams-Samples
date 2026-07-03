@@ -98,6 +98,12 @@ deploy:
       envs:
         REACT_APP_MICROSOFT_APP_ID: ${{AAD_APP_CLIENT_ID}}
 
+  # Build the React client so the server can serve it (ClientApp/build)
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./ClientApp
+      args: run build
+
   # Generate runtime environment variables For Server
   - uses: file/createOrUpdateEnvironmentFile
     with:

@@ -19,6 +19,9 @@ app.use(express.urlencoded({
   extended: true
 }));
 
+
+app.use(express.static(path.join(__dirname, '..', 'ClientApp', 'build')));
+
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { cors: { origin: "*" } });
 const { SimpleGraphClient } = require('../server/simpleGraphClient');
@@ -168,4 +171,9 @@ server.listen(PORT, () => {
 app.post('/api/messages', async (req, res) => {
    // Route received a request to adapter for processing
   await adapter.process(req, res, (context) => bot.run(context));
+});
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'ClientApp', 'build', 'index.html'));
 });
