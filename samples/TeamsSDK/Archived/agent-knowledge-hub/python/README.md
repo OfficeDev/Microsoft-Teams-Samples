@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Contoso Knowledge Hub - AI Academic & Career Guidance Agent
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Python
-extensions:
- contentType: samples
- createdDate: "10/21/2025 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-agent-knowledge-hub-python
----
-
 # Contoso Knowledge Hub - AI Academic & Career Guidance Agent
 
 This sample demonstrates an AI-powered Academic Agent built with the **Microsoft Teams SDK for Python**. The bot provides comprehensive educational support, career guidance, and course recommendations using Azure OpenAI.
