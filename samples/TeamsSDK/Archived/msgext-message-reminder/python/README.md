@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This comprehensive Python sample illustrates how to create a Messaging Extension that enables users to schedule tasks from within Microsoft Teams, complete with reminder cards sent at the scheduled times.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
-  contentType: samples
-  createdDate: "23/07/2025"
-urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-python
----
-
 # Message reminder with messaging extension action (Python)
 
 This comprehensive Python sample illustrates how to create a Messaging Extension that enables users to schedule tasks from within Microsoft Teams, complete with reminder cards sent at the scheduled times. With straightforward setup and seamless integration, this extension enhances productivity by allowing users to efficiently manage their tasks and reminders directly within Teams conversations.

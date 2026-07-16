@@ -1,21 +1,3 @@
----
-page_type: sample
-products:
-- office-teams
-- office-365
-languages:
-- csharp
-extensions:
-  contentType: samples
-  technologies:
-  - Tabs
-  - Microsoft Bot Framework v4
-  createdDate: "09/22/2017 05:54:09 PM"
-  updateDate: 10/10/2024 
-description: "This sample demonstrates how to create a Microsoft Teams bot in C# using Bot Framework v4, featuring Facebook authentication and various integration capabilities."
-urlFragment: officedev-microsoft-teams-samples-app-complete-sample-csharp
----
-
 # Microsoft Teams Bot in C#
 
 Develop a robust Microsoft Teams bot using C# and Bot Framework v4, featuring seamless integration of Tabs, Messaging Extensions, and Adaptive Cards. This sample also includes Facebook authentication to enrich user engagement and streamline interactions within the Teams environment.

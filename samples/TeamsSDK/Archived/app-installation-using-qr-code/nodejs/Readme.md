@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to install a Microsoft Teams app using a QR code, enabling users to generate and scan QR codes for easy installation.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10/11/2021 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-app-installation-using-qr-code-nodejs
----
-
 # Install app using barcode sample
 
 This sample illustrates the installation of a Microsoft Teams app using a QR code, enabling seamless installation through mobile devices. Users can generate and scan QR codes containing the app ID, facilitating quick access to key features such as bot interactions, Teams SSO, adaptive cards, task modules, and device permissions.

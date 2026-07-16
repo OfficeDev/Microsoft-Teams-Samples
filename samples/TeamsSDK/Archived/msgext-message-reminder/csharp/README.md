@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a C# Messaging Extension that allows users to schedule tasks and receive reminder cards in Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "11/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-csharp
----
-
 # Message reminder with messaging extension action
 
 This comprehensive C# sample illustrates how to create a Messaging Extension that enables users to schedule tasks from within Microsoft Teams, complete with reminder cards sent at the scheduled times. With easy setup and seamless integration, this extension enhances productivity by allowing users to manage tasks and reminders efficiently.

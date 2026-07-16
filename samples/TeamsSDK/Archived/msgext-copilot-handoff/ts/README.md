@@ -1,13 +1,3 @@
----
-page_type: sample
-description: This sample showcases a Teams message extension that serves as a plugin for Microsoft Copilot, enabling users to query the Northwind Database.
-products:
-- office-teams
-- copilot-m365
-languages:
-- typescript
----
-
 # Northwind inventory message extension sample
 
 ![License.](https://img.shields.io/badge/license-MIT-green.svg)

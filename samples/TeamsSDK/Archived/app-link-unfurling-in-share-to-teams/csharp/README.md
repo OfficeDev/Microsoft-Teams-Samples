@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app showcases the link unfurling feature for sharing content in Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
-  contentType: samples
-  createdDate: "14-12-2022 00:15:13"
-urlFragment: officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-csharp
----
-
 ## Link unfurling in Share to teams sample
 
 This sample app illustrates the link unfurling functionality in Microsoft Teams, enabling users to effortlessly share content with contacts or groups. With a focus on user experience, the app showcases how to enhance sharing capabilities in Teams through interactive features and integration support.

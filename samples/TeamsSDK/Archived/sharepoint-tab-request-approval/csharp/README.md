@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates the integration of SharePoint Embedded for storage management within the Teams Tab Request Approval application, featuring Teams SSO, activity feed notifications, and Graph API support.
-products:
-- office-teams
-- office
-- office-365
-- sharepoint-repository-service
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "12/19/2023 12:00:01 PM"
-urlFragment: officedev-microsoft-teams-samples-sharepoint-tab-request-approval-csharp
----
-
 # Tab Request Approval app + SharePoint Embedded
 
 Welcome to the documentation for the Tab Request Approval app leveraging the SharePoint Embedded API. 

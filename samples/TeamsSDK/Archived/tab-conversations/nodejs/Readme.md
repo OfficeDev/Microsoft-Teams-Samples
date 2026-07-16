@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Microsoft Teams sample app illustrates how to create conversational tabs, enabling users to engage in discussions about sub-entities within the app.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "06-10-2021 01:48:56"
-urlFragment: officedev-microsoft-teams-samples-tab-conversations-nodejs
----
-
 # Conversational Tabs
 
 Explore this Microsoft Teams sample app that demonstrates how to build conversational tabs, allowing users to have meaningful discussions about specific sub-entities within the tab. With comprehensive setup guidelines, including requirements for Node.js and Azure registration, this app provides a seamless experience for developers looking to enhance user interaction and collaboration in their Teams applications. [Create conversational tabs](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs?view=msteams-client-js-latest#continue-a-conversation)

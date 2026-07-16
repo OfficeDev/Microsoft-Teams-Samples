@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate is how to use Task Module using Bot Framework.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Java
-extensions:
- contentType: samples
- createdDate: "12/12/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-task-module-java
----
-
 # Teams Task Module
 
 Bot Framework v4 Teams Task Module sample.

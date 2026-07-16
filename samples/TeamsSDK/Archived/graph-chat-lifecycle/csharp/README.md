@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams, including creating chats, adding members, and deleting members using Microsoft Graph APIs with C#.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-csharp
----
-
 # Chat LifeCycle Application
 
 This sample application illustrates the lifecycle management of chats in Microsoft Teams, leveraging Microsoft Graph APIs to create chats, add and remove members, and demonstrate various scenarios. Developed in C#, it includes features such as tab integration, adaptive cards, and a welcome card, along with comprehensive setup instructions for registration, tunneling, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio.

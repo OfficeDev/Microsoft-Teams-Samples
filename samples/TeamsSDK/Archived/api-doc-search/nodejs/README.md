@@ -1,20 +1,3 @@
----
-page_type: sample
-description: This is a sample RAG-based semantic search using Azure CosmosDB NoSQL, demonstrating document ingestion, embedding generation, and prompt-based queries.
-products:
-- azure-cosmos-db
-- azure-openai
-- azure-function
-- azure-blob-storage
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/15/2024 12:00:00 PM"
-urlFragment: officedev-microsoft-teams-samples-api-doc-search-nodejs
-
----
-
 # RAG-based Semantic Search API with Azure CosmosDB NoSQL
 
 This sample demonstrates the concept of Retrieval Augmented Generation (RAG). 

@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate how to use search based Messaging Extension
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/17/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config-csharp
----
 # Teams Messaging Extensions Search
 
 This comprehensive C# sample showcases the development of a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) for Microsoft Teams, designed to enhance user interaction with external services through the [Bot Framework](https://dev.botframework.com) v4. It facilitates search functionality directly from the Teams client, enabling users to easily retrieve relevant information from connected systems.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Demonstrating the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards sent using bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "28-01-2025 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-cards-python
----
-
 # Typeahead search control in Adaptive Cards Python
 
 This sample shows the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards.

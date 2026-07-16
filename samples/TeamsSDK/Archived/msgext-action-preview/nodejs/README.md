@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app illustrates how to utilize action previews in Teams Messaging Extensions, allowing users to create cards from input in a Task Module. It showcases bot interactions that enhance user engagement by attributing messages to users.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10-04-2022 20:03:25"
-urlFragment: officedev-microsoft-teams-samples-msgext-action-preview-nodejs
----
-
 # Teams Messaging Extensions Action Preview
 
 Explore a sample of an action-based messaging extension for Microsoft Teams, featuring interactive previews and robust capabilities like bot interactions and message extensions. This tool enables users to engage with the bot and access actions directly from the compose box, enhancing the messaging experience.

@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to create a C# Messaging Extension in Microsoft Teams that allows users to perform searches and retrieve results.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/17/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-search-csharp
----
 # Teams Messaging Extensions Search
 
 This comprehensive C# sample provides a detailed guide on building a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) for Microsoft Teams, allowing users to conduct searches and retrieve results efficiently. By leveraging the [Bot Framework](https://dev.botframework.com), this extension enhances user interaction within Teams, demonstrating features such as search commands, message handling, and result display.

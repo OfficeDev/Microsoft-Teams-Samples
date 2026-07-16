@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to utilize the targeted notifications API for app icon badging during Teams meetings.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "23/05/2023 13:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-meetings-app-icon-badging-nodejs
----
-
 ## App Icon Badging In Teams Meeting Notification
 
 This sample application illustrates how to implement app icon badging notifications in Teams meetings using the targeted notifications API. It supports features like bots, in-meeting notifications, and RSC permissions, enabling developers to enhance user interaction within their Teams applications.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to obtain staggered Graph API permissions in a Microsoft Teams tab, prompting users for permissions only when specific features are accessed.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "03/17/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-csharp
----
-
 # Staggered Permission sample
 
 This sample app showcases a robust approach to managing Graph API permissions within a Microsoft Teams tab, utilizing staggered permission requests to enhance user experience. By only prompting users for the necessary permissions when they attempt to access specific features—like photos or emails—the app ensures a seamless interaction while maintaining security and privacy.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample bot demonstrates how to use various formatting styles on adaptive cards within Microsoft Teams. It includes capabilities like mentions, persona icons, and responsive layouts.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "01/30/2023 05:00:17 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-csharp
-
----
 ## Different formatting on cards
 
 Explore adaptive card formatting in Microsoft Teams with this bot sample. It includes features like mentions, emojis, persona icons, and different card layouts to enhance user interaction and presentation.

@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to send task notifications to a Teams channel using an Office 365 Connector.
-products:
-- office-teams
-- office-365
-languages:
-- csharp
-extensions:
-  contentType: samples
-  technologies:
-  - Connectors
-  createdDate: "12/02/2022 10:21:42 PM"
-urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-csharp
----
-
 # Microsoft Teams Sample Connector Todo
 
 This sample provides a comprehensive guide to building an Office 365 Connector that sends task notifications to a Microsoft Teams channel. The app simulates a task management system where users can create, view, and update tasks, showcasing how to send notifications through connectors to enhance productivity in Teams.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-proactive-installation-csharp
----
-
 # Proactive Installation Sample App
 
 This sample application showcases proactive installation of a Microsoft Teams app, allowing you to send notifications to users via Microsoft Graph APIs. With integrated bot functionality, this app facilitates user interaction and demonstrates how to efficiently manage app installations within Teams channels and group chats.s

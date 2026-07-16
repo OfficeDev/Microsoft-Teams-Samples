@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to build a bot for Microsoft Teams using the Bot Framework in Python. It highlights key features such as sending Hero Cards and handling user messages.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "19/12/2024 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-python
----
-
 # Bot Conversation QuickStart (Python) 
 
 This sample demonstrates how to build a bot for Microsoft Teams using the Bot Framework in Python. It highlights key features such as sending Hero Cards, handling user messages, and participating in Teams conversations.

@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a Node.js Messaging Extension for Microsoft Teams that includes a configuration page and supports single sign-on (SSO) authentication for enhanced user experience.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config-nodejs
----
-
 # Messaging Extension SSO Config Bot
 
 This comprehensive Node.js sample illustrates the development of a Messaging Extension for Microsoft Teams, integrating a configuration page and single sign-on (SSO) capabilities using the Bot Framework v4. Designed for seamless user interaction, this extension allows users to perform searches and retrieve profile information while ensuring secure authentication through SSO.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Python
-extensions:
- contentType: samples
- createdDate: "2024-12-12"
-urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-Python
----
-
 # Teams Message Reactions Bot Python Sample
 
 This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Bot Framework. The bot responds dynamically to reactions, supporting personal, group, and team scopes.

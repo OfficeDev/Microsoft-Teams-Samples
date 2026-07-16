@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to fetch shared images and files in Microsoft Teams groupchats and team channels using graph API.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "28/05/2025 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-file-fetch-nodejs
----
-
 # Install app using barcode sample
 
 This sample demonstrates how to fetch shared images and files in Microsoft Teams groupchats and team channels using graph API. While leveraging features such as bot interaction, Teams SSO, adaptive cards.

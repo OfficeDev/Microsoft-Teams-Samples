@@ -1,17 +1,3 @@
----
-page_type: sample
-products:
-- office-365
-languages:
-- python
-title: Microsoft Teams Python Hello World Sample
-description: The Microsoft Teams Python "Hello World" Sample app demonstrates key features of Teams, including tabs, bots, and messaging extensions, built with Python. It�s a great starting point for developing and deploying custom Teams apps.
-extensions:
-  contentType: samples
-  createdDate: 10/19/2022 10:02:21 PM
-urlFragment: officedev-microsoft-teams-samples-app-hello-world-python
----
-
 # Microsoft Teams hello world sample app.
 
 The Microsoft Teams Python "Hello World" Sample app is a comprehensive demonstration of essential Microsoft Teams features built using Python. This sample highlights the core functionalities of Teams, such as tabs, bots, and messaging extensions, making it an excellent starting point for developers interested in creating robust Teams apps.

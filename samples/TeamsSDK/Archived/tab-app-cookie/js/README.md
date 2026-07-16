@@ -1,18 +1,3 @@
----
-page_type: sample
-description: "This sample application demonstrates key web storage features, including managing cookies, SameSite cookies, and partitioned cookies. It also covers local storage and IndexedDB for data persistence in modern web applications."
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-extensions:
-  contentType: samples
-  createdDate: "11/22/2024 12:30:00 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-app-cookie-js
----
-
 # Microsoft Teams Cookie App
 
 This sample application provides an interactive demonstration of cookie management, including setting, clearing, and customizing attributes such as SameSite and Secure flags. It also explores advanced web storage solutions like local storage and IndexedDB, offering a practical guide to modern client-side data handling.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates the use of Teams tab in stage view using C#, showcasing collaborative features and interactive elements.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
-urlFragment: officedev-microsoft-teams-samples-tab-stage-view-csharp
----
-
 # Stage View
 
 This sample app illustrates the capabilities of Microsoft Teams tabs in stage view using C#. It demonstrates collaborative features, such as multi-window support and deep linking, allowing users to engage interactively through adaptive cards and links that enhance the overall user experience in Teams.

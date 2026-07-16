@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This C# sample demonstrates how a bot can receive real-time updates for meeting events and participant activities within Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "11/10/2021 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-meetings-events-csharp
----
-
 # Realtime meeting events
 
  Experience real-time meeting and participant events with this C# bot sample for Microsoft Teams. Currently available in public developer preview, it supports Adaptive Cards, bot interactions, and RSC permissions, allowing seamless integration for enhanced meeting management. To try it out, simply upload the provided manifest in your Teams client.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This bot can capture all channel messages in Teams using RSC permissions, without the need for @mentions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-nodejs
----
-
 # Receive Channel messages with RSC permissions
 
 This sample app illustrates how a bot can capture all channel messages in Microsoft Teams by utilizing RSC (resource-specific consent) permissions, eliminating the need for @mentions. The bot supports adaptive card responses, easy local testing with tools like ngrok or dev tunnels, and deployment to Azure, allowing it to function effectively across different channels and group chats in Teams.

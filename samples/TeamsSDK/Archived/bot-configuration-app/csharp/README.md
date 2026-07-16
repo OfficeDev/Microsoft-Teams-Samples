@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a bot for configuring and reconfiguring adaptive cards in team and group chats.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "11/03/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-csharp
----
-
 # Teams App Localization
 This sample demonstrates a bot for configuring and reconfiguring adaptive cards in team and group chats. It supports static and dynamic type-ahead search, allowing for enhanced interactivity and control customization.
 

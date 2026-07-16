@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10/11/2021 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-teamsfx-nodejs
----
- 
 # How to use this Proactive message bots app
 
 This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation references to send scheduled or triggered reminder notifications. The app is designed for local debugging and deployment to Azure, offering full integration with Microsoft 365 Agents Toolkit for streamlined setup and testing.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot enables users to request task approval from managers within group chats. Managers can quickly approve or reject requests, while other members view request details only.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "13-12-2021 17:00:25"
-urlFragment: officedev-microsoft-teams-samples-bot-request-approval-csharp
----
-
 # Bot request approval
 This sample demonstrates a Teams bot that facilitates task approval requests within group chats. Users can submit requests via Adaptive Cards, which managers can then approve or reject directly in the chat. Other group members can view request details, while only requesters and managers have access to actionable options. The sample supports Azure and includes comprehensive setup guidance, leveraging .NET Core and the Microsoft 365 Agents Toolkit for Visual Studio.
 

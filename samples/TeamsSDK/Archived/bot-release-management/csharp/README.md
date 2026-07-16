@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates a bot that integrates Azure DevOps with Teams, notifying users of new work items and creating group chats. It supports adaptive cards and is built on .NET 10 with full setup instructions provided.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "04/29/2022 00:02:15"
-urlFragment: officedev-microsoft-teams-samples-bot-release-management-csharp
----
-
 # Bot to create the group chat and send task notification using Azure service hook
 
 This sample app integrates Azure DevOps with Teams using a bot to send notifications on work item creation. It leverages service hooks to create group chats and deliver work item details via adaptive cards, providing a streamlined way to keep teams informed in real time.

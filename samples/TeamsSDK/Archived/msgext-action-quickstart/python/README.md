@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app showcases a Hello World Messaging Extension that processes parameters and generates a card in Microsoft Teams. It also illustrates how to receive and handle forwarded messages, enhancing interaction through action commands and message extensions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "31-12-2024 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-python
----
-
 # Bots/Messaging Extension
 
 Discover this Hello World Messaging Extension that demonstrates how to accept parameters and return interactive cards in Microsoft Teams. With features like action commands and message handling, this sample enables seamless integration with your web service, allowing users to initiate actions and interact directly within Teams.

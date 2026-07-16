@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This bot showcases how to use the people picker control within Adaptive Cards on Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "01/25/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-nodejs
----
 # People picker control in Adaptive Cards
 
 This sample app demonstrates how to utilize the people picker control on Adaptive Cards in Microsoft Teams, enabling users to select team members directly within a bot's response. The bot integrates with the Teams platform, supporting adaptive card functionalities, and allows for local testing with tools like ngrok or dev tunnels, as well as deployment to Azure.

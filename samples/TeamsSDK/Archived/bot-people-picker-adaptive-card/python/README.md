@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This bot showcases how to use the people picker control within Adaptive Cards on Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "01/28/2025 04:00:00 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-python
----
-
 # People picker control in Adaptive Cards
 
 This sample app demonstrates how to utilize the people picker control on Adaptive Cards in Microsoft Teams, enabling users to select team members directly within a bot's response. The bot integrates with the Teams platform, supporting adaptive card functionalities, and allows for local testing with tools like ngrok or dev tunnels, as well as deployment to Azure.

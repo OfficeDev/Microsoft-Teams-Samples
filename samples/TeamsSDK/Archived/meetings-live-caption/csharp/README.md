@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates how to utilize CART links to send live captions in Microsoft Teams meetings.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "06/24/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-meetings-live-caption-csharp
----
-
 # Meeting side panel application uses CART link to send caption in live meeting.
 
 This sample application showcases how to implement live captioning in Microsoft Teams using CART links. With features like a meeting side panel, chat integration, and configurable settings, this app enables real-time captioning to enhance accessibility during meetings.

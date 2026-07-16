@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Microsoft Teams bot can receive transitive member add and remove events in shared channels.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "09/10/2025 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-shared-channel-events-csharp
----
-
 # Bot updates for handling transitive member add/remove events in Microsoft Teams shared channels
 
 This sample shows how to build a Microsoft Teams bot using the Bot Framework SDK that responds to transitive member changes in shared channels. When a member is added to or removed from a parent team that shares a channel, Teams automatically updates the membership of the shared channel. The bot receives these transitive member add and remove events and can process them to track membership changes, maintain rosters, or trigger custom workflows. This enables developers to extend shared channel scenarios by keeping their applications and services in sync with the latest membership state across teams and channels.

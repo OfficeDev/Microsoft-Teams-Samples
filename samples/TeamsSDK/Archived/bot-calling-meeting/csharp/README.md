@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how a bot can create, join, and transfer calls or meetings within Microsoft Teams.
-products:
-  - office-teams
-  - office
-  - office-365
-languages:
-  - csharp
-extensions:
-  contentType: samples
-  createdDate: "07/07/2021 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-calling-meeting-csharp
----
-
 # Calling and Meeting Bot Sample V4
 
 ## Summary

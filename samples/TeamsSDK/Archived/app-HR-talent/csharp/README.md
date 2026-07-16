@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app simulates a recruiting and talent management system using Microsoft Teams Bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "02/12/2024 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
-
----
 # HR Talent Management App
 
 The HR Talent Management App is designed to simulate a comprehensive recruitment system within Microsoft Teams. It enables users and teams to efficiently handle hiring processes by creating, managing, and searching for job positions and candidates. This sample includes everything you need to test the app, including source code, deployment guides, and a pre-configured app package to upload directly into Teams.

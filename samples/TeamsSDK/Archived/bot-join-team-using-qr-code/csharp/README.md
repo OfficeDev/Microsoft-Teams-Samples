@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This bot allows users to join Microsoft Teams by scanning a team-specific QR code.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "12/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-join-team-using-qr-code-csharp
----
-
 # Join a team using QR code sample
 
 This Microsoft Teams sample bot helps users join a team by scanning a QR code that contains the team ID. It allows users to generate QR codes, leverages the Graph API, and supports both bot and Adaptive Cards functionality. Ideal for mobile clients, this feature enhances team onboarding with ease.

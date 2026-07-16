@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Contoso Knowledge Hub - AI Academic & Career Guidance Agent.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "21-10-2025 13:38:26"
-urlFragment: officedev-microsoft-teams-samples-agent-knowledge-hub-csharp
----
-
 # Contoso Knowledge Hub - AI Academic & Career Guidance Agent
 Contoso Knowledge Hub is an intelligent guidance agent built on the Teams SDK, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations.
 

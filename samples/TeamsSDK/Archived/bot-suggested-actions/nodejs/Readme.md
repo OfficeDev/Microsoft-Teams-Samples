@@ -1,17 +1,3 @@
----
-page_type: sample
-description: Demonstrating the feature where user can send suggested actions using bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "04/27/2022 23:30:17 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-suggested-actions-nodejs
----
 # Send Suggested Actions
 
 This sample shows the feature where user can [send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions) using bot.

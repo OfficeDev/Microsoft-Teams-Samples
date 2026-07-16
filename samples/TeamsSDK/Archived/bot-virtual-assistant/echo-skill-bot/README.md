@@ -1,16 +1,3 @@
----
-page_type: sample
-description: This sample bot demonstrates the implementation of basic message mirroring and interaction within personal scope in Teams.
-products:
-- office-teams
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/15/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-virtual-assistant-echo-skill-bot-nodejs
----
-
 # Echo Skill Bot
 
 This simple echo skill bot repeats the user's message and sends it back to them, demonstrating basic message handling in personal scope in Teams.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a simple python-based Messaging Extension that accepts search requests and returns results within Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "26/12/2024 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-python
----
-
 # Messaging Extension quick start
 
 This comprehensive python quick start sample illustrates the creation of a Messaging Extension in Microsoft Teams designed to process search requests from users. By enabling interactions through buttons and forms, it facilitates direct communication with your web service, enhancing user experience within the Teams environment.

@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This app showcases bot conversation events and messaging extensions for Microsoft Teams using the Bot Framework v4.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
----
-
 # Bots/Messaging Extension
 
 This sample demonstrates how to build a Microsoft Teams bot that handles conversation events and messaging extensions using Bot Framework v4. Users can interact with bots through adaptive cards, task modules, and buttons, enhancing the Teams experience with custom, interactive solutions.

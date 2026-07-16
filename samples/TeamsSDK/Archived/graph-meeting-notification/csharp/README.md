@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates how to use an online meeting subscription to send notifications in Microsoft Teams chat when users join, leave, or when meetings start and end.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/08/2022 12:16:45 AM"
-urlFragment: officedev-microsoft-teams-samples-graph-meeting-notification-csharp
----
-
 # Online meeting subscription
 
 This sample application illustrates the use of online meeting subscriptions in Microsoft Teams, allowing for real-time notifications in chat when users join or leave meetings and when meetings start or end. Developed in C#, it includes features like bot integration, change notifications, and adaptive cards, along with a comprehensive setup guide involving Azure Bot Service, Microsoft Graph API, and self-signed certificates for secure communication.

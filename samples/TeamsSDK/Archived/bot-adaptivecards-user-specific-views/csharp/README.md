@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app shows how to create user-specific adaptive card views for Teams, enabling personalized content and auto-updating across various chat contexts.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
-  contentType: samples
-  createdDate: "03/09/2022 11:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-views-csharp
----
-
 # Teams Adaptive Card Views
 
 - **Interaction with bot**

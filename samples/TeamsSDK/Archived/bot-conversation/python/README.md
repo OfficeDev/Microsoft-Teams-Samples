@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This app demonstrates using bot conversation events in Microsoft Teams, supporting adaptive cards, read receipts, and message update events. It includes immersive reader support for enhanced accessibility.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "12-12-2019 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-python
-
----
-
 # Teams Conversation Bot
 
 This sample app demonstrates how to handle various bot conversation events in Microsoft Teams, including read receipts and adaptive card interactions. It showcases capabilities such as immersive reader support and message update tracking, making it ideal for personal, group, and team chat scopes.

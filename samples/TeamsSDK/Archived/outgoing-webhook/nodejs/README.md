@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to implement a straightforward Outgoing Webhook for Microsoft Teams, allowing users to send messages to external services without the complexity of creating a full bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-extensions:
-  contentType: samples
-  createdDate: "12/05/2017 06:03:13 PM"
-urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs
----
 > [!IMPORTANT]
 >
 > The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).

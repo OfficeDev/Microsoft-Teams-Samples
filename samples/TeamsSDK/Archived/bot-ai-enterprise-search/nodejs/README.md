@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This Azure Open AI sample app integrates user search with Azure Open AI embeddings, Redis DB, and Teams bot for queries based on uploaded files.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/28/2023 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-open-ai-search-file-upload-nodejs
----
 # Teams Azure Open AI Embeddings And Redis Search On Uploaded File Using Bot
 
 This sample app demonstrates user search functionality powered by Azure Open AI embeddings and Redis DB, facilitating queries based on files uploaded by an admin using a Teams bot. It supports features like Adaptive Cards, Azure Blob Storage, and Redis integration within Teams.

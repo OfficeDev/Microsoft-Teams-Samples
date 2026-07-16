@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates a Node.js bot that integrates Azure DevOps with Teams, notifying users of new work items and creating group chats.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-- javascript
-extensions:
- contentType: samples
- createdDate: "04/28/2022 00:15:15"
-urlFragment: officedev-microsoft-teams-samples-bot-release-management-nodejs
----
-
 # Bot to create a group chat and send a task notification using Azure service hook
 
 This sample app integrates Azure DevOps with Teams using a bot to send notifications on work item creation. It leverages service hooks to create group chats and deliver work item details via adaptive cards, providing a streamlined way to keep teams informed in real time.
