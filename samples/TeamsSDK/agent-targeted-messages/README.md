@@ -6,6 +6,7 @@ This sample demonstrates how to use **targeted messaging** in Microsoft Teams. T
 
 - [Included Features](#included-features)
 - [Interaction with Agent](#interaction-with-agent)
+- [Slash and @mention Commands](#slash-and-mention-commands)
 - [Sample Implementations](#sample-implementations)
 - [How to run these samples](#how-to-run-these-samples)
   - [Run in the Teams Client](#run-in-the-teams-client)
@@ -55,6 +56,58 @@ Every agent response in this sample is a targeted message — only the intended 
 | Reminder delivery | The reminder target | `app.send(conversationId, new MessageActivity(...).withRecipient(recipient, true))` |
 | Viewing active reminders | The command sender | `send(new MessageActivity(...).withRecipient(sender, true))` |
 | Snooze confirmation | The snoozing user | `send(new MessageActivity(...).withRecipient(recipient, true))` |
+
+## Slash and @mention Commands
+
+Commands only appear in the Teams compose experience once declared in the `bots[].commandLists[]` section of the app manifest. Set `triggers` to `slash` (slash picker), `mention` (@mention menu), or both, and set `supportsTargetedMessages` to `true` to receive targeted messages in group conversations.
+
+```json
+{
+  "bots": [
+    {
+      "botId": "{{BOT_ID}}",
+      "scopes": ["personal", "team", "groupChat"],
+      "supportsTargetedMessages": true,
+      "commandLists": [
+        {
+          "scopes": ["personal", "team", "groupChat"],
+          "triggers": ["slash"],
+          "commands": [
+            {
+              "title": "my-reminders",
+              "description": "View your active reminders"
+            }
+          ]
+        },
+        {
+          "scopes": ["personal", "team", "groupChat"],
+          "triggers": ["mention"],
+          "commands": [
+            {
+              "title": "remind",
+              "description": "Set a reminder, e.g. remind me in 5 minutes to check email"
+            }
+          ]
+        },
+        {
+          "scopes": ["personal", "team", "groupChat"],
+          "triggers": ["slash", "mention"],
+          "commands": [
+            {
+              "title": "reminder-help",
+              "description": "Show help information"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+- The `my-reminders` command appears as a slash command.
+- The `remind` command appears as an @mention command.
+- The `reminder-help` command is available as both a slash and an @mention command.
 
 ## Sample Implementations
 
@@ -171,3 +224,5 @@ az ad app credential reset --id $appId
 
 - [Microsoft Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/)
 - [Targeted Messages in Teams](https://microsoft.github.io/teams-sdk/typescript/essentials/sending-messages/#targeted-messages)
+- [Receive targeted messages](https://learn.microsoft.com/microsoftteams/platform/agents-in-teams/targeted-messages#receive-targeted-messages)
+- [Agent slash commands](https://learn.microsoft.com/microsoftteams/platform/agents-in-teams/agent-slash-commands)
