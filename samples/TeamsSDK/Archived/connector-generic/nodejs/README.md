@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample provides a customizable Node.js connector for systems with webhook support, ideal for integration with Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-connector-generic-nodejs
-
----
-
 > [!IMPORTANT]
 >
 > The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).

@@ -1,16 +1,3 @@
----
-page_type: sample
-description: This sample app can be use to streaming scenarios in Teams using Azure Open AI and Bot Framework v4 for personal scope.
-products:
-- office-teams
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "11/18/2024"
-urlFragment: officedev-microsoft-teams-samples-bot-streaming-nodejs
----
-
 # Teams Streaming Bot Sample
 
 This bot has been created using [Bot Framework](https://dev.botframework.com) and [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) as a secondary/alternative option to using [Teams AI SDK](https://github.com/microsoft/teams-ai/tree/main/js/samples/04.ai-apps/i.teamsChefBot-streaming). 

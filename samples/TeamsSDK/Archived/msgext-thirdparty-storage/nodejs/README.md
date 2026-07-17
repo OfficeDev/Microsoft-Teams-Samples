@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This app enables seamless integration with third-party cloud storage providers for files dragged and dropped in Teams chats or channels. It uses the Microsoft Teams JavaScript SDK's thirdPartyCloudStorage module to fetch and upload files efficiently.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "2024-12-26 17:00:25"
-urlFragment: officedev-microsoft-teams-samples-msgext-thirdparty-storage-nodejs
----
-
 # Third-Party Storage Integration in Microsoft Teams
 Microsoft Teams allows users to integrate third-party cloud storage providers by modifying the default storage options from OneDrive and SharePoint. This capability enables files that are dragged and dropped into the Teams chat or message compose area to be stored in a third-party storage service. Using the Microsoft Teams JavaScript client library (TeamsJS), third-party apps can capture these files through the getDragAndDropFiles API and then upload them to their own cloud storage.
 

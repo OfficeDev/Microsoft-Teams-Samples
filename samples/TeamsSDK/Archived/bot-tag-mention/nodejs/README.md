@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "28/11/2023 20:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-tag-mention-nodejs
----
-
 # Tag mention bot
 
 This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework.

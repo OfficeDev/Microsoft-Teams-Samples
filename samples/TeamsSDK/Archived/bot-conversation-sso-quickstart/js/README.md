@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample bot demonstrates implementing SSO in Microsoft Teams using Azure AD.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 13:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-js
----
 # Teams Conversation Bot SSO quick-start
 
 This sample demonstrates how to implement Single Sign-On (SSO) for Teams bots using Azure Active Directory and the Bot Framework. It includes comprehensive setup instructions for authentication, tunneling, and deploying to Azure, offering a streamlined way to authenticate users and access Microsoft Graph data directly within Teams.

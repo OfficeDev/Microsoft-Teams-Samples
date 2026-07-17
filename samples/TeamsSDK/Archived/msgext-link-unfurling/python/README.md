@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample showcases a Python bot that implements link unfurling within Microsoft Teams messaging extensions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "12-12-2019 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-msgext-link-unfurling-python
----
-
 # Teams Link Unfurl Bot Python
 
 This sample application illustrates a Python bot that enhances Microsoft Teams by performing [link unfurling](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) in messaging extensions. By integrating with Azure, the bot facilitates seamless interactions when users share links, improving overall communication.

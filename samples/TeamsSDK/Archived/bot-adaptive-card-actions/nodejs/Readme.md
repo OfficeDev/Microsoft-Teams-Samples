@@ -1,17 +1,3 @@
----
-page_type: sample
-description: Sample which demonstrates different Adaptive Card action types using bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "12/27/2022 12:30:17 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-adaptivecard-actions-nodejs
----
 # Send Adaptive Card Including Different Actions - NodeJS
 
 This sample shows the feature where user can send adaptive card with different actions using bot.

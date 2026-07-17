@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate how an Bot can use Teams authentication
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/10/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-csharp
----
 # Teams Auth Bot
 
 Bot Framework v4 bot using Teams authentication

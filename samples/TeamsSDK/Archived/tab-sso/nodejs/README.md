@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates Azure AD Single Sign-On for Teams tabs, enabling Graph API access.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "12/03/2021 12:53:17 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-sso-nodejs
----
-
 # Tabs Azure AD SSO Sample using NodeJS
 
 This sample shows how to implement Azure AD single sign-on support for tabs. It will:

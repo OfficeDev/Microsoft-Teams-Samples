@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to integrate Open AI into a Teams message extension to evaluate contract proposals against policy checklists.
-products:
-- office-teams
-- copilot-m365
-- azure open-ai
-languages:
-- javascript
-extensions:
- contentType: samples
- createdDate: "07/15/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-ai-doc-compliance-checker-js
----
-
 # Compliance Checker using Azure Open AI
 
 Explore this sample application that integrates Azure Open AI into a Teams message extension, enabling users to evaluate contract proposals for compliance with specific policy guidelines stored in Azure Blob Storage. 

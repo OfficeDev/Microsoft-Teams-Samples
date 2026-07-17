@@ -24,8 +24,7 @@
   "proxy": "http://localhost:4001",
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {

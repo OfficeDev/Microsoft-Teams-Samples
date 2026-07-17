@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot helps users schedule recurring tasks and receive reminders at specified times. It supports adaptive cards and task modules, utilizing APScheduler to manage reminders.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
-  contentType: samples
-  createdDate: "02/06/2025"
-urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-python
----
-
 # Bot Daily Task Reminder (Python)
 
 The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurring tasks and receive reminders at designated times. Built with the Bot Framework SDK for Python and leveraging adaptive cards and task modules, this bot provides an efficient way to manage and be reminded of daily tasks directly within Teams. It includes setup instructions for Microsoft Entra ID, Teams integration, and Azure Bot Service, offering seamless scheduling and notification capabilities.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to implement link unfurling in Share to Teams for seamless sharing of site content directly to individual contacts or groups on Teams, using Python.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
-  contentType: samples
-  createdDate: "30-06-2025"
-urlFragment: officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-python
----
-
 # Link Unfurling in Share to Teams (Python)
 
 This sample demonstrates the Share to Teams feature, allowing users to seamlessly share site content directly to contacts or groups in Microsoft Teams, leveraging link unfurling to provide rich previews and context for shared links. It includes comprehensive setup instructions, bot registration, and local deployment steps for easy integration and testing within your Teams environment using Python.

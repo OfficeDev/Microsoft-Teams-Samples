@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This Teams sample application highlights deeplinks for various functionalities, such as initiating calls, chats, and navigating within tabs and apps. It features a comprehensive setup guide and supports interactions with both bots and tabs for enhanced user engagement.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
----
  # DeepLink
 
 Discover this Microsoft Teams sample app designed to demonstrate deeplinks for seamless interactions, including calls, chats, and navigation within tabs and applications. With robust features such as bot integration, a welcome card flow, and detailed setup instructions, this app empowers developers to enhance user experiences and streamline communication within Teams.

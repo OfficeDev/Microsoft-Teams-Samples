@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This is an sample application which showcases how to invoke Dialogs (referred as task modules in TeamsJS v1.x) from adaptive and hero cards.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10-04-2022 17:00:25"
-urlFragment: officedev-microsoft-teams-samples-bot-task-module-nodejs
----
-
 # Teams Dialog (referred as task modules in TeamsJS v1.x)
 
 Bot Framework Teams Dialog (referred as task modules in TeamsJS v1.x) sample.

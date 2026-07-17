@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates how to send real-time change notifications for user presence in Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-change-notification-csharp
----
-
 # Change Notification sample
 
 Bot Framework v4 ChangeNotification sample.

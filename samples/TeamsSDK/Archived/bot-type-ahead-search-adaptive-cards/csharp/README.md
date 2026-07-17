@@ -1,17 +1,3 @@
----
-page_type: sample
-description: Demonstrating the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards using sent bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "12/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-cards-csharp
----
 # Typeahead search control in Adaptive Cards C#
 
 This sample shows the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards.

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app retrieves meeting transcripts via the Graph API and displays them in a task module.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "03/08/2022 00:45:15"
-urlFragment: officedev-microsoft-teams-samples-meetings-transcription-csharp
----
-
 # Bot to show the transcript of the meeting using Microsoft Graph API.
 
 The Meeting Transcript Bot uses Microsoft Graph API to fetch and present meeting transcripts within a Teams task module. It features adaptive cards and bot interactions for seamless user engagement during meetings.

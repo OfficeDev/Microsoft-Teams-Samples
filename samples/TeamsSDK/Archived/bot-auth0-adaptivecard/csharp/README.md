@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "05/13/2025 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-auth0-adaptivecard-csharp
----
-
 # Auth0 Bot
 
 This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card

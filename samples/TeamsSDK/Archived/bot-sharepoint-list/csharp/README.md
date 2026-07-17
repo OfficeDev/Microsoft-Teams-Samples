@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot collects user input via adaptive cards and saves it to a SharePoint list.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-list-csharp
----
-
 # Sharepoint List Bot
 
 Bot Framework v4 SPListBot sample.

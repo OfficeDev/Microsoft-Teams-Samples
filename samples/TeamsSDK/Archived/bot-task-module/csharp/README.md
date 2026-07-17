@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate how to use Dialogs (referred as task modules in TeamsJS v1.x) using Bot Framework v4
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/17/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
-
----
 # Teams Dialog (referred as task modules in TeamsJS v1.x)
 
 Bot Framework Teams Dialogs (referred as task modules in TeamsJS v1.x) sample.

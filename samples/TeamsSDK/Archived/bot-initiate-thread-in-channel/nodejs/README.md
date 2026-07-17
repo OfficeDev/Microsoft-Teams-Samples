@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10-04-2022 17:00:25"
-urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-nodejs
----
-
 # Teams - Start new thread in a channel (proactive messaging)
 
 This sample application illustrates how to initiate a conversation thread within a specific channel in Microsoft Teams using Bot Framework v4. It includes key features such as adaptive cards, bot-driven interactions, and setup instructions for Microsoft 365 Agents Toolkit in Visual Studio, enabling easy uploading and debugging. Ideal for developers looking to integrate bots in Teams channels and create engaging, context-specific conversations.

@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "21/01/2023 12:54:21 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-sso-adaptivecard-nodejs
-
----
-
 # SSO for your Adaptive Cards
 
 This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards.

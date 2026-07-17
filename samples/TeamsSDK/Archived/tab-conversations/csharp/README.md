@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Microsoft Teams sample app showcases how to create conversational tabs for users to discuss sub-entities within a tab, enhancing collaboration and interaction.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
-urlFragment: officedev-microsoft-teams-samples-tab-conversations-csharp
----
-
 # Conversational Tabs
 
 Discover this Microsoft Teams sample app that demonstrates the implementation of conversational tabs, enabling users to engage in discussions about specific sub-entities within the tab. With comprehensive setup instructions and a demo manifest for easy installation, this app empowers developers to enhance user interaction and collaboration in their Teams applications. [Create conversational tabs](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs?view=msteams-client-js-latest#continue-a-conversation)

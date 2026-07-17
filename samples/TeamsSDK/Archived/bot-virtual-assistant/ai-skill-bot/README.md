@@ -1,16 +1,3 @@
----
-page_type: sample
-description: This AI Translator Skill Bot demonstrates translating user inputs and returning the translated responses, operating seamlessly in personal scope in Teams.
-products:
-- office-teams
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/15/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-virtual-assistant-ai-skill-bot-nodejs
----
-
 # AI Skill Bot
 
 This AI Translator Skill Bot takes user-provided text, translates it into the desired language, and then returns the translated response to the user. It operates smoothly in personal chats within Teams, showcasing its functionality across different communication contexts.

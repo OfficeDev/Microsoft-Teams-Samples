@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to create a Node.js Messaging Extension in Microsoft Teams that enables users to perform searches and retrieve results seamlessly.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10-10-2022 10:00:25"
-urlFragment: officedev-microsoft-teams-samples-msgext-search-nodejs
----
-
 # Teams Messaging Extensions Search
 
 This comprehensive Node.js sample provides a detailed guide on building a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) for Microsoft Teams, empowering users to conduct searches and retrieve results efficiently. By leveraging the [Bot Framework](https://dev.botframework.com), this extension enhances user interaction within Teams, demonstrating features such as search commands, message handling, and result display.

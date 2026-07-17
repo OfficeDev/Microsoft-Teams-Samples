@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to implement authentication in a C# Messaging Extension for Microsoft Teams, enabling secure access and user-specific interactions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/17/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-search-auth-config-csharp
----
 # Teams Search Auth Config 
 
 Bot Framework v4 sample for Teams expands the [msgext-search-auth-config](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-auth-config/csharp) sample to include a configuration page and Bot Service authentication.

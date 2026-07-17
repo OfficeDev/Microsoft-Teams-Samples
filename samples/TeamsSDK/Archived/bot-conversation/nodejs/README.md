@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10-04-2022 20:15:25"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-nodejs
----
-
 # Teams Conversation Bot
 
 Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).

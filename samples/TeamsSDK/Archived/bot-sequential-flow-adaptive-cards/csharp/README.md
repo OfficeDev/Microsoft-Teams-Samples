@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07-07-2021 13:38:26"
-urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-csharp
----
-
 # Sequential workflow adaptive cards C#
 
 This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot and the list of incident created can be seen in messaging extension and can share a specific incident to the chat/team.

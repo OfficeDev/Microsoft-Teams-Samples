@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate iss how to use the Bot Framework support for oauth in your bot
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "28/02/2023 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-nodejs
----
 # Teams Auth Bot
 
 Bot Framework v4 bot using Teams authentication

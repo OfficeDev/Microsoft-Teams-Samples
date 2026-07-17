@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot helps users schedule recurring tasks and receive reminders at specified times. It supports adaptive cards and task modules, utilizing the Quartz Scheduler to manage reminders.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "11/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-csharp
----
-
 # Bot daily task reminder
 
 The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurring tasks and receive reminders at designated times. Built with the Bot Framework and leveraging adaptive cards and task modules, this bot provides an efficient way to manage and be reminded of daily tasks directly within Teams. It includes setup instructions for Microsoft Entra ID, Teams integration, and Azure Bot Service, offering seamless scheduling and notification capabilities.

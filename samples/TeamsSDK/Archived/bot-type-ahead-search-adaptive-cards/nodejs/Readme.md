@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Demonstrating the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards sent using bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "12/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-cards-nodejs
----
-
 # Typeahead search control in Adaptive Cards Node.js
 
 This sample shows the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards.

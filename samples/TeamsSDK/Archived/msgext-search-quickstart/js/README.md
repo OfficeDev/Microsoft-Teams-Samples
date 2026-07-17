@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a simple JavaScript-based Messaging Extension that accepts search requests and returns results within Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-js
----
-
 # Messaging Extension quick start
 
 This comprehensive JavaScript quick start sample illustrates the creation of a Messaging Extension in Microsoft Teams designed to process search requests from users. By enabling interactions through buttons and forms, it facilitates direct communication with your web service, enhancing user experience within the Teams environment.

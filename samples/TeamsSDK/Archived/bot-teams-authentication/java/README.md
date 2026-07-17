@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate iss how to use the Bot Framework support for oauth in your bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Java
-extensions:
- contentType: samples
- createdDate: "12/12/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-team-teams-authentication-java
----
-
 # Teams Authentication Bot
 
 Bot Framework v4 bot using Teams authentication.

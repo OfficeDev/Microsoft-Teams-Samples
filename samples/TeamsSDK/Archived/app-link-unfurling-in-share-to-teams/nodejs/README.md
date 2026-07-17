@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to implement link unfurling in Share to Teams for seamless sharing of site content directly to individual contacts or groups on Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-- javascript
-extensions:
-    contentType: samples
-    createdDate: "14-12-2022 00:15:13"
-urlFragment: officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-nodejs
----
-
 ## Link unfruling Share to teams sample
 
 This sample demonstrates the Share to Teams feature, which allows users to seamlessly share site content directly to contacts or groups in Microsoft Teams, leveraging link unfurling to provide rich previews and context for shared links. It includes comprehensive setup instructions, bot registration, and local deployment steps, making it easy to integrate and test within your Teams environment.

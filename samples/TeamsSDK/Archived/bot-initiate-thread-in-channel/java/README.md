@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Java
-extensions:
- contentType: samples
- createdDate: "12/12/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-java
----
-
 # Microsoft Teams - Start Thread In A Specific Channel of a Team
 
 This sample application illustrates how to initiate a conversation thread within a specific channel in Microsoft Teams using Bot Framework v4. It includes key features such as adaptive cards, bot-driven interactions, and setup instructions for Teams Toolkit in Visual Studio, enabling easy uploading and debugging. Ideal for developers looking to integrate bots in Teams channels and create engaging, context-specific conversations.

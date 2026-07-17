@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates the use of Teams tab in stage view using Python, featuring collaborative elements and interactive capabilities.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "12/06/2025"
-urlFragment: officedev-microsoft-teams-samples-tab-stage-view-python
----
-
 # Tab Stage View
 
 This sample app showcases the capabilities of Microsoft Teams tabs in stage view using Python. It demonstrates collaborative features such as multi-window support and interactive elements, allowing users to engage dynamically through adaptive cards and deep linking for a richer experience in Teams.

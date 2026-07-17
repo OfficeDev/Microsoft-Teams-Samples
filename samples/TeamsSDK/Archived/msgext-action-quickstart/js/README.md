@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample app showcases an action-based Messaging Extension that processes parameters and generates a card in Microsoft Teams. It also illustrates how to receive and handle forwarded messages, enhancing interaction through action commands and message extensions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
----
-
 # Action-based Messaging Extension
 
 This sample demonstrates an action-based Messaging Extension in Microsoft Teams. It accepts parameters from the user and returns a Hero Card, handles a message-context action ("Share Message"), and demonstrates link unfurling.

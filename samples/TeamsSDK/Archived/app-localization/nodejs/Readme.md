@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to implement localization for a Microsoft Teams app using Bot and Tab functionalities.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-app-localization-nodejs
----
-
 # Teams App Localization Node.js
 The Teams App Localization sample demonstrates how to implement multilingual support using Bot and Tab capabilities in Microsoft Teams. This app allows users to interact in different languages, making it easy to customize content for a diverse audience.
 

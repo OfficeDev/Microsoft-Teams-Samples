@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot enables configuration and reconfiguration with dynamic search capabilities on Adaptive Cards.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "31-12-2024 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-auth-nodejs
----
-
 # Create a commands menu
 This sample illustrates bot configuration and reconfiguration in Teams and group chats, showcasing a type-ahead search feature on Adaptive Cards. It supports both static and dynamic search options, enabling a customizable and interactive bot experience for users.
 

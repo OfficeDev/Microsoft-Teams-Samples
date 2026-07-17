@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-proactive-installation-nodejs
----
-
 # Proactive Installation Sample App
 
 This sample application illustrates how to implement proactive installation of a Microsoft Teams app and send notifications using Microsoft Graph APIs. Featuring bot integration, this app allows for user interaction within Group Chats and Channels, enhancing communication and app management in Teams.

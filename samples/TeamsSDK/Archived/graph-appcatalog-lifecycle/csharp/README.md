@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to manage the lifecycle of Teams apps in the app catalog using Microsoft Graph APIs through a bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-appcatalog-lifecycle-csharp
----
 # AppCatalog sample
 
 This sample illustrates how to programmatically manage the lifecycle of your Teams app in the app catalog by leveraging Microsoft Graph APIs through a bot. It features Teams SSO, adaptive cards, and showcases various app management commands, allowing developers to easily interact with the app catalog.

@@ -1,19 +1,3 @@
----
-page_type: sample
-description: Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-- javascript
-extensions:
- contentType: samples
- createdDate: "07-07-2021 13:38:26"
-urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-nodejs
----
-
 # Sequential workflow adaptive cards Node.js
 
 ![Preview Image](Images/Preview.gif)

@@ -1,20 +1,3 @@
----
-page_type: sample
-description: Explore a sample that demonstrates building a Microsoft Teams bot using SDK v4, featuring messaging extensions, adaptive cards, and Facebook authentication.
-products:
-- office-teams
-- office-365
-languages:
-- nodejs
-- javascript
-extensions:
-  contentType: samples
-  technologies:
-  - Tabs
-  createdDate: "05/08/2017 09:41:53 AM"
-urlFragment: officedev-microsoft-teams-samples-app-complete-sample-nodejs
----
-
 # Microsoft Teams Bot in Node.js
 
 This sample application showcases the development of a feature-rich Microsoft Teams bot utilizing the Bot Framework SDK v4. It incorporates various functionalities, including dialog management, messaging extensions, and Facebook authentication, all built on Node.js.

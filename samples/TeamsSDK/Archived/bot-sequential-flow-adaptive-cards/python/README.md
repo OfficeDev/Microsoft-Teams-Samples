@@ -1,19 +1,3 @@
----
-page_type: sample
-description: Demonstrating on how to implement sequential flow, user specific view and up-to-date adaptive cards in bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "05-05-2025 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-python
-
----
-
 # Bot Sequential Flow Adaptive Cards
 
 Demonstrating on how to implement sequential flow, user specific view and up-to-date adaptive cards in bot.

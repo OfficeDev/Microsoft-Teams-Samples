@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample app integrates an Outlook add-in with a Teams tab to streamline the creation and management of discount offers. Users can insert discounts into emails and view consolidated data within Teams, enhancing collaboration and efficiency.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- typescript
-- nodejs
-extensions:
- contentType: samples
- createdDate: "09/19/2023 01:00:00 PM"
-urlFragment: officedev-microsoft-teams-samples-multiple-capability-discounts-ts
----
-
 # Discount Offers
 
 This sample combines, into a single app with a single manifest, an Outlook Add-in with a Teams Tab to make and manage discounts offers. The Outlook add-in is used to insert discount offers into e-mails. These offers are recorded in a mock customer relation management (CRM) system that is implemented with a simple JSON database. The aggregated data from the CRM is viewed in a Teams tab.

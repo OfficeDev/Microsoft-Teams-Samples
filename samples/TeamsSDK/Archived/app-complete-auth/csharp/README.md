@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample showcases Azure AD and Facebook authentication across bots, tabs, and messaging extensions in Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "02/25/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-app-complete-auth-csharp
----
-
 # Authentication complete sample
 
 Experience seamless authentication with this sample application, which integrates Azure AD and Facebook authentication across Microsoft Teams bots, tabs, and messaging extensions. It supports single sign-on (SSO), Adaptive Cards, Task Modules, and Microsoft Graph API, ensuring a rich and secure user experience.

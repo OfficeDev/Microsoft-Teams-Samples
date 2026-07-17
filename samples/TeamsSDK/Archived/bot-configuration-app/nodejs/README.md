@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a bot for configuring and reconfiguring adaptive cards in team and group chats.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "25-09-2023 23:30:17"
-urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-nodejs
----
 # Bot Configuration 
 
 This sample demonstrates a bot for configuring and reconfiguring adaptive cards in team and group chats. It supports static and dynamic type-ahead search, allowing for enhanced interactivity and control customization.

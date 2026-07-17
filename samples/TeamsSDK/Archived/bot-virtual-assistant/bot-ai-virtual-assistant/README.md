@@ -1,16 +1,3 @@
----
-page_type: sample
-description: A Teams AI-based Virtual Assistant Root Bot that routes user inputs to skill bots for tailored responses, enhancing productivity within Microsoft Teams.
-products:
-- office-teams
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/15/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-ai-virtual-assistant-nodejs
----
-
 # Virtual Assistant Bot (Root Bot)
 
 This Teams AI-based Virtual Assistant Root Bot is a consumer bot that uses the Teams AI library to dynamically route user inputs to Echo and AI skill bots, returning tailored responses. It operates seamlessly within Microsoft Teams to enhance productivity by automating responses and facilitating efficient interactions.

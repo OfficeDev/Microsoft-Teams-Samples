@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample showcases a Teams app template that enables data interaction using retrieval-augmented generation (RAG) with Azure OpenAI and Azure AI Search.
-products:
-- office-teams
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "07/30/2024 12:54 PM"
-urlFragment: officedev-microsoft-teams-samples-msteams-chat-with-your-data
-
----
-
 # Chat With Your Data
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=322043759&devcontainer_path=.devcontainer%2Fmsteams-chat-with-your-data%2Fdevcontainer.json&resume=1)
 

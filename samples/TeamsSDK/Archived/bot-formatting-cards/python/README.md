@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Sample which demonstrates different formatting supported in cards using bot.
-products:
-- office-teams
-- office
-- office-365
-langauges:
-- python
-extensions:
- contentType: samples
- createdDate: "02/18/2025 05:00:17 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-python
-
----
 ## Different Formatting Cards
 
 This sample shows the feature where user can use different formatting on adaptive cards using bot.
