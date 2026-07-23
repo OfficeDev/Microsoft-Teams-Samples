@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10-04-2022 20:15:25"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-nodejs
----
-
 # Graph Chat Migration Bot
 
 This is a Microsoft Teams bot sample that demonstrates how to use Microsoft Graph APIs for chat migration. Implements functionality to migrate chat messages with specific timestamps
