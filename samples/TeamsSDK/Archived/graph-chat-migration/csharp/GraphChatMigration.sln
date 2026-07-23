@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphChatMigration", "GraphChatMigration\GraphChatMigration.csproj", "{7717C3A6-B32B-7CDA-B5BC-0564F2C23A84}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.atkproj", "{B069B3BD-F6BC-CC40-82AB-3FCC2EA50FDF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4C8E0A70-612E-4BE1-9986-EE02F3FACC3E}"
+	ProjectSection(SolutionItems) = preProject
+		GraphChatMigration.slnLaunch.user = GraphChatMigration.slnLaunch.user
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7717C3A6-B32B-7CDA-B5BC-0564F2C23A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7717C3A6-B32B-7CDA-B5BC-0564F2C23A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7717C3A6-B32B-7CDA-B5BC-0564F2C23A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7717C3A6-B32B-7CDA-B5BC-0564F2C23A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B069B3BD-F6BC-CC40-82AB-3FCC2EA50FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B069B3BD-F6BC-CC40-82AB-3FCC2EA50FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B069B3BD-F6BC-CC40-82AB-3FCC2EA50FDF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B069B3BD-F6BC-CC40-82AB-3FCC2EA50FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B069B3BD-F6BC-CC40-82AB-3FCC2EA50FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B069B3BD-F6BC-CC40-82AB-3FCC2EA50FDF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {577A46D3-DAE5-43E7-A53B-54FDB7CA7820}
+	EndGlobalSection
+EndGlobal
