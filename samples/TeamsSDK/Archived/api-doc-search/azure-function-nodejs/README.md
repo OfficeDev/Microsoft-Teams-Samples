@@ -79,7 +79,7 @@
       - `connection` : The `connection` property specifies the name of the application setting that contains the connection string for your Azure Storage account. This connection string is used by the function to connect to Azure Storage. 
            - **Value:** `'c0008c_STORAGE'` (This is the name of the application setting where the connection string for Azure Storage is stored. It should match the name you use in your Azure Function App’s configuration in `.local.settings.json`.)
 
- - In a terminal, navigate to `samples/api-doc-search/azure-function-nodejs`
+ - In a terminal, navigate to `samples/TeamsSDK/Archived/api-doc-search/azure-function-nodejs`
 
  - Install node modules and run application by pressing F5 in Visual Studio Code
  

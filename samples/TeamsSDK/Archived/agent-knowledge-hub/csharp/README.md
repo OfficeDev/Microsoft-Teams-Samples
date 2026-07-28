@@ -76,7 +76,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - If you are using Visual Studio
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `samples/agent-knowledge-hub/csharp` folder
+    - Navigate to `samples/TeamsSDK/Archived/agent-knowledge-hub/csharp` folder
     - Select `AgentKnowledgeHub.sln` file and open it in Visual Studio
     - Press `F5` to run this project
     

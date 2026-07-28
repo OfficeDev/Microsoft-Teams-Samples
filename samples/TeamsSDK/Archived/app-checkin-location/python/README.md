@@ -82,7 +82,7 @@ Alternatively, you can also use the `dev tunnels`. Please follow [Create and hos
 devtunnel host -p 3978 --allow-anonymous
 ```
 
-### 3. In a terminal, navigate to `samples/app-checkin-location/python`
+### 3. In a terminal, navigate to `samples/TeamsSDK/Archived/app-checkin-location/python`
 
 ### 4. Activate your desired virtual environment
 

@@ -145,7 +145,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 2. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/app-complete-auth/csharp/AppCompleteAuth.sln`
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/app-complete-auth/csharp/AppCompleteAuth.sln`
  
 3. Setup and run the bot from Visual Studio: 
     Modify the `appsettings.json` and fill in the following details:

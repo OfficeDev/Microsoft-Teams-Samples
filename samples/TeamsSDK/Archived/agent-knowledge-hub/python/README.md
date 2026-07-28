@@ -94,7 +94,7 @@ the Teams service needs to call into the bot.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-4) In a terminal, navigate to `samples/agent-knowledge-hub/python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/agent-knowledge-hub/python`
 
 5) Activate your desired virtual environment
 

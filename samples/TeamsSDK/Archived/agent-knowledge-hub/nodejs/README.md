@@ -83,7 +83,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/agent-knowledge-hub/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/agent-knowledge-hub/nodejs`
 
 1) Install modules
 

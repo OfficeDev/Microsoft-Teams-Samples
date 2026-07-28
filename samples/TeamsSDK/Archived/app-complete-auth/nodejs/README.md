@@ -134,7 +134,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/app-complete-auth/nodejs`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/app-complete-auth/nodejs`
 
 3) Install node modules
 
@@ -310,4 +310,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-complete-auth-nodejs" /><img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-complete-auth-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-complete-auth-nodejs" />
