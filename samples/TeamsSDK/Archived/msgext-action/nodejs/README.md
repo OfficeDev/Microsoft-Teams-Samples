@@ -15,7 +15,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Teams Messaging Extensions Action:** [Manifest](/samples/msgext-action/csharp/demo-manifest/msgext-action.zip)
+**Teams Messaging Extensions Action:** [Manifest](/samples/TeamsSDK/Archived/msgext-action/csharp/demo-manifest/msgext-action.zip)
 
 
 ## Prerequisites
@@ -87,7 +87,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/msgext-action/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/msgext-action/nodejs`
 
 1) Install modules
 
@@ -113,7 +113,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the bot to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-action/nodejs/index.js#L47) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/msgext-action/nodejs/index.js#L47) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -155,4 +155,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-action-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-action-nodejs" />

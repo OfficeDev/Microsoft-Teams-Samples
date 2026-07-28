@@ -46,7 +46,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > the Teams service needs to call into the bot.
 
 ### Setup for Bot Auth
-Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
+Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 1. Setup NGROK
  - Run ngrok - point to port 3978
@@ -112,7 +112,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-meeting-ai-insights/nodejs/index.js#L52) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-meeting-ai-insights/nodejs/index.js#L52) and put your debugger for local debug.
 
 ## Running the sample
 

@@ -45,7 +45,7 @@
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - Navigate to `samples/api-doc-search/azure-function-nodejs` folder and open the project in Visual Studio Code.
+  - Navigate to `samples/TeamsSDK/Archived/api-doc-search/azure-function-nodejs` folder and open the project in Visual Studio Code.
   - Open `.local.settings1.json` file and rename it as `.local.settings.json` and update the configuration for the application for below values:
 
       - `"AzureWebJobsStorage": ""`: Use `"UseDevelopmentStorage=true"` to connect to the local Azure Storage Emulator; replace with actual Azure Storage connection string for deployment. e.g., `"DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;BlobEndpoint=https://your_account_name.blob.core.windows.net/"`.

@@ -13,7 +13,7 @@ The Tab Request Approval app, now integrated with SharePoint Embedded, serves as
 * Graph API
 
 ## Interaction with app
-![Tab-page](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/SharepointEmbedded.gif)
+![Tab-page](/samples/TeamsSDK/Archived/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/SharepointEmbedded.gif)
 
 ## Overview
 This is a modified version of the pre-existing [Tab Request Approval](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-request-approval/csharp) app that has been integrated with [SharePoint Embedded](https://learn.microsoft.com/en-us/sharepoint/dev/embedded/overview). 
@@ -106,7 +106,7 @@ It offers the following benefits:
 - Be able to perform operations on containers individually.
 - Reduced time complexity by a factor of N (N is the number of containers).
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/AdapterWithErrorHandler.cs#L35) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/sharepoint-tab-request-approval/csharp/TabRequestApproval/AdapterWithErrorHandler.cs#L35) line and put your debugger for local debug.
 
 #### Subscription Flow
 This app provides users with the ability to establish [change notification subscription](https://learn.microsoft.com/en-us/graph/api/resources/webhooks?view=graph-rest-1.0). Subscriptions can be made to messages in teams or chats.
@@ -114,10 +114,10 @@ This app provides users with the ability to establish [change notification subsc
 A subscription would be made by sending a ```POST``` request to either of the following endpoints: ```/Subscriptions/createTeamSubscription``` or ```Subscriptions/createChatSubscription```.
 
 - Teams Subscription
-![TeamsSubscription](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/CreateTeamSubscriptionPostman.png)
+![TeamsSubscription](/samples/TeamsSDK/Archived/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/CreateTeamSubscriptionPostman.png)
 
 - Chat Subscription
-![ChatsSubscription](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/CreateChatSubscriptionPostman.png)
+![ChatsSubscription](/samples/TeamsSDK/Archived/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/CreateChatSubscriptionPostman.png)
 
 Subscriptions have been made to inform developers of app installation or uninstallation events so that they would be able to leverage SharePoint Embedded APIs to provision or decommission storage respectively.
 
@@ -125,16 +125,16 @@ Ideally, the subscription should have been made to another resource that would i
 
 Installation and uninstallation events are simulated by entering the following respectively into a team or chat: ```#microsoft.graph.teamsAppInstalledEventMessageDetail``` and ```#microsoft.graph.teamsAppRemovedEventMessageDetail``` as shown below:
 - Simulating installation in chat
-![chatInstallation](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/InstallationSimulationInChat.png)
+![chatInstallation](/samples/TeamsSDK/Archived/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/InstallationSimulationInChat.png)
 
 - Simulating installation in team
-![teamInstallation](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/InstallationSimulationInTeam.png)
+![teamInstallation](/samples/TeamsSDK/Archived/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/InstallationSimulationInTeam.png)
 
 - Simulating uninstallation in chat
-![teamUninstallation](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/UninstallationSimulationInChat.png)
+![teamUninstallation](/samples/TeamsSDK/Archived/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/UninstallationSimulationInChat.png)
 
 - Simulating uninstallation in team
-![teamUninstallation](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/UninstallationSimulationInTeam.png)
+![teamUninstallation](/samples/TeamsSDK/Archived/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/UninstallationSimulationInTeam.png)
 
 The purpose of providing these simulations is to show you how storage can be provisioned and decommissioned using SharePoint Embedded. To use this simulation, ensure that you create a subscription in the required chat or team resource via the ```ChangeNotification``` controller.
 
@@ -149,6 +149,6 @@ The purpose of providing these simulations is to show you how storage can be pro
     - Ensure that you are able to grant admin consent to that Service Principal (Enterprise Application).
     Restarting the process of setting up SharePoint Embedded manually will resolve this. You can do this by navigating to the **API Permissions Tab** and click on ```Grant Admin Consent for {{Tenant Name}}```. Navigate to the app's Enterprise Application entity and click on the ```Grant Admin Consent for {{Tenant Name}}``` as well. Wait for a few minutes and refresh the permissions **API Permissions Tab** and the **Enterprise Application Tab**. If the statuses of the permissions have not been changed, then wait a few more minutes and repeat the above process again times.
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/sharepoint-tab-request-approval" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/sharepoint-tab-request-approval" />
     
     

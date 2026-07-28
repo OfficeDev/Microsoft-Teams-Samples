@@ -83,7 +83,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
  
   - Launch Visual Studio
   - File -> Open Folder
-  - Navigate to `samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions` folder
+  - Navigate to `samples/TeamsSDK/Archived/bot-adaptive-card-actions/csharp/AdaptiveCardActions` folder
   - Select `AdaptiveCardActions.sln` solution file
 
    - Modify the `/appsettings.json` and fill in the following details:
@@ -103,7 +103,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
 
 
 ## Running the sample
@@ -166,4 +166,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-adaptive-card-actions-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-adaptive-card-actions-csharp" />

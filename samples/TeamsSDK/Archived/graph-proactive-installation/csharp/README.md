@@ -91,7 +91,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   
     - Launch Visual Studio
     - File -> Open -> Project/Solution  
-    - Navigate to `samples/graph-proactive-installation/csharp` folder
+    - Navigate to `samples/TeamsSDK/Archived/graph-proactive-installation/csharp` folder
     - Select `ProactiveAppInstallation.sln` file
     - Press `F5` to run the project
 
@@ -131,7 +131,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
    ![Teams](ProactiveAppInstallation/Images/Teams.png)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-proactive-installation/csharp/ProactiveAppInstallation/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-proactive-installation/csharp/ProactiveAppInstallation/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
 
 
 ## Further reading
@@ -142,4 +142,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-proactive-installation-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-proactive-installation-csharp" />

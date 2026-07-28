@@ -35,7 +35,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### 1. Setup for Bot SSO
 - Setup for Bot SSO
-Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
+Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
@@ -63,7 +63,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples/bot-sso-adaptivecard/nodejs`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/bot-sso-adaptivecard/nodejs`
 
 - Update the `.env` configuration for the bot to use the MicrosoftAppId <<YOUR-MICROSOFT-APP-ID>>, MicrosoftAppPassword <<YOUR-MICROSOFT-PASSWORD>> and <<YOUR-CONNECTION-NAME>> replace with (OAuth Connection Name).
 
@@ -201,4 +201,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Universal Actions for Adaptive Cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/overview?tabs=mobile)
 - [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sso-adaptivecard-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-sso-adaptivecard-nodejs" />

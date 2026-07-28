@@ -89,7 +89,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/bot-teams-catering/csharp`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/bot-teams-catering/csharp`
 
   ```bash
   # run the bot
@@ -100,7 +100,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-teams-catering/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/bot-teams-catering/csharp` folder
   - Select `Catering.sln` file
   - Press `F5` to run the project
 
@@ -124,7 +124,7 @@ eg: https://smba.trafficmanager.net/amer/v3
    - Go to your project directory, the ./appPackage/build folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-catering/csharp/Catering/AdapterWithErrorHandler.cs#L45) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-teams-catering/csharp/Catering/AdapterWithErrorHandler.cs#L45) line and put your debugger for local debug.
 
 
 ## Running the sample
@@ -190,4 +190,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-teams-catering-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-teams-catering-csharp" />

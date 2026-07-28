@@ -80,7 +80,7 @@ the Teams service needs to call into the bot.
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
-4) In a terminal, navigate to `samples/bot-message-reaction/Python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-message-reaction/Python`
 
 5) Activate your desired virtual environment
 
@@ -138,4 +138,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-message-reaction-Python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-message-reaction-Python" />

@@ -105,7 +105,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) In a terminal, go to `samples/graph-chat-lifecycle/python`
+3) In a terminal, go to `samples/TeamsSDK/Archived/graph-chat-lifecycle/python`
 
 4) Activate your desired virtual environment
 
@@ -152,4 +152,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-lifecycle-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-chat-lifecycle-python" />

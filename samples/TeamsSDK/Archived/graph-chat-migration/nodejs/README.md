@@ -90,7 +90,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
    
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation/nodejs/index.js#L46) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation/nodejs/index.js#L46) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -137,4 +137,4 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-migration-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-chat-migration-nodejs" />

@@ -80,7 +80,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-configuration-app-auth/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-configuration-app-auth/nodejs`
 
 1) Install modules
 
@@ -145,4 +145,4 @@ Deploy your project to Azure by following these steps:
 - [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-configuration-app-auth-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-configuration-app-auth-nodejs" />

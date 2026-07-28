@@ -160,7 +160,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/chat/Meeting scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-adaptivecards-user-specific-views/csharp/Microsoft.Teams.Samples.UserSpecificViews/Bot/BotHttpAdapter.cs#L37) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-adaptivecards-user-specific-views/csharp/Microsoft.Teams.Samples.UserSpecificViews/Bot/BotHttpAdapter.cs#L37) line and put your debugger for local debug.
 
 **Basic Tests**
 * Tag the bot and send any message. The bot should respond with an adaptive card which should have options to try out the different cards.
@@ -355,4 +355,4 @@ If User A opens the chat again on either of these clients, it will show the cach
 [User Specific Views](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-adaptivecards-user-specific-views-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-adaptivecards-user-specific-views-csharp" />

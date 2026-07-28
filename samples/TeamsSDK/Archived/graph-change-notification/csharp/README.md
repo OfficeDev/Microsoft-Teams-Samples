@@ -134,7 +134,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `samples/graph-change-notification/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/graph-change-notification/csharp` folder
   - Select `ChangeNotification.sln` and open it in Visual Studio
   
   **Note:** In the debug dropdown menu of Visual Studio, select default startup project > **ChangeNotification**
@@ -152,7 +152,7 @@ Modify the `appsettings.json` file with the following details:
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-change-notification/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
 
 ## Running the sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
@@ -186,4 +186,4 @@ Modify the `appsettings.json` file with the following details:
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-change-notification-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-change-notification-csharp" />

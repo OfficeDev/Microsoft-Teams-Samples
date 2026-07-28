@@ -119,4 +119,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Build a Configurable Tab for Microsoft Teams App](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-channel-tab)
 - [Build a Bot](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-bot)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-region-selection-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-region-selection-python" />

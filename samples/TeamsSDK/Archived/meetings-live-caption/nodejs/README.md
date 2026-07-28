@@ -52,7 +52,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/meetings-live-caption/nodejs`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/meetings-live-caption/nodejs`
 
 3) Install modules
 
@@ -132,4 +132,4 @@ This sample now enforces single-tenant access in both UI and server APIs.
 
 - [Live Meeting Caption](https://support.microsoft.com/en-us/office/use-live-captions-in-a-teams-meeting-4be2d304-f675-4b57-8347-cbd000a21260)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-live-caption-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-live-caption-nodejs" />

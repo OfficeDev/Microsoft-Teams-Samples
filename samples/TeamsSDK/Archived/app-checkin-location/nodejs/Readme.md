@@ -67,7 +67,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/app-checkin-location/nodejs`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/app-checkin-location/nodejs`
 
 3) Install modules
 
@@ -82,7 +82,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     npm start
     ```
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-checkin-location/nodejs/index.js#L48) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-checkin-location/nodejs/index.js#L48) line and put your debugger for local debug.
 
 ### 4. Setup Manifest for Teams
 

@@ -74,7 +74,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-virtual-assistant/echo-skill-bot`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-virtual-assistant/echo-skill-bot`
 
 3) Install node modules
 
@@ -147,4 +147,4 @@ To learn more about deploying a `NodeJS` app to Azure, see [Configure the App Se
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-virtual-assistant/echo-skill-bot" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-virtual-assistant/echo-skill-bot" />

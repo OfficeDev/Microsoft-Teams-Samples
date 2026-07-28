@@ -47,7 +47,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    ```
 
 4. **Run the app**
-   - Clone the repository and navigate to `samples/msgext-message-reminder/nodejs`
+   - Clone the repository and navigate to `samples/TeamsSDK/Archived/msgext-message-reminder/nodejs`
    - Create a `.env` file with:
      ```
      MicrosoftAppId=<your-app-id>
@@ -113,4 +113,4 @@ No additional admin-consented permissions are needed for basic functionality.
 - [Proactive Messaging](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/send-proactive-messages)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-message-reminder-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-message-reminder-nodejs" />

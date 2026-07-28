@@ -16,7 +16,7 @@ Experience seamless authentication with this sample application, which integrate
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**App Complete Auth:** [Manifest](/samples/app-complete-auth/csharp/demo-manifest/App-Complete-Auth.zip)
+**App Complete Auth:** [Manifest](/samples/TeamsSDK/Archived/app-complete-auth/csharp/demo-manifest/App-Complete-Auth.zip)
 
 
 ## Prerequisites
@@ -174,7 +174,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
  **Note**: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
-- If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-auth/csharp/AppCompleteAuth/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+- If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-complete-auth/csharp/AppCompleteAuth/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
 
 
 ## Running the sample
@@ -309,4 +309,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-complete-auth-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-complete-auth-csharp" />

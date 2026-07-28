@@ -113,7 +113,7 @@ Please copy the `Source/appsettings.json` into a new file `appsettings.developme
 
 Please note the `StateReplay`, `TokenStorage` and `Keyring` sections are unused unless the `UseAzure` setting is `true`.
 
-### 8. Running the app (navigate to `samples/account-linking/csharp/Source`)
+### 8. Running the app (navigate to `samples/TeamsSDK/Archived/account-linking/csharp/Source`)
 
 ```bash
 dotnet run
@@ -173,4 +173,4 @@ Add the parameters to the
 - [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/account-linking-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/account-linking-csharp" />

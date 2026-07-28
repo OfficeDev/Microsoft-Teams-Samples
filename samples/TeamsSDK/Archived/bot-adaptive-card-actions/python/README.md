@@ -149,4 +149,4 @@ Install App in copilot
 - [Actions](https://learn.microsoft.com/adaptive-cards/rendering-cards/actions)
 - [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-adaptive-card-actions-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-adaptive-card-actions-python" />

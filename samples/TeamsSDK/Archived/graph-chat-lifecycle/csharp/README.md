@@ -123,7 +123,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/graph-chat-lifecycle/ChatLifecycle` folder
+  - Navigate to `samples/TeamsSDK/Archived/graph-chat-lifecycle/ChatLifecycle` folder
   - Select `ChatLifecycle.csproj` file
   
 4. Setup Manifest for Teams
@@ -197,4 +197,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-lifecycle-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-chat-lifecycle-csharp" />

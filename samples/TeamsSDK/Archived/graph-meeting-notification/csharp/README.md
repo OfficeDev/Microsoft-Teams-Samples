@@ -88,7 +88,7 @@ This sample application illustrates the use of online meeting subscriptions in M
 
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `samples/graph-meeting-notification/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/graph-meeting-notification/csharp` folder
   - Select `MeetingNotification` folder
   - Press `F5` to run the project
 
@@ -107,7 +107,7 @@ This sample application illustrates the use of online meeting subscriptions in M
    
 Follow this documentation to get more information on custom apps and uploading them into Teams - [Manage custom apps](https://docs.microsoft.com/en-us/microsoftteams/custom-app-overview) and [Upload an app package](https://docs.microsoft.com/en-us/microsoftteams/upload-custom-apps)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-meeting-notification/csharp/MeetingNotification/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-meeting-notification/csharp/MeetingNotification/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
 
 ## Running the sample
 ![Welcome Card](MeetingNotification/Images/WelcomeCard.png)
@@ -125,4 +125,4 @@ Follow this documentation to get more information on custom apps and uploading t
 - [Set up change notifications that include resource data](https://docs.microsoft.com/en-us/graph/webhooks-with-resource-data)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-meeting-notification-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-meeting-notification-csharp" />

@@ -80,7 +80,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-commands-menu/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-commands-menu/nodejs`
 
 1) Install modules
 
@@ -104,7 +104,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
    
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-commands-menu/nodejs/index.js#L46) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-commands-menu/nodejs/index.js#L46) line and put your debugger for local debug.
 
 # Running the sample
 
@@ -151,4 +151,4 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 - [Create a commands menu](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?branch=pr-en-us-10866&tabs=desktop%2Cdotnetlocalization)
 - [Create prompt suggestions](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/prompt-suggestions?branch=pr-en-us-10866&tabs=manually-in-the-app-manifest%2Cjavascript)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-commands-menu-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-commands-menu-nodejs" />

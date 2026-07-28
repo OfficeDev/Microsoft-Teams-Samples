@@ -80,7 +80,7 @@ E.g. ConnectionName = facebookconnection
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
- - In a terminal, navigate to `samples/app-complete-sample/nodejs`
+ - In a terminal, navigate to `samples/TeamsSDK/Archived/app-complete-sample/nodejs`
  
  - Once you have saved your bot and gotten the confirmation that it is created, navigate back to your  project. Open the ".env" file. There, copy/paste your App ID and App password from the step above.
     ```
@@ -113,7 +113,7 @@ E.g. ConnectionName = facebookconnection
    - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/nodejs/server/index.js#L53) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-complete-sample/nodejs/server/index.js#L53) line and put your debugger for local debug.
  
 ## Overview
 
@@ -212,4 +212,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-complete-sample-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-complete-sample-nodejs" />

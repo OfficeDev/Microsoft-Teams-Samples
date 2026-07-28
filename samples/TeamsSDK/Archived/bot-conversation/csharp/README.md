@@ -90,7 +90,7 @@ the Teams service needs to call into the bot.
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/bot-conversation/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/bot-conversation/csharp` folder
    - Select `TeamsConversationBot.csproj` or `TeamsConversationBot.sln`file
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
@@ -105,7 +105,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `appPackage.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 
 ## Running the sample
@@ -257,4 +257,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Format AI bot messages](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/format-ai-bot-messages?branch=pr-en-us-10798&tabs=js)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-conversation-csharp" />

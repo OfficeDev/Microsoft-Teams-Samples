@@ -100,7 +100,7 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) In a terminal, navigate to `samples/graph-proactive-installation/Python`
+3) In a terminal, navigate to `samples/TeamsSDK/Archived/graph-proactive-installation/Python`
 
 4) Activate your desired virtual environment
 
@@ -151,4 +151,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-proactive-installation-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-proactive-installation-python" />

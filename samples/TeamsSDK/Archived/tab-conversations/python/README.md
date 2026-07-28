@@ -74,10 +74,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 3. Setup for code
 
-- In a console, navigate to `samples/tab-conversations/python`
+- In a console, navigate to `samples/TeamsSDK/Archived/tab-conversations/python`
 
     ```bash
-    cd samples/tab-conversations/python
+    cd samples/TeamsSDK/Archived/tab-conversations/python
     ```
     
 - Install dependencies (optional - create virtual environment)
@@ -143,4 +143,4 @@ You can use this tab by following the below steps:
 
 - [Create conversational tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-conversations-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-conversations-python" />

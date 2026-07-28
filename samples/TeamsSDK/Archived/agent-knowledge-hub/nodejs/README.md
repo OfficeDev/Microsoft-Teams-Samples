@@ -135,4 +135,4 @@ the Teams service needs to call into the bot.
 - [Microsoft 365 Agents Toolkit CLI](https://aka.ms/teamsfx-toolkit-cli)
 - [Microsoft 365 Agents Toolkit Samples](https://github.com/OfficeDev/TeamsFx-Samples)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/agent-knowledge-hub-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/agent-knowledge-hub-nodejs" />

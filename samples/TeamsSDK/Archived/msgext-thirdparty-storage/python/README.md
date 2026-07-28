@@ -160,4 +160,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Admin settings for file drag-drop to third-party storage](https://learn.microsoft.com/en-us/microsoftteams/admin-settings-for-file-drag-drop-to-third-party-storage?branch=main&branchFallbackFrom=pr-en-us-11741)
 - [App manifest](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema?branch=main)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-thirdparty-storage-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-thirdparty-storage-python" />

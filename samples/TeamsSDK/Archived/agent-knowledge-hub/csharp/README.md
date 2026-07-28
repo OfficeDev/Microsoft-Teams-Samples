@@ -115,4 +115,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Microsoft 365 Agents Toolkit Samples](https://github.com/OfficeDev/TeamsFx-Samples)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/agent-knowledge-hub-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/agent-knowledge-hub-csharp" />

@@ -18,7 +18,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Stage View:** [Manifest](/samples/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)
+**Stage View:** [Manifest](/samples/TeamsSDK/Archived/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)
 
 ## Prerequisites
 
@@ -138,7 +138,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/csharp/TabInStageView/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/tab-stage-view/csharp/TabInStageView/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
 
 ## Interacting with the bot in Teams
     You can use this tab by following the below steps:
@@ -234,4 +234,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-stage-view-csharp" />

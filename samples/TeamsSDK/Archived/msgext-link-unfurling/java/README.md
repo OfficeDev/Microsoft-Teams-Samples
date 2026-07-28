@@ -59,7 +59,7 @@ the Teams service needs to call into the bot.
 
 1) Update the `resources/application.properties` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-1) From the root of this project folder: (`samples/msgext-link-unfurling/java`)
+1) From the root of this project folder: (`samples/TeamsSDK/Archived/msgext-link-unfurling/java`)
     - Open a terminal and build the sample using `mvn package` command
     - Install the packages in the local cache by using `mvn install` command in a terminal
     - Run it by using `java -jar .\target\bot-teams-link-unfurl-sample.jar` command in a terminal
@@ -91,4 +91,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Azure for Java cloud developers](https://docs.microsoft.com/azure/java/?view=azure-java-stable)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-link-unfurling-java" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-link-unfurling-java" />

@@ -72,7 +72,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 4. If you are using Visual Studio
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `samples/outgoing-webhook/csharp` folder
+    - Navigate to `samples/TeamsSDK/Archived/outgoing-webhook/csharp` folder
     - Select `WebhookSampleBot.sln` file
     - Update the HMAC value for the Dictionary named `SigningKeyDictionary` in AuthProvider.cs file.
     - Press `F5` to run the project  
@@ -97,4 +97,4 @@ Example screenshot to show Hero card (using type of card in message):
 [Outgoing webhook](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-outgoing-webhook?tabs=urljsonpayload%2Cdotnet)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/outgoing-webhook-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/outgoing-webhook-csharp" />

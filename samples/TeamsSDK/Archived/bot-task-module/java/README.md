@@ -14,10 +14,7 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 ## Interaction with bot
 ![TaskModule](Images/TaskModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-task-module/java/README.md
 
-=======
->>>>>>> origin/main:samples/bot-task-module/java/README.md
 ## Prerequisites
 
 - Intall Java 1.8+ [Java](https://www.oracle.com/java/technologies/downloads/#java8-windows)
@@ -63,7 +60,7 @@ the Teams service needs to call into the bot.
 
 1) Update the `resources/application.properties` file configuration in your project, for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) The Task Modules using pages require the deployed bot's path in BaseUrl.
 
-1) From the root of this project folder: (`samples/bot-task-module/java`)
+1) From the root of this project folder: (`samples/TeamsSDK/Archived/bot-task-module/java`)
     - Open a terminal and build the sample using `mvn package` command
     - Install the packages in the local cache by using `mvn install` command in a terminal
     - Run it by using `java -jar .\target\bot-teams-task-module-sample.jar` command in a terminal
@@ -111,4 +108,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure for Java cloud developers](https://docs.microsoft.com/en-us/azure/java/?view=azure-java-stable)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-task-module-java" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-task-module-java" />

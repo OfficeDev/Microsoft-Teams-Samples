@@ -89,7 +89,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/app-region-selection/RegionSelectionApp`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/app-region-selection/RegionSelectionApp`
 
   ```bash
   # run the bot
@@ -100,7 +100,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/app-region-selection/RegionSelectionApp` folder
+  - Navigate to `samples/TeamsSDK/Archived/app-region-selection/RegionSelectionApp` folder
   - Select `RegionSelectionApp.sln` file
   - Press `F5` to run the project
 
@@ -116,7 +116,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-region-selection/csharp/RegionSectionApp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-region-selection/csharp/RegionSectionApp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -143,4 +143,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Build a Configurable Tab for Microsoft Teams App](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-channel-tab)
 - [Build a Bot](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-bot)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-region-selection-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-region-selection-csharp" />
