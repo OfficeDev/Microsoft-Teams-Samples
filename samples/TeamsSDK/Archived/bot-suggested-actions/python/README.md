@@ -128,4 +128,4 @@ the Teams service needs to call into the bot.
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-suggested-actions-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-suggested-actions-python" />

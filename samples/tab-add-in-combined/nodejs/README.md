@@ -66,7 +66,7 @@ Interaction with the tab:
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-   - In a terminal, navigate to `samples/tab-add-in-combined/nodejs`.
+   - In a terminal, navigate to `samples/TeamsSDK/Archived/tab-add-in-combined/nodejs`.
    - Install modules:
 
     ```bash
@@ -78,8 +78,8 @@ Interaction with the tab:
    - Instructions for installing and configuring a local Mockoon database are in: [Setup Mockoon Database](setup-mockoon.md).
    - If you prefer, you can use any database, either on localhost or remotely, that can (1) send a JSON payload in response to a GET request and (2) update in response to a POST request that contains a JSON payload. Read the article that is linked to in the preceding bullet to find out what CORS headers and starter data should be used. You can use any domain and port you like (except ports 3000 and 53000 which are used by other parts of the sample), but if you use anything other than `localhost:3001`, you will need to edit the calls of `fetch` in the following two files to pass the correct domain and/or port:
 
-       - `samples/tab-add-in-combined/nodejs/add-in/src/taskpane/components/App.tsx`
-       - `samples/tab-add-in-combined/nodejs/tab/src/components/App.tsx`
+       - `samples/TeamsSDK/Archived/tab-add-in-combined/nodejs/add-in/src/taskpane/components/App.tsx`
+       - `samples/TeamsSDK/Archived/tab-add-in-combined/nodejs/tab/src/components/App.tsx`
 
 ### Build for production
 
@@ -93,7 +93,7 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 
 ### Run the Outlook add-in for the first time
 
-1. Open the folder `samples/tab-add-in-combined/nodejs` in Visual Studio Code.
+1. Open the folder `samples/TeamsSDK/Archived/tab-add-in-combined/nodejs` in Visual Studio Code.
 2. First, *make sure Outlook desktop is closed.*
 3. In Visual Studio Code, open the Microsoft 365 Agents Toolkit.
 4. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365.
@@ -181,4 +181,4 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-add-in-combined-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-add-in-combined-nodejs" />

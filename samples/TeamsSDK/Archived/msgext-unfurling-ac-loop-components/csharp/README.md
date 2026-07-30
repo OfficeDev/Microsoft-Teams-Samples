@@ -16,7 +16,7 @@ If you copy and paste a link from `https://github.com/OfficeDev/Microsoft-Teams-
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Msgext-Unfurling-Adaptive-Card-Loop-Components:** [Manifest](/samples/msgext-unfurling-ac-loop-components/csharp/demo-manifest/msgext-unfurling-ac-loop-components.zip)
+**Msgext-Unfurling-Adaptive-Card-Loop-Components:** [Manifest](/samples/TeamsSDK/Archived/msgext-unfurling-ac-loop-components/csharp/demo-manifest/msgext-unfurling-ac-loop-components.zip)
 
 ## Prerequisites
 
@@ -99,7 +99,7 @@ the Teams service needs to call into the bot.
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/msgext-unfurling-ac-loop-components/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/msgext-unfurling-ac-loop-components/csharp` folder
    - Select `MsgextUnfurlingAcLoop.csproj` or `MsgextUnfurlingAcLoop.sln`file
 
 1)  Modify the `/appsettings.json` and fill in the following details:
@@ -116,7 +116,7 @@ the Teams service needs to call into the bot.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-unfurling-ac-loop-components/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/msgext-unfurling-ac-loop-components/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ### 4. Running the sample
 
@@ -198,4 +198,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Universal Actions for Adaptive Cards](https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards)
 - [Extend a Teams message extension across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/extend-m365-teams-message-extension)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-unfurling-ac-loop-components-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-unfurling-ac-loop-components-csharp" />

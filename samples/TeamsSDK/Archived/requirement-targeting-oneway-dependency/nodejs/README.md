@@ -233,4 +233,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Specify Microsoft 365 host runtime requirements in app manifest](https://review.learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/specify-runtime-requirements?branch=pr-en-us-11018)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/requirement-targeting-oneway-dependency-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/requirement-targeting-oneway-dependency-nodejs" />

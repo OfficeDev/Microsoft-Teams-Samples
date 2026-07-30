@@ -57,7 +57,7 @@ the Teams service needs to call into the bot.
 
 1) Update the `resources/application.properties` file configuration in your project, for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-1) From the root of this project folder: (`samples/bot-message-reaction/java`)
+1) From the root of this project folder: (`samples/TeamsSDK/Archived/bot-message-reaction/java`)
     - Open a terminal and build the sample using `mvn package` command
     - Install the packages in the local cache by using `mvn install` command in a terminal
     - Run it by using `java -jar .\target\bot-messagereaction-sample.jar` command in a terminal
@@ -97,4 +97,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-message-reaction-java" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-message-reaction-java" />

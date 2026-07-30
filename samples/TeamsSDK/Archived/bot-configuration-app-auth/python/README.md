@@ -119,4 +119,4 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-configuration-app-auth-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-configuration-app-auth-python" />

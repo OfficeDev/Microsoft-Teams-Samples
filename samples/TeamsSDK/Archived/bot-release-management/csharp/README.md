@@ -163,7 +163,7 @@ Click on Add Permissions to commit your changes.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app to your org's app catalog". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-release-management/csharp/ReleaseManagement/AdapterWithErrorHandler.cs#L22) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-release-management/csharp/ReleaseManagement/AdapterWithErrorHandler.cs#L22) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -210,4 +210,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-release-management-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-release-management-csharp" />

@@ -14,7 +14,7 @@ This sample demonstrates the Share to Teams feature, allowing users to seamlessl
 
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your Teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**App check-in location:** [Manifest](/samples/app-link-unfurling-in-share-to-teams/python/demo-manifest/app-link-unfurling-stt.zip)
+**App check-in location:** [Manifest](/samples/TeamsSDK/Archived/app-link-unfurling-in-share-to-teams/python/demo-manifest/app-link-unfurling-stt.zip)
 
 ## Prerequisites
 
@@ -81,10 +81,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ### 3. Setup for code
 
-- In a terminal, navigate to `samples/app-link-unfurling-in-share-to-teams/python`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/app-link-unfurling-in-share-to-teams/python`
 
     ```bash
-    cd samples/app-link-unfurling-in-share-to-teams/python
+    cd samples/TeamsSDK/Archived/app-link-unfurling-in-share-to-teams/python
     ```
 
 - (Optional) Create a virtual environment
@@ -151,4 +151,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Share to teams](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-personal-app-or-tab)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-link-unfurling-in-share-to-teams-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-link-unfurling-in-share-to-teams-python" />

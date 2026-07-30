@@ -78,7 +78,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
-- Navigate to `samples/bot-shared-channel-events/csharp` 
+- Navigate to `samples/TeamsSDK/Archived/bot-shared-channel-events/csharp` 
     - Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the values received while doing Microsoft Entra ID app registration in step 1.
 
 - Run the app from a terminal or from Visual Studio, choose option A or B.
@@ -229,4 +229,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 - [Build-Apps-For-Shared-Private-Channels](https://learn.microsoft.com/en-us/microsoftteams/platform/build-apps-for-shared-private-channels?tabs=tabs%2Cexternal-users%2Csharedchannel).
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-shared-channel-events/csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-shared-channel-events/csharp" />

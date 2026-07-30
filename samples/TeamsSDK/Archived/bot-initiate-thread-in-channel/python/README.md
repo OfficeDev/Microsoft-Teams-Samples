@@ -124,4 +124,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-initiate-thread-in-channel-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-initiate-thread-in-channel-python" />

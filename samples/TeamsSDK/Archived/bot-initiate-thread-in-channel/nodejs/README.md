@@ -82,7 +82,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-initiate-thread-in-channel/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-initiate-thread-in-channel/nodejs`
 
 1) Install modules
 
@@ -107,7 +107,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to a any Teams channel
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-initiate-thread-in-channel/nodejs/index.js#L46) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-initiate-thread-in-channel/nodejs/index.js#L46) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -142,4 +142,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Get Channel Details](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/get-teams-context?tabs=dotnet#get-the-list-of-channels-in-a-team)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-initiate-thread-in-channel-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-initiate-thread-in-channel-nodejs" />

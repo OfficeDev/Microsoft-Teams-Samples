@@ -91,7 +91,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/msgext-ai-sentiment-analysis/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis/nodejs`
 
 1) Install modules
 
@@ -114,7 +114,7 @@ the Teams service needs to call into the bot.
     - **Zip** up the contents of the `AppManifest` folder (AppManifest.admin and AppManifest.user folders separately) to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-ai-sentiment-analysis/nodejs/index.js#L44) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis/nodejs/index.js#L44) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -182,4 +182,4 @@ Once the provisioning and deployment steps are finished, you can upload your app
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-ai-sentiment-analysis-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis-nodejs" />

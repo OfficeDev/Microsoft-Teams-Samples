@@ -12,10 +12,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). I
 ## Interaction with bot
 ![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-task-module/csharp/README.md
 
-=======
->>>>>>> origin/main:samples/bot-task-module/csharp/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -90,7 +87,7 @@ the Teams service needs to call into the bot.
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/bot-task-module/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/bot-task-module/csharp` folder
    - Select `TeamsTaskModule.csproj` or `TeamsTaskModule.sln`file
 
 1) Update the `appsettings.json` configuration for the bot to use the `<<MicrosoftAppId>>`, `<<MicrosoftAppPassword>>`, `<<MicrosoftAppTenantId>>` generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
@@ -107,7 +104,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in personal/groupchat/team scope (supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-task-module/csharp/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-task-module/csharp/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -155,4 +152,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Dialogs](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-task-module-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-task-module-csharp" />

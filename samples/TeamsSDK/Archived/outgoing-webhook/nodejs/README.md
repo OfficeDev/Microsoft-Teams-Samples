@@ -53,7 +53,7 @@ This project is an implementation of a very simple [Outgoing Webhook](https://do
 
 3. Setup Code
 
-- In a terminal, navigate to `samples/outgoing-webhook/nodejs`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/outgoing-webhook/nodejs`
 
  - Install modules
 
@@ -100,4 +100,4 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/outgoing-webhook-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/outgoing-webhook-nodejs" />

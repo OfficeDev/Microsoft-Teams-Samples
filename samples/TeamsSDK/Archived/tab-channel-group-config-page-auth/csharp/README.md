@@ -135,4 +135,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 [Tab-Channel-Group-config-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-config-page-auth-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-channel-group-config-page-auth-csharp" />

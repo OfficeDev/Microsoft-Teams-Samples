@@ -156,4 +156,4 @@ the Teams service needs to call into the bot.
 [Tab-personal](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 [Create a Custom Personal Tab with ASP. NET Core MVC](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-personal-python" />

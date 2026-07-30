@@ -81,7 +81,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/msgext-action-preview/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/msgext-action-preview/nodejs`
 
 1) Install modules
 
@@ -105,7 +105,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in team scope (Supported app scope)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-action-preview/nodejs/index.js#L45) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/msgext-action-preview/nodejs/index.js#L45) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -131,4 +131,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-action-preview-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-action-preview-nodejs" />

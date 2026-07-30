@@ -80,7 +80,7 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
 
-5) In a terminal, go to `samples/bot-request-approval/python`
+5) In a terminal, go to `samples/TeamsSDK/Archived/bot-request-approval/python`
 
 6) Activate your desired virtual environment
 
@@ -145,4 +145,4 @@ the Teams service needs to call into the bot.
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-request-approval-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-request-approval-python" />

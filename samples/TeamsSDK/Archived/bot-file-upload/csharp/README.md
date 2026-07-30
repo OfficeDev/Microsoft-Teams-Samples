@@ -98,7 +98,7 @@ the Teams service needs to call into the bot.
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/bot-file-upload/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/bot-file-upload/csharp` folder
    - Select `TeamsFileUpload.csproj` or `TeamsFileUpload.sln`file
 
 
@@ -114,7 +114,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope (Supported app scope)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-file-upload/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-file-upload/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -148,4 +148,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-file-upload-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-file-upload-csharp" />

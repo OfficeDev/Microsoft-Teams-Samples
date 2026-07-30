@@ -211,4 +211,4 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 - [Share to teams web apps](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-web-apps?branch=pr-en-us-10824&tabs=method1)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-deeplink-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-deeplink-python" />

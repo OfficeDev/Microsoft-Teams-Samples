@@ -94,7 +94,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-4) In a terminal, navigate to `samples/bot-receive-channel-messages-withRSC/Python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-receive-channel-messages-withRSC/Python`
 
 5) Activate your desired virtual environment
 
@@ -116,7 +116,7 @@ the Teams service needs to call into the bot.
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appManifest`, and then select **Add** to add the bot to your selected team.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-receive-channel-messages-withRSC/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-receive-channel-messages-withRSC/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -173,4 +173,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Receive Channel messages with RSC](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-receive-channel-messages-withRSC-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-receive-channel-messages-withRSC-python" />

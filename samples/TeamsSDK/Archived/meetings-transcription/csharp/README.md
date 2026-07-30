@@ -133,7 +133,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/meetings-transcription/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/meetings-transcription/csharp` folder
   - Select `MeetingTranscription.csproj` file
   - Press `F5` to run the project
 
@@ -205,7 +205,7 @@ Add the following permissions inside the **authorization** section of your `mani
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-transcription/csharp/MeetingTranscription/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/meetings-transcription/csharp/MeetingTranscription/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
 
 ## Running the sample.
 
@@ -256,4 +256,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-transcription-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-transcription-csharp" />

@@ -5,10 +5,7 @@
 - **Interaction with bot**
 ![bot-task-module ](Images/TaskModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-task-module/python/README.md
 
-=======
->>>>>>> origin/main:samples/bot-task-module/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -154,4 +151,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Task modules](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-task-module-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-task-module-python" />

@@ -116,7 +116,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```
    -Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 1 , the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 1, AppBaseUrl is the URL that you get in step 3 after running the tunnelling application, UserId of the user used while granting the policy in step 1).
 
-  - In the folder where repository is cloned navigate to `samples/meetings-attendance-report/nodejs`
+  - In the folder where repository is cloned navigate to `samples/TeamsSDK/Archived/meetings-attendance-report/nodejs`
 
   - Install node modules
 
@@ -144,7 +144,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
     - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-attendance-report/nodejs/index.js#L52) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/meetings-attendance-report/nodejs/index.js#L52) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -183,4 +183,4 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-attendance-report-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-attendance-report-nodejs" />

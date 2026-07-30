@@ -9,10 +9,7 @@ Discover this Microsoft Teams sample app that demonstrates the implementation of
 
 ![TabConversationModule](TabConversation/Images/tabconversationmodule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-conversations/csharp/README.md
 
-=======
->>>>>>> origin/main:samples/tab-conversations/csharp/README.md
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -79,7 +76,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/tab-conversations/csharp`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/tab-conversations/csharp`
 
   ```bash
   # run the bot
@@ -132,4 +129,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 -[Create conversational tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-conversations-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-conversations-csharp" />

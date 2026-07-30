@@ -16,10 +16,7 @@ With this sample, users can:
 
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/app-hello-world/python/README.md
 
-=======
->>>>>>> origin/main:samples/app-hello-world/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -224,4 +221,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-hello-world-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-hello-world-python" />

@@ -112,7 +112,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-5) In a terminal, navigate to `samples/bot-ai-enterprise-search/nodejs`
+5) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-ai-enterprise-search/nodejs`
 
 6) Install modules
 
@@ -243,4 +243,4 @@ Once the provisioning and deployment steps are finished, you can upload your app
 - [Quickstart: Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-nodejs?tabs=managed-identity%2Croles-azure-portal%2Csign-in-azure-cli)
 - [RediSearch](https://learn.microsoft.com/azure/azure-cache-for-redis/cache-redis-modules#redisearch)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-ai-enterprise-search-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-ai-enterprise-search-nodejs" />

@@ -109,7 +109,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
    
 6. Run the bot from a terminal or from Visual Studio:
 
-    A) From a terminal, navigate to `samples/app-complete-sample/csharp`
+    A) From a terminal, navigate to `samples/TeamsSDK/Archived/app-complete-sample/csharp`
 
 	  ```bash
 	  # run the bot
@@ -137,7 +137,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/csharp/AppCompleteSAmple/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-complete-sample/csharp/AppCompleteSAmple/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
    
 Congratulations!!! You have just created and uploaded your first Microsoft Teams app! Try adding a configurable tab, at-mentioning your bot by its registered name, or viewing your static tabs.<br><br>
 NOTE: Most of this sample app's functionality will now work. The only limitations are the authentication examples because your app is not registered with Microsoft Entra ID nor Visual Studio Team Services.
@@ -256,4 +256,4 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-complete-sample-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-complete-sample-csharp" />

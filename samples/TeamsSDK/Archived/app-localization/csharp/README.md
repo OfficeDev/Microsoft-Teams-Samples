@@ -12,10 +12,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 
 ![Preview Image](Images/Preview.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/app-localization/csharp/README.md
 
-=======
->>>>>>> origin/main:samples/app-localization/csharp/README.md
 ## Prerequisites
 
 Verify you have the right account for building Teams apps and install some recommended development tools.
@@ -102,7 +99,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-localization/csharp/Localization/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-localization/csharp/Localization/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 
 # Running the sample
 
@@ -169,4 +166,4 @@ After Changing Language to Hindi
 - [Localize your app](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-localization-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-localization-csharp" />

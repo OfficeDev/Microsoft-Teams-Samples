@@ -1,4 +1,0 @@
-microsoft-teams-api>=2.0.0a8
-microsoft-teams-apps>=2.0.0a8
-pydantic-settings>=2.0.0
-requests==2.31.0

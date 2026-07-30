@@ -94,7 +94,7 @@ the Teams service needs to call into the bot.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-4) In a terminal, navigate to `samples/agent-knowledge-hub/python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/agent-knowledge-hub/python`
 
 5) Activate your desired virtual environment
 
@@ -162,4 +162,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/agent-knowledge-hub-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/agent-knowledge-hub-python" />

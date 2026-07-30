@@ -13,10 +13,7 @@ This sample application provides an interactive demonstration of cookie manageme
 
 ![Cookie App](Images/Cookie_App.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-app-cookie/js/README.md
 
-=======
->>>>>>> origin/main:samples/tab-app-cookie/js/README.md
 ## Prerequisites
 
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
@@ -48,7 +45,7 @@ This sample application provides an interactive demonstration of cookie manageme
   
    - Install node modules
 
-     Inside js folder,  navigate to `samples/tab-app-cookie/js` open your local terminal and run the below command to install node modules. You can do the same in Visual   
+     Inside js folder,  navigate to `samples/TeamsSDK/Archived/tab-app-cookie/js` open your local terminal and run the below command to install node modules. You can do the same in Visual   
      Studio code terminal by opening the project in Visual Studio code.
 
      ```bash
@@ -109,4 +106,4 @@ This sample application provides an interactive demonstration of cookie manageme
 
 - [Will update once the document is confirmed](https://Needs_To_Be_Added)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-app-cookie-js" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-app-cookie-js" />

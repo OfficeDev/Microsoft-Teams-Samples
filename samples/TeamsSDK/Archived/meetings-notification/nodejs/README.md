@@ -95,7 +95,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - In a terminal, navigate to `samples\meetings-notification\nodejs`
 
     ```bash
-    cd samples/meetings-notification/nodejs
+    cd samples/TeamsSDK/Archived/meetings-notification/nodejs
     ```
 
 - Install modules
@@ -169,4 +169,4 @@ Message the Bot by @ mentioning to interact with the content bubble.
 - [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
 - [Build in-meeting notification for Teams meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/in-meeting-notification-for-meeting)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-notification-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-notification-nodejs" />

@@ -2,7 +2,6 @@
 
 ![Preview Image](Images/Preview.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards/nodejs/Readme.md
 This App talks about the Teams Bot User Specific Views and Sequential Workflows in adaptive card with Node JS
 
 This bot has been created using [Bot Framework v4](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V1.4
@@ -12,8 +11,6 @@ This is a sample app that provides an experience of managing incidents. This sam
 [Sequential Workflows](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/sequential-workflows)
 [Up to date cards](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/up-to-date-views)
 
-=======
->>>>>>> origin/main:samples/bot-sequential-flow-adaptive-cards/nodejs/Readme.md
 ## Key features
 
 - Incident Creation
@@ -101,10 +98,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     
 
-  - In a console, navigate to `samples/bot-sequential-flow-adaptive-cards/nodejs`
+  - In a console, navigate to `samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards/nodejs`
 
       ```bash
-      cd samples/bot-sequential-flow-adaptive-cards/nodejs
+      cd samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards/nodejs
       ```
   - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
 
@@ -133,7 +130,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sequential-flow-adaptive-cards/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 ## Workflows
 ### Workflow for bot interaction
@@ -256,4 +253,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [User Specific views](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC)
 - [Bot-Sequential-flow-adaptive-card](https://learn.microsoft.com/power-automate/create-adaptive-cards)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sequential-flow-adaptive-cards-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards-nodejs" />

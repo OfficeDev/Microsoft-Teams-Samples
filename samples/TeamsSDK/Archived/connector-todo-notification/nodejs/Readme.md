@@ -42,7 +42,7 @@ This sample provides a comprehensive guide to building an Office 365 Connector t
     
 3. Install node modules
 
-   Navigate to `samples/connector-todo-notification/nodejs`
+   Navigate to `samples/TeamsSDK/Archived/connector-todo-notification/nodejs`
    
    Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
@@ -148,4 +148,4 @@ This sample provides a comprehensive guide to building an Office 365 Connector t
 - Review [Getting Started with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/setup)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-todo-notification-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/connector-todo-notification-nodejs" />

@@ -20,7 +20,7 @@ The HR Talent Management App is designed to simulate a comprehensive recruitment
 
 ### 1. Setup for Bot SSO
 - Setup for Bot SSO
-Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-HR-talent/csharp/BotSSOSetup.md).
+Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-HR-talent/csharp/BotSSOSetup.md).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
@@ -50,7 +50,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/app-HR-talent/csharp`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/app-HR-talent/csharp`
 
   ```bash
   # run the bot
@@ -60,7 +60,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/app-HR-talent/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/app-HR-talent/csharp` folder
   - Select `TeamsTalentMgmtApp.sln` file
   - Press `F5` to run the project
 
@@ -242,4 +242,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-HR-talent-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-HR-talent-csharp" />

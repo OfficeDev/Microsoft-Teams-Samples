@@ -88,7 +88,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    
   - Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.sln`
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.sln`
    - Press `F5` to run the project
 	 
 5. Setup Manifest for Teams
@@ -103,7 +103,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -156,4 +156,4 @@ Static tpyedhead detail after submission
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Typeahead Search in Adaptive Cards](https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/dynamic-search?tabs=desktop%2Ccsharp)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-type-ahead-search-adaptive-cards-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-type-ahead-search-adaptive-cards-csharp" />
