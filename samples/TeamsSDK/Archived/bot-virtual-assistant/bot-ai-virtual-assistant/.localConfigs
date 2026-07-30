@@ -1,0 +1,13 @@
+BOT_ID=
+BOT_PASSWORD=
+SECRET_AZURE_OPENAI_API_KEY=
+AZURE_OPENAI_ENDPOINT=https://{servicename}.openai.azure.com/
+AZURE_OPENAI_DEPLOYMENT_NAME=
+MicrosoftAppType=Multitenant
+MicrosoftAppTenantId=
+SkillHostEndpoint={ApplicationBaseURL}/api/skills/
+SkillId=EchoSkillBot,OpenAiSkillBot
+SkillAppId=
+SkillEndpoint={EchoBot-ApplicationBaseURL}/api/messages,{AIBot-ApplicationBaseURL}/api/messages
+APPINSIGHTS_INSTRUMENTATIONKEY=
+APPINSIGHTS_CONNECTIONSTRING=

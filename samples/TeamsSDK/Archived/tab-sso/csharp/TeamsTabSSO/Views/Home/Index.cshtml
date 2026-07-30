@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<head>
+    <style>
+        .browser-button {
+            margin-top: 1rem;
+            font-weight: 600;
+            background-color: #5B58C7;
+            padding: 0.5rem 1.5rem;
+            color: white;
+            border-radius: 7px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .browser-button:hover {
+                background-color: #7A80EB;
+            }
+    </style>
+
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+    <script>
+        const authService = new MsalAuthService("@ViewBag.clientId", "@ViewBag.applicationIdURI");
+
+        $(document).ready(function() {
+
+            authService
+                .isCallback()
+                .then((isCallback) => {
+                    if (!isCallback) {
+                        authService
+                            .getUser()
+                            .then((user) => {
+                                // Signed in the user automatically; we're ready to go
+                                setUserSignedIn(true);
+                                getMyProfile(user.localAccountId);
+                            })
+                            .catch(() => {
+                                setUserSignedIn(false);
+                                // Failed to sign in the user automatically; show login screen
+                                console.log("Failed")
+                            });
+                    }
+                })
+                .catch((error) => {
+                    // Encountered error during redirect login flow; show error screen
+                    console.log(error);
+                });
+        });
+
+        function login() {
+            authService
+                .login()
+                .then((user) => {
+                    if (user) {
+                        setUserSignedIn(true);
+                        getMyProfile(user.localAccountId);
+                    } else {
+                        setUserSignedIn(false);
+                    }
+                })
+                .catch((err) => {
+                    setUserSignedIn(false);
+                    console.error(err);
+                });
+        };
+
+        function logout() {
+            authService.logout();
+        }
+
+        function getMyProfile(userId) {
+            setUserSignedIn(true);
+            authService.getUserInfo(userId);
+        }
+
+        function setUserSignedIn(isUserSignedIn) {
+            document.getElementById("browser-login").hidden = isUserSignedIn;
+        }
+    </script>
+</head>
+
+<h1>Tab SSO Authentication</h1>
+<div id="browser-signin-text" style="display:none;">Try signing in from browser - <a href="~/Home/" target="_blank">Click here</a></div>
+<div id="divError" style="display: none"></div>
+<button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
+<div id="divGraphProfile" style="display: none"></div>
+<div id="browser-signin-container" style="display:none;">
+    <div id="browser-login">
+        <h2>Please click on Login button to see your profile details!</h2>
+        <button class="browser-button" onclick="login()">Login</button>
+    </div>
+
+    <div id="divGraphProfile" style="display:none;"></div>
+</div>

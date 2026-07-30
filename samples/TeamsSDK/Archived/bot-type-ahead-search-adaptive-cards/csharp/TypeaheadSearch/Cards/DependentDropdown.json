@@ -1,0 +1,61 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "size": "ExtraLarge",
+      "text": "Country Picker",
+      "weight": "Bolder",
+      "wrap": true,
+      "type": "TextBlock"
+    },
+    {
+      "id": "choiceSelect",
+      "type": "Input.ChoiceSet",
+      "label": "Select a country or region:",
+      "choices": [
+        {
+          "title": "USA",
+          "value": "usa"
+        },
+        {
+          "title": "France",
+          "value": "france"
+        },
+        {
+          "title": "India",
+          "value": "india"
+        }
+      ],
+      "valueChangedAction": {
+        "type": "Action.ResetInputs",
+        "targetInputIds": [
+          "city"
+        ]
+      },
+      "isRequired": true,
+      "errorMessage": "Please select a country or region"
+    },
+    {
+      "style": "filtered",
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "cities",
+        "associatedInputs": "auto"
+      },
+      "id": "city",
+      "type": "Input.ChoiceSet",
+      "label": "Select a city:",
+      "placeholder": "Type to search for a city in the selected country",
+      "isRequired": true,
+      "errorMessage": "Please select a city"
+    }
+  ],
+  "actions": [
+    {
+      "title": "Submit",
+      "type": "Action.Submit"
+    }
+  ]
+}

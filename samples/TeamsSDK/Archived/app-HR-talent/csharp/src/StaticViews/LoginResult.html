@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Contoso - Login Result</title>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="/config.js"></script>
+
+    <style rel="stylesheet">
+        [lang|=en], body {
+            font-family: Arial,sans-serif;
+        }
+
+        [lang|=ja] {
+            font-family: Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,メイリオ,Meiryo,ＭＳ\ Ｐゴシック,Verdana,Arial,sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        h2 {
+            color: #000000;
+        }
+
+        h2, p {
+            margin: 10px 0 0 0;
+        }
+
+        .panel {
+            margin: 20px 112px;
+        }
+
+        #content {
+            padding: 40px;
+            text-align: center;
+            color: #707070;
+            background: #ffffff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <div id="content">
+            Processing...
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+
+        //this is where the user will land once they have done an Azure AD sign-in, assuming Teams SSO was unsuccessful...
+
+        initialiseTeams = () => {
+            let rejectPromise = null;
+            let timeout = null;
+
+            const promise = new Promise((resolve, reject) => {
+                rejectPromise = reject;
+                microsoftTeams.initialize(() => {
+                    window.clearTimeout(timeout);
+                    resolve(true);
+                }
+                )
+            });
+            //todo: try and improve this if possible. At present this function will return that the page is not open in Teams
+            //based on the MicrosoftTeams.initialize function timing out within 2 seconds
+
+            timeout = window.setTimeout(() => {
+                rejectPromise("Teams Initialise Timeout");
+            }, 2000);
+
+            return promise;
+        }
+
+
+        //similar to Auth-Start options/parameters, but we need to define navigateToLoginRequestUrl: false or it sends us back to login.html, which we do not want in this sample app.
+        const msalConfig = {
+            auth: {
+                clientId: window.global.microsoftAppId,
+                redirectUri: window.location.origin + "/StaticViews/LoginResult.html",
+                navigateToLoginRequestUrl: false
+            }
+        };
+
+        //MSAL ClientApp is initalized with msalConfig options
+        const clientApp = new msal.PublicClientApplication(msalConfig);
+
+        //this function handles the RedirectPromise and provides us with an Access Token
+
+
+        handleLoginPageLoad = async () => {
+
+            clientApp.handleRedirectPromise().then((response) => {
+                window.localStorage.setItem("userToken", response.accessToken);
+                passToken();
+
+            })};
+
+        passToken = async (response) => {
+            try {
+
+                await this.initialiseTeams();
+                this.inTeams = true;
+            }
+            catch {
+                this.inTeams = false;
+            }
+
+            if (this.inTeams) {
+
+
+                microsoftTeams.authentication.notifySuccess({ idToken: response.idToken, accessToken: response.accessToken, tokenType: response.tokenType, expiresIn: response.expiresIn });
+            }
+            else {
+                let redirectURL = window.localStorage.getItem("sourceHostname");
+                window.localStorage.removeItem("sourceHostname");
+                window.location.assign(redirectURL);
+            }
+        };
+
+        $(this.handleLoginPageLoad);
+
+
+
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+botbuilder-integration-aiohttp==4.17.1
+python-dotenv==1.2.2

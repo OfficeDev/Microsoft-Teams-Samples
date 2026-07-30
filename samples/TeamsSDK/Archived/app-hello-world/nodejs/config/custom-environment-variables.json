@@ -1,0 +1,11 @@
+{
+    "app": {
+        "baseUri": "BASE_URI",
+        "appId": "MICROSOFT_APP_ID",
+        "instrumentationKey": "APPINSIGHTS_INSTRUMENTATIONKEY"
+    },
+    "bot": {
+        "appId": "MICROSOFT_APP_ID",
+        "appPassword": "MICROSOFT_APP_PASSWORD"
+    }
+}

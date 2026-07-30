@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamsAuth", "TeamsAuth.csproj", "{BF151DD6-19D9-4205-B6A4-0E442641DE36}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{E198F1D5-2539-42D8-833A-CA2B18E8534B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F78B6736-919E-4D9C-B123-41397CB57178}"
+	ProjectSection(SolutionItems) = preProject
+		TeamsAuth.slnLaunch.user = TeamsAuth.slnLaunch.user
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF151DD6-19D9-4205-B6A4-0E442641DE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF151DD6-19D9-4205-B6A4-0E442641DE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF151DD6-19D9-4205-B6A4-0E442641DE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF151DD6-19D9-4205-B6A4-0E442641DE36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E198F1D5-2539-42D8-833A-CA2B18E8534B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E198F1D5-2539-42D8-833A-CA2B18E8534B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E198F1D5-2539-42D8-833A-CA2B18E8534B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E198F1D5-2539-42D8-833A-CA2B18E8534B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E198F1D5-2539-42D8-833A-CA2B18E8534B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C097BF47-C494-4B93-B1CC-0CE6C2A4CE4F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "2.3.1",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://privacy.microsoft.com",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
+  },
+  "name": {
+    "short": "Third-Party Cloud Storage",
+    "full": "Third-Party Cloud Storage Integration"
+  },
+  "description": {
+    "short": "Enable drag-and-drop file uploads to third-party cloud storage.",
+    "full": "This app enables seamless integration with third-party cloud storage providers for files dragged and dropped in Teams chats or channels. It uses the Microsoft Teams JavaScript SDK's thirdPartyCloudStorage module to fetch and upload files efficiently."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false,
+      "scopes": [
+        "team",
+        "personal",
+        "groupChat"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "canUpdateConfiguration": false,
+      "commands": [
+        {
+          "id": "createWithPreview",
+          "type": "action",
+          "title": "Create Card",
+          "description": "Example of creating a Card",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "compose"
+          ],
+          "parameters": [
+            {
+              "name": "param",
+              "title": "param",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
+}

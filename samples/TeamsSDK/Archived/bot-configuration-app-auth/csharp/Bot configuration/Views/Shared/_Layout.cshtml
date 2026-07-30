@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Microsoft Teams Hello World Sample App</title>
+    <base href="@(Url.Content("~"))" />
+    <link href="/Content/msteams-16.css" rel="stylesheet" />
+    <link href="/Content/Site.css" rel="stylesheet" />
+
+    @RenderSection("scripts", required: false)
+</head>
+    
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

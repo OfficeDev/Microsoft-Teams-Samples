@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Check In</title>
+    <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-QXdQxWIYy1PLsb9pdWIm5k6mjLxVKAF4ISp0BVCZZCiZNyaKXinYNAQVT8+8hEIf"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .submitClick {
+            margin: 5rem;
+            margin-left: 0rem;
+        }
+    </style>
+
+    <script>
+        microsoftTeams.app.initialize().then(() => {
+            getLocation();
+        });
+
+        function getLocation() {
+            if (microsoftTeams.location && microsoftTeams.location.isSupported()) {
+                const locationProps = {
+                    allowChooseLocation: true,
+                    showMap: true
+                };
+                microsoftTeams.location.getLocation(locationProps, (err, location) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    console.log(JSON.stringify(location));
+                    microsoftTeams.tasks.submitTask(location);
+                });
+            } else {
+                getLocationUsingNavigator();
+            }
+        }
+
+        function getLocationUsingNavigator() {
+            if (navigator.permissions) {
+                navigator.permissions.query({ name: "geolocation" }).then((result) => {
+                    if (result.state === "denied") {
+                        alert("Please give location permission.");
+                    }
+                });
+            }
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            const location = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+            microsoftTeams.tasks.submitTask(location);
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+        </div>
+    </div>
+</body>
+
+</html>

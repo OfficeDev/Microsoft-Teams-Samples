@@ -1,0 +1,2 @@
+aiohttp>=3.11.0
+botbuilder-integration-aiohttp>=4.17.1

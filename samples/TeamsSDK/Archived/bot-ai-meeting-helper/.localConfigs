@@ -1,0 +1,20 @@
+BOT_ID=
+BOT_PASSWORD=
+AZURE_OPENAI_API_KEY=
+AZURE_OPENAI_ENDPOINT=
+AZURE_OPENAI_DEPLOYMENT_NAME= 
+BOT_ENDPOINT=
+Base64EncodedCertificate=
+EncryptionCertificateId=
+PRIVATE_KEY_PATH= 
+Account_Name=
+Account_Key=
+Table_Name=
+partitionKey=
+AI_Model=
+SubscriptionURL=https://graph.microsoft.com/v1.0/subscriptions
+SystemPrompt=Generate a filtered list of action items from meeting transcriptions by user in bullet point user wise categorized with proper format like:  <b> Attendee:</b> 
+ Action Items in bullet points
+LocalTimeZone=Asia/Kolkata
+APPINSIGHTS_INSTRUMENTATIONKEY=
+APPINSIGHTS_CONNECTIONSTRING =

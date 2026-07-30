@@ -1,0 +1,109 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Create Group Chat"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "Title: ",
+              "wrap": true
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Input.Text",
+              "placeholder": "Please enter the title of GroupChat",
+              "wrap": true,
+              "id": "title"
+            }
+          ],
+          "width": "stretch"
+        }
+      ]
+    },    
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "Select Members: ",
+              "wrap": true
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Input.ChoiceSet",
+              "id": "users",
+              "style": "compact",
+              "isMultiSelect": true,
+              "value": "",
+              "choices": [
+                {
+                  "title": "",
+                  "value": ""
+                },
+                {
+                  "title": "",
+                  "value": ""
+                },
+                {
+                  "title": "",
+                  "value": ""
+                },
+                {
+                  "title": "",
+                  "value": ""
+                },
+                {
+                  "title": "",
+                  "value": ""
+                },
+                {
+                  "title": "",
+                  "value": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit",
+      "card": {
+        "version": 1.0,
+        "type": "AdaptiveCard",
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+      }
+    }
+  ]
+}

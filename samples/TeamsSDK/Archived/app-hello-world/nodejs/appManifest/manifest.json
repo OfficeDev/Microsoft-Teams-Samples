@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Contoso",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Hello World",
+    "full": "Hello World App for Microsoft Teams"
+  },
+  "description": {
+    "short": "Microsoft Teams hello world sample showcasing tabs, bots, and messaging.",
+    "full": " This Microsoft Teams Hello World sample app demonstrates the integration of tabs, bots, and messaging extensions using JavaScript, providing a comprehensive foundation for building interactive and engaging Teams applications. Experience the full capabilities of Teams by exploring features that enhance collaboration and productivity within the platform."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "conversations",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "com.contoso.helloworld.hellotab",
+      "name": "Hello Tab",
+      "contentUrl": "https://${{BOT_DOMAIN}}/hello",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "team",
+        "personal"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "commands": [
+        {
+          "id": "getRandomText",
+          "description": "Gets some random text and images that you can insert in messages for fun.",
+          "title": "Get some random text for fun",
+          "initialRun": true,
+          "parameters": [
+            {
+              "name": "cardTitle",
+              "description": "Card title to use",
+              "title": "Card title"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
+}

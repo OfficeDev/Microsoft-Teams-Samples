@@ -1,0 +1,57 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "weight": "bolder",
+      "text": "Meeting notification"
+    },
+    {
+      "type": "Container",
+      "$when": "${activeParticipantJoinedCount > 0}",
+      "items": [
+        {
+          "type": "TextBlock",
+          "size": "Medium",
+          "weight": "Bolder",
+          "text": "Members joined : "
+        },
+        {
+          "type": "FactSet",
+          "facts": [
+            {
+              "$data": "${activeParticipantsJoined}",
+              "title": "${title}:",
+              "value": "${value}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "$when": "${activeParticipantLeftCount > 0}",
+      "items": [
+        {
+          "type": "TextBlock",
+          "size": "Medium",
+          "weight": "Bolder",
+          "text": "Members left : "
+        },
+        {
+          "type": "FactSet",
+          "facts": [
+            {
+              "$data": "${activeParticipantsLeft}",
+              "title": "${title}:",
+              "value": "${value}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

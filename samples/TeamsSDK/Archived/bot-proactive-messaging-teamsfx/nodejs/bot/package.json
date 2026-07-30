@@ -1,0 +1,29 @@
+{
+  "name": "ProactiveMessagesTeamsFx",
+  "version": "1.0.0",
+  "msteams": {
+    "teamsAppId": null
+  },
+  "description": "Microsoft 365 Agents Toolkit hello world Bot sample",
+  "engines": {
+    "node": "18 || 20 || 22"
+  },
+  "author": "Microsoft",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "dev:teamsfx": "env-cmd --silent -f .env.teamsfx.local npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+    "start": "node ./index.js",
+    "watch": "nodemon ./index.js"
+  },
+  "dependencies": {
+    "botbuilder": "^4.23.3",
+    "dotenv": "^16.6.1",
+    "restify": "^11.1.0"
+  },
+  "devDependencies": {
+    "env-cmd": "^11.0.0",
+    "nodemon": "^3.1.14"
+  }
+}

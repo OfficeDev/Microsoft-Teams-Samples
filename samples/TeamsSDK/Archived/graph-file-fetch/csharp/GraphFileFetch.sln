@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{C7FD0E24-2254-4184-BF12-6C75D2752F28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A79A26F6-0AD0-48DF-BA9E-5D99F382A900}"
+	ProjectSection(SolutionItems) = preProject
+		GraphFileFetch.slnLaunch.user = GraphFileFetch.slnLaunch.user
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphFileFetch", "GraphFileFetch\GraphFileFetch.csproj", "{935D408E-BE6F-2789-24CC-E8B8CC4786D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{935D408E-BE6F-2789-24CC-E8B8CC4786D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{935D408E-BE6F-2789-24CC-E8B8CC4786D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{935D408E-BE6F-2789-24CC-E8B8CC4786D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{935D408E-BE6F-2789-24CC-E8B8CC4786D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F7F570D-74C3-4CF3-AACD-361A3D3F8E37}
+	EndGlobalSection
+EndGlobal

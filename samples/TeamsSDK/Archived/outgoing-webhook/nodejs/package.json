@@ -1,0 +1,15 @@
+{
+  "name": "outgoing-webhook",
+  "version": "1.0.0",
+  "description": "Sample to create an outgoing webhook for Microsoft Teams.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "esbuild": "^0.28.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

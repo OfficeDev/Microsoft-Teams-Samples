@@ -1,0 +1,24 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Adaptive Card with emojis",
+      "size": "Large",
+      "weight": "Bolder"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Publish Adaptive Card with emojis 🥰 ",
+          "weight": "bolder",
+          "size": "medium"
+        }
+      ]
+    }
+  ]
+}

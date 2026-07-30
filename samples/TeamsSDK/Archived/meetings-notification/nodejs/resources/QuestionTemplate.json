@@ -1,0 +1,44 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.5",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Provide your Feedback!",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "${name}",
+        "wrap": true
+      },
+      {
+        "type": "Input.ChoiceSet",
+         "id": "myReview",
+          "style": "expanded",
+          "isMultiSelect": false,
+          "wrap": true,
+           "value": "1",
+           "choices": [
+             {
+               "title": "Yes",
+                "value": "yes"
+              },
+              {
+                "title": "No",
+                "value": "no"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "Submit",
+            "data": {
+              "action": "${name}"
+            }
+          }
+        ]
+      }

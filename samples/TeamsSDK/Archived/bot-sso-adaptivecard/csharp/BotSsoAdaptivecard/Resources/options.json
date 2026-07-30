@@ -1,0 +1,31 @@
+﻿{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "",
+      "size": "Medium",
+      "weight": "Bolder"
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Sign in Universal SSO",
+          "data": {
+            "msteams": {
+              "type": "messageBack",
+              "displayText": "Sign in Universal SSO",
+              "text": "PerformSSO",
+              "value": "{\"bfKey\": \"bfVal\", \"conflictKey\": \"from value\"}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "appId": "<<YOUR-MICROSOFT-APP-ID>>",
+  "version": "1.5"
+}

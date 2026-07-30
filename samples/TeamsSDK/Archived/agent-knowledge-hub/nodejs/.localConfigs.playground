@@ -1,0 +1,7 @@
+# A gitignored place holder file for local runtime configurations
+CLIENT_ID=
+CLIENT_SECRET=
+AZURE_OPENAI_API_KEY=
+AZURE_OPENAI_ENDPOINT=
+AZURE_OPENAI_DEPLOYMENT_NAME=
+TEAMSFX_NOTIFICATION_STORE_FILENAME=.notification.playgroundstore.json

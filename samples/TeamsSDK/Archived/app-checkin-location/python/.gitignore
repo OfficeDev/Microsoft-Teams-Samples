@@ -1,0 +1,12 @@
+# TeamsFx files
+env/.env.*.user
+appManifest/build/
+
+# python virtual environment
+.venv/
+
+# misc
+.deployment/
+
+# tmp files
+__pycache__/

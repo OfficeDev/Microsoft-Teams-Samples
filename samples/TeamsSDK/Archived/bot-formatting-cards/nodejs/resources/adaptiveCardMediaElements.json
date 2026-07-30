@@ -1,0 +1,53 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.6",
+  "fallbackText": "This card requires CaptionSource to be viewed. Ask your platform to update to Adaptive Cards v1.6 for this and more!",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "YouTube video",
+      "wrap": true
+    },
+    {
+      "type": "Media",
+      "poster": "https://adaptivecards.io/content/poster-video.png",
+      "sources": [
+        {
+          "mimeType": "video/mp4",
+          "url": "https://www.youtube.com/watch?v=S7xTBa93TX8"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "Vimeo video",
+      "wrap": true
+    },
+    {
+      "type": "Media",
+      "poster": "https://adaptivecards.io/content/poster-video.png",
+      "sources": [
+        {
+          "mimeType": "video/mp4",
+          "url": "https://vimeo.com/508683403"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "Dailymotion video",
+      "wrap": true
+    },
+    {
+      "type": "Media",
+      "poster": "https://adaptivecards.io/content/poster-video.png",
+      "sources": [
+        {
+          "mimeType": "video/mp4",
+          "url": "https://www.dailymotion.com/video/x8wi5ho"
+        }
+      ]
+    }
+  ]
+}

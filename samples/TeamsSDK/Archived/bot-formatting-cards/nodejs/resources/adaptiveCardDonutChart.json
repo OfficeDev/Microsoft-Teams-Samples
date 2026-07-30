@@ -1,0 +1,43 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Chart.Donut",
+      "data": [
+        {
+          "legend": "Pear",
+          "value": 59
+        },
+        {
+          "legend": "Banana",
+          "value": 292
+        },
+        {
+          "legend": "Apple",
+          "value": 143
+        },
+        {
+          "legend": "Peach",
+          "value": 98
+        },
+        {
+          "legend": "Kiwi",
+          "value": 179
+        },
+        {
+          "legend": "Grapefruit",
+          "value": 50
+        },
+        {
+          "legend": "Orange",
+          "value": 212
+        },
+        {
+          "legend": "Cantaloupe",
+          "value": 68
+        }
+      ]
+    }
+  ]
+}

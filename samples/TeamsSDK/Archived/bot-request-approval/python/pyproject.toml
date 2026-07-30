@@ -1,0 +1,8 @@
+[project]
+name = "bot-request-approval"
+version = "1.0.0"
+description = "Bot Request Approval - Microsoft Teams Sample"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "botbuilder-integration-aiohttp>=4.14.5",
+]

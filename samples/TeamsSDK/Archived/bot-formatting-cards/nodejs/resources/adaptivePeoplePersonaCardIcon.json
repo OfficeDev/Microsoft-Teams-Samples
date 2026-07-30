@@ -1,0 +1,22 @@
+﻿{
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.6",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Persona",
+      "weight": "bolder"
+    },
+    {
+      "type": "Component",
+      "name": "graph.microsoft.com/user",
+      "view": "compact",
+      "properties": {
+        "id": "{{User-Object-ID}}",
+        "displayName": "{{User-Display-Name}}",
+        "userPrincipalName": "{{User-Principal-Name}}"
+      }
+    }
+  ]
+}

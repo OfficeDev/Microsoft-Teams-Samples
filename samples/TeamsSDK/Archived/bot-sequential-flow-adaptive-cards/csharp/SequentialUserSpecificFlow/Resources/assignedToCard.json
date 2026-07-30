@@ -1,0 +1,115 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "text": "**${incidentTitle}**"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "text": "Pending"
+                }
+              ],
+              "width": "auto"
+            }
+          ]
+        }
+      ],
+      "bleed": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "FactSet",
+                  "facts": [
+                    {
+                      "title": "**Selected Category:**",
+                      "value": "${category}"
+                    },
+                    {
+                      "title": "**Selected Sub-Category:**",
+                      "value": "${subCategory}"
+                    },
+                    {
+                      "title": "**Created By:**",
+                      "value": "${createdBy}"
+                    },
+                    {
+                      "title": "**Assigned To:**",
+                      "value": "${assignedToName}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Execute",
+          "verb": "approved",
+          "title": "Approve",
+          "data": {
+            "CreatedBy": "${createdBy}",
+            "IncidentTitle": "${incidentTitle}",
+            "AssignedTo": "${assignedTo}",
+            "Category": "${category}",
+            "SubCategory": "${subCategory}",
+            "AssignedToName": "${assignedToName}",
+            "UserMRI": "${userMRI}",
+            "IncidentId": "${incidentId}"
+          }
+        },
+        {
+          "type": "Action.Execute",
+          "verb": "rejected",
+          "title": "Reject",
+          "data": {
+            "CreatedBy": "${createdBy}",
+            "IncidentTitle": "${incidentTitle}",
+            "AssignedTo": "${assignedTo}",
+            "Category": "${category}",
+            "SubCategory": "${subCategory}",
+            "AssignedToName": "${assignedToName}",
+            "UserMRI": "${userMRI}",
+            "IncidentId": "${incidentId}"
+          }
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

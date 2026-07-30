@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "c5f12998-f395-4eaa-ad7c-5f5bab2d47bb",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "TeamsToDo Connector in .NET/C#",
+    "full": "TeamsToDo Connector in .NET/C# - full name"
+  },
+  "description": {
+       "short": "Office 365 Connector to generate task notifications in Microsoft Teams.",
+    "full": "This sample demonstrates how to send task notifications to a Teams channel using an Office 365 Connector."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#3F487F",
+  "connectors": [
+    {
+      "connectorId": "<<CONNECTOR-ID>>",
+      "configurationUrl": "https://<<VALID-DOMAIN>>/Connector/Setup",
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ]
+}

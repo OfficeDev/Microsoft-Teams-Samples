@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "config";
+}
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+
+<script type="text/javascript">
+    function onClick() {
+        microsoftTeams.pages.config.setValidityState(true);
+    }
+
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            var radios = document.getElementsByName('notificationType');
+
+            microsoftTeams.pages.config.setConfig({
+                entityId: 'request',
+				contentUrl: "$BaseUrl/request",
+                configName: 'config'
+            });
+            saveEvent.notifySuccess();
+        });
+    });
+</script>
+<div class="col-md-8">
+    <section id="configSection">
+
+
+        <div id="divConfig">
+            <br />
+            <form id="configForm">
+                <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Add App List tab
+            </form>
+        </div>
+
+
+        <div id="divError" style="display: none"></div>
+    </section>
+</div>

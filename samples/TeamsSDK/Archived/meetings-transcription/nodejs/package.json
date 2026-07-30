@@ -1,0 +1,38 @@
+{
+    "name": "meeting-transcript-bot",
+    "version": "1.0.0",
+    "description": "Bot Builder v4 meeting transcript sample",
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "dev:teamsfx": "npm run dev",
+        "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+        "start": "node ./index.js",
+        "watch": "nodemon ./index.js",
+        "build": "node build.js",
+        "lint": "eslint .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+    },
+    "dependencies": {
+        "axios": "^1.16.1",
+        "botbuilder": "^4.23.3",
+        "cors": "^2.8.6",
+        "dotenv": "^16.4.7",
+        "ejs": "^3.1.10",
+        "express": "^4.21.2"
+    },
+    "devDependencies": {
+        "eslint": "^8.57.1",
+        "eslint-config-standard": "^17.1.0",
+        "eslint-plugin-import": "^2.29.1",
+        "eslint-plugin-n": "^16.6.2",
+        "eslint-plugin-promise": "^6.6.0",
+        "nodemon": "^3.1.14",
+        "esbuild": "^0.28.0"
+    }
+}

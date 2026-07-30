@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Color Selector</title>
+    <style>
+        h3 {
+            color: #6364a5;
+        }
+    </style>
+</head>
+<body>
+
+    <section style="width: 100%; display: table">
+        <div style="display:table-row">
+            <div style="width: auto; display:table-cell;">
+                <div id="gray" style="display:none;">
+                    <h3>PersonalTab says: 'Hello Gray!'</h3>
+                </div>
+            </div>
+
+            <div style="display: table-cell">
+                <div id="red" style="display:none;">
+                    <h3>PersonalTab says: 'Hello Red!'</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <button onclick="selectGray()">Select Gray</button>
+    <img id="icon" src="/static/images/teamsIcon.png" alt="icon" style="width:100px" />
+    <button onclick="selectRed()">Select Red</button>
+
+    <p>
+        <h2 style="color:#6364a5">This is your personal tab</h2>
+    </p>
+
+    <script>
+        function selectGray() {
+            document.getElementById("icon").src = "/static/images/iconGray.png";
+            document.getElementById("gray").style.display = "block";
+            document.getElementById("red").style.display = "none";
+        }
+
+        function selectRed() {
+            document.getElementById("icon").src = "/static/images/iconRed.png";
+            document.getElementById("red").style.display = "block";
+            document.getElementById("gray").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "meetings-events-nodejs",
+  "version": "1.0.0",
+  "description": "Microsoft Teams real-time meeting events bot sample",
+  "main": "server/index.js",
+  "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "watch": "nodemon server/index.js",
+    "build": "node build.js",
+    "lint": "eslint .",
+    "server": "npm install && node server/index.js",
+    "manifest": "del \"appManifest\\appManifest.zip\" 2> nul && powershell Compress-Archive appManifest/* appManifest/appManifest.zip"
+  },
+  "keywords": [],
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "botbuilder": "^4.23.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.6.0",
+    "nodemon": "^3.1.14"
+  }
+}

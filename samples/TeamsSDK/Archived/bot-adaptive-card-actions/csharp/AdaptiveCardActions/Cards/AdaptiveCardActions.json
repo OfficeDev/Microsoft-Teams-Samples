@@ -1,0 +1,79 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Adaptive Card Actions"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Action Open URL",
+      "url": "https://adaptivecards.io"
+    },
+    {
+      "type": "Action.ShowCard",
+      "title": "Action Submit",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.5",
+        "body": [
+          {
+            "type": "Input.Text",
+            "id": "name",
+            "label": "Please enter your name:",
+            "isRequired": true,
+            "errorMessage": "Name is required"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "Submit"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Action.ShowCard",
+      "title": "Action ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "This card's action will show another card"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.ShowCard",
+            "title": "Action.ShowCard",
+            "card": {
+              "type": "AdaptiveCard",
+              "body": [
+                {
+                  "type": "TextBlock",
+                  "text": "Welcome To New Card"
+                }
+              ],
+              "actions": [
+                {
+                  "type": "Action.Submit",
+                  "title": "Click Me",
+                  "data": {
+                    "value": "Button has Clicked"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

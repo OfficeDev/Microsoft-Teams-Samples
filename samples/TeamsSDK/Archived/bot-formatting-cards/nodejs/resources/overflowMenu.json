@@ -1,0 +1,27 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "Overflow Menu Card",
+            "size": "Large",
+            "weight": "Bolder"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "title": "Set due date"
+        },
+        {
+            "type": "Action.OpenUrl",
+            "title": "View",
+            "url": "https://adaptivecards.io"
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Delete",
+            "mode": "secondary"
+        }
+    ]
+}

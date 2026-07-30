@@ -1,0 +1,49 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "layouts": [
+    {
+      "type": "Layout.AreaGrid",
+      "targetWidth": "atLeast:standard",
+      "columns": [
+        60
+      ],
+      "areas": [
+        {
+          "name": "imageArea"
+        },
+        {
+          "name": "textArea",
+          "column": 2
+        }
+      ]
+    }
+  ],
+  "body": [
+    {
+      "type": "Image",
+      "url": "https://picsum.photos/200/200?image=110",
+      "grid.area": "imageArea",
+      "style": "RoundedCorners",
+      "targetWidth": "atLeast:narrow"
+    },
+    {
+      "type": "Container",
+      "grid.area": "textArea",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Adaptive Cards",
+          "wrap": true,
+          "size": "ExtraLarge",
+          "weight": "Bolder"
+        },
+        {
+          "type": "TextBlock",
+          "text": "The simple, lightweight card format to power your ideas.",
+          "wrap": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "tab-deeplink",
+    "version": "1.0.0",
+    "description": "Microsoft Teams sample demonstrating deep links across tabs, chats, calls, and meetings.",
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "dev:teamsfx": "npm run dev",
+        "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+        "start": "node ./index.js",
+        "watch": "nodemon ./index.js",
+        "build": "node build.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples"
+    },
+    "dependencies": {
+        "adaptivecards-templating": "^2.3.1",
+        "botbuilder": "^4.23.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2"
+    },
+    "devDependencies": {
+        "esbuild": "^0.24.2",
+        "nodemon": "^3.1.9"
+    }
+}

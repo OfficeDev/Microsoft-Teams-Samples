@@ -1,0 +1,30 @@
+{
+    "name": "teams-bot",
+    "version": "1.0.0",
+    "description": "Bot Builder v4 Bot Teams sample",
+    "author": "Microsoft",
+    "license": "MIT",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "dev:teamsfx": "npm run dev",
+        "dev": "tsx watch --inspect=9239 ./index.js",
+        "start": "node ./index.js",
+        "watch": "tsx watch ./index.js",
+        "build": "node build.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+    },
+    "dependencies": {
+        "botbuilder": "^4.23.1",
+        "dotenv": "^16.4.7",
+        "restify": "^11.1.0"
+    },
+    "devDependencies": {
+        "esbuild": "^0.24.2",
+        "tsx": "^4.21.0"
+    }
+}

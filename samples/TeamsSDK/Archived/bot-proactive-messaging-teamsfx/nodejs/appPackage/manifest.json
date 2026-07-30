@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.21/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.21",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.example.com",
+    "privacyUrl": "https://www.example.com/privacy",
+    "termsOfUseUrl": "https://www.example.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "${{CONFIG_APPNAME_SHORT}}",
+    "full": "${{CONFIG_MANIFEST_APPNAME_FULL}}"
+  },
+  "description": {
+    "short": "Bot sample for proactive notifications ${{CONFIG_APPNAME_SHORT}}",
+    "full": "This bot sends proactive reminders by saving conversation references in Teams. ${{CONFIG_APPNAME_SHORT}}"
+  },
+  "accentColor": "#FFFFFF",
+  "copilotAgents": {
+    "customEngineAgents": [
+      {
+        "type": "bot",
+        "id": "${{BOT_ID}}"
+      }
+    ]
+  },
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "scopes": [
+        "copilot",
+        "personal",
+        "team",
+        "groupChat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "copilot",
+            "personal",
+            "team",
+            "groupChat"
+          ],
+          "commands": [
+            {
+              "title": "welcome",
+              "description": "Resend welcome card of this Bot"
+            },
+            {
+              "title": "learn",
+              "description": "Learn about Adaptive Card and Bot Command"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "composeExtensions": [],
+  "configurableTabs": [],
+  "staticTabs": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN}}"
+  ]
+}

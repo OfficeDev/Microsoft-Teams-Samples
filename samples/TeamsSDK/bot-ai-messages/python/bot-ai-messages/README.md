@@ -4,7 +4,7 @@ This sample demonstrates how to enhance AI-generated bot messages for Microsoft 
 
 ## Prerequisites
 
-- [Python >=3.12, <3.15](https://www.python.org/downloads/)
+- [Python >=3.11](https://www.python.org/downloads/)
 - pip (recommended) or [uv](https://docs.astral.sh/uv/)
 
 ## Run the sample

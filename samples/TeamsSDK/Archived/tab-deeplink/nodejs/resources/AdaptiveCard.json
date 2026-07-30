@@ -1,0 +1,39 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Please click on below buttons to navigate to a tab!",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "${BotsTitle}",
+      "url": "${BotsDeepLink}"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "${METitle}",
+      "url": "${MEDeepLink}"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "${CardsTitle}",
+      "url": "${CardsDeepLink}"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "${ExtendedDeepLinkTitle}",
+      "url": "${ExtendedDeepLink}"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "${sidePanelLinkTitle}",
+      "url": "${sidePanelLink}"
+    }
+  ]
+}

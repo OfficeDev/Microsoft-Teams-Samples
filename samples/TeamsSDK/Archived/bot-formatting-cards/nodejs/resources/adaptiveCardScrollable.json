@@ -1,0 +1,63 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Below is a scrollable container",
+      "wrap": true,
+      "size": "ExtraLarge",
+      "weight": "Bolder"
+    },
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "showBorder": true,
+      "maxHeight": "200px",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Item 1",
+          "size": "ExtraLarge"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Item 2",
+          "size": "ExtraLarge"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Item 3",
+          "size": "ExtraLarge"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Item 4",
+          "size": "ExtraLarge"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Item 5",
+          "size": "ExtraLarge"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Item 6",
+          "size": "ExtraLarge"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Item 7",
+          "size": "ExtraLarge"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Click me"
+    }
+  ]
+}

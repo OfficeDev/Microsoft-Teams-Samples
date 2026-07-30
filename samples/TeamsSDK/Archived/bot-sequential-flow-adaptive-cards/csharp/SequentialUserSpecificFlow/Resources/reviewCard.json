@@ -1,0 +1,100 @@
+{
+  "type": "AdaptiveCard",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "title": "Submit",
+      "verb": "refresh",
+      "data": {
+        "IncidentTitle": "${incidentTitle}",
+        "AssignedTo": "${assignedTo}",
+        "CreatedBy": "${createdBy}",
+        "Category": "${category}",
+        "SubCategory": "${subCategory}",
+        "AssignedToName": "${assignedToName}",
+        "UserMRI": "${userMRI}",
+        "IncidentId": "${incidentId}"
+      }
+    },
+    "userIds": [
+      "${userMRI}"
+    ]
+  },
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "text": "**${incidentTitle}**"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "text": "Pending"
+                }
+              ],
+              "width": "auto"
+            }
+          ]
+        }
+      ],
+      "bleed": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "FactSet",
+                  "facts": [
+                    {
+                      "title": "**Selected Category:**",
+                      "value": "${category}"
+                    },
+                    {
+                      "title": "**Selected Sub-Category:**",
+                      "value": "${subCategory}"
+                    },
+                    {
+                      "title": "**Created By:**",
+                      "value": "${createdBy}"
+                    },
+                    {
+                      "title": "**Assigned To:**",
+                      "value": "${assignedToName}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

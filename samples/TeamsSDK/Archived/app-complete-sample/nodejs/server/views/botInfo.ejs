@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Channel lifecycle demo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <style>
+    #mainDiv {
+      padding-left: 10%;
+      padding-top: 2%;
+    }
+  </style>
+</head>
+
+<body id=mainDiv>
+  <h3>Root Dialog File content</h3>
+  <pre class="result"></pre>
+  <script>
+    var fileContent =  <%-fileContent%>
+      $(document).ready(function () {
+        var content = document.querySelector(".result");
+        content.innerHTML = fileContent;
+      })
+  </script>
+</body>
+
+</html>

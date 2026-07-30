@@ -1,0 +1,33 @@
+{
+  "name": "teams-token-app",
+  "version": "1.0.0",
+  "description": "Microsoft Teams conversation bot quickstart",
+  "main": "server/index.js",
+  "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --exec babel-node --inspect=9239 --signal SIGINT server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "watch": "nodemon server/index.js",
+    "build": "npm install && cd client && npm install && npm run build",
+    "server": "npm install && cd client && npm install && npm run build && cd ../ && nodemon server/index.js",
+    "client": "cd client && npm install && npm run start",
+    "manifest": "del \"appManifest\\appManifest.zip\" 2> nul && powershell Compress-Archive appManifest/* appManifest/appManifest.zip"
+  },
+  "keywords": [],
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "botbuilder": "^4.23.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "html-entities": "^2.6.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.6",
+    "@babel/node": "^7.29.0",
+    "nodemon": "^3.1.14"
+  }
+}

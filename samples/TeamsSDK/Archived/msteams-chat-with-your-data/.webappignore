@@ -1,0 +1,9 @@
+.venv/
+.vscode/
+.env
+env/
+README.md
+m365agents.yml
+m365agents.local.yml
+__pycache__
+.mypy_cache

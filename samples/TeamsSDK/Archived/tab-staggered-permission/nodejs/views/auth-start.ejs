@@ -1,0 +1,49 @@
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.52.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-j4GNIru3mNYN+q8XdBRVyvbUx+0U867Cy90v6H61tpIZoR2pUq+bZDZmmpT8N7VG"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/5.8.0/js/msal-browser.min.js"></script>
+     <script type="text/javascript">
+         const data = <%-data%>;
+
+         document.addEventListener('DOMContentLoaded', () => {
+            getAuthToken(data.clientId, data.tenantId);
+         });
+       
+        // Get auth token.
+        function getAuthToken(clientId, tenantId) {
+             const scope = data.scope;
+            if (clientId && tenantId) {
+                microsoftTeams.app.initialize().then(() => {
+                    // Get the tab context, and use the information to navigate to Azure AD login page
+                    microsoftTeams.app.getContext().then(async (context) => {
+                        const msalConfig = {
+                            auth: {
+                                clientId: clientId,
+                                authority: `https://login.microsoftonline.com/${tenantId}`,
+                                navigateToLoginRequestUrl: false
+                            },
+                            cache: {
+                                cacheLocation: "sessionStorage",
+                            },
+                        };
+						
+                        const msalInstance = new msal.PublicClientApplication(msalConfig);
+                        await msalInstance.initialize();
+						
+                        const scopesArray = scope.split(" ");
+                        const scopesRequest = {
+                            scopes: scopesArray,
+                            redirectUri: window.location.origin + `/auth-end`,
+                            loginHint: context.user.loginHint
+                        };
+						
+                        await msalInstance.loginRedirect(scopesRequest);
+                    });
+                });
+            }
+        }
+    </script>
+</head>
+<body class="theme-light">
+</body>

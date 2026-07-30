@@ -1,0 +1,45 @@
+﻿@model IList<TeamsToDoAppConnector.Models.TaskItem>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tasks</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Task Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Assigned To
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Assigned)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Detail", new { id = item.Guid })
+            </td>
+        </tr>
+    }
+
+</table>
+

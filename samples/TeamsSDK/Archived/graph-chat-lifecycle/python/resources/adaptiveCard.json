@@ -1,0 +1,124 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Create Group Chat"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "Title: ",
+              "wrap": true
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Input.Text",
+              "placeholder": "Please enter the title of GroupChat",
+              "wrap": true,
+              "id": "title"
+            }
+          ],
+          "width": "stretch"
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "Select Members: ",
+              "wrap": true
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Input.ChoiceSet",
+              "id": "users",
+              "style": "compact",
+              "isMultiSelect": true,
+              "value": "",
+              "choices": [
+                {
+                  "title": "${user1Title}",
+                  "value": "${user1Id}"
+                },
+                {
+                  "title": "${user2Title}",
+                  "value": "${user2Id}"
+                },
+                {
+                  "title": "${user3Title}",
+                  "value": "${user3Id}"
+                },
+                {
+                  "title": "${user4Title}",
+                  "value": "${user4Id}"
+                },
+                {
+                  "title": "${user5Title}",
+                  "value": "${user5Id}"
+                },
+                {
+                  "title": "${user6Title}",
+                  "value": "${user6Id}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "**Note**: Selected Members will be added into a group chat and based on the count selected, members will be added to the chat using different scenarios: with all chat history, no chat history, chat history with no. of days accordingly.",
+              "wrap": true
+            }
+          ],
+          "width": "auto"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit",
+      "card": {
+        "version": 1.0,
+        "type": "AdaptiveCard",
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const config = {
+    botId: process.env.BOT_ID,
+    botPassword: process.env.BOT_PASSWORD,
+    botTenantId: process.env.BOT_TENANT_ID || process.env.AZURE_TENANT_ID,
+    azureOpenApiKey: process.env.SECRET_AZURE_OPENAPI_KEY,
+    completionModelUrl: process.env.COMPLETION_MODEL_URL,
+    redisConnection: process.env.REDIS_CONNECTION,
+    embeddingModelUrl: process.env.EMBEDDING_MODEL_URL,
+    azureStorageConnStr: process.env.AZURE_STORAGE_CONNECTION_STRING
+};
+exports.default = config;
+//# sourceMappingURL=config.js.map

@@ -1,0 +1,32 @@
+﻿html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 25px;
+}
+
+.appButton {
+    background: #6264A7;
+    border: 0.125rem solid;
+    border-color: transparent;
+    border-radius: 0.1875rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: inherit;
+    height: 2rem;
+    min-width: 6rem;
+    padding: 0.25rem;
+    white-space: nowrap;
+    margin: 50px;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+#red, #gray {
+    margin-bottom: 25px;
+}
+
+#end {
+    margin-top: 25px;
+}

@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p>
+    Please click on any of the authentication
+</p>
+<div style="height: 20px">
+</div>
+<div>
+    <!-- Login button -->
+    <button id="btnLogin" onclick="silentLogin()">Login to Silent</button>
+</div>
+<div style="height: 30px">
+</div>
+
+<script type="text/javascript">
+
+        function silentLogin() {
+            window.location.href = "@Url.Action("SilentConfigureTab", "Home")";
+        }
+
+</script>

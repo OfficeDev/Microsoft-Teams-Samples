@@ -1,0 +1,69 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
+using System.Threading.Tasks;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Connector;
+using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Logging;
+
+namespace PeoplePicker
+{
+    /// <summary>
+    /// Custom Bot Framework adapter with error handling to log unhandled exceptions and send trace activities.
+    /// </summary>
+    public class AdapterWithErrorHandler : CloudAdapter
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdapterWithErrorHandler"/> class.
+        /// </summary>
+        /// <param name="auth">Bot Framework authentication configuration.</param>
+        /// <param name="logger">Logger for logging errors and events.</param>
+        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<CloudAdapter> logger)
+            : base(auth, logger)
+        {
+            // Set up custom error handling for the bot.
+            OnTurnError = async (turnContext, exception) =>
+            {
+                // Log any unhandled exceptions during the turn.
+                // In production, consider logging this to Application Insights or other telemetry services.
+                // Azure Application Insights. Visit https://aka.ms/bottelemetry to see how
+                // to add telemetry capture to your bot.
+                logger.LogError(exception, $"[OnTurnError] Unhandled error: {exception.Message}");
+                // Uncomment below commented line for local debugging..
+                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
+
+                // Send a trace activity to the Bot Framework Emulator (if in use)
+                await SendTraceActivityAsync(turnContext, exception);
+            };
+        }
+
+        /// <summary>
+        /// Sends a trace activity when an error occurs, particularly useful in the Bot Framework Emulator.
+        /// </summary>
+        /// <param name="turnContext">The current turn context.</param>
+        /// <param name="exception">The exception that was thrown during the bot turn.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        private static async Task SendTraceActivityAsync(ITurnContext turnContext, Exception exception)
+        {
+            // Only send a trace activity if we're talking to the Bot Framework Emulator
+            if (turnContext.Activity.ChannelId == Channels.Emulator)
+            {
+                // Create a trace activity to capture the error
+                Activity traceActivity = new Activity(ActivityTypes.Trace)
+                {
+                    Label = "TurnError",
+                    Name = "OnTurnError Trace",
+                    Value = exception.Message,
+                    ValueType = "https://www.botframework.com/schemas/error",
+                };
+
+                // Send the trace activity to the bot framework emulator
+                await turnContext.SendActivityAsync(traceActivity);
+            }
+        }
+    }
+}

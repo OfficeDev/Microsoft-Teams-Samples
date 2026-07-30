@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "{{AppId}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab Auth SSO",
+    "full": "Tab Auth SSO"
+  },
+  "description": {
+    "short": "Azure AD SSO sample for Teams tab with Graph API access using Node.js.",
+    "full": "This sample app demonstrates Azure AD Single Sign-On for Teams tabs, enabling Graph API access."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "Auth",
+      "contentUrl": "https://<your_tunnel_domain>/ssoDemo",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<your_tunnel_domain>"
+  ],
+  "webApplicationInfo": {
+    "id": "{{AppId}}",
+    "resource": "api://<your_tunnel_domain>/{{AppId}}"
+  }
+}

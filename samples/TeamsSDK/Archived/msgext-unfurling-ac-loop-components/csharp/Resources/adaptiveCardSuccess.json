@@ -1,0 +1,22 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Default",
+      "text": "Adaptive Card-based Loop component Successfully Execute!! ",
+      "style": "heading"
+    },
+    {
+      "type": "Image",
+      "url": "https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png",
+      "height": "auto",
+      "size": "Medium",
+      "horizontalAlignment": "left",
+      "spacing": "None",
+      "width": "0px"
+    }
+  ]
+}

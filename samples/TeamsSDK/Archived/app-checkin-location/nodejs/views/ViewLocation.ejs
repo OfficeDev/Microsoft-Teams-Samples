@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.18.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-g8DoRkiR0ECQ9rwKIgY8GjQ5h0d2jp1347CmU/IRlyUHPjJZiFWEOYc+hFtT9MGL"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        microsoftTeams.app.initialize().then(() => {
+            viewLocation();
+        })
+        // Method to show geo location for given latitude and longitude values.
+        function viewLocation() {
+            const params = new URLSearchParams(window.location.search);
+            const latitude = params.get('latitude');
+            const longitude = params.get('longitude');
+
+            if (!latitude || !longitude) {
+                alert("Please ensure that all necessary access has been granted.");
+                return;
+            }
+
+            const location = {
+                "latitude": parseFloat(latitude),
+                "longitude": parseFloat(longitude)
+            };
+            if (microsoftTeams.location.isSupported()) {
+                microsoftTeams.location.showLocation(location, (error, result) => {
+                    if (error) {
+                        let errorMessage = "Error";
+                        if (error.message) {
+                            errorMessage = `Error Code: ${error.errorCode}, Message: ${error.message}`;
+                        } else {
+                            errorMessage = `Error Code: ${error.errorCode}`;
+                        }
+                        alert(errorMessage);
+                        return;
+                    }
+                });
+            }
+            else {
+                showMap(latitude,longitude);
+            }
+        }
+        function showMap(latitude,longitude) {
+            
+            // Get location data
+            var latlong =  latitude+ "," + longitude ;
+
+            // Set Google map source url
+            var mapLink = "http://maps.google.com?q=" + latlong;
+            
+            // Create and insert Google map
+            document.getElementById("map").innerHTML = "latitude : "+ latitude + ", Longitude :  "+ longitude +"  <br /> <a target='_blank'  href='" + mapLink + "'> Click here to view location </a>";
+        }
+    </script>
+    <style>
+        .submitClick {
+            margin: 5rem;
+            margin-left: 0rem;
+        }
+    </style>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel" id="map">
+            <div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

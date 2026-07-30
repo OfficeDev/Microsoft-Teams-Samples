@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "{new GUID for this Teams app - not the Azure AD App ID}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Teams Auth SSO",
+    "full": "Teams Auth SSO"
+  },
+  "description": {
+    "short": "Microsoft Teams sample app demonstrating Azure AD SSO in a Teams tab using C#.",
+    "full": "This sample app showcases Azure Active Directory Single Sign-On (SSO) within a Microsoft Teams tab, utilizing the On-Behalf-Of flow to call Microsoft Graph APIs with C#."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "Auth",
+      "contentUrl": "https://{{domain-name}}/Home/Index",
+      "scopes": [ "personal" ]
+    }
+  ],
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://{{domain-name}}/{{Microsoft-App-Id}}"
+  }
+}

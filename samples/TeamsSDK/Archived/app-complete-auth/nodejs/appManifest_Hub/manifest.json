@@ -1,0 +1,124 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "{{MicrosoftAppId}}",
+  "webApplicationInfo": {
+    "id": "{{MicrosoftAppId}}",
+    "resource": "api://{Base_URL_Domain}/botid-{{MicrosoftAppId}}"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://{{Base_URL_Domain}}",
+    "privacyUrl": "https://{{Base_URL_Domain}}/privacy",
+    "termsOfUseUrl": "https://{{Base_URL_Domain}}/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "App complete auth",
+    "full": "Authentication sample for Microsoft Teams"
+  },
+  "description": {
+    "short": "Authentication sample for Microsoft Teams",
+    "full": "Authentication sample for Microsoft Teams"
+  },
+  "staticTabs": [
+    {
+      "contentUrl": "https://{{Base_URL_Domain}}/AuthTab",
+      "entityId": "Auth",
+      "name": "Auth",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "{{MicrosoftAppId}}",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "SSO",
+          "type": "action",
+          "title": "SSO",
+          "description": "SSO authentication",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "LogoutSSO",
+          "type": "action",
+          "title": "Log out sso",
+          "description": "Sign out from authenticated services.",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "LogoutFacebook",
+          "description": "Sign out from authenticated services.",
+          "title": "Log out facebook",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "UserCredentials",
+          "description": "Sign in using user credentials",
+          "title": "Using credentials",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "FacebookLogin",
+          "description": "Sign in to facebook",
+          "title": "Facebook sign in",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.botframework.com",
+              "{{Base_URL_Domain}}"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "accentColor": "#60A18E",
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok-free.app",
+    "token.botframework.com",
+    "{{Base_URL_Domain}}"
+  ]
+}

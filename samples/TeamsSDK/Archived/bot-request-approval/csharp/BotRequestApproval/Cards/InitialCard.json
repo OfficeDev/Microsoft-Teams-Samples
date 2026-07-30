@@ -1,0 +1,32 @@
+{
+  "type": "AdaptiveCard",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "title": "Submit",
+      "verb": "initialRefresh",
+      "data": {
+        "CreatedBy": "${createdBy}"
+      }
+    },
+    "userIds": [
+      "${createdByID}"
+    ]
+  },
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Request initiated by:",
+      "size": "Default",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${createdBy}",
+      "size": "Default",
+      "weight": "Default"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

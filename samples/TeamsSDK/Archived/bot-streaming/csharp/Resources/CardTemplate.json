@@ -1,0 +1,12 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "${finaltStreamText}"
+    }
+  ]
+}

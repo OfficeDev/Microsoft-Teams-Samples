@@ -1,0 +1,108 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.9",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "App Camp",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/termofuse",
+        "termsOfUseUrl": "https://www.example.com/privacy"
+    },
+    "icons": {
+        "color": "Northwind-Logo3-192-${{APP_NAME_SUFFIX}}.png",
+        "outline": "Northwind-Logo3-32.png"
+    },
+    "name": {
+        "short": "Northwind Inventory",
+        "full": "Northwind Inventory App"
+    },
+    "description": {
+        "short": "Teams message extension for Microsoft Copilot to query Northwind Database.",
+        "full": "This sample showcases a Teams message extension that serves as a plugin for Microsoft Copilot, enabling users to query the Northwind Database."
+    },
+    "accentColor": "#3690E9",
+    "bots": [
+        {
+          "botId": "${{BOT_ID}}",
+          "scopes": [ "personal", "team", "groupChat" ],
+          "isNotificationOnly": false,
+          "supportsFiles": false
+        }
+      ],
+    "composeExtensions": [
+        {
+            "botId": "${{BOT_ID}}",
+            "commands": [
+                {
+                    "id": "inventorySearch",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Search products by name, category, inventory status, supplier location, stock level",
+                    "title": "Product inventory",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "productName",
+                            "title": "Product name",
+                            "description": "Enter a product name here",
+                            "inputType": "text"
+                        },
+                        {
+                            "name": "categoryName",
+                            "title": "Category name",
+                            "description": "Enter the category of the product",
+                            "inputType": "text"
+                        },
+                        {
+                            "name": "inventoryStatus",
+                            "title": "Inventory status",
+                            "description": "Enter what status of the product inventory. Possible values are 'in stock', 'low stock', 'on order', or 'out of stock'",
+                            "inputType": "text"
+                        },
+                        {
+                            "name": "supplierCity",
+                            "title": "Supplier city",
+                            "description": "Enter the supplier city of product",
+                            "inputType": "text"
+                        },
+                        {
+                            "name": "stockQuery",
+                            "title": "Stock level",
+                            "description": "Enter a range of integers such as 0-42 or 100- (for >100 items). Only use if you need an exact numeric range.",
+                            "inputType": "text"
+                        }
+                    ]
+                },
+                {
+                    "id": "discountSearch",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Search for discounted products by category",
+                    "title": "Discounts",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "categoryName",
+                            "title": "Category name",
+                            "description": "Enter the category to find discounted products",
+                            "inputType": "text"
+                        }
+                    ]
+                }
+            ]
+        }
+        
+    ],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}

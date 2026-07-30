@@ -1,0 +1,7 @@
+BOT_ID=
+BOT_PASSWORD=
+SECRET_AZURE_OPENAPI_KEY= <Azure OpenAI Service Key>
+REDIS_CONNECTION=redis://default:<REDIS_PASSWORD>=@<REDIS_HOST>:<REDIS_PORT>
+EMBEDDING_MODEL_URL=https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Embedding Model Name>/embeddings?api-version=2023-03-15-preview
+COMPLETION_MODEL_URL=https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Completion Model Name>
+AZURE_STORAGE_CONNECTION_STRING='DefaultEndpointsProtocol=https;AccountName=<Storage Account Name>;AccountKey=<Your Account Key>;EndpointSuffix=core.windows.net'

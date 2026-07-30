@@ -1,0 +1,36 @@
+﻿@page
+@model QRAppInstallation.Pages.GenerateQRModel
+@{
+}
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        microsoftTeams.initialize();
+        function generateQR() {
+            var appId = $("#appIdOptions").val();
+            $("#qrImg").attr("src", `${window.location.origin}/${appId}.png`);
+            $("#qrImg").removeAttr("hidden");
+        };
+    </script>
+</head>
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <label for="appIdOptions">Select App</label>
+                <select id="appIdOptions" name="cars">
+                    <option value="1542629c-01b3-4a6d-8f76-1938b779e48d" selected>Polly</option>
+                    <option value="81fef3a6-72aa-4648-a763-de824aeafb7d">Forms</option>
+                    <option value="7299542a-1697-4ec1-812b-6b70065c0795">Azure Boards</option>
+                    <option value="0c5cfdbb-596f-4d39-b557-5d9516c94107">App Studio</option>
+                </select>
+                <button onClick="generateQR()">Generate QR</button>
+                <img alt="QR Image" id="qrImg" hidden="hidden" />
+            </div>
+        </div>
+    </div>
+</body>

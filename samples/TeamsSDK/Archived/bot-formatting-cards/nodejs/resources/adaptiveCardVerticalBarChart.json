@@ -1,0 +1,55 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Chart.VerticalBar",
+      "title": "Sample",
+      "xAxisTitle": "Days",
+      "yAxisTitle": "Sales",
+      "colorSet": "categorical",
+      "data": [
+        {
+          "x": "Pear",
+          "y": 59
+        },
+        {
+          "x": "Banana",
+          "y": 292
+        },
+        {
+          "x": "Apple",
+          "y": 143
+        },
+        {
+          "x": "Peach",
+          "y": 98
+        },
+        {
+          "x": "Kiwi",
+          "y": 179
+        },
+        {
+          "x": "Grapefruit",
+          "y": 20
+        },
+        {
+          "x": "Orange",
+          "y": 212
+        },
+        {
+          "x": "Cantaloupe",
+          "y": 68
+        },
+        {
+          "x": "Grape",
+          "y": 102
+        },
+        {
+          "x": "Tangerine",
+          "y": 38
+        }
+      ]
+    }
+  ]
+}

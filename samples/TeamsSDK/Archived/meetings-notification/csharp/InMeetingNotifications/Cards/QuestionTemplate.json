@@ -1,0 +1,46 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+
+      "type": "TextBlock",
+      "text": "Provide your Feedback!"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "${Topic}?"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "Feedback",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "wrap": true,
+      "value": "1",
+      "choices": [
+        {
+          "title": "Yes",
+          "value": "Yes"
+        },
+        {
+          "title": "No",
+          "value": "No"
+        }
+
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "id": "submit",
+      "title": "Submit",
+      "data": {
+        "Type": "SubmitFeedback",
+        "Choice": "${Id}"
+      }
+    }
+  ]
+}
