@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app retrieves meeting transcripts via the Graph API and displays them in a task module.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "03/08/2022 00:45:15"
-urlFragment: officedev-microsoft-teams-samples-meetings-transcription-csharp
----
-
 # Bot to show the transcript of the meeting using Microsoft Graph API.
 
 The Meeting Transcript Bot uses Microsoft Graph API to fetch and present meeting transcripts within a Teams task module. It features adaptive cards and bot interactions for seamless user engagement during meetings.
@@ -148,7 +133,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/meetings-transcription/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/meetings-transcription/csharp` folder
   - Select `MeetingTranscription.csproj` file
   - Press `F5` to run the project
 
@@ -220,7 +205,7 @@ Add the following permissions inside the **authorization** section of your `mani
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-transcription/csharp/MeetingTranscription/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/meetings-transcription/csharp/MeetingTranscription/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
 
 ## Running the sample.
 
@@ -271,4 +256,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-transcription-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-transcription-csharp" />

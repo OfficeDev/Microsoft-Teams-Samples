@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/06/2023 20:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-tag-mention-csharp
----
-
 # Tag mention bot
 
 This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework.
@@ -222,4 +207,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-tag-mention-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-tag-mention-csharp" />

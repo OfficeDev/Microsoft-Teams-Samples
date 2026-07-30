@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how a bot can create, join, and transfer calls or meetings within Microsoft Teams.
-products:
-  - office-teams
-  - office
-  - office-365
-languages:
-  - csharp
-extensions:
-  contentType: samples
-  createdDate: "07/07/2021 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-calling-meeting-csharp
----
-
 # Calling and Meeting Bot Sample V4
 
 ## Summary
@@ -51,7 +36,7 @@ This sample app demonstrates a bot's ability to create, join, and manage calls a
 
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/bot-calling-meeting/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/bot-calling-meeting/csharp` folder
    - Select `CallingBotSample.csproj` file
 
 3. Run ngrok - point to port 3978
@@ -206,7 +191,7 @@ Register one Azure AD application in your tenant's directory for the bot and tab
    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
    - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-calling-meeting/csharp/Source/CallingBotSample/AdapterWithErrorHandler.cs#L22) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-calling-meeting/csharp/Source/CallingBotSample/AdapterWithErrorHandler.cs#L22) line and put your debugger for local debug.
 
 ## Running the sample
 

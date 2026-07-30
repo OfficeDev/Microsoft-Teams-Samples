@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate iss how to use the Bot Framework support for oauth in your bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Java
-extensions:
- contentType: samples
- createdDate: "12/12/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-team-teams-authentication-java
----
-
 # Teams Authentication Bot
 
 Bot Framework v4 bot using Teams authentication.
@@ -37,7 +22,7 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Teams Auth Bot:** [Manifest](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
+**Teams Auth Bot:** [Manifest](/samples/TeamsSDK/Archived/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
 
 ## Prerequisites
 - Intall Java 1.8+ [Java](https://www.oracle.com/java/technologies/downloads/#java8-windows)
@@ -87,7 +72,7 @@ the Teams service needs to call into the bot.
 
 1) - Update the `resources/application.properties` file configuration in your project, for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-1) From the root of this project folder: (`samples/bot-teams-authentication/java`)
+1) From the root of this project folder: (`samples/TeamsSDK/Archived/bot-teams-authentication/java`)
     - Open a terminal and build the sample using `mvn package` command
     - Install the packages in the local cache by using `mvn install` command in a terminal
     - Run it by using `java -jar .\target\bot-teams-authentication-sample.jar` command in a terminal
@@ -122,4 +107,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Authentication Basics](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-overview)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-teams-authentication-java" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-teams-authentication-java" />

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Python
-extensions:
- contentType: samples
- createdDate: "2024-12-12"
-urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-Python
----
-
 # Teams Message Reactions Bot Python Sample
 
 This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Bot Framework. The bot responds dynamically to reactions, supporting personal, group, and team scopes.
@@ -95,7 +80,7 @@ the Teams service needs to call into the bot.
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
-4) In a terminal, navigate to `samples/bot-message-reaction/Python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-message-reaction/Python`
 
 5) Activate your desired virtual environment
 
@@ -153,4 +138,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-message-reaction-Python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-message-reaction-Python" />

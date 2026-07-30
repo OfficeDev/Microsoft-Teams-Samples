@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This app allows users to quickly view, add, and manage group members in federated Teams chat.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "08-21-2024 20:15:25"
-urlFragment: officedev-microsoft-teams-samples-bot-feed-members-nodejs
----
-
 # Apps in federated
 
 This bot sample demonstrates real-time member management in federated Microsoft Teams group chats, enabling users to view, add, and organize group members seamlessly. Included features like Adaptive Cards enhance the interaction experience, with setup guides for Microsoft 365 Agents Toolkit and manual deployment options.
@@ -96,7 +81,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-feed-members/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-feed-members/nodejs`
 
 1) Install modules
 
@@ -120,7 +105,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
    
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-feed-members/nodejs/index.js#L46) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-feed-members/nodejs/index.js#L46) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -158,4 +143,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-feed-members-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-feed-members-nodejs" />

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Microsoft Teams app allows users to select and set a region using a Bot and Tab.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "13-02-2025 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-app-region-selection-python
----
-
 # Region Selection App
 
 A Microsoft Teams sample app for region selection, leveraging both Bot and Tab interactions. The app features Adaptive Cards to facilitate region configuration and provides a seamless experience to manage data center selection through the Teams client.
@@ -134,4 +119,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Build a Configurable Tab for Microsoft Teams App](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-channel-tab)
 - [Build a Bot](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-bot)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-region-selection-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-region-selection-python" />

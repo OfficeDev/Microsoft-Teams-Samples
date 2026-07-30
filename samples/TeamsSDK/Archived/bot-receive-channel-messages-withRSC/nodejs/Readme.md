@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This bot can capture all channel messages in Teams using RSC permissions, without the need for @mentions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-nodejs
----
-
 # Receive Channel messages with RSC permissions
 
 This sample app illustrates how a bot can capture all channel messages in Microsoft Teams by utilizing RSC (resource-specific consent) permissions, eliminating the need for @mentions. The bot supports adaptive card responses, easy local testing with tools like ngrok or dev tunnels, and deployment to Azure, allowing it to function effectively across different channels and group chats in Teams.
@@ -108,7 +93,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In the folder where repository is cloned navigate to `samples/bot-receive-channel-messages-withRSC/nodejs`
+- In the folder where repository is cloned navigate to `samples/TeamsSDK/Archived/bot-receive-channel-messages-withRSC/nodejs`
 
 - Install node modules
 
@@ -152,7 +137,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appManifest`, and then select **Add** to add the bot to your selected team.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-receive-channel-messages-withRSC/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-receive-channel-messages-withRSC/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -211,4 +196,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-receive-channel-messages-withRSC-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-receive-channel-messages-withRSC-nodejs" />

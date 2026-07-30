@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a Node.js Messaging Extension for Microsoft Teams that includes a configuration page and supports single sign-on (SSO) authentication for enhanced user experience.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config-nodejs
----
-
 # Messaging Extension SSO Config Bot
 
 This comprehensive Node.js sample illustrates the development of a Messaging Extension for Microsoft Teams, integrating a configuration page and single sign-on (SSO) capabilities using the Bot Framework v4. Designed for seamless user interaction, this extension allows users to perform searches and retrieve profile information while ensuring secure authentication through SSO.
@@ -53,7 +37,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
 1. Setup for Bot SSO     
-    Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md). 
+    Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation-sso-quickstart/BotSSOSetup.md). 
  
 2) App Registration
 
@@ -115,7 +99,7 @@ Under the root of this sample folder, build and run by commands:
 - **Interacting with the Message Extension in Teams
     Once the Messaging Extension is installed, find the icon for **Config Auth Search** in the Compose Box's Messaging Extension menu. Right click to choose **Settings** and view the Config page. Click the icon to display the search window, type anything it will show your profile picture.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-search-sso-config/nodejs/index.js#L57) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/msgext-search-sso-config/nodejs/index.js#L57) line and put your debugger for local debug.
 
 ## Deploy the bot to Azure
 
@@ -148,4 +132,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Zero Install Link Unfurling](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet%2Cadvantages#zero-install-for-link-unfurling)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-search-sso-config-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-search-sso-config-nodejs" />

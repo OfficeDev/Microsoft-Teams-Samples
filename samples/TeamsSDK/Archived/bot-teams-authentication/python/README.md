@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate iss how to use the Bot Framework support for oauth in your bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Python
-extensions:
- contentType: samples
- createdDate: "12-12-2019 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-team-teams-authentication--python
-
----
-
 # Teams Auth Bot
 
 Bot Framework v4 bot using Teams authentication
@@ -172,4 +156,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Bot Authentication Basics](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-teams-authentication-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-teams-authentication-python" />

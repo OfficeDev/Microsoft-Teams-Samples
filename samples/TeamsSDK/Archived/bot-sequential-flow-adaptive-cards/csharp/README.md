@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07-07-2021 13:38:26"
-urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-csharp
----
-
 # Sequential workflow adaptive cards C#
 
 This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot and the list of incident created can be seen in messaging extension and can share a specific incident to the chat/team.
@@ -92,7 +77,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-sequential-flow-adaptive-cards/csharp/` folder
+  - Navigate to `samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards/csharp/` folder
   - Select `SequentialUserSpecificFlow.csproj` file
   - Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
   
@@ -109,7 +94,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
     - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sequential-flow-adaptive-cards/csharp/SequentialUserSpecificFlow/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards/csharp/SequentialUserSpecificFlow/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Workflows
 
@@ -214,4 +199,4 @@ sequenceDiagram
 - [User Specific views](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC)
 - [Bot-Sequential-flow-adaptive-card](https://learn.microsoft.com/power-automate/create-adaptive-cards)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sequential-flow-adaptive-cards-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards-csharp" />

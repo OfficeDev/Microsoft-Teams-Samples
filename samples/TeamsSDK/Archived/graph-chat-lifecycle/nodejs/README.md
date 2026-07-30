@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams using Node.js and Microsoft Graph APIs, including creating chats, adding members, and deleting members.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs
----
-
 # ChatLifecycle Application
 
 This sample application showcases the management of chat lifecycles in Microsoft Teams, utilizing Microsoft Graph APIs for creating chats, adding members, and removing members in various scenarios. Developed in Node.js, it includes features such as tab integration, adaptive cards, and a welcome card, along with detailed instructions for registration, tunneling, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
@@ -126,10 +111,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples/graph-chat-lifecycle/nodejs`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/graph-chat-lifecycle/nodejs`
 
     ```bash
-    cd samples/graph-chat-lifecycle/nodejs
+    cd samples/TeamsSDK/Archived/graph-chat-lifecycle/nodejs
     ```
 - Update your `config/default.json` file
     * Replace the `YOUR-MICROSOFT-APP-ID` property with you Azure AD application ID.
@@ -223,4 +208,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
 [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-lifecycle-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-chat-lifecycle-nodejs" />

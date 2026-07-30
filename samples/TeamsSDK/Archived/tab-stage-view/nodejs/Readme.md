@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates the use of Teams tab in stage view using Node.js, featuring collaborative elements and interactive capabilities.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10/06/2021 01:48:56 AM"
-urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
----
-
 # Stage View
 
 This sample app showcases the capabilities of Microsoft Teams tabs in stage view using Node.js. It demonstrates collaborative features such as multi-window support and interactive elements, allowing users to engage dynamically through adaptive cards and deep linking for a richer experience in Teams.
@@ -34,7 +19,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Stage View:** [Manifest](/samples/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)
+**Stage View:** [Manifest](/samples/TeamsSDK/Archived/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)
 
 ## Prerequisites
 
@@ -113,7 +98,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a console, navigate to `samples/tab-stage-view/nodejs` folder
+- In a console, navigate to `samples/TeamsSDK/Archived/tab-stage-view/nodejs` folder
 
 - Install modules
 
@@ -155,7 +140,7 @@ Also update `BaseUrl` according to your code runtime environment.
          - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
 
 ## Running the sample
 - From Teams left side bar, select the ellipses ●●● and choose your app from the list.
@@ -262,4 +247,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-stage-view-nodejs" />

@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates how to use CART links to send live captions in Microsoft Teams meeting tabs.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-- javascript
-extensions:
- contentType: samples
- createdDate: "06/24/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-meetings-live-caption-nodejs
----
-
 # Meeting side panel application uses CART link to send caption in live meeting.
 
 This sample application illustrates how to implement live captioning in Microsoft Teams meetings using CART links. With functionalities including a meeting side panel, chat integration, and the ability to configure captions during meetings, this app significantly improves accessibility for participants.
@@ -68,7 +52,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/meetings-live-caption/nodejs`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/meetings-live-caption/nodejs`
 
 3) Install modules
 
@@ -148,4 +132,4 @@ This sample now enforces single-tenant access in both UI and server APIs.
 
 - [Live Meeting Caption](https://support.microsoft.com/en-us/office/use-live-captions-in-a-teams-meeting-4be2d304-f675-4b57-8347-cbd000a21260)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-live-caption-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-live-caption-nodejs" />

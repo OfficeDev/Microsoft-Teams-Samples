@@ -1,20 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates how to implement link unfurling in a Teams messaging ext4) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
-
-5) __*This step is specific to Teams.*__ion using the Bot Framework v4.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/17/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-csharp
----
-
 # Teams Link Unfurl Bot C#
 
 This sample demonstrates a Teams bot that utilizes [link unfurling](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) within messaging extensions, built with the Bot Framework v4. Users can experience seamless integration in Teams and Outlook, featuring capabilities like search commands and enhanced link previews.
@@ -82,7 +65,7 @@ the Teams service needs to call into the bot.
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/msgext-link-unfurling/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/msgext-link-unfurling/csharp` folder
    - Select `TeamsLinkUnfurling.csproj` or `TeamsLinkUnfurling.sln`file
 
 1) Run ngrok - point to port 3978
@@ -124,7 +107,7 @@ the Teams service needs to call into the bot.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-link-unfurling/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/msgext-link-unfurling/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Running the sample
 

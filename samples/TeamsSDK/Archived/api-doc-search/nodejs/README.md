@@ -1,20 +1,3 @@
----
-page_type: sample
-description: This is a sample RAG-based semantic search using Azure CosmosDB NoSQL, demonstrating document ingestion, embedding generation, and prompt-based queries.
-products:
-- azure-cosmos-db
-- azure-openai
-- azure-function
-- azure-blob-storage
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/15/2024 12:00:00 PM"
-urlFragment: officedev-microsoft-teams-samples-api-doc-search-nodejs
-
----
-
 # RAG-based Semantic Search API with Azure CosmosDB NoSQL
 
 This sample demonstrates the concept of Retrieval Augmented Generation (RAG). 
@@ -80,13 +63,13 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - Navigate to `samples/api-doc-search/nodejs` folder and open the project in Visual Studio Code.
+  - Navigate to `samples/TeamsSDK/Archived/api-doc-search/nodejs` folder and open the project in Visual Studio Code.
   - Open `.env` file and update the `.env` configuration for the application to use the `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentName`, `CosmosDBEndpoint`, `CosmosDBKey`, `CosmosDBDatabaseId`, `CosmosDBContainerId`, `SimilarityScore`, `APPINSIGHTS_INSTRUMENTATIONKEY`, `APPINSIGHTS_CONNECTIONSTRING` values.
   
 **Note: All of these above values are created and collected in the previous steps.
 Also, responses depend on `Cosine Similarity` where `Cosine similarity` compares two items by looking at the angle between them, giving a score from 0 to 1, where `1` means they are exactly the same, and `0` means they are completely different.**
 
-  - In a terminal, navigate to `samples/api-doc-search/nodejs` or open folder in Visual Studio Code.
+  - In a terminal, navigate to `samples/TeamsSDK/Archived/api-doc-search/nodejs` or open folder in Visual Studio Code.
   - Install node modules and run application by pressing F5 in Visual Studio Code
  
    ```bash
@@ -194,4 +177,4 @@ To test the application in Azure environment, you can deploy the Azure function 
 
 - [Azure App Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/api-doc-search" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/api-doc-search" />

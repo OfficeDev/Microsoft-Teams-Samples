@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates how to send notifications for changes in user presence status in Microsoft Teams using Node.js and the Bot Framework.
-urlFragment: teams-graph-change-notification-nodejs
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-change-notification-nodejs
----
-
 # Change Notification sample using nodejs
 
 Bot Framework v4 ChangeNotification sample.
@@ -151,7 +135,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
  - Open from Visual Studio code
     - Launch Visual Studio code
     - File -> Open Folder
-    - Navigate to `samples/graph-change-notification/nodejs` folder
+    - Navigate to `samples/TeamsSDK/Archived/graph-change-notification/nodejs` folder
     - Run npm command  in the terminal
         ```bash
         npm install
@@ -170,7 +154,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/nodejs/index.js#L42) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-change-notification/nodejs/index.js#L42) line and put your debugger for local debug.
 
 ## Running with sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adaptive card
@@ -204,4 +188,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-change-notification-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-change-notification-nodejs" />

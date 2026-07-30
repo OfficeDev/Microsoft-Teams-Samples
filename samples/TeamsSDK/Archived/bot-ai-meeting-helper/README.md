@@ -1,16 +1,3 @@
----
-page_type: sample
-description: This sample uses Azure OpenAI to extract meeting action items and summaries, sending them directly to subscribed participants in Microsoft Teams..
-products:
-- office-teams
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/29/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-ai-meeting-helper-nodejs
----
-
 # Meeting Helper with Azure Open AI
 
 This sample leverages Azure OpenAI to automatically extract action items and generate summaries from meeting transcriptions, delivering them to subscribed users in Microsoft Teams. It utilizes Graph API, Azure Table Storage, and self-signed certificates for a seamless and secure experience.
@@ -34,7 +21,7 @@ This sample leverages Azure OpenAI to automatically extract action items and gen
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Microsoft Teams Meeting Helper sample app:** [Manifest](/samples/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
+**Microsoft Teams Meeting Helper sample app:** [Manifest](/samples/TeamsSDK/Archived/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
 
 - To run the demo, you must set up and grant the necessary policy. Please follow the second step mentioned below for instructions (in "Setup and use the sample locally" section) on how to do this. 
 
@@ -67,7 +54,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 **Note>** While creating or setting up Application Insights, choose `NodeJS` as the application type.
 
 ## Setup and use the sample locally 
-1) Navigate to the `samples/bot-ai-meeting-helper/.localConfigs` and update the values below.
+1) Navigate to the `samples/TeamsSDK/Archived/bot-ai-meeting-helper/.localConfigs` and update the values below.
 
    ```txt
         BOT_ID - It will be automatically generated while running the sample using Toolkit.
@@ -197,4 +184,4 @@ If you want to deploy the app to Azure, you can follow the below steps:
 - [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal) 
 - [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-ai-meeting-helper" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-ai-meeting-helper" />

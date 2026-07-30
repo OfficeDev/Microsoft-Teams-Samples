@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to install a Microsoft Teams app using QR code scanning, allowing users to generate a QR code with the app ID for seamless installation.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/11/2021 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-app-installation-using-qr-code-csharp
----
-
 # Install app using barcode sample
 
 This C# sample illustrates the process of installing Microsoft Teams apps via QR code scanning. Users can generate a QR code containing the app ID, making installation straightforward while leveraging features such as bot interaction, Teams SSO, adaptive cards, task modules, and media permissions.
@@ -113,7 +98,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-- In a terminal, navigate to `samples/app-installation-using-qr-code/csharp`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/app-installation-using-qr-code/csharp`
 
     change into project folder
     ```bash
@@ -159,7 +144,7 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/m
  - **Note**
  Kindly add the app/bot in personal scope and login there, afterwards add the app/bot in any Teams channel.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-installation-using-qr-code/csharp/QRAppInstallation/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-installation-using-qr-code/csharp/QRAppInstallation/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -210,4 +195,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-installation-using-qr-code-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-installation-using-qr-code-csharp" />

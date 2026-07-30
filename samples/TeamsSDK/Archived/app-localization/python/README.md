@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to implement localization for a Microsoft Teams app using Bot and Tab functionalities.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "16/01/2025 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-app-localization-python
----
-
 # Microsoft Teams localization sample app.
 
 The Teams App Localization sample demonstrates how to implement multilingual support using Bot and Tab capabilities in Microsoft Teams. This app allows users to interact in different languages, making it easy to customize content for a diverse audience.
@@ -29,10 +14,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 
 ![image](Images/appLocalizationModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/app-localization/python/README.md
 
-=======
->>>>>>> origin/main:samples/app-localization/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -182,4 +164,4 @@ After Changing Language to Hindi
 
 - [Localize your app](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-localization-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-localization-python" />

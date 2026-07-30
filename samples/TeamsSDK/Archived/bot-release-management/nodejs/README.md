@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates a Node.js bot that integrates Azure DevOps with Teams, notifying users of new work items and creating group chats.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-- javascript
-extensions:
- contentType: samples
- createdDate: "04/28/2022 00:15:15"
-urlFragment: officedev-microsoft-teams-samples-bot-release-management-nodejs
----
-
 # Bot to create a group chat and send a task notification using Azure service hook
 
 This sample app integrates Azure DevOps with Teams using a bot to send notifications on work item creation. It leverages service hooks to create group chats and deliver work item details via adaptive cards, providing a streamlined way to keep teams informed in real time.
@@ -150,7 +134,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/bot-release-management/nodejs`
+2) In the folder where repository is cloned navigate to `samples/TeamsSDK/Archived/bot-release-management/nodejs`
 
 3) Install node modules
 
@@ -173,7 +157,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 - Zip up the contents of the `/appManifest` folder to create a `manifest.zip`
 - Upload the manifest.zip to Teams (in the Apps view click "Upload an app to your org's app catalog")
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-release-management/nodejs/index.js#L52) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-release-management/nodejs/index.js#L52) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -215,4 +199,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-release-management-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-release-management-nodejs" />

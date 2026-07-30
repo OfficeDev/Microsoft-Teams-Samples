@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to implement a straightforward Outgoing Webhook for Microsoft Teams, allowing users to send messages to external services without the complexity of creating a full bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-csharp
----
-
 > [!IMPORTANT]
 >
 > The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
@@ -87,7 +72,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 4. If you are using Visual Studio
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `samples/outgoing-webhook/csharp` folder
+    - Navigate to `samples/TeamsSDK/Archived/outgoing-webhook/csharp` folder
     - Select `WebhookSampleBot.sln` file
     - Update the HMAC value for the Dictionary named `SigningKeyDictionary` in AuthProvider.cs file.
     - Press `F5` to run the project  
@@ -112,4 +97,4 @@ Example screenshot to show Hero card (using type of card in message):
 [Outgoing webhook](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-outgoing-webhook?tabs=urljsonpayload%2Cdotnet)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/outgoing-webhook-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/outgoing-webhook-csharp" />

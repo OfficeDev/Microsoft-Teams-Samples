@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-proactive-installation-nodejs
----
-
 # Proactive Installation Sample App
 
 This sample application illustrates how to implement proactive installation of a Microsoft Teams app and send notifications using Microsoft Graph APIs. Featuring bot integration, this app allows for user interaction within Group Chats and Channels, enhancing communication and app management in Teams.
@@ -135,9 +120,9 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/graph-proactive-installation/nodejs`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/graph-proactive-installation/nodejs`
     ```bash
-    cd samples/graph-proactive-installation/nodejs
+    cd samples/TeamsSDK/Archived/graph-proactive-installation/nodejs
     ```
 3)  Install modules
 
@@ -162,7 +147,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-proactive-installation/nodejs/index.js#L47) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-proactive-installation/nodejs/index.js#L47) line and put your debugger for local debug.
 
 ## Running the sample
 ![Install ](Images/1.Install.png)
@@ -190,4 +175,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-proactive-installation-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-proactive-installation-nodejs" />

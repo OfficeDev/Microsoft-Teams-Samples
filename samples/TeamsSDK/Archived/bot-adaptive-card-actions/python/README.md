@@ -1,19 +1,3 @@
----
-page_type: sample
-description: Sample which demonstrates different Adaptive Card action types using bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "12-12-2024 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-adaptive-card-actions-python
-
----
-
 # Teams Conversation Bot
 
 This sample shows the feature where user can send adaptive card with different actions using bot.
@@ -165,4 +149,4 @@ Install App in copilot
 - [Actions](https://learn.microsoft.com/adaptive-cards/rendering-cards/actions)
 - [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-adaptive-card-actions-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-adaptive-card-actions-python" />

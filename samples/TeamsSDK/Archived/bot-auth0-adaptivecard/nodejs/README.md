@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "08-05-2025 20:15:25"
-urlFragment: officedev-microsoft-teams-samples-bot-auth0-adaptivecard-nodejs
----
-
 # Auth0 Bot
 
 This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card
@@ -25,10 +10,7 @@ This sample demonstrates how to authenticate users in a Microsoft Teams bot usin
 ## Interaction with bot
 ![Conversation Bot](Images/bot-auth.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-auth0-adaptivecard/nodejs/README.md
 
-=======
->>>>>>> origin/main:samples/bot-auth0-adaptivecard/nodejs/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -120,7 +102,7 @@ __*Configure Application Settings:*__
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-auth0-adaptivecard/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-auth0-adaptivecard/nodejs`
 
 1) Install modules
 
@@ -174,4 +156,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
 - [Auth0 Documentation](https://auth0.com/docs)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-auth0-adaptivecard-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-auth0-adaptivecard-nodejs" />

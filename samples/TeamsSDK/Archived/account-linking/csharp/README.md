@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates authentication integration using Azure AD, Facebook, and username/password methods across bot, tab, and messaging extension functionalities in Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-- microsoft-teams
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "03/22/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-account-linking-csharp
----
-
 # External OAuth identity linking in Teams Apps.
 
 This sample demonstrates how to link a user's Microsoft Entra ID with external OAuth identities like GitHub, Google, or Facebook across multiple Teams capabilities, including tabs, conversational bots, and messaging extensions. It provides a robust implementation for handling OAuth2.0 identity linking and token management, ensuring seamless access and persistent authentication across devices and Teams components.
@@ -129,7 +113,7 @@ Please copy the `Source/appsettings.json` into a new file `appsettings.developme
 
 Please note the `StateReplay`, `TokenStorage` and `Keyring` sections are unused unless the `UseAzure` setting is `true`.
 
-### 8. Running the app (navigate to `samples/account-linking/csharp/Source`)
+### 8. Running the app (navigate to `samples/TeamsSDK/Archived/account-linking/csharp/Source`)
 
 ```bash
 dotnet run
@@ -189,4 +173,4 @@ Add the parameters to the
 - [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/account-linking-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/account-linking-csharp" />

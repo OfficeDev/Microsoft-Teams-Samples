@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to integrate Open AI into a Teams message extension to evaluate contract proposals against policy checklists.
-products:
-- office-teams
-- copilot-m365
-- azure open-ai
-languages:
-- javascript
-extensions:
- contentType: samples
- createdDate: "07/15/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-ai-doc-compliance-checker-js
----
-
 # Compliance Checker using Azure Open AI
 
 Explore this sample application that integrates Azure Open AI into a Teams message extension, enabling users to evaluate contract proposals for compliance with specific policy guidelines stored in Azure Blob Storage. 
@@ -71,7 +56,7 @@ Upload the policy guideline document (keep the file-name handy for adding into t
     ```
 1) Navigate to the `samples/msgext-ai-doc-compliance-checker` folder and open with Visual Studio Code.
 
-1) Navigate to the `samples/msgext-ai-doc-compliance-checker/.localConfigs` directory and update the values below.
+1) Navigate to the `samples/TeamsSDK/Archived/msgext-ai-doc-compliance-checker/.localConfigs` directory and update the values below.
 
    When running the sample using the toolkit, the BOT_ID and BOT_PASSWORD are automatically generated for you. You do not need to manually configure these credentials
     ```bash
@@ -156,4 +141,4 @@ If you want to deploy the app to Azure, you can follow the below steps:
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
 - [Quickstart: Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-nodejs?tabs=managed-identity%2Croles-azure-portal%2Csign-in-azure-cli)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-ai-doc-compliance-checker" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-ai-doc-compliance-checker" />

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates how to utilize CART links to send live captions in Microsoft Teams meetings.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "06/24/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-meetings-live-caption-csharp
----
-
 # Meeting side panel application uses CART link to send caption in live meeting.
 
 This sample application showcases how to implement live captioning in Microsoft Teams using CART links. With features like a meeting side panel, chat integration, and configurable settings, this app enables real-time captioning to enhance accessibility during meetings.
@@ -103,7 +88,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 4) Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/meetings-live-caption/csharp/MeetingLiveCaption.sln`
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/meetings-live-caption/csharp/MeetingLiveCaption.sln`
 
 1) Run the bot from Visual Studio:
    - Press `F5` to run the project
@@ -150,4 +135,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Live Meeting Caption](https://support.microsoft.com/en-us/office/use-live-captions-in-a-teams-meeting-4be2d304-f675-4b57-8347-cbd000a21260)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-live-caption-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-live-caption-csharp" />

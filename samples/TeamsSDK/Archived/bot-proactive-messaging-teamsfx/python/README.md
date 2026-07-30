@@ -1,17 +1,3 @@
----
-page_type: sample
-products:
-- office-365
-languages:
-- python
-title: Microsoft Teams Proactive Messaging TeamsFx
-description: This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation references to send scheduled or triggered reminder notifications.
-extensions:
-  contentType: samples
-  createdDate: 06/21/2025 10:02:21 AM
-urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-teamsfx-python
----
-
 # How to use this Proactive Messaging TeamsFx bots app
 
 This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation references to send scheduled or triggered reminder notifications. The app is designed for local debugging and deployment to Azure, offering full integration with Microsoft 365 Agents Toolkit for streamlined setup and testing.
@@ -95,7 +81,7 @@ the Teams service needs to call into the bot.
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
-4) In a terminal, navigate to `samples/bot-proactive-messaging-teamsfx/python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-proactive-messaging-teamsfx/python`
 
 5) Activate your desired virtual environment
 
@@ -144,4 +130,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Step by step guide to send proactive messages](https://docs.microsoft.com/en-us/microsoftteams/platform/sbs-send-proactive)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-proactive-messaging-teamsfx-Python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-proactive-messaging-teamsfx-Python" />

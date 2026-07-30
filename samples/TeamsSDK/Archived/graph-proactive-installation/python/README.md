@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "05/03/2025 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-proactive-installation-python
----
-
 # Proactive Installation Sample App
 
 This sample application illustrates how to implement proactive installation of a Microsoft Teams app and send notifications using Microsoft Graph APIs. Featuring bot integration, this app allows for user interaction within Group Chats and Channels, enhancing communication and app management in Teams.
@@ -115,7 +100,7 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) In a terminal, navigate to `samples/graph-proactive-installation/Python`
+3) In a terminal, navigate to `samples/TeamsSDK/Archived/graph-proactive-installation/Python`
 
 4) Activate your desired virtual environment
 
@@ -166,4 +151,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-proactive-installation-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-proactive-installation-python" />

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This bot allows users to join Microsoft Teams by scanning a team-specific QR code.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "12/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-join-team-using-qr-code-csharp
----
-
 # Join a team using QR code sample
 
 This Microsoft Teams sample bot helps users join a team by scanning a QR code that contains the team ID. It allows users to generate QR codes, leverages the Graph API, and supports both bot and Adaptive Cards functionality. Ideal for mobile clients, this feature enhances team onboarding with ease.
@@ -131,7 +116,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-join-team-using-qr-code/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/bot-join-team-using-qr-code/csharp` folder
   - Select `JoinTeamByQR.csproj` file
   - Press `F5` to run the project
    
@@ -149,7 +134,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-join-team-using-qr-code/csharp/JoinTeamByQR/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
  
 ## Running the sample
 
@@ -183,4 +168,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
 - [QR Scanner Capability](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/qr-barcode-scanner-capability)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-join-team-using-qr-code-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-join-team-using-qr-code-csharp" />

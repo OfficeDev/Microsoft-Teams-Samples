@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "28/11/2023 20:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-tag-mention-nodejs
----
-
 # Tag mention bot
 
 This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework.
@@ -125,7 +110,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-- In a terminal, navigate to `samples/bot-tag-mention/nodejs`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/bot-tag-mention/nodejs`
  
 - Install modules
 -   ```bash
@@ -217,4 +202,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-tag-mention-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-tag-mention-nodejs" />

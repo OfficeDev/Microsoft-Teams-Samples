@@ -1,17 +1,3 @@
----
-page_type: sample
-products:
-- office-365
-languages:
-- python
-title: Microsoft Teams Python Hello World Sample
-description: The Microsoft Teams Python "Hello World" Sample app demonstrates key features of Teams, including tabs, bots, and messaging extensions, built with Python. It�s a great starting point for developing and deploying custom Teams apps.
-extensions:
-  contentType: samples
-  createdDate: 10/19/2022 10:02:21 PM
-urlFragment: officedev-microsoft-teams-samples-app-hello-world-python
----
-
 # Microsoft Teams hello world sample app.
 
 The Microsoft Teams Python "Hello World" Sample app is a comprehensive demonstration of essential Microsoft Teams features built using Python. This sample highlights the core functionalities of Teams, such as tabs, bots, and messaging extensions, making it an excellent starting point for developers interested in creating robust Teams apps.
@@ -30,10 +16,7 @@ With this sample, users can:
 
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/app-hello-world/python/README.md
 
-=======
->>>>>>> origin/main:samples/app-hello-world/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -238,4 +221,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-hello-world-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-hello-world-python" />

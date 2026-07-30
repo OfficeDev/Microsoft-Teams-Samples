@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to request staggered Graph API permissions in a Microsoft Teams tab, prompting users only when specific features are accessed.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-- javascript
-extensions:
- contentType: samples
- createdDate: "03/07/2022 00:15:13 AM"
-urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-nodejs
----
-
 # Staggered permission sample
 
 This sample app illustrates an effective way to manage Graph API permissions within a Microsoft Teams tab using Node.js. By employing staggered permission requests, the app enhances user experience by only prompting for necessary permissions when users interact with specific features, such as photos or emails, thus minimizing consent fatigue and promoting a seamless interaction.
@@ -30,7 +14,7 @@ This sample app illustrates an effective way to manage Graph API permissions wit
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Staggered Permission sample:** [Manifest](/samples/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
+**Staggered Permission sample:** [Manifest](/samples/TeamsSDK/Archived/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
 
 ## Prerequisites
 
@@ -236,4 +220,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-staggered-permission-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-staggered-permission-nodejs" />

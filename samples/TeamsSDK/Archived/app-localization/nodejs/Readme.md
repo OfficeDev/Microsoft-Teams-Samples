@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to implement localization for a Microsoft Teams app using Bot and Tab functionalities.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-app-localization-nodejs
----
-
 # Teams App Localization Node.js
 The Teams App Localization sample demonstrates how to implement multilingual support using Bot and Tab capabilities in Microsoft Teams. This app allows users to interact in different languages, making it easy to customize content for a diverse audience.
 
@@ -27,10 +12,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 ## Interaction with app
 ![image](Images/appLocalizationModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/app-localization/nodejs/Readme.md
 
-=======
->>>>>>> origin/main:samples/app-localization/nodejs/Readme.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -101,7 +83,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
  - In a terminal, navigate to `samples\app-localization\nodejs`
 
     ```bash
-    cd samples/app-localization/nodejs
+    cd samples/TeamsSDK/Archived/app-localization/nodejs
     ```
 
  - Install node modules For Server
@@ -132,7 +114,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 	
   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/appManifest_Hub` folder with the required values.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-localization/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-localization/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 7. Run your app.
 - Start the bot
@@ -207,4 +189,4 @@ After Changing Language to Hindi
 - [Localize your app](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-localization-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-localization-nodejs" />

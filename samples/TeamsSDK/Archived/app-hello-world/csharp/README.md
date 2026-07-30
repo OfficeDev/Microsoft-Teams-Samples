@@ -1,21 +1,3 @@
----
-page_type: sample
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-title: Microsoft Teams C# Helloworld Sample
-description: A Microsoft Teams Hello World sample app built with .NET/C# that demonstrates essential features like tabs, bots, and messaging extensions for seamless interaction within the Teams environment.
-extensions:
-  contentType: samples
-  platforms:
-  - CSS
-  createdDate: 10/19/2022 10:02:21 PM
-urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
----
-
 # Microsoft Teams hello world sample app.
 
 - The Microsoft Teams Hello World application, built with .NET/C#, serves as an introductory sample showcasing fundamental Microsoft Teams capabilities, including tabs, bots, and messaging extensions. This application provides a hands-on experience for developers looking to explore the Teams platform and its integration options.
@@ -179,7 +161,7 @@ To set the **Tab as the default landing capability**, configure the 'staticTabs'
 ],
 ```
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -239,4 +221,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-hello-world-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-hello-world-csharp" />

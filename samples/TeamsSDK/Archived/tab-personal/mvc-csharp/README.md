@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample showcases the development of a custom personal tab for Microsoft Teams, utilizing ASP.NET Core MVC to enhance user interaction. 
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-personal-mvc-csharp
----
-
 # Personal Tab with ASP. NET Core MVC
 
 This sample application illustrates the process of building a custom personal tab in Microsoft Teams using ASP.NET Core MVC. It provides a comprehensive guide on setting up the environment, configuring the app manifest, and deploying the app across Teams and Office platforms, enabling seamless integration and enhanced user experience.
@@ -24,10 +9,7 @@ This sample application illustrates the process of building a custom personal ta
 
 ![personaltab](Images/PersonalTabModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-personal/mvc-csharp/README.md
 
-=======
->>>>>>> origin/main:samples/tab-personal/mvc-csharp/README.md
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -177,4 +159,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 [Create a Custom Personal Tab with ASP. NET Core MVC](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-mvc-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-personal-mvc-csharp" />

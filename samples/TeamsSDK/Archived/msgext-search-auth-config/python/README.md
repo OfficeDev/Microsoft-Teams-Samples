@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to create a Python-based search Messaging Extension in Microsoft Teams that includes a configuration page and supports user authentication.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Python
-extensions:
- contentType: samples
- createdDate: "12-12-2019 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-msgext-search-auth-config-python
-
----
-
 # Teams Search Auth Config
 
 This comprehensive Python sample illustrates the implementation of a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions)  in Microsoft Teams, enhanced with a configuration page for user authentication and settings. By integrating Azure Active Directory for secure sign-in and utilizing the Microsoft Graph API, it enables personalized user experiences and interactions within Teams.
@@ -28,10 +12,7 @@ There are two basic types of Messaging Extension in Teams: [Search-based](https:
 ## Interaction with app
 ![msgext-search-auth-config ](Images/msgext-auth-config-gif.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/msgext-search-auth-config/python/README.md
 
-=======
->>>>>>> origin/main:samples/msgext-search-auth-config/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -151,4 +132,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-search-auth-config-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-search-auth-config-python" />

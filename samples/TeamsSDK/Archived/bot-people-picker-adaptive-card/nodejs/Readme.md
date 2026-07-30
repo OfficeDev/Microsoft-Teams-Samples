@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This bot showcases how to use the people picker control within Adaptive Cards on Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "01/25/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-nodejs
----
 # People picker control in Adaptive Cards
 
 This sample app demonstrates how to utilize the people picker control on Adaptive Cards in Microsoft Teams, enabling users to select team members directly within a bot's response. The bot integrates with the Teams platform, supporting adaptive card functionalities, and allows for local testing with tools like ngrok or dev tunnels, as well as deployment to Azure.
@@ -97,7 +83,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-- In the folder where repository is cloned navigate to `samples/bot-people-picker-adaptive-card/nodejs`
+- In the folder where repository is cloned navigate to `samples/TeamsSDK/Archived/bot-people-picker-adaptive-card/nodejs`
 
 - Install node modules
 
@@ -121,7 +107,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-people-picker-adaptive-card/nodejs/index.js#L44) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-people-picker-adaptive-card/nodejs/index.js#L44) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -153,4 +139,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [People picker in Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/people-picker)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-people-picker-adaptive-card-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-people-picker-adaptive-card-nodejs" />

@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This Azure Open AI sample app integrates user search with Azure Open AI embeddings, Redis DB, and Teams bot for queries based on uploaded files.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/28/2023 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-open-ai-search-file-upload-nodejs
----
 # Teams Azure Open AI Embeddings And Redis Search On Uploaded File Using Bot
 
 This sample app demonstrates user search functionality powered by Azure Open AI embeddings and Redis DB, facilitating queries based on files uploaded by an admin using a Teams bot. It supports features like Adaptive Cards, Azure Blob Storage, and Redis integration within Teams.
@@ -126,7 +112,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-5) In a terminal, navigate to `samples/bot-ai-enterprise-search/nodejs`
+5) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-ai-enterprise-search/nodejs`
 
 6) Install modules
 
@@ -257,4 +243,4 @@ Once the provisioning and deployment steps are finished, you can upload your app
 - [Quickstart: Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-nodejs?tabs=managed-identity%2Croles-azure-portal%2Csign-in-azure-cli)
 - [RediSearch](https://learn.microsoft.com/azure/azure-cache-for-redis/cache-redis-modules#redisearch)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-ai-enterprise-search-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-ai-enterprise-search-nodejs" />

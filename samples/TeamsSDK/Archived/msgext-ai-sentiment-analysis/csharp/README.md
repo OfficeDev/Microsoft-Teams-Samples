@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample allows users to assess the sentiment of messages in Teams chats by utilizing a messaging extension integrated with Open AI. The analysis categorizes messages as positive, negative, or neutral, enhancing understanding of team interactions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "17/10/2023 04:00:00 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-csharp
----
-
 # Sentiment Analysis for Teams chat messages using Azure Open AI and messaging extension.
 
 Discover this sample application that integrates Azure Open AI into a Teams messaging extension, enabling users to analyze the sentiment of chat messages in real-time. The tool categorizes sentiments as positive, negative, or neutral, providing valuable insights into team dynamics and communication patterns.
@@ -111,7 +96,7 @@ the Teams service needs to call into the bot.
 
 2. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/msgext-ai-sentiment-analysis/csharp/MEAISentimentAnalysis.sln`
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis/csharp/MEAISentimentAnalysis.sln`
    
 
 1) Update the `appSettings.json` configuration for the bot to use the `MicrosoftAppId`, `SECRET_OPENAI_API_KEY` and `ApplicationBaseUrl`  with application base url. For e.g., your ngrok or dev tunnels url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
@@ -149,4 +134,4 @@ Showing Sentiment Analysis `Negative` depending on Teams chat message
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-ai-sentiment-analysis-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis-csharp" />

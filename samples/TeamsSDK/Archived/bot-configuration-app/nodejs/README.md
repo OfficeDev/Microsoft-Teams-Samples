@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a bot for configuring and reconfiguring adaptive cards in team and group chats.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "25-09-2023 23:30:17"
-urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-nodejs
----
 # Bot Configuration 
 
 This sample demonstrates a bot for configuring and reconfiguring adaptive cards in team and group chats. It supports static and dynamic type-ahead search, allowing for enhanced interactivity and control customization.
@@ -26,10 +12,7 @@ This sample demonstrates a bot for configuring and reconfiguring adaptive cards 
 
 ![Configuration Bot](Images/ConfigurationBot.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-configuration-app/nodejs/README.md
 
-=======
->>>>>>> origin/main:samples/bot-configuration-app/nodejs/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -98,7 +81,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-configuration-app/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-configuration-app/nodejs`
 
 1) Install modules
 
@@ -169,4 +152,4 @@ Deploy your project to Azure by following these steps:
 - [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-configuration-app-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-configuration-app-nodejs" />

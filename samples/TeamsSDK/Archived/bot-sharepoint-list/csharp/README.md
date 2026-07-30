@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot collects user input via adaptive cards and saves it to a SharePoint list.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-list-csharp
----
-
 # Sharepoint List Bot
 
 Bot Framework v4 SPListBot sample.
@@ -59,7 +44,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/bot-sharepoint-list/csharp` folder
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/bot-sharepoint-list/csharp` folder
 
   ```bash
   # run the bot
@@ -70,7 +55,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-sharepoint-list/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/bot-sharepoint-list/csharp` folder
   - Select `SPListBot.csproj` file
   - Press `F5` to run the project
 
@@ -145,7 +130,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - Enter the values in Adaptive Card and click on Save button.
 - Bot will save the card data in SharePoint List.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sharepoint-list/csharp/SPListBot/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-sharepoint-list/csharp/SPListBot/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
 
 ### Screenshots
 **Upload the custom app in Teams**
@@ -171,4 +156,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sharepoint-list-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-sharepoint-list-csharp" />

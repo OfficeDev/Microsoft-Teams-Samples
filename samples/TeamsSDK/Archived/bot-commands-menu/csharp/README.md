@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Microsoft Teams Create Commands Menu
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "05/17/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-commands-menu-csharp
----
-
 # Create a commands menu
 This sample add a command menu with a dropdown list of commands for your bot. Users can select a command from the list, which will insert the command title into the compose box. Then, they can select Send to execute the command.
 
@@ -109,7 +94,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - **Zip** up the contents of the `Manifest` or `Manifest_hub` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
     
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-commands-menu/csharp/CommandsMenu/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-commands-menu/csharp/CommandsMenu/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 
 # Running the sample
 
@@ -156,4 +141,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Create a commands menu](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?branch=pr-en-us-10866&tabs=desktop%2Cdotnetlocalization)
 - [Create prompt suggestions](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/prompt-suggestions?branch=pr-en-us-10866&tabs=manually-in-the-app-manifest%2Cjavascript)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-commands-menu-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-commands-menu-csharp" />

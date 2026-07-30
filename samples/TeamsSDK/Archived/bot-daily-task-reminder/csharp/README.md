@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot helps users schedule recurring tasks and receive reminders at specified times. It supports adaptive cards and task modules, utilizing the Quartz Scheduler to manage reminders.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "11/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-csharp
----
-
 # Bot daily task reminder
 
 The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurring tasks and receive reminders at designated times. Built with the Bot Framework and leveraging adaptive cards and task modules, this bot provides an efficient way to manage and be reminded of daily tasks directly within Teams. It includes setup instructions for Microsoft Entra ID, Teams integration, and Azure Bot Service, offering seamless scheduling and notification capabilities.
@@ -96,7 +81,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
      ```
    - Launch Visual Studio
       - File -> Open -> Project/Solution
-      - Navigate to folder where repository is cloned then `samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder.sln`
+      - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/bot-daily-task-reminder/csharp/BotDailyTaskReminder.sln`
 
    - Modify the `appsettings.json` and fill in the following details:
       - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
@@ -116,7 +101,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
       - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-daily-task-reminder/csharp/BotDailyTaskReminder/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -170,4 +155,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-daily-task-reminder-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-daily-task-reminder-csharp" />

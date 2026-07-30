@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This Teams bot enables users to request task approval from managers within group chats. Managers can quickly approve or reject requests, while other members view request details only.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "17-06-2025 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-request-approval-python
-
----
-
 # Bot request approval
 This sample demonstrates a Teams bot that facilitates task approval requests within group chats. Users can submit requests via Adaptive Cards, which managers can then approve or reject directly in the chat. Other group members can view request details, while only requesters and managers have access to actionable options. The sample supports Azure and includes comprehensive setup guidance, leveraging .NET Core and the Microsoft 365 Agents Toolkit for Visual Studio.
 
@@ -96,7 +80,7 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
 
-5) In a terminal, go to `samples/bot-request-approval/python`
+5) In a terminal, go to `samples/TeamsSDK/Archived/bot-request-approval/python`
 
 6) Activate your desired virtual environment
 
@@ -161,4 +145,4 @@ the Teams service needs to call into the bot.
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-request-approval-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-request-approval-python" />

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot enables users to request task approval from managers within group chats. Managers can quickly approve or reject requests, while other members view request details only.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "6-12-2021 17:00:25"
-urlFragment: officedev-microsoft-teams-samples-bot-request-approval-nodejs
----
-
 # Bot request approval
 This sample demonstrates a Teams bot that facilitates task approval requests within group chats. Users can submit requests via Adaptive Cards, which managers can then approve or reject directly in the chat. Other group members can view request details, while only requesters and managers have access to actionable options. The sample supports Azure and includes comprehensive setup guidance, leveraging .NET Core and the Microsoft 365 Agents Toolkit for Visual Studio.
 
@@ -100,7 +85,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
     - Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `ClientId` and `ClientSecret`, `BaseURL` with your app's base url. (Note the ClientId is the AppId created in step 1 (Setup for Bot), the ClientSecret is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
     
-  - In the folder where repository is cloned navigate to `samples/bot-request-approval/nodejs`
+  - In the folder where repository is cloned navigate to `samples/TeamsSDK/Archived/bot-request-approval/nodejs`
 
   - Install node modules
 
@@ -127,7 +112,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-request-approval/nodejs/index.js#L47) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-request-approval/nodejs/index.js#L47) line and put your debugger for local debug.
  
  ## Running the sample.
  
@@ -171,4 +156,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-request-approval-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-request-approval-nodejs" />

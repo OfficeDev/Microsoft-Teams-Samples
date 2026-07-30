@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "11/16/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-file-viewer-csharp
----
-
 # Bot with SharePoint file to view in Teams file viewer
 
 Using this C# sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer
@@ -108,12 +93,12 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2 In a terminal, navigate to `samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer`
+2 In a terminal, navigate to `samples/TeamsSDK/Archived/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer`
 
 3 If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/bot-sharepoint-file-viewer/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/bot-sharepoint-file-viewer/csharp` folder
    - Select `BotWithSharePointFileViewer.csproj` or `BotWithSharePointFileViewer.sln`file
 
 4 Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId and ConnectionName generated in Step 1 (Setup for Bot SSO). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
@@ -131,7 +116,7 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 
 
 ## Running the sample
@@ -159,4 +144,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sharepoint-file-viewer-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-sharepoint-file-viewer-csharp" />

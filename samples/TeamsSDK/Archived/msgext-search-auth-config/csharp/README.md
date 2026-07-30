@@ -1,20 +1,6 @@
----
-page_type: sample
-description: This sample demonstrates how to implement authentication in a C# Messaging Extension for Microsoft Teams, enabling secure access and user-specific interactions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/17/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-search-auth-config-csharp
----
 # Teams Search Auth Config 
 
-Bot Framework v4 sample for Teams expands the [msgext-search-auth-config](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-auth-config/csharp) sample to include a configuration page and Bot Service authentication.
+Bot Framework v4 sample for Teams expands the [msgext-search-auth-config](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/Archived/msgext-search-auth-config/csharp) sample to include a configuration page and Bot Service authentication.
 This comprehensive C# sample provides a step-by-step guide for building a search-based Messaging Extension in Microsoft Teams that integrates authentication through Azure Active Directory. By utilizing the [Bot Framework](https://dev.botframework.com) and Microsoft Graph API, it showcases how to implement secure user sign-in, access user data, and leverage messaging extension capabilities, enhancing the overall user experience.
 
 In this sample we are assuming the OAuth 2 provider is Azure Active Directory V2 (AADv2) and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication) for information about getting an AADv2 application setup for use in Azure Bot Service. The scopes used in this sample are the following:
@@ -35,10 +21,7 @@ In this sample we are assuming the OAuth 2 provider is Azure Active Directory V2
 ## Interaction With Messaging Extension Auth
 ![msgext-search-auth-config ](Images/msgext-search-auth-config.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/msgext-search-auth-config/csharp/README.md
 
-=======
->>>>>>> origin/main:samples/msgext-search-auth-config/csharp/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -72,7 +55,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 the Teams service needs to call into the bot.
 
 ### 1. Setup for Messaging Extension Auth
-Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
+Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 1) Clone the repository
 
@@ -83,7 +66,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/msgext-search-auth-config/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/msgext-search-auth-config/csharp` folder
    - Select `TeamsMessagingExtensionsSearchAuthConfig.csproj` or `TeamsMessagingExtensionsSearchAuthConfig.sln`file
 
 1) Run ngrok - point to port 3978 (You can skip this step, if you have already run ngrok while doing SSO setup)
@@ -162,4 +145,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-search-auth-config-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-search-auth-config-csharp" />

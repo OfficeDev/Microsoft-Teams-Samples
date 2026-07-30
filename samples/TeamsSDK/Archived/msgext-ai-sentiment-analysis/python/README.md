@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample allows users to assess the sentiment of messages in Teams chats by utilizing a messaging extension integrated with Open AI. The analysis categorizes messages as positive, negative, or neutral, enhancing understanding of team interactions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "07-01-2025 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-python
-
----
-
 # Sentiment Analysis for Teams chat messages using Azure Open AI and messaging extension.
 
 Explore this sample application that integrates Azure Open AI with a Teams messaging extension, enabling real-time sentiment analysis of chat messages. It categorizes sentiments as positive, negative, or neutral, providing valuable insights into team interactions and enhancing overall communication effectiveness.
@@ -99,7 +83,7 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
 
-5) In a terminal, go to `samples/msgext-ai-sentiment-analysis/python`
+5) In a terminal, go to `samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis/python`
 
 6) Activate your desired virtual environment
 
@@ -140,4 +124,4 @@ Showing Sentiment Analysis `On Terminal`
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-ai-sentiment-analysis-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis-python" />

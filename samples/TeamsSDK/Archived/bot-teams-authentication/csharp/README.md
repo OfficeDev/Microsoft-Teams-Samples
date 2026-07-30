@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate how an Bot can use Teams authentication
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "07/10/2019 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-csharp
----
 # Teams Auth Bot
 
 Bot Framework v4 bot using Teams authentication
@@ -45,7 +31,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Teams Auth Bot:** [Manifest](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
+**Teams Auth Bot:** [Manifest](/samples/TeamsSDK/Archived/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
 
 ## Prerequisites
 
@@ -78,7 +64,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > the Teams service needs to call into the bot.
 
 ### 1. Setup for Bot Auth
-Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
+Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 1) Clone the repository
 
@@ -89,7 +75,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 1) If you are using Visual Studio
 - Launch Visual Studio
 - File -> Open -> Project/Solution
-- Navigate to `samples/bot-teams-authentication/csharp` folder
+- Navigate to `samples/TeamsSDK/Archived/bot-teams-authentication/csharp` folder
 - Select `TeamsAuth.csproj` or `TeamsAuth.sln`file
 
 1) Run ngrok - point to port 3978 (You can skip this step, if you have already run ngrok while doing SSO setup)
@@ -117,7 +103,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication/csharp/AdapterWithErrorHandler.cs#L35) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-teams-authentication/csharp/AdapterWithErrorHandler.cs#L35) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -147,4 +133,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Bot Authentication Basics](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-teams-authentication-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-teams-authentication-csharp" />

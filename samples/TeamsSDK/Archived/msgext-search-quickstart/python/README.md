@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a simple python-based Messaging Extension that accepts search requests and returns results within Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "26/12/2024 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-python
----
-
 # Messaging Extension quick start
 
 This comprehensive python quick start sample illustrates the creation of a Messaging Extension in Microsoft Teams designed to process search requests from users. By enabling interactions through buttons and forms, it facilitates direct communication with your web service, enhancing user experience within the Teams environment.
@@ -31,7 +16,7 @@ This comprehensive python quick start sample illustrates the creation of a Messa
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Messaging Extension quick start:** [Manifest](/samples/msgext-search-quickstart/js/demo-manifest/msgext-search-quickstart.zip)
+**Messaging Extension quick start:** [Manifest](/samples/TeamsSDK/Archived/msgext-search-quickstart/js/demo-manifest/msgext-search-quickstart.zip)
 
 ## Prerequisites
 
@@ -101,7 +86,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  - In a terminal, navigate to `samples/msgext-search-quickstart/python`
+  - In a terminal, navigate to `samples/TeamsSDK/Archived/msgext-search-quickstart/python`
   
   - Activate your desired virtual environment
 

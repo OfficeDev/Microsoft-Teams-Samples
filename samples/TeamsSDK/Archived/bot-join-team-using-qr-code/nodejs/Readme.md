@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This bot allows users to join Microsoft Teams by scanning a team-specific QR code.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "12/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-join-team-using-qr-code-nodejs
----
-
 # Join a team using QR code sample
 This Microsoft Teams sample bot helps users join a team by scanning a QR code that contains the team ID. It allows users to generate QR codes, leverages the Graph API, and supports both bot and Adaptive Cards functionality. Ideal for mobile clients, this feature enhances team onboarding with ease.
 
@@ -77,7 +62,7 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-join-team-using-qr-code/nodejs`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-join-team-using-qr-code/nodejs`
 
 3) Install node modules
 
@@ -121,7 +106,7 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-join-team-using-qr-code/nodejs/index.js#L50) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-join-team-using-qr-code/nodejs/index.js#L50) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -153,4 +138,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [QR Scanner Capability](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/qr-barcode-scanner-capability)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-join-team-using-qr-code-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-join-team-using-qr-code-nodejs" />

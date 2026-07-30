@@ -1,17 +1,3 @@
----
-page_type: sample
-products:
-- office-365
-languages:
-- javascript
-title: Specify relationships between app capabilities
-description: This sample Node.js app showcases how to specify mutual-dependency relationships between app capabilities in Microsoft Teams using the 'elementRelationshipSet' property in the app manifest.
-extensions:
-  contentType: samples
-  createdDate: 08/20/2024 10:02:21 PM
-urlFragment: officedev-microsoft-teams-samples-requirement-targeting-mutual-dependency-nodejs
----
-
 # Microsoft 365 RT Sample App Feature.
 
 - The Microsoft 365 RT Sample App Feature is a Node.js application designed to illustrate mutual-dependency relationships between various capabilities within Microsoft Teams, such as bots, tabs, and message extensions. Leveraging the 'elementRelationshipSet' property in the app manifest, this sample enables developers to define and manage dependencies, ensuring a cohesive and integrated app experience that meets the specific requirements of users in Microsoft 365 environments.
@@ -184,4 +170,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Specify Microsoft 365 host runtime requirements in app manifest](https://review.learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/specify-runtime-requirements?branch=pr-en-us-11018)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/requirement-targeting-mutual-dependency-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/requirement-targeting-mutual-dependency-nodejs" />

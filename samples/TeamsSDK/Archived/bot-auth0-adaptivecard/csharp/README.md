@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "05/13/2025 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-auth0-adaptivecard-csharp
----
-
 # Auth0 Bot
 
 This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card
@@ -25,10 +10,7 @@ This sample demonstrates how to authenticate users in a Microsoft Teams bot usin
 ## Interaction with bot
 ![Conversation Bot](Images/bot-auth.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-auth0-adaptivecard/csharp/README.md
 
-=======
->>>>>>> origin/main:samples/bot-auth0-adaptivecard/csharp/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -124,7 +106,7 @@ the Teams service needs to call into the bot.
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/bot-auth0-adaptivecard/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/bot-auth0-adaptivecard/csharp` folder
    - Select `TeamsConversationBot.csproj` or `TeamsConversationBot.sln`file
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
@@ -143,7 +125,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `appPackage.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-auth0-adaptivecard/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-auth0-adaptivecard/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -171,4 +153,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
 - [Auth0 Documentation](https://auth0.com/docs)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-auth0-adaptivecard-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-auth0-adaptivecard-csharp" />

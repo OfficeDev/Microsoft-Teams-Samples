@@ -1,16 +1,3 @@
----
-page_type: sample
-description: A Teams AI-based Virtual Assistant Root Bot that routes user inputs to skill bots for tailored responses, enhancing productivity within Microsoft Teams.
-products:
-- office-teams
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/15/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-ai-virtual-assistant-nodejs
----
-
 # Virtual Assistant Bot (Root Bot)
 
 This Teams AI-based Virtual Assistant Root Bot is a consumer bot that uses the Teams AI library to dynamically route user inputs to Echo and AI skill bots, returning tailored responses. It operates seamlessly within Microsoft Teams to enhance productivity by automating responses and facilitating efficient interactions.
@@ -71,7 +58,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) Navigate to the `samples/bot-virtual-assistant/bot-ai-virtual-assistant` folder and open with Visual Studio Code.
+2) Navigate to the `samples/TeamsSDK/Archived/bot-virtual-assistant/bot-ai-virtual-assistant` folder and open with Visual Studio Code.
 
 3) Open and modify the `.localConfigs` file contained in your project folder (Open it in Visual Studio Code or any other editor) and fill in below details:
    - `BOT_ID` - It will be automatically generated while running the sample using Toolkit.
@@ -108,7 +95,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **If you are facing any issue while adding the application from launched browser popup, you can upload the generated app package manually by following below steps:**
 
-- Navigate to the application folder `samples/bot-virtual-assistant/bot-ai-virtual-assistant/appPackage/build` and check for `appPackage.local.zip` auto generated file.
+- Navigate to the application folder `samples/TeamsSDK/Archived/bot-virtual-assistant/bot-ai-virtual-assistant/appPackage/build` and check for `appPackage.local.zip` auto generated file.
 
 - Upload the `appPackage.local.zip` file to Teams (in the Apps view click **"Upload a custom app"**)
    - Go to **Microsoft Teams** and then go to side panel, select Apps
@@ -167,4 +154,4 @@ If you want to deploy the app to Azure, you can follow the below steps:
 - [Azure Open AI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
 - [Azure Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-virtual-assistant/bot-ai-virtual-assistant" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-virtual-assistant/bot-ai-virtual-assistant" />

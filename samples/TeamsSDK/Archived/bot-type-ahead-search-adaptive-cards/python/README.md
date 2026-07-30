@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Demonstrating the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards sent using bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "28-01-2025 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-cards-python
----
-
 # Typeahead search control in Adaptive Cards Python
 
 This sample shows the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards.
@@ -155,4 +140,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Typeahead Search in Adaptive Cards](https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/dynamic-search?tabs=desktop%2Ccsharp)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-type-ahead-search-adaptive-cards-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-type-ahead-search-adaptive-cards-python" />

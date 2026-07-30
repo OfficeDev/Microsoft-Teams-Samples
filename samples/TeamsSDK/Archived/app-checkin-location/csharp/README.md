@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample showcases a Microsoft Teams bot that allows users to check in their current location and view all previous check-ins seamlessly.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
-  contentType: samples
-  createdDate: "11/11/2021 11:30:17 AM"
-urlFragment: officedev-microsoft-teams-samples-app-checkin-location-csharp
----
-
 # App check-in location
 
 The App Check-In Location sample demonstrates a feature that allows users to check in from their current location and view all previous check-ins using a bot. This functionality is particularly beneficial for tracking attendance and user engagement within the Microsoft Teams environment.
@@ -94,7 +79,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/app-checkin-location/csharp`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/app-checkin-location/csharp`
 
   ```bash
   # run the bot
@@ -107,7 +92,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
      - Select `AppCheckinLocation.csproj` file
      - Press `F5` to run the project
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-checkin-location/csharp/AppCheckinLocation/AdapterWithErrorHandler.cs#L33) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-checkin-location/csharp/AppCheckinLocation/AdapterWithErrorHandler.cs#L33) line and put your debugger for local debug.
 
 4) Setup Manifest for Teams
 - __*This step is specific to Teams.*__
@@ -176,4 +161,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-checkin-location-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-checkin-location-csharp" />

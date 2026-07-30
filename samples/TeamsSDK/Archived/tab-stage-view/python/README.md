@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrates the use of Teams tab in stage view using Python, featuring collaborative elements and interactive capabilities.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "12/06/2025"
-urlFragment: officedev-microsoft-teams-samples-tab-stage-view-python
----
-
 # Tab Stage View
 
 This sample app showcases the capabilities of Microsoft Teams tabs in stage view using Python. It demonstrates collaborative features such as multi-window support and interactive elements, allowing users to engage dynamically through adaptive cards and deep linking for a richer experience in Teams.
@@ -92,7 +77,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
 
-5) In a terminal, go to `samples/tab-stage-view/python`
+5) In a terminal, go to `samples/TeamsSDK/Archived/tab-stage-view/python`
 
 6) Activate your desired virtual environment
 
@@ -161,4 +146,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-stage-view-python" />

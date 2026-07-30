@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This app showcases bot conversation events and messaging extensions for Microsoft Teams using the Bot Framework v4.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
----
-
 # Bots/Messaging Extension
 
 This sample demonstrates how to build a Microsoft Teams bot that handles conversation events and messaging extensions using Bot Framework v4. Users can interact with bots through adaptive cards, task modules, and buttons, enhancing the Teams experience with custom, interactive solutions.
@@ -95,7 +79,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     
-   - In a terminal, navigate to `samples/bot-conversation-quickstart/js`
+   - In a terminal, navigate to `samples/TeamsSDK/Archived/bot-conversation-quickstart/js`
    
   -  Build
   
@@ -115,7 +99,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-quickstart/js/index.js#L43) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation-quickstart/js/index.js#L43) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -130,4 +114,4 @@ Start debugging the project by hitting the `F5` key or click the debug icon in V
 
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-quickstart-js" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-conversation-quickstart-js" />

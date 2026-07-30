@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to fetch shared images and files in Microsoft Teams groupchats and team channels using graph API.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "28/05/2025 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-file-fetch-csharp
----
-
 # Install app using barcode sample
 
 This sample demonstrates how to fetch shared images and files in Microsoft Teams groupchats and team channels using graph API. While leveraging features such as bot interaction, Teams SSO, adaptive cards.
@@ -107,7 +92,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-- In a terminal, navigate to `samples/graph-file-fetch/csharp`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/graph-file-fetch/csharp`
 
     change into project folder
     ```bash
@@ -153,7 +138,7 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/m
  - **Note**
  Kindly add the app/bot in personal scope and login there, afterwards add the app/bot in any Teams channel.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-file-fetch/csharp/GraphFileFetch/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-file-fetch/csharp/GraphFileFetch/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
 
 ## Running the sample
 

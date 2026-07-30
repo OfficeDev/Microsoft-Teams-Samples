@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This bot showcases how to use the people picker control within Adaptive Cards on Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "01/28/2025 04:00:00 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-python
----
-
 # People picker control in Adaptive Cards
 
 This sample app demonstrates how to utilize the people picker control on Adaptive Cards in Microsoft Teams, enabling users to select team members directly within a bot's response. The bot integrates with the Teams platform, supporting adaptive card functionalities, and allows for local testing with tools like ngrok or dev tunnels, as well as deployment to Azure.
@@ -97,7 +82,7 @@ the Teams service needs to call into the bot.
       * Select Microsoft Graph -\> Delegated permissions.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-4) In a terminal, navigate to `samples/bot-people-picker-adaptive-card/Python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-people-picker-adaptive-card/Python`
 
 5) Activate your desired virtual environment
 
@@ -151,4 +136,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [People picker in Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/people-picker)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-people-picker-adaptive-card-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-people-picker-adaptive-card-python" />

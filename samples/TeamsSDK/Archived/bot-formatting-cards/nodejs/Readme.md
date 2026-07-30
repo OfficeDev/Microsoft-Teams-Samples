@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Sample which demonstrates different formatting supported in cards using bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "01/28/2023 05:00:17 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-nodejs
-
----
 ## Different Formatting Cards
 
 This sample shows the feature where user can use different formatting on adaptive cards using bot.
@@ -90,7 +75,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  - In a terminal, navigate to `samples/bot-formatting-cards/nodejs`
+  - In a terminal, navigate to `samples/TeamsSDK/Archived/bot-formatting-cards/nodejs`
   - Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 **Update mentionSupport json**
@@ -357,4 +342,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Media elements in Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-11492&tabs=desktop%2Cdeveloper-portal-for-teams)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-formatting-cards-nodejs" />

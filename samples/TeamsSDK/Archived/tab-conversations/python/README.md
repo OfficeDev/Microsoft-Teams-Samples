@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Microsoft Teams sample app illustrates how to create conversational tabs, enabling users to engage in discussions about sub-entities within the app.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "20-06-2025 01:48:56"
-urlFragment: officedev-microsoft-teams-samples-tab-conversations-python
----
-
 # Conversational Tabs
 
 Explore this Microsoft Teams sample app that demonstrates how to build conversational tabs, allowing users to have meaningful discussions about specific sub-entities within the tab. With comprehensive setup guidelines, including requirements for Python and Azure registration, this app provides a seamless experience for developers looking to enhance user interaction and collaboration in their Teams applications. [Create conversational tabs](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs?view=msteams-client-js-latest#continue-a-conversation)
@@ -89,10 +74,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 3. Setup for code
 
-- In a console, navigate to `samples/tab-conversations/python`
+- In a console, navigate to `samples/TeamsSDK/Archived/tab-conversations/python`
 
     ```bash
-    cd samples/tab-conversations/python
+    cd samples/TeamsSDK/Archived/tab-conversations/python
     ```
     
 - Install dependencies (optional - create virtual environment)
@@ -158,4 +143,4 @@ You can use this tab by following the below steps:
 
 - [Create conversational tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-conversations-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-conversations-python" />

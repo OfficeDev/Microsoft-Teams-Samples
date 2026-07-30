@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate is how to use Task Module using Bot Framework.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "12-12-2019 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-task-module-python
-
----
-
 # Teams Task Module
 
 [Task Modules](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules) allow you to create modal popup experiences in your Teams bot or application. This sample shows how to fetch a Task Module from a Hero Card button and receive input from an Adaptive Card in the Task Module.
@@ -21,10 +5,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-task-module-python
 - **Interaction with bot**
 ![bot-task-module ](Images/TaskModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-task-module/python/README.md
 
-=======
->>>>>>> origin/main:samples/bot-task-module/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -170,4 +151,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Task modules](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-task-module-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-task-module-python" />

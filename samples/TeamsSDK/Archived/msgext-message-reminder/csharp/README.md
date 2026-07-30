@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates a C# Messaging Extension that allows users to schedule tasks and receive reminder cards in Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "11/24/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-csharp
----
-
 # Message reminder with messaging extension action
 
 This comprehensive C# sample illustrates how to create a Messaging Extension that enables users to schedule tasks from within Microsoft Teams, complete with reminder cards sent at the scheduled times. With easy setup and seamless integration, this extension enhances productivity by allowing users to manage tasks and reminders efficiently.
@@ -104,7 +89,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
    - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
   
-- From a terminal, navigate to `samples/msgext-message-reminder/csharp`
+- From a terminal, navigate to `samples/TeamsSDK/Archived/msgext-message-reminder/csharp`
 
   ```bash
   # run the bot
@@ -112,7 +97,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   ```
  Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/msgext-message-reminder/csharp/MessagingExtensionReminder.sln`
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/msgext-message-reminder/csharp/MessagingExtensionReminder.sln`
    - Press `F5` to run the project
     
 5. Setup Manifest for Teams
@@ -127,7 +112,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-message-reminder/csharp/MessagingExtensionReminder/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/msgext-message-reminder/csharp/MessagingExtensionReminder/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
   
 ## Running the sample
 
@@ -174,4 +159,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-message-reminder-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-message-reminder-csharp" />

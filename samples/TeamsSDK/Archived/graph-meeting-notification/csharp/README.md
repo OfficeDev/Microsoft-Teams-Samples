@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates how to use an online meeting subscription to send notifications in Microsoft Teams chat when users join, leave, or when meetings start and end.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "10/08/2022 12:16:45 AM"
-urlFragment: officedev-microsoft-teams-samples-graph-meeting-notification-csharp
----
-
 # Online meeting subscription
 
 This sample application illustrates the use of online meeting subscriptions in Microsoft Teams, allowing for real-time notifications in chat when users join or leave meetings and when meetings start or end. Developed in C#, it includes features like bot integration, change notifications, and adaptive cards, along with a comprehensive setup guide involving Azure Bot Service, Microsoft Graph API, and self-signed certificates for secure communication.
@@ -103,7 +88,7 @@ This sample application illustrates the use of online meeting subscriptions in M
 
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `samples/graph-meeting-notification/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/graph-meeting-notification/csharp` folder
   - Select `MeetingNotification` folder
   - Press `F5` to run the project
 
@@ -122,7 +107,7 @@ This sample application illustrates the use of online meeting subscriptions in M
    
 Follow this documentation to get more information on custom apps and uploading them into Teams - [Manage custom apps](https://docs.microsoft.com/en-us/microsoftteams/custom-app-overview) and [Upload an app package](https://docs.microsoft.com/en-us/microsoftteams/upload-custom-apps)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-meeting-notification/csharp/MeetingNotification/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-meeting-notification/csharp/MeetingNotification/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
 
 ## Running the sample
 ![Welcome Card](MeetingNotification/Images/WelcomeCard.png)
@@ -140,4 +125,4 @@ Follow this documentation to get more information on custom apps and uploading t
 - [Set up change notifications that include resource data](https://docs.microsoft.com/en-us/graph/webhooks-with-resource-data)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-meeting-notification-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-meeting-notification-csharp" />

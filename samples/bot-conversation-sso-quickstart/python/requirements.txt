@@ -1,2 +1,0 @@
-botbuilder-integration-aiohttp>=4.17.0
-botbuilder-dialogs>=4.16.2

@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates using a bot to send multiple card types in Microsoft Teams, including Adaptive, Hero, Thumbnail, and OAuth cards. It covers setup, deployment, and app installation instructions.
-products:
-- office-teams
-- office
-- office-teams
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "21/10/2022 07:54:21 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-all-cards-csharp
-
----
-
 # Types of Cards
 
 This Microsoft Teams bot sample demonstrates sending various card types, such as Adaptive, Hero, List, and Thumbnail cards. It includes detailed steps for setup, app deployment, and using Microsoft 365 Agents Toolkit for Visual Studio to run the app. Experience this versatile bot directly within your Teams client, complete with a manifest for easy uploading.
@@ -115,7 +99,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
   Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/bot-all-cards/csharp/BotAllCards`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/bot-all-cards/csharp/BotAllCards`
 
   ```bash
   # run the bot
@@ -126,7 +110,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-all-cards/csharp/BotAllCards` folder
+  - Navigate to `samples/TeamsSDK/Archived/bot-all-cards/csharp/BotAllCards` folder
   - Select `BotAllCards.csproj` file
   - Press `F5` to run the project   
 
@@ -149,7 +133,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   ![Installapp](BotAllCards/Images/OauthConnection.png)
 
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/7336b195da6ea77299d220612817943551065adb/samples/bot-all-cards/csharp/BotAllCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/7336b195da6ea77299d220612817943551065adb/samples/TeamsSDK/Archived/bot-all-cards/csharp/BotAllCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
 5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
@@ -218,4 +202,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Types of cards](https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#receipt-card)
 - [Create bot connection](https://learn.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-all-cards-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-all-cards-csharp" />

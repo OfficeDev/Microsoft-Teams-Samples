@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to install a Microsoft Teams app using a QR code, enabling users to generate and scan QR codes for easy installation.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10/11/2021 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-app-installation-using-qr-code-nodejs
----
-
 # Install app using barcode sample
 
 This sample illustrates the installation of a Microsoft Teams app using a QR code, enabling seamless installation through mobile devices. Users can generate and scan QR codes containing the app ID, facilitating quick access to key features such as bot interactions, Teams SSO, adaptive cards, task modules, and device permissions.
@@ -75,7 +60,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples/app-installation-using-qr-code/nodejs`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/app-installation-using-qr-code/nodejs`
 
 - Install modules
 
@@ -129,7 +114,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-installation-using-qr-code/nodejs/index.js#L48) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-installation-using-qr-code/nodejs/index.js#L48) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -179,4 +164,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-installation-using-qr-code-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-installation-using-qr-code-nodejs" />

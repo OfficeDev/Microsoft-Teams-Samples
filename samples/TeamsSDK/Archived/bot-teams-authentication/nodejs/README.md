@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample app demonstrate iss how to use the Bot Framework support for oauth in your bot
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "28/02/2023 13:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-nodejs
----
 # Teams Auth Bot
 
 Bot Framework v4 bot using Teams authentication
@@ -35,7 +21,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Teams Auth Bot:** [Manifest](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
+**Teams Auth Bot:** [Manifest](/samples/TeamsSDK/Archived/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
 
 ## Prerequisites
 
@@ -84,7 +70,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 
 ### Setup for Bot Auth
-Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
+Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation-sso-quickstart/BotSSOSetup.md).
 1. Setup NGROK
  - Run ngrok - point to port 3978
 
@@ -131,7 +117,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication/nodejs/index.js#L52) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-teams-authentication/nodejs/index.js#L52) and put your debugger for local debug.
 
 ## Running the sample
 
@@ -173,4 +159,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Bot Authentication Basics](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-teams-authentication-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-teams-authentication-nodejs" />

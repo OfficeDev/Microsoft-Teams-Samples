@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Demonstrating the feature where user can send suggested actions using bot.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "04/27/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-suggested-actions-csharp
----
-
 # Send Suggested Actions
 
 This sample shows the feature where user can [send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions) using bot.
@@ -96,7 +81,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
      - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
      - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
    
-   - In a terminal, navigate to `samples/bot-suggested-actions/csharp`
+   - In a terminal, navigate to `samples/TeamsSDK/Archived/bot-suggested-actions/csharp`
 
      change into project folder
       ```bash
@@ -127,7 +112,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-suggested-actions/csharp/SuggestedActions/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-suggested-actions/csharp/SuggestedActions/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -165,4 +150,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-suggested-actions-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-suggested-actions-csharp" />

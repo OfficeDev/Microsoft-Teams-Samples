@@ -1,18 +1,3 @@
----
-page_type: sample
-description: "This sample application demonstrates key web storage features, including managing cookies, SameSite cookies, and partitioned cookies. It also covers local storage and IndexedDB for data persistence in modern web applications."
-products:
-- office-teams
-- office
-- office-365
-languages:
-- javascript
-extensions:
-  contentType: samples
-  createdDate: "11/22/2024 12:30:00 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-app-cookie-js
----
-
 # Microsoft Teams Cookie App
 
 This sample application provides an interactive demonstration of cookie management, including setting, clearing, and customizing attributes such as SameSite and Secure flags. It also explores advanced web storage solutions like local storage and IndexedDB, offering a practical guide to modern client-side data handling.
@@ -28,10 +13,7 @@ This sample application provides an interactive demonstration of cookie manageme
 
 ![Cookie App](Images/Cookie_App.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-app-cookie/js/README.md
 
-=======
->>>>>>> origin/main:samples/tab-app-cookie/js/README.md
 ## Prerequisites
 
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
@@ -63,7 +45,7 @@ This sample application provides an interactive demonstration of cookie manageme
   
    - Install node modules
 
-     Inside js folder,  navigate to `samples/tab-app-cookie/js` open your local terminal and run the below command to install node modules. You can do the same in Visual   
+     Inside js folder,  navigate to `samples/TeamsSDK/Archived/tab-app-cookie/js` open your local terminal and run the below command to install node modules. You can do the same in Visual   
      Studio code terminal by opening the project in Visual Studio code.
 
      ```bash
@@ -124,4 +106,4 @@ This sample application provides an interactive demonstration of cookie manageme
 
 - [Will update once the document is confirmed](https://Needs_To_Be_Added)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-app-cookie-js" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-app-cookie-js" />

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This app allows users to quickly view, add, and manage group members in federated Teams chat.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "28-01-2025 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-feed-members-python
----
-
 # Apps in federated
 
 This bot sample demonstrates real-time member management in federated Microsoft Teams group chats, enabling users to view, add, and organize group members seamlessly. Included features like Adaptive Cards enhance the interaction experience, with setup guides for Microsoft 365 Agents Toolkit and manual deployment options.
@@ -141,4 +126,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-feed-members-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-feed-members-python" />

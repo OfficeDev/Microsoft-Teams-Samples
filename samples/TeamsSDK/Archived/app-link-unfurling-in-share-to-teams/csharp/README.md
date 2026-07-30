@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample app showcases the link unfurling feature for sharing content in Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
-  contentType: samples
-  createdDate: "14-12-2022 00:15:13"
-urlFragment: officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-csharp
----
-
 ## Link unfurling in Share to teams sample
 
 This sample app illustrates the link unfurling functionality in Microsoft Teams, enabling users to effortlessly share content with contacts or groups. With a focus on user experience, the app showcases how to enhance sharing capabilities in Teams through interactive features and integration support.
@@ -24,7 +9,7 @@ This sample app illustrates the link unfurling functionality in Microsoft Teams,
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**App link unfurling in share to teams:** [Manifest](/samples/app-link-unfurling-in-share-to-teams/csharp/demo-manifest/app-link-unfurling-stt.zip)
+**App link unfurling in share to teams:** [Manifest](/samples/TeamsSDK/Archived/app-link-unfurling-in-share-to-teams/csharp/demo-manifest/app-link-unfurling-stt.zip)
    
 ## Prerequisites
 
@@ -107,7 +92,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/app-link-unfurling-in-share-to-teams/csharp`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/app-link-unfurling-in-share-to-teams/csharp`
 
   ```bash
   # run the bot
@@ -157,4 +142,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Share to teams](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-personal-app-or-tab)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-link-unfurling-in-share-to-teams-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-link-unfurling-in-share-to-teams-csharp" />

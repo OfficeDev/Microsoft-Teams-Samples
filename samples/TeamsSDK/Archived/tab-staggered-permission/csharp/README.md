@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to obtain staggered Graph API permissions in a Microsoft Teams tab, prompting users for permissions only when specific features are accessed.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "03/17/2022 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-csharp
----
-
 # Staggered Permission sample
 
 This sample app showcases a robust approach to managing Graph API permissions within a Microsoft Teams tab, utilizing staggered permission requests to enhance user experience. By only prompting users for the necessary permissions when they attempt to access specific features—like photos or emails—the app ensures a seamless interaction while maintaining security and privacy.
@@ -30,7 +15,7 @@ This sample app showcases a robust approach to managing Graph API permissions wi
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Staggered Permission sample:** [Manifest](/samples/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
+**Staggered Permission sample:** [Manifest](/samples/TeamsSDK/Archived/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
  
 ## Prerequisites
 
@@ -135,7 +120,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   
 - Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/tab-staggered-permission/csharp/StaggeredPermission.sln`    
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/tab-staggered-permission/csharp/StaggeredPermission.sln`    
   - Press `F5` to run the project
 	 
 4. Setup Manifest for Teams
@@ -216,4 +201,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-staggered-permission-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-staggered-permission-csharp" />

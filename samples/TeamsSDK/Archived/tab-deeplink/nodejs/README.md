@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams sample application illustrates how to use deeplinks for initiating calls, video chats, and navigating within various app tabs. It includes detailed setup instructions and supports interactions with bots and tabs to enhance user experience.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "07-07-2021 13:38:27"
-urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
----
-
 # DeepLink
 
 Explore this Microsoft Teams sample app designed to demonstrate the use of deeplinks for seamless interactions, including calls, chats, and navigation across tabs and applications. Featuring bot integration and comprehensive setup guidance, this app empowers developers to create engaging and efficient communication experiences within Teams.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
@@ -99,10 +84,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     data-app-id="{{Your-App-Id}}"
     ```
 
-    - In a terminal, navigate to `samples/tab-deeplink/nodejs`
+    - In a terminal, navigate to `samples/TeamsSDK/Archived/tab-deeplink/nodejs`
 
         ```bash
-        cd samples/tab-deeplink/nodejs
+        cd samples/TeamsSDK/Archived/tab-deeplink/nodejs
         ```
 
     - Install modules
@@ -122,7 +107,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - If you are using Visual Studio code
      - Launch Visual Studio code
      - Folder -> Open -> Project/Solution
-     - Navigate to ```samples/tab-deeplink/nodejs``` folder
+     - Navigate to ```samples/TeamsSDK/Archived/tab-deeplink/nodejs``` folder
      - Select ```nodejs``` Folder
      
      - To run the application required  node modules.Please use this command to install modules npm i.
@@ -140,7 +125,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-deeplink/nodejs/index.js#L62) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/tab-deeplink/nodejs/index.js#L62) line and put your debugger for local debug.
 
 ## Interacting with the bot
 
@@ -258,4 +243,4 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-deeplink-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-deeplink-nodejs" />

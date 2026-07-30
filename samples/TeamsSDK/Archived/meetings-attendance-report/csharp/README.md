@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample application demonstrates how to retrieve meeting attendance reports using the Graph API and send them through a bot in the meeting chat.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "08/20/2022 00:01:15"
-urlFragment: officedev-microsoft-teams-samples-meetings-attendance-report-csharp
----
-
 # Meeting attendance report
 
 This sample application showcases how to utilize the Graph API to generate meeting attendance reports and deliver them through a bot in Microsoft Teams chat. Users can effortlessly manage attendance tracking, ensuring they stay informed about participant engagement during meetings.
@@ -140,7 +125,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Launch Visual Studio
 - File -> Open -> Project/Solution
-- Navigate to `samples/meetings-attendance-report/csharp` folder
+- Navigate to `samples/TeamsSDK/Archived/meetings-attendance-report/csharp` folder
 - Select `MeetingAttendance.csproj` file
 - Press `F5` to run the project
 
@@ -155,7 +140,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-attendance-report/csharp/MeetingAttendance/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/meetings-attendance-report/csharp/MeetingAttendance/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -198,4 +183,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-attendance-report-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-attendance-report-csharp" />

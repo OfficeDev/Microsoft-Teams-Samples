@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample showcases a Microsoft Teams bot that allows users to check in their current location and view all previous check-ins seamlessly.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "11/11/2021 23:30:17 PM"
-urlFragment: officedev-microsoft-teams-samples-app-checkin-location-nodejs
----
 # Get Checkin info of user
 
 The App Check-In Location sample demonstrates a feature that allows users to check in from their current location and view all previous check-ins using a bot. This functionality is particularly beneficial for tracking attendance and user engagement within the Microsoft Teams environment.
@@ -81,7 +67,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/app-checkin-location/nodejs`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/app-checkin-location/nodejs`
 
 3) Install modules
 
@@ -96,7 +82,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     npm start
     ```
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-checkin-location/nodejs/index.js#L48) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-checkin-location/nodejs/index.js#L48) line and put your debugger for local debug.
 
 ### 4. Setup Manifest for Teams
 
@@ -157,4 +143,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-checkin-location-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-checkin-location-nodejs" />

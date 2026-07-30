@@ -1,32 +1,3 @@
----
-page_type: sample
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-
-## Run the app (Manually Uploading to Teams)
-
-> Note these instructions are for running the sample on your local machine, the tunneling solution is required because
-the Teams service needs to call into the app.
-
-1) Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-2) Run ngrok - point to port 3978ation (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the config.py.hon
-title: Microsoft Teams Python Chat Lifecycle Sample
-description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams using Python and Microsoft Graph APIs, including creating chats, adding members, and deleting members.
-extensions:
- contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-python
----
-
 # ChatLifecycle Application
 
 This sample application showcases the management of chat lifecycles in Microsoft Teams, utilizing Microsoft Graph APIs for creating chats, adding members, and removing members in various scenarios. Developed in Python, it includes features such as tab integration, adaptive cards, and lifecycle management, along with detailed instructions for registration, tunneling, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
@@ -134,7 +105,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) In a terminal, go to `samples/graph-chat-lifecycle/python`
+3) In a terminal, go to `samples/TeamsSDK/Archived/graph-chat-lifecycle/python`
 
 4) Activate your desired virtual environment
 
@@ -181,4 +152,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-lifecycle-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-chat-lifecycle-python" />

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample showcases how to implement Microsoft Entra ID and silent authentication in a configurable Teams tab, enabling secure access to user profile information.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "03/20/2021 12:00:00 AM"
-urlFragment: officedev-microsoft-teams-samples-tab-channel-group-config-page-auth-csharp
----
-
 # Config Tab Authentication
 
 Explore how to integrate Microsoft Entra ID and silent authentication in your Microsoft Teams tabs with this comprehensive sample application. The guide walks you through the necessary setup, including OAuth 2.0 implementation, app registration, and the configuration of user authentication flows, ensuring seamless access to Microsoft Graph user profile data.
@@ -150,4 +135,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 [Tab-Channel-Group-config-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-config-page-auth-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-channel-group-config-page-auth-csharp" />

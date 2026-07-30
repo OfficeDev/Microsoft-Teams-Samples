@@ -1,19 +1,3 @@
----
-page_type: sample
-description: This sample showcases the development of a custom personal tab for Microsoft Teams.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "17-06-2019 14:53:25"
-urlFragment: officedev-microsoft-teams-samples-tab-personal-python
-
----
-
 # Personal Tab with Python
 
 This sample application illustrates the process of building a custom personal tab in Microsoft Teams using Python. It provides a comprehensive guide on setting up the environment, configuring the app manifest, and deploying the app across Teams and Office platforms, enabling seamless integration and enhanced user experience.
@@ -172,4 +156,4 @@ the Teams service needs to call into the bot.
 [Tab-personal](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 [Create a Custom Personal Tab with ASP. NET Core MVC](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-personal-python" />

@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample bot demonstrates how to use various formatting styles on adaptive cards within Microsoft Teams. It includes capabilities like mentions, persona icons, and responsive layouts.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "01/30/2023 05:00:17 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-csharp
-
----
 ## Different formatting on cards
 
 Explore adaptive card formatting in Microsoft Teams with this bot sample. It includes features like mentions, emojis, persona icons, and different card layouts to enhance user interaction and presentation.
@@ -98,7 +83,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
     Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/bot-formatting-cards/csharp/BotFormattingCards`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/bot-formatting-cards/csharp/BotFormattingCards`
 
      ```bash
      # run the bot
@@ -109,7 +94,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `samples/bot-formatting-cards/csharp/BotFormattingCards` folder
+    - Navigate to `samples/TeamsSDK/Archived/bot-formatting-cards/csharp/BotFormattingCards` folder
     - Select `BotFormattingCards.csproj` file
     - Press `F5` to run the project   
   
@@ -189,7 +174,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       }
         ```
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/fb5beb01271099430655ea0e56e8b6230c0e424e/samples/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/fb5beb01271099430655ea0e56e8b6230c0e424e/samples/TeamsSDK/Archived/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
@@ -396,4 +381,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Fluent icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?branch=pr-en-us-11655&tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Media elements in Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-11492&tabs=desktop%2Cdeveloper-portal-for-teams)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-formatting-cards-csharp" />

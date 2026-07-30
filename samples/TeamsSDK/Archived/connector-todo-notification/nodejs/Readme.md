@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample demonstrates how to send task notifications to a Teams channel using an Office 365 Connector.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "11/11/2021 11:30:17 PM"
-urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-nodejs
----
 > [!IMPORTANT]
 >
 > The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
@@ -56,7 +42,7 @@ This sample provides a comprehensive guide to building an Office 365 Connector t
     
 3. Install node modules
 
-   Navigate to `samples/connector-todo-notification/nodejs`
+   Navigate to `samples/TeamsSDK/Archived/connector-todo-notification/nodejs`
    
    Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
@@ -162,4 +148,4 @@ This sample provides a comprehensive guide to building an Office 365 Connector t
 - Review [Getting Started with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/setup)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-todo-notification-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/connector-todo-notification-nodejs" />

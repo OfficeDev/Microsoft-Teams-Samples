@@ -1,18 +1,3 @@
----
-page_type: sample
-description: Sample which demonstrates different formatting supported in cards using bot.
-products:
-- office-teams
-- office
-- office-365
-langauges:
-- python
-extensions:
- contentType: samples
- createdDate: "02/18/2025 05:00:17 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-python
-
----
 ## Different Formatting Cards
 
 This sample shows the feature where user can use different formatting on adaptive cards using bot.
@@ -100,7 +85,7 @@ the Teams service needs to call into the bot.
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
-4) In a terminal, navigate to `samples/bot-formatting-cards/python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-formatting-cards/python`
 
 5) Activate your desired virtual environment
 
@@ -331,4 +316,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Media elements in Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-11492&tabs=desktop%2Cdeveloper-portal-for-teams)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-formatting-cards-python" />

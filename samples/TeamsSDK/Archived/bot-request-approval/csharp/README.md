@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This Teams bot enables users to request task approval from managers within group chats. Managers can quickly approve or reject requests, while other members view request details only.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "13-12-2021 17:00:25"
-urlFragment: officedev-microsoft-teams-samples-bot-request-approval-csharp
----
-
 # Bot request approval
 This sample demonstrates a Teams bot that facilitates task approval requests within group chats. Users can submit requests via Adaptive Cards, which managers can then approve or reject directly in the chat. Other group members can view request details, while only requesters and managers have access to actionable options. The sample supports Azure and includes comprehensive setup guidance, leveraging .NET Core and the Microsoft 365 Agents Toolkit for Visual Studio.
 
@@ -97,7 +82,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 3. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/bot-request-approval/csharp/BotRequestApproval.sln`
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/bot-request-approval/csharp/BotRequestApproval.sln`
     
 4. Run ngrok - point to port 3978
 
@@ -129,7 +114,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams. 
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-request-approval/csharp/BotRequestApproval/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-request-approval/csharp/BotRequestApproval/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
  
    
 ## Running the sample
@@ -170,4 +155,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-request-approval-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-request-approval-csharp" />
