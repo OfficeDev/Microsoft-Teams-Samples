@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample bot archives Teams group chat messages and sends them as files to users.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
- contentType: samples
- createdDate: "11/10/2021 11:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-archive-groupchat-messages-csharp
----
-
 # Archive groupchat messages
 
 This sample demonstrates a bot that archives group chat messages in Microsoft Teams and sends them to users as downloadable files. It supports Teams SSO, Adaptive Cards, and Graph API integration for enhanced functionality.
@@ -127,7 +112,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - `{{ MICROSOFT-APP-PASSWORD}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Connection Name }}` - Generated from Step 1, also referred as Instruction on setting connection.
   
-  - From a terminal, navigate to `samples/bot-archive-groupchat-messages/csharp`
+  - From a terminal, navigate to `samples/TeamsSDK/Archived/bot-archive-groupchat-messages/csharp`
 
 	  ```bash
 	  # run the bot
@@ -154,7 +139,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 	   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
 	   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
     
 ## Running the Sample
 
@@ -179,4 +164,4 @@ Send `getchat` message to the bot, you will recieve a consent card by the bot in
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-archive-groupchat-messages-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-archive-groupchat-messages-csharp" />

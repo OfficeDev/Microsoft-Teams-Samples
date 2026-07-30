@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This sample bot archives Teams group chat messages and sends them as files to users.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "10/11/2021 23:35:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-archive-groupchat-messages-nodejs
----
- 
 # Archive groupchat messages
 
 This sample demonstrates a bot that archives group chat messages in Microsoft Teams and sends them to users as downloadable files. It supports Teams SSO, Adaptive Cards, and Graph API integration for enhanced functionality.
@@ -110,7 +95,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples/bot-archive-groupchat-messages/nodejs`
+- In a terminal, navigate to `samples\TeamsSDK\Archived\bot-archive-groupchat-messages\nodejs`
 
 - Install modules
 
@@ -137,7 +122,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-archive-groupchat-messages/nodejs/index.js#L45) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-archive-groupchat-messages/nodejs/index.js#L45) line and put your debugger for local debug.
 
 
 ## Running the sample
@@ -188,4 +173,4 @@ Send `getchat` message to the bot, you will recieve a consent card by the bot in
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-archive-groupchat-messages-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-archive-groupchat-messages-nodejs" />
