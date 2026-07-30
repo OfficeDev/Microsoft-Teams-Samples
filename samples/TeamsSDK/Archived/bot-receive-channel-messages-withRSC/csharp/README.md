@@ -115,7 +115,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 
 ## Interacting with the bot in Teams
 
@@ -177,4 +177,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-receive-channel-messages-withRSC-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-receive-channel-messages-withRSC-csharp" />

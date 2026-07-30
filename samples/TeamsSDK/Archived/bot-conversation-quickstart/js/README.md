@@ -79,7 +79,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     
-   - In a terminal, navigate to `samples/bot-conversation-quickstart/js`
+   - In a terminal, navigate to `samples/TeamsSDK/Archived/bot-conversation-quickstart/js`
    
   -  Build
   
@@ -99,7 +99,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-quickstart/js/index.js#L43) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-conversation-quickstart/js/index.js#L43) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -114,4 +114,4 @@ Start debugging the project by hitting the `F5` key or click the debug icon in V
 
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-quickstart-js" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-conversation-quickstart-js" />

@@ -111,10 +111,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples/graph-chat-lifecycle/nodejs`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/graph-chat-lifecycle/nodejs`
 
     ```bash
-    cd samples/graph-chat-lifecycle/nodejs
+    cd samples/TeamsSDK/Archived/graph-chat-lifecycle/nodejs
     ```
 - Update your `config/default.json` file
     * Replace the `YOUR-MICROSOFT-APP-ID` property with you Azure AD application ID.
@@ -208,4 +208,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
 [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-lifecycle-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-chat-lifecycle-nodejs" />

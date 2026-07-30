@@ -5,7 +5,7 @@ A **comprehensive Microsoft Teams bot sample** that showcases fundamental Teams 
 ## Official Microsoft Teams Samples Repository
 
 This sample is part of the **official Microsoft Teams Samples repository**:
-**https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs**
+**https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/Archived/app-hello-world/nodejs**
 
 For more Teams samples and documentation, visit the main repository:
 **https://github.com/OfficeDev/Microsoft-Teams-Samples**
@@ -19,10 +19,7 @@ For more Teams samples and documentation, visit the main repository:
 
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/app-hello-world/nodejs/README.md
 
-=======
->>>>>>> origin/main:samples/app-hello-world/nodejs/README.md
 ## Prerequisites
 
 -  Microsoft Teams is installed and you have an account (not a guest account)
@@ -163,7 +160,7 @@ This sample is **optimized for GitHub Copilot Agent Mode** with:
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-2) In a terminal, navigate to `samples/app-hello-world/nodejs`
+2) In a terminal, navigate to `samples/TeamsSDK/Archived/app-hello-world/nodejs`
 
 3) Install modules
 
@@ -235,7 +232,7 @@ To set the **Tab as the default landing capability**, configure the 'staticTabs'
 ],
 ```
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-hello-world/nodejs/src/bot.js#L38) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-hello-world/nodejs/src/bot.js#L38) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -295,4 +292,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-hello-world-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-hello-world-nodejs" />

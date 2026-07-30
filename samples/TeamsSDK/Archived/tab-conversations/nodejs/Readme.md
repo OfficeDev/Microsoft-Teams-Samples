@@ -9,10 +9,7 @@ Explore this Microsoft Teams sample app that demonstrates how to build conversat
 
 ![Preview Image](images/Preview.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-conversations/nodejs/Readme.md
 
-=======
->>>>>>> origin/main:samples/tab-conversations/nodejs/Readme.md
 ## Prerequisites
 
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program).
@@ -84,10 +81,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a console, navigate to `samples/tab-conversations/nodejs`
+- In a console, navigate to `samples/TeamsSDK/Archived/tab-conversations/nodejs`
 
     ```bash
-    cd samples/tab-conversations/nodejs
+    cd samples/TeamsSDK/Archived/tab-conversations/nodejs
     ```
     
 - Open a terminal and navigate to project root directory
@@ -143,4 +140,4 @@ You can use this tab by following the below steps:
 
 -[Create conversational tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-conversations-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-conversations-nodejs" />

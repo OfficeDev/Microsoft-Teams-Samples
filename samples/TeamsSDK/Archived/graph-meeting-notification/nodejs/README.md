@@ -128,7 +128,7 @@ To include resource data of graph notifications, this Graph API require self-sig
 2. ZIP the appManifest and make sure manifest.json and two icon images are at root.
 3. Upload the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-**Note**: If you are facing any issue in your app, please uncomment [this]https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-meeting-notification/nodejs/index.js#L54) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this]https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-meeting-notification/nodejs/index.js#L54) line and put your debugger for local debug.
 
 ## Running the sample
 - After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
@@ -147,4 +147,4 @@ To include resource data of graph notifications, this Graph API require self-sig
 - [Change notifications for Microsoft Teams meeting](https://docs.microsoft.com/en-us/graph/changenotifications-for-onlinemeeting)
 - [Set up change notifications that include resource data](https://docs.microsoft.com/en-us/graph/webhooks-with-resource-data)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-meeting-notification-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-meeting-notification-nodejs" />

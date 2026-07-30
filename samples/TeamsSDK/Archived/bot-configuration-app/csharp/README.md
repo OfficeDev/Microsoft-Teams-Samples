@@ -11,10 +11,7 @@ This sample demonstrates a bot for configuring and reconfiguring adaptive cards 
 
 ![Configuration Bot](Images/ConfigurationBot.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-configuration-app/csharp/README.md
 
-=======
->>>>>>> origin/main:samples/bot-configuration-app/csharp/README.md
 ## Prerequisites
 
 Verify you have the right account for building Teams apps and install some recommended development tools.
@@ -150,4 +147,4 @@ Deploy your project to Azure by following these steps:
 - [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-configuration-app-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-configuration-app-csharp" />

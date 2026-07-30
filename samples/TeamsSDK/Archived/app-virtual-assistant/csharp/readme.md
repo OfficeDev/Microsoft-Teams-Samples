@@ -5,8 +5,4 @@ This sample showcases a versatile virtual assistant template tailored for Micros
 Please refer to the [Virtual Assistant Template documentation](https://microsoft.github.io/botframework-solutions/virtual-assistant/tutorials/create-assistant/csharp/1-intro/) for deployment and customization instructions.
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-virtual-assistant-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-virtual-assistant-csharp" />

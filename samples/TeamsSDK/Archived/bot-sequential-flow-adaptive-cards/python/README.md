@@ -19,7 +19,6 @@ Demonstrating on how to implement sequential flow, user specific view and up-to-
 
 ![Bot Adaptive ActionsGif](Images/AdaptiveCardActions.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards/python/README.md
 This App talks about the Teams Bot User Specific Views and Sequential Workflows in adaptive card with python
 
 This bot has been created using [Bot Framework v4](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V1.4
@@ -29,8 +28,6 @@ This is a sample app that provides an experience of managing incidents. This sam
 [Sequential Workflows](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/sequential-workflows)
 [Up to date cards](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/up-to-date-views)
 
-=======
->>>>>>> origin/main:samples/bot-sequential-flow-adaptive-cards/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -238,4 +235,4 @@ You can also interact with this app using messaging extension action which allow
 - [User Specific views](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC)
 - [Bot-Sequential-flow-adaptive-card](https://learn.microsoft.com/power-automate/create-adaptive-cards)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sequential-flow-adaptive-cards-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-sequential-flow-adaptive-cards-python" />

@@ -12,10 +12,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). I
 ## Interaction with botss
 ![Dialog App](Images/TeamsDialog.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-task-module/nodejs/README.md
 
-=======
->>>>>>> origin/main:samples/bot-task-module/nodejs/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -86,7 +83,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-task-module/nodejs`
+1) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-task-module/nodejs`
 
 1) Install modules
 
@@ -114,7 +111,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in personal/groupchat/team scope (supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-task-module/nodejs/index.js#L45) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-task-module/nodejs/index.js#L45) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -173,4 +170,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Dialogs (referred as task modules in TeamsJS v1.x)](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-task-module-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-task-module-nodejs" />

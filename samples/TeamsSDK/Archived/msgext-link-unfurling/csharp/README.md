@@ -65,7 +65,7 @@ the Teams service needs to call into the bot.
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/msgext-link-unfurling/csharp` folder
+   - Navigate to `samples/TeamsSDK/Archived/msgext-link-unfurling/csharp` folder
    - Select `TeamsLinkUnfurling.csproj` or `TeamsLinkUnfurling.sln`file
 
 1) Run ngrok - point to port 3978
@@ -107,7 +107,7 @@ the Teams service needs to call into the bot.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-link-unfurling/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/msgext-link-unfurling/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Running the sample
 

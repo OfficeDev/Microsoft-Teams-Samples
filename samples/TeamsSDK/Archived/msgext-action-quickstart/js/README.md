@@ -21,7 +21,7 @@ This sample demonstrates an action-based Messaging Extension in Microsoft Teams.
 ## Run the app (Microsoft 365 Agents Toolkit for Visual Studio Code)
 
 1. Install [Visual Studio Code](https://code.visualstudio.com/) and the [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) extension.
-1. Open this sample folder (`samples/msgext-action-quickstart/js`) in VS Code.
+1. Open this sample folder (`samples/TeamsSDK/Archived/msgext-action-quickstart/js`) in VS Code.
 1. Sign in to the toolkit with your Microsoft 365 account.
 1. Press **F5** (or **Run > Start Debugging**). The toolkit will:
     - Validate prerequisites
@@ -57,7 +57,7 @@ This sample demonstrates an action-based Messaging Extension in Microsoft Teams.
 
     ```powershell
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    cd Microsoft-Teams-Samples/samples/msgext-action-quickstart/js
+    cd Microsoft-Teams-Samples/samples/TeamsSDK/Archived/msgext-action-quickstart/js
     npm install
     ```
 
@@ -119,4 +119,4 @@ No Resource-Specific Consent (RSC) permissions are required for this scenario.
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Azure Bot Service Documentation](https://learn.microsoft.com/azure/bot-service/)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-action-quickstart-js" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-action-quickstart-js" />

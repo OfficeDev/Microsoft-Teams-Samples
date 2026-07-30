@@ -12,10 +12,7 @@ There are two basic types of Messaging Extension in Teams: [Search-based](https:
 ## Interaction with app
 ![msgext-search-auth-config ](Images/msgext-auth-config-gif.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/msgext-search-auth-config/python/README.md
 
-=======
->>>>>>> origin/main:samples/msgext-search-auth-config/python/README.md
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -135,4 +132,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-search-auth-config-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-search-auth-config-python" />

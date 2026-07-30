@@ -77,7 +77,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
 
-5) In a terminal, go to `samples/tab-stage-view/python`
+5) In a terminal, go to `samples/TeamsSDK/Archived/tab-stage-view/python`
 
 6) Activate your desired virtual environment
 
@@ -146,4 +146,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-stage-view-python" />

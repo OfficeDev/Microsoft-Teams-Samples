@@ -98,7 +98,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-- In a terminal, navigate to `samples/app-installation-using-qr-code/csharp`
+- In a terminal, navigate to `samples/TeamsSDK/Archived/app-installation-using-qr-code/csharp`
 
     change into project folder
     ```bash
@@ -144,7 +144,7 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/m
  - **Note**
  Kindly add the app/bot in personal scope and login there, afterwards add the app/bot in any Teams channel.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-installation-using-qr-code/csharp/QRAppInstallation/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/app-installation-using-qr-code/csharp/QRAppInstallation/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -195,4 +195,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-installation-using-qr-code-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-installation-using-qr-code-csharp" />

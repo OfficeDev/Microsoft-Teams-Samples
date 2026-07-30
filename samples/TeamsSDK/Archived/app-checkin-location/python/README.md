@@ -82,7 +82,7 @@ Alternatively, you can also use the `dev tunnels`. Please follow [Create and hos
 devtunnel host -p 3978 --allow-anonymous
 ```
 
-### 3. In a terminal, navigate to `samples/app-checkin-location/python`
+### 3. In a terminal, navigate to `samples/TeamsSDK/Archived/app-checkin-location/python`
 
 ### 4. Activate your desired virtual environment
 
@@ -137,4 +137,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-checkin-location-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/app-checkin-location-python" />

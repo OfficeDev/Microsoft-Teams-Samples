@@ -81,7 +81,7 @@ the Teams service needs to call into the bot.
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
-4) In a terminal, navigate to `samples/bot-proactive-messaging-teamsfx/python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-proactive-messaging-teamsfx/python`
 
 5) Activate your desired virtual environment
 
@@ -130,4 +130,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Step by step guide to send proactive messages](https://docs.microsoft.com/en-us/microsoftteams/platform/sbs-send-proactive)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-proactive-messaging-teamsfx-Python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-proactive-messaging-teamsfx-Python" />

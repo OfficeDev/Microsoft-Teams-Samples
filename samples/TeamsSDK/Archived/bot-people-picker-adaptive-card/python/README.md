@@ -82,7 +82,7 @@ the Teams service needs to call into the bot.
       * Select Microsoft Graph -\> Delegated permissions.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-4) In a terminal, navigate to `samples/bot-people-picker-adaptive-card/Python`
+4) In a terminal, navigate to `samples/TeamsSDK/Archived/bot-people-picker-adaptive-card/Python`
 
 5) Activate your desired virtual environment
 
@@ -136,4 +136,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [People picker in Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/people-picker)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-people-picker-adaptive-card-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-people-picker-adaptive-card-python" />

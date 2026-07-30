@@ -11,11 +11,7 @@ Use the bot command `peoplepickercard` to get the card with people picker contro
 ## Interaction with app
 
 ![people picker card ](PeoplePicker/Images/PepolePickerAdaptiveCard.gif)
-<<<<<<< HEAD:samples/TeamsSDK/Archived/bot-people-picker-adaptive-card/csharp/README.md
  
-=======
-
->>>>>>> origin/main:samples/bot-people-picker-adaptive-card/csharp/README.md
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -93,7 +89,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 - Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/bot-people-picker-adaptive-card/csharp/PeoplePicker.sln`
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/bot-people-picker-adaptive-card/csharp/PeoplePicker.sln`
  
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
@@ -106,7 +102,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/bot-people-picker-adaptive-card/csharp/PeoplePicker/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
    
 ## Running the sample
 
@@ -132,4 +128,4 @@ Use the bot command `peoplepickercard` to get the card with people picker contro
 - [People picker in Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/people-picker)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-people-picker-adaptive-card-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-people-picker-adaptive-card-csharp" />

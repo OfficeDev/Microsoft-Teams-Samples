@@ -81,7 +81,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     
-   - In a terminal, navigate to `samples/bot-conversation-quickstart/python`
+   - In a terminal, navigate to `samples/TeamsSDK/Archived/bot-conversation-quickstart/python`
    
    - Activate your desired virtual environment
 
@@ -116,4 +116,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ![hello response team](Images/7.Teams_HeroCard.png)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-quickstart-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-conversation-quickstart-python" />

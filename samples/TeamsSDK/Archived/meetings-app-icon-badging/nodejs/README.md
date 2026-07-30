@@ -95,7 +95,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 - In a terminal, navigate to `samples\meetings-app-icon-badging\nodejs`
 
     ```bash
-    cd samples/meetings-app-icon-badging/nodejs
+    cd samples/TeamsSDK/Archived/meetings-app-icon-badging/nodejs
     ```
 
 - Install modules
@@ -124,7 +124,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
          - Then select the `manifest.zip` file from `appManifest`.
          - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-app-icon-badging/nodejs/index.js#L45) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/meetings-app-icon-badging/nodejs/index.js#L45) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -154,4 +154,4 @@ Type `SendNotification` in bot chat to send In-Meeting notifications.
 
 - [Grant RSC permissions to your app](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent#install-your-app-in-a-team-or-chat)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-app-icon-badging-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-app-icon-badging-nodejs" />

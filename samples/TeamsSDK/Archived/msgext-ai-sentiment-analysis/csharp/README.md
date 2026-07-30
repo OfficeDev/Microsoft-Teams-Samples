@@ -96,7 +96,7 @@ the Teams service needs to call into the bot.
 
 2. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/msgext-ai-sentiment-analysis/csharp/MEAISentimentAnalysis.sln`
+   - Navigate to folder where repository is cloned then `samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis/csharp/MEAISentimentAnalysis.sln`
    
 
 1) Update the `appSettings.json` configuration for the bot to use the `MicrosoftAppId`, `SECRET_OPENAI_API_KEY` and `ApplicationBaseUrl`  with application base url. For e.g., your ngrok or dev tunnels url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
@@ -134,4 +134,4 @@ Showing Sentiment Analysis `Negative` depending on Teams chat message
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-ai-sentiment-analysis-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/msgext-ai-sentiment-analysis-csharp" />

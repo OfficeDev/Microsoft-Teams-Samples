@@ -159,7 +159,7 @@ Click on Add Permissions to commit your changes.
    - In Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
  
    - On the configuration page, click on `sAdd Oauth Connection Settings`.
-    ![Add OAuth Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AddOauth.png)
+    ![Add OAuth Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/TeamsSDK/Archived/bot-conversation-sso-quickstart/js/sso_media/AddOauth.png)
 
 - Fill out the Connection Setting form
 
@@ -177,7 +177,7 @@ Click on Add Permissions to commit your changes.
 
     - Click "Save"
 
-    ![SSO Connection Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image017.png)
+    ![SSO Connection Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/TeamsSDK/Archived/bot-conversation-sso-quickstart/js/sso_media/image017.png)
 
 ### Configuring the sample:
 
@@ -191,7 +191,7 @@ Click on Add Permissions to commit your changes.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app to your org's app catalog". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope (Supported scope)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-appcatalog-lifecycle/nodejs/index.js#L45) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/graph-appcatalog-lifecycle/nodejs/index.js#L45) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -226,4 +226,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Authentication](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv2%2Ccsharp)
 - [App in Catalog](https://docs.microsoft.com/en-us/graph/api/resources/teamsapp?view=graph-rest-1.0)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-appcatalog-lifecycle-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/graph-appcatalog-lifecycle-nodejs" />

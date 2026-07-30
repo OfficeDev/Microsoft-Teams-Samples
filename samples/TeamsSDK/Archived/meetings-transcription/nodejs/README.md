@@ -122,7 +122,7 @@ Click on Add Permissions to commit your changes.
 
    ![User Id](Images/UserID.png)
 
-  - In a terminal, navigate to `samples/meetings-transcription/nodejs`
+  - In a terminal, navigate to `samples/TeamsSDK/Archived/meetings-transcription/nodejs`
 
   - Install modules
 
@@ -153,7 +153,7 @@ Click on Add Permissions to commit your changes.
    - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-transcription/nodejs/index.js#L50) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/meetings-transcription/nodejs/index.js#L50) line and put your debugger for local debug.
     
 **NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
 
@@ -189,4 +189,4 @@ Click on Add Permissions to commit your changes.
 [Meeting Transcript](https://support.microsoft.com/en-us/office/view-live-transcription-in-a-teams-meeting-dc1a8f23-2e20-4684-885e-2152e06a4a8b)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-transcription-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/meetings-transcription-nodejs" />

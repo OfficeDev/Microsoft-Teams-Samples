@@ -9,10 +9,7 @@ This sample application illustrates the process of building a custom personal ta
 
 ![personaltab](Images/PersonalTabModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-personal/mvc-csharp/README.md
 
-=======
->>>>>>> origin/main:samples/tab-personal/mvc-csharp/README.md
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -162,4 +159,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 [Create a Custom Personal Tab with ASP. NET Core MVC](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-mvc-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-personal-mvc-csharp" />

@@ -9,10 +9,7 @@ This sample application illustrates the process of developing a custom personal 
 
 ![personaltabmodule](Images/PersonalTabModule.gif)
 
-<<<<<<< HEAD:samples/TeamsSDK/Archived/tab-personal/razor-csharp/README.md
 
-=======
->>>>>>> origin/main:samples/tab-personal/razor-csharp/README.md
 
 ## Prerequisites
 
@@ -106,4 +103,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 [Create a Custom Personal Tab with ASP.NET Core](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-razor-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-personal-razor-csharp" />

@@ -120,7 +120,7 @@ Register your application with Azure AD
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/bot-sso-adaptivecard/csharp`
+  A) From a terminal, navigate to `samples/TeamsSDK/Archived/bot-sso-adaptivecard/csharp`
 
   ```bash
   # run the bot
@@ -130,7 +130,7 @@ Register your application with Azure AD
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-sso-adaptivecard/csharp` folder
+  - Navigate to `samples/TeamsSDK/Archived/bot-sso-adaptivecard/csharp` folder
   - Select `BotSsoAdaptivecard.sln` file
   - Press `F5` to run the project
 
@@ -143,7 +143,7 @@ Register your application with Azure AD
    - On line 29, replace `<<YOUR-MICROSOFT-APP-ID>>`.
 
 **Notes:**
-- If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/727ae5487d750c25e02a6de5b0c0912b72d86b94/samples/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
+- If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/727ae5487d750c25e02a6de5b0c0912b72d86b94/samples/TeamsSDK/Archived/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
 **Bot Configuration:**
 
@@ -202,4 +202,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard" />

@@ -134,4 +134,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
 - [Auth0 Documentation](https://auth0.com/docs)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-auth0-adaptivecard-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-auth0-adaptivecard-python" />

@@ -62,7 +62,7 @@ the Teams service needs to call into the bot.
 
 1) Update the `resources/application.properties` file configuration in your project, for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-1) From the root of this project folder: (`samples/bot-conversation/java`)
+1) From the root of this project folder: (`samples/TeamsSDK/Archived/bot-conversation/java`)
     - Open a terminal and build the sample using `mvn package` command
     - Install the packages in the local cache by using `mvn install` command in a terminal
     - Run it by using `java -jar .\target\bot-teams-conversation-sample.jar` command in a terminal
@@ -116,4 +116,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [How Microsoft Teams bots work](https://docs.microsoft.com/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
 - [Azure for Java cloud developers](https://docs.microsoft.com/azure/java/?view=azure-java-stable)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-java" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/bot-conversation-java" />

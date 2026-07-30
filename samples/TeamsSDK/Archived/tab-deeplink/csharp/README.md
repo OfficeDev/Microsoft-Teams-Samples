@@ -21,7 +21,7 @@ Discover this Microsoft Teams sample app designed to demonstrate deeplinks for s
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
 
-**Tab Deeplink:** [Manifest](/samples/tab-deeplink/csharp/demo-manifest/tab-deeplink.zip)
+**Tab Deeplink:** [Manifest](/samples/TeamsSDK/Archived/tab-deeplink/csharp/demo-manifest/tab-deeplink.zip)
 
  ## Prerequisites
 
@@ -129,7 +129,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-deeplink/csharp/DeepLinkBot/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/TeamsSDK/Archived/tab-deeplink/csharp/DeepLinkBot/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
 
  ## Running the sample
 
@@ -303,4 +303,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-deeplink-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/TeamsSDK/Archived/tab-deeplink-csharp" />
