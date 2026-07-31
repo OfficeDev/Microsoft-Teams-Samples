@@ -49,7 +49,7 @@
   "overrides": {
     "nth-check": "^2.0.1",
     "postcss": "^8.4.31",
-    "serialize-javascript": "^7.0.5",
+    "serialize-javascript": "^6.0.2",
     "@tootallnate/once": "^2.0.1",
     "webpack": "^5.104.1",
     "ws": "^8.21.0",
