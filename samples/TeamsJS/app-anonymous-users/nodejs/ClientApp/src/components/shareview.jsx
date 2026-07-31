@@ -237,12 +237,16 @@ const ShareView = () => {
                     }
                 })
                 .then((responseJson) => {
-                    if (responseJson === "") {
+                    let userDetails = responseJson ? JSON.parse(responseJson) : null;
+
+                    // When consent is required or the on-behalf-of flow fails, the
+                    // server returns an error object (no `details`). Show the consent
+                    // button instead of reading an undefined property.
+                    if (!userDetails || userDetails.error || !userDetails.details) {
                         setIsConsentButtonVisible(true);
                         setIsSsoAuthenticationButtonVisible(false);
                     }
                     else {
-                        let userDetails = JSON.parse(responseJson);
                         setUserName("Welcome: " + userDetails.details.displayName);
 
                         setIsSsoAuthenticationButtonVisible(false);

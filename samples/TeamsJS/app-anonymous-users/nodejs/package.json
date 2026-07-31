@@ -21,12 +21,12 @@
     "@azure/msal-node": "^1.6.0",
     "@microsoft/microsoft-graph-client": "^2.2.1",
     "axios": "^0.21.4",
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "isomorphic-fetch": "^3.0.0",
-    "socket.io": "^4.4.1",
-    "botbuilder": "^4.19.1"
+    "socket.io": "^4.8.3",
+    "botbuilder": "^4.23.3"
   },
   "devDependencies": {
     "eslint": "^7.0.0",
