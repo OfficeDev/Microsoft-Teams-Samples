@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/TeamsSDK/bot-proactive-message/python/bot-proactive-message/assets/bot-proactive-message.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/TeamsSDK/bot-proactive-message/bot-proactive-message.gif",
         "alt": "Solution UX showing proactive bot messages for Microsoft Teams"
       }
     ],
