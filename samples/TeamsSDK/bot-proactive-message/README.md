@@ -20,7 +20,7 @@ This sample demonstrates a Teams bot that sends proactive messages using the Tea
 
 ## Interaction with Bot
 
-![Bot Proactive Message](dotnet/bot-proactive-message/assets/bot-proactive-message.gif)
+![Bot Proactive Message](bot-proactive-message.gif)
 
 
 ## Sample Implementations
