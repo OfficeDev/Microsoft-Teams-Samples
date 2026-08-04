@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-proactive-message-python",
+    "source": "officeDev",
+    "title": "Bot Proactive Message Sample",
+    "shortDescription": "This sample demonstrates how to send proactive messages to Microsoft Teams users using Python.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/bot-proactive-message/python",
+    "longDescription": [
+      "This sample demonstrates how to send proactive messages to Microsoft Teams users, built with the Teams SDK. It showcases capturing the conversation id from an install activity, storing it, and using it to send immediate and delayed proactive notifications."
+    ],
+    "creationDateTime": "2026-07-31",
+    "updateDateTime": "2026-07-31",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot,proactive-message,conversation-id,notifications"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/TeamsSDK/bot-proactive-message/python/bot-proactive-message/assets/bot-proactive-message.gif",
+        "alt": "Solution UX showing proactive bot messages for Microsoft Teams"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
