@@ -4,7 +4,7 @@
     "source": "officeDev",
     "title": "Bot Proactive Message Sample",
     "shortDescription": "This sample demonstrates how to send proactive messages to Microsoft Teams users using Node.js and TypeScript.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/bot-proactive-message/nodejs",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/bot-proactive-message/nodejs/bot-proactive-message",
     "longDescription": [
       "This sample demonstrates how to send proactive messages to Microsoft Teams users, built with the Teams SDK. It showcases capturing the conversation id from an install activity, storing it, and using it to send immediate and delayed proactive notifications."
     ],
