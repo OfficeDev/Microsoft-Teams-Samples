@@ -15,7 +15,7 @@ This sample demonstrates a Teams bot that sends proactive messages using the Tea
   - [Run in the Teams Client](#run-in-the-teams-client)
     - [Configure DevTunnels](#configure-devtunnels)
   - [Provision with the Teams Developer CLI](#provision-with-the-teams-developer-cli)
-- [Troubleshooting](#troubleshooting)
+- [Teams SDK Troubleshooting](#teams-sdk-troubleshooting)
 - [Further Reading](#further-reading)
 
 ## Interaction with Bot
