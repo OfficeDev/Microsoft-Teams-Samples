@@ -87,7 +87,7 @@ Once provisioning completes, start your bot - the sample will pick up the creden
 
 # Teams SDK Troubleshooting
 
-If you encounter errors you believe exists in Teams SDK, you can file an issue in GitHub for the langauge in which you encountered the issue
+If you encounter errors you believe exist in the Teams SDK, you can file an issue on GitHub for the language in which you encountered the issue.
 - [C#](https://github.com/microsoft/teams.net/issues/new/choose)
 - [TypeScript](https://github.com/microsoft/teams.ts/issues/new/choose)
 - [Python](https://github.com/microsoft/teams.py/issues/new/choose)
