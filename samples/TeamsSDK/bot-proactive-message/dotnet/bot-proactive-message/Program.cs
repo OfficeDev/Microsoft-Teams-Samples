@@ -21,7 +21,7 @@ var conversationIdStore = new ConcurrentDictionary<string, string>();
 // carries the conversation id, so any handler can capture it.
 teams.OnInstall(async (context, cancellationToken) =>
 {
-    RememberConversation(context.Activity.From.AadObjectId, context.Activity.Conversation.Id);
+    SaveConversation(context.Activity.From.AadObjectId, context.Activity.Conversation.Id);
 
     await context.Send("Hi! I am going to remind you to say something to me soon!", cancellationToken);
 
@@ -32,7 +32,7 @@ teams.OnInstall(async (context, cancellationToken) =>
 teams.OnMessage(async (context, cancellationToken) =>
 {
     var userId = context.Activity.From.AadObjectId;
-    RememberConversation(userId, context.Activity.Conversation.Id);
+    SaveConversation(userId, context.Activity.Conversation.Id);
 
     var text = context.Activity.Text?.Trim().ToLowerInvariant() ?? string.Empty;
 
@@ -55,7 +55,7 @@ teams.OnMessage(async (context, cancellationToken) =>
 });
 
 // Saves the conversation id so it can be used for proactive messaging later.
-void RememberConversation(string? userId, string conversationId)
+void SaveConversation(string? userId, string conversationId)
 {
     if (string.IsNullOrEmpty(userId))
     {
