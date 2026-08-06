@@ -4,7 +4,7 @@ This sample demonstrates how to send proactive messages to Microsoft Teams users
 
 ## Prerequisites
 
-- [Python >=3.12, <3.15](https://www.python.org/downloads/)
+- [Python >=3.11, <3.15](https://www.python.org/downloads/)
 - pip (recommended) or [uv](https://docs.astral.sh/uv/)
 
 ## Run the sample

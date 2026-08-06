@@ -14,7 +14,7 @@ app = App()
 conversation_id_store: dict[str, str] = {}
 
 
-def remember_conversation(user_id: Optional[str], conversation_id: str) -> None:
+def save_conversation(user_id: Optional[str], conversation_id: str) -> None:
     """Save the conversation_id so it can be used for proactive messaging later."""
     if not user_id:
         return
@@ -51,7 +51,7 @@ def schedule_proactive_notification(user_id: Optional[str], delay_seconds: float
 # carries the conversation id, so any handler can capture it.
 @app.on_install_add
 async def handle_install_add(ctx: ActivityContext[InstalledActivity]) -> None:
-    remember_conversation(ctx.activity.from_.aad_object_id, ctx.activity.conversation.id)
+    save_conversation(ctx.activity.from_.aad_object_id, ctx.activity.conversation.id)
 
     await ctx.send("Hi! I am going to remind you to say something to me soon!")
 
@@ -62,7 +62,7 @@ async def handle_install_add(ctx: ActivityContext[InstalledActivity]) -> None:
 @app.on_message
 async def handle_message(ctx: ActivityContext[MessageActivity]) -> None:
     user_id = ctx.activity.from_.aad_object_id
-    remember_conversation(user_id, ctx.activity.conversation.id)
+    save_conversation(user_id, ctx.activity.conversation.id)
 
     text = (ctx.activity.text or "").strip().lower()
 
