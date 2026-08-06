@@ -11,7 +11,7 @@ const app = new App();
 const conversationIdStore = new Map<string, string>();
 
 // Saves the conversation id so it can be used for proactive messaging later.
-const rememberConversation = (userId: string | undefined, conversationId: string) => {
+const saveConversation = (userId: string | undefined, conversationId: string) => {
   if (!userId) {
     return;
   }
@@ -46,7 +46,7 @@ const scheduleProactiveNotification = (userId: string | undefined, delayMs: numb
 // Installation is just one place to get the conversation id. Every activity
 // carries the conversation id, so any handler can capture it.
 app.on("install.add", async ({ activity, send }) => {
-  rememberConversation(activity.from.aadObjectId, activity.conversation.id);
+  saveConversation(activity.from.aadObjectId, activity.conversation.id);
 
   await send("Hi! I am going to remind you to say something to me soon!");
 
@@ -56,7 +56,7 @@ app.on("install.add", async ({ activity, send }) => {
 
 app.on("message", async ({ activity, send }) => {
   const userId = activity.from.aadObjectId;
-  rememberConversation(userId, activity.conversation.id);
+  saveConversation(userId, activity.conversation.id);
 
   const text = activity.text?.trim().toLowerCase() ?? "";
 
