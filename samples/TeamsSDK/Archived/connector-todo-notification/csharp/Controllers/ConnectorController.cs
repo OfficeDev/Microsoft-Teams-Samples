@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.Identity.Web;
 using TeamsToDoAppConnector.Models;
 using TeamsToDoAppConnector.Models.Configuration;
 using TeamsToDoAppConnector.Repository;
@@ -10,6 +12,7 @@ namespace TeamsToDoAppConnector.Controllers
     /// <summary>
     /// Represents the controller responsible for setting up the connector.
     /// </summary>
+    [Authorize]
     public class ConnectorController : Controller
     {
 
@@ -44,13 +47,29 @@ namespace TeamsToDoAppConnector.Controllers
             }
             else
             {
-                var subscription = SubscriptionRepository.Subscriptions.Where(sub => sub.WebHookUri == webhookInfo.WebhookUrl).FirstOrDefault();
+                // Validate the destination before storing or calling it to prevent SSRF (CWE-918).
+                if (!WebhookValidator.IsValid(webhookInfo.WebhookUrl, appSettings.Value.AllowedWebhookHostSuffixes, out _))
+                {
+                    return RedirectToAction("Error");
+                }
+
+                // Bind the webhook to the authenticated connector context (owner + tenant).
+                var ownerObjectId = User.GetObjectId();
+                var ownerTenantId = User.GetTenantId();
+
+                var subscription = SubscriptionRepository.Subscriptions
+                    .Where(sub => sub.WebHookUri == webhookInfo.WebhookUrl
+                        && sub.OwnerObjectId == ownerObjectId
+                        && sub.OwnerTenantId == ownerTenantId)
+                    .FirstOrDefault();
                 if (subscription == null)
                 {
                     Subscription newSubscription = new Subscription
                     {
                         WebHookUri = webhookInfo.WebhookUrl,
-                        EventType = webhookInfo.EventType
+                        EventType = webhookInfo.EventType,
+                        OwnerObjectId = ownerObjectId,
+                        OwnerTenantId = ownerTenantId
                     };
 
                     // Save the subscription so that it can be used to push data to the registered channels.
@@ -62,7 +81,7 @@ namespace TeamsToDoAppConnector.Controllers
                     subscription.EventType = webhookInfo.EventType;
                 }
 
-                await TaskHelper.PostWelcomeMessage(webhookInfo.WebhookUrl, appSettings.Value.BaseUrl);
+                await TaskHelper.PostWelcomeMessage(webhookInfo.WebhookUrl, appSettings.Value.BaseUrl, appSettings.Value.AllowedWebhookHostSuffixes);
 
                 return View();
             }
