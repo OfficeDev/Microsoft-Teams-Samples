@@ -6,8 +6,29 @@ require('dotenv').config({ path: ENV_FILE });
 const PORT = process.env.PORT || 3978;
 const server = express();
 const axios = require('axios');
+const { validateWebhook } = require('./webhookValidator');
+const { requireAuth } = require('./authMiddleware');
 
-var webhookUrl = "";
+// Webhooks registered per authenticated connector context, keyed by "tenantId:objectId".
+var subscriptions = {};
+
+function ownerKey(user) {
+    return `${user.tenantId}:${user.objectId}`;
+}
+
+// Re-validates the destination immediately before the outbound call (defense in depth
+// against SSRF) and disables redirects so a trusted host cannot bounce to an internal target.
+async function postCard(url, card) {
+    const result = await validateWebhook(url);
+    if (!result.valid) {
+        return;
+    }
+    try {
+        await axios.post(url, card, { maxRedirects: 0 });
+    } catch (error) {
+        console.error(error.message);
+    }
+}
 
 var taskList = {
     "task": [
@@ -47,7 +68,7 @@ server.get('/TaskDetails', (req, res, next) => {
     res.render('./views/TaskDetails', { taskList: JSON.stringify(taskList) })
 });
 
-server.post('/Task/Save', (req, res, next) => {
+server.post('/Task/Save', requireAuth, (req, res, next) => {
     var task = {
         "Title": req.body.title,
         "Description": req.body.description,
@@ -88,15 +109,14 @@ server.post('/Task/Save', (req, res, next) => {
             }
         ]
     }
-    
-    axios.post(webhookUrl, card)
-        .then(res => {
-            console.log(`statusCode: ${res.status}`)
-            console.log(res)
-        })
-        .catch(error => {
-            console.error(error)
-        })
+
+    // Only notify the webhook registered by the current authenticated connector context.
+    const url = subscriptions[ownerKey(req.user)];
+    if (url) {
+        postCard(url, card);
+    }
+
+    res.json({ status: 'Task saved.' });
 });
 
 server.get('/Create', (req, res, next) => {
@@ -121,10 +141,19 @@ server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 
-server.post('/Connector/Save', (req, res) => {
+server.post('/Connector/Save', requireAuth, async (req, res) => {
+
+    // Validate the destination before storing or calling it to prevent SSRF (CWE-918).
+    const result = await validateWebhook(req.body.webhookUrl);
+    if (!result.valid) {
+        res.status(400).json({ error: result.reason });
+        return;
+    }
+
+    // Bind the webhook to the authenticated connector context (owner + tenant).
+    subscriptions[ownerKey(req.user)] = req.body.webhookUrl;
 
     var link = process.env.BaseUrl + "/TaskDetails"
-    webhookUrl = req.body.webhookUrl;
     var card = {
         "@type": "MessageCard",
         "summary": "Welcome Message",
@@ -134,13 +163,7 @@ server.post('/Connector/Save', (req, res) => {
         }]
     }
 
-    axios.post(req.body.webhookUrl, card)
-        .then(res => {
-            console.log(`statusCode: ${res.status}`)
-            console.log(res)
-        })
-        .catch(error => {
-            console.error(error)
-        })
+    await postCard(req.body.webhookUrl, card);
 
+    res.json({ status: 'Webhook registered.' });
 });
