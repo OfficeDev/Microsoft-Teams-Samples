@@ -4,7 +4,7 @@ This sample demonstrates how to interact with adaptive cards in Microsoft Teams 
 
 ## Prerequisites
 
-- [Python >=3.11, <3.15](https://www.python.org/downloads/)
+- [Python >=3.11, <4.0](https://www.python.org/downloads/)
 - [pip](https://pip.pypa.io/en/stable/installation/)
 - [uv](https://docs.astral.sh/uv/)
 
