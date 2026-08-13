@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.Identity.Web;
 using TeamsToDoAppConnector.Models;
 using TeamsToDoAppConnector.Models.Configuration;
 using TeamsToDoAppConnector.Repository;
@@ -11,6 +13,7 @@ namespace TeamsToDoAppConnector.Controllers
     /// Represents the controller which handles tasks create, update. 
     /// This class also sends push notification to the channels.
     /// </summary>
+    [Authorize]
     public class TaskController : Controller
     {
 
@@ -44,10 +47,13 @@ namespace TeamsToDoAppConnector.Controllers
             item.Guid = Guid.NewGuid().ToString();
             TaskRepository.Tasks.Add(item);
 
-            // Loop through subscriptions and notify each channel that task is created.
-            foreach (var sub in SubscriptionRepository.Subscriptions)
+            // Only notify webhooks registered by the current authenticated connector context.
+            var ownerObjectId = User.GetObjectId();
+            var ownerTenantId = User.GetTenantId();
+            foreach (var sub in SubscriptionRepository.Subscriptions
+                .Where(s => s.OwnerObjectId == ownerObjectId && s.OwnerTenantId == ownerTenantId))
             {
-                await TaskHelper.PostTaskNotification(sub.WebHookUri, item, "Created",appSettings.Value.BaseUrl);
+                await TaskHelper.PostTaskNotification(sub.WebHookUri, item, "Created", appSettings.Value.BaseUrl, appSettings.Value.AllowedWebhookHostSuffixes);
             }
 
             return RedirectToAction("Detail", new { id = item.Guid });
@@ -64,24 +70,29 @@ namespace TeamsToDoAppConnector.Controllers
         [HttpPost]
         public async Task Update([FromBody]Request request, string id)
         {
-            //Task<HttpResponseMessage>
             var task = TaskRepository.Tasks.First(t => t.Guid == id);
             task.Title = request.Title;
 
             string json = TaskHelper.GetConnectorCardJson(task, "Updated", appSettings.Value.BaseUrl);
 
+            // Only notify webhooks registered by the current authenticated connector context.
+            var ownerObjectId = User.GetObjectId();
+            var ownerTenantId = User.GetTenantId();
+            foreach (var sub in SubscriptionRepository.Subscriptions
+                .Where(s => s.EventType == EventType.Update
+                    && s.OwnerObjectId == ownerObjectId
+                    && s.OwnerTenantId == ownerTenantId))
+            {
+                await TaskHelper.PostTaskNotification(sub.WebHookUri, task, "Updated", appSettings.Value.BaseUrl, appSettings.Value.AllowedWebhookHostSuffixes);
+            }
+
+            // Write the response after notifications so setting headers/status is valid.
             Response.Clear();
             Response.ContentType = "application/json; charset=utf-8";
-            Response.Headers.Add("CARD-ACTION-STATUS", "The task is uppdate.");
-            Response.Headers.Add("CARD-UPDATE-IN-BODY", "true");
-            Response.WriteAsync(json);
+            Response.Headers["CARD-ACTION-STATUS"] = "The task is updated.";
+            Response.Headers["CARD-UPDATE-IN-BODY"] = "true";
             Response.StatusCode = StatusCodes.Status200OK;
-            
-            // Send Task updated notification to all Subscriptions.
-            foreach (var sub in SubscriptionRepository.Subscriptions.Where(s => s.EventType == EventType.Update))
-            {
-                await TaskHelper.PostTaskNotification(sub.WebHookUri, task, "Updated", appSettings.Value.BaseUrl);
-            }
+            await Response.WriteAsync(json);
         }
     }
 }

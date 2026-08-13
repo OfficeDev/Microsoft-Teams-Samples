@@ -6,6 +6,12 @@
 
 This sample provides a comprehensive guide to building an Office 365 Connector that sends task notifications to a Microsoft Teams channel. The app simulates a task management system where users can create, view, and update tasks, showcasing how to send notifications through connectors to enhance productivity in Teams.
 
+> [!IMPORTANT]
+> **Security notice**
+> * **Do not expose this sample anonymously.** The `/Connector/Save` and `/Task/Save` endpoints require a valid Microsoft Entra ID bearer token; configure `MicrosoftAppId` and `MicrosoftAppTenantId` in `.env` before running. Never deploy it as a public, unauthenticated endpoint.
+> * **Webhook destinations are restricted.** Registered webhook URLs are accepted only when they use HTTPS and match the `AllowedWebhookHostSuffixes` allow-list, and are blocked when they resolve to loopback, private (RFC1918), link-local, or other reserved addresses. This prevents Server-Side Request Forgery (SSRF). Outbound calls also disable HTTP redirects. Update the allow-list to match your own connector endpoints.
+> * Each registered webhook is bound to the authenticated user/tenant that created it, and notifications are sent only to the webhook owned by the current caller's context.
+
 ## Included Features
 * Connectors
 

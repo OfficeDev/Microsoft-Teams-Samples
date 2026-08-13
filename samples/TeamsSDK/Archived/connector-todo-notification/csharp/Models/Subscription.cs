@@ -7,6 +7,10 @@
     {
         public string? WebHookUri { get; set; }
         public EventType EventType { get; set; }
+
+        // Identity of the Entra ID user/connector context that registered this webhook.
+        public string? OwnerObjectId { get; set; }
+        public string? OwnerTenantId { get; set; }
     }
 
     /// <summary>

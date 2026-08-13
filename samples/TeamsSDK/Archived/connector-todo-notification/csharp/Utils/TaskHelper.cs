@@ -18,13 +18,13 @@ namespace TeamsToDoAppConnector.Utils
             };
         }
 
-        public static async Task PostTaskNotification(string webhook, TaskItem item, string title, string baseUrl)
+        public static async Task PostTaskNotification(string webhook, TaskItem item, string title, string baseUrl, string[]? allowedHostSuffixes)
         {
             string cardJson = GetConnectorCardJson(item, title, baseUrl);
-            await PostCardAsync(webhook, cardJson);
+            await PostCardAsync(webhook, cardJson, allowedHostSuffixes);
         }
 
-        public static async Task PostWelcomeMessage(string webhookUrl, string baseUrl)
+        public static async Task PostWelcomeMessage(string webhookUrl, string baseUrl, string[]? allowedHostSuffixes)
         {
             string cardJson = @"{
             ""@type"": ""MessageCard"",
@@ -33,12 +33,20 @@ namespace TeamsToDoAppConnector.Utils
                 ""activityTitle"": ""Welcome Message"",
                 ""text"": ""Teams ToDo connector has been set up. We will send you notification whenever new task is added in [Task Manager Portal](" + baseUrl + "/task/create" + @").""}]}";
 
-            await PostCardAsync(webhookUrl, cardJson);
+            await PostCardAsync(webhookUrl, cardJson, allowedHostSuffixes);
         }
 
-        private static async Task PostCardAsync(string webhook, string cardJson)
+        private static async Task PostCardAsync(string webhook, string cardJson, string[]? allowedHostSuffixes)
         {
-            using HttpClient client = new HttpClient();
+            // Re-validate the destination immediately before the outbound call (defense in depth against SSRF).
+            if (!WebhookValidator.IsValid(webhook, allowedHostSuffixes, out _))
+            {
+                return;
+            }
+
+            // Disable automatic redirects so a trusted host cannot bounce the request to an internal target.
+            using var handler = new HttpClientHandler { AllowAutoRedirect = false };
+            using HttpClient client = new HttpClient(handler);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var content = new StringContent(cardJson, System.Text.Encoding.UTF8, "application/json");
             using var response = await client.PostAsync(webhook, content);
