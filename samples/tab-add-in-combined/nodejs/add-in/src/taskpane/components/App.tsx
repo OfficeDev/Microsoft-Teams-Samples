@@ -79,7 +79,12 @@ const App: React.FC = () => {
   const setDiscountText = (): Promise<void> => {
     return new Promise(function (resolve, reject) {
       try {
-        Office.context.mailbox.item.setSelectedDataAsync(offerText + " " + discount + "%.", function (asyncResult) {
+        const item = Office.context.mailbox.item;
+        if (!item) {
+          reject(new Error("No mail item is currently selected."));
+          return;
+        }
+        item.setSelectedDataAsync(offerText + " " + discount + "%.", function (asyncResult) {
           if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
             console.log("Selected text has been updated successfully.");
             resolve();
@@ -98,7 +103,12 @@ const App: React.FC = () => {
     return new Promise(function (resolve, reject) {
       try {
         let customerName: string = "";
-        Office.context.mailbox.item.to.getAsync((asyncResult) => {
+        const item = Office.context.mailbox.item;
+        if (!item) {
+          reject(new Error("No mail item is currently selected."));
+          return;
+        }
+        item.to.getAsync((asyncResult) => {
           if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
             const msgTo = asyncResult.value;
             customerName = msgTo[0].displayName !== "" ? msgTo[0].displayName : msgTo[0].emailAddress;

@@ -55,6 +55,10 @@ jobs:
             - project_path: 'samples/TeamsSDK/bot-task-modules/dotnet/bot-task-modules/BotTaskModules.csproj'
               name: 'bot-task-modules'
               version: '10.0.x'
+
+            - project_path: 'samples/TeamsSDK/bot-proactive-message/dotnet/bot-proactive-message/BotProactiveMessage.csproj'
+              name: 'bot-proactive-message'
+              version: '10.0.x'
            
             - project_path: 'samples/TeamsJS/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
               name: 'app-sso'
@@ -507,6 +511,14 @@ jobs:
 
             - project_path: 'samples/TeamsSDK/bot-task-modules/nodejs/bot-task-modules'
               name: 'bot-task-modules'
+              version: '20.x'
+
+            - project_path: 'samples/TeamsSDK/bot-proactive-message/nodejs/bot-proactive-message'
+              name: 'bot-proactive-message'
+              version: '20.x'
+
+            - project_path: 'samples/tab-add-in-combined/nodejs'
+              name: 'tab-add-in-combined'
               version: '20.x'
 
 
