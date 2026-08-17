@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="35.6.5" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="4.14.2" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="4.14.2" />
   </ItemGroup>
 
 </Project>

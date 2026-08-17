@@ -2,9 +2,7 @@
 import React, { useState, useEffect }  from 'react';
 import { 
   FluentProvider, 
-  teamsLightTheme, 
   teamsDarkTheme,
-  teamsHighContrastTheme,
   DataGrid,
   DataGridHeader,
   DataGridRow,

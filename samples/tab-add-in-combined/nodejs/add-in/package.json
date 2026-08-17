@@ -42,7 +42,6 @@
     "@types/react-dom": "^18.0.0",
     "acorn": "^8.16.0",
     "babel-loader": "^10.1.1",
-    "eslint-plugin-office-addins": "^4.0.9",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.7",
     "office-addin-cli": "^2.0.9",
