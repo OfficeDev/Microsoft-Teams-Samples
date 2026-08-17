@@ -7,7 +7,7 @@ requires-python = ">=3.11,<4.0"
 dependencies = [
     "microsoft-teams-apps==2.0.15",
     "microsoft-teams-api==2.0.15",
-    "microsoft-teams-cards==2.0.15,
+    "microsoft-teams-cards==2.0.15",
     "python-dotenv>=1.0.0",
 ]
 
