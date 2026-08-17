@@ -5,7 +5,7 @@ description = "Bot AI messaging sample that demonstrates how to enhance AI-gener
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
 dependencies = [
-    "microsoft-teams-apps==2.0.0",
-    "microsoft-teams-api==2.0.0",
-    "microsoft-teams-cards==2.0.0",
+    "microsoft-teams-apps==2.0.15",
+    "microsoft-teams-api==2.0.15",
+    "microsoft-teams-cards==2.0.15",
 ]

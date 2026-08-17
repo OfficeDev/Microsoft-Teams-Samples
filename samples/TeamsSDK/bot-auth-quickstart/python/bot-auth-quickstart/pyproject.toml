@@ -6,9 +6,9 @@ readme = "README.md"
 requires-python = ">=3.11,<4.0"
 dependencies = [
     "python-dotenv>=1.0.0",
-    "microsoft-teams-apps==2.0.0",
-    "microsoft-teams-graph==2.0.0",
-    "microsoft-teams-common==2.0.0",
+    "microsoft-teams-apps==2.0.15",
+    "microsoft-teams-graph==2.0.15",
+    "microsoft-teams-common==2.0.15",
     "msgraph-sdk>=1.0.0",
     "azure-identity>=1.12.0"
 ]
