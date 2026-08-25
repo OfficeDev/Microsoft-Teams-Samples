@@ -7,11 +7,10 @@
       "applicationUrl": "http://localhost:3978",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "AzureAd__ClientId": "<your-client-id>",
-        "AzureAd__TenantId": "<your-tenant-id>",
-        "AzureAd__ClientCredentials__0__SourceType": "ClientSecret",
-        "AzureAd__ClientCredentials__0__ClientSecret": "<your-client-secret>",
-        "OAuth__ConnectionName": "<your-oauth-connection-name>"
+        "Teams__ClientId": "<your-client-id>",
+        "Teams__ClientSecret": "<your-client-secret>",
+        "Teams__TenantId": "<your-tenant-id>",
+        "Teams__ConnectionName": "<your-oauth-connection-name>"
       }
     }
   }

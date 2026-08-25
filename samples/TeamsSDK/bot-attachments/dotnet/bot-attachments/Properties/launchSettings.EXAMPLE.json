@@ -17,10 +17,9 @@
       "applicationUrl": "http://localhost:3978",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-          "AzureAd__TenantId": "YOUR_TenantId",
-          "AzureAd__ClientId": "YOUR_ClientId",
-          "AzureAd__ClientCredentials__0__SourceType": "ClientSecret",
-          "AzureAd__ClientCredentials__0__ClientSecret": "YOUR_ClientSecret"
+        "Teams__TenantId": "YOUR_TenantId",
+        "Teams__ClientId": "YOUR_ClientId",
+        "Teams__ClientSecret": "YOUR_ClientSecret"
       }
     }
   }

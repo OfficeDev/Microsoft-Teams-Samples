@@ -1,30 +1,33 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 using Microsoft.Teams.Apps;
-using Microsoft.Teams.Apps.Files;
-using Microsoft.Teams.Apps.Schema;
-using Microsoft.Teams.Core.Hosting;
+using Microsoft.Teams.Apps.Activities;
+using Microsoft.Teams.Apps.Activities.Invokes;
+using Microsoft.Teams.Api;
+using Microsoft.Teams.Api.Activities;
 using Microsoft.Teams.Samples.BotAttachments.Models;
 using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 
 const string ContentTypeFileDownload = "application/vnd.microsoft.teams.file.download.info";
+const string ContentTypeFileConsent = "application/vnd.microsoft.teams.card.file.consent";
+const string ContentTypeFileInfo = "application/vnd.microsoft.teams.card.file.info";
 
-var builder = WebApplication.CreateSlimBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
-builder.Services.AddTeamsBotApplication();
+builder.AddTeams();
 
 var webApp = builder.Build();
-var teamsApp = webApp.UseTeamsBotApplication();
+var teamsApp = webApp.UseTeams(true);
 
 var httpClientFactory = webApp.Services.GetRequiredService<IHttpClientFactory>();
 var pendingUploads = new ConcurrentDictionary<string, byte[]>();
 
 // Handle incoming messages
-teamsApp.OnMessage(async (context, cancellationToken) =>
+teamsApp.OnMessage(async context =>
 {
     var activity = context.Activity;
     var attachment = activity.Attachments?.FirstOrDefault();
@@ -44,20 +47,20 @@ teamsApp.OnMessage(async (context, cancellationToken) =>
                 if (fileDownloadInfo?.DownloadUrl != null)
                 {
                     var httpClient = httpClientFactory.CreateClient();
-                    var response = await httpClient.GetAsync(fileDownloadInfo.DownloadUrl, cancellationToken);
+                    var response = await httpClient.GetAsync(fileDownloadInfo.DownloadUrl);
                     response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsByteArrayAsync(cancellationToken);
+                    var content = await response.Content.ReadAsByteArrayAsync();
 
                     var fileId = Guid.NewGuid().ToString();
                     pendingUploads[fileId] = content;
 
                     var fileName = attachment.Name ?? $"image_{Guid.NewGuid()}.png";
-                    var receivedMessage = new MessageActivityInput()
+                    var receivedMessage = new MessageActivity()
                         .WithText($"Received <b>{fileName}</b>. Requesting permission to save to your OneDrive...")
-                        .WithTextFormat(TextFormats.Xml);
-                    await context.SendAsync(receivedMessage, cancellationToken);
+                        .WithTextFormat(TextFormat.Xml);
+                    await context.Send(receivedMessage);
 
-                    await SendFileConsentCard(context, fileName, fileId, content.Length, cancellationToken);
+                    await SendFileConsentCard(context, fileName, fileId, content.Length);
                 }
             }
             catch (Exception ex)
@@ -68,17 +71,14 @@ teamsApp.OnMessage(async (context, cancellationToken) =>
         }
     }
 
-    await context.SendAsync("Welcome to the Bot Attachments sample! Please attach a file or image to save to your OneDrive!", cancellationToken);
+    await context.Send("Welcome to the Bot Attachments sample! Please attach a file or image to save to your OneDrive!");
 });
 
 // Handle file consent responses
-teamsApp.OnFileConsent(async (context, cancellationToken) =>
+teamsApp.OnFileConsent(async context =>
 {
     var fileConsentResponse = context.Activity.Value;
-    if (fileConsentResponse == null)
-    {
-        return AdaptiveCardResponse.CreateBuilder().WithStatusCode(400).Build();
-    }
+    if (fileConsentResponse == null) return;
 
     var contextData = fileConsentResponse.Context != null
         ? JsonSerializer.Deserialize<Dictionary<string, string>>((JsonElement)fileConsentResponse.Context)
@@ -87,85 +87,89 @@ teamsApp.OnFileConsent(async (context, cancellationToken) =>
     var fileName = contextData?["filename"] ?? "file";
     var fileId = contextData?["file_id"] ?? string.Empty;
 
-    if (fileConsentResponse.Action == "accept")
+    if (fileConsentResponse.Action == Microsoft.Teams.Api.Action.Accept)
     {
-        var acceptedMessage = new MessageActivityInput()
+        var acceptedMessage = new MessageActivity()
             .WithText($"Accepted. Uploading <b>{fileName}</b>...")
-            .WithTextFormat(TextFormats.Xml);
-        await context.SendAsync(acceptedMessage, cancellationToken);
+            .WithTextFormat(TextFormat.Xml);
+        await context.Send(acceptedMessage);
 
-        try
+        _ = Task.Run(async () =>
         {
-            if (!pendingUploads.TryRemove(fileId, out var fileData))
+            try
             {
-                Console.WriteLine($"File data not found for fileId: {fileId}");
-                return AdaptiveCardResponse.CreateBuilder().WithStatusCode(404).Build();
+                if (!pendingUploads.TryRemove(fileId, out var fileData))
+                {
+                    Console.WriteLine($"File data not found for fileId: {fileId}");
+                    return;
+                }
+
+                var uploadInfo = fileConsentResponse.UploadInfo;
+                var httpClient = httpClientFactory.CreateClient();
+                var fileContent = new ByteArrayContent(fileData);
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                fileContent.Headers.ContentRange = new ContentRangeHeaderValue(0, fileData.Length - 1, fileData.Length);
+
+                var uploadResponse = await httpClient.PutAsync(uploadInfo!.UploadUrl, fileContent);
+                uploadResponse.EnsureSuccessStatusCode();
+
+                var fileInfoAttachment = new Attachment
+                {
+                    ContentType = new ContentType(ContentTypeFileInfo),
+                    Name = uploadInfo.Name ?? fileName,
+                    ContentUrl = uploadInfo.ContentUrl,
+                    Content = new { uniqueId = uploadInfo.UniqueId, fileType = uploadInfo.FileType }
+                };
+
+                var successMessage = new MessageActivity()
+                    .WithText($"<b>{uploadInfo.Name ?? fileName}</b> has been successfully uploaded.")
+                    .WithTextFormat(TextFormat.Xml);
+                successMessage.Attachments = [fileInfoAttachment];
+                await context.Send(successMessage);
             }
-
-            var uploadInfo = fileConsentResponse.UploadInfo;
-            var httpClient = httpClientFactory.CreateClient();
-            using var fileContent = new ByteArrayContent(fileData);
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-            fileContent.Headers.ContentRange = new ContentRangeHeaderValue(0, fileData.Length - 1, fileData.Length);
-
-            var uploadResponse = await httpClient.PutAsync(uploadInfo!.UploadUrl, fileContent, cancellationToken);
-            uploadResponse.EnsureSuccessStatusCode();
-
-            var fileInfoAttachment = TeamsAttachment.CreateBuilder()
-                .WithContentType(AttachmentContentTypes.FileInfoCard)
-                .WithName(uploadInfo.Name ?? fileName)
-                .WithContentUrl(uploadInfo.ContentUrl)
-                .WithContent(new { uniqueId = uploadInfo.UniqueId, fileType = uploadInfo.FileType })
-                .Build();
-
-            var successMessage = new MessageActivityInput()
-                .WithText($"<b>{uploadInfo.Name ?? fileName}</b> has been successfully uploaded.")
-                .WithTextFormat(TextFormats.Xml)
-                .AddAttachment(fileInfoAttachment);
-            await context.SendAsync(successMessage, cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            pendingUploads.TryRemove(fileId, out _);
-            Console.WriteLine($"File upload failed: {ex}");
-        }
+            catch (Exception ex)
+            {
+                pendingUploads.TryRemove(fileId, out _);
+                Console.WriteLine($"File upload failed: {ex}");
+            }
+        });
     }
-    else if (fileConsentResponse.Action == "decline")
+    else if (fileConsentResponse.Action == Microsoft.Teams.Api.Action.Decline)
     {
         pendingUploads.TryRemove(fileId, out _);
-        var declineMessage = new MessageActivityInput()
+        var declineMessage = new MessageActivity()
             .WithText($"Declined. We won't upload file <b>{fileName}</b>.")
-            .WithTextFormat(TextFormats.Xml);
-        await context.SendAsync(declineMessage, cancellationToken);
+            .WithTextFormat(TextFormat.Xml);
+        await context.Send(declineMessage);
     }
-
-    return AdaptiveCardResponse.CreateBuilder().WithStatusCode(200).Build();
 });
 
 webApp.Run();
 
 // Send a file consent card to request permission to upload a received file to OneDrive
-async Task SendFileConsentCard(Context<MessageActivity> context, string fileName, string fileId, int fileSize, CancellationToken cancellationToken)
+async Task SendFileConsentCard<T>(IContext<T> context, string fileName, string fileId, int fileSize) where T : IActivity
 {
-    var consentContext = new JsonObject
+    var consentContext = new { filename = fileName, file_id = fileId };
+
+    var fileCard = new FileConsentCard
     {
-        ["filename"] = fileName,
-        ["file_id"] = fileId
+        Description = "This is the file I want to send you",
+        SizeInBytes = fileSize,
+        AcceptContext = consentContext,
+        DeclineContext = consentContext
     };
 
-    var fileCard = new JsonObject
+    var message = new MessageActivity
     {
-        ["description"] = "This is the file I want to send you",
-        ["sizeInBytes"] = fileSize,
-        ["acceptContext"] = consentContext.DeepClone(),
-        ["declineContext"] = consentContext.DeepClone()
+        Attachments =
+        [
+            new Attachment
+            {
+                Content = fileCard,
+                ContentType = new ContentType(ContentTypeFileConsent),
+                Name = fileName
+            }
+        ]
     };
-
-    var attachment = TeamsAttachment.CreateBuilder()
-        .WithContent(fileCard)
-        .WithContentType(AttachmentContentTypes.FileConsentCard)
-        .WithName(fileName)
-        .Build();
-
-    await context.SendAsync(new MessageActivityInput().AddAttachment(attachment), cancellationToken);
+    await context.Send(message);
 }

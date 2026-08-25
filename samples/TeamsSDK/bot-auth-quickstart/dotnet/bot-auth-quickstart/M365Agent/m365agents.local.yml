@@ -48,13 +48,10 @@ provision:
     with:
       target: ../BotAuthQuickstart/appsettings.Development.json
       content:
-        AzureAd:
+        Teams:
           ClientId: ${{BOT_ID}}
+          ClientSecret: ${{SECRET_BOT_PASSWORD}}
           TenantId: ${{TEAMS_APP_TENANT_ID}}
-          ClientCredentials:
-            - SourceType: ClientSecret
-              ClientSecret: ${{SECRET_BOT_PASSWORD}}
-        OAuth:
           ConnectionName: ${{CONNECTION_NAME}}
 
   - uses: aadApp/update # Apply the AAD manifest to an existing AAD app. Will use the object id in manifest file to determine which AAD app to update.
