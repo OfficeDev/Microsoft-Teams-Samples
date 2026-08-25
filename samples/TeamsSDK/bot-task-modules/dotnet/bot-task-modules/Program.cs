@@ -1,38 +1,33 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.Teams.Plugins.AspNetCore.Extensions;
+using System.Text.Json;
 using Microsoft.Teams.Apps;
-using Microsoft.Teams.Apps.Activities;
-using Microsoft.Teams.Apps.Extensions;
-using Microsoft.Teams.Apps.Activities.Invokes;
-using Microsoft.Teams.Api.Activities;
-using Microsoft.Teams.Api;
-using Microsoft.Teams.Api.TaskModules;
+using Microsoft.Teams.Apps.Schema;
+using Microsoft.Teams.Apps.TaskModules;
 using Microsoft.Teams.Cards;
 using Microsoft.Teams.Common;
-using System.Text.Json;
-using AdaptiveCard = Microsoft.Teams.Cards.AdaptiveCard;
 using Action = Microsoft.Teams.Cards.Action;
-using Size = Microsoft.Teams.Api.TaskModules.Size;
-using Response = Microsoft.Teams.Api.TaskModules.Response;
+using TaskModuleTask = Microsoft.Teams.Apps.TaskModules.Response;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddTeams();
+builder.Services.AddTeamsBotApplication();
 
 var webApp = builder.Build();
-var teamsApp = webApp.UseTeams(true);
+var teams = webApp.UseTeamsBotApplication();
 
 webApp.MapGet("/customform", async context =>
 {
+    context.Response.ContentType = "text/html; charset=utf-8";
     await context.Response.SendFileAsync(Path.Combine(builder.Environment.ContentRootPath, "pages", "CustomForm", "index.html"));
 });
 
-var botEndpoint = builder.Configuration["BotEndpoint"];
-if (string.IsNullOrEmpty(botEndpoint))
-    throw new InvalidOperationException("No BotEndpoint detected. Using webpages will not work as expected");
+// Must be the publicly reachable tunnel URL for the webpage dialog to render in Teams.
+var botEndpoint = builder.Configuration["BotEndpoint"] is { Length: > 0 } configuredEndpoint
+    ? configuredEndpoint
+    : "http://localhost:3978";
 
-teamsApp.OnMessage(async (context) =>
+teams.OnMessage(async (context, cancellationToken) =>
 {
     var card = new AdaptiveCard
     {
@@ -40,132 +35,180 @@ teamsApp.OnMessage(async (context) =>
         {
             new TextBlock("Task Module Invocation from Adaptive Card") { Weight = TextWeight.Bolder, Size = TextSize.Large }
         },
-        Actions = new List<Microsoft.Teams.Cards.Action>
+        Actions = new List<Action>
         {
-            new TaskFetchAction(new Dictionary<string, object?> { { "data", "AdaptiveCard" } }) { Title = "Adaptive Card" },
-            new TaskFetchAction(new Dictionary<string, object?> { { "data", "CustomForm" } }) { Title = "Custom Form" },
-            new TaskFetchAction(new Dictionary<string, object?> { { "data", "MultiStep" } }) { Title = "Multi-step Form" }
+            CreateTaskFetchAction("Adaptive Card", "adaptive_card"),
+            CreateTaskFetchAction("Custom Form", "custom_form"),
+            CreateTaskFetchAction("Multi-step Form", "multi_step_form")
         }
     };
 
-    await context.Send(new MessageActivity 
-    { 
-        Attachments = new List<Attachment> 
-        { 
-            new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = card } 
-        } 
+    await context.SendAsync(
+        new MessageActivityInput().WithAdaptiveCardAttachment(ToCardJson(card)),
+        cancellationToken);
+});
+
+teams.OnTaskFetch((context, cancellationToken) =>
+{
+    var data = context.Activity.Value?.Data as JsonElement?;
+    var dialogType = data?.TryGetProperty("opendialogtype", out var dialogTypeElement) == true && dialogTypeElement.ValueKind == JsonValueKind.String
+        ? dialogTypeElement.GetString()
+        : null;
+
+    return Task.FromResult(dialogType switch
+    {
+        "adaptive_card" => CreateAdaptiveCardDialog(),
+        "custom_form" => CreateCustomFormDialog(botEndpoint),
+        "multi_step_form" => CreateMultiStepFormDialog(),
+        _ => TaskModuleResponse.CreateBuilder()
+            .WithType(TaskModuleResponseTypes.Message)
+            .WithMessage("Unknown dialog type")
+            .Build()
     });
 });
 
-teamsApp.OnTaskFetch(async (context) =>
+teams.OnTaskSubmit(async (context, cancellationToken) =>
 {
-    var activity = context.Activity;
-    var json = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize(activity));
-    var data = json.GetProperty("value").GetProperty("data").GetProperty("data").GetString();
-
-    TaskInfo taskInfo;
-
-    if (data == "CustomForm")
+    var data = context.Activity.Value?.Data as JsonElement?;
+    if (data == null)
     {
-        taskInfo = new TaskInfo
-        {
-            Title = "Custom Form",
-            Width = new Union<int, Size>(510),
-            Height = new Union<int, Size>(450),
-            Url = $"{botEndpoint}/customform",
-            FallbackUrl = $"{botEndpoint}/customform"
-        };
-    }
-    else if (data == "MultiStep")
-    {
-        var step1Card = new AdaptiveCard
-        {
-            Body = new List<CardElement>
-            {
-                new TextBlock("Step 1 of 2 - Your Name") { Size = TextSize.Large, Weight = TextWeight.Bolder },
-                new TextInput { Id = "name", Label = "Name", Placeholder = "Enter your name", IsRequired = true }
-            },
-            Actions = new List<Action> { new SubmitAction().WithTitle("Next").WithData(new Union<string, SubmitActionData>(new SubmitActionData { NonSchemaProperties = new Dictionary<string, object?> { { "submissiontype", "multi_step_1" } } })) }
-        };
-
-        taskInfo = new TaskInfo
-        {
-            Title = "Multi-step Form",
-            Width = new Union<int, Size>(400),
-            Height = new Union<int, Size>(300),
-            Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = step1Card }
-        };
-    }
-    else
-    {
-        var dialogCard = new AdaptiveCard
-        {
-            Body = new List<CardElement>
-            {
-                new TextBlock("Enter Text Here") { Weight = TextWeight.Bolder },
-                new TextInput { Id = "usertext", Placeholder = "add some text and submit", IsMultiline = true }
-            },
-            Actions = new List<Action> { new SubmitAction { Title = "Submit" } }
-        };
-
-        taskInfo = new TaskInfo
-        {
-            Title = "Adaptive Card: Inputs",
-            Width = new Union<int, Size>(400),
-            Height = new Union<int, Size>(200),
-            Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = dialogCard }
-        };
+        return TaskModuleResponse.CreateBuilder()
+            .WithType(TaskModuleResponseTypes.Message)
+            .WithMessage("No data found in the activity value")
+            .Build();
     }
 
-    return new Response(new ContinueTask(taskInfo));
-});
+    string? GetFormValue(string key)
+        => data.Value.TryGetProperty(key, out var value) && value.ValueKind == JsonValueKind.String
+            ? value.GetString()
+            : null;
 
-teamsApp.OnTaskSubmit(async (context) =>
-{
-    var activity = context.Activity;
-    var json = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize(activity));
-    var submitData = JsonSerializer.Deserialize<Dictionary<string, object>>(json.GetProperty("value").GetProperty("data").GetRawText());
-    var submissionType = submitData?.GetValueOrDefault("submissiontype")?.ToString();
-
-    if (submissionType == "multi_step_1")
+    switch (GetFormValue("submissiondialogtype"))
     {
-        var name = submitData["name"]?.ToString();
-        var step2Card = new AdaptiveCard
-        {
-            Body = new List<CardElement>
-            {
-                new TextBlock("Step 2 of 2 - Your Email") { Size = TextSize.Large, Weight = TextWeight.Bolder },
-                new TextInput { Id = "email", Label = "Email", Placeholder = "Enter your email", IsRequired = true }
-            },
-            Actions = new List<Action> { new SubmitAction().WithTitle("Submit").WithData(new Union<string, SubmitActionData>(new SubmitActionData { NonSchemaProperties = new Dictionary<string, object?> { { "submissiontype", "multi_step_2" }, { "name", name! } } })) }
-        };
+        case "multi_step_1":
+            return CreateMultiStepFormStep2Dialog(GetFormValue("name") ?? "Unknown");
 
-        var taskInfo = new TaskInfo
-        {
-            Title = "Multi-step Form: Step 2",
-            Width = new Union<int, Size>(400),
-            Height = new Union<int, Size>(300),
-            Card = new Attachment { ContentType = new ContentType("application/vnd.microsoft.card.adaptive"), Content = step2Card }
-        };
+        case "multi_step_2":
+            await context.SendAsync($"Hi {GetFormValue("name")}, thanks for submitting! Your email is {GetFormValue("email")}", cancellationToken);
+            return TaskModuleResponse.CreateBuilder()
+                .WithType(TaskModuleResponseTypes.Message)
+                .WithMessage("Multi-step form completed!")
+                .Build();
 
-        return new Response(new ContinueTask(taskInfo));
+        case "custom_form":
+            await context.SendAsync($"Hi {GetFormValue("name")}, thanks for submitting! Your email is {GetFormValue("email")}", cancellationToken);
+            return TaskModuleResponse.CreateBuilder()
+                .WithType(TaskModuleResponseTypes.Message)
+                .WithMessage("Form submitted successfully")
+                .Build();
+
+        default:
+            await context.SendAsync($"You submitted: {GetFormValue("usertext")}", cancellationToken);
+            return TaskModuleResponse.CreateBuilder()
+                .WithType(TaskModuleResponseTypes.Message)
+                .WithMessage("Thanks for submitting!")
+                .Build();
     }
-
-    if (submissionType == "multi_step_2")
-    {
-        await context.Send($"Hi {submitData["name"]}, thanks for submitting! Your email is {submitData["email"]}");
-        return new Response(new MessageTask("Multi-step form completed!"));
-    }
-
-    if (submissionType == "custom_form")
-    {
-        await context.Send($"Hi {submitData["name"]}, thanks for submitting! Your email is {submitData["email"]}");
-        return new Response(new MessageTask("Form submitted successfully"));
-    }
-
-    var usertext = submitData?.GetValueOrDefault("usertext")?.ToString();
-    await context.Send($"You submitted: {usertext}");
-    return new Response(new MessageTask("Thanks for submitting!"));
 });
 
 webApp.Run();
+
+static SubmitAction CreateTaskFetchAction(string title, string dialogType) => new()
+{
+    Title = title,
+    Data = new Union<string, SubmitActionData>(new SubmitActionData
+    {
+        Msteams = new TaskFetchSubmitActionData(),
+        NonSchemaProperties = new Dictionary<string, object?> { { "opendialogtype", dialogType } }
+    })
+};
+
+static SubmitAction CreateSubmitAction(string title, IDictionary<string, object?> data) => new()
+{
+    Title = title,
+    Data = new Union<string, SubmitActionData>(new SubmitActionData { NonSchemaProperties = data })
+};
+
+static InvokeResponse<TaskModuleResponse> CreateAdaptiveCardDialog()
+{
+    var card = new AdaptiveCard
+    {
+        Body = new List<CardElement>
+        {
+            new TextBlock("Enter Text Here") { Weight = TextWeight.Bolder },
+            new TextInput { Id = "usertext", Placeholder = "add some text and submit", IsMultiline = true }
+        },
+        Actions = new List<Action>
+        {
+            CreateSubmitAction("Submit", new Dictionary<string, object?> { { "submissiondialogtype", "adaptive_card" } })
+        }
+    };
+
+    return BuildCardDialog("Adaptive Card: Inputs", card, height: 200, width: 400);
+}
+
+// The TaskModuleResponse builder supports card dialogs only, so URL dialogs are built manually.
+static InvokeResponse<TaskModuleResponse> CreateCustomFormDialog(string botEndpoint)
+    => new(200, new TaskModuleResponse
+    {
+        Task = new TaskModuleTask
+        {
+            Type = TaskModuleResponseTypes.Continue,
+            Value = new
+            {
+                title = "Custom Form",
+                url = $"{botEndpoint}/customform",
+                fallbackUrl = $"{botEndpoint}/customform",
+                height = 450,
+                width = 510
+            }
+        }
+    });
+
+static InvokeResponse<TaskModuleResponse> CreateMultiStepFormDialog()
+{
+    var card = new AdaptiveCard
+    {
+        Body = new List<CardElement>
+        {
+            new TextBlock("Step 1 of 2 - Your Name") { Size = TextSize.Large, Weight = TextWeight.Bolder },
+            new TextInput { Id = "name", Label = "Name", Placeholder = "Enter your name", IsRequired = true }
+        },
+        Actions = new List<Action>
+        {
+            CreateSubmitAction("Next", new Dictionary<string, object?> { { "submissiondialogtype", "multi_step_1" } })
+        }
+    };
+
+    return BuildCardDialog("Multi-step Form", card, height: 300, width: 400);
+}
+
+static InvokeResponse<TaskModuleResponse> CreateMultiStepFormStep2Dialog(string name)
+{
+    var card = new AdaptiveCard
+    {
+        Body = new List<CardElement>
+        {
+            new TextBlock("Step 2 of 2 - Your Email") { Size = TextSize.Large, Weight = TextWeight.Bolder },
+            new TextInput { Id = "email", Label = "Email", Placeholder = "Enter your email", IsRequired = true }
+        },
+        Actions = new List<Action>
+        {
+            CreateSubmitAction("Submit", new Dictionary<string, object?> { { "submissiondialogtype", "multi_step_2" }, { "name", name } })
+        }
+    };
+
+    return BuildCardDialog("Multi-step Form: Step 2", card, height: 300, width: 400);
+}
+
+static InvokeResponse<TaskModuleResponse> BuildCardDialog(string title, AdaptiveCard card, int height, int width)
+    => TaskModuleResponse.CreateBuilder()
+        .WithType(TaskModuleResponseTypes.Continue)
+        .WithTitle(title)
+        .WithHeight(height)
+        .WithWidth(width)
+        .WithCard(TeamsAttachment.CreateBuilder().WithAdaptiveCard(ToCardJson(card)).Build())
+        .Build();
+
+// AdaptiveCard.Serialize() omits unset properties; JsonSerializer.SerializeToElement emits nulls that Teams rejects.
+static JsonElement ToCardJson(AdaptiveCard card) => JsonDocument.Parse(card.Serialize()).RootElement;

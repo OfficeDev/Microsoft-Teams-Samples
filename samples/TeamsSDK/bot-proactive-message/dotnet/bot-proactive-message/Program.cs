@@ -2,16 +2,13 @@
 // Licensed under the MIT License.
 
 using System.Collections.Concurrent;
-using Microsoft.Teams.Api.Activities;
 using Microsoft.Teams.Apps;
-using Microsoft.Teams.Apps.Activities;
-using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddTeams();
+builder.Services.AddTeamsBotApplication();
 
 var webApp = builder.Build();
-var teams = webApp.UseTeams();
+var teams = webApp.UseTeamsBotApplication();
 
 // This would be some persistent storage in a real app. It maps a user's
 // Microsoft Entra object id to the conversation id we can message them on.
@@ -21,24 +18,24 @@ var conversationIdStore = new ConcurrentDictionary<string, string>();
 // carries the conversation id, so any handler can capture it.
 teams.OnInstall(async (context, cancellationToken) =>
 {
-    SaveConversation(context.Activity.From.AadObjectId, context.Activity.Conversation.Id);
+    SaveConversation(context.Activity.From?.AadObjectId, context.Activity.Conversation?.Id);
 
-    await context.Send("Hi! I am going to remind you to say something to me soon!", cancellationToken);
+    await context.SendAsync("Hi! I am going to remind you to say something to me soon!", cancellationToken);
 
     // Queue up a proactive notification to be sent in 10 seconds.
-    ScheduleProactiveNotification(context.Activity.From.AadObjectId, TimeSpan.FromSeconds(10));
+    ScheduleProactiveNotification(context.Activity.From?.AadObjectId, TimeSpan.FromSeconds(10));
 });
 
 teams.OnMessage(async (context, cancellationToken) =>
 {
-    var userId = context.Activity.From.AadObjectId;
-    SaveConversation(userId, context.Activity.Conversation.Id);
+    var userId = context.Activity.From?.AadObjectId;
+    SaveConversation(userId, context.Activity.Conversation?.Id);
 
     var text = context.Activity.Text?.Trim().ToLowerInvariant() ?? string.Empty;
 
     if (text.Contains("remind"))
     {
-        await context.Send("Got it. I will send you a proactive message in 10 seconds.", cancellationToken);
+        await context.SendAsync("Got it. I will send you a proactive message in 10 seconds.", cancellationToken);
         ScheduleProactiveNotification(userId, TimeSpan.FromSeconds(10));
     }
     else if (text.Contains("notify"))
@@ -47,7 +44,7 @@ teams.OnMessage(async (context, cancellationToken) =>
     }
     else
     {
-        await context.Send(
+        await context.SendAsync(
             "Welcome to the proactive message bot! Send 'notify' to receive a proactive message right away, " +
             "or 'remind' to receive one in 10 seconds.",
             cancellationToken);
@@ -55,9 +52,9 @@ teams.OnMessage(async (context, cancellationToken) =>
 });
 
 // Saves the conversation id so it can be used for proactive messaging later.
-void SaveConversation(string? userId, string conversationId)
+void SaveConversation(string? userId, string? conversationId)
 {
-    if (string.IsNullOrEmpty(userId))
+    if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(conversationId))
     {
         return;
     }
@@ -95,7 +92,9 @@ async Task SendProactiveNotification(string? userId)
         return;
     }
 
-    await teams.Send(conversationId, new MessageActivity("Hey! It's been a while. How are you?"));
+    await teams.SendAsync(
+        conversationId,
+        new MessageActivityInput().WithText("Hey! It's been a while. How are you?"));
 }
 
 webApp.Run();
