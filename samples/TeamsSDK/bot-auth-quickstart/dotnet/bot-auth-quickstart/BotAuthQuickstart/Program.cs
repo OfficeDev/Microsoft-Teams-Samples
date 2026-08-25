@@ -1,147 +1,122 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.Teams.Api.Activities;
+using Microsoft.Graph;
+using Microsoft.Kiota.Abstractions.Authentication;
 using Microsoft.Teams.Apps;
-using Microsoft.Teams.Apps.Activities;
-using Microsoft.Teams.Apps.Events;
-using Microsoft.Teams.Apps.Extensions;
-using Microsoft.Teams.Extensions.Graph;
-using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionName = builder.Configuration["Teams:ConnectionName"];
+// Must match the OAuth connection name configured on the Azure Bot resource.
+var connectionName = builder.Configuration["OAuth:ConnectionName"] ?? "oauthbotsetting";
 
-builder.AddTeams(App.Builder().AddOAuth(connectionName));
+builder.Services.AddTeamsBotApplication(options =>
+{
+    options.AddOAuthFlow(connectionName, oauth =>
+    {
+        oauth.OAuthCardText = "Sign in to Microsoft Graph";
+        oauth.SignInButtonText = "Sign in";
+    });
+});
 
 var app = builder.Build();
-var teams = app.UseTeams();
+var teams = app.UseTeamsBotApplication();
+var graphAuth = teams.GetOAuthFlow(connectionName);
 
 var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("BotAuthQuickstart");
 
-// Helper function to handle authentication and create Graph client using Token pattern.
-async Task<Microsoft.Graph.GraphServiceClient?> GetAuthenticatedGraphClient(IContext<MessageActivity> context)
+// Handle successful sign-in
+graphAuth.OnSignInComplete(async (context, tokenResponse, cancellationToken) =>
 {
-    if (!context.IsSignedIn)
+    await context.SendAsync(
+        "✅ **Successfully signed in!**\n\n" +
+        "You can now use these commands:\n\n" +
+        "• **profile** - View your profile\n\n" +
+        "• **signout** - Sign out when done",
+        cancellationToken);
+});
+
+// Handle sign-in failures
+graphAuth.OnSignInFailure(async (context, failure, cancellationToken) =>
+{
+    logger.LogError("Sign-in failed: {Code} - {Message}", failure?.Code, failure?.Message);
+    await context.SendAsync($"❌ Sign-in failed: {failure?.Code} - {failure?.Message}", cancellationToken);
+});
+
+teams.OnMessage("signin", async (context, cancellationToken) =>
+{
+    var token = await graphAuth.SignInAsync(context, cancellationToken);
+
+    if (token is not null)
     {
-        await context.Send("🔐 Please sign in first to access Microsoft Graph.");
-        await context.SignIn();
-        return null;
+        await context.SendAsync("✅ You are already signed in!", cancellationToken);
+    }
+});
+
+teams.OnMessage("signout", async (context, cancellationToken) =>
+{
+    await graphAuth.SignOutAsync(context, cancellationToken);
+    await context.SendAsync("👋 You have been signed out successfully!", cancellationToken);
+});
+
+teams.OnMessage("profile", async (context, cancellationToken) =>
+{
+    var token = await graphAuth.SignInAsync(context, cancellationToken);
+
+    // A null token means an OAuth card was sent; the flow resumes on a later turn.
+    if (token is null)
+    {
+        return;
     }
 
     try
     {
-        return context.GetUserGraphClient();
-    }
-    catch (Exception ex)
-    {
-        logger.LogError(ex, "Failed to create Graph client");
-        await context.Send("🔐 Failed to create authenticated client. Trying to sign in again.");
-        await context.SignIn();
-        return null;
-    }
-}
+        var graphClient = new GraphServiceClient(
+            new BaseBearerTokenAuthenticationProvider(new StaticAccessTokenProvider(token)));
 
-// Handle sign-in command
-async Task HandleSignInCommand(IContext<MessageActivity> context)
-{
-    if (context.IsSignedIn)
-    {
-        await context.Send("✅ You are already signed in!");
-    }
-    else
-    {
-        await context.Send("🔐 Signing you in to access Microsoft Graph...");
-        await context.SignIn();
-    }
-}
+        var me = await graphClient.Me.GetAsync(cancellationToken: cancellationToken);
 
-// Handle sign-out command
-async Task HandleSignOutCommand(IContext<MessageActivity> context)
-{
-    if (!context.IsSignedIn)
-    {
-        await context.Send("ℹ️ You are not currently signed in.");
-    }
-    else
-    {
-        await context.SignOut();
-        await context.Send("👋 You have been signed out successfully!");
-    }
-}
-
-// Handle profile command using Graph API with TokenProtocol pattern.
-async Task HandleProfileCommand(IContext<MessageActivity> context)
-{
-    try
-    {
-        var graphClient = await GetAuthenticatedGraphClient(context);
-        if (graphClient == null)
+        if (me is null)
         {
+            await context.SendAsync("❌ Could not retrieve your profile information.", cancellationToken);
             return;
         }
 
-        var me = await graphClient.Me.GetAsync();
-
-        if (me != null)
-        {
-            var profileInfo =
-                "👤 **Your Profile**\n\n" +
-                $"**Name:** {me.DisplayName ?? "N/A"}\n\n" +
-                $"**Email:** {me.UserPrincipalName ?? "N/A"}\n\n" +
-                $"**Job Title:** {me.JobTitle ?? "N/A"}\n\n" +
-                $"**Department:** {me.Department ?? "N/A"}\n\n" +
-                $"**Office:** {me.OfficeLocation ?? "N/A"}";
-
-            await context.Send(profileInfo);
-        }
-        else
-        {
-            await context.Send("❌ Could not retrieve your profile information.");
-        }
+        await context.SendAsync(
+            "👤 **Your Profile**\n\n" +
+            $"**Name:** {me.DisplayName ?? "N/A"}\n\n" +
+            $"**Email:** {me.UserPrincipalName ?? "N/A"}\n\n" +
+            $"**Job Title:** {me.JobTitle ?? "N/A"}\n\n" +
+            $"**Department:** {me.Department ?? "N/A"}\n\n" +
+            $"**Office:** {me.OfficeLocation ?? "N/A"}",
+            cancellationToken);
     }
     catch (Exception ex)
     {
         logger.LogError(ex, "Error getting profile");
-        await context.Send($"❌ Failed to get your profile: {ex.Message}");
+        await context.SendAsync($"❌ Failed to get your profile: {ex.Message}", cancellationToken);
     }
-}
+});
 
-// Handle default message when no pattern matches
-async Task HandleDefaultMessage(IContext<MessageActivity> context)
+teams.OnMessage(async (context, cancellationToken) =>
 {
-    await context.Send(
+    await context.SendAsync(
         "👋 **Hello! I'm a Teams Auth Quickstart and Graph bot.**\n\n" +
         "**Available commands:**\n\n" +
         "• **signin** - Sign in to your Microsoft account\n\n" +
         "• **signout** - Sign out\n\n" +
-        "• **profile** - Show your profile information\n\n"
-    );
-}
-
-// Handle successful sign-in events
-teams.OnSignIn(async (_, @event) =>
-{
-    var context = @event.Context;
-    await context.Send(
-        "✅ **Successfully signed in!**\n\n" +
-        "You can now use these commands:\n\n" +
-        "• **profile** - View your profile\n\n" +
-        "• **signout** - Sign out when done"
-    );
-});
-
-// Handle messages - each command is a separate pattern match
-teams.OnMessage("signin", async context => await HandleSignInCommand(context));
-teams.OnMessage("signout", async context => await HandleSignOutCommand(context));
-teams.OnMessage("profile", async context => await HandleProfileCommand(context));
-teams.OnMessage(async context => await HandleDefaultMessage(context));
-
-// Handle error events
-teams.OnError(async (_, @event) =>
-{
-    logger.LogError(@event.Exception, "Error occurred");
+        "• **profile** - Show your profile information\n\n",
+        cancellationToken);
 });
 
 app.Run();
+
+internal sealed class StaticAccessTokenProvider(string token) : IAccessTokenProvider
+{
+    public AllowedHostsValidator AllowedHostsValidator { get; } = new();
+
+    public Task<string> GetAuthorizationTokenAsync(
+        Uri uri,
+        Dictionary<string, object>? additionalAuthenticationContext = null,
+        CancellationToken cancellationToken = default) => Task.FromResult(token);
+}
