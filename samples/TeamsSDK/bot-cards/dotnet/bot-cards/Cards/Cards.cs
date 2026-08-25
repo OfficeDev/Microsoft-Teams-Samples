@@ -1,18 +1,24 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.Teams.Cards;
-using Microsoft.Teams.Api.Activities;
-using Microsoft.Teams.Api;
-using Microsoft.Teams.Common;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Teams.Apps;
+using Microsoft.Teams.Cards;
+using Microsoft.Teams.Common;
 
 namespace Microsoft.Teams.Samples.BotCards.Handlers;
 
 public static class Cards
 {
-    // Send Adaptive Card with various actions
-    public static async Task SendAdaptiveCardActions<T>(IContext<T> context) where T : IActivity
+    // Null properties must be dropped, otherwise empty schema values such as "requires" break card rendering in Teams
+    private static readonly JsonSerializerOptions CardSerializerOptions = new()
+    {
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+    };
+
+    // Adaptive Card with various actions
+    public static MessageActivityInput CreateAdaptiveCardActionsActivity()
     {
         var adaptiveCard = new AdaptiveCard
         {
@@ -21,7 +27,7 @@ public static class Cards
             {
                 new TextBlock("Adaptive Card Actions")
             },
-            Actions = new List<Microsoft.Teams.Cards.Action>
+            Actions = new List<Teams.Cards.Action>
             {
                 new OpenUrlAction("https://adaptivecards.io")
                 {
@@ -43,7 +49,7 @@ public static class Cards
                                 ErrorMessage = "Name is required"
                             }
                         },
-                        Actions = new List<Microsoft.Teams.Cards.Action>
+                        Actions = new List<Teams.Cards.Action>
                         {
                             new ExecuteAction
                             {
@@ -70,7 +76,7 @@ public static class Cards
                         {
                             new TextBlock("This card's action will show another card")
                         },
-                        Actions = new List<Microsoft.Teams.Cards.Action>
+                        Actions = new List<Teams.Cards.Action>
                         {
                             new ShowCardAction
                             {
@@ -91,11 +97,11 @@ public static class Cards
             }
         };
 
-        await context.Send(adaptiveCard);
+        return CreateCardActivity(adaptiveCard);
     }
 
-    // Send Toggle Visibility Card
-    public static async Task SendToggleVisibilityCard<T>(IContext<T> context) where T : IActivity
+    // Toggle Visibility Card
+    public static MessageActivityInput CreateToggleVisibilityActivity()
     {
         var adaptiveCard = new AdaptiveCard
         {
@@ -110,7 +116,7 @@ public static class Cards
                     Size = TextSize.ExtraLarge
                 }
             },
-            Actions = new List<Microsoft.Teams.Cards.Action>
+            Actions = new List<Teams.Cards.Action>
             {
                 new ToggleVisibilityAction
                 {
@@ -120,6 +126,14 @@ public static class Cards
             }
         };
 
-        await context.Send(adaptiveCard);
+        return CreateCardActivity(adaptiveCard);
+    }
+
+    // SDK 2.1 requires cards to be serialized to JsonElement before being attached to an activity
+    private static MessageActivityInput CreateCardActivity(AdaptiveCard card)
+    {
+        JsonElement cardElement = JsonSerializer.SerializeToElement(card, CardSerializerOptions);
+        return new MessageActivityInput().WithAdaptiveCardAttachment(cardElement);
     }
 }
+
