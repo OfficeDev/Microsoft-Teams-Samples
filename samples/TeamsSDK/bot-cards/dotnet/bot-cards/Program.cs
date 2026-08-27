@@ -18,7 +18,7 @@ teamsApp.OnAdaptiveCardAction(async (context, cancellationToken) =>
 
     if (data is null || !data.TryGetValue("name", out var nameValue))
     {
-        return AdaptiveCardResponse.CreateMessageResponse("No data specified", 400);
+        return AdaptiveCardResponse.CreateMessageResponse("No data specified", 200);
     }
 
     var name = nameValue is JsonElement element ? element.GetString() : nameValue?.ToString();
