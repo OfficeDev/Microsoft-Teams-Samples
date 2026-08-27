@@ -40,9 +40,16 @@ teams.OnMessageSubmitFeedback(async (context, cancellationToken) =>
     // Teams sends the feedback form inputs as a JSON-encoded string.
     if (!string.IsNullOrEmpty(feedback?.Feedback))
     {
-        using JsonDocument feedbackDoc = JsonDocument.Parse(feedback.Feedback);
-        if (feedbackDoc.RootElement.TryGetProperty("feedbackText", out JsonElement feedbackTextProp))
-            feedbackText = feedbackTextProp.GetString() ?? feedbackText;
+        try
+        {
+            using JsonDocument feedbackDoc = JsonDocument.Parse(feedback.Feedback);
+            if (feedbackDoc.RootElement.TryGetProperty("feedbackText", out JsonElement feedbackTextProp))
+                feedbackText = feedbackTextProp.GetString() ?? feedbackText;
+        }
+        catch (JsonException)
+        {
+            feedbackText = feedback.Feedback;
+        }
     }
 
     await context.SendAsync($"Provided reaction: {reaction}<br> Feedback: {feedbackText}", cancellationToken);
