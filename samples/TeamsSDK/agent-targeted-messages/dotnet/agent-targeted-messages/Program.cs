@@ -579,7 +579,7 @@ async Task HandleAddReaction(Context<MessageActivity> context, string commandTex
         await context.Api.Conversations.AddReactionAsync(
             activity.Conversation!.Id,
             activity.Id!,
-            new ReactionType("1f44b_wavinghand"),
+            new ReactionType(reactionType),
             cancellationToken: cancellationToken);
         await context.SendAsync($"Added a **{reactionType}** reaction to your message!", cancellationToken);
         Console.WriteLine($"[REACTION] Added {reactionType} reaction to message {activity.Id}");
