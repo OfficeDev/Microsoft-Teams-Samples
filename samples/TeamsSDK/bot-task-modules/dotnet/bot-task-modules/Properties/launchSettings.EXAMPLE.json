@@ -9,7 +9,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "BotEndpoint": "YOUR_BotEndpoint",
-        "AzureAd__DangerouslyAllowUnauthenticatedRequests": "true"
+        "AzureAd__DangerouslyAllowUnauthenticatedRequests": "false"
       }
     },
     "teamsbot": {
