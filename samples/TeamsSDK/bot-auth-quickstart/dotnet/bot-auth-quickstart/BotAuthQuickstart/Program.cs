@@ -40,7 +40,7 @@ graphAuth.OnSignInComplete(async (context, tokenResponse, cancellationToken) =>
 graphAuth.OnSignInFailure(async (context, failure, cancellationToken) =>
 {
     logger.LogError("Sign-in failed: {Code} - {Message}", failure?.Code, failure?.Message);
-    await context.SendAsync($"❌ Sign-in failed: {failure?.Code} - {failure?.Message}", cancellationToken);
+    await context.SendAsync("❌ Sign-in failed. Please try again.", cancellationToken);
 });
 
 teams.OnMessage("signin", async (context, cancellationToken) =>
