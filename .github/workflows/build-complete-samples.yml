@@ -598,6 +598,10 @@ jobs:
               name: 'bot-task-modules'
               version: '3.12.x'
 
+            - project_path: 'samples/TeamsSDK/bot-proactive-message/python/bot-proactive-message'
+              name: 'bot-proactive-message'
+              version: '3.12.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
     defaults:

@@ -1,6 +1,6 @@
-# Bot Meetings - Python
+# Bot Proactive Message - Python
 
-This sample demonstrates a bot for Microsoft Teams that handles real-time meeting events (start, end, participant join/leave) and retrieves meeting transcripts via Microsoft Graph.
+This sample demonstrates how to send proactive messages to Microsoft Teams users using Python.
 
 ## Prerequisites
 
@@ -11,8 +11,9 @@ This sample demonstrates a bot for Microsoft Teams that handles real-time meetin
 
 1. Navigate to this directory:
    ```bash
-   cd python/bot-meetings
+   cd python/bot-proactive-message
    ```
+
 2. Run the bot using pip:
 
 ```bash
@@ -34,4 +35,4 @@ python main.py
 
 The bot will start listening on `http://localhost:3978`.
 
-Once the bot is running, follow the main [README.md](../../README.md) to provision your app and side-load it into Teams using the [Teams Developer CLI](https://microsoft.github.io/teams-sdk/cli/).
+Refer to the main [README.md](../../README.md) to interact with your bot in Teams.
