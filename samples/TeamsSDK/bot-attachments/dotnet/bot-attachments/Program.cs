@@ -87,8 +87,12 @@ teamsApp.OnFileConsent(async (context, cancellationToken) =>
     contextData?.TryGetValue("filename", out var fileName);
     contextData?.TryGetValue("file_id", out var fileId);
 
-    fileName ??= "file";
-    fileId ??= string.Empty;
+    var fileName = contextData != null && contextData.TryGetValue("filename", out var name) && !string.IsNullOrEmpty(name)
+        ? name
+        : "file";
+    var fileId = contextData != null && contextData.TryGetValue("file_id", out var id) && id != null
+        ? id
+        : string.Empty;
 
     if (fileConsentResponse.Action == "accept")
     {
