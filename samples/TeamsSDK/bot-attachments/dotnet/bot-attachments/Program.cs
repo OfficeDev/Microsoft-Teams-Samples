@@ -84,12 +84,8 @@ teamsApp.OnFileConsent(async context =>
         ? JsonSerializer.Deserialize<Dictionary<string, string>>((JsonElement)fileConsentResponse.Context)
         : null;
 
-    var fileName = contextData != null && contextData.TryGetValue("filename", out var name) && !string.IsNullOrEmpty(name)
-        ? name
-        : "file";
-    var fileId = contextData != null && contextData.TryGetValue("file_id", out var id) && id != null
-        ? id
-        : string.Empty;
+    var fileName = contextData?["filename"] ?? "file";
+    var fileId = contextData?["file_id"] ?? string.Empty;
 
     if (fileConsentResponse.Action == Microsoft.Teams.Api.Action.Accept)
     {
