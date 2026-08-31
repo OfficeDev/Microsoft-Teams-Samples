@@ -2,6 +2,8 @@
 
 This sample demonstrates a search-based messaging extension in Microsoft Teams that allows users to search for Wikipedia articles.
 
+It targets [Teams SDK for .NET 2.1](https://microsoft.github.io/teams-sdk/csharp/getting-started/quickstart) (`Microsoft.Teams.Apps`).
+
 ## Prerequisites
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
