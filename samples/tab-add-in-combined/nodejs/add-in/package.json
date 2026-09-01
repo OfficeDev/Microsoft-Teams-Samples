@@ -40,6 +40,7 @@
     "@types/office-runtime": "^1.0.37",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/uuid": "^10.0.0",
     "acorn": "^8.16.0",
     "babel-loader": "^10.1.1",
     "html-loader": "^5.1.0",
