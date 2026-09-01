@@ -84,9 +84,6 @@ teamsApp.OnFileConsent(async (context, cancellationToken) =>
         ? JsonSerializer.Deserialize<Dictionary<string, string>>((JsonElement)fileConsentResponse.Context)
         : null;
 
-    contextData?.TryGetValue("filename", out var fileName);
-    contextData?.TryGetValue("file_id", out var fileId);
-
     var fileName = contextData != null && contextData.TryGetValue("filename", out var name) && !string.IsNullOrEmpty(name)
         ? name
         : "file";
