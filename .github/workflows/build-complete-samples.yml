@@ -331,27 +331,27 @@ jobs:
 
             - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/js'
               name: 'tab-channel-group-sso-quickstart'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/js/api-server'
               name: 'tab-channel-group-sso-quickstart-api-server'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/ts'
               name: 'tab-channel-group-sso-quickstart'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/TeamsJS/tab-channel-group-sso-quickstart/ts/api-server'
               name: 'tab-channel-group-sso-quickstart'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/TeamsJS/tab-personal-quickstart/js'
               name: 'tab-personal-quickstart'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/TeamsJS/tab-personal-quickstart/ts'
               name: 'tab-personal-quickstart'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/TeamsJS/tab-personal-sso-quickstart/js'
               name: 'tab-personal-sso-quickstart'

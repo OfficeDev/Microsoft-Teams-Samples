@@ -1,20 +1,18 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 using Microsoft.Teams.Apps;
-using Microsoft.Teams.Apps.Activities;
-using Microsoft.Teams.Api.Activities;
-using Microsoft.Teams.Api.Clients;
+using Microsoft.Teams.Apps.Schema;
 
-// Initialize Teams App - automatically uses CLIENT_ID and CLIENT_SECRET from environment variables
+// Initialize Teams App - credentials are read from the AzureAd configuration section
 var builder = WebApplication.CreateBuilder(args);
-builder.AddTeams();
+builder.Services.AddTeamsBotApplication();
+
 var webApp = builder.Build();
-var teamsApp = webApp.UseTeams(true);
+TeamsBotApplication teamsApp = webApp.UseTeamsBotApplication();
 
 // Handle conversation update events (when bot is added or members join)
-teamsApp.OnConversationUpdate(async context =>
+teamsApp.OnMembersAdded(async (context, cancellationToken) =>
 {
     var membersAdded = context.Activity.MembersAdded;
     if (membersAdded != null)
@@ -24,14 +22,14 @@ teamsApp.OnConversationUpdate(async context =>
             // Check if bot was added to the conversation
             if (member.Id == context.Activity.Recipient?.Id)
             {
-                await SendWelcomeMessage(context);
+                await SendWelcomeMessage(context, cancellationToken);
             }
         }
     }
 });
 
 // Handles incoming messages and routes to appropriate functions based on message content
-teamsApp.OnMessage(async context =>
+teamsApp.OnMessage(async (context, cancellationToken) =>
 {
     // Get message text and normalize it
     var text = (context.Activity.Text ?? "").Trim().ToLower();
@@ -39,57 +37,62 @@ teamsApp.OnMessage(async context =>
     // Handle mention me command
     if (text.Contains("mentionme") || text.Contains("mention me"))
     {
-        await MentionUser(context);
+        await MentionUser(context, cancellationToken);
     }
     // Handle whoami command
     else if (text.Contains("whoami"))
     {
-        await GetSingleMember(context);
+        await GetSingleMember(context, cancellationToken);
     }
     // Handle welcome command
     else if (text.Contains("welcome"))
     {
-        await SendWelcomeMessage(context);
+        await SendWelcomeMessage(context, cancellationToken);
     }
     // Echo greeting messages
     else if (text.Contains("hi") || text.Contains("hello"))
     {
-        await EchoMessage(context, text);
+        await EchoMessage(context, text, cancellationToken);
     }
     else
     {
-        await SendWelcomeMessage(context);
+        await SendWelcomeMessage(context, cancellationToken);
     }
 });
 
 // Sends a welcome message
-async Task SendWelcomeMessage<T>(IContext<T> context) where T : IActivity
+async Task SendWelcomeMessage<T>(Context<T> context, CancellationToken cancellationToken) where T : TeamsActivity
 {
-    await context.Send("Welcome to the Teams Quickstart Bot!");
+    await context.SendAsync("Welcome to the Teams Quickstart Bot!", cancellationToken);
 }
 
 // Echo back the user's message
-async Task EchoMessage(IContext<MessageActivity> context, string text)
+async Task EchoMessage(Context<MessageActivity> context, string text, CancellationToken cancellationToken)
 {
-    await context.Send($"**Echo :** {text}");
+    await context.SendAsync($"**Echo :** {text}", cancellationToken);
 }
 
 // Retrieves and displays information about the current user
-async Task GetSingleMember(IContext<MessageActivity> context)
+async Task GetSingleMember(Context<MessageActivity> context, CancellationToken cancellationToken)
 {
-    await context.Send($"You are: {context.Activity.From.Name}");
+    await context.SendAsync($"You are: {context.Activity.From?.Name}", cancellationToken);
 }
 
 // Mention a user in a message
-async Task MentionUser(IContext<MessageActivity> context)
+async Task MentionUser(Context<MessageActivity> context, CancellationToken cancellationToken)
 {
     var member = context.Activity.From;
+    if (member is null)
+    {
+        return;
+    }
+
     var mentionText = $"<at>{member.Name}</at>";
-    var activity = new MessageActivity()
+    var activity = new MessageActivityInput()
         .WithText($"Hello {mentionText}")
         .AddMention(member, addText: false);
 
-    await context.Send(activity);
+    await context.SendAsync(activity, cancellationToken);
 }
 
 // Starts the Teams bot application and listens for incoming requests
