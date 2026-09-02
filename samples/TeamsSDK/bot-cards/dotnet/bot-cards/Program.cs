@@ -1,52 +1,53 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.Teams.Plugins.AspNetCore.Extensions;
+using System.Text.Json;
 using Microsoft.Teams.Apps;
-using Microsoft.Teams.Apps.Activities;
-using Microsoft.Teams.Apps.Activities.Invokes;
-using Microsoft.Teams.Api.Activities;
-using Microsoft.Teams.Api;
 using Microsoft.Teams.Samples.BotCards.Handlers;
 
-// Initialize Teams App - automatically uses CLIENT_ID and CLIENT_SECRET from environment variables
+// Initialize Teams App - reads Entra credentials from the AzureAd configuration section
 var builder = WebApplication.CreateBuilder(args);
-builder.AddTeams();
+builder.Services.AddTeamsBotApplication();
 var webApp = builder.Build();
-var teamsApp = webApp.UseTeams(true);
+TeamsBotApplication teamsApp = webApp.UseTeamsBotApplication();
 
 // Handles card action submissions
-teamsApp.OnAdaptiveCardAction(async context =>
+teamsApp.OnAdaptiveCardAction(async (context, cancellationToken) =>
 {
     var data = context.Activity.Value?.Action?.Data;
-    var name = data?["name"]?.ToString() ?? "";
-    await context.Send($"Data Submitted: {name}");
+
+    if (data is null || !data.TryGetValue("name", out var nameValue))
+    {
+        return AdaptiveCardResponse.CreateMessageResponse("No data specified", 200);
+    }
+
+    var name = nameValue is JsonElement element ? element.GetString() : nameValue?.ToString();
+    await context.SendAsync($"Data Submitted: {name}", cancellationToken);
+
+    return AdaptiveCardResponse.CreateMessageResponse("Action processed successfully");
 });
 
 // Handles incoming messages and routes to appropriate functions based on message content
-teamsApp.OnMessage(async context =>
+teamsApp.OnMessage(async (context, cancellationToken) =>
 {
     var text = (context.Activity.Text ?? "").Trim().ToLower();
 
     if (text.Contains("card actions"))
     {
-        await Cards.SendAdaptiveCardActions(context);
+        await context.SendAsync(Cards.CreateAdaptiveCardActionsActivity(), cancellationToken);
     }
     else if (text.Contains("toggle visibility"))
     {
-        await Cards.SendToggleVisibilityCard(context);
+        await context.SendAsync(Cards.CreateToggleVisibilityActivity(), cancellationToken);
     }
     else
     {
-        await SendWelcomeMessage(context);
+        await context.SendAsync(
+            "Welcome to the Cards Bot! To interact with me, send one of the following commands: 'card actions' or 'toggle visibility'",
+            cancellationToken);
     }
 });
 
 // Starts the Teams bot application and listens for incoming requests
 webApp.Run();
 
-// Sends a welcome message
-async Task SendWelcomeMessage<T>(IContext<T> context) where T : IActivity
-{
-    await context.Send("Welcome to the Cards Bot! To interact with me, send one of the following commands: 'card actions' or 'toggle visibility'");
-}

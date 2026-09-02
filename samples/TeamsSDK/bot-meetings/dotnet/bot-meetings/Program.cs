@@ -1,28 +1,43 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Azure.Identity;
 using Microsoft.Graph;
-using Microsoft.Teams.Plugins.AspNetCore.Extensions;
 using Microsoft.Teams.Apps;
-using Microsoft.Teams.Apps.Activities;
-using Microsoft.Teams.Apps.Activities.Events;
+using Microsoft.Teams.Apps.Meetings;
+using Microsoft.Teams.Apps.Schema;
 using Microsoft.Teams.Cards;
 
-// Initialize Teams App - automatically uses CLIENT_ID, CLIENT_SECRET, and TENANT_ID from environment variables
+// Initialize the Teams bot application - auth comes from the AzureAd/BotFramework configuration sections
 var builder = WebApplication.CreateBuilder(args);
-builder.AddTeams();
+builder.Services.AddTeamsBotApplication();
 var webApp = builder.Build();
-var teamsApp = webApp.UseTeams(true);
+var teamsApp = webApp.UseTeamsBotApplication();
 
 // AZURE_* credentials must be set to use secrets.
-Environment.SetEnvironmentVariable("AZURE_TENANT_ID", builder.Configuration["Teams:TenantId"] ?? "");
-Environment.SetEnvironmentVariable("AZURE_CLIENT_ID", builder.Configuration["Teams:ClientId"] ?? "");
-Environment.SetEnvironmentVariable("AZURE_CLIENT_SECRET", builder.Configuration["Teams:ClientSecret"] ?? "");
+Environment.SetEnvironmentVariable("AZURE_TENANT_ID", builder.Configuration["AzureAd:TenantId"] ?? "");
+Environment.SetEnvironmentVariable("AZURE_CLIENT_ID", builder.Configuration["AzureAd:ClientId"] ?? "");
+Environment.SetEnvironmentVariable("AZURE_CLIENT_SECRET", builder.Configuration["AzureAd:ClientCredentials:0:ClientSecret"] ?? "");
 
 var credential = new DefaultAzureCredential();
 var graphClient = new GraphServiceClient(credential, new[] { "https://graph.microsoft.com/.default" });
+
+// Resolve the Graph onlineMeeting id from the meeting's join URL
+async Task<string> GetOnlineMeetingIdAsync(string userId, string joinWebUrl)
+{
+    var escapedJoinUrl = joinWebUrl.Replace("'", "''", StringComparison.Ordinal);
+
+    var meetings = await graphClient.Users[userId]
+        .OnlineMeetings
+        .GetAsync(config =>
+        {
+            config.QueryParameters.Filter = $"JoinWebUrl eq '{escapedJoinUrl}'";
+        });
+
+    return meetings?.Value?.FirstOrDefault()?.Id ?? string.Empty;
+}
 
 // Method to retrieve meeting transcript
 async Task<string> GetMeetingTranscriptAsync(string meetingResourceId, string userId)
@@ -101,11 +116,15 @@ string ParseVtt(string vtt)
 }
 
 
+// Serialize an adaptive card into an attachment that can be sent with a message activity
+MessageActivityInput BuildCardMessage(AdaptiveCard card) =>
+    new MessageActivityInput().WithAdaptiveCardAttachment(JsonSerializer.SerializeToElement(card));
+
 // Register meeting participant join handler
-teamsApp.OnMeetingJoin(async context =>
+teamsApp.OnMeetingJoin(async (context, cancellationToken) =>
 {
     var activity = context.Activity.Value;
-    if (string.IsNullOrEmpty(activity.Members[0].User?.AadObjectId)) return;
+    if (activity is null || string.IsNullOrEmpty(activity.Members[0].User?.AadObjectId)) return;
 
     var member = activity.Members[0].User.Name;
     var role = activity.Members[0].Meeting?.Role ?? "a participant";
@@ -123,13 +142,14 @@ teamsApp.OnMeetingJoin(async context =>
         }
     };
 
-    await context.Send(card);
+    await context.SendAsync(BuildCardMessage(card), cancellationToken);
 });
 
 // Register meeting start handler
-teamsApp.OnMeetingStart(async context =>
+teamsApp.OnMeetingStart(async (context, cancellationToken) =>
 {
     var activity = context.Activity.Value;
+    if (activity is null) return;
 
     var card = new AdaptiveCard
     {
@@ -153,38 +173,41 @@ teamsApp.OnMeetingStart(async context =>
         },
         Actions = new List<Microsoft.Teams.Cards.Action>
         {
-            new OpenUrlAction(activity.JoinUrl)
+            new OpenUrlAction(activity.JoinUrl?.ToString() ?? string.Empty)
             {
                 Title = "Join Meeting"
             }
         }
     };
 
-    await context.Send(card);
+    await context.SendAsync(BuildCardMessage(card), cancellationToken);
 });
 
 // Register meeting end handler with transcript support
-teamsApp.OnMeetingEnd(async context =>
+teamsApp.OnMeetingEnd(async (context, cancellationToken) =>
 {
     var activity = context.Activity.Value;
+    if (activity is null) return;
+
     var meetingId = activity.Id;
-    
+
     // Get meeting info from API
-    var meetingInfo = await context.Api.Meetings.GetByIdAsync(meetingId);
+    var meetingInfo = await context.Api.Meetings.GetByIdAsync(meetingId, cancellationToken);
 
     // Retrieve the user ID of the organizer for the transcript API
-    var userId = "";
-    if (meetingInfo?.Organizer != null)
+    var userId = TeamsChannelAccount.FromChannelAccount(meetingInfo?.Organizer)?.AadObjectId ?? "";
+
+    // Look up the Graph onlineMeeting that matches this meeting's join URL
+    var joinUrl = (activity.JoinUrl ?? meetingInfo?.Details?.JoinUrl)?.ToString();
+    var msGraphResourceId = "";
+    if (!string.IsNullOrEmpty(joinUrl) && !string.IsNullOrEmpty(userId))
     {
-        userId = meetingInfo.Organizer.AadObjectId ?? "";
+        msGraphResourceId = await GetOnlineMeetingIdAsync(userId, joinUrl);
     }
 
-    // Get MS Graph Resource ID from meeting details
-    var msGraphResourceId = meetingInfo?.Details?.MSGraphResourceId;
-
     // Wait 30 seconds for the transcript to become available
-    await Task.Delay(30000);
-    
+    await Task.Delay(30000, cancellationToken);
+
     // Retrieve transcript
     var transcript = "";
     if (!string.IsNullOrEmpty(msGraphResourceId) && !string.IsNullOrEmpty(userId))
@@ -239,13 +262,15 @@ teamsApp.OnMeetingEnd(async context =>
         Body = cardBody
     };
 
-    await context.Send(card);
+    await context.SendAsync(BuildCardMessage(card), cancellationToken);
 });
 
 // Register meeting participant leave handler
-teamsApp.OnMeetingLeave(async context =>
+teamsApp.OnMeetingLeave(async (context, cancellationToken) =>
 {
     var activity = context.Activity.Value;
+    if (activity is null) return;
+
     var member = activity.Members[0].User.Name;
 
     var card = new AdaptiveCard
@@ -261,7 +286,7 @@ teamsApp.OnMeetingLeave(async context =>
         }
     };
 
-    await context.Send(card);
+    await context.SendAsync(BuildCardMessage(card), cancellationToken);
 });
 
 // Starts the Teams bot application and listens for incoming requests
