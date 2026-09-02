@@ -1,13 +1,28 @@
 {
+  "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "Start Project": {
+    "localhost": {
       "commandName": "Project",
       "dotnetRunMessages": true,
+      "launchBrowser": false,
       "applicationUrl": "http://localhost:3978",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "hotReloadProfile": "aspnetcore"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AzureAd__DangerouslyAllowUnauthenticatedRequests": "false"
+      }
+    },
+    "teamsbot": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:3978",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AzureAd__TenantId": "YOUR_TenantId",
+        "AzureAd__ClientId": "YOUR_ClientId",
+        "AzureAd__ClientCredentials__0__SourceType": "ClientSecret",
+        "AzureAd__ClientCredentials__0__ClientSecret": "YOUR_ClientSecret"
+      }
     }
   }
 }
