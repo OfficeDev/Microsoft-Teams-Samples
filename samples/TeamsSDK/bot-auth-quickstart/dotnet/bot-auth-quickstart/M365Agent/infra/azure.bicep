@@ -43,16 +43,20 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
           value: '1'
         }
         {
-          name: 'Teams__ClientId'
+          name: 'AzureAd__ClientId'
           value: identity.properties.clientId
         }
         {
-          name: 'Teams__TenantId'
+          name: 'AzureAd__TenantId'
           value: identity.properties.tenantId
         }
         {
-          name: 'Teams__BotType'
-          value: 'UserAssignedMsi'
+          name: 'AzureAd__ClientCredentials__0__SourceType'
+          value: 'SignedAssertionFromManagedIdentity'
+        }
+        {
+          name: 'AzureAd__ClientCredentials__0__ManagedIdentityClientId'
+          value: identity.properties.clientId
         }
       ]
       ftpsState: 'FtpsOnly'
