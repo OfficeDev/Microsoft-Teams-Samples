@@ -111,6 +111,12 @@ The CLI provisions a baseline Microsoft Entra app, but the meeting Graph API per
 
 ### 4. Configure Application Access Policy
 
+> [!IMPORTANT]
+>
+> * Whether you need this step depends on the kind of meeting you're working with.
+> * **Scheduled private chat meeting**: the `.Chat` RSC permissions in step 5 are sufficient and no application access policy is required.
+> * **Channel meeting**: `OnlineMeetingTranscript.Read.Chat` doesn't apply, so you need `OnlineMeetingTranscript.Read.All` plus the policy below, which requires a tenant administrator. See [Get callTranscript](https://learn.microsoft.com/graph/api/calltranscript-get).
+
 Online meeting application access policies cannot be configured through the Teams CLI; they must be created and granted via PowerShell.
 
 Follow this link - [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
