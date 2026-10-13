@@ -228,10 +228,10 @@ jobs:
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@871f041373faaad213a635d9afb62905ec029bbb # v1.10.1
         with:
           dotnet-version: "${{ matrix.version }}"
           include-prerelease: true
@@ -528,10 +528,10 @@ jobs:
       run:
         working-directory: "${{ matrix.project_path }}"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1.4.6
         with:
           node-version: "${{ matrix.version }}"
 
@@ -608,10 +608,10 @@ jobs:
       run:
         working-directory: "${{ matrix.project_path }}"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@7f4fc3e22c37d6ff65e88745f38bd3157c663f7c # v4.9.1
         with:
           python-version: "${{ matrix.version }}"
           cache: 'pip'
