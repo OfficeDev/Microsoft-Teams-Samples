@@ -5,7 +5,7 @@ using Microsoft.Teams.Apps;
 using Microsoft.Teams.Apps.Files;
 using Microsoft.Teams.Apps.Schema;
 using Microsoft.Teams.Core.Hosting;
-using Microsoft.Teams.Samples.BotAttachments.Models;
+using FileDownloadInfo = Microsoft.Teams.Samples.BotAttachments.Models.FileDownloadInfo;
 using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 using System.Text.Json;
