@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.11/yaml.schema.json
+# Default lifecycle (M365 Agents Toolkit). This bot is socket-ONLY: it receives activities from APX
+# over the Azure SignalR Default-mode socket, so there is NO dev tunnel and NO public messaging
+# endpoint. For local F5 debugging the toolkit uses teamsapp.local.yml.
+version: v1.11
+
+provision:
+  - uses: teamsApp/create
+    with:
+      name: Prkare Socket Test-${{TEAMSFX_ENV}}
+    writeToEnvironmentFile:
+      teamsAppId: TEAMS_APP_ID
+
+  - uses: aadApp/create
+    with:
+      name: prkare-default-mode-socket-bot-${{TEAMSFX_ENV}}
+      generateClientSecret: true
+      generateServicePrincipal: true
+      signInAudience: AzureADMyOrg
+    writeToEnvironmentFile:
+      clientId: BOT_ID
+      clientSecret: SECRET_BOT_PASSWORD
+      objectId: AAD_APP_OBJECT_ID
+      tenantId: AAD_APP_TENANT_ID
+
+  # Socket mode: messagingEndpoint is a required placeholder (botFramework/create rejects empty).
+  # It becomes the APS CallbackUrl, but net8 socket-first delivery bypasses it for connected bots.
+  - uses: botFramework/create
+    with:
+      botId: ${{BOT_ID}}
+      name: Prkare Socket Test
+      messagingEndpoint: "https://example.com/api/messages"
+      description: "Prkare Socket Test — Default-mode socket bot; receives over Azure
+        SignalR, no public endpoint."
+      channels:
+        - name: msteams
+
+  - uses: teamsApp/validateManifest
+    with:
+      manifestPath: ./appPackage/manifest.json
+
+  - uses: teamsApp/zipAppPackage
+    with:
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputFolder: ./appPackage/build
+
+  - uses: teamsApp/validateAppPackage
+    with:
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+  - uses: teamsApp/update
+    with:
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+deploy:
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.localConfigs
+      envs:
+        BOT_ID: ${{BOT_ID}}
+        BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        BOT_TENANT_ID: ${{AAD_APP_TENANT_ID}}
+        APX_BASE_URL: ${{APX_BASE_URL}}
+        DEFAULT_DIRECTIVE: ${{DEFAULT_DIRECTIVE}}
+        NODE_TLS_REJECT_UNAUTHORIZED: ${{NODE_TLS_REJECT_UNAUTHORIZED}}
+projectId: 469133cd-3e22-4e84-8968-2d622a28ddcb

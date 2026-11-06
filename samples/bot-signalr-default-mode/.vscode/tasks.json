@@ -1,0 +1,142 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start socket bot locally",
+      "dependsOn": [
+        "Free debug port",
+        "Validate prerequisites",
+        "npm install (socket bot)",
+        "Initialize env files (if missing)",
+        "Provision",
+        "Deploy",
+        "Start application"
+      ],
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "Debug prep (Edge)",
+      "dependsOn": [
+        "Start socket bot locally",
+        "Open Teams (Edge)"
+      ],
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "Debug prep (Chrome)",
+      "dependsOn": [
+        "Start socket bot locally",
+        "Open Teams (Chrome)"
+      ],
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "Open Teams (Edge)",
+      "type": "shell",
+      "command": "node scripts/open-teams.js edge",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Open Teams (Chrome)",
+      "type": "shell",
+      "command": "node scripts/open-teams.js chrome",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Free debug port",
+      "type": "shell",
+      "command": "node scripts/free-port.js 9239",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Initialize env files (if missing)",
+      "type": "shell",
+      "command": "node scripts/init-env.js",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Validate prerequisites",
+      "type": "teamsfx",
+      "command": "debug-check-prerequisites",
+      "args": {
+        "prerequisites": [
+          "nodejs",
+          "m365Account"
+        ]
+      }
+    },
+    {
+      "label": "npm install (socket bot)",
+      "type": "shell",
+      "command": "npm install --no-audit"
+    },
+    {
+      "label": "Provision",
+      "type": "teamsfx",
+      "command": "provision",
+      "args": {
+        "env": "local"
+      }
+    },
+    {
+      "label": "Deploy",
+      "type": "teamsfx",
+      "command": "deploy",
+      "args": {
+        "env": "local"
+      }
+    },
+    {
+      "label": "Start application",
+      "type": "shell",
+      "command": "npm run dev:teamsfx",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": {
+        "pattern": [
+          {
+            "regexp": "^.*$",
+            "file": 0,
+            "location": 1,
+            "message": 2
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "\\[nodemon\\] starting",
+          "endsPattern": "prkare-default-mode-socket-bot starting|connected to Azure SignalR|\\[nodemon\\] app crashed"
+        }
+      }
+    }
+  ]
+}

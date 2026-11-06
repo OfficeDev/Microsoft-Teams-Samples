@@ -1,0 +1,29 @@
+# Dependencies / build output
+node_modules/
+lib/
+dist/
+*.tsbuildinfo
+
+# Run logs (logs/socket-test-*.log) and anything else dropped in logs/, e.g. exported service logs
+logs/
+*.log
+
+# Secrets & local env -- NEVER commit (templates .env.example and env/*.sample ARE tracked)
+.env
+.env.local
+.env.*.local
+.localConfigs
+.localConfigs.*
+env/.env.*
+!env/.env.*.sample
+
+# Teams Toolkit generated output
+appPackage/build/
+devTools/
+
+# Local Redis lockfile / pid (if ever placed in-repo)
+*.pid
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

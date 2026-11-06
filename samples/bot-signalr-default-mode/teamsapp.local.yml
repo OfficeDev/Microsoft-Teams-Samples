@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.11/yaml.schema.json
+# Local-debug lifecycle (M365 Agents Toolkit: 'teamsapp provision/deploy --env local').
+# Full Teams app that installs into Teams for a 1:1 chat, but socket-ONLY: it receives activities from
+# APX over the Azure SignalR Default-mode socket, so there is NO dev tunnel and NO public messaging
+# endpoint. The bot registration uses a placeholder endpoint that is never called while the bot is
+# socket-connected and socket-eligible in APX.
+version: v1.11
+
+provision:
+  # Create (or reuse) the Teams app registration in Teams Developer Portal.
+  - uses: teamsApp/create
+    with:
+      name: Prkare Socket Test-${{TEAMSFX_ENV}}
+    writeToEnvironmentFile:
+      teamsAppId: TEAMS_APP_ID
+
+  # Create (or reuse) the bot's Microsoft Entra app (single-tenant). Its client id is the bot id /
+  # socket botKey; the client secret mints the Bot Framework JWT for the authenticated connect.
+  # Idempotent: reuses the app when BOT_ID is already set in env/.env.local, else mints a new one.
+  - uses: aadApp/create
+    with:
+      name: prkare-default-mode-socket-bot-${{TEAMSFX_ENV}}
+      generateClientSecret: true
+      generateServicePrincipal: true
+      signInAudience: AzureADMyOrg
+    writeToEnvironmentFile:
+      clientId: BOT_ID
+      clientSecret: SECRET_BOT_PASSWORD
+      objectId: AAD_APP_OBJECT_ID
+      tenantId: AAD_APP_TENANT_ID
+
+  # Socket mode: messagingEndpoint is a required placeholder (botFramework/create rejects empty).
+  # It becomes the bot's APS CallbackUrl, but net8 socket-first delivery bypasses it for connected bots.
+  - uses: botFramework/create
+    with:
+      botId: ${{BOT_ID}}
+      name: Prkare Socket Test
+      messagingEndpoint: "https://example.com/api/messages"
+      description: "Prkare Socket Test — Default-mode socket bot; receives over Azure SignalR, no public endpoint."
+      channels:
+        - name: msteams
+
+  # Validate, build, and publish the Teams app package.
+  - uses: teamsApp/validateManifest
+    with:
+      manifestPath: ./appPackage/manifest.json
+
+  - uses: teamsApp/zipAppPackage
+    with:
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputFolder: ./appPackage/build
+
+  - uses: teamsApp/validateAppPackage
+    with:
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+  # Apply the manifest to the Teams app in Teams Developer Portal (so install works).
+  - uses: teamsApp/update
+    with:
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+# Generate the runtime env the bot process reads (gitignored .localConfigs).
+deploy:
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.localConfigs
+      envs:
+        BOT_ID: ${{BOT_ID}}
+        BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        BOT_TENANT_ID: ${{AAD_APP_TENANT_ID}}
+        APX_BASE_URL: ${{APX_BASE_URL}}
+        DEFAULT_DIRECTIVE: ${{DEFAULT_DIRECTIVE}}
+        TENANT_IN_PATH: ${{TENANT_IN_PATH}}
+        NODE_TLS_REJECT_UNAUTHORIZED: ${{NODE_TLS_REJECT_UNAUTHORIZED}}

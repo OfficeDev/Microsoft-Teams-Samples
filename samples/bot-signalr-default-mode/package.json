@@ -1,0 +1,26 @@
+{
+  "name": "prkare-default-mode-socket-bot",
+  "version": "1.0.0",
+  "description": "Prkare Socket Test — Teams bot for APX Default-mode socket delivery over Azure SignalR. Installs into Teams for a 1:1 chat with no public endpoint; receives invokes/activities on the 'Activity' client method and replies via client results, sending outbound content over the HTTP conversation API. Targets APX Canary.",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "init:env": "node scripts/init-env.js",
+    "start": "node -r dotenv/config ./lib/index.js",
+    "dev": "nodemon --watch src --ext ts --exec \"node --inspect=9239 -r dotenv/config -r ts-node/register ./src/index.ts\"",
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev"
+  },
+  "dependencies": {
+    "@microsoft/signalr": "^8.0.7",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.0",
+    "env-cmd": "^10.1.0",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
