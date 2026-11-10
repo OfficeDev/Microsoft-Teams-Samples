@@ -13,7 +13,7 @@ import { startKeepAlive } from "./keepAlive";
 // socket. Closing a terminal doesn't always kill a detached node, and the --inspect port then just
 // collides while the orphan keeps its socket. A PID lockfile fixes it: on startup SIGTERM any prior
 // instance, then claim the lock.
-const LOCK_FILE = path.join(os.tmpdir(), "prkare-default-mode-socket-bot.lock");
+const LOCK_FILE = path.join(os.tmpdir(), "default-mode-socket-bot.lock");
 
 async function enforceSingleInstance(): Promise<void> {
   try {
@@ -139,7 +139,7 @@ async function main(): Promise<void> {
   freeInspectorPortIfBusy();
 
   console.log(
-    `prkare-default-mode-socket-bot starting. apx=${config.apxBaseUrl} regions=${config.regions.join(",")} ` +
+    `default-mode-socket-bot starting. apx=${config.apxBaseUrl} regions=${config.regions.join(",")} ` +
       `botKey=${config.botKey} defaultDirective=${config.defaultDirective}`
   );
 

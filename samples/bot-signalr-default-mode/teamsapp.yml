@@ -7,13 +7,13 @@ version: v1.11
 provision:
   - uses: teamsApp/create
     with:
-      name: Prkare Socket Test-${{TEAMSFX_ENV}}
+      name: Socket Test-${{TEAMSFX_ENV}}
     writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
 
   - uses: aadApp/create
     with:
-      name: prkare-default-mode-socket-bot-${{TEAMSFX_ENV}}
+      name: default-mode-socket-bot-${{TEAMSFX_ENV}}
       generateClientSecret: true
       generateServicePrincipal: true
       signInAudience: AzureADMyOrg
@@ -28,9 +28,9 @@ provision:
   - uses: botFramework/create
     with:
       botId: ${{BOT_ID}}
-      name: Prkare Socket Test
+      name: Socket Test
       messagingEndpoint: "https://example.com/api/messages"
-      description: "Prkare Socket Test — Default-mode socket bot; receives over Azure
+      description: "Socket Test — Default-mode socket bot; receives over Azure
         SignalR, no public endpoint."
       channels:
         - name: msteams

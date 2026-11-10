@@ -1,5 +1,5 @@
 // Teams requires the user to @-mention a bot in channels and group chats, so the inbound text arrives as
-// "<at>Prkare Socket Test</at> hi". APX delivers the raw Bot Framework activity over the socket, so there
+// "<at>Socket Test</at> hi". APX delivers the raw Bot Framework activity over the socket, so there
 // is no TurnContext here — this is the equivalent of TurnContext.removeRecipientMention for raw activities.
 
 export type ConversationScope = "personal" | "groupchat" | "channel" | "unknown";

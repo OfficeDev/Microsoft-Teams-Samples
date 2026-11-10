@@ -11,7 +11,7 @@
 // The main demo card sent as the reply to any user message.
 export function invokeDemoCard(statusText?: string): Record<string, unknown> {
   const body: Record<string, unknown>[] = [
-    { type: "TextBlock", text: "Prkare Socket Test", weight: "Bolder", size: "Large" },
+    { type: "TextBlock", text: "Socket Test", weight: "Bolder", size: "Large" },
     {
       type: "TextBlock",
       wrap: true,

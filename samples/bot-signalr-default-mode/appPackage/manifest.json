@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "id": "${{TEAMS_APP_ID}}",
     "developer": {
-        "name": "prkare",
+        "name": "Default-mode Socket Bot",
         "websiteUrl": "https://example.com",
         "privacyUrl": "https://example.com/privacy",
         "termsOfUseUrl": "https://example.com/termsofuse"
@@ -14,8 +14,8 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "Prkare Socket Test",
-        "full": "Prkare Socket Test (Default-mode socket bot)"
+        "short": "Socket Test",
+        "full": "Socket Test (Default-mode socket bot)"
     },
     "description": {
         "short": "APX Default-mode socket test bot (no public endpoint).",

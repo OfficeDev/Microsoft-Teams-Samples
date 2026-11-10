@@ -1,4 +1,4 @@
-# Prkare Socket Test — APX Default-mode socket bot
+# APX Default-mode socket bot
 
 A Teams bot that installs into Teams for a **1:1 chat**, but receives everything from **APX** over an
 **Azure SignalR Default-mode socket** — so it exposes **no public messaging endpoint and no dev
@@ -121,7 +121,7 @@ That's it. The `Start socket bot locally` task chain does the rest:
 
 Teams opens in a **single tab** of your normal (signed-in) Edge/Chrome — the bot is debugged via a Node
 attach, not a throwaway debug browser, so there is no second sign-in/redirect tab. Install the app and
-start a **1:1 chat** with **Prkare Socket Test**.
+start a **1:1 chat** with **Socket Test**.
 
 There is **no dev tunnel and no messaging endpoint** — the bot is reachable only via its outbound
 socket to Azure SignalR. To re-seed env files manually (e.g. outside VS Code), run `npm run init:env`.
@@ -134,7 +134,7 @@ npm install
 npm run build && npm run dev:teamsfx
 ```
 
-Expected: `prkare-default-mode-socket-bot starting. apx=https://botapi.skype.com regions=amer,emea,apac botKey=<appId> ...`
+Expected: `default-mode-socket-bot starting. apx=https://botapi.skype.com regions=amer,emea,apac botKey=<appId> ...`
 then `[socket] conn=connN region=<region> event=ready connectionId=...` for one socket in each region, and
 `[bot] phase=ready`. From then on `[keepalive]` logs each socket's scheduled refresh (60 s before its token
 expires).

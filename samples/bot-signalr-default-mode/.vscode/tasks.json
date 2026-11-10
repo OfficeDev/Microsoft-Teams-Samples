@@ -134,7 +134,7 @@
         "background": {
           "activeOnStart": true,
           "beginsPattern": "\\[nodemon\\] starting",
-          "endsPattern": "prkare-default-mode-socket-bot starting|connected to Azure SignalR|\\[nodemon\\] app crashed"
+          "endsPattern": "default-mode-socket-bot starting|connected to Azure SignalR|\\[nodemon\\] app crashed"
         }
       }
     }
