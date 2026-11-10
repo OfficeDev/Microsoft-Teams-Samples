@@ -1,7 +1,7 @@
 {
-  "name": "prkare-default-mode-socket-bot",
+  "name": "default-mode-socket-bot",
   "version": "1.0.0",
-  "description": "Prkare Socket Test — Teams bot for APX Default-mode socket delivery over Azure SignalR. Installs into Teams for a 1:1 chat with no public endpoint; receives invokes/activities on the 'Activity' client method and replies via client results, sending outbound content over the HTTP conversation API. Targets APX Canary.",
+  "description": "Teams bot for APX Default-mode socket delivery over Azure SignalR. Installs into Teams for a 1:1 chat with no public endpoint; receives invokes/activities on the 'Activity' client method and replies via client results, sending outbound content over the HTTP conversation API. Connects in every APX region (amer, emea, apac).",
   "private": true,
   "engines": { "node": ">=18" },
   "main": "./lib/index.js",

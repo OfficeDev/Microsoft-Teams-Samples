@@ -1,41 +1,38 @@
 import { HubConnectionState } from "@microsoft/signalr";
 import { NegotiateError, REPLACES_HEADER } from "./negotiate";
+import { config } from "./config";
 import { SocketSession } from "./socketClient";
 import { logEvent, logError } from "./log";
 import {
-  TARGET_CONNECTIONS,
   describeConnectError,
   drainAndClose,
   nextLabel,
   openFresh,
-  positiveInt,
   retire,
+  seconds,
+  regionSockets,
   setCloseListener,
   sleep,
-  slots,
 } from "./socketPool";
 
-// Keeps one socket open per slot for as long as the bot runs, the way the Teams SDKs should
+// Keeps one socket open per region for as long as the bot runs, the way the Teams SDKs should
 // (spec "Teams SDK changes for replacing a socket"):
 //   * Refresh: 60 s before a socket's token expires (expiresIn - 60 s from its connect), open a new socket with
 //     x-ms-socket-replaces-connection-id naming the old one, then drain the old socket (keep answering on it;
 //     close it once nothing is in flight and 5 s have passed). A 429 or other failure keeps the old socket
-//     serving and retries; if the old socket closes first, the slot reconnects without the header.
-//   * Reconnect: when a slot's socket closes without being replaced (server close, token expiry, network),
+//     serving and retries; if the old socket closes first, the region reconnects without the header.
+//   * Reconnect: when a region's socket closes without being replaced (server close, token expiry, network),
 //     connect again without the header, backing off 1 s .. 30 s (Retry-After on 429). A 401/403 means socket
-//     mode is off for the bot, so the slot stops (the SDKs do the same).
+//     mode is off for the bot, so the region stops (the SDKs do the same).
+//   * Each region is kept independently, so a problem in one region doesn't affect the others.
 //   * A replaced socket that closes, whether the bot or APX closed it, is never reconnected.
 
-// Refresh this long before the token expires.
+// Refresh this long before the token expires (expiresIn from the connect response).
 const REFRESH_LEAD_MS = 60 * 1000;
-
-// For trying refreshes without waiting for the token lifetime: refresh each socket this many seconds after it
-// is ready. Unset = refresh 60 s before expiry.
-const REFRESH_AFTER_SECONDS = positiveInt(process.env.SOCKET_REFRESH_AFTER_SECONDS, 0);
 
 const MAX_BACKOFF_MS = 30000;
 
-const keepers: SlotKeeper[] = [];
+const keepers: RegionKeeper[] = [];
 
 export function startKeepAlive(): void {
   setCloseListener((session, error) => {
@@ -45,31 +42,29 @@ export function startKeepAlive(): void {
   });
   logEvent("keepalive", {
     phase: "start",
-    slots: TARGET_CONNECTIONS,
-    refresh: REFRESH_AFTER_SECONDS
-      ? `${REFRESH_AFTER_SECONDS}s after each socket is ready (SOCKET_REFRESH_AFTER_SECONDS)`
-      : `${REFRESH_LEAD_MS / 1000}s before each token expires`,
+    regions: config.regions.join(","),
+    refresh: `${REFRESH_LEAD_MS / 1000}s before each token expires (expiresIn from the connect response)`,
     refreshMethod: `new socket with ${REPLACES_HEADER}, then drain and close the old one`,
   });
-  for (let slot = 1; slot <= TARGET_CONNECTIONS; slot++) {
-    const keeper = new SlotKeeper(slot);
+  for (const region of config.regions) {
+    const keeper = new RegionKeeper(region);
     keepers.push(keeper);
-    keeper.adopt(slots[slot - 1]);
+    keeper.adopt(regionSockets.get(region));
   }
 }
 
-class SlotKeeper {
+class RegionKeeper {
   private current: SocketSession | undefined;
   private timer: NodeJS.Timeout | undefined;
   private busy = false;
   private stopped = false;
   private backoffMs = 0;
 
-  constructor(private readonly slot: number) {}
+  constructor(private readonly region: string) {}
 
   adopt(session: SocketSession | undefined): void {
     if (!session || session.connection.state !== HubConnectionState.Connected) {
-      void this.reconnect("the slot has no open socket");
+      void this.reconnect("the region has no open socket");
       return;
     }
     this.current = session;
@@ -77,7 +72,7 @@ class SlotKeeper {
   }
 
   onSocketClosed(session: SocketSession, error?: Error): void {
-    // Only the slot's current socket matters: a replaced socket is never reconnected, and a socket the bot
+    // Only the region's current socket matters: a replaced socket is never reconnected, and a socket the bot
     // closed itself was closed on purpose.
     if (session !== this.current || session.closedByBot || this.stopped) {
       return;
@@ -87,7 +82,13 @@ class SlotKeeper {
       // A refresh is in progress; it reconnects if it can't replace the closed socket.
       return;
     }
-    void this.reconnect(`${session.label} closed: ${error?.message ?? "no error"}`);
+    const closedAt = session.closedAtMs ?? Date.now();
+    const vsExpiryMs = closedAt - session.negotiate.tokenExpiresAtMs;
+    const atExpiry = Math.abs(vsExpiryMs) <= 2 * 60 * 1000;
+    void this.reconnect(
+      `${session.label} closed by the server ${atExpiry ? "at token expiry" : "before token expiry"} ` +
+        `(${seconds(vsExpiryMs)}s vs exp, error: ${error?.message ?? "none"})`
+    );
   }
 
   private scheduleRefresh(): void {
@@ -96,11 +97,12 @@ class SlotKeeper {
     if (!session || this.stopped) {
       return;
     }
-    const refreshAt = REFRESH_AFTER_SECONDS
-      ? session.readyAtMs + REFRESH_AFTER_SECONDS * 1000
-      : session.negotiate.negotiatedAtMs + Math.max(session.negotiate.expiresIn * 500, session.negotiate.expiresIn * 1000 - REFRESH_LEAD_MS);
+    // expiresIn - 60 s after the connect returned. A lifetime under 2 min (never sent by APX) refreshes at half-life
+    // instead, so the refresh never fires immediately and loops.
+    const lifetimeMs = session.negotiate.expiresIn * 1000;
+    const refreshAt = session.negotiate.negotiatedAtMs + Math.max(lifetimeMs / 2, lifetimeMs - REFRESH_LEAD_MS);
     logEvent("keepalive", {
-      slot: this.slot,
+      region: this.region,
       conn: session.label,
       connectionId: session.connectionId,
       event: "refresh scheduled",
@@ -125,12 +127,12 @@ class SlotKeeper {
     try {
       const { index, label } = nextLabel();
       logEvent("flow", {
-        step: `refresh slot ${this.slot}`,
+        step: `refresh ${this.region}`,
         action: `open ${label} with ${REPLACES_HEADER}: ${old.connectionId} (replacing ${old.label})`,
-        reason: REFRESH_AFTER_SECONDS ? `${REFRESH_AFTER_SECONDS}s after ${old.label} was ready` : `${REFRESH_LEAD_MS / 1000}s before ${old.label}'s token expires`,
+        reason: `${REFRESH_LEAD_MS / 1000}s before ${old.label}'s token expires`,
       });
       try {
-        fresh = await openFresh(index, label, { slot: this.slot, replacesConnectionId: old.connectionId });
+        fresh = await openFresh(index, label, { region: this.region, replacesConnectionId: old.connectionId });
       } catch (e) {
         if (e instanceof NegotiateError && (e.status === 401 || e.status === 403)) {
           this.stop(`refresh refused with ${e.status}: socket mode is off for this bot`, e.cv);
@@ -139,7 +141,7 @@ class SlotKeeper {
         const retryMs = e instanceof NegotiateError && e.status === 429 ? (e.retryAfterSec ?? 15) * 1000 : this.nextBackoff();
         logError(
           "keepalive",
-          { slot: this.slot, event: "refresh failed", error: describeConnectError(e), keepServingOn: old.label, retryInMs: retryMs },
+          { region: this.region, event: "refresh failed", error: describeConnectError(e), keepServingOn: old.label, retryInMs: retryMs },
           e instanceof NegotiateError ? e.cv : undefined
         );
         this.timer = setTimeout(() => void this.refresh(), retryMs);
@@ -150,7 +152,7 @@ class SlotKeeper {
       this.current = fresh;
       logEvent("refresh <<", {
         mode: "header",
-        slot: this.slot,
+        region: this.region,
         result: "OK",
         newConn: fresh.label,
         newConnectionId: fresh.connectionId,
@@ -180,13 +182,13 @@ class SlotKeeper {
     try {
       for (let attempt = 1; !this.stopped; attempt++) {
         const { index, label } = nextLabel();
-        logEvent("flow", { step: `reconnect slot ${this.slot}`, attempt, reason, action: `open ${label} (no header)` });
+        logEvent("flow", { step: `reconnect ${this.region}`, attempt, reason, action: `open ${label} (no header)` });
         try {
-          const session = await openFresh(index, label, { slot: this.slot });
-          slots[this.slot - 1] = session;
+          const session = await openFresh(index, label, { region: this.region });
+          regionSockets.set(this.region, session);
           this.current = session;
           this.backoffMs = 0;
-          logEvent("keepalive", { slot: this.slot, event: "reconnected", conn: label, connectionId: session.connectionId, attempts: attempt });
+          logEvent("keepalive", { region: this.region, event: "reconnected", conn: label, connectionId: session.connectionId, attempts: attempt });
           this.scheduleRefresh();
           return;
         } catch (e) {
@@ -197,7 +199,7 @@ class SlotKeeper {
           const waitMs = e instanceof NegotiateError && e.status === 429 ? (e.retryAfterSec ?? 15) * 1000 : this.nextBackoff();
           logError(
             "keepalive",
-            { slot: this.slot, event: "reconnect failed", attempt, error: describeConnectError(e), retryInMs: waitMs },
+            { region: this.region, event: "reconnect failed", attempt, error: describeConnectError(e), retryInMs: waitMs },
             e instanceof NegotiateError ? e.cv : undefined
           );
           await sleep(waitMs);
@@ -211,7 +213,7 @@ class SlotKeeper {
   private stop(reason: string, cv?: string): void {
     this.stopped = true;
     this.clearTimer();
-    logError("keepalive", { slot: this.slot, event: "slot stopped", reason, note: "the bot no longer refreshes or reconnects this slot; restart it after socket mode is back on" }, cv);
+    logError("keepalive", { region: this.region, event: "region stopped", reason, note: "the bot no longer refreshes or reconnects this region; restart it after socket mode is back on" }, cv);
   }
 
   private nextBackoff(): number {

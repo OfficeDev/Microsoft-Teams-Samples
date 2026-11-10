@@ -1,7 +1,7 @@
 import {
   HubConnection,
   HubConnectionBuilder,
-  HubConnectionState,
+  IHttpConnectionOptions,
   ILogger,
   LogLevel,
 } from "@microsoft/signalr";
@@ -16,8 +16,8 @@ const SOCKET_READY_TIMEOUT_MS = 30000;
 export interface SocketSession {
   index: number;
   label: string;
-  // Which of the long-lived slots this socket serves (1..N); refreshes keep the slot and change the socket.
-  slot: number;
+  // The region this socket serves (amer, emea, apac). A refresh keeps the region and changes the socket.
+  region: string;
   connection: HubConnection;
   negotiate: NegotiateResult;
   connectedAtMs: number;
@@ -37,7 +37,7 @@ export interface SocketSession {
   // Set once a newer socket took over this socket's slot.
   retiredAtMs?: number;
   retiredBy?: string;
-  retiredMode?: "legacy" | "header";
+  retiredMode?: "header";
 }
 
 export interface SocketCallbacks {
@@ -46,7 +46,7 @@ export interface SocketCallbacks {
 }
 
 export interface OpenOptions {
-  slot: number;
+  region: string;
   // Sends x-ms-socket-replaces-connection-id with this server connectionId (refresh, new way).
   replacesConnectionId?: string;
 }
@@ -61,21 +61,21 @@ export interface OpenOptions {
 // separate `send`, no upstream webhook, and no correlation bookkeeping on either side.
 //
 // Resolves once APX's SocketReady has arrived, so the caller knows the connection id APX will route to.
-// There is deliberately no automatic reconnect and no token refresh: when Azure SignalR closes the socket
-// (e.g. at token expiry) the close is logged and the socket stays closed.
+// The SignalR client's automatic reconnect is off: every new socket needs a new connect call, so the
+// keep-alive (keepAlive.ts) refreshes sockets before their token expires and reconnects after a drop.
 export async function openSocket(
   index: number,
   label: string,
   callbacks: SocketCallbacks,
   options: OpenOptions
 ): Promise<SocketSession> {
-  const neg = await negotiate(label, options.replacesConnectionId);
+  const neg = await negotiate(label, options.region, options.replacesConnectionId);
   const conn = buildHub(neg, label);
 
   const session: SocketSession = {
     index,
     label,
-    slot: options.slot,
+    region: options.region,
     connection: conn,
     negotiate: neg,
     connectedAtMs: 0,
@@ -95,6 +95,7 @@ export async function openSocket(
   conn.on("SocketReady", (frame: any) => {
     logEvent("SocketReady <<", {
       conn: label,
+      region: options.region,
       dir: "APX->bot",
       protocolVersion: frame?.protocolVersion ?? frame?.ProtocolVersion,
       botKey: frame?.botKey ?? frame?.BotKey,
@@ -116,6 +117,7 @@ export async function openSocket(
   session.clientConnectionId = conn.connectionId ?? undefined;
   logEvent("socket", {
     conn: label,
+    region: options.region,
     event: "connected",
     note: "Azure SignalR (Default mode)",
     clientConnectionId: session.clientConnectionId,
@@ -136,6 +138,7 @@ export async function openSocket(
   session.connectionId = String(frame.connectionId ?? frame.ConnectionId ?? "");
   logEvent("socket", {
     conn: label,
+    region: options.region,
     event: "ready",
     connectionId: session.connectionId,
     clientConnectionId: session.clientConnectionId,
@@ -144,90 +147,62 @@ export async function openSocket(
   return session;
 }
 
-export interface DuplicateOutcome {
-  label: string;
-  started: boolean;
-  startError?: string;
-  clientConnectionId?: string;
-  gotSocketReady: boolean;
-  readyConnectionId?: string;
-  deliveries: number;
-  closed: boolean;
-  closedAfterMs?: number;
-  closeError?: string;
-  stoppedByBot: boolean;
-}
-
-// Opens a second socket with the SAME url and access token as `primary`. APX allows one socket per token:
-// its hub should abort this one before it joins the bot's group (no SocketReady) and keep the primary.
-// Only call this after the primary's SocketReady; two sockets opening on one token at the same moment
-// see each other and are both closed. Anything still open after `waitMs` is stopped here, so a duplicate
-// APX wrongly accepted can't hold a slot of the bot's connection limit.
-export async function openDuplicateSocket(
-  primary: SocketSession,
-  label: string,
-  onActivity: (envelope: any) => Promise<unknown>,
-  waitMs: number
-): Promise<DuplicateOutcome> {
-  const conn = buildHub(primary.negotiate, label);
-  const out: DuplicateOutcome = { label, started: false, gotSocketReady: false, deliveries: 0, closed: false, stoppedByBot: false };
-  let resolveSettled: () => void = () => undefined;
-  const settled = new Promise<void>((resolve) => (resolveSettled = resolve));
-  const startAt = Date.now();
-
-  conn.on("SocketReady", (frame: any) => {
-    out.gotSocketReady = true;
-    out.readyConnectionId = String(frame?.connectionId ?? frame?.ConnectionId ?? "");
-    logError("SocketReady <<", { conn: label, dir: "APX->bot", connectionId: out.readyConnectionId, note: "UNEXPECTED: APX accepted a second socket on a token another socket uses" });
-    resolveSettled();
-  });
-  conn.on("Activity", (envelope: any) => {
-    out.deliveries += 1;
-    logError("route <<", { conn: label, envelopeId: envelope?.envelopeId, note: "UNEXPECTED: delivery on the duplicate-token socket; answering it" });
-    return onActivity(envelope);
-  });
-  conn.onclose((e) => {
-    out.closed = true;
-    out.closedAfterMs = Date.now() - startAt;
-    out.closeError = e?.message;
-    logEvent("socket", {
-      conn: label,
-      event: "closed",
-      closedBy: out.stoppedByBot ? "bot" : "server",
-      closedAfterMs: out.closedAfterMs,
-      error: e?.message ?? "(none)",
-    });
-    resolveSettled();
-  });
-
-  try {
-    await conn.start();
-    out.started = true;
-    out.clientConnectionId = conn.connectionId ?? undefined;
-    logEvent("socket", { conn: label, event: "connected (transport)", clientConnectionId: out.clientConnectionId, startMs: Date.now() - startAt });
-  } catch (e) {
-    out.startError = (e as Error).message;
-    out.closedAfterMs = Date.now() - startAt;
-    logEvent("socket", { conn: label, event: "start failed", afterMs: out.closedAfterMs, error: out.startError });
-    return out;
-  }
-
-  if (!out.closed) {
-    await withTimeout(settled, waitMs);
-  }
-  if (conn.state !== HubConnectionState.Disconnected) {
-    out.stoppedByBot = true;
-    logError("socket", { conn: label, event: "still open", waitedMs: waitMs, gotSocketReady: out.gotSocketReady, note: "stopping the duplicate so it can't count against the limit" });
-    await conn.stop().catch(() => undefined);
-  }
-  return out;
-}
-
 function buildHub(neg: NegotiateResult, label: string): HubConnection {
+  // `WebSocket` is honored by the client (HttpConnection) but missing from the public options type.
+  const options: IHttpConnectionOptions & { WebSocket?: unknown } = {
+    accessTokenFactory: () => neg.accessToken,
+    WebSocket: closeLoggingWebSocket(label),
+  };
   return new HubConnectionBuilder()
-    .withUrl(neg.url, { accessTokenFactory: () => neg.accessToken })
+    .withUrl(neg.url, options)
     .configureLogging(signalrLogger(label))
     .build();
+}
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const WsWebSocket: any = require("ws");
+
+// The `ws` WebSocket the SignalR client uses in Node, extended to log the raw close code and reason the
+// service sends. The SignalR client reports a normal close (1000) as a plain disconnect without them, so this
+// is the only place the bot sees how Azure SignalR ended a socket (e.g. at token expiry). Only listens; adds no
+// behavior.
+function closeLoggingWebSocket(label: string): any {
+  return class extends WsWebSocket {
+    constructor(...args: any[]) {
+      super(...args);
+      const openedAt = Date.now();
+      this.on("close", (code: number, reason: Buffer | string) => {
+        const text = reason ? reason.toString() : "";
+        logEvent("ws", {
+          conn: label,
+          event: "websocket closed",
+          code,
+          codeMeaning: closeCodeMeaning(code),
+          reason: text || "(none)",
+          openSec: ((Date.now() - openedAt) / 1000).toFixed(1),
+        });
+      });
+    }
+  };
+}
+
+function closeCodeMeaning(code: number): string {
+  switch (code) {
+    case 1000:
+      return "normal closure";
+    case 1001:
+      return "going away";
+    case 1005:
+      return "no status code";
+    case 1006:
+      return "abnormal closure (no close frame)";
+    case 1008:
+      return "policy violation";
+    case 1011:
+      return "server error";
+    default:
+      return code >= 4000 ? "application-defined" : "other";
+  }
 }
 
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | undefined> {

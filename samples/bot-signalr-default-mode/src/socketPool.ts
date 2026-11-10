@@ -1,19 +1,15 @@
 import { HubConnectionState } from "@microsoft/signalr";
+import { config } from "./config";
 import { handleActivity } from "./handler";
 import { NegotiateError } from "./negotiate";
-import { openDuplicateSocket, openSocket, OpenOptions, SocketCallbacks, SocketSession } from "./socketClient";
+import { openSocket, OpenOptions, SocketCallbacks, SocketSession } from "./socketClient";
 import { logEvent, logError } from "./log";
 
-// Shared state for the bot's sockets: which socket serves each slot, the inbound delivery handler, close
-// handling, the bounded drain of a replaced socket and the same-token check. Used by the startup self-test
-// (selfTest.ts) and by the keep-alive that refreshes and reconnects sockets (keepAlive.ts).
-
-// Number of sockets the bot keeps open (APX's default per-bot limit is 3).
-export const TARGET_CONNECTIONS = positiveInt(process.env.SOCKET_CONNECTIONS, 3);
-
-// Startup self-test (limit probe, refresh scenarios) and the same-token check after every new socket.
-// SOCKET_SELF_TEST=false skips both and just keeps the sockets open.
-export const SELF_TEST_ENABLED = (process.env.SOCKET_SELF_TEST || "true").toLowerCase() !== "false";
+// Shared state for the bot's sockets, one per region: which socket serves each region, the inbound delivery
+// handler, close handling and the bounded drain of a replaced socket. Used by the keep-alive that refreshes and
+// reconnects sockets (keepAlive.ts).
+// Logged this long before a token expires, so the close that follows is easy to line up.
+const EXPIRY_HEADS_UP_MS = 60 * 1000;
 
 // APX caches a bot's connection list for 5s (SignalRSocketConnectionResolver); steps that change the set of
 // sockets wait a little longer than that before the next one.
@@ -21,9 +17,6 @@ export const STEP_GAP_MS = 6000;
 
 // Generous because a connect can transiently fail (e.g. a 503 from an instance that can't serve it).
 const MAX_INITIAL_CONNECT_ATTEMPTS = 20;
-
-// How long to wait for APX to close a second socket opened on an already-used token.
-const DUPLICATE_WAIT_MS = 10000;
 
 // Replacing a socket (spec "Teams SDK changes for replacing a socket"): keep answering on the old socket and
 // close it once nothing is in flight there and at least 5 s have passed since the new socket was ready (APX's
@@ -43,10 +36,8 @@ const CLOSED_SOCKET_RETENTION_MS = 15 * 60 * 1000;
 const EXPIRY_TOLERANCE_MS = 2 * 60 * 1000;
 
 export const sessions: SocketSession[] = [];
-// The socket currently serving each slot (index = slot - 1).
-export const slots: SocketSession[] = [];
-// Step results for the self-test summary.
-export const results: { step: string; expected: string; actual: string; asExpected: boolean }[] = [];
+// The socket currently serving each region.
+export const regionSockets = new Map<string, SocketSession>();
 
 const expiryTimers = new Map<SocketSession, NodeJS.Timeout[]>();
 // Deadline (arrival + deadlineMs) of each envelope still in flight, per socket, for the drain.
@@ -58,7 +49,7 @@ let closeListener: ((session: SocketSession, error?: Error) => void) | undefined
 
 export const callbacks: SocketCallbacks = { onActivity, onClosed };
 
-// Lets the keep-alive react to a socket closing (to reconnect its slot).
+// Lets the keep-alive react to a socket closing (to reconnect its region).
 export function setCloseListener(listener: (session: SocketSession, error?: Error) => void): void {
   closeListener = listener;
 }
@@ -68,53 +59,52 @@ export function nextLabel(): { index: number; label: string } {
   return { index, label: `conn${index}` };
 }
 
-// Opens a new socket and, with the self-test on, checks that APX refuses a second socket on the same token.
+// Opens a new socket and starts tracking it.
 export async function openFresh(index: number, label: string, options: OpenOptions): Promise<SocketSession> {
   const session = await openSocket(index, label, callbacks, options);
   track(session);
-  if (SELF_TEST_ENABLED) {
-    await sameTokenCheck(session);
-  }
   return session;
 }
 
-// Opens TARGET_CONNECTIONS sockets one after the other; each waits for APX's SocketReady (with the connection
-// id) before the next connect starts. Returns false if a socket can't be opened.
+// Opens one socket in each region, all regions at once; each socket waits for APX's SocketReady (with the
+// connection id). A region that can't open is left to the keep-alive, which keeps reconnecting it, so a problem in
+// one region doesn't affect the others. Returns false only if no region could be opened.
 export async function openInitialSockets(): Promise<boolean> {
-  logEvent("flow", { phase: `open ${TARGET_CONNECTIONS} sockets one after the other` });
-  for (let slot = 1; slot <= TARGET_CONNECTIONS; slot++) {
-    const session = await openWithRetry(slot);
-    if (!session) {
-      return false;
+  logEvent("flow", { phase: `open one socket per region: ${config.regions.join(", ")}` });
+  const opened = await Promise.all(config.regions.map((region) => openWithRetry(region)));
+  config.regions.forEach((region, i) => {
+    const session = opened[i];
+    if (session) {
+      regionSockets.set(region, session);
     }
-    slots[slot - 1] = session;
-  }
-  logEvent("test", { phase: "sockets open", live: liveCount(), connections: describeSlots() });
-  return true;
+  });
+  logEvent("flow", { phase: "sockets open", live: liveCount(), connections: describeRegions() });
+  return regionSockets.size > 0;
 }
 
-async function openWithRetry(slot: number): Promise<SocketSession | undefined> {
+async function openWithRetry(region: string): Promise<SocketSession | undefined> {
   const { index, label } = nextLabel();
   let backoffMs = 0;
   for (let attempt = 1; attempt <= MAX_INITIAL_CONNECT_ATTEMPTS; attempt++) {
-    logEvent("flow", { step: `open ${label}`, slot, attempt, liveBefore: liveCount() });
+    logEvent("flow", { step: `open ${label}`, region, attempt, liveBefore: liveCount() });
     try {
-      const session = await openFresh(index, label, { slot });
-      logEvent("test", { phase: "opened", conn: label, slot, connectionId: session.connectionId, liveNow: liveCount() });
+      const session = await openFresh(index, label, { region });
+      logEvent("flow", { phase: "opened", conn: label, region, connectionId: session.connectionId, liveNow: liveCount() });
       return session;
     } catch (e) {
       if (attempt === MAX_INITIAL_CONNECT_ATTEMPTS) {
-        logError("test", { phase: "giving up", conn: label, attempts: attempt, error: describeConnectError(e) });
+        logError("flow", { phase: "giving up for now; the keep-alive keeps reconnecting", conn: label, region, attempts: attempt, error: describeConnectError(e) });
         break;
       }
       let waitMs: number;
       if (e instanceof NegotiateError && e.status === 429) {
         waitMs = (e.retryAfterSec ?? 15) * 1000;
         logError(
-          "test",
+          "flow",
           {
             phase: "connect refused (429)",
             conn: label,
+            region,
             attempt,
             liveBefore: liveCount(),
             note: "APX still counts other sockets for this bot (e.g. another bot instance); waiting Retry-After",
@@ -125,7 +115,7 @@ async function openWithRetry(slot: number): Promise<SocketSession | undefined> {
       } else {
         backoffMs = backoffMs === 0 ? 1000 : Math.min(backoffMs * 2, 30000);
         waitMs = backoffMs;
-        logError("test", { phase: "connect failed", conn: label, attempt, maxAttempts: MAX_INITIAL_CONNECT_ATTEMPTS, retryInMs: waitMs, error: describeConnectError(e) });
+        logError("flow", { phase: "connect failed", conn: label, region, attempt, maxAttempts: MAX_INITIAL_CONNECT_ATTEMPTS, retryInMs: waitMs, error: describeConnectError(e) });
       }
       await sleep(waitMs);
     }
@@ -133,53 +123,12 @@ async function openWithRetry(slot: number): Promise<SocketSession | undefined> {
   return undefined;
 }
 
-// APX allows one socket per token: its hub aborts a socket whose token another socket already uses, before
-// that socket joins the bot's group, and logs "BotHub connect REJECTED". The first socket keeps serving.
-export async function sameTokenCheck(primary: SocketSession): Promise<void> {
-  const dupLabel = `${primary.label}-dup`;
-  const step = `same-token ${primary.label}`;
-  const expected = "2nd socket closed by APX without SocketReady; 1st socket stays open";
-  logEvent("flow", {
-    step,
-    action: `open ${dupLabel} with the same url + access token as ${primary.label}`,
-    tokenId: primary.negotiate.tokenId,
-    primaryConnectionId: primary.connectionId,
-    expected: `${expected} (APX log: BotHub connect REJECTED ... already uses this token)`,
-  });
-  const r = await openDuplicateSocket(primary, dupLabel, (env) => handleActivity(env), DUPLICATE_WAIT_MS);
-  // Give a wrongly closed primary a moment to show up as closed.
-  await sleep(1000);
-  const primaryState = primary.connection.state;
-  const rejectedByServer = !r.gotSocketReady && !r.stoppedByBot && (r.closed || !!r.startError);
-  const asExpected = rejectedByServer && primaryState === HubConnectionState.Connected;
-  const actual = rejectedByServer
-    ? `2nd socket ${r.startError ? "failed to start" : "closed by server"} after ${r.closedAfterMs}ms; 1st socket ${primaryState}`
-    : `2nd socket ${r.gotSocketReady ? "got SocketReady" : "stayed open"} (stopped by bot); 1st socket ${primaryState}`;
-  record(step, expected, actual, asExpected);
-  (asExpected ? logEvent : logError)("same-token <<", {
-    conn: primary.label,
-    dup: dupLabel,
-    tokenId: primary.negotiate.tokenId,
-    dupStarted: r.started,
-    dupStartError: r.startError,
-    dupClientConnectionId: r.clientConnectionId,
-    dupGotSocketReady: r.gotSocketReady,
-    dupDeliveries: r.deliveries,
-    dupClosedBy: r.stoppedByBot ? "bot (APX left it open)" : rejectedByServer ? "server" : "-",
-    dupClosedAfterMs: r.closedAfterMs,
-    dupCloseError: r.closeError ?? r.startError ?? "(none)",
-    primaryConnectionId: primary.connectionId,
-    primaryState,
-    asExpected,
-  });
-}
-
-// Marks `old` as replaced by `fresh` in its slot.
-export function retire(old: SocketSession, fresh: SocketSession, mode: "legacy" | "header"): void {
+// Marks `old` as replaced by `fresh` in its region.
+export function retire(old: SocketSession, fresh: SocketSession, mode: "header"): void {
   old.retiredAtMs = fresh.readyAtMs;
   old.retiredBy = fresh.label;
   old.retiredMode = mode;
-  slots[fresh.slot - 1] = fresh;
+  regionSockets.set(fresh.region, fresh);
 }
 
 // Keep answering on the old socket; close it once nothing is in flight there and at least 5 s have passed
@@ -227,10 +176,6 @@ export function track(session: SocketSession): void {
   }
 }
 
-export function record(step: string, expected: string, actual: string, asExpected: boolean): void {
-  results.push({ step, expected, actual, asExpected });
-}
-
 export function startStatusTimer(): void {
   logStatus("ready");
   setInterval(() => logStatus("periodic"), STATUS_INTERVAL_MS);
@@ -249,7 +194,7 @@ export function logStatus(reason: string): void {
     logEvent("status", {
       reason,
       conn: s.label,
-      slot: s.slot,
+      region: s.region,
       connectionId: s.connectionId,
       state: s.connection.state,
       openedAt: s.connectedAtMs ? new Date(s.connectedAtMs).toISOString() : undefined,
@@ -264,7 +209,7 @@ export function logStatus(reason: string): void {
       closeError: s.closeError,
     });
   }
-  logEvent("status", { reason, live: liveCount(), slots: describeSlots(), envelopes: totalEnvelopes, tally: tally() });
+  logEvent("status", { reason, live: liveCount(), regions: describeRegions(), envelopes: totalEnvelopes, tally: tally() });
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -291,7 +236,7 @@ async function onActivity(session: SocketSession, envelope: any): Promise<unknow
     "route <<",
     {
       conn: session.label,
-      slot: session.slot,
+      region: session.region,
       connectionId: session.connectionId,
       retired: session.retiredAtMs ? `${session.retiredMode} ${seconds(sinceRetireMs ?? 0)}s ago by ${session.retiredBy}` : undefined,
       note: unexpectedOnRetired
@@ -349,7 +294,7 @@ function onClosed(session: SocketSession, error?: Error): void {
 
   (session.closedByBot || session.retiredAtMs ? logEvent : logError)("socket", {
     conn: session.label,
-    slot: session.slot,
+    region: session.region,
     event: "closed",
     connectionId: session.connectionId || "(before SocketReady)",
     closedBy: session.closedByBot ? "bot" : "server/network",
@@ -365,28 +310,66 @@ function onClosed(session: SocketSession, error?: Error): void {
   });
 
   closeListener?.(session, error);
+
+  // One [expiry] line per server-side close of a socket that wasn't replaced, to grep the expiry results.
+  if (!session.closedByBot && !session.retiredAtMs) {
+    const nearExpiry = Math.abs(closedAt - expiresAt) <= EXPIRY_TOLERANCE_MS;
+    (nearExpiry ? logEvent : logError)("expiry", {
+      conn: session.label,
+      connectionId: session.connectionId,
+      event: "closed by server",
+      expiresIn: session.negotiate.expiresIn,
+      tokenExpiresAt: new Date(expiresAt).toISOString(),
+      closedAt: new Date(closedAt).toISOString(),
+      closedVsTokenExpirySec: seconds(closedAt - expiresAt),
+      openSec: session.connectedAtMs ? seconds(closedAt - session.connectedAtMs) : undefined,
+      closeError: error?.message ?? "(none)",
+      verdict,
+    });
+  }
 }
 
-// Logs when the token's exp is reached and, if the socket is still open shortly after, that the server
-// did not close it at expiry.
+// Logs the expected close time when a socket opens, a heads-up 60 s before its token expires, when exp is
+// reached and, if the socket is still open shortly after, that the server did not close it at expiry.
 function scheduleExpiryWatch(session: SocketSession): void {
   const untilExpiry = Math.max(0, session.negotiate.tokenExpiresAtMs - Date.now());
-  const atExpiry = setTimeout(() => {
-    logEvent("expiry", { conn: session.label, connectionId: session.connectionId, event: "token exp reached", state: session.connection.state });
-  }, untilExpiry);
-  const afterExpiry = setTimeout(() => {
-    if (session.connection.state !== HubConnectionState.Disconnected) {
-      logError("expiry", {
-        conn: session.label,
-        connectionId: session.connectionId,
-        event: "STILL OPEN after token expiry",
-        state: session.connection.state,
-        minutesPastExpiry: minutes(Date.now() - session.negotiate.tokenExpiresAtMs),
-        verdict: "server did NOT close the socket at token expiry",
-      });
-    }
-  }, untilExpiry + EXPIRY_TOLERANCE_MS);
-  expiryTimers.set(session, [atExpiry, afterExpiry]);
+  logEvent("expiry", {
+    conn: session.label,
+    connectionId: session.connectionId,
+    event: "watching",
+    expiresIn: session.negotiate.expiresIn,
+    lifetimeMin: minutes(session.negotiate.expiresIn * 1000),
+    tokenExpiresAt: new Date(session.negotiate.tokenExpiresAtMs).toISOString(),
+    expect: "refreshed before tokenExpiresAt",
+  });
+  const timers: NodeJS.Timeout[] = [];
+  if (untilExpiry > EXPIRY_HEADS_UP_MS) {
+    timers.push(
+      setTimeout(() => {
+        logEvent("expiry", { conn: session.label, connectionId: session.connectionId, event: "token expires in 60s", state: session.connection.state });
+      }, untilExpiry - EXPIRY_HEADS_UP_MS)
+    );
+  }
+  timers.push(
+    setTimeout(() => {
+      logEvent("expiry", { conn: session.label, connectionId: session.connectionId, event: "token exp reached", state: session.connection.state });
+    }, untilExpiry)
+  );
+  timers.push(
+    setTimeout(() => {
+      if (session.connection.state !== HubConnectionState.Disconnected) {
+        logError("expiry", {
+          conn: session.label,
+          connectionId: session.connectionId,
+          event: "STILL OPEN after token expiry",
+          state: session.connection.state,
+          minutesPastExpiry: minutes(Date.now() - session.negotiate.tokenExpiresAtMs),
+          verdict: "server did NOT close the socket at token expiry",
+        });
+      }
+    }, untilExpiry + EXPIRY_TOLERANCE_MS)
+  );
+  expiryTimers.set(session, timers);
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -413,27 +396,13 @@ function latestDeadline(session: SocketSession): number {
   return values.length ? Math.max(...values) : 0;
 }
 
-export function receivedWhileRetired(session: SocketSession): number {
-  return receivedAfterRetire.get(session) ?? 0;
-}
-
 // Open sockets the bot knows of.
 export function liveCount(): number {
   return sessions.filter((s) => s.connection.state === HubConnectionState.Connected).length;
 }
 
-// Open sockets still in the bot's group as APX sees it: everything open except old sockets of a header refresh,
-// which APX moved to the draining group.
-export function inGroupCount(): number {
-  return sessions.filter((s) => s.connection.state === HubConnectionState.Connected && s.retiredMode !== "header").length;
-}
-
-export function drainingCount(): number {
-  return sessions.filter((s) => s.connection.state === HubConnectionState.Connected && s.retiredMode === "header").length;
-}
-
-export function describeSlots(): string {
-  return slots.map((s) => `slot${s.slot}=${s.label}(${s.connectionId}, ${s.connection.state})`).join(" ");
+export function describeRegions(): string {
+  return [...regionSockets.values()].map((s) => `${s.region}=${s.label}(${s.connectionId}, ${s.connection.state})`).join(" ");
 }
 
 function tally(): string {
@@ -446,11 +415,6 @@ export function minutes(ms: number): string {
 
 export function seconds(ms: number): string {
   return (ms / 1000).toFixed(1);
-}
-
-export function positiveInt(raw: string | undefined, fallback: number): number {
-  const n = Number(raw);
-  return Number.isInteger(n) && n > 0 ? n : fallback;
 }
 
 export function sleep(ms: number): Promise<void> {

@@ -7,7 +7,8 @@
 //
 // adaptiveCard/action is verb-aware (invokeDemoCard's Action.Execute buttons) so each button yields a
 // visibly different socket response: refreshCard updates the card in place, showMessage shows a toast,
-// errorAction returns a message noting a simulated error. task/fetch returns a dialog over the socket.
+// errorAction returns a real Universal Actions error (statusCode 400, application/vnd.microsoft.error).
+// task/fetch returns a dialog over the socket.
 
 import { invokeDemoCard, refreshedCard, taskModuleCard } from "./cards";
 
@@ -50,6 +51,12 @@ function messageInvokeResponse(text: string): Record<string, unknown> {
   return { statusCode: 200, type: "application/vnd.microsoft.activity.message", value: text };
 }
 
+// Universal Actions error response. It travels inside a 200 reply: APX only parses the body of a 2xx, and its
+// ModernInvokeResponseParser requires type application/vnd.microsoft.error with non-empty value.code and value.message.
+function errorInvokeResponse(statusCode: number, code: string, message: string): Record<string, unknown> {
+  return { statusCode, type: "application/vnd.microsoft.error", value: { code, message } };
+}
+
 // Handles the adaptiveCard/action invoke (Action.Execute), branching on the button's verb.
 function handleAdaptiveCardAction(value: any): InvokeReply {
   const action = g(value, "action") || {};
@@ -64,9 +71,12 @@ function handleAdaptiveCardAction(value: any): InvokeReply {
     case "showmessage":
       return { status: 200, body: messageInvokeResponse(`Handled over the socket at ${nowIso}.`) };
     case "erroraction":
-      // The socket delivery/response itself succeeds (status 200); the body signals a simulated error
-      // so it's clearly visible in the client. (Use the `directive=error` path to test a 500 reply.)
-      return { status: 200, body: messageInvokeResponse("Simulated error response — returned over the socket.") };
+      // The socket reply itself succeeds (status 200); the body is the bot's error, which Teams shows as an
+      // error on the card. (Use the `directive=error` path to test a transport-level 500 reply.)
+      return {
+        status: 200,
+        body: errorInvokeResponse(400, "BadRequest", `Simulated error returned over the socket at ${nowIso}.`),
+      };
     default:
       return { status: 200, body: adaptiveCardInvokeResponse(200, invokeDemoCard(`Unknown verb '${verb}' handled over the socket.`)) };
   }

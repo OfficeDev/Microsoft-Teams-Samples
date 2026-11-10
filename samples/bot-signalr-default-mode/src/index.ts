@@ -5,8 +5,7 @@ import { execSync } from "child_process";
 import * as inspector from "inspector";
 import { config } from "./config";
 import { initFileLog, logEvent } from "./log";
-import { SELF_TEST_ENABLED, TARGET_CONNECTIONS, logStatus, openInitialSockets, startStatusTimer } from "./socketPool";
-import { runSelfTest } from "./selfTest";
+import { logStatus, openInitialSockets, startStatusTimer } from "./socketPool";
 import { startKeepAlive } from "./keepAlive";
 
 // Single-instance guard. An orphaned bot process survives APX restarts (resilient reconnect) and
@@ -140,24 +139,17 @@ async function main(): Promise<void> {
   freeInspectorPortIfBusy();
 
   console.log(
-    `prkare-default-mode-socket-bot starting. apx=${config.apxBaseUrl} botKey=${config.botKey} ` +
-      `defaultDirective=${config.defaultDirective}`
+    `prkare-default-mode-socket-bot starting. apx=${config.apxBaseUrl} regions=${config.regions.join(",")} ` +
+      `botKey=${config.botKey} defaultDirective=${config.defaultDirective}`
   );
 
-  logEvent("bot", {
-    phase: "start",
-    sockets: TARGET_CONNECTIONS,
-    selfTest: SELF_TEST_ENABLED ? "on (limit probe, refresh scenarios, same-token checks)" : "off (SOCKET_SELF_TEST=false)",
-  });
+  logEvent("bot", { phase: "start", regions: config.regions.join(","), socketsPerRegion: 1 });
 
-  // Open the sockets one after the other, run the startup self-test once, then keep the sockets alive:
-  // refresh each one 60 s before its token expires (replaces header + drain) and reconnect after a drop.
+  // Open one socket in each region, then keep them alive: refresh each one 60 s before its token expires
+  // (replaces header + drain) and reconnect after a drop. Each region is kept independently.
   if (!(await openInitialSockets())) {
-    console.error("[bot] could not open the sockets. Exiting.");
+    console.error("[bot] could not open a socket in any region. Exiting.");
     process.exit(1);
-  }
-  if (SELF_TEST_ENABLED) {
-    await runSelfTest();
   }
   startKeepAlive();
   logEvent("bot", { phase: "ready", next: "use the bot from Teams; each delivery logs a [route <<] line with the socket it arrived on" });
