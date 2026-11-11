@@ -1,5 +1,5 @@
 // Real Teams invoke handling — builds the appropriate Bot Framework invoke-response BODY for a given
-// invoke name, mirroring prem-test-me-bot's response shapes (compose-extension result,
+// invoke name, mirroring test-me-bot's response shapes (compose-extension result,
 // AdaptiveCardInvokeResponse, task module, signin, default/unknown). The socket bot returns these as
 // the client-results reply frame's { status, body }, exactly as the HTTP bot returns
 // { status, JSON(body) } — so APX's InvokeHelper.ProcessInvokeResponse sees the same shape on both
@@ -83,7 +83,7 @@ function handleAdaptiveCardAction(value: any): InvokeReply {
 }
 
 // Maps an invoke `name` to its { status, body }. Unknown names fall through to a benign default,
-// matching prem-test-me-bot's onInvokeActivity default branch.
+// matching test-me-bot's onInvokeActivity default branch.
 export function buildInvokeResponse(name: string | undefined, value: any): InvokeReply {
   const n = (name || "").toLowerCase();
   switch (n) {

@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "id": "${{TEAMS_APP_ID}}",
     "developer": {
-        "name": "Default-mode Socket Bot",
+        "name": "Microsoft",
         "websiteUrl": "https://example.com",
         "privacyUrl": "https://example.com/privacy",
         "termsOfUseUrl": "https://example.com/termsofuse"
@@ -18,8 +18,8 @@
         "full": "Socket Test (Default-mode socket bot)"
     },
     "description": {
-        "short": "APX Default-mode socket test bot (no public endpoint).",
-        "full": "Test bot that receives invokes and activities from APX over an Azure SignalR Default-mode socket and responds over the socket via client results, sending any content replies over the HTTP conversation API. It exposes no public messaging endpoint."
+        "short": "ACS Default-mode socket test bot (no public endpoint).",
+        "full": "Test bot that receives invokes and activities from ACS over an Azure SignalR Default-mode socket and responds over the socket via client results, sending any content replies over the HTTP conversation API. It exposes no public messaging endpoint."
     },
     "accentColor": "#3690E9",
     "supportsChannelFeatures": "tier1",

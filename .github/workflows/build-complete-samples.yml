@@ -521,6 +521,10 @@ jobs:
               name: 'tab-add-in-combined'
               version: '20.x'
 
+            - project_path: 'samples/bot-signalr-default-mode/nodejs'
+              name: 'bot-signalr-default-mode'
+              version: '26.x'
+
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
