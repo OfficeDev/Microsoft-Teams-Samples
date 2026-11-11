@@ -25,8 +25,7 @@ export async function getBotFrameworkToken(): Promise<string> {
   if (!config.botPassword) {
     throw new Error(
       "BOT_PASSWORD (client secret) is required for the authenticated connect. It is provisioned as " +
-        "SECRET_BOT_PASSWORD and mapped to BOT_PASSWORD in .localConfigs. Point APX_BASE_URL at a local " +
-        "DEBUG APX to use the unauthenticated ?botKey= override instead."
+        "SECRET_BOT_PASSWORD and mapped to BOT_PASSWORD in .localConfigs."
     );
   }
 

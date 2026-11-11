@@ -139,7 +139,7 @@ async function main(): Promise<void> {
   freeInspectorPortIfBusy();
 
   console.log(
-    `default-mode-socket-bot starting. apx=${config.apxBaseUrl} regions=${config.regions.join(",")} ` +
+    `default-mode-socket-bot starting. connect=https://{region}.botapi.skype.com regions=${config.regions.join(",")} ` +
       `botKey=${config.botKey} defaultDirective=${config.defaultDirective}`
   );
 

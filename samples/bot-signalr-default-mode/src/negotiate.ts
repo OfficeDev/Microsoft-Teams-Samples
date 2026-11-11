@@ -33,38 +33,26 @@ export class NegotiateError extends Error {
   }
 }
 
-// The public APX host. Its per-region hosts ({region}.botapi.skype.com) always reach that region's front end,
-// wherever the bot runs, while botapi.skype.com itself goes to the front end nearest the bot.
-const PUBLIC_APX_HOST = "botapi.skype.com";
-const REGIONS_WITH_OWN_HOST = new Set(["amer", "emea", "apac", "eudb"]);
+// APX's per-region connect host. Each region's host always reaches that region's front end, wherever the bot runs, so
+// the socket lands on the SignalR resource that delivers that region's traffic.
+const CONNECT_HOST_SUFFIX = "botapi.skype.com";
 
-// The URL the connect call goes to. On the public host, each region connects through its own host so its socket lands
-// on the SignalR resource that delivers that region's traffic. Any other host (Canary, Pilot1, a local APX) is used as
-// is. Only the connect call goes through here; the bot's other calls to APX (replies) use the activity's serviceUrl.
-export function connectUrlFor(connectPath: string, region: string): URL {
-  const url = new URL(connectPath);
-  const normalizedRegion = region.toLowerCase();
-  if (config.geoConnectHost && url.hostname.toLowerCase() === PUBLIC_APX_HOST && REGIONS_WITH_OWN_HOST.has(normalizedRegion)) {
-    url.hostname = `${normalizedRegion}.${PUBLIC_APX_HOST}`;
-  }
-  return url;
+// The URL of the connect call for a region: https://{region}.botapi.skype.com/{region}/v3/websockets/connect
+// (or the tenantized route). Only connect calls (opening, refreshing and reconnecting a region's socket) use it; the
+// bot's other calls to APX (replies) go to the serviceUrl of the incoming activity.
+export function connectUrlFor(region: string, tenantId?: string): URL {
+  const r = region.toLowerCase();
+  const path = tenantId ? `/${r}/${tenantId}/v3/websockets/connect` : `/${r}/v3/websockets/connect`;
+  return new URL(`https://${r}.${CONNECT_HOST_SUFFIX}${path}`);
 }
 
-// POST {apxBaseUrl}/{region}/v3/websockets/connect, on {region}.botapi.skype.com for the public host (connectUrlFor).
-// Authenticated with a Bot Framework JWT when BOT_PASSWORD is set; APX derives the botKey from the validated
-// token. A DEBUG local APX honors ?botKey=<MsaAppId> when the request is unauthenticated.
+// POST https://{region}.botapi.skype.com/{region}/v3/websockets/connect, authenticated with a Bot Framework JWT;
+// APX derives the botKey from the validated token.
 export async function negotiate(label: string | undefined, region: string, replacesConnectionId?: string): Promise<NegotiateResult> {
-  const base = `${config.apxBaseUrl.replace(/\/+$/, "")}/${region}`;
-
   // The plain route {region}/v3/websockets/connect is the default. TENANT_IN_PATH=true forces the tenantized
-  // route {region}/{tenantId}/v3/websockets/connect (needs TenantIdInPathRoutesEnabled in the ring); a local
-  // DEBUG ?botKey= run always keeps the plain route.
-  const useTenantPath =
-    config.tenantInPath && !!config.botPassword && !!config.botTenantId;
-  const connectPath = useTenantPath
-    ? `${base}/${config.botTenantId}/v3/websockets/connect`
-    : `${base}/v3/websockets/connect`;
-  const url = connectUrlFor(connectPath, region);
+  // route {region}/{tenantId}/v3/websockets/connect (needs TenantIdInPathRoutesEnabled in the ring).
+  const useTenantPath = config.tenantInPath && !!config.botTenantId;
+  const url = connectUrlFor(region, useTenantPath ? config.botTenantId : undefined);
   logEvent("negotiate >>", {
     conn: label,
     region,
@@ -82,12 +70,8 @@ export async function negotiate(label: string | undefined, region: string, repla
     headers[REPLACES_HEADER] = replacesConnectionId;
   }
 
-  if (config.botPassword) {
-    const token = await getBotFrameworkToken();
-    headers["authorization"] = `Bearer ${token}`;
-  } else if (config.botKey) {
-    url.searchParams.set("botKey", config.botKey);
-  }
+  const token = await getBotFrameworkToken();
+  headers["authorization"] = `Bearer ${token}`;
 
   const startedAtMs = Date.now();
   const res = await fetch(url.toString(), {

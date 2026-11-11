@@ -1,4 +1,4 @@
-# APX Default-mode socket bot
+# Socket Test — APX Default-mode socket bot
 
 A Teams bot that installs into Teams for a **1:1 chat**, but receives everything from **APX** over an
 **Azure SignalR Default-mode socket** — so it exposes **no public messaging endpoint and no dev
@@ -16,11 +16,10 @@ no manual copy step.
 ## What it does
 
 1. `POST https://{region}.botapi.skype.com/{region}/v3/websockets/connect` for each region (`amer`, `emea`,
-   `apac`), authenticated with a real **Bot Framework JWT** minted from the bot's client secret ->
+   `apac` by default), authenticated with a real **Bot Framework JWT** minted from the bot's client secret ->
    `{ url, accessToken, expiresIn, protocolVersion }`. Each region's own host always reaches that region's front
-   end, so the socket lands on the SignalR resource that delivers the region's traffic; the global
-   `botapi.skype.com` would send every region to the front end nearest the bot. Only connect uses the per-region
-   host; replies go to the activity's `serviceUrl` as before.
+   end, so the socket lands on the SignalR resource that delivers the region's traffic. Only connect calls use the
+   per-region host; every other call (replies) goes to the `serviceUrl` of the incoming activity.
 2. Opens a SignalR WebSocket to the negotiated **Azure SignalR** `url` and joins the bot's group.
 3. Receives APX->bot frames on the **`Activity`** client method (a `SocketActivityEnvelope`):
    - **invoke** (`type:"invoke"`) -> computes the Bot Framework invoke response and **returns** it as
@@ -130,11 +129,11 @@ socket to Azure SignalR. To re-seed env files manually (e.g. outside VS Code), r
 
 ```bash
 npm install
-# set BOT_ID / BOT_PASSWORD / BOT_TENANT_ID / APX_BASE_URL in .localConfigs (or provision once), then:
+# set BOT_ID / BOT_PASSWORD / BOT_TENANT_ID (and optionally APX_REGIONS) in .localConfigs (or provision once), then:
 npm run build && npm run dev:teamsfx
 ```
 
-Expected: `default-mode-socket-bot starting. apx=https://botapi.skype.com regions=amer,emea,apac botKey=<appId> ...`
+Expected: `default-mode-socket-bot starting. connect=https://{region}.botapi.skype.com regions=amer,emea,apac botKey=<appId> ...`
 then `[socket] conn=connN region=<region> event=ready connectionId=...` for one socket in each region, and
 `[bot] phase=ready`. From then on `[keepalive]` logs each socket's scheduled refresh (60 s before its token
 expires).
@@ -147,16 +146,14 @@ expires).
 
 | var | meaning |
 |---|---|
-| `APX_BASE_URL` | APX connect host, without a region: `https://botapi.skype.com` (default). Local DEBUG APX: `https://localhost:444`. A trailing region (e.g. `/amer`) is ignored. |
-| `APX_REGIONS` | regions to connect in, one socket each (default `amer,emea,apac`). For a local DEBUG APX use `amer`. |
-| `APX_GEO_CONNECT_HOST` | `true` (default) = when `APX_BASE_URL` is `https://botapi.skype.com`, connect through each region's own host (`https://{region}.botapi.skype.com`). `false` = connect through `APX_BASE_URL` as is. Other hosts (Canary, Pilot1, a local APX) are always used as is. Only the connect call is affected. |
+| `APX_REGIONS` | regions to connect in, one socket each (comma-separated; default `amer,emea,apac`; `eudb` is also supported, other values are ignored). Each region connects at `https://{region}.botapi.skype.com/{region}/v3/websockets/connect`; the connect host isn't configurable. |
 | `BOT_ID` | the bot's MSA AppId = socket botKey. APX derives the key from the validated token. |
 | `BOT_PASSWORD` | the bot's client secret (provisioned as `SECRET_BOT_PASSWORD`). Required for the authenticated connect. |
 | `BOT_TENANT_ID` | the bot's home tenant (single-tenant Entra app) = the Bot Framework token issuer APX validates. Also the tenant put in the connect path when `TENANT_IN_PATH=true`. |
 | `TENANT_IN_PATH` | `false` (default) = plain route `{region}/v3/websockets/connect`. `true` = tenantized route `{region}/{tenantId}/v3/websockets/connect`, which needs `TenantIdInPathRoutesEnabled` in the ring. |
 | `TEAMS_APP_ID` | the Teams app id (provisioned); used by the F5 launch URL. |
 | `DEFAULT_DIRECTIVE` | behavior when an invoke/activity carries no `value.directive` (ok/error/delay/drop). |
-| `NODE_TLS_REJECT_UNAUTHORIZED` | `1` = validate TLS (production); `0` = accept a self-signed local APX dev cert. Must be non-empty for the toolkit. |
+| `NODE_TLS_REJECT_UNAUTHORIZED` | keep `1` (validate TLS). Must be non-empty for the toolkit. |
 
 Secrets (`SECRET_BOT_PASSWORD`) live in `env/.env.local.user` (gitignored, encrypted by the toolkit).
 
