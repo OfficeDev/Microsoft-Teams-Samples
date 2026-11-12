@@ -7,7 +7,7 @@ tunnel**. It accepts invokes and one-way activities over the socket and responds
 the socket-mode design intends.
 
 Set up like a normal M365 Agents Toolkit bot: **F5 does all the registration** (Teams app + Entra app
-+ Bot Framework) and opens Teams in the browser to install the app — minus the tunnel/endpoint steps.
+Bot Framework) and opens Teams in the browser to install the app — minus the tunnel/endpoint steps.
 The gitignored env files are **auto-seeded from their `.sample` templates on first run**, so there is
 no manual copy step.
 
