@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to socket bot",
+      "type": "node",
+      "request": "attach",
+      "port": 9239,
+      "restart": true,
+      "presentation": {
+        "group": "all",
+        "hidden": true
+      },
+      "internalConsoleOptions": "neverOpen"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug in Teams (Edge)",
+      "configurations": [
+        "Attach to socket bot"
+      ],
+      "preLaunchTask": "Debug prep (Edge)",
+      "presentation": {
+        "group": "group 1: Teams",
+        "order": 1
+      },
+      "stopAll": true
+    },
+    {
+      "name": "Debug in Teams (Chrome)",
+      "configurations": [
+        "Attach to socket bot"
+      ],
+      "preLaunchTask": "Debug prep (Chrome)",
+      "presentation": {
+        "group": "group 1: Teams",
+        "order": 2
+      },
+      "stopAll": true
+    }
+  ]
+}

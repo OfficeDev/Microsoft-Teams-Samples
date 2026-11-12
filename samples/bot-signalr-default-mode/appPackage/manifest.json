@@ -1,0 +1,60 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.25/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.25",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://example.com",
+        "privacyUrl": "https://example.com/privacy",
+        "termsOfUseUrl": "https://example.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Socket Test",
+        "full": "Socket Test (Default-mode socket bot)"
+    },
+    "description": {
+        "short": "ACS Default-mode socket test bot (no public endpoint).",
+        "full": "Test bot that receives invokes and activities from ACS over an Azure SignalR Default-mode socket and responds over the socket via client results, sending any content replies over the HTTP conversation API. It exposes no public messaging endpoint."
+    },
+    "accentColor": "#3690E9",
+    "supportsChannelFeatures": "tier1",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "isNotificationOnly": false,
+            "supportsFiles": false,
+            "commandLists": [
+                {
+                    "scopes": [
+                        "personal",
+                        "team",
+                        "groupChat"
+                    ],
+                    "commands": [
+                        {
+                            "title": "hi",
+                            "description": "Echo the message over the socket and post the invoke-demo card"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}
