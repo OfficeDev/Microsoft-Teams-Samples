@@ -2,7 +2,7 @@
 // invoke name, mirroring test-me-bot's response shapes (compose-extension result,
 // AdaptiveCardInvokeResponse, task module, signin, default/unknown). The socket bot returns these as
 // the client-results reply frame's { status, body }, exactly as the HTTP bot returns
-// { status, JSON(body) } — so APX's InvokeHelper.ProcessInvokeResponse sees the same shape on both
+// { status, JSON(body) } — so ACS's InvokeHelper.ProcessInvokeResponse sees the same shape on both
 // transports.
 //
 // adaptiveCard/action is verb-aware (invokeDemoCard's Action.Execute buttons) so each button yields a
@@ -17,7 +17,7 @@ export interface InvokeReply {
   body?: unknown;
 }
 
-// Case-insensitive property read (APX camelCases the envelope; stay robust to any casing change).
+// Case-insensitive property read (ACS camelCases the envelope; stay robust to any casing change).
 function g(obj: any, name: string): any {
   if (obj == null) return undefined;
   if (obj[name] !== undefined) return obj[name];
@@ -51,7 +51,7 @@ function messageInvokeResponse(text: string): Record<string, unknown> {
   return { statusCode: 200, type: "application/vnd.microsoft.activity.message", value: text };
 }
 
-// Universal Actions error response. It travels inside a 200 reply: APX only parses the body of a 2xx, and its
+// Universal Actions error response. It travels inside a 200 reply: ACS only parses the body of a 2xx, and its
 // ModernInvokeResponseParser requires type application/vnd.microsoft.error with non-empty value.code and value.message.
 function errorInvokeResponse(statusCode: number, code: string, message: string): Record<string, unknown> {
   return { statusCode, type: "application/vnd.microsoft.error", value: { code, message } };

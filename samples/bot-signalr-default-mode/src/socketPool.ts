@@ -11,7 +11,7 @@ import { logEvent, logError } from "./log";
 // Logged this long before a token expires, so the close that follows is easy to line up.
 const EXPIRY_HEADS_UP_MS = 60 * 1000;
 
-// APX caches a bot's connection list for 5s (SignalRSocketConnectionResolver); steps that change the set of
+// ACS caches a bot's connection list for 5s (SignalRSocketConnectionResolver); steps that change the set of
 // sockets wait a little longer than that before the next one.
 export const STEP_GAP_MS = 6000;
 
@@ -19,13 +19,13 @@ export const STEP_GAP_MS = 6000;
 const MAX_INITIAL_CONNECT_ATTEMPTS = 20;
 
 // Replacing a socket (spec "Teams SDK changes for replacing a socket"): keep answering on the old socket and
-// close it once nothing is in flight there and at least 5 s have passed since the new socket was ready (APX's
+// close it once nothing is in flight there and at least 5 s have passed since the new socket was ready (ACS's
 // connection cache can still hand out the old socket for that long), but no later than the latest deadline of
 // what is still in flight on it.
 const DRAIN_MIN_MS = 5000;
 const DEFAULT_DEADLINE_MS = 25000;
 
-export const APX_REPLACED_REASON = "Replaced by a newer socket.";
+export const ACS_REPLACED_REASON = "Replaced by a newer socket.";
 
 const STATUS_INTERVAL_MS = 5 * 60 * 1000;
 
@@ -66,7 +66,7 @@ export async function openFresh(index: number, label: string, options: OpenOptio
   return session;
 }
 
-// Opens one socket in each region, all regions at once; each socket waits for APX's SocketReady (with the
+// Opens one socket in each region, all regions at once; each socket waits for ACS's SocketReady (with the
 // connection id). A region that can't open is left to the keep-alive, which keeps reconnecting it, so a problem in
 // one region doesn't affect the others. Returns false only if no region could be opened.
 export async function openInitialSockets(): Promise<boolean> {
@@ -107,7 +107,7 @@ async function openWithRetry(region: string): Promise<SocketSession | undefined>
             region,
             attempt,
             liveBefore: liveCount(),
-            note: "APX still counts other sockets for this bot (e.g. another bot instance); waiting Retry-After",
+            note: "ACS still counts other sockets for this bot (e.g. another bot instance); waiting Retry-After",
             retryInMs: waitMs,
           },
           e.cv
@@ -228,7 +228,7 @@ async function onActivity(session: SocketSession, envelope: any): Promise<unknow
   const deadlineMs = Number(envelope?.deadlineMs ?? envelope?.DeadlineMs ?? DEFAULT_DEADLINE_MS);
   const startedAt = Date.now();
   deadlinesOf(session).set(envelopeId, startedAt + deadlineMs);
-  // After a header refresh APX stops routing to the old socket, but its 5 s connection cache can still hand it
+  // After a header refresh ACS stops routing to the old socket, but its 5 s connection cache can still hand it
   // out briefly; only a delivery after that window is unexpected.
   const sinceRetireMs = session.retiredAtMs ? startedAt - session.retiredAtMs : undefined;
   const unexpectedOnRetired = session.retiredMode === "header" && sinceRetireMs !== undefined && sinceRetireMs > STEP_GAP_MS;
@@ -240,9 +240,9 @@ async function onActivity(session: SocketSession, envelope: any): Promise<unknow
       connectionId: session.connectionId,
       retired: session.retiredAtMs ? `${session.retiredMode} ${seconds(sinceRetireMs ?? 0)}s ago by ${session.retiredBy}` : undefined,
       note: unexpectedOnRetired
-        ? "UNEXPECTED: APX still routes to a socket it replaced, after its 5 s cache"
+        ? "UNEXPECTED: ACS still routes to a socket it replaced, after its 5 s cache"
         : session.retiredMode === "header"
-          ? "within APX's 5 s connection cache after the replace; possible"
+          ? "within ACS's 5 s connection cache after the replace; possible"
           : undefined,
       envelopeNo: totalEnvelopes,
       envelopeId,
@@ -281,8 +281,8 @@ function onClosed(session: SocketSession, error?: Error): void {
   if (session.closedByBot) {
     verdict = "closed by the bot";
   } else if (session.retiredAtMs) {
-    verdict = (error?.message ?? "").includes(APX_REPLACED_REASON)
-      ? `CLOSED BY APX AFTER REPLACE (${seconds(closedAt - session.retiredAtMs)}s after ${session.retiredBy} was ready)`
+    verdict = (error?.message ?? "").includes(ACS_REPLACED_REASON)
+      ? `CLOSED BY ACS AFTER REPLACE (${seconds(closedAt - session.retiredAtMs)}s after ${session.retiredBy} was ready)`
       : `retired socket closed by the server ${seconds(closedAt - session.retiredAtMs)}s after ${session.retiredBy} was ready`;
   } else if (Math.abs(closedAt - expiresAt) <= EXPIRY_TOLERANCE_MS) {
     verdict = "CLOSED AT TOKEN EXPIRY";

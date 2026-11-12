@@ -1,8 +1,8 @@
 // Structured, greppable logging for every call in/out of the bot. Each line is:
 //   [<ISO-8601 UTC>] [<tag>] key=value ...  MS-CV=<cv>
-// so you can copy the MS-CV + timestamp straight into the APX log search. MS-CV is the correlation
+// so you can copy the MS-CV + timestamp straight into the ACS log search. MS-CV is the correlation
 // vector: for an inbound socket envelope it's echoed on the envelope (env.cv); for an outbound HTTP
-// call it's on the APX *response* headers (APX mints it per request). Both success and failure are
+// call it's on the ACS *response* headers (ACS mints it per request). Both success and failure are
 // logged with the same shape.
 import * as fs from "fs";
 import * as path from "path";
@@ -99,7 +99,7 @@ export function cvOf(h: Headers | undefined): string | undefined {
   return h.get("MS-CV") ?? h.get("ms-cv") ?? undefined;
 }
 
-// Correlation/diagnostic headers useful for looking a request up in the APX server logs.
+// Correlation/diagnostic headers useful for looking a request up in the ACS server logs.
 export function diagHeaders(h: Headers | undefined): string {
   if (!h) return "[no headers]";
   const wanted = [

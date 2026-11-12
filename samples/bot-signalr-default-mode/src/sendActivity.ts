@@ -8,10 +8,10 @@ export interface SendResult {
 }
 
 // Sends an outbound activity to a conversation over the HTTP conversation API — the path the socket
-// mode design keeps on HTTP. The socket carries only APX -> bot delivery and the bot's invoke/ack
+// mode design keeps on HTTP. The socket carries only ACS -> bot delivery and the bot's invoke/ack
 // response (client results); when the bot SENDS content (a reply/proactive message) it POSTs to
 // {serviceUrl}/v3/conversations/{conversationId}/activities with its Bot Framework JWT (the same
-// credential used for the connect). Falls back to no auth header for a local DEBUG APX.
+// credential used for the connect). Falls back to no auth header for a local DEBUG ACS.
 export async function sendActivityHttp(
   serviceUrl: string,
   conversationId: string,
@@ -30,14 +30,14 @@ export async function sendActivityHttp(
   }
 
   const activityType = (activity as any)?.type;
-  logEvent("http-send >>", { dir: "bot->APX", method: "POST", url, conv: conversationId, activityType });
+  logEvent("http-send >>", { dir: "bot->ACS", method: "POST", url, conv: conversationId, activityType });
 
   let res: Response;
   try {
     res = await fetch(url, { method: "POST", headers, body: JSON.stringify(activity) });
   } catch (e) {
     // Network/transport failure — no response, so no MS-CV to correlate.
-    logError("http-send <<", { dir: "APX->bot", result: "TRANSPORT_ERROR", url, conv: conversationId, error: (e as Error).message });
+    logError("http-send <<", { dir: "ACS->bot", result: "TRANSPORT_ERROR", url, conv: conversationId, error: (e as Error).message });
     throw e;
   }
 
@@ -46,12 +46,12 @@ export async function sendActivityHttp(
     const errText = await res.text().catch(() => "");
     logError(
       "http-send <<",
-      { dir: "APX->bot", result: "FAIL", status: res.status, url, conv: conversationId, diag: diagHeaders(res.headers), body: errText || "(empty)" },
+      { dir: "ACS->bot", result: "FAIL", status: res.status, url, conv: conversationId, diag: diagHeaders(res.headers), body: errText || "(empty)" },
       cv
     );
     throw new Error(`HTTP sendActivity failed: HTTP ${res.status} ${diagHeaders(res.headers)} ${errText}`);
   }
 
-  logEvent("http-send <<", { dir: "APX->bot", result: "OK", status: res.status, url, conv: conversationId }, cv);
+  logEvent("http-send <<", { dir: "ACS->bot", result: "OK", status: res.status, url, conv: conversationId }, cv);
   return { status: res.status, cv };
 }

@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.11/yaml.schema.json
-# Default lifecycle (M365 Agents Toolkit). This bot is socket-ONLY: it receives activities from APX
+# Default lifecycle (M365 Agents Toolkit). This bot is socket-ONLY: it receives activities from ACS
 # over the Azure SignalR Default-mode socket, so there is NO dev tunnel and NO public messaging
 # endpoint. For local F5 debugging the toolkit uses teamsapp.local.yml.
 version: v1.11
@@ -61,7 +61,7 @@ deploy:
         BOT_ID: ${{BOT_ID}}
         BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
         BOT_TENANT_ID: ${{AAD_APP_TENANT_ID}}
-        APX_REGIONS: ${{APX_REGIONS}}
+        ACS_REGIONS: ${{ACS_REGIONS}}
         DEFAULT_DIRECTIVE: ${{DEFAULT_DIRECTIVE}}
         NODE_TLS_REJECT_UNAUTHORIZED: ${{NODE_TLS_REJECT_UNAUTHORIZED}}
 projectId: 469133cd-3e22-4e84-8968-2d622a28ddcb

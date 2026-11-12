@@ -8,8 +8,8 @@ import { initFileLog, logEvent } from "./log";
 import { logStatus, openInitialSockets, startStatusTimer } from "./socketPool";
 import { startKeepAlive } from "./keepAlive";
 
-// Single-instance guard. An orphaned bot process survives APX restarts (resilient reconnect) and
-// would keep an extra connection registered in APX's directory — so an invoke could target the stale
+// Single-instance guard. An orphaned bot process survives ACS restarts (resilient reconnect) and
+// would keep an extra connection registered in ACS's directory — so an invoke could target the stale
 // socket. Closing a terminal doesn't always kill a detached node, and the --inspect port then just
 // collides while the orphan keeps its socket. A PID lockfile fixes it: on startup SIGTERM any prior
 // instance, then claim the lock.

@@ -10,7 +10,7 @@ let cached: { token: string; expiresAtMs: number } | undefined;
 
 // Acquires (and caches) a Bot Framework connector token via the OAuth2 client-credentials flow,
 // using the bot's client secret. The resulting token's audience is https://api.botframework.com and
-// its issuer is the bot's home tenant — exactly what APX's OpenIdJwtAuthenticator validates for a
+// its issuer is the bot's home tenant — exactly what ACS's OpenIdJwtAuthenticator validates for a
 // bot on the authenticated POST /v3/websockets/connect endpoint (ToChannelTokenValidationParameters
 // + retrieveBotTenant). Cached until ~1 minute before expiry so re-negotiates reuse it.
 export async function getBotFrameworkToken(): Promise<string> {

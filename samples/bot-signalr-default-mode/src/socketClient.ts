@@ -8,11 +8,11 @@ import {
 import { negotiate, NegotiateResult } from "./negotiate";
 import { logEvent, logError } from "./log";
 
-// How long to wait after the socket opens for APX's SocketReady frame (sent from BotHub.OnConnectedAsync
+// How long to wait after the socket opens for ACS's SocketReady frame (sent from BotHub.OnConnectedAsync
 // once the connection has joined the bot's group).
 const SOCKET_READY_TIMEOUT_MS = 30000;
 
-// One socket opened by the bot: an APX connect (negotiate) plus the Azure SignalR connection it led to.
+// One socket opened by the bot: an ACS connect (negotiate) plus the Azure SignalR connection it led to.
 export interface SocketSession {
   index: number;
   label: string;
@@ -22,7 +22,7 @@ export interface SocketSession {
   negotiate: NegotiateResult;
   connectedAtMs: number;
   readyAtMs: number;
-  // The hub connection id APX reported in SocketReady. APX routes deliveries to this id.
+  // The hub connection id ACS reported in SocketReady. ACS routes deliveries to this id.
   connectionId: string;
   // The id the client library got from Azure SignalR's negotiate. Logged to confirm it matches.
   clientConnectionId?: string;
@@ -52,15 +52,15 @@ export interface OpenOptions {
 }
 
 // Builds a SignalR hub connection to the negotiated Azure SignalR URL and wires the inbound
-// "Activity" client method (APX -> bot).
+// "Activity" client method (ACS -> bot).
 //
-// Default mode delivers each invoke via *client results*: APX calls
+// Default mode delivers each invoke via *client results*: ACS calls
 // `InvokeAsync<InvokeReplyFrame>("Activity", envelope)` and awaits the return value, which the Azure
 // SignalR Service routes back to the exact invoking pod by invocation id. So the registered handler
 // RETURNS the reply frame and @microsoft/signalr sends it back as the invocation result — there is no
 // separate `send`, no upstream webhook, and no correlation bookkeeping on either side.
 //
-// Resolves once APX's SocketReady has arrived, so the caller knows the connection id APX will route to.
+// Resolves once ACS's SocketReady has arrived, so the caller knows the connection id ACS will route to.
 // The SignalR client's automatic reconnect is off: every new socket needs a new connect call, so the
 // keep-alive (keepAlive.ts) refreshes sockets before their token expires and reconnects after a drop.
 export async function openSocket(
@@ -87,7 +87,7 @@ export async function openSocket(
     closedByBot: false,
   };
 
-  // Returning a value (Promise) from this handler is what makes client results work — APX awaits it.
+  // Returning a value (Promise) from this handler is what makes client results work — ACS awaits it.
   conn.on("Activity", (envelope: any) => callbacks.onActivity(session, envelope));
 
   let resolveReady: (frame: any) => void = () => undefined;
@@ -96,7 +96,7 @@ export async function openSocket(
     logEvent("SocketReady <<", {
       conn: label,
       region: options.region,
-      dir: "APX->bot",
+      dir: "ACS->bot",
       protocolVersion: frame?.protocolVersion ?? frame?.ProtocolVersion,
       botKey: frame?.botKey ?? frame?.BotKey,
       connectionId: frame?.connectionId ?? frame?.ConnectionId,

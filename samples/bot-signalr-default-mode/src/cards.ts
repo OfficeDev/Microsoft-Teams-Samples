@@ -16,7 +16,7 @@ export function invokeDemoCard(statusText?: string): Record<string, unknown> {
       type: "TextBlock",
       wrap: true,
       text:
-        "Each button sends an **invoke to the bot over the APX socket**; the bot responds **over the socket**. " +
+        "Each button sends an **invoke to the bot over the ACS socket**; the bot responds **over the socket**. " +
         "The Action.Execute buttons update this card in place so you can see the round-trip.",
     },
   ];
@@ -54,7 +54,7 @@ export function taskModuleCard(): Record<string, unknown> {
     version: "1.5",
     body: [
       { type: "TextBlock", text: "Socket task module", weight: "Bolder", size: "Medium" },
-      { type: "TextBlock", text: "This dialog was fetched over the APX socket (task/fetch).", wrap: true },
+      { type: "TextBlock", text: "This dialog was fetched over the ACS socket (task/fetch).", wrap: true },
       { type: "Input.Text", id: "note", placeholder: "Type something to submit over the socket…" },
     ],
     actions: [

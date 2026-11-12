@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.11/yaml.schema.json
 # Local-debug lifecycle (M365 Agents Toolkit: 'teamsapp provision/deploy --env local').
 # Full Teams app that installs into Teams for a 1:1 chat, but socket-ONLY: it receives activities from
-# APX over the Azure SignalR Default-mode socket, so there is NO dev tunnel and NO public messaging
+# ACS over the Azure SignalR Default-mode socket, so there is NO dev tunnel and NO public messaging
 # endpoint. The bot registration uses a placeholder endpoint that is never called while the bot is
-# socket-connected and socket-eligible in APX.
+# socket-connected and socket-eligible in ACS.
 version: v1.11
 
 provision:
@@ -69,7 +69,7 @@ deploy:
         BOT_ID: ${{BOT_ID}}
         BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
         BOT_TENANT_ID: ${{AAD_APP_TENANT_ID}}
-        APX_REGIONS: ${{APX_REGIONS}}
+        ACS_REGIONS: ${{ACS_REGIONS}}
         DEFAULT_DIRECTIVE: ${{DEFAULT_DIRECTIVE}}
         TENANT_IN_PATH: ${{TENANT_IN_PATH}}
         NODE_TLS_REJECT_UNAUTHORIZED: ${{NODE_TLS_REJECT_UNAUTHORIZED}}

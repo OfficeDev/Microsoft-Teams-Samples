@@ -1,5 +1,5 @@
 # start-local-redis.ps1
-# Starts a local Redis server used by APX's Default-mode socket connection directory
+# Starts a local Redis server used by ACS's Default-mode socket connection directory
 # (RedisConnectionDirectory: HSET botconn:{botKey} field=connectionId, with a TTL; the invoker pod
 # HGETALLs and picks the most-recently-seen connection to target with client results). Default mode
 # has NO reply backplane — Redis only holds the botKey -> connectionId directory.
@@ -54,7 +54,7 @@ foreach ($i in 1..12) {
 }
 if ($pong -match 'PONG') {
   Write-Host "Redis is up on localhost:$Port (PING -> PONG)." -ForegroundColor Green
-  Write-Host "Point APX at it with APX_LOCAL_REDIS_CONNECTIONSTRING=localhost:$Port (SignalRConfiguration.LocalRedisConnectionString)."
+  Write-Host "Point ACS at it with ACS_LOCAL_REDIS_CONNECTIONSTRING=localhost:$Port (SignalRConfiguration.LocalRedisConnectionString)."
   Write-Host "Stop later with: Get-Process redis-server | Stop-Process"
 } else {
   Write-Warning "Redis did not answer PING on port $Port - check $InstallDir."

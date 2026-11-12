@@ -25,7 +25,7 @@ import {
 //     connect again without the header, backing off 1 s .. 30 s (Retry-After on 429). A 401/403 means socket
 //     mode is off for the bot, so the region stops (the SDKs do the same).
 //   * Each region is kept independently, so a problem in one region doesn't affect the others.
-//   * A replaced socket that closes, whether the bot or APX closed it, is never reconnected.
+//   * A replaced socket that closes, whether the bot or ACS closed it, is never reconnected.
 
 // Refresh this long before the token expires (expiresIn from the connect response).
 const REFRESH_LEAD_MS = 60 * 1000;
@@ -97,7 +97,7 @@ class RegionKeeper {
     if (!session || this.stopped) {
       return;
     }
-    // expiresIn - 60 s after the connect returned. A lifetime under 2 min (never sent by APX) refreshes at half-life
+    // expiresIn - 60 s after the connect returned. A lifetime under 2 min (never sent by ACS) refreshes at half-life
     // instead, so the refresh never fires immediately and loops.
     const lifetimeMs = session.negotiate.expiresIn * 1000;
     const refreshAt = session.negotiate.negotiatedAtMs + Math.max(lifetimeMs / 2, lifetimeMs - REFRESH_LEAD_MS);
