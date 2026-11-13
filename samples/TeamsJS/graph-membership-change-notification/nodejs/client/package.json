@@ -12,7 +12,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-router-dom": "6.2.2",
-    "react-scripts": "^4.0.0",
+    "react-scripts": "^5.0.1",
     "reactstrap": "^9.1.4"
   },
   "scripts": {
