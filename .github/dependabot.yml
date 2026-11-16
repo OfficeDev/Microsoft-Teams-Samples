@@ -1,11 +1,14 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    groups:
-      github-actions:
-        patterns: ["*"]
+  - package-ecosystem: "npm"
+    directories:
+      - "/samples/**"
     schedule:
       interval: "weekly"
-    cooldown:
-      default-days: 7
+    open-pull-requests-limit: 0
+    allow:
+      - dependency-type: "all"
+    groups:
+      npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
