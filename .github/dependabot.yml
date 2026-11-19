@@ -1,4 +1,6 @@
 version: 2
+# Dependabot security updates must also be enabled in repository settings.
+# A zero open-pull-requests-limit disables version updates, not security updates.
 updates:
   - package-ecosystem: "npm"
     directories:
@@ -10,5 +12,41 @@ updates:
       - dependency-type: "all"
     groups:
       npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
+  - package-ecosystem: "pip"
+    directories:
+      - "/samples/**"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    allow:
+      - dependency-type: "all"
+    groups:
+      pip-security:
+        applies-to: security-updates
+        patterns: ["*"]
+  - package-ecosystem: "nuget"
+    directories:
+      - "/samples/**"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    allow:
+      - dependency-type: "all"
+    groups:
+      nuget-security:
+        applies-to: security-updates
+        patterns: ["*"]
+  - package-ecosystem: "maven"
+    directories:
+      - "/samples/**"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    allow:
+      - dependency-type: "all"
+    groups:
+      maven-security:
         applies-to: security-updates
         patterns: ["*"]
