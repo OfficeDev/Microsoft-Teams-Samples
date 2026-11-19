@@ -1,5 +1,8 @@
 version: 2
-# Dependabot security updates must also be enabled in repository settings.
+# This file cannot filter security updates by severity.
+# For critical/high-only PRs, disable blanket Dependabot security updates and
+# enable a repository auto-triage rule targeting Critical or High severity
+# with the action "Open a pull request to resolve this alert".
 # A zero open-pull-requests-limit disables version updates, not security updates.
 updates:
   - package-ecosystem: "npm"
