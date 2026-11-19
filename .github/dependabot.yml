@@ -1,4 +1,9 @@
 version: 2
+# This file cannot filter security updates by severity.
+# For critical/high-only PRs, disable blanket Dependabot security updates and
+# enable a repository auto-triage rule targeting Critical or High severity
+# with the action "Open a pull request to resolve this alert".
+# A zero open-pull-requests-limit disables version updates, not security updates.
 updates:
   - package-ecosystem: "npm"
     directories:
@@ -10,5 +15,41 @@ updates:
       - dependency-type: "all"
     groups:
       npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
+  - package-ecosystem: "pip"
+    directories:
+      - "/samples/**"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    allow:
+      - dependency-type: "all"
+    groups:
+      pip-security:
+        applies-to: security-updates
+        patterns: ["*"]
+  - package-ecosystem: "nuget"
+    directories:
+      - "/samples/**"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    allow:
+      - dependency-type: "all"
+    groups:
+      nuget-security:
+        applies-to: security-updates
+        patterns: ["*"]
+  - package-ecosystem: "maven"
+    directories:
+      - "/samples/**"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    allow:
+      - dependency-type: "all"
+    groups:
+      maven-security:
         applies-to: security-updates
         patterns: ["*"]
