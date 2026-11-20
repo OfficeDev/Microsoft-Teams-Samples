@@ -1,0 +1,84 @@
+name: TeamsJS Critical and High dependency remediation
+
+"on":
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Validate fixes without pushing branches or opening PRs
+        type: boolean
+        default: true
+        required: true
+      max_manifests:
+        description: Maximum new manifests to attempt in this run (0 = all)
+        type: number
+        default: 20
+        required: true
+  schedule:
+    # Repeats successful PR creation in bounded batches; existing open PRs are skipped.
+    - cron: "17 2 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: teamsjs-security-remediation
+  cancel-in-progress: false
+
+env:
+  PYTHONUNBUFFERED: "1"
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Check out the default branch without mutable action references
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch --depth=1 origin "${DEFAULT_BRANCH}"
+          git checkout -B "${DEFAULT_BRANCH}" FETCH_HEAD
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Remediate and validate affected TeamsJS manifests
+        env:
+          # Create a fine-grained PAT with repository permission "Dependabot alerts: Read"
+          # and save it as this Actions secret. The workflow's GITHUB_TOKEN is used for PRs.
+          DEPENDABOT_ALERTS_TOKEN: ${{ secrets.DEPENDABOT_ALERTS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          INPUT_MAX: ${{ inputs.max_manifests }}
+        run: |
+          set -euo pipefail
+          dry_run="${INPUT_DRY_RUN:-false}"
+          max_groups="${INPUT_MAX:-20}"
+          args=(
+            --repo "${GITHUB_REPOSITORY}"
+            --root .
+            --base "${DEFAULT_BRANCH}"
+            --severity critical,high
+            --max-groups "${max_groups}"
+            --report teamsjs-security-remediation-report.json
+          )
+          if [[ "${EVENT_NAME}" == "workflow_dispatch" && "${dry_run}" == "true" ]]; then
+            args+=(--dry-run)
+          fi
+          python3 .github/scripts/teamsjs_security_remediation.py "${args[@]}"
+
+      - name: Print machine-readable report
+        if: always()
+        run: |
+          if [[ -f teamsjs-security-remediation-report.json ]]; then
+            cat teamsjs-security-remediation-report.json
+          else
+            echo '{"error":"No report was generated"}'
+          fi
