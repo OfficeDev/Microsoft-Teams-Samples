@@ -13,10 +13,6 @@ updates:
     open-pull-requests-limit: 0
     allow:
       - dependency-type: "all"
-    groups:
-      npm-security:
-        applies-to: security-updates
-        patterns: ["*"]
   - package-ecosystem: "pip"
     directories:
       - "/samples/**"
