@@ -5,15 +5,14 @@ import React, { useState } from 'react'
 import * as microsoftTeams from '@microsoft/teams-js'
 import { Provider, themes, Flex, Header, Button, ThemePrepared } from '@fluentui/react'
 import * as querystring from 'querystring'
-import { isArray } from 'util';
 
-const teamsInitializePromise = new Promise(resolve => microsoftTeams.initialize(() => resolve()));
+const teamsInitializePromise = new Promise<void>(resolve => microsoftTeams.initialize(() => resolve()));
 
 function getInitialTheme() : ThemePrepared
 {
   const params = querystring.parse(window.location.search.substring(1));
   const theme = params["theme"];
-  return isArray(theme) 
+  return Array.isArray(theme) 
     ? teamsThemeToFluentTheme(theme[0] || "default") 
     : teamsThemeToFluentTheme(theme);
 }
