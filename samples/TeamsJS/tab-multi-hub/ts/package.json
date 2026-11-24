@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "overrides": {
+    "websocket-driver": "0.7.5",
     "@babel/traverse": "7.23.2",
     "shell-quote": "1.11.0"
   },

@@ -4,6 +4,10 @@
   "private": true,
   "author": "Microsoft",
   "license": "MIT",
+  "engines": {
+    "node": ">=18",
+    "npm": ">=8.3"
+  },
   "dependencies": {
     "@fluentui/react-northstar": "^0.63.1",
     "@microsoft/teams-js": "^2.35.0",
@@ -36,6 +40,9 @@
     ]
   },
   "overrides": {
+    "cacache": {
+      "tar": "7.5.23"
+    },
     "@babel/traverse": "7.23.2",
     "shell-quote": "1.11.0",
     "loader-utils@^1.0.0": "1.4.2",

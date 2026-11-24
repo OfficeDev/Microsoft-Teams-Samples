@@ -2,7 +2,15 @@
   "name": "microsoft-teams-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18",
+    "npm": ">=8.3"
+  },
   "overrides": {
+    "websocket-driver": "0.7.5",
+    "cacache": {
+      "tar": "7.5.23"
+    },
     "loader-utils@^2.0.0": "2.0.4",
     "form-data@^3.0.0": "3.0.5",
     "@surma/rollup-plugin-off-main-thread": {

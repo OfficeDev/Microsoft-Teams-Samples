@@ -6,6 +6,7 @@
   },
   "private": true,
   "overrides": {
+    "websocket-driver": "0.7.5",
     "shell-quote": "1.11.0"
   },
   "dependencies": {
