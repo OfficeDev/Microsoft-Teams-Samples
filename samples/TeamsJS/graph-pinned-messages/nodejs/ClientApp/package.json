@@ -39,5 +39,10 @@
   "proxy": "http://localhost:3000",
   "devDependencies": {
     "env-cmd": "^10.1.0"
+  },
+  "overrides": {
+    "@surma/rollup-plugin-off-main-thread": {
+      "ejs": "3.1.10"
+    }
   }
 }
