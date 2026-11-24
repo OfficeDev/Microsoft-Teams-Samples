@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://create-react-app.dev/docs/getting-started).
 
+## Dependency maintenance
+
+The scoped `@surma/rollup-plugin-off-main-thread` override keeps its build-time
+EJS renderer on 3.1.10 rather than the vulnerable 2.x dependency. Preserve this
+override when refreshing the lockfile. For this legacy React dependency tree,
+use `npm ci --legacy-peer-deps`; lockfile maintenance uses
+`npm update ejs --package-lock-only --ignore-scripts --legacy-peer-deps`.
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -16,6 +16,14 @@ urlFragment: officedev-microsoft-teams-samples-tab-navbar-menu-ts
 
 # Teams Personal Tab Navbar-Menu Sample TS
 
+## Dependency maintenance
+
+The scoped `react-dev-utils` override replaces its pinned vulnerable
+`shell-quote` with 1.11.0. Preserve this override when updating dependencies.
+Use `npm ci --legacy-peer-deps` for this legacy React dependency tree; refresh
+the lockfile with
+`npm update shell-quote --package-lock-only --ignore-scripts --legacy-peer-deps`.
+
 This Microsoft Teams sample application showcases the implementation of a navbar menu in personal tabs, providing users with quick access to multiple actions and an overflow menu for additional options. Tailored for mobile clients, it enhances usability and improves navigation within the app, making it easier to manage tasks and access features efficiently.
 
 **Note:** NaveBar menu is only supported in Mobile Clients.

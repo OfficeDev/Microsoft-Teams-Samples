@@ -1,4 +1,9 @@
 {
+  "overrides": {
+    "react-dev-utils": {
+      "shell-quote": "1.11.0"
+    }
+  },
   "name": "meetings-token-app",
   "version": "0.3.1",
   "private": true,
