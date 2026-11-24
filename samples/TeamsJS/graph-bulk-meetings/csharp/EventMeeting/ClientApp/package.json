@@ -38,5 +38,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "overrides": {
+    "react-dev-utils": {
+      "immer": "9.0.21"
+    }
   }
 }

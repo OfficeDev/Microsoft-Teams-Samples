@@ -52,6 +52,14 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 > Check the status of all your Teams apps on [Developer Portal](https://dev.teams.microsoft.com/apps).
 > Microsoft 365 Agents Toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
 
+### Dependency security
+
+Bot Framework 4.17.1 or later permits the pinned jsonpickle 3.x dependency. Keep
+`poetry.lock` and `src/requirements.txt` synchronized using
+`poetry export --without-hashes -f requirements.txt -o src/requirements.txt`.
+jsonpickle is an object deserializer, not a safe parser for untrusted JSON: only
+deserialize bot state from trusted storage, never user-supplied payloads.
+
 ## Set up your data source
 1. Run```sh deploy.sh``` in the terminal. You can use Azure Cloud Shell (Bash) for a Windows device. You will be prompted to login to Azure and select a subscription.
 2. Go to the [Azure AI Studio](https://oai.azure.com/portal), select relevant subscription and the resource ```teamsazureopenai-cognitive```.

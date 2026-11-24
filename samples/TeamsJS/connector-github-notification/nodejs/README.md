@@ -33,6 +33,7 @@ This sample illustrates how to develop a GitHub connector for Microsoft Teams us
 
 ### Configuration 
  - Default configuration is in `config\default.json`
+ - This sample uses Mongoose 6, which requires Node.js 12 or later and MongoDB 3.6 or later. Configure the database connection in `server.js` for your own MongoDB instance. Mongoose 6 retains the callback-based query and save APIs used by this sample.
  
 ### How to Run
  - install all the dependencies through npm install.
