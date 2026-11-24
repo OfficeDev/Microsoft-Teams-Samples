@@ -1,15 +1,13 @@
 {
-  "overrides": {
-    "react-dev-utils": {
-      "shell-quote": "1.11.0"
-    }
-  },
   "name": "meetings-token-app",
   "version": "1.0.0",
   "private": true,
   "overrides": {
     "@surma/rollup-plugin-off-main-thread": {
       "ejs": "3.1.10"
+    },
+    "react-dev-utils": {
+      "shell-quote": "1.11.0"
     }
   },
   "author": "Microsoft",

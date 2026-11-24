@@ -1,9 +1,4 @@
 {
-  "overrides": {
-    "react-dev-utils": {
-      "shell-quote": "1.11.0"
-    }
-  },
   "name": "live-coding-sample",
   "version": "0.3.1",
   "description": "This sample demonstrates live coding using live share sdk.",
@@ -71,6 +66,9 @@
   "overrides": {
     "@surma/rollup-plugin-off-main-thread": {
       "ejs": "3.1.10"
+    },
+    "react-dev-utils": {
+      "shell-quote": "1.11.0"
     }
   }
 }
