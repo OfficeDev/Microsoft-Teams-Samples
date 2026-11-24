@@ -65,6 +65,8 @@
   },
   "proxy": "http://localhost:3000/",
   "overrides": {
-    "ejs": "3.1.7"
+    "@surma/rollup-plugin-off-main-thread": {
+      "ejs": "3.1.10"
+    }
   }
 }

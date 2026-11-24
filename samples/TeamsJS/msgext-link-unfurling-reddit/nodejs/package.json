@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Microsoft 365 Agents Toolkit link unfurling sample",
     "engines": {
-        "node": "16 || 18"
+        "node": ">=20"
     },
     "author": "Microsoft",
     "license": "MIT",
@@ -21,12 +21,18 @@
     },
     "dependencies": {
         "adaptivecards-templating": "^2.3.1",
-        "axios": "^1.6.0",
-        "botbuilder": "^4.20.0",
+        "axios": "^1.21.1",
+        "botbuilder": "^4.23.3",
         "restify": "^10.0.0"
     },
     "devDependencies": {
         "env-cmd": "^10.1.0",
-        "nodemon": "^2.0.7"
+        "nodemon": "^3.1.14"
+    },
+    "overrides": {
+        "find-my-way": "^9.7.0",
+        "minimatch": "^11.0.1",
+        "send": "^0.19.2",
+        "uuid": "^11.1.1"
     }
 }

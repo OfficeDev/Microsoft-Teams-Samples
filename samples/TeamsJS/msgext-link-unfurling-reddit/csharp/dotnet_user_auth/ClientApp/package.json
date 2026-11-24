@@ -10,15 +10,22 @@
     "react-dom": "^16.13.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
-    "react-scripts": "3.4.3",
-    "typescript": "~3.7.2"
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.9.5"
+  },
+  "overrides": {
+    "nth-check": "^2.1.1",
+    "postcss": "^8.5.33",
+    "serialize-javascript": "^7.1.4",
+    "svgo": "^2.8.4",
+    "underscore": "^1.13.8"
   },
   "scripts": {
     "start": "react-scripts start",
