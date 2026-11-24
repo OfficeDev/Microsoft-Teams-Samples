@@ -47,6 +47,13 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 
 ## Setup
 
+The web project targets .NET Framework 4.6.1. Restore and build its solution with
+Visual Studio's ASP.NET web-development tools on Windows. Keep
+`Microsoft.Data.OData`, `Microsoft.Data.Edm`, `Microsoft.Data.Services.Client`,
+and `System.Spatial` at 5.8.4 together; OData requires these exact companion
+versions. The project references and binding redirects match their 5.8.4.0
+assemblies.
+
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot

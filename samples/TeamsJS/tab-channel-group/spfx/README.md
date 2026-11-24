@@ -25,7 +25,7 @@ Discover how to build Microsoft Teams tabs using the SharePoint Framework in thi
 
 ## Prerequisites
 - [App Catalog site](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-developer-tenant#create-app-catalog-site)
-- [Node.js](https://nodejs.org/en/download/releases/) version 10.X
+- [Node.js](https://nodejs.org/en/download/releases/) version 18.17.1 or later in the 18.x release line. The patched JSONPath Plus build dependency requires Node 18; SPFx 1.18.2 does not support newer Node major versions.
 - Install [glup](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-development-environment#install-gulp)
 
 ### Setup 
