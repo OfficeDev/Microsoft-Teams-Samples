@@ -2,6 +2,11 @@
   "name": "meetings-token-app",
   "version": "1.0.0",
   "private": true,
+  "overrides": {
+    "@surma/rollup-plugin-off-main-thread": {
+      "ejs": "3.1.10"
+    }
+  },
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {

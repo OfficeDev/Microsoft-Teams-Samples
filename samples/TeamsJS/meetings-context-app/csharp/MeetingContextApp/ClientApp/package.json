@@ -47,5 +47,10 @@
     "@types/react": "^16.7.17",
     "@types/react-router-dom": "^5.3.0"
   },
-  "proxy": "http://localhost:5130"
+  "proxy": "http://localhost:5130",
+  "overrides": {
+    "@surma/rollup-plugin-off-main-thread": {
+      "ejs": "3.1.10"
+    }
+  }
 }
