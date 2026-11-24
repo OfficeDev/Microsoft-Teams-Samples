@@ -31,5 +31,10 @@
   },
   "devDependencies": {
     "env-cmd": "^10.1.0"
+  },
+  "overrides": {
+    "nss": {
+      "node.extend": "1.1.7"
+    }
   }
 }

@@ -35,6 +35,7 @@
     "@fluentui/react": "^8.106.4"
   },
   "overrides": {
-    "jsonpath-plus": "10.3.0"
+    "jsonpath-plus": "10.3.0",
+    "webpack@^5.0.0": "^5.76.0"
   }
 }

@@ -43,6 +43,11 @@ Explore this Microsoft Teams sample app that demonstrates how to utilize dynamic
 
 **Note**: This app was created using Yo Teams, the Microsoft Teams app generator: [YoTeams Documentation](https://pnp.github.io/generator-teams/)
 
+The deployment tooling overrides CLI for Microsoft 365 to version 6.6.0 because
+the CLI 5.9.0 embedded shrinkwrap locks vulnerable XML parsers. Keep this parent
+override when updating `yoteams-deploy`; XML-only overrides cannot replace its
+embedded dependency tree.
+
 All required source code are located in the `./src` folder:
 
 * `client` client side code

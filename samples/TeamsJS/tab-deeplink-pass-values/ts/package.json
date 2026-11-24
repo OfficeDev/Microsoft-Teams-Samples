@@ -64,5 +64,10 @@
   ],
   "engines": {
     "node": ">=12"
+  },
+  "overrides": {
+    "yoteams-deploy": {
+      "@pnp/cli-microsoft365": "6.6.0"
+    }
   }
 }

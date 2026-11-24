@@ -31,5 +31,8 @@
     "memorystorage": "^0.12.0",
     "node-fetch": "^2.7.0",
     "nodemon": "^2.0.19"
+  },
+  "overrides": {
+    "adal-node": "0.2.3"
   }
 }

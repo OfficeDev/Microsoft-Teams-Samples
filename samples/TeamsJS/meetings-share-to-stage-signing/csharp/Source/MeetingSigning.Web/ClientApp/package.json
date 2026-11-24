@@ -88,6 +88,10 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-sonarjs": "^0.15.0",
-    "webpack": "^5.68.0"
+    "webpack": "^5.76.0"
+  },
+  "overrides": {
+    "webpack@^5.0.0": "$webpack",
+    "handlebars": "4.7.10"
   }
 }

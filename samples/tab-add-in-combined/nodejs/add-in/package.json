@@ -62,5 +62,8 @@
   "prettier": "office-addin-prettier-config",
   "browserslist": [
     "ie 11"
-  ]
+  ],
+  "overrides": {
+    "handlebars": "4.7.10"
+  }
 }
