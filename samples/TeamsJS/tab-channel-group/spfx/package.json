@@ -33,5 +33,8 @@
     "typescript": "4.7.4",
     "@microsoft/sp-module-interfaces": "1.18.2",
     "@fluentui/react": "^8.106.4"
+  },
+  "overrides": {
+    "webpack@^5.0.0": "^5.76.0"
   }
 }
