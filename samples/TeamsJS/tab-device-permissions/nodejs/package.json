@@ -26,7 +26,6 @@
     "reactstrap": "9.1.6",
     "rsuite": "^5.23.2",
     "scheduler": "^0.26.0",
-    "swiper": "^8.4.5",
     "typescript": "^4.9.3",
     "web-vitals": "^1.1.2"
   },
@@ -58,5 +57,10 @@
   "devDependencies": {
     "@types/w3c-image-capture": "^1.0.5",
     "env-cmd": "^10.1.0"
+  },
+  "overrides": {
+    "react-dev-utils": {
+      "shell-quote": "1.11.0"
+    }
   }
 }

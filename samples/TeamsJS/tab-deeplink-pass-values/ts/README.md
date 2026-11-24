@@ -43,10 +43,15 @@ Explore this Microsoft Teams sample app that demonstrates how to utilize dynamic
 
 **Note**: This app was created using Yo Teams, the Microsoft Teams app generator: [YoTeams Documentation](https://pnp.github.io/generator-teams/)
 
-The deployment tooling overrides CLI for Microsoft 365 to version 6.6.0 because
-the CLI 5.9.0 embedded shrinkwrap locks vulnerable XML parsers. Keep this parent
-override when updating `yoteams-deploy`; XML-only overrides cannot replace its
-embedded dependency tree.
+The gulpfile registers only `yoteams-build-core`. The unused `yoteams-deploy`
+dependency has been removed, along with its CLI for Microsoft 365 dependency
+tree (including vulnerable Swiper). Local builds, app packaging, and the
+Docker/Azure deployment options below do not require that deployment plugin.
+If adding automated publishing, use maintained tooling rather than restoring
+the obsolete plugin and its embedded dependencies.
+Validate with `npm ci`, `npx gulp build`, and `npx gulp manifest` after configuring
+the environment below. If the ngrok binary download is unavailable, use
+`npm ci --ignore-scripts` for build validation and the external dev tunnel option.
 
 All required source code are located in the `./src` folder:
 
@@ -159,7 +164,6 @@ You can use the following flags for the `serve`, `ngrok-serve` and build command
 * `--no-linting` or `-l` - skips the linting of Typescript during build to improve build times
 * `--debug` - builds in debug mode and significantly improves build time with support for hot reloading of client side components
 * `--env <filename>.env` - use an alternate set of environment files
-* `--publish` - automatically publish the application to the Teams App store
 
 ### Deployment
 

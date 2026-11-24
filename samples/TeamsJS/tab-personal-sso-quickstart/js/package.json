@@ -16,6 +16,10 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1"
   },
+  "overrides": {
+    "shell-quote": "1.11.0",
+    "form-data@^3.0.0": "3.0.5"
+  },
   "browser": {
     "crypto": false
   },

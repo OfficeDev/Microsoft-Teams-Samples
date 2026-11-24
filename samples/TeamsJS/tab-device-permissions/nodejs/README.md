@@ -64,6 +64,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
     
 ## Setup
+The unused Swiper dependency has been removed; the device-permission UI does
+not use a carousel. Keep the `react-dev-utils` override for patched
+`shell-quote` 1.11.0 until the build tooling supplies that version itself.
+
  NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
 1) App Registration

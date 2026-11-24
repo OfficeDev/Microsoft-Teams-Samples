@@ -19,13 +19,20 @@ urlFragment: officedev-microsoft-teams-samples-app-task-module-nodejs
 
 ## Dependency maintenance
 
+Use Node.js 22.x and npm 8.3 or later so the security overrides are
+enforced. The `ms-rest` override upgrades its Request client within Request 2.x,
+removing the unpatched form-data 1.x chain. Keep form-data on patched 2.x and
+BSON on patched 1.x to preserve the legacy client and MongoDB driver APIs.
+The scoped source-map update keeps gulp-typescript compatible with modern
+Node.js, which provides a global Fetch API.
+
 Handlebars requires 4.7.10 or later, removing its old `optimist` dependency.
 A scoped override keeps legacy `mkdirp` on patched minimist 0.2.4, while
 1.x consumers use 1.2.8.
 Keep fsevents at 1.2.13 or later within its declared 1.x range to avoid its old
 bundled vulnerable minimist copies. Preserve lockfile version 2 when updating:
-`npm update handlebars minimist fsevents --package-lock-only --lockfile-version=2 --ignore-scripts --legacy-peer-deps`.
-Install the legacy dependency tree using `npm ci --legacy-peer-deps`.
+`npm update handlebars minimist fsevents --package-lock-only --lockfile-version=2 --ignore-scripts`.
+Install the dependency tree using `npm ci`.
 
 A task module allows you to create modal popup experiences in your Teams application. Inside the popup, you can run your own custom HTML/JavaScript code, show an `<iframe>`-based widget such as a YouTube or Microsoft Stream video, or display an [Adaptive card](https://docs.microsoft.com/en-us/adaptive-cards/).
 

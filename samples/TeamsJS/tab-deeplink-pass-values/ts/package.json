@@ -54,8 +54,7 @@
     "webpack": "^5.72.0",
     "webpack-node-externals": "^3.0.0",
     "yargs": "^17.5.1",
-    "yoteams-build-core": "^1.8.0",
-    "yoteams-deploy": "^1.4.0"
+    "yoteams-build-core": "^1.8.0"
   },
   "browserslist": [
     "> 1%",
@@ -64,10 +63,5 @@
   ],
   "engines": {
     "node": ">=12"
-  },
-  "overrides": {
-    "yoteams-deploy": {
-      "@pnp/cli-microsoft365": "6.6.0"
-    }
   }
 }
