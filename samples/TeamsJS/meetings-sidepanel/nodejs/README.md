@@ -57,6 +57,11 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
+Agenda cards are plain Adaptive Card JSON sent through Teams
+`CardFactory.adaptiveCard`; the server does not need the browser-only
+`adaptivecards` renderer or its Swiper peer dependency. Run `npm test` to check
+agenda card serialization and `npm run build` to validate the server bundle.
+
 - Register an Microsoft Entra ID app in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)

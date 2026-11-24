@@ -1,5 +1,5 @@
 const { CardFactory } = require('botbuilder');
-const AdaptiveCards = require("adaptivecards");
+const createAgendaCard = require("./AgendaCard");
 const sidePanelBot = require('../bots/SidePanelBot');
 const path = require('path');
 const ENV_FILE = path.join(__dirname, '..', '.env');
@@ -18,7 +18,7 @@ getAgenda = (req, res, next) => {
     async function publishAgenda() {
         const agendaPoints = String(req.body);
         const array = agendaPoints.split(",");
-        const adaptive = await AgendaAdaptiveList(array);
+        const adaptive = createAgendaCard(array);
         const client = new ConnectorClient(credentials, { baseUri: sidePanelBot.serviceUrl });
         
         try {
@@ -35,16 +35,6 @@ getAgenda = (req, res, next) => {
         }
     }
 
-    async function AgendaAdaptiveList(agenda) {
-        const aCard = new AdaptiveCards.AdaptiveCard();
-        aCard.addItem(new AdaptiveCards.TextBlock("**Here is the Agenda for Today**"));
-        agenda.forEach(element => {
-            aCard.addItem(new AdaptiveCards.TextBlock(
-                "- " + element + "\r"
-            ));
-        });
-        return aCard;
-    }
 }
 
 setContext = (req, res, next) => {

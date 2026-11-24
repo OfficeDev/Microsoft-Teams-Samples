@@ -9,6 +9,11 @@
     "start": "nodemon server.js",
     "build": "node build.js"
   },
+  "overrides": {
+    "jsprim@1.4.1": "1.4.2",
+    "form-data@^2.0.0": "2.5.6",
+    "form-data@^4.0.0": "4.0.6"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {

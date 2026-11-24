@@ -4,6 +4,10 @@
   "private": true,
   "author": "Microsoft",
   "license": "MIT",
+  "overrides": {
+    "@babel/traverse": "7.23.2",
+    "shell-quote": "1.11.0"
+  },
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
     "@microsoft/teams-js": "^2.35.0",

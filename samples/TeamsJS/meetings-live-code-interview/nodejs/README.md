@@ -18,6 +18,19 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-node
 
 This sample application facilitates live coding interviews in Microsoft Teams using the Live Share SDK. Featuring a side panel that lists coding questions, it allows participants to engage in real-time coding challenges, ensuring an interactive and collaborative experience during technical interviews.
 
+## Dependency maintenance
+
+Use npm 8.3 or later to enforce the security overrides. Keep loader-utils and
+form-data on their consumer-specific major versions. The scoped immer 9.x
+override patches react-dev-utils without migrating this sample to webpack 5.
+The existing Northstar/React peer mismatch requires `npm ci --legacy-peer-deps`;
+this preserves the legacy peer graph but still enforces the security overrides.
+Preserve lockfile version 3 when regenerating it.
+Keep jsrsasign at 11.1.1 or later for both Fluid token-generation consumers.
+The test-runtime-utils 10.x requirement is overridden to the patched 11.x
+implementation; these consumers use HS256 JWT signing, not the removed RSA
+encryption/decryption APIs.
+
 ## Included Features
 * Meeting Stage
 * Meeting SidePanel

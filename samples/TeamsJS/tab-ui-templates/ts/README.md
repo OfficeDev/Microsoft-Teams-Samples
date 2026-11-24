@@ -19,6 +19,16 @@ urlFragment: officedev-microsoft-teams-samples-tab-ui-templates-ts
 
 This sample app illustrates best practices for designing applications within Microsoft Teams, featuring a collection of high-quality UI templates that have been rigorously tested for various common use cases, including dashboards and forms. By leveraging these templates, developers can create visually appealing and user-friendly applications that enhance the overall Teams experience.
 
+## Dependency maintenance
+
+Keep npm `overrides` and Yarn Classic `resolutions` synchronized when updating
+security patches. Use npm 8.3 or later, preserve package-lock version 3, and
+regenerate both `package-lock.json` and `yarn.lock`. Keep Request and its types
+on patched form-data 2.x and jsdom on patched form-data 3.x; do not force one
+major version across both consumers. Check `npm ci` and
+`yarn install --frozen-lockfile` separately.
+Keep Babel Traverse at 7.23.2 or later in the compatible 7.x line in both graphs.
+
  ## Included Features
 * Tabs
 * UI Templates

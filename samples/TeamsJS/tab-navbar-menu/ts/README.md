@@ -20,9 +20,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-navbar-menu-ts
 
 The scoped `react-dev-utils` override replaces its pinned vulnerable
 `shell-quote` with 1.11.0. Preserve this override when updating dependencies.
-Use `npm ci --legacy-peer-deps` for this legacy React dependency tree; refresh
-the lockfile with
-`npm update shell-quote --package-lock-only --ignore-scripts --legacy-peer-deps`.
+The scoped immer 9.x override patches react-dev-utils without a webpack major
+upgrade. Preserve the consumer-specific loader-utils 2.x and form-data 3.x
+security overrides as well. Use npm 8.3 or later and `npm ci`; refresh the
+version 3 lockfile with
+`npm install --package-lock-only --lockfile-version=3 --ignore-scripts`.
 
 This Microsoft Teams sample application showcases the implementation of a navbar menu in personal tabs, providing users with quick access to multiple actions and an overflow menu for additional options. Tailored for mobile clients, it enhances usability and improves navigation within the app, making it easier to manage tasks and access features efficiently.
 

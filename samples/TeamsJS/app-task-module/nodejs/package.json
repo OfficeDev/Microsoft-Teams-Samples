@@ -1,5 +1,15 @@
 {
   "overrides": {
+    "shell-quote": "1.11.0",
+    "jsprim@1.4.1": "1.4.2",
+    "bson@^1.0.0": "1.1.4",
+    "form-data@^2.0.0": "2.5.6",
+    "ms-rest": {
+      "request": "2.88.2"
+    },
+    "gulp-typescript": {
+      "source-map": "0.7.6"
+    },
     "mkdirp": {
       "minimist": "0.2.4"
     }
@@ -23,8 +33,8 @@
     "url": "https://github.com/billbliss/msteams-sample-hello-world-nodejs-ts/issues"
   },
   "engines": {
-    "node": ">=8.9.4 <10.17.0",
-    "npm": ">=5.6.0"
+    "node": ">=22.0.0 <23.0.0",
+    "npm": ">=8.3.0"
   },
   "homepage": "https://github.com/billbliss/msteams-sample-hello-world-nodejs-ts/blob/master/README.md",
   "dependencies": {

@@ -18,6 +18,15 @@ urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-nodejs
 
 This sample application illustrates the use of the Microsoft Graph Toolkit within a Microsoft Teams tab, enabling the display and interaction of user data in a collaborative environment. With features such as tabs, sign-in cards, and integration capabilities, it serves as a practical guide for developers looking to enhance their Teams applications with Microsoft Graph functionalities.
 
+## Dependency maintenance
+
+Use npm 8.3 or later to enforce security overrides. Keep shell-quote on patched
+1.x and fast-xml-parser on patched 4.x for Adaptive Expressions compatibility.
+Regenerate the version 2 lockfile with
+`npm install --package-lock-only --lockfile-version=2 --ignore-scripts`.
+The XML parser override addresses the reported entity-encoding security issue;
+it does not migrate Adaptive Expressions to the XML parser 5.x API.
+
  ## Included Features
 * Tabs
 * Graph Toolkit

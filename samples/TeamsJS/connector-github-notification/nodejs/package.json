@@ -20,6 +20,12 @@
     "xmlhttprequest": "^1.8.0",
     "esbuild": "^0.18.1"
   },
+  "overrides": {
+    "uglify-js@^2.0.0": "2.8.29",
+    "jade": {
+      "constantinople": "3.1.2"
+    }
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
