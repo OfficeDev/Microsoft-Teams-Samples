@@ -1,4 +1,9 @@
 {
+  "overrides": {
+    "mkdirp": {
+      "minimist": "0.2.4"
+    }
+  },
   "name": "msteams-task-module-test",
   "version": "1.0.0",
   "description": "Test app for testing the Teams task module",
@@ -31,7 +36,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
-    "handlebars": "^4.7.0",
+    "handlebars": "^4.7.10",
     "path": "^0.12.7",
     "pug": "^2.0.3",
     "request": "^2.88.0",
