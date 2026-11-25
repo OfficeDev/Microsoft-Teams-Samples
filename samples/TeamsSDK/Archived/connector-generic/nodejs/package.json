@@ -16,6 +16,7 @@
   "license": "ISC",
   "description": "",
   "overrides": {
-    "uglify-js": "2.8.29"
+    "uglify-js": "2.8.29",
+    "constantinople": "3.1.2"
   }
 }
