@@ -30,6 +30,8 @@ This sample application showcases how to utilize team and channel subscriptions 
 
 ## Prerequisites
 
+The `client` build requires Node.js 18.17+ (18.x) or 20.5+; use a supported LTS release.
+
 Use npm 8.3.0 or newer for client dependencies so the security overrides in `package.json` are honored.
 
 - Microsoft Teams is installed and you have an account (not a guest account)

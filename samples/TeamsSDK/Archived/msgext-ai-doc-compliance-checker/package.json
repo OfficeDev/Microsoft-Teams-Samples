@@ -22,11 +22,11 @@
   "dependencies": {
     "@azure/openai": "^1.0.0-beta.12",
     "@azure/storage-blob": "^12.23.0",
+    "@langchain/core": "^0.3.80",
+    "@langchain/textsplitters": "^0.1.0",
     "adaptive-expressions": "^4.20.0",
-    "adaptivecards": "^3.0.1",
     "adaptivecards-templating": "^2.3.1",
     "botbuilder": "^4.21.0",
-    "langchain": "^0.0.118",
     "pdf-parse": "^1.1.1",
     "restify": "^10.0.0",
     "word-extractor": "^1.0.4"
@@ -36,6 +36,7 @@
     "nodemon": "^3.1.0"
   },
   "overrides": {
-    "axios@0": "0.32.0"
+    "axios@0": "0.32.0",
+    "fast-xml-parser@4": "4.5.4"
   }
 }

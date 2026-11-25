@@ -27,6 +27,8 @@ This sample application allows users to efficiently create multiple meetings in 
 
 ## Prerequisites
 
+The `ClientApp` build requires Node.js 18.17+ (18.x) or 20.5+; use a supported LTS release.
+
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  .[NET 6.0](https://dotnet.microsoft.com/en-us/download) SDK.
     ```bash

@@ -11,5 +11,7 @@ application: run `npm ci --legacy-peer-deps && npm run build` from `client`. Its
 webpack 4 tooling requires `NODE_OPTIONS=--openssl-legacy-provider` on modern
 Node.js.
 
+The client build requires Node.js 18.17+ (18.x) or 20.5+; use a supported LTS release.
+
 Use npm 8.3.0 or newer for client dependencies so the security overrides in
 `package.json` are honored.

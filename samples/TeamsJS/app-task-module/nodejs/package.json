@@ -12,7 +12,8 @@
     },
     "mkdirp": {
       "minimist": "0.2.4"
-    }
+    },
+    "decode-uri-component": "0.2.2"
   },
   "name": "msteams-task-module-test",
   "version": "1.0.0",

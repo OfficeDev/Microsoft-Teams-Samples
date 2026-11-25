@@ -19,5 +19,9 @@
     "uuid": "^9.0.1",
     "word-extractor": "^1.0.4"
   },
-  "main": "src/functions/*.js"
+  "main": "src/functions/*.js",
+  "overrides": {
+    "fast-xml-parser@4": "4.5.4",
+    "protobufjs@7": "7.5.5"
+  }
 }

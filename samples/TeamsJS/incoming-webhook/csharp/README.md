@@ -48,6 +48,8 @@ This sample demonstrates a Teams tab where users can input Incoming Webhook URLs
 
 ## Prerequisites
 
+The `ClientApp` build requires Node.js 18.17+ (18.x) or 20.5+; use a supported LTS release.
+
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash

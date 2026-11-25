@@ -18,6 +18,10 @@ The solution not only presents results as interactive adaptive cards but is also
 - You will need a Microsoft work or school account with [permissions to upload custom Teams applications](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading). The account will also need a Microsoft Copilot for Microsoft 365 license to use the extension in Copilot.
 - [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio)
 
+Document chunking uses `@langchain/textsplitters` without LangChain's expression
+evaluator. Adaptive Cards are rendered by Teams, so this server does not depend on
+the browser renderer or its Swiper peer dependency.
+
 ## Create an Azure Open AI service
 
 - In Azure portal, create an [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).

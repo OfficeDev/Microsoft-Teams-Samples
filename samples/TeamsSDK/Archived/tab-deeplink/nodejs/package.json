@@ -26,5 +26,8 @@
     "devDependencies": {
         "esbuild": "^0.24.2",
         "nodemon": "^3.1.9"
+    },
+    "overrides": {
+        "fast-xml-parser@4": "4.5.4"
     }
 }
