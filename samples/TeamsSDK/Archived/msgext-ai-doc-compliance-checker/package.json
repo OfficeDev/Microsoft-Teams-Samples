@@ -37,6 +37,7 @@
   },
   "overrides": {
     "form-data@4": "^4.0.4",
+    "axios@0": "0.32.0",
     "fast-xml-parser@4": "4.5.4"
   }
 }

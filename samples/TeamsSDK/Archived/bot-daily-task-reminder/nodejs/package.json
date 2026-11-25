@@ -32,6 +32,7 @@
     },
     "overrides": {
         "form-data@2": "^2.5.4",
-        "form-data@4": "^4.0.4"
+        "form-data@4": "^4.0.4",
+        "axios@0": "0.32.0"
     }
 }

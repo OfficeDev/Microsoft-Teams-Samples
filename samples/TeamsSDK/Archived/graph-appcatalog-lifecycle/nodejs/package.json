@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^3.0.7",
-        "axios": "^1.7.9",
+        "axios": "^1.16.0",
         "botbuilder": "^4.23.3",
         "botbuilder-dialogs": "^4.23.3",
         "dotenv": "^16.4.7",
