@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",
-        "axios": "^0.21.1",
+        "axios": "^0.35.0",
         "@azure/msal-node": "^1.4.0",
         "botbuilder": "4.20.0",
         "botbuilder-dialogs": "4.20.0",
@@ -34,6 +34,9 @@
         "isomorphic-fetch": "^3.0.0",
         "querystring": "^0.2.1",
         "restify": "~8.5.1"
+    },
+    "overrides": {
+        "axios@<1.0.0": "$axios"
     },
     "devDependencies": {
         "eslint": "^7.0.0",
