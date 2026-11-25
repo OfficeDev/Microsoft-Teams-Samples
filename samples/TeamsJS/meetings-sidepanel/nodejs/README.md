@@ -35,7 +35,9 @@ This sample application illustrates how to create an interactive [Side Panel](ht
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org) version 10.14 or higher
+Use npm 8.3.0 or newer for `ClientApp` dependencies so the security overrides in `package.json` are honored.
+
+- A supported [Node.js](https://nodejs.org) LTS version
 
     ```bash
     # determine node version

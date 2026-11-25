@@ -45,6 +45,8 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ## Prerequisites
 
+Use npm 8.3.0 or newer for client dependencies so the security overrides in `package.json` are honored.
+
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 
     ```bash
