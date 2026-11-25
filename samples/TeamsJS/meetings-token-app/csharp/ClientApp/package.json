@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "overrides": {
+    "axios@<1.0.0": "0.35.0",
     "@surma/rollup-plugin-off-main-thread": {
       "ejs": "^3.1.10"
     },

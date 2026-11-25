@@ -52,7 +52,7 @@
     "@types/react": "^17.0.71",
     "@types/react-dom": "^17.0.25",
     "@types/react-router-dom": "^5.1.6",
-    "axios": "^0.21.0",
+    "axios": "^0.35.0",
     "env-cmd": "^10.1.0",
     "gulp": "^4.0.2",
     "gulp-token-replace": "^1.1.5",
@@ -65,6 +65,7 @@
     "z-schema": "^5.0.0"
   },
   "overrides": {
+    "websocket-driver": "0.7.5",
     "@babel/traverse": "7.23.2",
     "shell-quote": "1.11.0",
     "form-data@^2.0.0": "2.5.6",
@@ -72,6 +73,7 @@
     "websocket-driver": "0.7.5"
   },
   "resolutions": {
+    "websocket-driver": "0.7.5",
     "@babel/traverse": "7.23.2",
     "shell-quote": "1.11.0",
     "**/request/form-data": "2.5.6",

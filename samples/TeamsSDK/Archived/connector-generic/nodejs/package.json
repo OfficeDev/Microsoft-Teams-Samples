@@ -14,5 +14,8 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "overrides": {
+    "uglify-js": "2.8.29"
+  }
 }
