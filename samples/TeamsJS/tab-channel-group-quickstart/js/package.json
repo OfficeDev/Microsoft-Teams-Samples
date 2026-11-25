@@ -5,6 +5,9 @@
     "teamsAppId": null
   },
   "private": true,
+  "overrides": {
+    "form-data@^3.0.0": "3.0.5"
+  },
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
     "@microsoft/teams-js": "^2.35.0",
