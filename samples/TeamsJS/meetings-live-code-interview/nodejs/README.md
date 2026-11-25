@@ -26,6 +26,8 @@ override patches react-dev-utils without migrating this sample to webpack 5.
 The existing Northstar/React peer mismatch requires `npm ci --legacy-peer-deps`;
 this preserves the legacy peer graph but still enforces the security overrides.
 Preserve lockfile version 3 when regenerating it.
+Keep the tar 7.5.19 and websocket-driver 0.7.5 overrides to enforce the patched
+transitive versions. The tar override requires Node.js 18 or later.
 Keep jsrsasign at 11.1.1 or later for both Fluid token-generation consumers.
 The test-runtime-utils 10.x requirement is overridden to the patched 11.x
 implementation; these consumers use HS256 JWT signing, not the removed RSA

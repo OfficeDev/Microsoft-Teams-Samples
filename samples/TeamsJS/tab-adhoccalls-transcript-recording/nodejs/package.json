@@ -5,6 +5,9 @@
     "teamsAppId": null
   },
   "private": true,
+  "overrides": {
+    "websocket-driver": "0.7.5"
+  },
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
     "@microsoft/teams-js": "^2.35.0",

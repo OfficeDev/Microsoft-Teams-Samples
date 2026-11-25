@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node dist/server.js"
   },
+  "overrides": {
+    "websocket-driver": "0.7.5"
+  },
   "dependencies": {
     "@fluentui/react": "^8.115.6",
     "@fluentui/react-northstar": "~0.62.0",
