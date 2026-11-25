@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "overrides": {
+    "source-map-js": "1.2.4",
     "tar": "7.5.19",
     "websocket-driver": "0.7.5",
     "loader-utils@^2.0.0": "2.0.4",

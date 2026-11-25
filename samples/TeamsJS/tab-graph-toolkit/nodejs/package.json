@@ -6,6 +6,8 @@
   },
   "private": true,
   "overrides": {
+    "@xmldom/xmldom": "0.8.15",
+    "source-map-js": "1.2.4",
     "form-data@^3.0.0": "3.0.5",
     "form-data@^4.0.0": "4.0.6",
     "shell-quote": "1.11.0",
