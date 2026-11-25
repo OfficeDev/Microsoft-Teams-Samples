@@ -25,6 +25,8 @@ upgrade. Preserve the consumer-specific loader-utils 2.x and form-data 3.x
 security overrides as well. Use npm 8.3 or later and `npm ci`; refresh the
 version 3 lockfile with
 `npm install --package-lock-only --lockfile-version=3 --ignore-scripts`.
+Keep the tar 7.5.19 and websocket-driver 0.7.5 overrides to enforce the patched
+transitive versions. The tar override requires Node.js 18 or later.
 
 This Microsoft Teams sample application showcases the implementation of a navbar menu in personal tabs, providing users with quick access to multiple actions and an overflow menu for additional options. Tailored for mobile clients, it enhances usability and improves navigation within the app, making it easier to manage tasks and access features efficiently.
 
@@ -41,7 +43,7 @@ This Microsoft Teams sample application showcases the implementation of a navbar
  ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  [NodeJS](https://nodejs.org/en/) 18 or later
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 

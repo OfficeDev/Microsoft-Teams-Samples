@@ -26,6 +26,8 @@ override patches react-dev-utils without migrating this sample to webpack 5.
 The existing Northstar/React peer mismatch requires `npm ci --legacy-peer-deps`;
 this preserves the legacy peer graph but still enforces the security overrides.
 Preserve lockfile version 3 when regenerating it.
+Keep the tar 7.5.19 and websocket-driver 0.7.5 overrides to enforce the patched
+transitive versions. The tar override requires Node.js 18 or later.
 Keep jsrsasign at 11.1.1 or later for both Fluid token-generation consumers.
 The test-runtime-utils 10.x requirement is overridden to the patched 11.x
 implementation; these consumers use HS256 JWT signing, not the removed RSA
@@ -45,7 +47,7 @@ encryption/decryption APIs.
 
  - Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 18 or higher).
 
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 

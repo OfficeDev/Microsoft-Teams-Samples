@@ -28,6 +28,8 @@ on patched form-data 2.x and jsdom on patched form-data 3.x; do not force one
 major version across both consumers. Check `npm ci` and
 `yarn install --frozen-lockfile` separately.
 Keep Babel Traverse at 7.23.2 or later in the compatible 7.x line in both graphs.
+Keep websocket-driver at 0.7.5 in both graphs to patch protocol length-header
+handling.
 
  ## Included Features
 * Tabs

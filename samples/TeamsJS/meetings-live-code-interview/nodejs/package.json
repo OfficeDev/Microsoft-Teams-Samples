@@ -4,6 +4,9 @@
   "description": "This sample demonstrates live coding using live share sdk.",
   "license": "Microsoft",
   "author": "Microsoft",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@fluentui/react-card": "^9.0.26",
     "@fluentui/react-components": "^9.0.0-rc.10",
@@ -76,6 +79,8 @@
   },
   "proxy": "http://localhost:3000",
   "overrides": {
+    "tar": "7.5.19",
+    "websocket-driver": "0.7.5",
     "jsrsasign": "11.1.1",
     "loader-utils@^2.0.0": "2.0.4",
     "form-data@^3.0.0": "3.0.5",
