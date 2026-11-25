@@ -15,6 +15,7 @@
     },
     "license": "MIT",
     "overrides": {
-        "handlebars": "4.7.10"
+        "handlebars": "4.7.10",
+        "axios@0": "0.32.0"
     }
 }

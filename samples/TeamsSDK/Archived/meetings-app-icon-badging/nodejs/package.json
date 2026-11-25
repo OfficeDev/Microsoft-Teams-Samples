@@ -31,5 +31,8 @@
     "esbuild": "^0.28.0",
     "eslint": "^9.39.4",
     "nodemon": "^3.1.14"
+  },
+  "overrides": {
+    "axios@1": "1.16.0"
   }
 }

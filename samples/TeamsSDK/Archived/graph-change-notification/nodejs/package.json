@@ -33,5 +33,8 @@
         "eslint-plugin-promise": "^6.6.0",
         "nodemon": "~3.1.14",
         "esbuild": "^0.28.0"
+    },
+    "overrides": {
+        "axios@1": "1.16.0"
     }
 }

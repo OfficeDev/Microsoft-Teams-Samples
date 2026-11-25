@@ -34,5 +34,8 @@
   "devDependencies": {
     "env-cmd": "^10.1.0",
     "nodemon": "^3.1.0"
+  },
+  "overrides": {
+    "axios@0": "0.32.0"
   }
 }
