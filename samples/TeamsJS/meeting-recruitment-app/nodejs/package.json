@@ -52,5 +52,9 @@
     "@types/react-router-dom": "^5.3.0",
     "nodemon": "^2.0.13"
   },
-  "proxy": "http://localhost:3978"
+  "proxy": "http://localhost:3978",
+  "overrides": {
+    "websocket-driver": "0.7.5",
+    "shell-quote": "1.11.0"
+  }
 }

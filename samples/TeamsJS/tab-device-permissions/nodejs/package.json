@@ -61,6 +61,7 @@
   "overrides": {
     "react-dev-utils": {
       "shell-quote": "1.11.0"
-    }
+    },
+    "websocket-driver": "0.7.5"
   }
 }

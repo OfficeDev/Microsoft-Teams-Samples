@@ -4,7 +4,8 @@
   "private": true,
   "overrides": {
     "@babel/traverse": "7.23.2",
-    "shell-quote": "1.11.0"
+    "shell-quote": "1.11.0",
+    "websocket-driver": "0.7.5"
   },
   "dependencies": {
     "@azure/msal-browser": "^2.11.0",
