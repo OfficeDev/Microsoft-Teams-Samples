@@ -29,6 +29,8 @@ This sample application uses Microsoft Graph API to notify users of team or chan
 
 ## Prerequisites
 
+Use npm 8.3.0 or newer for client dependencies so the security overrides in `package.json` are honored.
+
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution

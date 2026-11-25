@@ -46,5 +46,9 @@
   "proxy": "http://localhost:3000",
   "devDependencies": {
     "ajv": "^7.2.4"
+  },
+  "overrides": {
+    "form-data@^3.0.0": "3.0.5",
+    "shell-quote": "1.11.0"
   }
 }
