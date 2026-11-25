@@ -57,5 +57,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000",
+  "overrides": {
+    "axios@<1.0.0": "0.35.0"
+  }
 }
