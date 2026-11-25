@@ -21,6 +21,8 @@
   },
   "main": "src/functions/*.js",
   "overrides": {
-    "form-data@4": "^4.0.4"
+    "form-data@4": "^4.0.4",
+    "fast-xml-parser@4": "4.5.4",
+    "protobufjs@7": "7.5.5"
   }
 }

@@ -29,6 +29,8 @@ This sample application demonstrates how to conduct live coding interviews in Mi
 
 ## Prerequisites
 
+The `ClientApp` build requires Node.js 18.17+ (18.x) or 20.5+; use a supported LTS release.
+
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash

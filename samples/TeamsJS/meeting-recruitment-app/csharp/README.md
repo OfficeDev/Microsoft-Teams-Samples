@@ -31,6 +31,8 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 ## Prerequisites
 
+The `ClientApp` build requires Node.js 18.17+ (18.x) or 20.5+; use a supported LTS release.
+
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
