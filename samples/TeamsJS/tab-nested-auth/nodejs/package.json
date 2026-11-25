@@ -7,7 +7,8 @@
   "private": true,
   "overrides": {
     "form-data@^3.0.0": "3.0.5",
-    "shell-quote": "1.11.0"
+    "shell-quote": "1.11.0",
+    "websocket-driver": "0.7.5"
   },
   "dependencies": {
     "@azure/msal-browser": "^3.15.0",

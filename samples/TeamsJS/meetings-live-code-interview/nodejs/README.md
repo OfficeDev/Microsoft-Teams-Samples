@@ -30,6 +30,8 @@ Keep jsrsasign at 11.1.1 or later for both Fluid token-generation consumers.
 The test-runtime-utils 10.x requirement is overridden to the patched 11.x
 implementation; these consumers use HS256 JWT signing, not the removed RSA
 encryption/decryption APIs.
+Keep websocket-driver at 0.7.5 and tar at 7.5.23 or later in their respective
+compatible release lines. The patched tar dependency requires Node.js 18 or later.
 
 ## Included Features
 * Meeting Stage
@@ -45,7 +47,7 @@ encryption/decryption APIs.
 
  - Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 18 or higher).
 
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 

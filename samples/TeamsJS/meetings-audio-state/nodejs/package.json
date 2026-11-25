@@ -46,6 +46,11 @@
     },
     "@surma/rollup-plugin-off-main-thread": {
       "ejs": "3.1.10"
-    }
+    },
+    "websocket-driver": "0.7.5",
+    "tar": "7.5.23"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

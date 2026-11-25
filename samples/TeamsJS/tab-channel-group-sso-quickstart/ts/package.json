@@ -50,5 +50,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "overrides": {
+    "websocket-driver": "0.7.5",
+    "shell-quote": "1.11.0"
+  }
 }

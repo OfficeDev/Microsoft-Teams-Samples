@@ -18,6 +18,13 @@ urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 
 This sample tab application showcases how to manage audio states in Microsoft Teams meetings by muting and unmuting using the Incoming Client Audio API. With features like meeting side panel integration, support for Teams themes, and RSC permissions, it provides a streamlined experience for controlling audio directly from the app.
 
+## Dependency maintenance
+
+Use npm 8.3 or later to enforce the security overrides. Keep shell-quote at
+1.11.0, websocket-driver at 0.7.5, and tar at 7.5.23 or later in their respective
+compatible release lines. Preserve lockfile version 2 when regenerating it.
+The patched tar dependency requires Node.js 18 or later.
+
 ## Included Features
 * Meeting SidePanel
 * RSC Permissions
@@ -27,7 +34,7 @@ This sample tab application showcases how to manage audio states in Microsoft Te
 ![mute-unmute](Images/mute-unmute-audiostate.gif)
 
 ## Prerequisites
-- [nodejs](https://nodejs.org/en/)
+- [nodejs](https://nodejs.org/en/) version 18 or later
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 

@@ -41,5 +41,9 @@
   "proxy": "http://localhost:5000",
   "devDependencies": {
     "web-vitals": "^3.1.0"
+  },
+  "overrides": {
+    "websocket-driver": "0.7.5",
+    "shell-quote": "1.11.0"
   }
 }
