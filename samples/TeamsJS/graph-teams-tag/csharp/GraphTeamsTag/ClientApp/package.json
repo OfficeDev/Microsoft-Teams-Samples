@@ -35,6 +35,7 @@
     ]
   },
   "overrides": {
+    "form-data@3": "^3.0.4",
     "shell-quote": "1.12.0"
   }
 }

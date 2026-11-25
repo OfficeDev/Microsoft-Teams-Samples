@@ -58,6 +58,7 @@
   },
   "overrides": {
     "axios@<1.0.0": "$axios",
+    "form-data@3": "^3.0.4",
     "shell-quote": "1.12.0",
     "websocket-driver": "0.7.5",
     "@fluidframework/test-runtime-utils": {

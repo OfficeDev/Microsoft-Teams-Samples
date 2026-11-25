@@ -6,6 +6,7 @@
     "loader-utils@1": "1.4.2",
     "loader-utils@2": "2.0.4",
     "loader-utils@3": "3.2.1",
+    "form-data@2": "^2.5.4",
     "decode-uri-component": "0.2.2",
     "eventsource@1": "1.1.2",
     "@babel/traverse": "7.23.2",

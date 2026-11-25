@@ -28,6 +28,7 @@
         "nodemon": "^3.1.9"
     },
     "overrides": {
+        "form-data@4": "^4.0.4",
         "fast-xml-parser@4": "4.5.4"
     }
 }

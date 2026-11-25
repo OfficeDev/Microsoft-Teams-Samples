@@ -33,6 +33,7 @@
         "nodemon": "~2.0.4"
     },
     "overrides": {
+        "form-data@4": "^4.0.4",
         "axios@0": "0.32.0"
     }
 }

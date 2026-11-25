@@ -39,6 +39,7 @@
   },
   "overrides": {
     "minimist": "1.2.8",
+    "form-data@4": "^4.0.4",
     "axios@0": "$axios"
   }
 }

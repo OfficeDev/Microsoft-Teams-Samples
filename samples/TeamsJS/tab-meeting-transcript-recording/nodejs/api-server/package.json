@@ -22,5 +22,8 @@
     "node-fetch": "^2.6.0",
     "socket.io": "^4.7.2",
     "stream": "^0.0.2"
+  },
+  "overrides": {
+    "form-data@4": "^4.0.4"
   }
 }

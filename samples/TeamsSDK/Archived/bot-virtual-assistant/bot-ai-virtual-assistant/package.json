@@ -38,6 +38,8 @@
         "nodemon": "^2.0.7"
     },
     "overrides": {
+        "form-data@4": "^4.0.4",
+        "protobufjs@7": "7.5.5",
         "axios@0": "0.32.0"
     }
 }

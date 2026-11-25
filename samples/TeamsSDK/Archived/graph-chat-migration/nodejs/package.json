@@ -2,7 +2,7 @@
     "name": "graphchatmigration",
     "version": "1.0.0",
     "msteams": {
-      "teamsAppId": null
+        "teamsAppId": null
     },
     "description": "Microsoft Teams Toolkit hello world Bot sample",
     "engines": {
@@ -33,5 +33,8 @@
         "env-cmd": "^10.1.0",
         "nodemon": "^3.1.7",
         "esbuild": "^0.18.1"
+    },
+    "overrides": {
+        "form-data@2": "^2.5.4"
     }
 }

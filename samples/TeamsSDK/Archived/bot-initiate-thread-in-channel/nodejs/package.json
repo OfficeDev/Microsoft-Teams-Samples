@@ -25,5 +25,8 @@
     "devDependencies": {
         "tsx": "^4.21.0",
         "esbuild": "^0.24.2"
+    },
+    "overrides": {
+        "form-data@4": "^4.0.4"
     }
 }
