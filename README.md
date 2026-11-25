@@ -28,6 +28,10 @@ The samples are sorted by SDK in the sections below to help you find exactly wha
 
 Each sample contains a README that describes the scenario and platform features being used. The links below will navigate you to the folders containing samples using Teams SDK or TeamsJS. The archived samples based on deprecated frameworks and SDKs are available within the Teams SDK folder.  
 
+### Installing npm dependencies
+
+Use npm 8.3.0 or newer for samples with `overrides` in `package.json`; these overrides pin patched transitive dependencies, including loader-utils, Immer, and constantinople. Run `npm ci` from the sample's npm project directory to use its checked-in lockfile. For legacy React samples with peer-dependency conflicts, use `npm ci --legacy-peer-deps` without removing the security overrides.
+
 ### Teams SDK
 
 [Teams SDK Samples](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/TeamsSDK/)

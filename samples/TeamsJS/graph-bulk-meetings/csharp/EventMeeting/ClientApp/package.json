@@ -42,6 +42,8 @@
   "overrides": {
     "react-dev-utils": {
       "immer": "9.0.21"
-    }
+    },
+    "loader-utils@^1": "1.4.2",
+    "loader-utils@^2": "2.0.4"
   }
 }

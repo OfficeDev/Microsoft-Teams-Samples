@@ -79,6 +79,8 @@
     "webpack@^5.0.0": "$webpack",
     "handlebars": "4.7.10",
     "@types/react": "$@types/react",
-    "@types/react-dom": "$@types/react-dom"
+    "@types/react-dom": "$@types/react-dom",
+    "loader-utils@^1": "1.4.2",
+    "loader-utils@^2": "2.0.4"
   }
 }
