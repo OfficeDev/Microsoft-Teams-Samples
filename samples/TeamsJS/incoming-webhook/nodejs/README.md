@@ -30,6 +30,8 @@ This sample demonstrates how to use Incoming Webhooks in Microsoft Teams to send
 
 ## Prerequisites
 
+Use npm 8.3.0 or newer for `ClientApp` dependencies so the security overrides in `package.json` are honored.
+
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account

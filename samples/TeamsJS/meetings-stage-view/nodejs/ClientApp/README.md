@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Use npm 8.3.0 or newer so the security overrides in `package.json` are honored.
+
 ## Available Scripts
 
 In the project directory, you can run:

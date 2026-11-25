@@ -23,6 +23,7 @@ This sample demonstrates how to enable anonymous user support in Microsoft Teams
 
 ## Prerequisites
 
+- npm 8.3.0 or newer for `ClientApp` dependencies so the security overrides in `package.json` are honored.
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version

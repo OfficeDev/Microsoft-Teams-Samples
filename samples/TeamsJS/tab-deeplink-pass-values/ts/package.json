@@ -12,7 +12,7 @@
     "@fluentui/react": "^8.115.6",
     "@fluentui/react-northstar": "~0.62.0",
     "@microsoft/teams-js": "^2.0.0",
-    "axios": "^0.27.2",
+    "axios": "^0.35.0",
     "botbuilder": "~4.16.0",
     "botbuilder-dialogs": "~4.16.0",
     "compression": "1.7.4",
@@ -60,6 +60,7 @@
     "yoteams-build-core": "^1.8.0"
   },
   "overrides": {
+    "axios@<1.0.0": "$axios",
     "form-data@^2.0.0": "2.5.6",
     "form-data@^4.0.0": "4.0.6"
   },
