@@ -28,5 +28,8 @@
         "esbuild": "^0.18.1",
         "tsx": "^4.21.0",
         "typescript": "^5.3.3"
+    },
+    "overrides": {
+        "axios@0": "0.32.0"
     }
 }

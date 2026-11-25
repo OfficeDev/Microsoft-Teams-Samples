@@ -27,5 +27,8 @@
     "devDependencies": {
         "nodemon": "^3.1.14",
         "esbuild": "^0.25.0"
+    },
+    "overrides": {
+        "axios@1": "1.16.0"
     }
 }
