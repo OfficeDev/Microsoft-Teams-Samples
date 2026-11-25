@@ -6,6 +6,8 @@
   },
   "private": true,
   "overrides": {
+    "form-data@^3.0.0": "3.0.5",
+    "form-data@^4.0.0": "4.0.6",
     "shell-quote": "1.11.0",
     "fast-xml-parser@^4.0.0": "4.5.7"
   },
