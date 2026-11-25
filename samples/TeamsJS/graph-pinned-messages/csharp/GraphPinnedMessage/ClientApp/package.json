@@ -7,7 +7,7 @@
   "dependencies": {
     "@azure/msal-browser": "^2.11.0",
     "@fluentui/react-northstar": "^0.63.1",
-    "axios": "^0.21.1",
+    "axios": "^1.21.1",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-router-dom": "6.2.2",
@@ -46,6 +46,8 @@
     },
     "loader-utils@1": "1.4.2",
     "loader-utils@2": "2.0.4",
-    "loader-utils@3": "3.2.1"
+    "loader-utils@3": "3.2.1",
+    "axios": "$axios",
+    "decode-uri-component": "0.5.1"
   }
 }

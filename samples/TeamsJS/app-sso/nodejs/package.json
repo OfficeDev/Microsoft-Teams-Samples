@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",
-        "axios": "^0.35.0",
+        "axios": "^1.21.1",
         "@azure/msal-node": "^1.4.0",
         "botbuilder": "4.20.0",
         "botbuilder-dialogs": "4.20.0",
@@ -35,9 +35,6 @@
         "querystring": "^0.2.1",
         "restify": "~8.5.1"
     },
-    "overrides": {
-        "axios@<1.0.0": "$axios"
-    },
     "devDependencies": {
         "eslint": "^7.0.0",
         "eslint-config-standard": "^14.1.1",
@@ -47,5 +44,8 @@
         "eslint-plugin-standard": "^4.0.1",
         "nodemon": "~2.0.4",
         "esbuild": "^0.18.1"
+    },
+    "overrides": {
+        "axios": "$axios"
     }
 }

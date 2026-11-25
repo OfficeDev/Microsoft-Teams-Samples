@@ -20,7 +20,7 @@
     "@azure/msal-node": "^1.14.3",
     "@microsoft/microsoft-graph-client": "^3.0.4",
     "@microsoft/teams-js": "^2.34.0",
-    "axios": "^0.35.0",
+    "axios": "^1.21.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
@@ -31,5 +31,8 @@
     "request": "^2.88.2",
     "esbuild": "^0.18.1",
     "archiver": "^5.3.1"
+  },
+  "overrides": {
+    "axios": "$axios"
   }
 }
