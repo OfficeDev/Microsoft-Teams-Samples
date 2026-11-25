@@ -30,6 +30,8 @@ This sample demonstrates how to use Incoming Webhooks in Microsoft Teams to send
 
 ## Prerequisites
 
+The `ClientApp` build requires Node.js 18.17+ (18.x) or 20.5+; use a supported LTS release.
+
 Use npm 8.3.0 or newer for `ClientApp` dependencies so the security overrides in `package.json` are honored.
 
 - [NodeJS](https://nodejs.org/en/)

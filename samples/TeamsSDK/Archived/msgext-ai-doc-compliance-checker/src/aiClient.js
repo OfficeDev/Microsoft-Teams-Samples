@@ -1,6 +1,6 @@
 // aiClient.js
 const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
-const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
+const { RecursiveCharacterTextSplitter } = require("@langchain/textsplitters");
 const config = require("./config");
 
 // Initialize Azure OpenAI client

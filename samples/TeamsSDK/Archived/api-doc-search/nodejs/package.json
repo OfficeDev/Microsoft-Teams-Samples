@@ -16,5 +16,8 @@
     "@azure/cosmos": "^4.0.0",
     "@azure/openai": "^1.0.0-beta.6",
     "applicationinsights": "^3.1.0"
+  },
+  "overrides": {
+    "protobufjs@7": "7.5.5"
   }
 }

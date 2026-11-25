@@ -29,6 +29,8 @@ This sample application illustrates how to display the contents of the meeting c
  
 ## Prerequisites
 
+The `ClientApp` build requires Node.js 18.17+ (18.x) or 20.5+; use a supported LTS release.
+
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  .[NET 6.0](https://dotnet.microsoft.com/download) SDK.
     ```bash
