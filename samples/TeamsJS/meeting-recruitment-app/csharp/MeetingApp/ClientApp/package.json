@@ -8,7 +8,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "axios": "^0.21.4",
+    "axios": "^1.21.1",
     "msteams-ui-components-react": "^0.8.4",
     "react": "16.8.0",
     "react-dom": "16.8.0",
@@ -57,6 +57,8 @@
     },
     "loader-utils@1": "1.4.2",
     "loader-utils@2": "2.0.4",
-    "loader-utils@3": "3.2.1"
+    "loader-utils@3": "3.2.1",
+    "decode-uri-component": "0.5.1",
+    "axios": "$axios"
   }
 }

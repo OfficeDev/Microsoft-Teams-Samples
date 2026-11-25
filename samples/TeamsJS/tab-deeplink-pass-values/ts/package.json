@@ -6,13 +6,17 @@
     "start": "node dist/server.js"
   },
   "overrides": {
+    "form-data@^2.0.0": "2.5.6",
+    "form-data@^4.0.0": "4.0.6",
+    "axios": "$axios",
+    "decode-uri-component": "0.5.1",
     "websocket-driver": "0.7.5"
   },
   "dependencies": {
     "@fluentui/react": "^8.115.6",
     "@fluentui/react-northstar": "~0.62.0",
     "@microsoft/teams-js": "^2.0.0",
-    "axios": "^0.35.0",
+    "axios": "^1.21.1",
     "botbuilder": "~4.16.0",
     "botbuilder-dialogs": "~4.16.0",
     "compression": "1.7.4",
@@ -58,11 +62,6 @@
     "webpack-node-externals": "^3.0.0",
     "yargs": "^17.5.1",
     "yoteams-build-core": "^1.8.0"
-  },
-  "overrides": {
-    "axios@<1.0.0": "$axios",
-    "form-data@^2.0.0": "2.5.6",
-    "form-data@^4.0.0": "4.0.6"
   },
   "browserslist": [
     "> 1%",

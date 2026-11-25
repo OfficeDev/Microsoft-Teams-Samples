@@ -10,7 +10,7 @@
   "dependencies": {
     "@fluentui/react-northstar": "^0.63.1",
     "@microsoft/teams-js": "^2.35.0",
-    "axios": "^0.35.0",
+    "axios": "^1.21.1",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-router-dom": "6.2.2",
@@ -39,7 +39,7 @@
     ]
   },
   "overrides": {
-    "tar": "7.5.19",
+    "tar": "7.5.23",
     "websocket-driver": "0.7.5",
     "@babel/traverse": "7.23.2",
     "shell-quote": "1.11.0",
@@ -52,8 +52,8 @@
     "@surma/rollup-plugin-off-main-thread": {
       "ejs": "3.1.10"
     },
-    "websocket-driver": "0.7.5",
-    "tar": "7.5.23"
+    "axios": "$axios",
+    "decode-uri-component": "0.5.1"
   },
   "engines": {
     "node": ">=18"
