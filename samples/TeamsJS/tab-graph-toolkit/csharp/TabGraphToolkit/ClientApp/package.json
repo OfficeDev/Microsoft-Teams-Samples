@@ -53,5 +53,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "."
+  "homepage": ".",
+  "overrides": {
+    "form-data@3": "^3.0.4"
+  }
 }

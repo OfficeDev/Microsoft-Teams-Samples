@@ -29,5 +29,9 @@
         "@types/node-schedule": "^2.1.7",
         "tsx": "^4.21.0",
         "typescript": "^5.7.0"
+    },
+    "overrides": {
+        "form-data@2": "^2.5.4",
+        "form-data@4": "^4.0.4"
     }
 }

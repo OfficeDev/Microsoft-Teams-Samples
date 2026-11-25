@@ -61,6 +61,7 @@
     "loader-utils@2": "2.0.4",
     "loader-utils@3": "3.2.1",
     "decode-uri-component": "0.5.1",
-    "axios": "$axios"
+    "axios": "$axios",
+    "form-data@3": "^3.0.4"
   }
 }

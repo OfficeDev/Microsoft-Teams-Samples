@@ -57,6 +57,7 @@
     ]
   },
   "overrides": {
-    "axios@<1.0.0": "$axios"
+    "axios@<1.0.0": "$axios",
+    "form-data@3": "^3.0.4"
   }
 }

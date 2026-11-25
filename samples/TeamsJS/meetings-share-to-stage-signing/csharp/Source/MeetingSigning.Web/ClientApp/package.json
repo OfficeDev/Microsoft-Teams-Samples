@@ -99,6 +99,7 @@
     "loader-utils@3": "3.2.1",
     "react-dev-utils": {
       "shell-quote": "1.12.0"
-    }
+    },
+    "form-data@3": "^3.0.4"
   }
 }

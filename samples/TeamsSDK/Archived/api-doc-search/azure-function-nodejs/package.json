@@ -19,5 +19,8 @@
     "uuid": "^9.0.1",
     "word-extractor": "^1.0.4"
   },
-  "main": "src/functions/*.js"
+  "main": "src/functions/*.js",
+  "overrides": {
+    "form-data@4": "^4.0.4"
+  }
 }

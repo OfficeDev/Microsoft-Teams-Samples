@@ -5,7 +5,8 @@
     },
     "loader-utils@1": "1.4.2",
     "loader-utils@2": "2.0.4",
-    "loader-utils@3": "3.2.1"
+    "loader-utils@3": "3.2.1",
+    "form-data@2": "^2.5.4"
   },
   "name": "microsoft.teams.samples.linkunfurling",
   "version": "0.1.0",

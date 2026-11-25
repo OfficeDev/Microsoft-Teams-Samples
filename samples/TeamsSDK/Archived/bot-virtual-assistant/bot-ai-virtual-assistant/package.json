@@ -36,5 +36,9 @@
     "devDependencies": {
         "env-cmd": "^10.1.0",
         "nodemon": "^2.0.7"
+    },
+    "overrides": {
+        "form-data@4": "^4.0.4",
+        "protobufjs@7": "7.5.5"
     }
 }
