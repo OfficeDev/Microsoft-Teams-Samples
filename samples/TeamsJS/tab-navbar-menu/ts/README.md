@@ -25,6 +25,10 @@ upgrade. Preserve the consumer-specific loader-utils 2.x and form-data 3.x
 security overrides as well. Use npm 8.3 or later and `npm ci`; refresh the
 version 3 lockfile with
 `npm install --package-lock-only --lockfile-version=3 --ignore-scripts`.
+The proposed cacache tar 7.x security override requires Node.js 18 or later;
+use a supported Node.js release such as 22.x. The proposed websocket-driver
+0.7.5 override also replaces SockJS's exact 0.6.5 pin. These new constraints
+require regenerated lockfiles and cache/development-server validation before use.
 
 This Microsoft Teams sample application showcases the implementation of a navbar menu in personal tabs, providing users with quick access to multiple actions and an overflow menu for additional options. Tailored for mobile clients, it enhances usability and improves navigation within the app, making it easier to manage tasks and access features efficiently.
 

@@ -2,6 +2,9 @@
   "name": "tabappnavigation",
   "version": "1.0.0",
   "private": true,
+  "overrides": {
+    "websocket-driver": "0.7.5"
+  },
   "dependencies": {
     "@fluentui/react-components": "^9.9.1",
     "@microsoft/teams-js": "^2.35.0",

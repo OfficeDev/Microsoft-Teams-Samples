@@ -2,6 +2,9 @@
   "name": "microsoft-teams-app",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "websocket-driver": "0.7.5"
+  },
   "dependencies": {
     "@microsoft/teams-js": "^2.35.0",
     "@testing-library/jest-dom": "^5.11.6",
