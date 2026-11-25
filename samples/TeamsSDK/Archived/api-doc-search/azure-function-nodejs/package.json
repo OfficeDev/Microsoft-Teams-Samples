@@ -21,6 +21,7 @@
   },
   "main": "src/functions/*.js",
   "overrides": {
-    "fast-xml-parser@4": "4.5.4"
+    "fast-xml-parser@4": "4.5.4",
+    "protobufjs@7": "7.5.5"
   }
 }

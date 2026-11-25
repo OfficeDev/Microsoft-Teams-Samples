@@ -39,6 +39,7 @@
     ]
   },
   "overrides": {
-    "shell-quote": "1.8.4"
+    "shell-quote": "1.12.0",
+    "websocket-driver": "0.7.5"
   }
 }

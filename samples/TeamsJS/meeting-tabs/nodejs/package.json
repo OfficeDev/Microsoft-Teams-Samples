@@ -10,7 +10,8 @@
     "axios": "$axios",
     "@surma/rollup-plugin-off-main-thread": {
       "ejs": "3.1.10"
-    }
+    },
+    "websocket-driver": "0.7.5"
   },
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",

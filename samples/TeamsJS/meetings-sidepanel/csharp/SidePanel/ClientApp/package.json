@@ -57,6 +57,14 @@
     ]
   },
   "overrides": {
-    "axios@<1.0.0": "$axios"
+    "axios@<1.0.0": "$axios",
+    "shell-quote": "1.12.0",
+    "websocket-driver": "0.7.5",
+    "@fluidframework/test-runtime-utils": {
+      "jsrsasign": "11.1.1"
+    },
+    "@fluidframework/server-services-client": {
+      "jsrsasign": "11.1.1"
+    }
   }
 }

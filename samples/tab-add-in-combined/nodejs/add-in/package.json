@@ -64,6 +64,7 @@
     "ie 11"
   ],
   "overrides": {
-    "handlebars": "4.7.10"
+    "handlebars": "4.7.10",
+    "shell-quote": "1.12.0"
   }
 }
