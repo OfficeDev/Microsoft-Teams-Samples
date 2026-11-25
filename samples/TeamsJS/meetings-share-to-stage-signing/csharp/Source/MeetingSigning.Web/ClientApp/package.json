@@ -91,6 +91,7 @@
     "webpack": "^5.76.0"
   },
   "overrides": {
+    "axios@<1.0.0": "0.35.0",
     "webpack@^5.0.0": "$webpack",
     "handlebars": "4.7.10",
     "loader-utils@1": "1.4.2",

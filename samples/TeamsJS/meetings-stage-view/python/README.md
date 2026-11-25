@@ -27,6 +27,8 @@ This sample application [Enables the configuration](https://docs.microsoft.com/m
 
 ## Prerequisites
 
+Use npm 8.3.0 or newer for `ClientApp` dependencies so the security overrides in `package.json` are honored.
+
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program).
 
 2. To test locally, [Python](https://www.python.org/downloads/) must be installed on your development machine (version 3.7 or higher).
