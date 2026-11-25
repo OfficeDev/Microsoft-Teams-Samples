@@ -6,6 +6,7 @@
   },
   "private": true,
   "overrides": {
+    "form-data@^3.0.0": "3.0.5",
     "websocket-driver": "0.7.5"
   },
   "dependencies": {
@@ -37,5 +38,9 @@
   },
   "devDependencies": {
     "env-cmd": "^10.1.0"
+  },
+  "overrides": {
+    "websocket-driver": "0.7.5",
+    "shell-quote": "1.11.0"
   }
 }

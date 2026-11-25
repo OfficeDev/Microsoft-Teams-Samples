@@ -32,6 +32,8 @@ Keep jsrsasign at 11.1.1 or later for both Fluid token-generation consumers.
 The test-runtime-utils 10.x requirement is overridden to the patched 11.x
 implementation; these consumers use HS256 JWT signing, not the removed RSA
 encryption/decryption APIs.
+Keep websocket-driver at 0.7.5 and tar at 7.5.23 or later in their respective
+compatible release lines. The patched tar dependency requires Node.js 18 or later.
 
 ## Included Features
 * Meeting Stage

@@ -19,8 +19,9 @@ urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 ## Dependency maintenance
 
 Use Node.js 18 or later and npm 8.3 or later to enforce the security overrides.
-Preserve the tar 7.5.19 and websocket-driver 0.7.5 overrides when updating
-dependencies; the patched tar version requires Node.js 18 or later.
+Keep shell-quote at 1.11.0, websocket-driver at 0.7.5, and tar at 7.5.23 or
+later in their respective compatible release lines. Preserve lockfile version 2
+when regenerating it; the patched tar dependency requires Node.js 18 or later.
 
 This sample tab application showcases how to manage audio states in Microsoft Teams meetings by muting and unmuting using the Incoming Client Audio API. With features like meeting side panel integration, support for Teams themes, and RSC permissions, it provides a streamlined experience for controlling audio directly from the app.
 

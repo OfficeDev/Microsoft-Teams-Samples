@@ -69,7 +69,8 @@
     "@babel/traverse": "7.23.2",
     "shell-quote": "1.11.0",
     "form-data@^2.0.0": "2.5.6",
-    "form-data@^3.0.0": "3.0.5"
+    "form-data@^3.0.0": "3.0.5",
+    "websocket-driver": "0.7.5"
   },
   "resolutions": {
     "websocket-driver": "0.7.5",
@@ -77,7 +78,8 @@
     "shell-quote": "1.11.0",
     "**/request/form-data": "2.5.6",
     "**/@types/request/form-data": "2.5.6",
-    "**/jsdom/form-data": "3.0.5"
+    "**/jsdom/form-data": "3.0.5",
+    "websocket-driver": "0.7.5"
   },
   "scripts": {
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",

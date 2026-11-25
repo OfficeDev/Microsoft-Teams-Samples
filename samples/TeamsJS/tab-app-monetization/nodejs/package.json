@@ -56,5 +56,9 @@
     "env-cmd": "^10.1.0",
     "react-scripts": "^5.0.1",
     "typescript": "4.9.5"
+  },
+  "overrides": {
+    "websocket-driver": "0.7.5",
+    "shell-quote": "1.11.0"
   }
 }
