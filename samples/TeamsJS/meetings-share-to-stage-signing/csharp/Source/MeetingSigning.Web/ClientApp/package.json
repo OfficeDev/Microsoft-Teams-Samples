@@ -99,6 +99,8 @@
     "loader-utils@3": "3.2.1",
     "react-dev-utils": {
       "shell-quote": "1.12.0"
-    }
+    },
+    "decode-uri-component": "0.2.2",
+    "fast-xml-parser@4": "4.5.4"
   }
 }

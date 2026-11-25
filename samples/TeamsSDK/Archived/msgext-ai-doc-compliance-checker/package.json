@@ -34,5 +34,8 @@
   "devDependencies": {
     "env-cmd": "^10.1.0",
     "nodemon": "^3.1.0"
+  },
+  "overrides": {
+    "fast-xml-parser@4": "4.5.4"
   }
 }

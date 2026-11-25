@@ -9,7 +9,8 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4.0"
+python = ">=3.11,<4.0"
+anyio = ">=4.14.2,<5.0.0"
 teams-ai = "^1.1.0"
 python-dotenv = "^1.0.1"
 azure-identity = "^1.17.0"
@@ -39,7 +40,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 100
-target-version = ['py38']
+target-version = ['py311']
 
 [tool.isort]
 profile = "black"
@@ -48,7 +49,7 @@ profile = "black"
 addopts = "--cov-report html:coverage --cov=src"
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.11"
 ignore_missing_imports = true
 show_error_codes = true
 no_implicit_optional = true
