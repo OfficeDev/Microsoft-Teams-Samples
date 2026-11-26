@@ -8,6 +8,9 @@
     "websocket-driver": "0.7.5",
     "loader-utils@^2.0.0": "2.0.4",
     "form-data@^3.0.0": "3.0.5",
+    "workbox-build": {
+      "rollup": "2.80.0"
+    },
     "@surma/rollup-plugin-off-main-thread": {
       "ejs": "3.1.10"
     },

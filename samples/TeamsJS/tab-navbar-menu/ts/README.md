@@ -28,6 +28,10 @@ version 3 lockfile with
 Keep websocket-driver at 0.7.5 and tar at 7.5.23 or later in their respective
 compatible release lines. The patched tar dependency requires Node.js 18 or later.
 
+Preserve the scoped `workbox-build` override to Rollup 2.80.0. Rollup 1.x has no
+fix for the path-traversal vulnerability; the override keeps this sample on
+react-scripts 4 while retaining Workbox service-worker generation.
+
 This Microsoft Teams sample application showcases the implementation of a navbar menu in personal tabs, providing users with quick access to multiple actions and an overflow menu for additional options. Tailored for mobile clients, it enhances usability and improves navigation within the app, making it easier to manage tasks and access features efficiently.
 
 **Note:** NaveBar menu is only supported in Mobile Clients.
