@@ -26,6 +26,11 @@ BSON on patched 1.x to preserve the legacy client and MongoDB driver APIs.
 The scoped source-map update keeps gulp-typescript compatible with modern
 Node.js, which provides a global Fetch API.
 
+Keep Botbuilder on the 3.16.x release line: its updated JSON Web Token dependency
+removes the unpatched `joi`/`hoek` chain without introducing the nested install
+scripts used by Botbuilder 3.30.0. The `qs` override keeps the legacy HTTP clients
+on patched 6.17.1.
+
 Handlebars requires 4.7.10 or later, removing its old `optimist` dependency.
 A scoped override keeps legacy `mkdirp` on patched minimist 0.2.4, while
 1.x consumers use 1.2.8.

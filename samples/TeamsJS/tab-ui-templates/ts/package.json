@@ -65,6 +65,7 @@
     "z-schema": "^5.0.0"
   },
   "overrides": {
+    "rollup": "2.80.0",
     "source-map-js": "1.2.4",
     "websocket-driver": "0.7.5",
     "@babel/traverse": "7.23.2",
@@ -75,6 +76,7 @@
     "decode-uri-component": "0.5.1"
   },
   "resolutions": {
+    "rollup": "2.80.0",
     "source-map-js": "1.2.4",
     "websocket-driver": "0.7.5",
     "@babel/traverse": "7.23.2",
