@@ -57,6 +57,8 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 Bot Framework 4.17.1 or later permits the pinned jsonpickle 3.x dependency. Keep
 `poetry.lock` and `src/requirements.txt` synchronized using
 `poetry export --without-hashes -f requirements.txt -o src/requirements.txt`.
+Keep h11 at 0.16.0 or later to reject malformed HTTP chunk terminators, and
+httpcore at 1.0.9 or later because older releases constrain h11 below the fix.
 jsonpickle is an object deserializer, not a safe parser for untrusted JSON: only
 deserialize bot state from trusted storage, never user-supplied payloads.
 
