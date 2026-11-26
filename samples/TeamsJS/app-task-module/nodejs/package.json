@@ -13,7 +13,8 @@
     "mkdirp": {
       "minimist": "0.2.4"
     },
-    "decode-uri-component": "0.2.2"
+    "decode-uri-component": "0.2.2",
+    "qs": "6.17.1"
   },
   "name": "msteams-task-module-test",
   "version": "1.0.0",
@@ -42,7 +43,7 @@
     "adaptivecards": "^1.1.0",
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
-    "botbuilder": "^3.15.0",
+    "botbuilder": "~3.16.0",
     "botbuilder-teams": "^0.1.7",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
