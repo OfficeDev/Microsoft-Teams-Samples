@@ -1,5 +1,6 @@
 {
   "overrides": {
+    "sha.js": "2.4.12",
     "react-dev-utils": {
       "shell-quote": "1.12.0"
     },

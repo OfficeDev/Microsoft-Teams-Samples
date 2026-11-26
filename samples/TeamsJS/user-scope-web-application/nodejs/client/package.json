@@ -48,6 +48,7 @@
     "ajv": "^7.2.4"
   },
   "overrides": {
+    "sha.js": "2.4.12",
     "form-data@^3.0.0": "3.0.5",
     "shell-quote": "1.11.0",
     "websocket-driver": "0.7.5"

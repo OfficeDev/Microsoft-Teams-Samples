@@ -1,7 +1,7 @@
 // Import necessary libraries and modules
 
 const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
-const { RecursiveCharacterTextSplitter } = require('langchain/text_splitter');
+const { RecursiveCharacterTextSplitter } = require('@langchain/textsplitters');
 const { BlobServiceClient } = require('@azure/storage-blob');
 const pdfParse = require('pdf-parse');
 const path = require('path');

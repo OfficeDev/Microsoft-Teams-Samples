@@ -24,7 +24,6 @@
         "botframework-connector": "^4.9.4",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
-        "file-system": "^1.2.2",
         "fs": "^0.0.1-security",
         "http": "^0.0.1-security",
         "isomorphic-fetch": "^3.0.0",

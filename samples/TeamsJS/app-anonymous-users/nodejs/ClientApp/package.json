@@ -42,6 +42,7 @@
   },
   "proxy": "http://localhost:3000",
   "overrides": {
+    "websocket-driver": "0.7.5",
     "shell-quote": "1.12.0"
   }
 }

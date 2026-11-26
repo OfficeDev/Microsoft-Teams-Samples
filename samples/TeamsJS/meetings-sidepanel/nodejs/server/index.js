@@ -8,7 +8,6 @@ const path = require('path');
 const restify = require('restify');
 var bodyParser = require('body-parser');
 const socketio = require('socket.io')(8080);
-var fs = require('file-system');
 const cacheService = require('./Services/myCache');
 Controller = require('./Controllers/HomeController')
 

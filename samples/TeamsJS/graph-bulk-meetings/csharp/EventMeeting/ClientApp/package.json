@@ -40,6 +40,7 @@
     ]
   },
   "overrides": {
+    "websocket-driver": "0.7.5",
     "react-dev-utils": {
       "immer": "9.0.21",
       "shell-quote": "1.12.0",

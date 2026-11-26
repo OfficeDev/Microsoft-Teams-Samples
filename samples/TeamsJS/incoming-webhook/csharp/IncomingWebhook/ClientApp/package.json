@@ -49,6 +49,7 @@
     "@types/react-router-dom": "^5.3.0"
   },
   "overrides": {
+    "websocket-driver": "0.7.5",
     "@surma/rollup-plugin-off-main-thread": {
       "ejs": "3.1.10"
     },

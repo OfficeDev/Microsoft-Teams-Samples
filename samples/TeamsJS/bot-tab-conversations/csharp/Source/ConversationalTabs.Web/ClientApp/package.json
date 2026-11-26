@@ -76,6 +76,7 @@
     "webpack": "^5.76.0"
   },
   "overrides": {
+    "websocket-driver": "0.7.5",
     "webpack@^5.0.0": "$webpack",
     "handlebars": "4.7.10",
     "@types/react": "$@types/react",
