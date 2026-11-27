@@ -50,6 +50,7 @@
     "env-cmd": "^10.1.0"
   },
   "overrides": {
+    "body-parser": "^1.20.9",
     "source-map-js": "1.2.4",
     "websocket-driver": "0.7.5",
     "@babel/traverse": "7.23.2",

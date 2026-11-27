@@ -129,7 +129,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
  - Install Python dependencies
 
     ```bash
-    pip install flask pyOpenSSL
+    pip install -r requirements.txt
     ```
 
  - Run your app

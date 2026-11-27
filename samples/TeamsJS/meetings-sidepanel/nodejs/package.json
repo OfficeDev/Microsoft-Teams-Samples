@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",
-        "body-parser": "^1.19.0",
+        "body-parser": "^1.20.9",
         "botbuilder": "^4.22.1",
         "botframework-connector": "^4.9.4",
         "dotenv": "^8.2.0",
@@ -40,6 +40,10 @@
         "url": "^0.11.0"
     },
     "overrides": {
+        "body-parser": "$body-parser",
+        "restify": {
+            "find-my-way": "^8.2.2"
+        },
         "form-data@^2.0.0": "2.5.6"
     },
     "devDependencies": {

@@ -5,6 +5,7 @@
   "author": "Microsoft",
   "license": "MIT",
   "overrides": {
+    "body-parser": "^1.20.9",
     "@babel/traverse": "7.23.2",
     "shell-quote": "1.11.0",
     "axios": "$axios",
