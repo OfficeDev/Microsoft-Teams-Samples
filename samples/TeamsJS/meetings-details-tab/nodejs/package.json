@@ -29,6 +29,7 @@
     "memorystorage": "^0.12.0"
   },
   "overrides": {
+    "axios": "^1.21.1",
     "adaptive-expressions": {
       "fast-xml-parser": "4.5.7"
     }

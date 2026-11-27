@@ -39,6 +39,7 @@
     ]
   },
   "overrides": {
+    "body-parser": "^1.20.9",
     "tar": "7.5.23",
     "websocket-driver": "0.7.5",
     "@babel/traverse": "7.23.2",
